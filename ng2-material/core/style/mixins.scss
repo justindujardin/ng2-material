@@ -1,0 +1,56 @@
+@mixin margin-selectors($before:1em, $after:1em, $start:0px, $end:0px) {
+  -webkit-margin-before: $before;
+  -webkit-margin-after: $after;
+  -webkit-margin-start: $start;
+  -webkit-margin-end: $end;
+}
+
+@mixin not-selectable($value:none) {
+  -webkit-touch-callout: $value;
+  -webkit-user-select: $value;
+  -khtml-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
+}
+
+@mixin input-placeholder-color($color) {
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder, /* Firefox 19+ */
+  &:-moz-placeholder, /* Firefox 18- */
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+@mixin pie-clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@function map-to-string($map) {
+  $map-str: '{';
+  $keys: map-keys($map);
+  $len: length($keys);
+  @for $i from 1 through $len {
+    $key: nth($keys, $i);
+    $value: map-get($map, $key);
+    $map-str: $map-str + '_' + $key + '_: _' + map-get($map, $key) + '_';
+    @if $i != $len {
+      $map-str: $map-str + ',';
+    }
+  }
+  @return $map-str + '}';
+}
+
+
+/* mixin definition ; sets LTR and RTL within the same style call */
+@mixin rtl($prop, $value, $rtl-value) {
+  #{$prop}: $value;
+  html[dir=rtl] & {
+    #{$prop}: $rtl-value;
+  }
+}
