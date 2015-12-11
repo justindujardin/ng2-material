@@ -1,0 +1,20 @@
+@import "font/font";
+
+@import "ng2-material/all";
+@import "examples/example";
+
+demos-app {
+  .md-toolbar {
+    max-width: 200px;
+  }
+  > md-content {
+    max-width: 800px;
+    > h1 {
+      margin-top:40px;
+      color: md-color($md-primary,900);
+    }
+    .card-media {
+      background-color: md-color($md-background);
+    }
+  }
+}

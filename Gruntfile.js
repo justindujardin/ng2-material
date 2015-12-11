@@ -9,10 +9,32 @@ module.exports = function (grunt) {
       "<%- sourceRoot %>/**/*.css",
       "<%- sourceRoot %>/**/*.css.map"
     ],
+    copy: {
+      vendor: {
+        files: [
+          {
+            expand: true,
+            src: [
+              './node_modules/systemjs/dist/*.js',
+              './node_modules/angular2/bundles/angular2.dev.js',
+              './node_modules/angular2/typings/**/*'
+            ],
+            dest: 'vendor/'
+          }
+        ]
+      },
+      font: {
+        files: [{expand: true, src: ['./font/*.*'], dest: 'lib/ng2-material/'}]
+      },
+      styles: {
+        files: [{src: ['<%- sourceRoot %>/all.css'], dest: 'lib/ng2-material/ng2-material.css'}]
+      }
+    },
     notify: {
       options: {title: 'Material for Angular2'},
-      styles: {options: {message: 'Styles Compiled.'}},
-      source: {options: {message: 'Source Compiled.'}}
+      bundle: {options: {message: 'Output Bundle Built'}},
+      styles: {options: {message: 'Styles Compiled'}},
+      source: {options: {message: 'Source Compiled'}}
     },
     ts: {
       source: {
@@ -30,21 +52,17 @@ module.exports = function (grunt) {
         }]
       }
     },
-    'http-server': {
-      dev: {
-        root: 'public',
-        port: 8282,
-        host: 'localhost',
-        ext: 'html',
-        runInBackground: true,
-        https: true,
-        openBrowser: true
-      }
-    },
     watch: {
+      dist: {
+        files: ['<%- sourceRoot %>/**/*.js', '<%- sourceRoot %>/**/*.css'],
+        tasks: ['dist-bundle', 'notify:bundle']
+      },
       sass: {
-        files: ['<%- sourceRoot %>/**/*.scss'],
-        tasks: ['sass', 'notify:styles']
+        files: [
+          '<%- sourceRoot %>/**/*.css',
+          '<%- sourceRoot %>/*.css',
+          'app.css'],
+        tasks: ['sass', 'copy:styles', 'notify:styles']
       },
       ts: {
         files: ['<%- sourceRoot %>/**/*.ts'],
@@ -53,15 +71,15 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-http-server');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-ts');
-  grunt.registerTask('default', ['ts', 'sass']);
-  grunt.registerTask('develop-ide', ['default', 'http-server']);
-  grunt.registerTask('develop', ['develop-ide', 'watch']);
+  grunt.registerTask('default', ['copy', 'ts', 'sass']);
+  grunt.registerTask('develop-ide', ['default', 'watch']);
+  grunt.registerTask('develop', ['default', 'watch']);
 
 
   grunt.registerTask('dist-bundle', 'Build a single-file javascript output.', function () {
