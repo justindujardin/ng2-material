@@ -1,0 +1,20 @@
+<div class="inset">
+  <md-switch [(checked)]="data.cb1" aria-label="Switch 1">
+    Switch 1: {{ data.cb1 }}
+  </md-switch>
+  <md-switch [(checked)]="data.cb2" aria-label="Switch 2" ng-true-value="'yup'" ng-false-value="'nope'" class="md-warn">
+    Switch 2 (md-warn): {{ data.cb2 }}
+  </md-switch>
+  <md-switch disabled="true" aria-label="Disabled switch" [(checked)]="disabledModel">
+    Switch (Disabled)
+  </md-switch>
+  <md-switch disabled="true" aria-label="Disabled active switch" [(checked)]="data.cb4">
+    Switch (Disabled, Active)
+  </md-switch>
+  <md-switch class="md-primary" md-no-ink aria-label="Switch No Ink" [(checked)]="data.cb5">
+    Switch (md-primary): No Ink
+  </md-switch>
+  <md-switch [checked]="data.cb6" aria-label="Switch 6" (checkedChange)="onChange($event)">
+    Switch 6 message: {{ message }}
+  </md-switch>
+</div>

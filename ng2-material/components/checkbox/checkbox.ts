@@ -3,7 +3,9 @@ import {isPresent} from 'angular2/src/facade/lang';
 import {KeyCodes} from '../../core/key_codes';
 import {KeyboardEvent} from 'angular2/src/facade/browser';
 import {NumberWrapper} from 'angular2/src/facade/lang';
-import {Output, EventEmitter} from "angular2/core";
+import {Input, Output, EventEmitter} from 'angular2/core';
+
+// TODO (jdd): ng-true-value, ng-false-value
 
 @Component({
   selector: 'md-checkbox',
@@ -23,16 +25,16 @@ import {Output, EventEmitter} from "angular2/core";
 })
 export class MdCheckbox {
 
-  @Output() ngOnChange:EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   /** Whether this checkbox is checked. */
-  checked: boolean;
+  @Input() checked: boolean;
 
   /** Whether this checkbox is disabled. */
-  disabled_: boolean;
+  @Input('disabled') disabled_: boolean;
 
   /** Setter for tabindex */
-  tabindex: number;
+  @Input() tabindex: number;
 
   constructor(@Attribute('tabindex') tabindex: string) {
     this.checked = false;
@@ -49,7 +51,7 @@ export class MdCheckbox {
   }
 
   onKeydown(event: KeyboardEvent) {
-    if (event.keyCode == KeyCodes.SPACE) {
+    if (event.keyCode === KeyCodes.SPACE) {
       event.preventDefault();
       this.toggle(event);
     }
@@ -62,6 +64,6 @@ export class MdCheckbox {
     }
 
     this.checked = !this.checked;
-    this.ngOnChange.emit(this.checked);
+    this.checkedChange.emit(this.checked);
   }
 }
