@@ -4,15 +4,20 @@ import CardInCardActions from './components/card/in_card_actions';
 import CardActionButtons from './components/card/card_action_buttons';
 
 
-
 import ToolbarBasicUsage from './components/toolbar/basic_usage';
+
+
+import ProgressCircularBasicUsage from './components/progress_circular/basic_usage';
+import ProgressLinearBasicUsage from './components/progress_linear/basic_usage';
 
 /**
  * Collection of Material Design component directives.
  */
 export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   CardBasicUsage, CardInCardActions, CardActionButtons,
-  ToolbarBasicUsage
+  ToolbarBasicUsage,
+  ProgressCircularBasicUsage,
+  ProgressLinearBasicUsage
 ]);
 
 export * from './example';

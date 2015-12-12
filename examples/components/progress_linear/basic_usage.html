@@ -1,0 +1,64 @@
+<div layout="column" layout-margin style="padding:25px;">
+
+  <h2 class="md-title">Determinate</h2>
+
+  <p>
+    For operations where the percentage of the operation completed can be determined, use a <b>determinate</b>
+    indicator.
+    They give users a quick sense of how long an operation will take.
+  </p>
+  <md-progress-linear mode="determinate" [value]="determinateValue"></md-progress-linear>
+
+  <h4 class="md-title">Indeterminate</h4>
+
+  <p>
+    For operations where the user is asked to wait a moment while something finishes up, and it's not
+    necessary to expose what's happening behind the scenes and how long it will take, use an
+    <b>indeterminate</b> indicator:
+  </p>
+  <md-progress-linear mode="indeterminate"></md-progress-linear>
+
+  <h4 class="md-title">Buffer</h4>
+
+  <p>
+    For operations where the user wants to indicate some activity or loading from the server,
+    use the <b>buffer</b> indicator:
+  </p>
+  <md-progress-linear class="md-warn" [mode]="modes[0]" [value]="determinateValue"
+                      [buffer-value]="determinateValue2"></md-progress-linear>
+
+  <h4 class="md-title">Query</h4>
+
+  <p>
+    For situations where the user wants to indicate pre-loading (until the loading can actually be made),
+    use the <b>query</b> indicator:
+  </p>
+
+  <div class="container" ng-class="{'visible' : !activated}">
+    <md-progress-linear [mode]="modes[1]"></md-progress-linear>
+    <div class="bottom-block">
+      <span>Loading application libraries...</span>
+    </div>
+  </div>
+
+  <hr [ng-class]="{'visible' : activated}">
+
+  <div id="loaders" layout="row" layout-align="start center">
+
+    <p>Query and Buffer progress linear indicators: </p>
+
+    <h5>Off</h5>
+    <md-switch
+        [checked]="activated"
+        (md-on-change)="toggleActivation()"
+        aria-label="Enable Indicators">
+      <h5>On</h5>
+    </md-switch>
+  </div>
+
+  <p class="small">
+    Note: With the above switch -- which simply clears the mode in each <code>&lt;md-progress-linear
+    md-mode=""&gt;</code> element --
+    developers now easily disable the animations and hide their progress indicators.</p>
+
+</div>

@@ -53,10 +53,6 @@ module.exports = function (grunt) {
       }
     },
     watch: {
-      dist: {
-        files: ['<%- sourceRoot %>/**/*.js', '<%- sourceRoot %>/**/*.css'],
-        tasks: ['dist-bundle', 'notify:bundle']
-      },
       sass: {
         files: [
           '<%- sourceRoot %>/**/*.css',
@@ -78,8 +74,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-ts');
   grunt.registerTask('default', ['copy', 'ts', 'sass']);
-  grunt.registerTask('develop-ide', ['default', 'watch']);
   grunt.registerTask('develop', ['default', 'watch']);
+  grunt.registerTask('build', ['default', 'dist-bundle']);
 
 
   grunt.registerTask('dist-bundle', 'Build a single-file javascript output.', function () {

@@ -9,7 +9,7 @@
     "label-position": true,
     "label-undefined": true,
     "max-line-length": [true, 120],
-    "member-access": true,
+    "member-access": false,
     "member-ordering": [true,
       "public-before-private",
       "static-before-instance",
