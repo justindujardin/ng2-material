@@ -16,14 +16,11 @@ import {Event, KeyboardEvent} from 'angular2/src/facade/browser';
 
 import {MdRadioDispatcher} from './radio_dispatcher';
 import {KeyCodes} from '../../core/key_codes';
-import {Output} from 'angular2/core';
+import {Output, Input} from 'angular2/core';
 
 // TODO(jdd): [disabled] style
 
 // TODO(jelbourn): Behaviors to test
-// Disabled radio don't select
-// Disabled radios don't propagate click event
-// Radios are disabled by parent group
 // Radios set default tab index iff not in parent group
 // Radios are unique-select
 // Radio updates parent group's value
@@ -52,36 +49,45 @@ var _uniqueIdCounter: number = 0;
 })
 export class MdRadioGroup implements OnChanges {
   /** The selected value for the radio group. The value comes from the options. */
-  value: any;
+  @Input('value') value_: any;
+
+  get value(): any {
+    return this.value_;
+  }
+
+  set value(value: any) {
+    let button = this.getChildByValue(value);
+    this.value_ = value;
+    if (button) {
+      this.selectedRadioId = button.id;
+      this.activedescendant = button.id;
+    }
+  }
 
   /** The HTML name attribute applied to radio buttons in this group. */
-  name_: string;
+  name_: string = `md-radio-group-${_uniqueIdCounter++}`;
 
   /** Dispatcher for coordinating radio unique-selection by name. */
   radioDispatcher: MdRadioDispatcher;
 
   /** Array of child radio buttons. */
-  radios_: MdRadioButton[];
+  radios_: MdRadioButton[] = [];
 
   activedescendant: any;
 
-  disabled_: boolean;
+  disabled_: boolean = false;
 
   /** The ID of the selected radio button. */
-  selectedRadioId: string;
+  selectedRadioId: string = '';
 
-  @Output('valueChange') change: EventEmitter<any>;
+  @Output('valueChange') change: EventEmitter<any> = new EventEmitter();
 
   tabindex: number;
 
-  constructor(@Attribute('tabindex') tabindex: string, @Attribute('disabled') disabled: string,
+  constructor(@Attribute('tabindex') tabindex: string,
+              @Attribute('disabled') disabled: string,
               radioDispatcher: MdRadioDispatcher) {
-    this.name_ = `md-radio-group-${_uniqueIdCounter++}`;
-    this.radios_ = [];
-    this.change = new EventEmitter();
     this.radioDispatcher = radioDispatcher;
-    this.selectedRadioId = '';
-    this.disabled_ = false;
 
     // The simple presence of the `disabled` attribute dictates disabled state.
     this.disabled = isPresent(disabled);
@@ -156,12 +162,24 @@ export class MdRadioGroup implements OnChanges {
   // TODO(jelbourn): Replace this with a findIndex method in the collections facade.
   getSelectedRadioIndex(): number {
     for (let i = 0; i < this.radios_.length; i++) {
-      if (this.radios_[i].id == this.selectedRadioId) {
+      if (this.radios_[i].id === this.selectedRadioId) {
         return i;
       }
     }
 
     return -1;
+  }
+
+  /**
+   * Return a child radio by its value.
+   */
+  getChildByValue(value: any): MdRadioButton {
+    for (let i = 0; i < this.radios_.length; i++) {
+      if (this.radios_[i].value === value) {
+        return this.radios_[i];
+      }
+    }
+    return null;
   }
 
   /** Steps the selected radio based on the given step value (usually either +1 or -1). */
@@ -200,6 +218,7 @@ export class MdRadioGroup implements OnChanges {
     '[attr.aria-checked]': 'checked',
     '[attr.aria-disabled]': 'disabled',
     '(keydown)': 'onKeydown($event)',
+    '(click)': 'select($event)'
   }
 })
 @View({
@@ -231,21 +250,24 @@ export class MdRadioButton implements OnInit {
 
   tabindex: number;
 
-  constructor(@Optional() @SkipSelf() @Host() radioGroup: MdRadioGroup, @Attribute('id') id: string,
-              @Attribute('tabindex') tabindex: string, radioDispatcher: MdRadioDispatcher) {
+  constructor(@Optional() @SkipSelf() @Host() radioGroup: MdRadioGroup,
+              @Attribute('id') id: string,
+              @Attribute('value') value: string,
+              @Attribute('tabindex') tabindex: string,
+              radioDispatcher: MdRadioDispatcher) {
     // Assertions. Ideally these should be stripped out by the compiler.
     // TODO(jelbourn): Assert that there's no name binding AND a parent radio group.
 
     this.radioGroup = radioGroup;
     this.radioDispatcher = radioDispatcher;
-    this.value = null;
+    this.value = value ? value : null;
     this.checked = false;
 
     this.id = isPresent(id) ? id : `md-radio-${_uniqueIdCounter++}`;
 
     // Whenever a radio button with the same name is checked, uncheck this radio button.
     radioDispatcher.listen((name) => {
-      if (name == this.name) {
+      if (name === this.name) {
         this.checked = false;
       }
     });
@@ -281,7 +303,8 @@ export class MdRadioButton implements OnInit {
   }
 
   get disabled(): any {
-    return this.disabled_;
+    // True if self or parent group are disabled.
+    return this.disabled_ || (this.radioGroup && this.radioGroup.disabled);
   }
 
   set disabled(value: any) {
@@ -307,7 +330,7 @@ export class MdRadioButton implements OnInit {
 
   /** Handles pressing the space key to select this focused radio button. */
   onKeydown(event: KeyboardEvent) {
-    if (event.keyCode == KeyCodes.SPACE) {
+    if (event.keyCode === KeyCodes.SPACE) {
       event.preventDefault();
       this.select(event);
     }
