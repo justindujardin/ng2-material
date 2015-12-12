@@ -16,6 +16,9 @@ import {Event, KeyboardEvent} from 'angular2/src/facade/browser';
 
 import {MdRadioDispatcher} from './radio_dispatcher';
 import {KeyCodes} from '../../core/key_codes';
+import {Output} from 'angular2/core';
+
+// TODO(jdd): [disabled] style
 
 // TODO(jelbourn): Behaviors to test
 // Disabled radio don't select
@@ -33,7 +36,6 @@ var _uniqueIdCounter: number = 0;
 
 @Component({
   selector: 'md-radio-group',
-  outputs: ['change'],
   inputs: ['disabled', 'value'],
   host: {
     'role': 'radiogroup',
@@ -68,7 +70,7 @@ export class MdRadioGroup implements OnChanges {
   /** The ID of the selected radio button. */
   selectedRadioId: string;
 
-  change: EventEmitter<any>;
+  @Output('valueChange') change: EventEmitter<any>;
 
   tabindex: number;
 
@@ -108,10 +110,10 @@ export class MdRadioGroup implements OnChanges {
 
     // If the value of this radio-group has been set or changed, we have to look through the
     // child radio buttons and select the one that has a corresponding value (if any).
-    if (isPresent(this.value) && this.value != '') {
+    if (isPresent(this.value) && this.value !== '') {
       this.radioDispatcher.notify(this.name_);
       this.radios_.forEach(radio => {
-        if (radio.value == this.value) {
+        if (radio.value === this.value) {
           radio.checked = true;
           this.selectedRadioId = radio.id;
           this.activedescendant = radio.id;
@@ -125,7 +127,7 @@ export class MdRadioGroup implements OnChanges {
     this.value = value;
     this.selectedRadioId = id;
     this.activedescendant = id;
-    ObservableWrapper.callEmit(this.change, null);
+    ObservableWrapper.callEmit(this.change, value);
   }
 
   /** Registers a child radio button with this group. */
@@ -275,7 +277,7 @@ export class MdRadioButton implements OnInit {
     // if the user just adds a `disabled` attribute with no value, or may be absent completely.
     // TODO(jelbourn): If someone sets `disabled="disabled"`, will this work in dart?
     return this.disabled || (isPresent(this.disabled) && StringWrapper.equals(this.disabled, '')) ||
-           (isPresent(this.radioGroup) && this.radioGroup.disabled);
+      (isPresent(this.radioGroup) && this.radioGroup.disabled);
   }
 
   get disabled(): any {

@@ -1,6 +1,5 @@
 @import "../../core/style/variables";
 @import "../../core/style/shadows";
-
 // TODO(jelbourn): This goes away.
 @import "../../core/style/default-theme";
 
@@ -76,7 +75,6 @@ md-radio-group {
   cursor: pointer;
 }
 
-
 // THEME
 
 .md-radio-off {
@@ -94,7 +92,6 @@ md-radio-group {
 // TODO
 .md-radio-checked .md-ink-ripple { }
 .md-radio-container .md-ripple { }
-p
 
 md-radio-group:not([disabled]) md-radio:not([disabled]) {
 

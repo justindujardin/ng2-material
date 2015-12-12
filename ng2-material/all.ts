@@ -33,6 +33,7 @@ import {MdProgressCircular} from './components/progress_circular/progress_circul
 export * from './components/progress_circular/progress_circular';
 
 import {MdRadioButton, MdRadioGroup} from './components/radio/radio_button';
+import {MdRadioDispatcher} from './components/radio/radio_dispatcher';
 export * from './components/radio/radio_button';
 export * from './components/radio/radio_dispatcher';
 
@@ -59,4 +60,11 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdRadioButton, MdRadioGroup,
   MdSwitch,
   MdToolbar
+]);
+
+/**
+ * Collection of Material Design component providers.
+ */
+export const MATERIAL_PROVIDERS: Type[] = CONST_EXPR([
+  MdRadioDispatcher
 ]);
