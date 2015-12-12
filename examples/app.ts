@@ -1,9 +1,9 @@
 import {Component, View} from 'angular2/core';
 import {bootstrap} from 'angular2/angular2';
-import {MATERIAL_DIRECTIVES} from './ng2-material/all';
+import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
 
-import {DEMO_DIRECTIVES} from './examples/all';
-import Example from './examples/example';
+import {DEMO_DIRECTIVES} from './all';
+import Example from './example';
 
 
 
@@ -11,7 +11,7 @@ import Example from './examples/example';
   selector: 'demos-app'
 })
 @View({
-  templateUrl: 'app.html',
+  templateUrl: 'examples/app.html',
   directives: [MATERIAL_DIRECTIVES, Example, DEMO_DIRECTIVES]
 })
 export class DemosApp {

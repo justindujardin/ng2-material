@@ -18,7 +18,7 @@ import {isPresent} from 'angular2/src/facade/lang';
 })
 @View({
   templateUrl: 'ng2-material/components/button/button.html',
-  styleUrls: ['ng2-material/components/button/button.css'],
+  //styleUrls: ['ng2-material/components/button/button.css'],
   encapsulation: ViewEncapsulation.None,
 })
 export class MdButton {

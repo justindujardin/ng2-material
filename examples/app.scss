@@ -1,7 +1,8 @@
-@import "font/font";
+$md-font-url: '../public/font/';
 
-@import "ng2-material/all";
-@import "examples/example";
+@import "../public/font/font";
+@import "../ng2-material/all";
+@import "example";
 
 demos-app {
   .md-toolbar {
@@ -14,8 +15,6 @@ demos-app {
       margin-bottom:rem(6);
       font-weight: 300;
       color: md-color($md-primary,900);
-    }
-    > md-divider {
     }
     .card-media {
       background-color: md-color($md-background);

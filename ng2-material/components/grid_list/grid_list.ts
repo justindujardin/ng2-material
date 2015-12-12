@@ -418,7 +418,7 @@ class Position {
 
 
 /** Simple data structure for style values to be applied to a tile. */
-class TileStyle {
+export class TileStyle {
   height: string;
   width: string;
   top: string;

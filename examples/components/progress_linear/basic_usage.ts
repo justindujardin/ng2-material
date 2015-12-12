@@ -3,7 +3,7 @@ import {MATERIAL_DIRECTIVES} from '../../base';
 
 @Component({selector: 'progress-linear-basic-usage'})
 @View({templateUrl: 'examples/components/progress_linear/basic_usage.html', directives: [MATERIAL_DIRECTIVES]})
-export default class DemoView {
+export default class ProgressLinearBasicUsage {
   public modes: string[] = [];
   public mode: string = 'query';
   public activated: boolean = true;
@@ -54,13 +54,14 @@ export default class DemoView {
    */
   toggleActivation() {
     if (!this.activated) {
-      this.modes = [];
+      this.modes = [null,null,null,null,null];
     }
     if (this.activated) {
       this._j = this._counter = 0;
       this.determinateValue = 30;
       this.determinateValue2 = 30;
     }
+    this.activated = !this.activated;
   };
 
 }

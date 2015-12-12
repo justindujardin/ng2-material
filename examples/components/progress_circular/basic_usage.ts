@@ -3,7 +3,7 @@ import {MATERIAL_DIRECTIVES} from '../../base';
 
 @Component({selector: 'progress-circular-basic-usage'})
 @View({templateUrl: 'examples/components/progress_circular/basic_usage.html', directives: [MATERIAL_DIRECTIVES]})
-export default class DemoView {
+export default class ProgressCircularBasicUsage {
   public imagePath: string = 'public/images/washedout.png';
 
   public modes: string[] = [];
