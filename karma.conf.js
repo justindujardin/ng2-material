@@ -15,7 +15,7 @@ module.exports = function (config) {
       'node_modules/systemjs/dist/system.src.js',
       'node_modules/reflect-metadata/Reflect.js',
       "config.karma.js",
-      {pattern: 'ng2-material/**/*.js', watched: true, included: false},
+      {pattern: 'ng2-material/**/*.*', watched: true, included: false},
 
       {pattern: 'node_modules/angular2/**/*.js', included: false, watched: false},
       {pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false},
