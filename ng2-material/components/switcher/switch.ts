@@ -1,5 +1,5 @@
 import {Component, View, ViewEncapsulation, Attribute} from 'angular2/angular2';
-import {MdCheckbox} from "../checkbox/checkbox";
+import {MdCheckbox} from '../checkbox/checkbox';
 
 // TODO(jelbourn): add gesture support
 // TODO(jelbourn): clean up CSS.
@@ -12,6 +12,7 @@ import {MdCheckbox} from "../checkbox/checkbox";
     '[attr.aria-checked]': 'checked',
     '[attr.aria-disabled]': 'disabled_',
     '(keydown)': 'onKeydown($event)',
+    '(click)': 'toggle($event)'
   }
 })
 @View({
