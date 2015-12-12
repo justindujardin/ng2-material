@@ -81,6 +81,17 @@ module.exports = function (grunt) {
       default: {
         src: ['<%- sourceRoot %>/**/*.ts']
       }
+    },
+    remapIstanbul: {
+      build: {
+        src: '.coverage/**/coverage-final.json',
+        options: {
+          reports: {
+            'html': 'coverage',
+            'lcovonly': '.coverage/lcov.info'
+          }
+        }
+      }
     }
 
   });
@@ -92,6 +103,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('dts-generator');
+  grunt.loadNpmTasks('remap-istanbul');
   grunt.registerTask('default', ['copy', 'dtsGenerator', 'ts', 'sass']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('build', ['default', 'dist-bundle']);

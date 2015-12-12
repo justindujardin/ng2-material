@@ -2,7 +2,7 @@
 module.exports = function (config) {
   "use strict";
 
-  var coverageDebug = true;
+  var coverageDebug = false;
 
   config.set({
     basePath: '',
@@ -43,17 +43,17 @@ module.exports = function (config) {
         base: 'Chrome',
         flags: ['--no-sandbox']
       }
+    },
+
+    preprocessors: (process.env.TRAVIS || coverageDebug) ? {"ng2-material/**/*.js": "coverage"} : {},
+    coverageReporter: {
+      dir: '.coverage',
+
+      reporters: [
+        // reporters not supporting the `file` property
+        {type: 'json'},
+        {type: 'lcov'}
+      ]
     }
-    //
-    //preprocessors: (process.env.TRAVIS || coverageDebug) ? {"lib/ng2-material/*.js": "coverage"} : {},
-    //coverageReporter: {
-    //  dir: '.coverage',
-    //
-    //  reporters: [
-    //    // reporters not supporting the `file` property
-    //    {type: 'json'},
-    //    {type: 'lcov'}
-    //  ]
-    //}
   });
 };

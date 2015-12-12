@@ -26,6 +26,7 @@
   "typings": "lib/ng2-material/ng2-material.d.ts",
   "devDependencies": {
     "dts-generator": "^1.6.3",
+    "istanbul": "^1.0.0-alpha.2",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-clean": "^0.7.0",
@@ -36,7 +37,9 @@
     "grunt-ts": "^5.2.0",
     "karma": "^0.13.15",
     "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "0.5.3",
     "karma-jasmine": "^0.2.2",
+    "remap-istanbul": "^0.4.0",
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps"
   }
 }
