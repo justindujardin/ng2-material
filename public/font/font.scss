@@ -1,16 +1,16 @@
+$md-font-url: './' !default;
 
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(./font/MaterialIcons-Regular.eot); /* For IE6-8 */
-  src: local('./Material Icons'),
-       local('./MaterialIcons-Regular'),
-       url(./font/MaterialIcons-Regular.woff2) format('woff2'),
-       url(./font/MaterialIcons-Regular.woff) format('woff'),
-       url(./font/MaterialIcons-Regular.ttf) format('truetype');
+  src: url($md-font-url + 'MaterialIcons-Regular.eot'); /* For IE6-8 */
+  src: local($md-font-url + 'Material Icons'),
+       local($md-font-url + 'MaterialIcons-Regular'),
+       url($md-font-url + 'MaterialIcons-Regular.woff2') format('woff2'),
+       url($md-font-url + 'MaterialIcons-Regular.woff') format('woff'),
+       url($md-font-url + 'MaterialIcons-Regular.ttf') format('truetype');
 }
-
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
