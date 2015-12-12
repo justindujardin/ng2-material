@@ -10,6 +10,9 @@ export default class ProgressCircularBasicUsage {
   public activated: boolean = true;
   public determinateValue: number = 30;
 
+  private _counter: number = 0;
+  private _j: number = 0;
+
   constructor() {
 
     // Iterate every 100ms, non-stop
@@ -45,9 +48,5 @@ export default class ProgressCircularBasicUsage {
       this._j = this._counter = 0;
     }
   };
-
-
-  private _counter: number = 0;
-  private _j: number = 0;
 
 }

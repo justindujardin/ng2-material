@@ -35,11 +35,11 @@ md-card {
       height: 40px;
 
       .md-user-avatar,
-      md-icon {
+      [md-icon] {
         border-radius: 50%;
       }
 
-      md-icon {
+      [md-icon] {
         padding: 8px;
       }
 
@@ -134,7 +134,7 @@ md-card {
     margin: $baseline-grid;
 
     &.layout-column {
-      .md-button {
+      [md-button] {
         &:not(.md-icon-button) {
           margin: $baseline-grid / 4 0;
 
@@ -161,7 +161,7 @@ md-card {
       flex-direction: row;
     }
 
-    &:not(.layout-column) .md-button {
+    &:not(.layout-column) [md-button] {
       &:not(.md-icon-button) {
         margin: 0 $baseline-grid * .5;
 
@@ -214,8 +214,8 @@ md-card {
 
 $card-border-radius: 2px !default;
 
-md-card.md-THEME_NAME-theme {
-  background-color: md-color($md-background, 500); //'{{background-color}}';
+md-card {
+  background-color: md-color($md-background, lighter); //'{{background-color}}';
   border-radius: $card-border-radius;
 
   .md-card-image {
@@ -224,15 +224,15 @@ md-card.md-THEME_NAME-theme {
 
   md-card-header {
     md-card-avatar {
-      md-icon {
-        color: md-color($md-background); //'{{background-color}}';
+      [md-icon] {
+        color: md-color($md-background, lighter); //'{{background-color}}';
         background-color: md-color($md-foreground, hint-text); //'{{foreground-3}}';
       }
     }
 
     md-card-header-text {
       .md-subhead {
-        color: md-color($md-foreground, text); //'{{foreground-2}}'
+        color: md-color($md-foreground, secondary-text); //'{{foreground-2}}'
       }
     }
   }
@@ -241,7 +241,7 @@ md-card.md-THEME_NAME-theme {
     md-card-title-text {
       &:not(:only-child) {
         .md-subhead {
-          color: md-color($md-foreground, text); // '{{foreground-2}}';
+          color: md-color($md-foreground, secondary-text); // '{{foreground-2}}';
         }
       }
     }
