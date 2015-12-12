@@ -24,7 +24,7 @@ module.exports = function (grunt) {
         ]
       },
       font: {
-        files: [{expand: true, src: ['./font/*.*'], dest: 'lib/ng2-material/'}]
+        files: [{expand: true, flatten: true, src: ['./public/font/*.*'], dest: 'lib/ng2-material/'}]
       },
       styles: {
         files: [{src: ['<%- sourceRoot %>/all.css'], dest: 'lib/ng2-material/ng2-material.css'}]
@@ -61,10 +61,28 @@ module.exports = function (grunt) {
         tasks: ['sass', 'copy:styles', 'notify:styles']
       },
       ts: {
-        files: ['<%- sourceRoot %>/**/*.ts'],
+        files: [
+          '<%- sourceRoot %>/**/*.ts',
+          './*.ts',
+          'test/**/*.ts'
+        ],
         tasks: ['ts', 'notify:source']
       }
+    },
+
+
+    // RELEASE TASKS
+    dtsGenerator: {
+      options: {
+        name: 'ng2-material',
+        baseDir: '<%- sourceRoot %>',
+        out: 'lib/ng2-material/<%=pkg.name%>.d.ts'
+      },
+      default: {
+        src: ['<%- sourceRoot %>/**/*.ts']
+      }
     }
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -73,7 +91,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-ts');
-  grunt.registerTask('default', ['copy', 'ts', 'sass']);
+  grunt.loadNpmTasks('dts-generator');
+  grunt.registerTask('default', ['copy', 'dtsGenerator', 'ts', 'sass']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('build', ['default', 'dist-bundle']);
 
@@ -81,7 +100,7 @@ module.exports = function (grunt) {
   grunt.registerTask('dist-bundle', 'Build a single-file javascript output.', function () {
     var done = this.async();
     var Builder = require('systemjs-builder');
-    var builder = new Builder('./', './config.js');
+    var builder = new Builder('./', './config.bundle.js');
     builder
       .bundle('ng2-material', 'lib/ng2-material/ng2-material.js', {
         minify: false,
@@ -98,5 +117,8 @@ module.exports = function (grunt) {
       });
   });
 
+  grunt.registerTask('docs-meta', 'Build metadata files describing example usages', function () {
+
+  });
 
 };

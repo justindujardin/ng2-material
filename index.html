@@ -7,28 +7,18 @@
   <meta http-equiv="Content-Style-Type" content="text/css"/>
   <meta http-equiv="Content-Script-Type" content="text/javascript"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <link rel="stylesheet" type="text/css" href="./app.css">
+  <link rel="stylesheet" type="text/css" href="./examples/app.css">
 
 </head>
 <body>
 
 <demos-app></demos-app>
 
-<script src="./vendor/node_modules/systemjs/dist/system.src.js"></script>
-<script src="./vendor/node_modules/angular2/bundles/angular2.dev.js"></script>
+<script src="./node_modules/systemjs/dist/system.src.js"></script>
+<script src="./node_modules/angular2/bundles/angular2.dev.js"></script>
+<script src="./config.js"></script>
 <script>
-  System.config({
-    packages: {
-      'ng2-material': {
-        defaultExtension: 'js'
-      },
-      'examples': {
-        defaultExtension: 'js'
-      }
-    },
-    baseURL: './'
-  });
-  System.import('app.js')
+  System.import('examples/app.js')
     .then(function () {
       console.log("loaded app");
     })

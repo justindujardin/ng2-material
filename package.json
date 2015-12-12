@@ -14,11 +14,18 @@
     "test": "npm install"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.48",
+    "angular2": "2.0.0-alpha.52",
+    "es6-promise": "^3.0.2",
+    "es6-shim": "^0.33.13",
+    "reflect-metadata": "^0.1.2",
+    "rxjs": "5.0.0-alpha.14",
     "systemjs": "0.19.2",
-    "typescript": "^1.8.0-dev.20151122"
+    "typescript": "^1.8.0-dev.20151122",
+    "zone.js": "^0.5.8"
   },
+  "typings": "lib/ng2-material/ng2-material.d.ts",
   "devDependencies": {
+    "dts-generator": "^1.6.3",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-clean": "^0.7.0",
@@ -27,6 +34,9 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-notify": "^0.4.3",
     "grunt-ts": "^5.2.0",
+    "karma": "^0.13.15",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-jasmine": "^0.2.2",
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps"
   }
 }
