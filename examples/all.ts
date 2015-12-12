@@ -10,6 +10,8 @@ import ToolbarBasicUsage from './components/toolbar/basic_usage';
 import ProgressCircularBasicUsage from './components/progress_circular/basic_usage';
 import ProgressLinearBasicUsage from './components/progress_linear/basic_usage';
 
+import RadioBasicUsage from './components/radio/basic_usage';
+
 import SwitchBasicUsage from './components/switch/basic_usage';
 
 /**
@@ -17,8 +19,9 @@ import SwitchBasicUsage from './components/switch/basic_usage';
  */
 export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   CardBasicUsage, CardInCardActions, CardActionButtons,
-  ToolbarBasicUsage,
+  RadioBasicUsage,
   SwitchBasicUsage,
+  ToolbarBasicUsage,
   ProgressCircularBasicUsage,
   ProgressLinearBasicUsage
 ]);

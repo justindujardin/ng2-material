@@ -5,7 +5,7 @@ import {KeyboardEvent} from 'angular2/src/facade/browser';
 import {NumberWrapper} from 'angular2/src/facade/lang';
 import {Input, Output, EventEmitter} from 'angular2/core';
 
-// TODO (jdd): ng-true-value, ng-false-value
+// TODO(jdd): ng-true-value, ng-false-value
 
 @Component({
   selector: 'md-checkbox',
