@@ -44,5 +44,6 @@
     "karma-jasmine": "^0.2.2",
     "remap-istanbul": "^0.4.0",
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps"
-  }
+  },
+  "contributors": []
 }
