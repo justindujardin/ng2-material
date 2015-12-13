@@ -172,7 +172,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('dts-generator');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.registerTask('default', ['copy', 'dtsGenerator', 'ts:source', 'sass']);
+  grunt.registerTask('default', ['dtsGenerator', 'ts:source', 'sass', 'copy:styles']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release']);
 
