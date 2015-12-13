@@ -1,9 +1,110 @@
 import {View, Component} from 'angular2/core';
 import {Input} from 'angular2/core';
+import {DynamicComponentLoader} from "angular2/core";
+import {ElementRef} from "angular2/core";
+import {ComponentRef} from "angular2/core";
+import {IExampleData} from "./app";
+import {DEMO_DIRECTIVES} from "./all";
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
+import {Http} from "angular2/http";
+import {Response} from "angular2/http";
+import {Highlight} from './highlight';
 
-@Component({selector: 'example'})
-@View({templateUrl: 'examples/example.html'})
+
+export interface ISourceFile {
+  data:string;
+  type:string;
+}
+
+@Component({
+  selector: 'example',
+  properties: ['templateData', 'stylesData', 'sourceData', 'showSource', 'orderedFiles']
+})
+@View({
+  templateUrl: 'examples/example.html',
+  directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES, Highlight]
+})
 export default class Example {
+  private _model: IExampleData = null;
+  private _reference: ComponentRef = null;
 
-  @Input() public name: string = 'Unnamed Example';
+  @Input()
+  set model(value: IExampleData) {
+    this._model = value;
+    this.applyModel(value);
+  }
+
+  get model(): IExampleData {
+    return this._model;
+  }
+
+  private _loaded: boolean = false;
+  get loaded(): boolean {
+    return this._loaded;
+  }
+
+  constructor(private _element: ElementRef,
+              public http: Http,
+              public dcl: DynamicComponentLoader) {
+  }
+
+  /**
+   * The set of source files associated with the example
+   */
+  public orderedFiles: ISourceFile[] = [];
+
+  /**
+   * True to show the source code for the example
+   */
+  public showSource: boolean = false;
+
+  /**
+   * The selected type of source to view.
+   */
+  @Input() public selected:string = 'html';
+
+  applyModel(model: IExampleData) {
+    this.orderedFiles = [];
+    this._loaded = false;
+    // Fetch template, styles, and source strings for display.
+    if (model.template) {
+      this.addFile(model.template, 'html');
+    }
+    if (model.styles) {
+      this.addFile(model.styles, 'scss');
+    }
+    if (model.source) {
+      this.addFile(model.source, 'typescript');
+    }
+
+    // Render the example component into the view.
+    let template = `<${model.component}></${model.component}>`;
+    @Component({selector: 'md-example-view'})
+    @View({template: template, directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES]})
+    class CompiledComponent {
+    }
+    this.dcl.loadIntoLocation(CompiledComponent, this._element, 'example')
+      .then((ref: ComponentRef) => {
+        if (this._reference) {
+          this._reference.dispose();
+        }
+        this._loaded = true;
+        this._reference = ref;
+      });
+
+
+  }
+
+  addFile(url: string, type: string) {
+    let desc: ISourceFile = {
+      type: type,
+      data: ''
+    };
+    this.http.get(url).subscribe((res: Response) => {
+      desc.data = res.text();
+    });
+    this.orderedFiles.push(desc);
+  }
+
+
 }

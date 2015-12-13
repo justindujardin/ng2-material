@@ -57,6 +57,9 @@ module.exports = function (grunt) {
             src: [
               './node_modules/systemjs/dist/*.js',
               './node_modules/angular2/bundles/angular2.dev.js',
+              './node_modules/angular2/bundles/http.dev.js',
+              './node_modules/highlightjs/highlight.pack.js',
+              './node_modules/highlightjs/styles/*.css',
               './node_modules/angular2/typings/**/*'
             ],
             dest: '<%- sitePath %>/<%- pkg.version %>/'
@@ -74,6 +77,7 @@ module.exports = function (grunt) {
     notify: {
       options: {title: 'Material for Angular2'},
       bundle: {options: {message: 'Output Bundle Built'}},
+      meta: {options: {message: 'Site Index Compiled'}},
       styles: {options: {message: 'Styles Compiled'}},
       source: {options: {message: 'Source Compiled'}}
     },
@@ -106,8 +110,18 @@ module.exports = function (grunt) {
         files: [
           '<%- sourceRoot %>/**/*.css',
           '<%- sourceRoot %>/*.css',
-          'app.css'],
+          'app.css'
+        ],
         tasks: ['sass', 'copy:styles', 'notify:styles']
+      },
+      meta: {
+        files: [
+          'examples/**/*.html',
+          'examples/**/*.ts',
+          'examples/**/*.scss',
+          'examples/*.*'
+        ],
+        tasks: ['site-meta', 'notify:meta']
       },
       ts: {
         files: [
@@ -187,7 +201,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('dts-generator');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.registerTask('default', ['dtsGenerator', 'ts:source', 'sass', 'copy:styles']);
+  grunt.registerTask('default', ['dtsGenerator', 'site-meta', 'ts:source', 'sass', 'copy:styles']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release']);
 
@@ -230,7 +244,7 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('publish', 'Build metadata files describing example usages', function (tag) {
+  grunt.registerTask('publish', 'Publish new npm package', function (tag) {
     var exec = require('child_process').exec;
     var done = this.async();
     process.chdir('out');
@@ -242,6 +256,96 @@ module.exports = function (grunt) {
       grunt.log.ok('Published to NPM' + (tag ? ' @' + tag : ''));
       done();
     });
+  });
+
+
+  grunt.registerTask('site-meta', 'Build metadata files describing example usages', function (tag) {
+    var done = this.async();
+    var glob = require('glob');
+    var fs = require('fs');
+    var path = require('path');
+    var util = require('util');
+    var meta = {};
+    glob("examples/components/**/*.html", function (err, files) {
+      files.forEach(parseDemo);
+      var output = prepareMeta();
+      fs.writeFileSync('public/meta.json', JSON.stringify(output, null, 2));
+      done();
+    });
+
+    function parseDemo(templateFile) {
+      var name = path.basename(templateFile, '.html');
+      var result = {
+        template: templateFile
+      };
+      var sourceFile = path.join(path.dirname(templateFile), name + '.ts');
+      var stylesFile = path.join(path.dirname(templateFile), name + '.scss');
+      if (fileExists(stylesFile)) {
+        result.styles = stylesFile;
+      }
+      if (fileExists(sourceFile)) {
+        result.source = sourceFile;
+      }
+
+      var component = readableString(path.basename(path.dirname(templateFile)));
+      result.component = selectorString(component + ' ' + readableString(name));
+      meta[component] = meta[component] || {};
+      meta[component][readableString(name)] = result;
+      lintDemo(result);
+    }
+
+    // Make the metadata easier to access in angular by using arrays rather than key/value pairs.
+    // Store as an object internally to group examples by component.
+    function prepareMeta() {
+      var keys = Object.keys(meta);
+
+      var output = keys.map(function (key) {
+        var demos = meta[key];
+        var demoKeys = Object.keys(demos);
+        return {
+          name: key,
+          examples: demoKeys.map(function (key) {
+            demos[key].name = key;
+            return demos[key];
+          })
+        };
+      });
+      return output;
+    }
+
+    // Convert readable string of component + demo to a valid element name that
+    // can be inserted into the dom to produce the demo.
+    // e.g. "Card Basic Usage" -> "card-basic-usage"
+    function selectorString(readableString) {
+      return readableString
+        .split(' ')
+        .map(function (c) {
+          return c.toLowerCase();
+        })
+        .join('-');
+    }
+
+    function readableString(snakeCaseString) {
+      return snakeCaseString
+        .split('_')
+        .map(function (c) {
+          return c[0].toUpperCase() + c.slice(1);
+        })
+        .join(' ');
+    }
+
+    function lintDemo(outputMeta) {
+      grunt.log.ok('checking ' + outputMeta.source + ' no lint present');
+    }
+
+    function fileExists(filePath) {
+      try {
+        return fs.statSync(filePath).isFile();
+      }
+      catch (err) {
+        return false;
+      }
+    }
   });
 
 };

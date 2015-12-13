@@ -7,64 +7,21 @@
       <span>Angular2 Material</span>
     </h2>
     <span flex></span>
-    <button md-button class="md-icon-button" aria-label="More">
-      <i md-icon class="md-light">question</i>
-    </button>
   </div>
 </md-toolbar>
 
-<md-content layout-padding>
-
-  <h1>Toolbar</h1>
-  <example name="Basic Usage">
-    <toolbar-basic-usage></toolbar-basic-usage>
-  </example>
-
-  <md-divider></md-divider>
-
-  <h1>Radio</h1>
-  <example name="Basic Usage">
-    <radio-basic-usage></radio-basic-usage>
-  </example>
-
-  <md-divider></md-divider>
-
-  <h1>Switch</h1>
-  <example name="Basic Usage">
-    <switch-basic-usage></switch-basic-usage>
-  </example>
-
-  <md-divider></md-divider>
-
-  <h1>Progress Linear</h1>
-  <example name="Basic Usage">
-    <progress-linear-basic-usage></progress-linear-basic-usage>
-  </example>
+<md-content md-scroll-y layout-padding>
 
 
-  <md-divider></md-divider>
-
-  <md-divider></md-divider>
-
-  <h1>Progress Circular</h1>
-  <example name="Basic Usage">
-    <progress-circular-basic-usage></progress-circular-basic-usage>
-  </example>
+  <ul>
+    <li *ngFor="#value of meta"><span>{{value.name}}</span></li>
+  </ul>
 
 
-  <md-divider></md-divider>
-
-  <h1>Card</h1>
-  <example name="Basic Usage">
-    <card-basic-usage></card-basic-usage>
-  </example>
-
-  <example name="Action Buttons">
-    <card-action-buttons></card-action-buttons>
-  </example>
-
-  <example name="In Card Actions">
-    <card-in-card-actions></card-in-card-actions>
-  </example>
+  <section *ngFor="#value of meta">
+    <h1 [innerText]="value.name"></h1>
+    <example *ngFor="#demo of value.examples" [model]="demo"></example>
+    <md-divider></md-divider>
+  </section>
 
 </md-content>

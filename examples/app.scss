@@ -11,10 +11,13 @@ demos-app {
   > md-content {
     max-width: 800px;
     > h1 {
-      margin-top:rem(6);
-      margin-bottom:rem(6);
+      margin-top: rem(6);
+      margin-bottom: rem(6);
       font-weight: 300;
-      color: md-color($md-primary,900);
+      color: md-color($md-primary, 900);
+    }
+    > md-divider {
+      margin-top: rem(6);
     }
     .card-media {
       background-color: md-color($md-background);

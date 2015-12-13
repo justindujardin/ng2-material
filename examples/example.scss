@@ -1,6 +1,20 @@
+
+.demo-container {
+  .demo-toolbar {
+    button[md-button] {
+      color: rgba(255,255,255,0.6);
+      &.active {
+        color: rgba(255,255,255,0.9);
+      }
+    }
+
+  }
+}
+
 .layout-content,
 .doc-content {
   max-width: 864px;
+  min-width: 400px;
   margin: 16px;
   box-sizing: border-box;
 }
@@ -101,20 +115,11 @@ md-tabs.demo-source-tabs .active md-tab-label {
   min-height: 448px;
 }
 
-.demo-content > div.layout-fill {
-  min-height: 448px;
-}
-
 .small-demo .demo-content > div[layout-fill] {
   min-height: 224px;
 }
 
-.small-demo .demo-content > div.layout-fill {
-  min-height: 224px;
-}
-
-.layout-content .small-demo .demo-content > div[layout],
-.layout-options .small-demo .demo-content > div.layout {
+.layout-content .small-demo .demo-content > div[layout] {
   min-height: auto !important;
   max-height: auto !important;
   height: 128px !important;
@@ -152,16 +157,5 @@ md-toolbar.demo-toolbar .md-button {
 
 .demo-source-container {
   display: block;
-  border: 1px solid #ddd;
-  background-color: #f6f6f6;
   height: 400px;
-}
-
-.demo-source-container hljs {
-  margin-bottom: 0;
-  border-radius: 0;
-}
-
-.show-source div[demo-include] {
-  border-top: #ddd solid 2px;
 }

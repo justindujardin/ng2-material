@@ -4,6 +4,7 @@
 dist/
 out/
 site/
+public/meta.json
 
 ng2-material/**/*.css
 ng2-material/**/*.css.map
