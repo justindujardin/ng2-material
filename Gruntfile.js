@@ -81,6 +81,39 @@ module.exports = function (grunt) {
 
 
     // RELEASE TASKS
+    bump: {
+      options: {
+        files: ['package.json'],
+        updateConfigs: ['pkg'],
+        commit: true,
+        commitMessage: 'chore(deploy): release v%VERSION%',
+        commitFiles: [
+          'package.json',
+          'CHANGELOG.md'
+        ],
+        createTag: true,
+        tagName: 'v%VERSION%',
+        tagMessage: 'Version %VERSION%',
+        push: true,
+        pushTo: 'origin',
+        gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+      }
+    },
+    conventionalChangelog: {
+      options: {
+        changelogOpts: {
+          preset: 'angular'
+        }
+      },
+      release: {
+        src: 'CHANGELOG.md'
+      }
+    },
+    'npm-contributors': {
+      options: {
+        commitMessage: 'chore(attribution): update contributors'
+      }
+    },
     dtsGenerator: {
       options: {
         name: 'ng2-material',
@@ -115,7 +148,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('remap-istanbul');
   grunt.registerTask('default', ['copy', 'dtsGenerator', 'ts', 'sass']);
   grunt.registerTask('develop', ['default', 'watch']);
-  grunt.registerTask('build', ['default', 'dist-bundle']);
+  grunt.registerTask('build', ['default', 'dist-bundle', 'copy:release']);
 
 
   grunt.registerTask('dist-bundle', 'Build a single-file javascript output.', function () {
@@ -138,8 +171,33 @@ module.exports = function (grunt) {
       });
   });
 
-  grunt.registerTask('docs-meta', 'Build metadata files describing example usages', function () {
+  grunt.loadNpmTasks('grunt-bump');
+  grunt.loadNpmTasks('grunt-conventional-changelog');
+  grunt.loadNpmTasks('grunt-npm');
+  grunt.registerTask('release', 'Build, bump and tag a new release.', function (type) {
+    type = type || 'patch';
+    grunt.task.run([
+      'clean',
+      'build',
+      'npm-contributors',
+      'bump:' + type + ':bump-only',
+      'conventionalChangelog',
+      'bump-commit',
+      'publish'
+    ]);
+  });
 
+
+  grunt.registerTask('publish', 'Build metadata files describing example usages', function (tag) {
+    var exec = require('child_process').exec;
+    process.chdir('out');
+    exec('npm publish' + (tag ? ' --tag ' + tag : ''), function (err) {
+      process.chdir('../');
+      if (err) {
+        return grunt.fatal(err.message.replace(/\n$/, '.'));
+      }
+      grunt.log.ok('Published to NPM' + (tag ? ' @' + tag : ''));
+    });
   });
 
 };
