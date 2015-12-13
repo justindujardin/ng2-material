@@ -29,6 +29,8 @@ module.exports = function (grunt) {
       release: {
         files: [
           {src: 'package.json', dest: '<%- outPath %>/'},
+          {src: 'CHANGELOG.md', dest: '<%- outPath %>/'},
+          {src: 'README.md', dest: '<%- outPath %>/'},
           // Individual style and html files
           // NOTE: Individual js/d.ts outputs are handled by the build task for release
           {expand: true, cwd: 'ng2-material/', src: ['**/*.css'], dest: '<%- outPath %>/'},
