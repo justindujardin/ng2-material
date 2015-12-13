@@ -1,6 +1,7 @@
 .DS_Store
+.baseDir.*
 .idea
-lib/
+dist/
 out/
 
 ng2-material/**/*.css

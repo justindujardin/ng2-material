@@ -4,7 +4,7 @@ module.exports = function (grunt) {
     sourceRoot: 'ng2-material',
     outPath: 'out',
     clean: [
-      "lib/",
+      "dist/",
       "<%- outPath %>/",
       "<%- sourceRoot %>/**/*.js",
       "<%- sourceRoot %>/**/*.d.ts",
@@ -14,7 +14,7 @@ module.exports = function (grunt) {
     ],
     copy: {
       styles: {
-        files: [{src: ['<%- sourceRoot %>/all.css'], dest: 'lib/ng2-material/ng2-material.css'}]
+        files: [{src: ['<%- sourceRoot %>/all.css'], dest: 'dist/ng2-material.css'}]
       },
       release: {
         files: [
@@ -30,7 +30,7 @@ module.exports = function (grunt) {
           {expand: true, cwd: 'ng2-material/', src: ['**/*.ts'], dest: '<%- outPath %>/source'},
 
           // Bundled js and css files
-          {expand: true, cwd: 'lib/ng2-material/', src: ['*.*'], dest: '<%- outPath %>/dist'},
+          {expand: true, cwd: 'dist/', src: ['*.*'], dest: '<%- outPath %>/dist'},
           {expand: true, cwd: 'public/font/', src: ['*.*'], dest: '<%- outPath %>/dist'},
 
 
@@ -122,7 +122,7 @@ module.exports = function (grunt) {
       options: {
         name: 'ng2-material',
         baseDir: '<%- sourceRoot %>',
-        out: 'lib/ng2-material/<%=pkg.name%>.d.ts'
+        out: 'dist/<%=pkg.name%>.d.ts'
       },
       default: {
         src: ['<%- sourceRoot %>/**/*.ts']
@@ -160,12 +160,12 @@ module.exports = function (grunt) {
     var Builder = require('systemjs-builder');
     var builder = new Builder('./', './config.bundle.js');
     builder
-      .bundle('ng2-material', 'lib/ng2-material/ng2-material.js', {
+      .bundle('ng2-material', 'dist/ng2-material.js', {
         minify: false,
         sourceMaps: true
       })
       .then(function () {
-        return builder.bundle('ng2-material', 'lib/ng2-material/ng2-material.min.js', {
+        return builder.bundle('ng2-material', 'dist/ng2-material.min.js', {
           minify: true,
           sourceMaps: true
         });
@@ -186,6 +186,7 @@ module.exports = function (grunt) {
       'npm-contributors',
       'bump:' + type + ':bump-only',
       'conventionalChangelog',
+      'copy:release',
       'bump-commit',
       'publish'
     ]);
@@ -194,6 +195,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('publish', 'Build metadata files describing example usages', function (tag) {
     var exec = require('child_process').exec;
+    var done = this.async();
     process.chdir('out');
     exec('npm publish' + (tag ? ' --tag ' + tag : ''), function (err) {
       process.chdir('../');
@@ -201,6 +203,7 @@ module.exports = function (grunt) {
         return grunt.fatal(err.message.replace(/\n$/, '.'));
       }
       grunt.log.ok('Published to NPM' + (tag ? ' @' + tag : ''));
+      done();
     });
   });
 

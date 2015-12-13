@@ -23,7 +23,7 @@
     "typescript": "^1.8.0-dev.20151122",
     "zone.js": "^0.5.8"
   },
-  "typings": "lib/ng2-material/ng2-material.d.ts",
+  "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
     "dts-generator": "^1.6.3",
     "grunt": "^0.4.5",
