@@ -4,4 +4,7 @@ import {MATERIAL_DIRECTIVES} from '../../base';
 @Component({selector: 'toolbar-basic-usage'})
 @View({templateUrl: 'examples/components/toolbar/basic_usage.html', directives: [MATERIAL_DIRECTIVES]})
 export default class ToolbarBasicUsage {
+  clicked(message: string) {
+    alert(message);
+  }
 }

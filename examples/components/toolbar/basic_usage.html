@@ -2,17 +2,17 @@
   <br>
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <button md-button class="md-icon-button" aria-label="Settings">
+      <button md-button class="md-icon-button" aria-label="Settings" (click)="clicked('Menu')">
         <i md-icon>menu</i>
       </button>
       <h2>
         <span>Toolbar with Icon Buttons</span>
       </h2>
       <span flex></span>
-      <button md-button class="md-icon-button" aria-label="Favorite">
+      <button md-button class="md-icon-button" aria-label="Favorite" (click)="clicked('Favorite')">
         <i md-icon>favorite</i>
       </button>
-      <button md-button class="md-icon-button" aria-label="More">
+      <button md-button class="md-icon-button" aria-label="More" (click)="clicked('Show More')">
         <i md-icon>more_vert</i>
       </button>
     </div>
@@ -27,7 +27,7 @@
         <span>Toolbar with Standard Buttons</span>
       </h2>
       <span flex></span>
-      <button md-raised-button aria-label="Learn More">
+      <button md-raised-button aria-label="Learn More" (click)="clicked('Learn More')">
         Learn More
       </button>
       <button md-fab class="md-mini md-warn" aria-label="Favorite">

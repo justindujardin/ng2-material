@@ -194,6 +194,11 @@ $md-icon-border-radius: $md-fab-border-radius;
       @include md-button-disabled();
     }
   }
+
+  &.md-button-focus {
+    background: md-color($md-background, 500);
+  }
+
 }
 
 
