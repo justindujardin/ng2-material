@@ -1,6 +1,7 @@
 .DS_Store
 .idea
 lib/
+out/
 
 ng2-material/**/*.css
 ng2-material/**/*.css.map

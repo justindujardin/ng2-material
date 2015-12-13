@@ -2,32 +2,41 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     sourceRoot: 'ng2-material',
+    outPath: 'out',
     clean: [
       "lib/",
+      "<%- outPath %>/",
       "<%- sourceRoot %>/**/*.js",
       "<%- sourceRoot %>/**/*.js.map",
       "<%- sourceRoot %>/**/*.css",
       "<%- sourceRoot %>/**/*.css.map"
     ],
     copy: {
-      vendor: {
-        files: [
-          {
-            expand: true,
-            src: [
-              './node_modules/systemjs/dist/*.js',
-              './node_modules/angular2/bundles/angular2.dev.js',
-              './node_modules/angular2/typings/**/*'
-            ],
-            dest: 'vendor/'
-          }
-        ]
-      },
-      font: {
-        files: [{expand: true, flatten: true, src: ['./public/font/*.*'], dest: 'lib/ng2-material/'}]
-      },
       styles: {
         files: [{src: ['<%- sourceRoot %>/all.css'], dest: 'lib/ng2-material/ng2-material.css'}]
+      },
+      release: {
+        files: [
+          {src: 'package.json', dest: '<%- outPath %>/'},
+          // Individual module files
+          {expand: true, cwd: 'ng2-material/', src: ['**/*.js'], dest: '<%- outPath %>/'},
+          {expand: true, cwd: 'ng2-material/', src: ['**/*.css'], dest: '<%- outPath %>/'},
+          {expand: true, cwd: 'ng2-material/', src: ['**/*.html'], dest: '<%- outPath %>/'},
+          {expand: true, cwd: 'ng2-material/', src: ['**/*.d.ts'], dest: '<%- outPath %>/'},
+
+          // Source .ts/.scss files for people that prefer to build.
+          // TODO: this gets the .d.ts files as well. consider removing them.
+          {expand: true, cwd: 'ng2-material/', src: ['**/*.scss'], dest: '<%- outPath %>/source'},
+          {expand: true, cwd: 'ng2-material/', src: ['**/*.ts'], dest: '<%- outPath %>/source'},
+
+          // Bundled js and css files
+          {expand: true, cwd: 'lib/ng2-material/', src: ['*.*'], dest: '<%- outPath %>/dist'},
+          {expand: true, cwd: 'public/font/', src: ['*.*'], dest: '<%- outPath %>/dist'},
+
+
+          // Material Icons web font
+          {expand: true, cwd: 'public/', src: ['font/*.*'], dest: '<%- outPath %>/'}
+        ]
       }
     },
     notify: {
@@ -47,7 +56,7 @@ module.exports = function (grunt) {
           expand: true,
           cwd: '<%- sourceRoot %>',
           dest: '<%- sourceRoot %>',
-          src: ["<%- sourceRoot %>/all.scss", "<%- sourceRoot %>/**/*.scss"],
+          src: ["all.scss", "components/**/*.scss"],
           ext: '.css'
         }]
       }

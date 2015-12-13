@@ -2,7 +2,7 @@
   "name": "ng2-material",
   "version": "0.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "all.ts",
   "repository": {
     "type": "git",
     "url": "git@github.com:justindujardin/ng2-material.git"
