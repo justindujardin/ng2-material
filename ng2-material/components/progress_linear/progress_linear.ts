@@ -1,4 +1,4 @@
-import {Component, View, ViewEncapsulation, Attribute, OnChanges} from 'angular2/angular2';
+import {Component, View, ViewEncapsulation, Attribute, OnChanges} from 'angular2/core';
 import {CONST} from 'angular2/src/facade/lang';
 import {isPresent, isBlank} from 'angular2/src/facade/lang';
 import {Math} from 'angular2/src/facade/math';

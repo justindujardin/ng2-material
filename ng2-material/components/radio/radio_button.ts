@@ -8,7 +8,7 @@ import {
   Optional,
   OnChanges,
   OnInit
-} from 'angular2/angular2';
+} from 'angular2/core';
 
 import {isPresent, StringWrapper, NumberWrapper} from 'angular2/src/facade/lang';
 import {ObservableWrapper, EventEmitter} from 'angular2/src/facade/async';

@@ -1,4 +1,4 @@
-import {Component, View, ViewEncapsulation} from 'angular2/angular2';
+import {Component, View, ViewEncapsulation} from 'angular2/core';
 import {MdProgressLinear} from '../progress_linear/progress_linear';
 
 @Component({selector: 'md-progress-circular'})
