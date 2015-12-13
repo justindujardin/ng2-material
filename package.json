@@ -26,6 +26,7 @@
   "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
     "dts-generator": "1.6.3",
+    "glob": "6.0.1",
     "grunt": "0.4.5",
     "grunt-bump": "0.7.0",
     "grunt-cli": "0.1.13",
