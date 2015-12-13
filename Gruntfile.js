@@ -60,6 +60,7 @@ module.exports = function (grunt) {
               './node_modules/angular2/bundles/http.dev.js',
               './node_modules/highlightjs/highlight.pack.js',
               './node_modules/highlightjs/styles/*.css',
+              './node_modules/rxjs/**/*.js',
               './node_modules/angular2/typings/**/*'
             ],
             dest: '<%- sitePath %>/<%- pkg.version %>/'
@@ -203,6 +204,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('remap-istanbul');
   grunt.registerTask('default', ['dtsGenerator', 'site-meta', 'ts:source', 'sass', 'copy:styles']);
   grunt.registerTask('develop', ['default', 'watch']);
+  grunt.registerTask('site', ['build', 'copy:site']);
   grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release']);
 
 
