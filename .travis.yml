@@ -5,6 +5,7 @@ node_js:
 
 before_script:
  - npm install
+ - gem install sass
  - ./node_modules/.bin/grunt build
 
 script:
