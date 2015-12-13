@@ -12,7 +12,15 @@ module.exports = function (grunt) {
       "<%- sourceRoot %>/**/*.d.ts",
       "<%- sourceRoot %>/**/*.js.map",
       "<%- sourceRoot %>/**/*.css",
-      "<%- sourceRoot %>/**/*.css.map"
+      "<%- sourceRoot %>/**/*.css.map",
+      "examples/**/*.js",
+      "examples/**/*.d.ts",
+      "examples/**/*.js.map",
+      "examples/**/*.css",
+      "examples/**/*.css.map",
+      "test/**/*.js",
+      "test/**/*.d.ts",
+      "test/**/*.js.map"
     ],
     copy: {
       styles: {
@@ -79,9 +87,14 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '<%- sourceRoot %>',
-          dest: '<%- sourceRoot %>',
-          src: ["all.scss", "components/**/*.scss"],
+          cwd: './',
+          dest: '.',
+          src: [
+            "examples/*.scss",
+            "examples/**/*.scss",
+            "<%- sourceRoot %>/all.scss",
+            "<%- sourceRoot %>/components/**/*.scss"
+          ],
           ext: '.css'
         }]
       }
