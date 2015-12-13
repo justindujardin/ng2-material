@@ -1,3 +1,13 @@
+<a name="0.0.2"></a>
+## [0.0.2](https://github.com/justindujardin/ng2-material/compare/v0.0.1...v0.0.2) (2015-12-13)
+
+
+### Features
+
+* **build:** include bumped version in npm publish ([88f7134](https://github.com/justindujardin/ng2-material/commit/88f7134))
+
+
+
 <a name="0.0.1"></a>
 ## 0.0.1 (2015-12-13)
 
