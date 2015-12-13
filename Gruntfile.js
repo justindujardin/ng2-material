@@ -48,6 +48,9 @@ module.exports = function (grunt) {
     ts: {
       source: {
         tsconfig: true
+      },
+      release: {
+        tsconfig: 'tsconfig.build.json'
       }
     },
     sass: {

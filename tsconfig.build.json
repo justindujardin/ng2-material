@@ -3,10 +3,11 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "declaration": false,
+    "declaration": true,
     "noImplicitAny": false,
     "removeComments": true,
     "noLib": false,
+    "outDir": "out",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true
