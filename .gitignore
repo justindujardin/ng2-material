@@ -3,6 +3,7 @@
 .idea
 dist/
 out/
+site/
 
 ng2-material/**/*.css
 ng2-material/**/*.css.map

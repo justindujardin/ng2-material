@@ -3,9 +3,11 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     sourceRoot: 'ng2-material',
     outPath: 'out',
+    sitePath: 'site',
     clean: [
       "dist/",
       "<%- outPath %>/",
+      "<%- sitePath %>/",
       "<%- sourceRoot %>/**/*.js",
       "<%- sourceRoot %>/**/*.d.ts",
       "<%- sourceRoot %>/**/*.js.map",
@@ -25,7 +27,6 @@ module.exports = function (grunt) {
           {expand: true, cwd: 'ng2-material/', src: ['**/*.html'], dest: '<%- outPath %>/'},
 
           // Source .ts/.scss files for people that prefer to build.
-          // TODO: this gets the .d.ts files as well. consider removing them.
           {expand: true, cwd: 'ng2-material/', src: ['**/*.scss'], dest: '<%- outPath %>/source'},
           {expand: true, cwd: 'ng2-material/', src: ['**/*.ts'], dest: '<%- outPath %>/source'},
 
@@ -36,6 +37,27 @@ module.exports = function (grunt) {
 
           // Material Icons web font
           {expand: true, cwd: 'public/', src: ['font/*.*'], dest: '<%- outPath %>/'}
+        ]
+      },
+      // Examples site all nicely packaged up for uploading to an FTP.
+      site: {
+        files: [
+          {
+            expand: true,
+            src: [
+              './node_modules/systemjs/dist/*.js',
+              './node_modules/angular2/bundles/angular2.dev.js',
+              './node_modules/angular2/typings/**/*'
+            ],
+            dest: '<%- sitePath %>/<%- pkg.version %>/'
+          },
+
+          {expand: true, src: 'package.json', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, src: 'index.html', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, src: 'config.js', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, src: 'ng2-material/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, src: 'public/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, src: 'examples/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
         ]
       }
     },
