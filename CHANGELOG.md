@@ -1,3 +1,14 @@
+<a name="0.0.3"></a>
+## [0.0.3](https://github.com/justindujardin/ng2-material/compare/v0.0.2...v0.0.3) (2015-12-13)
+
+
+### Features
+
+* **build:** add support for generating examples static site ([a9db1d2](https://github.com/justindujardin/ng2-material/commit/a9db1d2))
+* **build:** include readme and changelog in npm package ([78650a8](https://github.com/justindujardin/ng2-material/commit/78650a8))
+
+
+
 <a name="0.0.2"></a>
 ## [0.0.2](https://github.com/justindujardin/ng2-material/compare/v0.0.1...v0.0.2) (2015-12-13)
 
