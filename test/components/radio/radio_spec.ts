@@ -12,8 +12,8 @@ import {DebugElement} from 'angular2/src/core/debug/debug_element';
 import {Component, View, provide} from 'angular2/core';
 import {UrlResolver} from 'angular2/compiler';
 import {TestUrlResolver} from '../../test_url_resolver';
-import {MdRadioGroup, MdRadioButton} from 'ng2-material/components/radio/radio_button';
-import {MATERIAL_PROVIDERS} from 'ng2-material/all';
+import {MdRadioGroup, MdRadioButton} from '../../../ng2-material/components/radio/radio_button';
+import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
 
 

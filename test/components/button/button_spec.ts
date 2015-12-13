@@ -17,7 +17,7 @@ import {DebugElement} from 'angular2/src/core/debug/debug_element';
 import {Component, View, ViewMetadata, provide} from 'angular2/core';
 import {UrlResolver} from 'angular2/compiler';
 
-import {MdButton, MdAnchor} from 'ng2-material/components/button/button';
+import {MdButton, MdAnchor} from '../../../ng2-material/components/button/button';
 
 import {TestUrlResolver} from '../../test_url_resolver';
 

@@ -1,22 +1,42 @@
 {
-  "version": "1.6.0",
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "declaration": true,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
-    "outDir": "out",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "sourceMap": true
-  },
-  "exclude": [
-    "node_modules",
-    "lib",
-    "out",
-    "vendor"
-  ],
-  "compileOnSave": true
+    "version": "1.6.0",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": true,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false,
+        "outDir": "out",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "sourceRoot": "ng2-material"
+    },
+    "filesGlob": [
+        "ng2-material/**/*.ts"
+    ],
+    "compileOnSave": true,
+    "files": [
+        "ng2-material/all.ts",
+        "ng2-material/components/button/button.ts",
+        "ng2-material/components/card/card.ts",
+        "ng2-material/components/checkbox/checkbox.ts",
+        "ng2-material/components/content/content.ts",
+        "ng2-material/components/dialog/dialog.ts",
+        "ng2-material/components/divider/divider.ts",
+        "ng2-material/components/grid_list/grid_list.ts",
+        "ng2-material/components/icon/icon.ts",
+        "ng2-material/components/input/input.ts",
+        "ng2-material/components/list/list.ts",
+        "ng2-material/components/progress_circular/progress_circular.ts",
+        "ng2-material/components/progress_linear/progress_linear.ts",
+        "ng2-material/components/radio/radio_button.ts",
+        "ng2-material/components/radio/radio_dispatcher.ts",
+        "ng2-material/components/sidenav/sidenav.ts",
+        "ng2-material/components/switcher/switch.ts",
+        "ng2-material/components/toolbar/toolbar.ts",
+        "ng2-material/core/animations/ripple.ts",
+        "ng2-material/core/key_codes.ts"
+    ]
 }

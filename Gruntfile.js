@@ -7,6 +7,7 @@ module.exports = function (grunt) {
       "lib/",
       "<%- outPath %>/",
       "<%- sourceRoot %>/**/*.js",
+      "<%- sourceRoot %>/**/*.d.ts",
       "<%- sourceRoot %>/**/*.js.map",
       "<%- sourceRoot %>/**/*.css",
       "<%- sourceRoot %>/**/*.css.map"
@@ -18,11 +19,10 @@ module.exports = function (grunt) {
       release: {
         files: [
           {src: 'package.json', dest: '<%- outPath %>/'},
-          // Individual module files
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.js'], dest: '<%- outPath %>/'},
+          // Individual style and html files
+          // NOTE: Individual js/d.ts outputs are handled by the build task for release
           {expand: true, cwd: 'ng2-material/', src: ['**/*.css'], dest: '<%- outPath %>/'},
           {expand: true, cwd: 'ng2-material/', src: ['**/*.html'], dest: '<%- outPath %>/'},
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.d.ts'], dest: '<%- outPath %>/'},
 
           // Source .ts/.scss files for people that prefer to build.
           // TODO: this gets the .d.ts files as well. consider removing them.
@@ -91,6 +91,7 @@ module.exports = function (grunt) {
         commit: true,
         commitMessage: 'chore(deploy): release v%VERSION%',
         commitFiles: [
+          'tsconfig.build.json',
           'package.json',
           'CHANGELOG.md'
         ],
@@ -149,9 +150,9 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('dts-generator');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.registerTask('default', ['copy', 'dtsGenerator', 'ts', 'sass']);
+  grunt.registerTask('default', ['copy', 'dtsGenerator', 'ts:source', 'sass']);
   grunt.registerTask('develop', ['default', 'watch']);
-  grunt.registerTask('build', ['default', 'dist-bundle', 'copy:release']);
+  grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release']);
 
 
   grunt.registerTask('dist-bundle', 'Build a single-file javascript output.', function () {
