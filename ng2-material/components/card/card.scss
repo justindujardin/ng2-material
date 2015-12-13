@@ -133,7 +133,7 @@ md-card {
   .md-actions, md-card-actions {
     margin: $baseline-grid;
 
-    &.layout-column {
+    &[layout=column] {
       [md-button] {
         &:not(.md-icon-button) {
           margin: $baseline-grid / 4 0;
@@ -161,7 +161,7 @@ md-card {
       flex-direction: row;
     }
 
-    &:not(.layout-column) [md-button] {
+    &:not([layout=column]) [md-button] {
       &:not(.md-icon-button) {
         margin: 0 $baseline-grid * .5;
 
