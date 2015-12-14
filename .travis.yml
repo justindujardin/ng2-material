@@ -13,7 +13,7 @@ before_script:
  - ./node_modules/.bin/grunt build
 
 script:
- - karma start karma.conf.js
+ - karma start karma.conf.js --single-run
 
 before_install:
   - npm install -g karma-cli
