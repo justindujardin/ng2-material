@@ -1,4 +1,4 @@
-Material Design for Angular2
+Material Components for Angular2 [![Build Status](https://travis-ci.org/justindujardin/ng2-material.svg?branch=master)](https://travis-ci.org/justindujardin/ng2-material) [![Coverage Status](https://coveralls.io/repos/justindujardin/ng2-material/badge.svg?branch=master&service=github)](https://coveralls.io/github/justindujardin/ng2-material?branch=master)
 ---
 
 This project is intended to be a placeholder for material design components in Angular2 until an official
