@@ -28,7 +28,7 @@ module.exports = function (config) {
     autoWatch: true,
     background: true,
     // - Chrome, ChromeCanary, Firefox, Opera, Safari (only Mac), PhantomJS, IE (only Windows)
-    browsers: process.env.TRAVIS ? ['TravisChrome'] : ['Chrome'],
+    browsers: process.env.TRAVIS ? ['Firefox'] : ['Chrome'],
     browserNoActivityTimeout: 15000,
     singleRun: false,
     reportSlowerThan: 500,
@@ -38,12 +38,6 @@ module.exports = function (config) {
     exclude: [
       'node_modules/angular2/**/*_spec.js'
     ],
-    customLaunchers: {
-      TravisChrome: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    },
 
     preprocessors: (process.env.TRAVIS || coverageDebug) ? {"ng2-material/**/*.js": "coverage"} : {},
     coverageReporter: {
