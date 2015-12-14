@@ -1,3 +1,19 @@
+<a name="0.0.4"></a>
+## [0.0.4](https://github.com/justindujardin/ng2-material/compare/v0.0.3...v0.0.4) (2015-12-14)
+
+
+### Bug Fixes
+
+* **card:** issue with layout alignment of first child button ([0da02fe](https://github.com/justindujardin/ng2-material/commit/0da02fe))
+
+### Features
+
+* **build:** add coveralls config for coverage reporting ([21077cc](https://github.com/justindujardin/ng2-material/commit/21077cc))
+* **build:** add travis script for test execution ([7dd10ca](https://github.com/justindujardin/ng2-material/commit/7dd10ca))
+* **docs:** view example source files inline ([a8c1ba2](https://github.com/justindujardin/ng2-material/commit/a8c1ba2))
+
+
+
 <a name="0.0.3"></a>
 ## [0.0.3](https://github.com/justindujardin/ng2-material/compare/v0.0.2...v0.0.3) (2015-12-13)
 

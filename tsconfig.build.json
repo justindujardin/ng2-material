@@ -36,7 +36,6 @@
         "ng2-material/components/sidenav/sidenav.ts",
         "ng2-material/components/switcher/switch.ts",
         "ng2-material/components/toolbar/toolbar.ts",
-        "ng2-material/core/animations/ripple.ts",
         "ng2-material/core/key_codes.ts"
     ]
 }
