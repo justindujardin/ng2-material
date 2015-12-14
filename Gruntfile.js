@@ -306,6 +306,7 @@ module.exports = function (grunt) {
         var demoKeys = Object.keys(demos);
         return {
           name: key,
+          id: selectorString(key),
           examples: demoKeys.map(function (key) {
             demos[key].name = key;
             return demos[key];

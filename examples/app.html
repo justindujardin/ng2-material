@@ -10,15 +10,21 @@
   </div>
 </md-toolbar>
 
-<md-content md-scroll-y layout-padding>
+<md-content class="examples" md-scroll-y layout-padding>
+
+  <h1 class="examples-title">Example Usage</h1>
+  <p class="examples-intro">The examples below illustrate how to use the various components implemented by this project.</p>
+
+  <nav class="examples-toc">
+    <h1>Components</h1>
+    <ul>
+      <li *ngFor="#value of meta"><a href="#{{value.id}}">{{value.name}}</a></li>
+    </ul>
+  </nav>
 
 
-  <ul>
-    <li *ngFor="#value of meta"><span>{{value.name}}</span></li>
-  </ul>
 
-
-  <section *ngFor="#value of meta">
+  <section *ngFor="#value of meta" [id]="value.id">
     <h1 [innerText]="value.name"></h1>
     <example *ngFor="#demo of value.examples" [model]="demo"></example>
     <md-divider></md-divider>

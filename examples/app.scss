@@ -25,4 +25,55 @@ demos-app {
       }
     }
   }
+
+  .examples {
+    padding-top: 80px;
+
+    .examples-title {
+      color: md-color($md-primary);
+      font-size: rem(3.4);
+      font-weight: 400;
+      line-height: rem(4);
+      margin-bottom: 30px;
+    }
+
+    .examples-intro {
+      font-size: rem(2);
+      line-height: rem(3.2);
+      margin-bottom: 0;
+      padding: 0 38px 40px 0;
+    }
+    .examples-toc {
+      border-left: 5px solid md-color($md-primary);
+      padding-left: 20px;
+      h1 {
+        margin: 0;
+        font-size: rem(1.5);
+        line-height: rem(1.6);
+        padding-bottom: 12px;
+        font-weight: 400;
+        color: #757575
+      }
+
+      ul {
+        list-style: none;
+        margin-top: 0;
+        padding-left: 0
+      }
+
+      li {
+        font-size: 20px;
+        line-height: 40px;
+        a {
+          text-decoration: none;
+          color: md-color($md-primary);
+        }
+        &:last-child {
+          line-height: 20px;
+          padding-top: 10px
+        }
+      }
+    }
+  }
+
 }
