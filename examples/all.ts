@@ -8,6 +8,7 @@ import {CONST_EXPR, Type} from 'angular2/src/facade/lang';
 // --=> EXAMPLES_IMPORT_START
 import CardBasicUsage from './components/card/basic_usage';
 import CardInlineActions from './components/card/inline_actions';
+import ButtonBasicUsage from './components/button/basic_usage';
 import CardActionButtons from './components/card/action_buttons';
 import ToolbarBasicUsage from './components/toolbar/basic_usage';
 import ProgressCircularBasicUsage from './components/progress_circular/basic_usage';
@@ -22,6 +23,7 @@ import SwitchBasicUsage from './components/switch/basic_usage';
 export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
 // --=> EXAMPLES_EXPORT_START
   CardBasicUsage, CardInlineActions, CardActionButtons,
+  ButtonBasicUsage,
   RadioBasicUsage,
   SwitchBasicUsage,
   ToolbarBasicUsage,
