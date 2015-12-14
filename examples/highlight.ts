@@ -4,7 +4,8 @@ import {ViewEncapsulation} from "angular2/core";
 declare var hljs: any;
 
 @Component({
-  selector: 'highlight'
+  selector: 'highlight',
+  properties: ['type', 'text']
 })
 @View({
   template: `<pre><code class="highlight" [innerHtml]="rendered || text"></code></pre>`,
