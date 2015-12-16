@@ -140,15 +140,15 @@ md-toolbar.demo-toolbar md-tab-label {
   color: #99E4EE
 }
 
-md-toolbar.demo-toolbar .md-button:hover {
+md-toolbar.demo-toolbar [md-button]:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
-md-toolbar.demo-toolbar .md-button.active, md-toolbar.demo-toolbar .md-button.active md-icon {
+md-toolbar.demo-toolbar [md-button].active, md-toolbar.demo-toolbar [md-button].active md-icon {
   color: #418CD6;
 }
 
-md-toolbar.demo-toolbar .md-button {
+md-toolbar.demo-toolbar [md-button] {
   -webkit-transition: all 0.3s linear;
   -moz-transition: all 0.3s linear;
   transition: all 0.3s linear;
