@@ -12,7 +12,6 @@ import ButtonBasicUsage from './components/button/basic_usage';
 import CardActionButtons from './components/card/action_buttons';
 import ToolbarBasicUsage from './components/toolbar/basic_usage';
 import ToolbarScrollShrink from './components/toolbar/scroll_shrink';
-import ProgressCircularBasicUsage from './components/progress_circular/basic_usage';
 import ProgressLinearBasicUsage from './components/progress_linear/basic_usage';
 import RadioBasicUsage from './components/radio/basic_usage';
 import SwitchBasicUsage from './components/switch/basic_usage';
@@ -28,7 +27,6 @@ export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   RadioBasicUsage,
   SwitchBasicUsage,
   ToolbarBasicUsage, ToolbarScrollShrink,
-  ProgressCircularBasicUsage,
   ProgressLinearBasicUsage
 // --=> EXAMPLES_EXPORT_END
 ]);
