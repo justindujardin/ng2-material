@@ -56,11 +56,12 @@ module.exports = function (grunt) {
             expand: true,
             src: [
               './node_modules/systemjs/dist/*.js',
+              './node_modules/angular2/bundles/angular2-polyfills.js',
               './node_modules/angular2/bundles/angular2.dev.js',
               './node_modules/angular2/bundles/http.dev.js',
               './node_modules/highlightjs/highlight.pack.js',
               './node_modules/highlightjs/styles/*.css',
-              './node_modules/rxjs/**/*.js',
+              './node_modules/rxjs/bundles/Rx.js',
               './node_modules/angular2/typings/**/*'
             ],
             dest: '<%- sitePath %>/<%- pkg.version %>/'
