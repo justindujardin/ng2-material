@@ -25,7 +25,7 @@
 
 
   <section *ngFor="#value of meta" [id]="value.id">
-    <h1 [innerText]="value.name"></h1>
+    <h1>{{ value.name }}</h1>
     <example *ngFor="#demo of value.examples" [model]="demo"></example>
     <md-divider></md-divider>
   </section>

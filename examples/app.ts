@@ -29,6 +29,16 @@ export class DemosApp {
   constructor(http: Http) {
     http.get('public/meta.json')
       .subscribe((res: Response) => {
+        // HACKS: use to filter down to a single example for testing
+        //let data = res.json();
+        //let results = [];
+        //data.forEach((d) => {
+        //  if(d.name === 'Toolbar'){
+        //    results.push(d);
+        //  }
+        //});
+        //this.meta = results;
+
         this.meta = res.json();
         console.log(this.meta);
       });

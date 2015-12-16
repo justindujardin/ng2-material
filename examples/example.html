@@ -1,21 +1,19 @@
 <div class="doc-demo-content doc-content">
   <div flex layout="column" style="z-index:1">
 
-    <div class="doc-description" ng-bind-html="demoCtrl.demoDescription.contents | toHtml"></div>
-
     <section class="demo-container md-whiteframe-z1"
-             ng-class="{'show-source': demoCtrl.$showSource}">
+             [ngClass]="{'show-source': showSource}">
 
       <md-toolbar class="demo-toolbar md-primary">
         <div class="md-toolbar-tools">
-          <h3 [innerText]="model?.name"></h3>
+          <h3>{{ model?.name }}</h3>
           <span flex></span>
           <button md-button *ngFor="#file of orderedFiles"
                   aria-label="View Source"
                   [style.display]="showSource!=true?'none':'block'"
                   [ngClass]="{ active: selected==file.type }"
-                  [innerText]="file.type"
                   (click)="selected=file.type">
+            {{ file.type }}
           </button>
           <button md-button
                   class="md-icon-button"

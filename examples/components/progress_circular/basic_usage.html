@@ -45,7 +45,7 @@
         [checked]="activated"
         (md-on-change)="toggleActivation()"
         aria-label="Toggle Progress Circular Indicators">
-      <h5 [innerText]="activated?'On':'Off'"></h5>
+      <h5>{{ activated?'On':'Off' }}</h5>
     </md-switch>
   </div>
 
