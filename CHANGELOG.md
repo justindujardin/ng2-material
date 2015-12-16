@@ -1,3 +1,20 @@
+<a name="0.0.5"></a>
+## [0.0.5](https://github.com/justindujardin/ng2-material/compare/v0.0.4...v0.0.5) (2015-12-16)
+
+
+### Bug Fixes
+
+* **examples:** issue where demos would not load in firefox ([bc54249](https://github.com/justindujardin/ng2-material/commit/bc54249))
+
+### Features
+
+* **examples:** add button basic usage ([c456f27](https://github.com/justindujardin/ng2-material/commit/c456f27))
+* **examples:** add navigation to demo page ([7777da9](https://github.com/justindujardin/ng2-material/commit/7777da9))
+* **README:** add travis and coveralls badges ([ac175dd](https://github.com/justindujardin/ng2-material/commit/ac175dd))
+* **toolbar:** add scroll shrink option ([32be4a5](https://github.com/justindujardin/ng2-material/commit/32be4a5))
+
+
+
 <a name="0.0.4"></a>
 ## [0.0.4](https://github.com/justindujardin/ng2-material/compare/v0.0.3...v0.0.4) (2015-12-14)
 
