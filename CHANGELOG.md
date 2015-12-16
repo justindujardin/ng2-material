@@ -1,3 +1,13 @@
+<a name="0.0.6"></a>
+## [0.0.6](https://github.com/justindujardin/ng2-material/compare/v0.0.5...v0.0.6) (2015-12-16)
+
+
+### Features
+
+* update to angular 2.0 beta 0 ([1885f11](https://github.com/justindujardin/ng2-material/commit/1885f11))
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/justindujardin/ng2-material/compare/v0.0.4...v0.0.5) (2015-12-16)
 
