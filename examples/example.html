@@ -27,12 +27,12 @@
       </md-toolbar>
 
       <!-- Source views -->
-      <md-tabs class="demo-source-tabs md-primary" [hidden]="showSource==false" style="min-height: 0;">
-        <md-tab *ngFor="#file of orderedFiles" label="file.name">
-          <md-content md-scroll-y class="demo-source-container" [style.display]="selected!=file.type?'none':'block'">
+      <md-tabs *ngIf="showSource">
+        <template md-tab *ngFor="#file of orderedFiles" [title]="file.type">
+          <md-content md-scroll-y class="demo-source-container">
             <highlight [text]="file.data" [type]="file.type" class="no-header"></highlight>
           </md-content>
-        </md-tab>
+        </template>
       </md-tabs>
 
       <!-- Live Demos -->

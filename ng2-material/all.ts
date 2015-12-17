@@ -43,6 +43,9 @@ export * from './components/switcher/switch';
 import {MdToolbar} from './components/toolbar/toolbar';
 export * from './components/toolbar/toolbar';
 
+import {MdTabs, MdTab} from './components/tabs/tabs';
+export * from './components/toolbar/toolbar';
+
 /**
  * Collection of Material Design component directives.
  */
@@ -59,7 +62,8 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdProgressCircular,
   MdRadioButton, MdRadioGroup,
   MdSwitch,
-  MdToolbar
+  MdToolbar,
+  MdTab, MdTabs
 ]);
 
 /**

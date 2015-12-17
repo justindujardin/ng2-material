@@ -15,6 +15,7 @@ import ToolbarScrollShrink from './components/toolbar/scroll_shrink';
 import ProgressLinearBasicUsage from './components/progress_linear/basic_usage';
 import RadioBasicUsage from './components/radio/basic_usage';
 import SwitchBasicUsage from './components/switch/basic_usage';
+import TabsBasicUsage from './components/tabs/basic_usage';
 // --=> EXAMPLES_IMPORT_END
 
 /**
@@ -26,6 +27,7 @@ export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   ButtonBasicUsage,
   RadioBasicUsage,
   SwitchBasicUsage,
+  TabsBasicUsage,
   ToolbarBasicUsage, ToolbarScrollShrink,
   ProgressLinearBasicUsage
 // --=> EXAMPLES_EXPORT_END
