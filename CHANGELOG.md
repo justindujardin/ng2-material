@@ -1,3 +1,24 @@
+<a name="0.0.7"></a>
+## [0.0.7](https://github.com/justindujardin/ng2-material/compare/v0.0.6...v0.0.7) (2015-12-19)
+
+
+### Bug Fixes
+
+* **examples:** import ng2-material from its bundle not using relative paths ([9cc14e6](https://github.com/justindujardin/ng2-material/commit/9cc14e6))
+* **examples:** top and bottom margin on button example ([cf40976](https://github.com/justindujardin/ng2-material/commit/cf40976))
+
+### Features
+
+* **button:** add ripple to buttons ([eb78e1f](https://github.com/justindujardin/ng2-material/commit/eb78e1f))
+* **tabs:** add dynamic height example ([877a3ef](https://github.com/justindujardin/ng2-material/commit/877a3ef))
+* **tabs:** add dynamic tabs example ([d0b0eff](https://github.com/justindujardin/ng2-material/commit/d0b0eff))
+* **tabs:** add ink ripple to tab buttons ([3636925](https://github.com/justindujardin/ng2-material/commit/3636925))
+* **tabs:** basic material styled tabs with no ink or animations ([d6653f7](https://github.com/justindujardin/ng2-material/commit/d6653f7))
+* **util:** add Animate class for css and typescript based animations ([99a4abc](https://github.com/justindujardin/ng2-material/commit/99a4abc))
+* **util:** add Ink class for applying ripples to html elements ([0fd473c](https://github.com/justindujardin/ng2-material/commit/0fd473c))
+
+
+
 <a name="0.0.6"></a>
 ## [0.0.6](https://github.com/justindujardin/ng2-material/compare/v0.0.5...v0.0.6) (2015-12-16)
 
