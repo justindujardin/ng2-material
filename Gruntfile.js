@@ -112,6 +112,7 @@ module.exports = function (grunt) {
         files: [
           '<%- sourceRoot %>/**/*.scss',
           '<%- sourceRoot %>/*.scss',
+          'examples/**/*.scss',
           'app.scss'
         ],
         tasks: ['sass', 'copy:styles', 'notify:styles']
