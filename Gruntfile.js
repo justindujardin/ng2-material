@@ -110,9 +110,9 @@ module.exports = function (grunt) {
     watch: {
       sass: {
         files: [
-          '<%- sourceRoot %>/**/*.css',
-          '<%- sourceRoot %>/*.css',
-          'app.css'
+          '<%- sourceRoot %>/**/*.scss',
+          '<%- sourceRoot %>/*.scss',
+          'app.scss'
         ],
         tasks: ['sass', 'copy:styles', 'notify:styles']
       },
