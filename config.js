@@ -7,8 +7,5 @@ System.config({
       defaultExtension: 'js'
     }
   },
-  map: {
-    "angular2/*" : "node_modules/angular2/*"
-  },
   baseURL: './'
 });

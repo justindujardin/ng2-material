@@ -71,6 +71,7 @@ module.exports = function (grunt) {
           {expand: true, src: 'index.html', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'config.js', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'ng2-material/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, src: 'dist/*.*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'public/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'examples/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
         ]
@@ -214,18 +215,33 @@ module.exports = function (grunt) {
     var done = this.async();
     var Builder = require('systemjs-builder');
     var builder = new Builder('./', './config.bundle.js');
+
+    // Strip the extension off of the output System js import names.
+
+    //var fs = require('fs');
+    //
+    //function fixPaths(file) {
+    //  var contents = fs.readFileSync(file).toString();
+    //  contents = contents.replace(/("ng2-material\/.*?\.ts")/g, function (match) {
+    //    return match.replace('.ts', '');
+    //  });
+    //  fs.writeFileSync(file, contents, 'utf-8');
+    //}
+
     builder
       .bundle('ng2-material', 'dist/ng2-material.js', {
         minify: false,
         sourceMaps: true
       })
       .then(function () {
+        //fixPaths('dist/ng2-material.js');
         return builder.bundle('ng2-material', 'dist/ng2-material.min.js', {
           minify: true,
           sourceMaps: true
         });
       })
       .then(function () {
+        //fixPaths('dist/ng2-material.min.js');
         done();
       });
   });
