@@ -1,4 +1,4 @@
-
+@import "../ng2-material/all";
 .demo-container {
   .demo-toolbar {
     button[md-button] {
@@ -47,21 +47,14 @@ docs-demo {
 }
 
 .demo-source-tabs md-tabs-wrapper {
-  background-color: #2C80D2 !important;
+  background-color: md-color($md-primary,400) !important;
 }
 
-md-tabs.demo-source-tabs md-tab,
+md-tabs.demo-source-tabs [md-tab],
 md-tabs.demo-source-tabs .md-header {
   background-color: #444444 !important;
 }
 
-md-tabs.demo-source-tabs md-tab-label {
-  color: #ccc !important;
-}
-
-md-tabs.demo-source-tabs .active md-tab-label {
-  color: #fff !important;
-}
 
 .demo-source-tabs.ng-hide {
   min-height: 0;

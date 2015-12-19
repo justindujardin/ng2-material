@@ -8,13 +8,6 @@
         <div class="md-toolbar-tools">
           <h3>{{ model?.name }}</h3>
           <span flex></span>
-          <button md-button *ngFor="#file of orderedFiles"
-                  aria-label="View Source"
-                  [style.display]="showSource!=true?'none':'block'"
-                  [ngClass]="{ active: selected==file.type }"
-                  (click)="selected=file.type">
-            {{ file.type }}
-          </button>
           <button md-button
                   class="md-icon-button"
                   aria-label="View Source"
@@ -27,8 +20,8 @@
       </md-toolbar>
 
       <!-- Source views -->
-      <md-tabs *ngIf="showSource">
-        <template md-tab *ngFor="#file of orderedFiles" [title]="file.type">
+      <md-tabs *ngIf="showSource" mdNoScroll="true" class="demo-source-tabs md-primary md-no-scroll">
+        <template md-tab *ngFor="#file of orderedFiles" [label]="file?.type">
           <md-content md-scroll-y class="demo-source-container">
             <highlight [text]="file.data" [type]="file.type" class="no-header"></highlight>
           </md-content>

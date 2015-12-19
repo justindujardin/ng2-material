@@ -1,8 +1,22 @@
-<ul class="nav nav-tabs">
-  <li *ngFor="var pane of panes"
-      (click)="select(pane)"
-      role="presentation" [class.active]="pane.active">
-    <a href="javascript: false">{{pane.title}}</a>
-  </li>
-</ul>
-<ng-content></ng-content>
+<md-tabs-wrapper>
+  <md-tab-data></md-tab-data>
+  <md-tabs-canvas role="tablist">
+    <md-pagination-wrapper>
+      <md-tab-item tabindex="-1"
+                   class="md-tab"
+                   (click)="select(pane)"
+                   [class.md-active]="selected == pane"
+                   [style.max-width]="maxTabWidth + 'px'"
+                   *ngFor="#pane of panes"
+                   role="tab">
+        {{pane.label}}
+      </md-tab-item>
+      <md-ink-bar></md-ink-bar>
+    </md-pagination-wrapper>
+  </md-tabs-canvas>
+</md-tabs-wrapper>
+<md-tabs-content-wrapper>
+  <md-tab-content role="tabpanel" [class.md-no-scroll]="mdNoScroll">
+    <ng-content></ng-content>
+  </md-tab-content>
+</md-tabs-content-wrapper>
