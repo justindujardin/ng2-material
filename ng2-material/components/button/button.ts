@@ -43,7 +43,7 @@ export class MdButton {
       this.isMouseDown = false
     }, 100);
 
-    if (Ink.canApply(this._element.nativeElement)) {
+    if (this._element && Ink.canApply(this._element.nativeElement)) {
       Ink.rippleEvent(this._element.nativeElement, event);
     }
   }
