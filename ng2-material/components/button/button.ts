@@ -30,10 +30,7 @@ export class MdButton {
   /** Whether the button has focus from the keyboard (not the mouse). Used for class binding. */
   isKeyboardFocused: boolean = false;
 
-  private _noInk: boolean = false;
-
-  constructor(private _element: ElementRef, @Attribute('md-no-ink') mdNoInk: string) {
-    this._noInk = isPresent(mdNoInk);
+  constructor(private _element: ElementRef) {
   }
 
   onMousedown(event) {
@@ -46,7 +43,7 @@ export class MdButton {
       this.isMouseDown = false
     }, 100);
 
-    if (!this._noInk) {
+    if (Ink.canApply(this._element.nativeElement)) {
       Ink.rippleEvent(this._element.nativeElement, event);
     }
   }

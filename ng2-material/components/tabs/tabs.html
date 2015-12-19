@@ -4,7 +4,7 @@
     <md-pagination-wrapper>
       <md-tab-item tabindex="-1"
                    class="md-tab"
-                   (click)="select(pane)"
+                   (click)="clickTabButton(pane,$event)"
                    [class.md-active]="selected == pane"
                    [style.max-width]="maxTabWidth + 'px'"
                    *ngFor="#pane of panes"

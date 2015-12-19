@@ -2,15 +2,22 @@ import {Component, Directive, Input, QueryList,
   ViewContainerRef, TemplateRef, ContentChildren} from 'angular2/core';
 import {AfterContentInit} from "angular2/core";
 import {Attribute} from "angular2/core";
+import {isPresent} from "angular2/src/facade/lang";
+import {OnChanges} from "angular2/core";
+import {Ink} from "../../core/util/ink";
+import {ElementRef} from "angular2/core";
 @Directive({
   selector: '[md-tab]'
 })
 export class MdTab {
   @Input() label: string;
+  @Input() disabled: boolean = false;
   private _active: boolean = false;
 
   constructor(public viewContainer: ViewContainerRef,
+              @Attribute('disabled') disabled: string,
               public templateRef: TemplateRef) {
+    this.disabled = isPresent(disabled);
   }
 
   @Input() set active(active: boolean) {
@@ -31,10 +38,14 @@ export class MdTab {
   selector: 'md-tabs',
   templateUrl: 'ng2-material/components/tabs/tabs.html'
 })
-export class MdTabs implements AfterContentInit {
+export class MdTabs implements AfterContentInit, OnChanges {
   @ContentChildren(MdTab) panes: QueryList<MdTab>;
 
-  constructor(@Attribute('mdNoScroll') private _mdNoScroll: string) {
+  @Input() mdNoScroll: boolean = false;
+
+  constructor(private _element: ElementRef,
+              @Attribute('mdNoScroll') noScroll: string) {
+    this.mdNoScroll = isPresent(noScroll);
   }
 
   private _selectedIndex: number = -1;
@@ -50,14 +61,6 @@ export class MdTabs implements AfterContentInit {
     }
   }
 
-  ngAfterContentInit(): any {
-    setTimeout(()=> {
-      if (this._selectedIndex === -1) {
-        this.select(this.panes.toArray()[0]);
-      }
-    }, 0);
-  }
-
   get selected(): MdTab {
     let result = null;
     this.panes.toArray().forEach((p: MdTab) => {
@@ -68,8 +71,27 @@ export class MdTabs implements AfterContentInit {
     return result;
   }
 
-
   select(pane: MdTab) {
     this.panes.toArray().forEach((p: MdTab) => p.active = p == pane);
   }
+
+  clickTabButton(pane: MdTab, event?) {
+    if (event && Ink.canApply(event.target)) {
+      Ink.rippleEvent(event.target, event);
+    }
+    this.select(pane);
+  }
+
+  ngAfterContentInit(): any {
+    setTimeout(()=> {
+      if (this._selectedIndex === -1) {
+        this.select(this.panes.toArray()[0]);
+      }
+    }, 0);
+  }
+
+  ngOnChanges(changes: {}): any {
+
+  }
+
 }

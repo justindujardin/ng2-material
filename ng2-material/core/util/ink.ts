@@ -8,6 +8,14 @@ import {Animate} from "./animate";
 export class Ink {
 
   /**
+   * Determine if ink can be applied to a given element.
+   * @param element The element to check
+   */
+  static canApply(element: HTMLElement): boolean {
+    return !DOM.hasAttribute(element, 'md-no-ink');
+  }
+
+  /**
    * Ink ripples are equal in height/width, so get the scalar size
    * of the container.
    *
