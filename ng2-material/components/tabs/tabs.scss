@@ -36,7 +36,7 @@ md-tabs {
   overflow: hidden;
   position: relative;
   flex-shrink: 0;
-  &:not(.md-no-tab-content):not(.md-dynamic-height) {
+  &:not(.md-no-tab-content):not([md-dynamic-height]) {
     min-height: 200 + $tabs-header-height;
   }
   &[md-align-tabs="bottom"] {
@@ -54,7 +54,7 @@ md-tabs {
       bottom: $tabs-header-height;
     }
   }
-  &.md-dynamic-height {
+  &[md-dynamic-height] {
     md-tabs-content-wrapper {
       min-height: 0;
       position: relative;
@@ -75,7 +75,7 @@ md-tabs {
       border-width: 0 0 1px;
       border-style: solid;
     }
-    &:not(.md-dynamic-height) {
+    &:not([md-dynamic-height]) {
       md-tabs-content-wrapper {
         top: $tabs-header-height + 1;
       }

@@ -4,8 +4,9 @@
     <md-pagination-wrapper>
       <md-tab-item tabindex="-1"
                    class="md-tab"
-                   (click)="clickTabButton(pane,$event)"
+                   (click)="onTabClick(pane,$event)"
                    [class.md-active]="selected == pane"
+                   [disabled]="pane.disabled"
                    [style.max-width]="maxTabWidth + 'px'"
                    *ngFor="#pane of panes"
                    role="tab">
@@ -16,7 +17,8 @@
   </md-tabs-canvas>
 </md-tabs-wrapper>
 <md-tabs-content-wrapper>
-  <md-tab-content role="tabpanel" [class.md-no-scroll]="mdNoScroll">
+  <md-tab-content role="tabpanel" class="md-active"
+                  [class.md-no-scroll]="mdNoScroll">
     <ng-content></ng-content>
   </md-tab-content>
 </md-tabs-content-wrapper>
