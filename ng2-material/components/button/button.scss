@@ -41,6 +41,13 @@ $md-icon-border-radius: $md-fab-border-radius;
   }
 }
 
+@mixin md-ripple-base() {
+  background-clip: padding-box;
+  overflow: hidden;
+  // The following hack causes Safari/Chrome to respect overflow hidden for ripples
+  -webkit-mask-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC');
+}
+
 /** Mixin to set button size to fit an icon */
 @mixin md-button-icon {
   margin: 0 $md-icon-button-margin;
@@ -50,6 +57,10 @@ $md-icon-border-radius: $md-fab-border-radius;
   padding: $baseline-grid;
   width: $md-icon-button-width;
   border-radius: $md-icon-border-radius;
+  .md-ripple-container {
+    border-radius: $md-icon-border-radius;
+    @include md-ripple-base();
+  }
 }
 
 /** Styles for all disabled buttons. */
@@ -137,6 +148,11 @@ $md-icon-border-radius: $md-fab-border-radius;
   // cannot technically be :disabled.
   &[disabled] {
     @include md-button-disabled();
+  }
+
+  .md-ripple-container {
+    border-radius: $md-button-border-radius;
+    @include md-ripple-base()
   }
 }
 
@@ -242,6 +258,12 @@ $md-icon-border-radius: $md-fab-border-radius;
       background-color: md-color($md-accent,A700); //'{{accent-A700}}';
     }
   }
+
+  .md-ripple-container {
+    border-radius: $md-fab-border-radius;
+    @include md-ripple-base();
+  }
+
 
 
   &.md-mini {

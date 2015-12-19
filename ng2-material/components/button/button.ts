@@ -2,15 +2,17 @@ import {Component, View, ViewEncapsulation, OnChanges} from 'angular2/core';
 
 import {TimerWrapper} from 'angular2/src/facade/async';
 import {isPresent} from 'angular2/src/facade/lang';
+import {ElementRef} from "angular2/core";
+import {Ink} from "../../core/util/ink";
+import {Attribute} from "angular2/core";
 
 
-// TODO(jelbourn): Ink ripples.
 // TODO(jelbourn): Make the `isMouseDown` stuff done with one global listener.
 
 @Component({
   selector: '[md-button]:not(a), [md-fab]:not(a), [md-raised-button]:not(a)',
   host: {
-    '(mousedown)': 'onMousedown()',
+    '(mousedown)': 'onMousedown($event)',
     '(focus)': 'onFocus()',
     '(blur)': 'onBlur()',
     '[class.md-button-focus]': 'isKeyboardFocused',
@@ -28,13 +30,25 @@ export class MdButton {
   /** Whether the button has focus from the keyboard (not the mouse). Used for class binding. */
   isKeyboardFocused: boolean = false;
 
-  onMousedown() {
+  private _noInk: boolean = false;
+
+  constructor(private _element: ElementRef, @Attribute('md-no-ink') mdNoInk: string) {
+    this._noInk = isPresent(mdNoInk);
+  }
+
+  onMousedown(event) {
     // We only *show* the focus style when focus has come to the button via the keyboard.
     // The Material Design spec is silent on this topic, and without doing this, the
     // button continues to look :active after clicking.
     // @see http://marcysutton.com/button-focus-hell/
     this.isMouseDown = true;
-    TimerWrapper.setTimeout(() => {this.isMouseDown = false}, 100);
+    TimerWrapper.setTimeout(() => {
+      this.isMouseDown = false
+    }, 100);
+
+    if (!this._noInk) {
+      Ink.rippleEvent(this._element.nativeElement, event);
+    }
   }
 
   onFocus() {
