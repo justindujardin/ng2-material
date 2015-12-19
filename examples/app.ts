@@ -6,6 +6,10 @@ import {DEMO_DIRECTIVES} from './all';
 import Example from './example';
 import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
 
+//
+// PLUNKR for ng2: http://plnkr.co/edit/UPJESEgyKFsm4hyW4fWR
+//
+
 /**
  * Describe an example that can be dynamically loaded.
  */

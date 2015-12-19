@@ -1,7 +1,5 @@
-import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from '../../base';
-import {Input} from "angular2/core";
-import {ViewEncapsulation} from "angular2/core";
+import {View, Component, Input, ViewEncapsulation} from 'angular2/core';
+import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
 
 export interface ITabData {
   title:string;

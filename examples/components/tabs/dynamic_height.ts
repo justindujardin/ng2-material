@@ -1,6 +1,5 @@
-import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from '../../base';
-import {ViewEncapsulation} from "angular2/core";
+import {View, Component, ViewEncapsulation} from 'angular2/core';
+import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
 
 @Component({selector: 'tabs-dynamic-height'})
 @View({
