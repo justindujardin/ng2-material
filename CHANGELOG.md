@@ -1,3 +1,22 @@
+<a name="0.0.8"></a>
+## [0.0.8](https://github.com/justindujardin/ng2-material/compare/v0.0.7...v0.0.8) (2015-12-20)
+
+
+### Bug Fixes
+
+* **browser:** use autoprefixer to enable flexbox on safari ([9ae1a42](https://github.com/justindujardin/ng2-material/commit/9ae1a42))
+* **examples:** use es6 shim for safari 8 compatibility ([9e65de0](https://github.com/justindujardin/ng2-material/commit/9e65de0))
+* **toolbar:** use prefix translate for scroll-shrink in safari 8 ([9e14280](https://github.com/justindujardin/ng2-material/commit/9e14280))
+
+### Features
+
+* **build:** add setBaseUrl to override where to load templates and styles from ([3ea1270](https://github.com/justindujardin/ng2-material/commit/3ea1270))
+* **examples:** add PLUNKR template showing how to get started ([029acbc](https://github.com/justindujardin/ng2-material/commit/029acbc))
+* **examples:** add release version to the site header ([4aa3bee](https://github.com/justindujardin/ng2-material/commit/4aa3bee))
+* **highlight:** allow specifying highlight text as body content ([f169ee6](https://github.com/justindujardin/ng2-material/commit/f169ee6))
+
+
+
 <a name="0.0.7"></a>
 ## [0.0.7](https://github.com/justindujardin/ng2-material/compare/v0.0.6...v0.0.7) (2015-12-19)
 
