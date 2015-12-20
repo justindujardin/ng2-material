@@ -72,6 +72,7 @@ module.exports = function (grunt) {
           {expand: true, src: 'config.js', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'ng2-material/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'dist/*.*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, cwd: 'public/font/', flatten: true, src: ['*.*'], dest: '<%- sitePath %>/<%- pkg.version %>/dist/'},
           {expand: true, src: 'public/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'examples/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
         ]
@@ -101,6 +102,7 @@ module.exports = function (grunt) {
           src: [
             "examples/*.scss",
             "examples/**/*.scss",
+            "public/font/*.scss",
             "<%- sourceRoot %>/all.scss",
             "<%- sourceRoot %>/components/**/*.scss"
           ],
