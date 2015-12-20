@@ -288,6 +288,11 @@ module.exports = function (grunt) {
     var path = require('path');
     var util = require('util');
     var meta = {};
+
+    fs.writeFileSync('public/version.json',JSON.stringify({
+      version: require('./package.json').version
+    }));
+
     glob("examples/components/**/*.html", function (err, files) {
       files.forEach(parseDemo);
       var output = prepareMeta();

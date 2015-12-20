@@ -31,6 +31,8 @@ export interface IExampleData {
 export class DemosApp {
   meta: any;
 
+  version: string;
+
   constructor(http: Http) {
     http.get('public/meta.json')
       .subscribe((res: Response) => {
@@ -44,8 +46,10 @@ export class DemosApp {
         //  }
         //});
         //this.meta = results;
-
-        console.log(this.meta);
+      });
+    http.get('public/version.json')
+      .subscribe((res: Response) => {
+        this.version = res.json().version;
       });
   }
 }
