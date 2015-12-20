@@ -1,5 +1,8 @@
 import {Component, View, Input} from "angular2/core";
 import {ViewEncapsulation} from "angular2/core";
+import {AfterContentInit} from "angular2/core";
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {ElementRef} from "angular2/core";
 
 declare var hljs: any;
 
@@ -8,11 +11,11 @@ declare var hljs: any;
   properties: ['type', 'text']
 })
 @View({
-  template: `<pre><code class="highlight" [innerHtml]="rendered || text"></code></pre>`,
+  template: `<pre><code class="highlight" [innerHtml]="rendered || text"><ng-content></ng-content></code></pre>`,
   styleUrls: ['examples/highlight.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class Highlight {
+export class Highlight implements AfterContentInit {
   get type(): string {
     return this._type;
   }
@@ -37,6 +40,16 @@ export class Highlight {
   private _type: string = 'typescript';
 
   rendered: string = null;
+
+  constructor(private element: ElementRef) {
+  }
+
+  ngAfterContentInit() {
+    // If there is no text binding, use the body of the element.
+    if (this._text === '' && this.element) {
+      this.text = DOM.getText(this.element.nativeElement);
+    }
+  }
 
   render() {
     var lines = this._text.split('\n');
