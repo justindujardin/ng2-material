@@ -39,6 +39,10 @@ demos-app {
       line-height: rem(3.2);
       margin-bottom: 0;
       padding: 0 38px 40px 0;
+      a {
+        text-decoration: none;
+        color: md-color($md-primary);
+      }
     }
     .examples-toc {
       border-left: 5px solid md-color($md-primary);
