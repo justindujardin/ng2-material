@@ -60,6 +60,7 @@ module.exports = function (grunt) {
               './node_modules/angular2/bundles/angular2.dev.js',
               './node_modules/angular2/bundles/http.dev.js',
               './node_modules/highlightjs/highlight.pack.js',
+              './node_modules/es6-shim/es6-*.js',
               './node_modules/highlightjs/styles/*.css',
               './node_modules/rxjs/bundles/Rx.js',
               './node_modules/angular2/typings/**/*'
