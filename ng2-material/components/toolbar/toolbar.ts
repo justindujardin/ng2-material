@@ -129,8 +129,12 @@ export class MdToolbar implements AfterViewInit, OnChanges, OnDestroy {
       Math.max(0, this._currentY + scrollTop - this._previousScrollTop)
     );
 
-    DOM.setStyle(this.el.nativeElement, 'transform', `translate3d(0,${-this._currentY * this.mdShrinkSpeed}px,0)`);
-    DOM.setStyle(this._content, 'transform', `translate3d(0,${(this._toolbarHeight - this._currentY) * this.mdShrinkSpeed}px,0)`);
+    let toolbarXform = `translate3d(0,${-this._currentY * this.mdShrinkSpeed}px,0)`;
+    let contentXform = `translate3d(0,${(this._toolbarHeight - this._currentY) * this.mdShrinkSpeed}px,0)`;
+    DOM.setStyle(this._content, '-webkit-transform', contentXform);
+    DOM.setStyle(this._content, 'transform', contentXform);
+    DOM.setStyle(this.el.nativeElement, '-webkit-transform', toolbarXform);
+    DOM.setStyle(this.el.nativeElement, 'transform', toolbarXform);
 
     this._previousScrollTop = scrollTop;
 
