@@ -73,7 +73,13 @@ module.exports = function (grunt) {
           {expand: true, src: 'config.js', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'ng2-material/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'dist/*.*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, cwd: 'public/font/', flatten: true, src: ['*.*'], dest: '<%- sitePath %>/<%- pkg.version %>/dist/'},
+          {
+            expand: true,
+            cwd: 'public/font/',
+            flatten: true,
+            src: ['*.*'],
+            dest: '<%- sitePath %>/<%- pkg.version %>/dist/'
+          },
           {expand: true, src: 'public/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'examples/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
         ]
@@ -111,6 +117,25 @@ module.exports = function (grunt) {
         }]
       }
     },
+    postcss: {
+      options: {
+        map: true,
+        processors: [
+          require('autoprefixer')({
+            remove: false
+          })
+        ]
+      },
+      dist: {
+        src: [
+          "examples/*.css",
+          "examples/**/*.css",
+          "public/font/*.css",
+          "<%- sourceRoot %>/all.css",
+          "<%- sourceRoot %>/components/**/*.css"
+        ]
+      }
+    },
     watch: {
       sass: {
         files: [
@@ -119,7 +144,7 @@ module.exports = function (grunt) {
           'examples/**/*.scss',
           'app.scss'
         ],
-        tasks: ['sass', 'copy:styles', 'notify:styles']
+        tasks: ['sass', 'postcss:dist', 'copy:styles', 'notify:styles']
       },
       meta: {
         files: [
@@ -204,11 +229,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('dts-generator');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.registerTask('default', ['dtsGenerator', 'site-meta', 'ts:source', 'sass', 'copy:styles']);
+  grunt.registerTask('default', ['dtsGenerator', 'site-meta', 'ts:source', 'sass', 'postcss', 'copy:styles']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('site', ['build', 'copy:site']);
   grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release']);
@@ -290,7 +316,7 @@ module.exports = function (grunt) {
     var util = require('util');
     var meta = {};
 
-    fs.writeFileSync('public/version.json',JSON.stringify({
+    fs.writeFileSync('public/version.json', JSON.stringify({
       version: require('./package.json').version
     }));
 

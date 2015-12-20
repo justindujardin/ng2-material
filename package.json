@@ -25,6 +25,7 @@
   },
   "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
+    "autoprefixer": "6.2.0",
     "coveralls": "2.11.6",
     "dts-generator": "1.6.3",
     "es6-module-loader": "^0.17.4",
@@ -39,6 +40,7 @@
     "grunt-conventional-changelog": "5.0.0",
     "grunt-notify": "0.4.3",
     "grunt-npm": "0.0.2",
+    "grunt-postcss": "0.7.1",
     "grunt-ts": "5.2.0",
     "highlightjs": "8.7.0",
     "istanbul": "1.0.0-alpha.2",
