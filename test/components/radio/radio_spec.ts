@@ -25,6 +25,11 @@ export function main() {
       return debugEl.nativeElement.tagName.toLowerCase() === tagName.toLowerCase();
     });
   }
+  function findChildById(parent: DebugElement, id: string): DebugElement {
+    return parent.query((debugEl) => {
+      return debugEl.nativeElement.id.toLowerCase() === id.toLowerCase();
+    });
+  }
 
   @Component({selector: 'test-app'})
   @View({
@@ -43,8 +48,15 @@ export function main() {
       this.clicks++;
     }
   }
+
   describe('Radios', () => {
     let builder: TestComponentBuilder;
+
+    function setup(template: string = null, typeFn: any = TestComponent): Promise<ComponentFixture> {
+      return template ?
+        builder.overrideTemplate(typeFn, template).createAsync(typeFn) :
+        builder.createAsync(typeFn);
+    }
 
     beforeEachProviders(() => [
       MATERIAL_PROVIDERS,
@@ -62,25 +74,65 @@ export function main() {
           expect(radioGroup.value).toBe('Banana');
           async.done();
         });
-      }), 10000);
-      it('should disable child radios when disabled', inject([AsyncTestCompleter], (async) => {
+      }));
+      it('should only have one selected child at a time', inject([AsyncTestCompleter], (async) => {
+        let template = `
+            <md-radio-group>
+              <md-radio-button id="rdo1" value="Apple"></md-radio-button>
+              <md-radio-button id="rdo2" value="Banana"></md-radio-button>
+            </md-radio-group>`;
+        setup(template).then((fixture: ComponentFixture) => {
+          let radio = findChildById(fixture.debugElement, 'rdo1');
+          let radio2 = findChildById(fixture.debugElement, 'rdo2');
+          let group = <MdRadioGroup>findChild(fixture.debugElement, 'md-radio-group').componentInstance;
+          expect(group.value).toBeFalsy();
+
+          radio.nativeElement.click();
+          expect(radio.componentInstance.checked).toBe(true);
+          expect(radio2.componentInstance.checked).toBe(false);
+          expect(group.value).toBe('Apple');
+
+          radio2.nativeElement.click();
+          expect(radio2.componentInstance.checked).toBe(true);
+          expect(radio.componentInstance.checked).toBe(false);
+          expect(group.value).toBe('Banana');
+          async.done();
+        });
+      }));
+      it('should select a child by value when value is set on group', inject([AsyncTestCompleter], (async) => {
+        let template = `
+            <md-radio-group>
+              <md-radio-button id="rdo1" value="Apple"></md-radio-button>
+              <md-radio-button id="rdo2" value="Banana"></md-radio-button>
+            </md-radio-group>`;
+        setup(template).then((fixture: ComponentFixture) => {
+          let radio = findChildById(fixture.debugElement, 'rdo1');
+          let radio2 = findChildById(fixture.debugElement, 'rdo2');
+          let group = <MdRadioGroup>findChild(fixture.debugElement, 'md-radio-group').componentInstance;
+          expect(group.value).toBeFalsy();
+          expect(radio.componentInstance.checked).toBe(false);
+          group.value = "Apple";
+          fixture.detectChanges();
+          expect(radio.componentInstance.checked).toBe(true);
+          expect(group.value).toBe('Apple');
+          async.done();
+        });
+      }));
+      it('should disable child radio buttons when disabled', inject([AsyncTestCompleter], (async) => {
         var template = `
             <md-radio-group disabled>
               <md-radio-button>Apple</md-radio-button>
             </md-radio-group>`;
-        builder
-          .overrideTemplate(TestComponent, template)
-          .createAsync(TestComponent)
-          .then(fixture => {
-            fixture.detectChanges();
-            let radioGroup = <MdRadioGroup>findChild(fixture.debugElement, 'md-radio-group').componentInstance;
-            expect(radioGroup.disabled).toBe(true);
+        setup(template).then((fixture: ComponentFixture) => {
+          fixture.detectChanges();
+          let radioGroup = <MdRadioGroup>findChild(fixture.debugElement, 'md-radio-group').componentInstance;
+          expect(radioGroup.disabled).toBe(true);
 
-            let radio = <MdRadioButton>findChild(fixture.debugElement, 'md-radio-button').componentInstance;
-            expect(radio.disabled).toBe(true);
-            async.done();
-          });
-      }), 10000);
+          let radio = <MdRadioButton>findChild(fixture.debugElement, 'md-radio-button').componentInstance;
+          expect(radio.disabled).toBe(true);
+          async.done();
+        });
+      }));
     });
 
     describe('md-radio-button', () => {
@@ -90,42 +142,49 @@ export function main() {
             <md-radio-group (click)="onClick($event)">
               <md-radio-button [disabled]="clicks > 0" value="Apple">Apple</md-radio-button>
             </md-radio-group>`;
-
-        builder
-          .overrideTemplate(TestComponent, template)
-          .createAsync(TestComponent)
-          .then(fixture => {
-            let app: TestComponent = fixture.debugElement.componentInstance;
-            fixture.detectChanges();
-            let radio = findChild(fixture.debugElement, 'md-radio-button');
-            expect(app.clicks).toBe(0);
-            radio.nativeElement.click();
-            expect(app.clicks).toBe(1);
-            fixture.detectChanges();
-            radio.nativeElement.click();
-            expect(app.clicks).toBe(1);
-            async.done();
-          });
+        setup(template).then((fixture: ComponentFixture) => {
+          let app: TestComponent = fixture.debugElement.componentInstance;
+          fixture.detectChanges();
+          let radio = findChild(fixture.debugElement, 'md-radio-button');
+          expect(app.clicks).toBe(0);
+          radio.nativeElement.click();
+          expect(app.clicks).toBe(1);
+          fixture.detectChanges();
+          radio.nativeElement.click();
+          expect(app.clicks).toBe(1);
+          async.done();
+        });
       }));
       it('should not be selectable when disabled', inject([AsyncTestCompleter], (async) => {
         let template = `
             <md-radio-group>
               <md-radio-button disabled value="Apple">Apple</md-radio-button>
             </md-radio-group>`;
+        setup(template).then((fixture: ComponentFixture) => {
+          let radio = findChild(fixture.debugElement, 'md-radio-button');
+          let group = <MdRadioGroup>findChild(fixture.debugElement, 'md-radio-group').componentInstance;
+          expect(group.getSelectedRadioIndex()).toBe(-1);
+          fixture.detectChanges();
+          radio.nativeElement.click();
+          fixture.detectChanges();
+          expect(group.getSelectedRadioIndex()).toBe(-1);
+          async.done();
+        });
+      }));
 
-        builder
-          .overrideTemplate(TestComponent, template)
-          .createAsync(TestComponent)
-          .then((fixture:ComponentFixture) => {
-            let radio = findChild(fixture.debugElement, 'md-radio-button');
-            let group = <MdRadioGroup>findChild(fixture.debugElement, 'md-radio-group').componentInstance;
-            expect(group.getSelectedRadioIndex()).toBe(-1);
-            fixture.detectChanges();
-            radio.nativeElement.click();
-            fixture.detectChanges();
-            expect(group.getSelectedRadioIndex()).toBe(-1);
-            async.done();
-          });
+      it('should update parent group value when when selected', inject([AsyncTestCompleter], (async) => {
+        let template = `
+            <md-radio-group>
+              <md-radio-button value="Apple">Apple</md-radio-button>
+            </md-radio-group>`;
+        setup(template).then((fixture: ComponentFixture) => {
+          let radio = findChild(fixture.debugElement, 'md-radio-button');
+          let group = <MdRadioGroup>findChild(fixture.debugElement, 'md-radio-group').componentInstance;
+          expect(group.value).toBeFalsy();
+          radio.nativeElement.click();
+          expect(group.value).toBe('Apple');
+          async.done();
+        });
       }));
     });
 

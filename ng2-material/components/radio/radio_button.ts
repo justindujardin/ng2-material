@@ -22,9 +22,6 @@ import {Output, Input} from 'angular2/core';
 
 // TODO(jelbourn): Behaviors to test
 // Radios set default tab index iff not in parent group
-// Radios are unique-select
-// Radio updates parent group's value
-// Change to parent group's value updates the selected child radio
 // Radio name is pulled on parent group
 // Radio group changes on arrow keys
 // Radio group skips disabled radios on arrow keys
@@ -61,6 +58,7 @@ export class MdRadioGroup implements OnChanges {
     if (button) {
       this.selectedRadioId = button.id;
       this.activedescendant = button.id;
+      button.checked = true;
     }
   }
 
