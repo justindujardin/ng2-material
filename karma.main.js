@@ -9,23 +9,6 @@ __karma__.loaded = function () {
 };
 
 
-System.import('angular2/src/platform/browser/browser_adapter').then(function (browser_adapter) {
-  browser_adapter.BrowserDomAdapter.makeCurrent();
-}).then(function () {
-  return Promise.all(
-    Object.keys(window.__karma__.files) // All files served by Karma.
-      .filter(onlySpecFiles)
-      .map(file2moduleName)
-      .map(function (path) {
-        return System.import(path).then(function (module) {
-          if (module.hasOwnProperty('main')) {
-            module.main();
-          } else {
-            throw new Error('Module ' + path + ' does not implement main() method.');
-          }
-        });
-      }));
-})
 System.import('angular2/src/platform/browser/browser_adapter')
   .then(function (browser_adapter) {
     browser_adapter.BrowserDomAdapter.makeCurrent();
@@ -44,7 +27,7 @@ System.import('angular2/src/platform/browser/browser_adapter')
             if (module.hasOwnProperty('main')) {
               module.main();
             } else {
-              throw new Error('Module ' + path + ' does not implement main() method.');
+              console.warn(' skipping ' + path + ' which does not implement main() method.');
             }
           });
         }))
