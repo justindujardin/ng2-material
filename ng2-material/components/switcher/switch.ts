@@ -16,7 +16,16 @@ import {MdCheckbox} from '../checkbox/checkbox';
   }
 })
 @View({
-  templateUrl: 'ng2-material/components/switcher/switch.html',
+  template: `
+    <div class="md-switch-container">
+      <div class="md-switch-bar"></div>
+      <div class="md-switch-thumb-container">
+        <div class="md-switch-thumb"></div>
+      </div>
+    </div>
+    <div class="md-switch-label">
+      <ng-content></ng-content>
+    </div>`,
   directives: [],
   encapsulation: ViewEncapsulation.None
 })

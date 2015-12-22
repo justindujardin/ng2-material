@@ -24,7 +24,14 @@ class ProgressMode {
   }
 })
 @View({
-  templateUrl: 'ng2-material/components/progress_linear/progress_linear.html',
+  template: `
+    <div class="md-progress-linear-container md-ready">
+      <div class="md-progress-linear-dashed"></div>
+      <div class="md-progress-linear-bar md-progress-linear-bar1"
+          [style.transform]="secondaryBarTransform"></div>
+      <div class="md-progress-linear-bar md-progress-linear-bar2"
+          [style.transform]="primaryBarTransform"></div>
+    </div>`,
   directives: [],
   encapsulation: ViewEncapsulation.None
 })

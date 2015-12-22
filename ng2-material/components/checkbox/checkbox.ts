@@ -19,7 +19,13 @@ import {Input, Output, EventEmitter} from 'angular2/core';
   }
 })
 @View({
-  templateUrl: 'ng2-material/components/checkbox/checkbox.html',
+  template: `
+    <div (click)="toggle($event)">
+      <div class="md-checkbox-container">
+        <div class="md-checkbox-icon"></div>
+      </div>
+      <div class="md-checkbox-label"><ng-content></ng-content></div>
+    </div>`,
   directives: [],
   encapsulation: ViewEncapsulation.None
 })

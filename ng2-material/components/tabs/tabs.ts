@@ -5,6 +5,7 @@ import {
 import {isPresent} from "angular2/src/facade/lang";
 import {Ink} from "../../core/util/ink";
 import {ViewEncapsulation} from "angular2/core";
+import {NgFor} from "angular2/common";
 
 
 // TODO: behaviors to test
@@ -49,7 +50,32 @@ export class MdTab {
 
 @Component({
   selector: 'md-tabs',
-  templateUrl: 'ng2-material/components/tabs/tabs.html',
+  template: `
+    <md-tabs-wrapper>
+      <md-tab-data></md-tab-data>
+      <md-tabs-canvas role="tablist">
+        <md-pagination-wrapper>
+          <md-tab-item tabindex="-1"
+                       class="md-tab"
+                       (click)="onTabClick(pane,$event)"
+                       [class.md-active]="selected == pane"
+                       [disabled]="pane.disabled"
+                       [style.max-width]="maxTabWidth + 'px'"
+                       *ngFor="#pane of panes"
+                       role="tab">
+            {{pane.label}}
+          </md-tab-item>
+          <md-ink-bar></md-ink-bar>
+        </md-pagination-wrapper>
+      </md-tabs-canvas>
+    </md-tabs-wrapper>
+    <md-tabs-content-wrapper>
+      <md-tab-content role="tabpanel" class="md-active"
+                      [class.md-no-scroll]="mdNoScroll">
+        <ng-content></ng-content>
+      </md-tab-content>
+    </md-tabs-content-wrapper>`,
+  directives: [NgFor],
   encapsulation: ViewEncapsulation.None
 })
 export class MdTabs implements AfterContentInit {
@@ -85,7 +111,12 @@ export class MdTabs implements AfterContentInit {
   }
 
   select(pane: MdTab) {
-    this.panes.toArray().forEach((p: MdTab) => p.active = p == pane);
+    this.panes.toArray().forEach((p: MdTab, index: number) => {
+      p.active = p == pane;
+      if (p.active) {
+        this._selectedIndex = index;
+      }
+    });
   }
 
   onTabClick(pane: MdTab, event?) {

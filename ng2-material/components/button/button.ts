@@ -7,6 +7,8 @@ import {Ink} from "../../core/util/ink";
 import {Attribute} from "angular2/core";
 
 
+const BUTTON_TEMPLATE = `<span class="md-button-wrapper"><ng-content></ng-content></span>`;
+
 // TODO(jelbourn): Make the `isMouseDown` stuff done with one global listener.
 
 @Component({
@@ -19,8 +21,7 @@ import {Attribute} from "angular2/core";
   },
 })
 @View({
-  templateUrl: 'ng2-material/components/button/button.html',
-  //styleUrls: ['ng2-material/components/button/button.css'],
+  template: BUTTON_TEMPLATE,
   encapsulation: ViewEncapsulation.None,
 })
 export class MdButton {
@@ -72,7 +73,7 @@ export class MdButton {
   },
 })
 @View({
-  templateUrl: 'ng2-material/components/button/button.html',
+  template: BUTTON_TEMPLATE,
   encapsulation: ViewEncapsulation.None
 })
 export class MdAnchor extends MdButton implements OnChanges {

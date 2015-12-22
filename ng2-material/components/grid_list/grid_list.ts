@@ -29,7 +29,10 @@ class RowHeightMode {
 
 @Component({selector: 'md-grid-list', inputs: ['cols', 'rowHeight', 'gutterSize']})
 @View({
-  templateUrl: 'ng2-material/components/grid_list/grid_list.html',
+  template: `
+    <div class="md-grid-list">
+      <ng-content></ng-content>
+    </div>`,
   encapsulation: ViewEncapsulation.None
 })
 export class MdGridList implements AfterContentChecked {
@@ -226,7 +229,11 @@ export class MdGridList implements AfterContentChecked {
   }
 })
 @View({
-  templateUrl: 'ng2-material/components/grid_list/grid_tile.html',
+  template: `
+    <style>@import "ng2-material/components/grid_list/grid-list.css";</style>
+    <figure>
+      <ng-content></ng-content>
+    </figure>`,
   encapsulation: ViewEncapsulation.None
 })
 export class MdGridTile implements OnDestroy,

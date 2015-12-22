@@ -213,7 +213,9 @@ export class MdDialogConfig {
 })
 @View({
   encapsulation: ViewEncapsulation.None,
-  templateUrl: 'ng2-material/components/dialog/dialog.html',
+  template: `
+    <md-dialog-content></md-dialog-content>
+    <div tabindex="0" (focus)="wrapFocus()"></div>`,
   directives: [forwardRef(() => MdDialogContent)]
 })
 class MdDialogContainer {

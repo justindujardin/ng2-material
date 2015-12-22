@@ -75,9 +75,11 @@ export class MdList {
   properties: ['wrap']
 })
 @View({
-  templateUrl: 'ng2-material/components/list/list_item.html'
+  template: `
+    <div class="md-no-style md-list-item-inner">
+      <ng-content></ng-content>
+    </div>`
 })
-
 export class MdListItem implements AfterViewInit {
   constructor(private _element: ElementRef) {
   }
