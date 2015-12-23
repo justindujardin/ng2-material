@@ -1,5 +1,5 @@
 <md-content class="md-padding">
-  <md-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+  <md-tabs [selected]="selectedIndex" md-border-bottom md-autoselect>
     <template md-tab *ngFor="var tab of tabs"
             [disabled]="tab.disabled"
             [label]="tab.title">

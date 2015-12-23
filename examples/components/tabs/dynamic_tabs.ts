@@ -7,7 +7,10 @@ export interface ITabData {
   disabled?:boolean;
 }
 
-@Component({selector: 'tabs-dynamic-tabs'})
+@Component({
+  selector: 'tabs-dynamic-tabs',
+  properties: ['selectedIndex']
+})
 @View({
   templateUrl: 'examples/components/tabs/dynamic_tabs.html',
   styleUrls: ['examples/components/tabs/dynamic_tabs.css'],
@@ -24,7 +27,7 @@ export default class TabsDynamicTabs {
   selected = null;
   previous = null;
 
-  private _selectedIndex: number = 0;
+  private _selectedIndex: number = 1;
   @Input()
   set selectedIndex(value: number) {
     this.previous = this.selected;
