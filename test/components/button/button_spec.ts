@@ -20,14 +20,9 @@ import {UrlResolver} from 'angular2/compiler';
 import {MdButton, MdAnchor} from '../../../ng2-material/components/button/button';
 
 import {TestUrlResolver} from '../../test_url_resolver';
-
+import {findChildByTag} from '../../util';
 
 export function main() {
-
-  /** Gets a child DebugElement by tag name. */
-  function getChildDebugElement(parent: DebugElement, tagName: string): DebugElement {
-    return parent.query(debugEl => debugEl.nativeElement.tagName.toLowerCase() == tagName);
-  }
 
   /** Test component that contains an MdButton. */
   @Component({selector: 'test-app'})
@@ -61,7 +56,7 @@ export function main() {
       it('should handle a click on the button', inject([AsyncTestCompleter], (async) => {
         builder.createAsync(TestApp).then(fixture => {
           let testComponent = fixture.debugElement.componentInstance;
-          let buttonDebugElement = getChildDebugElement(fixture.debugElement, 'button');
+          let buttonDebugElement = findChildByTag(fixture.debugElement, 'button');
 
           buttonDebugElement.nativeElement.click();
           expect(testComponent.clickCount).toBe(1);
@@ -73,7 +68,7 @@ export function main() {
       it('should disable the button', inject([AsyncTestCompleter], (async) => {
         builder.createAsync(TestApp).then(fixture => {
           let testAppComponent = fixture.debugElement.componentInstance;
-          let buttonDebugElement = getChildDebugElement(fixture.debugElement, 'button');
+          let buttonDebugElement = findChildByTag(fixture.debugElement, 'button');
           let buttonElement = buttonDebugElement.nativeElement;
 
           // The button should initially be enabled.
@@ -105,7 +100,7 @@ export function main() {
       it('should remove disabled anchors from tab order', inject([AsyncTestCompleter], (async) => {
         builder.createAsync(TestApp).then(fixture => {
           let testAppComponent = fixture.debugElement.componentInstance;
-          let anchorDebugElement = getChildDebugElement(fixture.debugElement, 'a');
+          let anchorDebugElement = findChildByTag(fixture.debugElement, 'a');
           let anchorElement = anchorDebugElement.nativeElement;
 
           // The anchor should initially be in the tab order.
