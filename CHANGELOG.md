@@ -1,3 +1,17 @@
+<a name="0.0.9"></a>
+## [0.0.9](https://github.com/justindujardin/ng2-material/compare/v0.0.8...v0.0.9) (2015-12-24)
+
+
+### Bug Fixes
+
+* **build:** inline templates until offline compilation is available ([0c5fa5e](https://github.com/justindujardin/ng2-material/commit/0c5fa5e)), closes [#1](https://github.com/justindujardin/ng2-material/issues/1)
+
+### Features
+
+* **tabs:** basic behavioral tests for tab selection binding and input ([3cf848d](https://github.com/justindujardin/ng2-material/commit/3cf848d))
+
+
+
 <a name="0.0.8"></a>
 ## [0.0.8](https://github.com/justindujardin/ng2-material/compare/v0.0.7...v0.0.8) (2015-12-20)
 
