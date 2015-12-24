@@ -211,13 +211,23 @@ module.exports = function (grunt) {
         src: ['<%- sourceRoot %>/**/*.ts']
       }
     },
+    karma: {
+      cover: {
+        options: {
+          singleRun: true
+        },
+        configFile: './karma.conf.js',
+        preprocessors: {"ng2-material/**/*.js": "coverage"}
+      }
+    },
     remapIstanbul: {
       build: {
         src: '.coverage/**/coverage-final.json',
         options: {
           reports: {
             'html': 'coverage',
-            'lcovonly': '.coverage/lcov.info'
+            'lcovonly': '.coverage/lcov.info',
+            'text': 'coverage/coverage.txt'
           }
         }
       }
@@ -231,12 +241,14 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-notify');
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('dts-generator');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.registerTask('default', ['dtsGenerator', 'site-meta', 'ts:source', 'sass', 'postcss', 'copy:styles']);
+  grunt.registerTask('default', ['dtsGenerator', 'ts:source', 'sass', 'postcss', 'copy:styles', 'site-meta']);
   grunt.registerTask('develop', ['default', 'watch']);
-  grunt.registerTask('site', ['build', 'copy:site']);
+  grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
+  grunt.registerTask('site', ['build', 'cover', 'copy:site']);
   grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release']);
 
 
@@ -315,49 +327,117 @@ module.exports = function (grunt) {
     var path = require('path');
     var util = require('util');
     var meta = {};
+    var tasks = [];
 
-    fs.writeFileSync('public/version.json', JSON.stringify({
-      version: require('./package.json').version
-    }));
+    writeJson('public/version.json', require('./package.json').version);
 
-    glob("examples/components/**/*.html", function (err, files) {
-      files.forEach(parseDemo);
-      var output = prepareMeta();
-      fs.writeFileSync('public/meta.json', JSON.stringify(output, null, 2));
-      done();
+    tasks.push(function buildCoverage() {
+      // Parse Lcov report and generate `coverage.json` file for site.
+      var parse = require('lcov-parse');
+      parse('.coverage/lcov.info', function (err, data) {
+        if(err) {
+          grunt.log.ok('skipping code coverage because lcov.info is missing');
+          return next();
+        }
+        // Obj has "found" and "hit"
+        function percent(obj) {
+          if (obj.found === 0) {
+            return 100;
+          }
+          return parseFloat((obj.hit / obj.found * 100.0).toPrecision(2), 10);
+        }
+
+        var outMeta = data.map(function (d) {
+          delete d.lines.details;
+          delete d.functions.details;
+          delete d.branches.details;
+          delete d.title;
+          d.lines.percent = percent(d.lines);
+          d.functions.percent = percent(d.functions);
+          d.branches.percent = percent(d.branches);
+          return d;
+        });
+        writeJson('public/coverage.json', outMeta);
+        next();
+      });
+    });
+    tasks.push(function buildExamples() {
+      glob("examples/components/**/*.html", function (err, files) {
+        files.forEach(function parseDemo(templateFile) {
+          var name = path.basename(templateFile, '.html');
+          var result = {
+            template: templateFile
+          };
+          var sourceFile = path.join(path.dirname(templateFile), name + '.ts');
+          var stylesFile = path.join(path.dirname(templateFile), name + '.scss');
+          if (fileExists(stylesFile)) {
+            result.styles = stylesFile;
+          }
+          if (fileExists(sourceFile)) {
+            result.source = sourceFile;
+          }
+
+          var component = readableString(path.basename(path.dirname(templateFile)));
+          result.component = selectorString(component + ' ' + readableString(name));
+          meta[component] = meta[component] || {};
+          meta[component].files = [];
+          meta[component][readableString(name)] = result;
+          lintDemo(result);
+        });
+
+
+        glob("ng2-material/components/**/*.ts", function (err, files) {
+          files.forEach(function linkComponentsToExamples(sourceFile) {
+            var component = readableString(path.basename(path.dirname(sourceFile)));
+            if (!meta[component]) {
+              return;
+            }
+            meta[component].files.push(sourceFile);
+          });
+          writeJson('public/meta.json', prepareMeta());
+          next();
+        });
+      });
     });
 
-    function parseDemo(templateFile) {
-      var name = path.basename(templateFile, '.html');
-      var result = {
-        template: templateFile
-      };
-      var sourceFile = path.join(path.dirname(templateFile), name + '.ts');
-      var stylesFile = path.join(path.dirname(templateFile), name + '.scss');
-      if (fileExists(stylesFile)) {
-        result.styles = stylesFile;
+    function next() {
+      if (tasks.length === 0) {
+        return done();
       }
-      if (fileExists(sourceFile)) {
-        result.source = sourceFile;
-      }
-
-      var component = readableString(path.basename(path.dirname(templateFile)));
-      result.component = selectorString(component + ' ' + readableString(name));
-      meta[component] = meta[component] || {};
-      meta[component][readableString(name)] = result;
-      lintDemo(result);
+      var current = tasks.shift();
+      current();
     }
+
+    return next();
+
+    // ------------------------------------------------------------------------
+    // Helpers and such
+    // ------------------------------------------------------------------------
+
+    function writeJson(to, data) {
+      try {
+        fs.writeFileSync(to, JSON.stringify(data, null, 2));
+      }
+      catch (e) {
+        grunt.log.fatal('failed to write (' + to + ') with error: ' + e);
+
+      }
+    }
+
 
     // Make the metadata easier to access in angular by using arrays rather than key/value pairs.
     // Store as an object internally to group examples by component.
     function prepareMeta() {
       var keys = Object.keys(meta);
 
-      var output = keys.map(function (key) {
+      return keys.map(function (key) {
         var demos = meta[key];
+        var sources = demos.files.slice();
+        delete demos.files;
         var demoKeys = Object.keys(demos);
         return {
           name: key,
+          sources: sources,
           id: selectorString(key),
           examples: demoKeys.map(function (key) {
             demos[key].name = key;
@@ -365,7 +445,6 @@ module.exports = function (grunt) {
           })
         };
       });
-      return output;
     }
 
     // Convert readable string of component + demo to a valid element name that

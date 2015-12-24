@@ -4,6 +4,14 @@ module.exports = function (config) {
 
   var coverageDebug = false;
 
+  var coverageReporters = [
+    {type: 'json'},
+    {type: 'lcov'}
+  ];
+  if (coverageDebug || process.env.TRAVIS) {
+    coverageReporters.push({type: 'text'});
+  }
+
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
@@ -43,11 +51,7 @@ module.exports = function (config) {
     coverageReporter: {
       dir: '.coverage',
 
-      reporters: [
-        // reporters not supporting the `file` property
-        {type: 'json'},
-        {type: 'lcov'}
-      ]
+      reporters: coverageReporters
     }
   });
 };

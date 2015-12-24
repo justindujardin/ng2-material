@@ -4,8 +4,9 @@
 dist/
 out/
 site/
-public/meta.json
-public/version.json
+/public/coverage.json
+/public/meta.json
+/public/version.json
 
 ng2-material/**/*.css
 ng2-material/**/*.css.map

@@ -38,6 +38,7 @@
     "grunt-contrib-sass": "0.9.2",
     "grunt-contrib-watch": "0.6.1",
     "grunt-conventional-changelog": "5.0.0",
+    "grunt-karma": "0.12.1",
     "grunt-notify": "0.4.3",
     "grunt-npm": "0.0.2",
     "grunt-postcss": "0.7.1",
@@ -49,6 +50,7 @@
     "karma-coverage": "0.5.3",
     "karma-firefox-launcher": "0.1.7",
     "karma-jasmine": "0.2.2",
+    "lcov-parse": "0.0.10",
     "remap-istanbul": "0.4.0",
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps"
   },
