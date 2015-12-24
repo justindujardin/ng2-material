@@ -9,6 +9,7 @@ import {NgFor} from "angular2/common";
 import {Host} from "angular2/core";
 import {SkipSelf} from "angular2/core";
 import {Query} from "angular2/core";
+import {ElementRef} from "angular2/core";
 
 
 // TODO: behaviors to test
@@ -89,6 +90,7 @@ export class MdTabs {
   @Input() mdNoScroll: boolean = false;
 
   constructor(@Query(MdTab) public panes: QueryList<MdTab>,
+              private _element: ElementRef,
               @Attribute('mdNoScroll') noScroll: string) {
     this.mdNoScroll = isPresent(noScroll);
     this.panes.changes.subscribe((_) => {
@@ -134,7 +136,7 @@ export class MdTabs {
   }
 
   onTabClick(pane: MdTab, event?) {
-    if (event && Ink.canApply(event.target)) {
+    if (event && Ink.canApply(this._element.nativeElement)) {
       Ink.rippleEvent(event.target, event);
     }
     this.selectedTab = pane;
