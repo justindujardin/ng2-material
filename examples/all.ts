@@ -7,6 +7,7 @@ import CardBasicUsage from './components/card/basic_usage';
 import CardInlineActions from './components/card/inline_actions';
 import ButtonBasicUsage from './components/button/basic_usage';
 import CardActionButtons from './components/card/action_buttons';
+import DialogBasicUsage from './components/dialog/basic_usage';
 import ToolbarBasicUsage from './components/toolbar/basic_usage';
 import ToolbarScrollShrink from './components/toolbar/scroll_shrink';
 import ProgressLinearBasicUsage from './components/progress_linear/basic_usage';
@@ -21,6 +22,7 @@ import TabsDynamicTabs from './components/tabs/dynamic_tabs';
 export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   CardBasicUsage, CardInlineActions, CardActionButtons,
   ButtonBasicUsage,
+  DialogBasicUsage,
   RadioBasicUsage,
   SwitchBasicUsage,
   TabsDynamicHeight,

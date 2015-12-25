@@ -11,6 +11,7 @@ import {MdContent} from './components/content/content';
 export * from './components/content/content';
 
 export * from './components/dialog/dialog';
+import {MdDialog} from './components/dialog/dialog';
 
 import {MdDivider} from './components/divider/divider';
 export * from './components/divider/divider';
@@ -109,6 +110,7 @@ export class MaterialTemplateResolver extends UrlResolver {
  * Collection of Material Design component providers.
  */
 export const MATERIAL_PROVIDERS: any[] = [
+  MdDialog,
   MdRadioDispatcher,
   provide(UrlResolver, {useValue: new MaterialTemplateResolver()})
 ];
