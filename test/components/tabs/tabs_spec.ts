@@ -119,7 +119,27 @@ export function main() {
         });
       }));
 
-      it('md-tabs[md-no-ink] should not ripple', inject([AsyncTestCompleter], (async) => {
+      it('md-tabs should ripple when tab buttons are clicked', inject([AsyncTestCompleter], (async) => {
+        let template = `
+          <md-tabs [selected]="selectedIndex">
+            <template md-tab label="Tab1"><span>Tab1</span></template>
+          </md-tabs>`;
+
+        setup(template).then((api: ITabsFixture) => {
+          let save = Ink.rippleEvent;
+          let fired = false;
+          Ink.rippleEvent = () => {
+            fired = true;
+            return Promise.resolve();
+          };
+          api.tabButtons[0].click();
+          expect(fired).toBe(true);
+          Ink.rippleEvent = save;
+          async.done();
+        });
+      }));
+
+      it('md-tabs[md-no-ink] should not ripple when tab buttons are clicked', inject([AsyncTestCompleter], (async) => {
         let template = `
           <md-tabs md-no-ink [selected]="selectedIndex">
             <template md-tab label="Tab1"><span>Tab1</span></template>
