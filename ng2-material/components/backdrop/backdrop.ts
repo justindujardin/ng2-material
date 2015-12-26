@@ -7,7 +7,10 @@ import {Component} from "angular2/core";
 import {Input} from "angular2/core";
 import {Output} from "angular2/core";
 import {EventEmitter} from "angular2/core";
-/** Component for the dialog "backdrop", a transparent overlay over the rest of the page. */
+
+/**
+ * A transparent overlay for content on the page.
+ */
 @Component({
   selector: 'md-backdrop',
   host: {
@@ -15,7 +18,7 @@ import {EventEmitter} from "angular2/core";
   },
 })
 @View({template: '', encapsulation: ViewEncapsulation.None})
-export class MdBackdrop implements AfterViewInit {
+export class MdBackdrop {
 
   /**
    * When true, clicking on the backdrop will close it
@@ -23,36 +26,75 @@ export class MdBackdrop implements AfterViewInit {
   @Input()
   clickClose: boolean = false;
 
+  /**
+   * Emits when the backdrop begins to hide.
+   */
   @Output()
   onHiding: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
 
+  /**
+   * Emits when the backdrop has finished being hidden.
+   */
   @Output()
   onHidden: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
 
-  /** Whether this checkbox is checked. */
-  @Input() checked: boolean;
+
+  /**
+   * Emits when the backdrop begins to be shown.
+   */
+  @Output()
+  onShowing: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
+
+  /**
+   * Emits when the backdrop has finished being shown.
+   */
+  @Output()
+  onShown: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
+
 
   constructor(public element: ElementRef) {
   }
 
-  active: boolean = false;
 
-  ngAfterViewInit() {
-    Animate.enter(this.element.nativeElement, 'md-active');
-    this.active = true;
+  private _visible: boolean = false;
+
+  /**
+   * Read-only property indicating whether the backdrop is visible or not.
+   */
+  get visible(): boolean {
+    return this._visible;
   }
 
   onClick() {
-    if (this.clickClose && this.active) {
+    if (this.clickClose && this.visible) {
       this.hide();
     }
   }
 
-  hide(): Promise<void> {
-    if (!this.active) {
+  /**
+   * Show the backdrop and return a promise that is resolved when the show animations are
+   * complete.
+   */
+  show(): Promise<void> {
+    if (this.visible) {
       return Promise.resolve();
     }
-    this.active = false;
+    this.visible = true;
+    this.onShowing.emit(this);
+    return Animate.enter(this.element.nativeElement, 'md-active').then(() => {
+      this.onShown.emit(this);
+    });
+  }
+
+  /**
+   * Hide the backdrop and return a promise that is resolved when the hide animations are
+   * complete.
+   */
+  hide(): Promise<void> {
+    if (!this.visible) {
+      return Promise.resolve();
+    }
+    this.visible = false;
     this.onHiding.emit(this);
     return Animate.leave(this.element.nativeElement, 'md-active').then(() => {
       this.onHidden.emit(this);
