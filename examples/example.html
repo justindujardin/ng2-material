@@ -12,7 +12,7 @@
                   class="md-icon-button"
                   aria-label="View Source"
                   [ngClass]="{ active: showSource }"
-                  (click)="showSource = !showSource">
+                  (click)="toggleSource()">
             <!--<md-tooltip md-autohide>View Source</md-tooltip>-->
             <i md-icon>code</i>
           </button>
@@ -21,7 +21,8 @@
 
       <!-- Source views -->
       <md-tabs md-dynamic-height
-               [ngClass]="{ shown: showSource }"
+               *ngIf="showSource"
+               [ngClass]="{ shown: showTabs }"
                mdNoScroll="true"
                class="demo-source-tabs md-primary md-no-scroll">
         <template md-tab *ngFor="#file of orderedFiles" [label]="file?.type">

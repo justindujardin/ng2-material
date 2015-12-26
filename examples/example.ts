@@ -9,6 +9,11 @@ import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 import {Http} from "angular2/http";
 import {Response} from "angular2/http";
 import {Highlight} from './highlight';
+import {TimerWrapper} from "angular2/src/facade/async";
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {MdTabs} from "ng2-material/components/tabs/tabs";
+import {Query} from "angular2/core";
+import {QueryList} from "angular2/core";
 
 
 export interface ISourceFile {
@@ -45,6 +50,7 @@ export default class Example {
 
   constructor(private _element: ElementRef,
               public http: Http,
+              @Query(MdTabs) public panes: QueryList<MdTabs>,
               public dcl: DynamicComponentLoader) {
   }
 
@@ -58,10 +64,12 @@ export default class Example {
    */
   public showSource: boolean = false;
 
+  private showTabs: boolean = false;
+
   /**
    * The selected type of source to view.
    */
-  @Input() public selected:string = 'html';
+  @Input() public selected: string = 'html';
 
   applyModel(model: IExampleData) {
     this.orderedFiles = [];
@@ -104,6 +112,21 @@ export default class Example {
       desc.data = res.text();
     });
     this.orderedFiles.push(desc);
+  }
+
+  toggleSource() {
+    if(this.showSource){
+      this.showTabs = false;
+      TimerWrapper.setTimeout(() => {
+        this.showSource = false;
+      }, 500);
+    }
+    else {
+      this.showSource = true;
+      TimerWrapper.setTimeout(() => {
+        this.showTabs = true;
+      }, 25);
+    }
   }
 
 
