@@ -10,19 +10,19 @@ import {
 
 import {Promise} from 'angular2/src/facade/async';
 import {isPresent, Type} from 'angular2/src/facade/lang';
-import {MdDialogRef} from './_dialog_ref';
-import {MdDialogConfig} from './_dialog_config';
-import {MdDialogContainer} from './_dialog_container';
-import {MdDialogBasic} from './_dialog_basic';
+import {MdDialogRef} from './dialog_ref';
+import {MdDialogConfig} from './dialog_config';
+import {MdDialogContainer} from './dialog_container';
+import {MdDialogBasic} from './dialog_basic';
 import {MdBackdrop} from "../backdrop/backdrop";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {Renderer} from "angular2/core";
 import {Animate} from '../../core/util/animate';
 
-export * from './_dialog_config';
-export * from './_dialog_container';
-export * from './_dialog_ref';
-export * from './_dialog_basic';
+export * from './dialog_config';
+export * from './dialog_container';
+export * from './dialog_ref';
+export * from './dialog_basic';
 
 // TODO(jelbourn): body scrolling is disabled while dialog is open.
 // TODO(jelbourn): Don't manually construct and configure a DOM element. See #1402
@@ -30,15 +30,6 @@ export * from './_dialog_basic';
 // TODO(jelbourn): Focus the dialog element when it is opened.
 // TODO(jelbourn): Pre-built `alert` and `confirm` dialogs.
 // TODO(jelbourn): Animate dialog out of / into opening element.
-
-/**
- * Any components that are launched through MdDialog should implement this
- * interface. The `dialog` will be injected into the component instance to
- * allow dismissing or interacting with the dialog reference.
- */
-export interface IDialogComponent {
-  dialog: MdDialogRef;
-}
 
 /**
  * Service for opening modal dialogs.
@@ -64,7 +55,6 @@ export class MdDialog {
 
     // Create the dialogRef here so that it can be injected into the content component.
     var dialogRef = new MdDialogRef();
-    config.dialogRef(dialogRef);
 
     var bindings = Injector.resolve([provide(MdDialogRef, {useValue: dialogRef})]);
 

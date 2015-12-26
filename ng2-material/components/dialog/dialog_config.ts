@@ -1,6 +1,6 @@
 
 
-import {MdDialogRef} from "./_dialog_ref";
+import {MdDialogRef} from "./dialog_ref";
 
 /** Configuration for a dialog to be opened. */
 export class MdDialogConfig {
@@ -48,11 +48,6 @@ export class MdDialogConfig {
 
   targetEvent(ev: Event): MdDialogConfig {
     this.sourceEvent = ev;
-    return this;
-  }
-
-  dialogRef(ref: MdDialogRef): MdDialogConfig {
-    this.context.dialog = ref;
     return this;
   }
 
