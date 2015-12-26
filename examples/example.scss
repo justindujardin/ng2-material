@@ -1,4 +1,8 @@
-@import "../ng2-material/all";
+@import "../ng2-material/core/style/variables";
+@import "../ng2-material/core/style/mixins";
+@import "../ng2-material/core/style/theme-functions";
+@import "../ng2-material/core/style/default-theme";
+
 .demo-container {
   .demo-toolbar {
     button[md-button] {
@@ -42,8 +46,12 @@ docs-demo {
   -webkit-transition: all 0.45s cubic-bezier(0.35, 0, 0.25, 1);
   transition: all 0.45s cubic-bezier(0.35, 0, 0.25, 1);
   height: 448px;
+  max-height:0;
   background: #fff;
   overflow: hidden;
+  &.shown {
+    max-height: 448px;
+  }
 }
 
 .demo-source-tabs md-tabs-wrapper {
@@ -78,14 +86,6 @@ md-tabs.demo-source-tabs .md-header {
   display: flex;
 }
 
-.small-demo .demo-source-tabs:not(.ng-hide) {
-  height: 224px;
-}
-
-.small-demo .demo-content {
-  min-height: 128px;
-}
-
 .doc-content > * {
   -webkit-box-flex: 1 1 auto;
   -webkit-flex: 1 1 auto;
@@ -106,22 +106,6 @@ md-tabs.demo-source-tabs .md-header {
 
 .demo-content > div[layout-fill] {
   min-height: 448px;
-}
-
-.small-demo .demo-content > div[layout-fill] {
-  min-height: 224px;
-}
-
-.layout-content .small-demo .demo-content > div[layout] {
-  min-height: auto !important;
-  max-height: auto !important;
-  height: 128px !important;
-}
-
-.small-demo .demo-toolbar,
-.small-demo .md-toolbar-tools {
-  min-height: 48px;
-  max-height: 48px;
 }
 
 md-toolbar.demo-toolbar {
