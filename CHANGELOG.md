@@ -1,3 +1,17 @@
+<a name="0.0.10"></a>
+## [0.0.10](https://github.com/justindujardin/ng2-material/compare/v0.0.9...v0.0.10) (2015-12-26)
+
+
+### Features
+
+* **backdrop:** backdrop component and tests ([c55751c](https://github.com/justindujardin/ng2-material/commit/c55751c))
+* **backdrop:** basic component that can be closed and emits onHiding/onHidden ([e0a92bb](https://github.com/justindujardin/ng2-material/commit/e0a92bb))
+* **dialog:** basic test spec ([c8d52e8](https://github.com/justindujardin/ng2-material/commit/c8d52e8))
+* **dialog:** support basic alert and confirm dialogs ([7236279](https://github.com/justindujardin/ng2-material/commit/7236279))
+* **reporting:** show code coverage in build log and export json file for examples site ([3b5147e](https://github.com/justindujardin/ng2-material/commit/3b5147e))
+
+
+
 <a name="0.0.9"></a>
 ## [0.0.9](https://github.com/justindujardin/ng2-material/compare/v0.0.8...v0.0.9) (2015-12-24)
 
