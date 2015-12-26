@@ -3,9 +3,7 @@ import {MATERIAL_DIRECTIVES,MdDialog} from 'ng2-material/all';
 import {ElementRef} from "angular2/core";
 import {Input} from "angular2/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {MdDialogConfig} from "ng2-material/components/dialog/dialog_config";
-import {MdDialogBasic} from "ng2-material/components/dialog/dialog_basic";
-import {MdDialogRef} from "ng2-material/components/dialog/dialog_ref";
+import {MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/components/dialog/dialog";
 
 
 function hasMedia(size: string) {

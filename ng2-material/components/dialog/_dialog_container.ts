@@ -2,7 +2,7 @@ import {ViewEncapsulation} from "angular2/core";
 import {View} from "angular2/core";
 import {Component} from "angular2/core";
 import {ElementRef} from "angular2/core";
-import {MdDialogRef} from "./dialog_ref";
+import {MdDialogRef} from "./_dialog_ref";
 import {KeyCodes} from "../../core/key_codes";
 import {forwardRef} from "angular2/core";
 import {Directive} from "angular2/core";

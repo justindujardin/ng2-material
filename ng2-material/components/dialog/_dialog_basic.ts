@@ -1,11 +1,11 @@
-
 import {NgIf} from "angular2/common";
-import {MdButton} from "ng2-material/components/button/button";
+import {MdButton} from "../button/button";
 import {View} from "angular2/core";
 import {Component} from "angular2/core";
 import {IDialogComponent} from "./dialog";
-import {MdDialogRef} from "ng2-material/components/dialog/dialog_ref";
+import {MdDialogRef} from "./_dialog_ref";
 import {Input} from "angular2/core";
+
 @Component({selector: 'md-dialog-basic'})
 @View({
   template: `

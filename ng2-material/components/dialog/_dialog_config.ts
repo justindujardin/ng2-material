@@ -1,6 +1,6 @@
 
 
-import {MdDialogRef} from "./dialog_ref";
+import {MdDialogRef} from "./_dialog_ref";
 
 /** Configuration for a dialog to be opened. */
 export class MdDialogConfig {

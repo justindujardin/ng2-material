@@ -69,7 +69,9 @@ export class MdDialogRef {
   /** Closes the dialog. This operation is asynchronous. */
   close(result: any = null): Promise<void> {
     return Animate.leave(this.containerRef.location.nativeElement, 'md-active').then(() => {
-      this._backdropRef.instance.hide();
+      if (this._backdropRef) {
+        this._backdropRef.instance.hide();
+      }
       return this.contentRefDeferred.promise.then((_) => {
         if (!this.isClosed) {
           this.isClosed = true;

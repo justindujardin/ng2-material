@@ -10,14 +10,19 @@ import {
 
 import {Promise} from 'angular2/src/facade/async';
 import {isPresent, Type} from 'angular2/src/facade/lang';
-import {MdDialogRef} from './dialog_ref';
-import {MdDialogConfig} from './dialog_config';
-import {MdDialogContainer} from './dialog_container';
+import {MdDialogRef} from './_dialog_ref';
+import {MdDialogConfig} from './_dialog_config';
+import {MdDialogContainer} from './_dialog_container';
+import {MdDialogBasic} from './_dialog_basic';
 import {MdBackdrop} from "../backdrop/backdrop";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {Renderer} from "angular2/core";
 import {Animate} from '../../core/util/animate';
 
+export * from './_dialog_config';
+export * from './_dialog_container';
+export * from './_dialog_ref';
+export * from './_dialog_basic';
 
 // TODO(jelbourn): body scrolling is disabled while dialog is open.
 // TODO(jelbourn): Don't manually construct and configure a DOM element. See #1402
@@ -75,9 +80,9 @@ export class MdDialog {
         // Create a DOM node to serve as a physical host element for the dialog.
         var dialogElement = containerRef.location.nativeElement;
 
-        DOM.appendChild(config.container || this._defaultContainer, dialogElement);
+        this.renderer.setElementClass(containerRef.location, 'md-dialog-absolute', !!config.container);
 
-        this.renderer.setElementClass(containerRef.location, 'md-dialog-absolute', !!options.container);
+        DOM.appendChild(config.container || this._defaultContainer, dialogElement);
 
         if (isPresent(config.width)) {
           this.renderer.setElementStyle(containerRef.location, 'width', config.width);
