@@ -66,7 +66,7 @@ $md-icon-border-radius: $md-fab-border-radius;
 /** Styles for all disabled buttons. */
 @mixin md-button-disabled() {
   color: md-color($md-foreground, disabled);
-  background-color: transparent;
+  background-color: md-color($md-background, 300);
   cursor: default;
 }
 
