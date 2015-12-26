@@ -76,10 +76,10 @@ export class MdBackdrop {
    * complete.
    */
   show(): Promise<void> {
-    if (this.visible) {
+    if (this._visible) {
       return Promise.resolve();
     }
-    this.visible = true;
+    this._visible = true;
     this.onShowing.emit(this);
     return Animate.enter(this.element.nativeElement, 'md-active').then(() => {
       this.onShown.emit(this);
@@ -91,10 +91,10 @@ export class MdBackdrop {
    * complete.
    */
   hide(): Promise<void> {
-    if (!this.visible) {
+    if (!this._visible) {
       return Promise.resolve();
     }
-    this.visible = false;
+    this._visible = false;
     this.onHiding.emit(this);
     return Animate.leave(this.element.nativeElement, 'md-active').then(() => {
       this.onHidden.emit(this);
