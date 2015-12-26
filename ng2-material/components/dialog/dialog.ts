@@ -19,12 +19,10 @@ import {Renderer} from "angular2/core";
 import {Animate} from '../../core/util/animate';
 
 
-// TODO(jelbourn): Opener of dialog can control where it is rendered.
 // TODO(jelbourn): body scrolling is disabled while dialog is open.
 // TODO(jelbourn): Don't manually construct and configure a DOM element. See #1402
 // TODO(jelbourn): Wrap focus from end of dialog back to the start. Blocked on #1251
 // TODO(jelbourn): Focus the dialog element when it is opened.
-// TODO(jelbourn): Real dialog styles.
 // TODO(jelbourn): Pre-built `alert` and `confirm` dialogs.
 // TODO(jelbourn): Animate dialog out of / into opening element.
 
