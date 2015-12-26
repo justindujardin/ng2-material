@@ -330,13 +330,13 @@ module.exports = function (grunt) {
     var meta = {};
     var tasks = [];
 
-    writeJson('public/version.json', require('./package.json').version);
+    writeJson('public/version.json', {version: require('./package.json').version});
 
     tasks.push(function buildCoverage() {
       // Parse Lcov report and generate `coverage.json` file for site.
       var parse = require('lcov-parse');
       parse('.coverage/lcov.info', function (err, data) {
-        if(err) {
+        if (err) {
           grunt.log.ok('skipping code coverage because lcov.info is missing');
           return next();
         }
