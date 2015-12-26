@@ -124,7 +124,7 @@ export class MdDialog {
         this.renderer.setElementClass(componentRef.location, 'md-backdrop', true);
         this.renderer.setElementClass(componentRef.location, 'md-backdrop-absolute', !!options.container);
         DOM.appendChild(options.container || this._defaultContainer, componentRef.location.nativeElement);
-        return componentRef;
+        return backdrop.show().then(() => componentRef);
       });
   }
 
