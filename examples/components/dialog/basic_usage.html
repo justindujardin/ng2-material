@@ -11,17 +11,17 @@
     <button md-raised-button class="md-primary" (click)="showConfirm($event)" flex="100" flex-gt-md="auto">
       Confirm Dialog
     </button>
-    <button md-raised-button class="md-primary" (click)="showAdvanced($event)" flex="100" flex-gt-md="auto">
+    <button md-raised-button disabled class="md-primary" (click)="showAdvanced($event)" flex="100" flex-gt-md="auto">
       Custom Dialog
     </button>
     <div hide-gt-sm layout="row" layout-align="center center" flex="100">
         <md-checkbox [(checked)]="customFullscreen" aria-label="Fullscreen Custom Dialog">Custom Dialog Fullscreen</md-checkbox>
       </div>
-    <button md-raised-button class="md-primary" (click)="showTabDialog($event)" flex="100" flex-gt-md="auto">
+    <button md-raised-button disabled class="md-primary" (click)="showTabDialog($event)" flex="100" flex-gt-md="auto">
       Tab Dialog
     </button>
   </div>
-  <p class="footer">Note: The <b>Confirm</b> dialog does not use <code>config.clickOutsideToClose(true)</code>.</p>
+  <p class="footer">Note: The <b>Confirm</b> dialog sets <code>config.clickOutsideToClose(false)</code>.</p>
 
   <div *ngIf="status">
     <br/>

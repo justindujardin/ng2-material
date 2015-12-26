@@ -36,19 +36,6 @@ export default class DialogBasicUsage {
       .ok('Got it!')
       .targetEvent(ev);
     this.dialog.open(MdDialogBasic, this.element, config);
-    //// Appending dialog to document.body to cover sidenav in docs app
-    //// Modal dialogs should fully cover application
-    //// to prevent interaction outside of dialog
-    //this.dialog.show(
-    //  this.dialog.alert()
-    //    .parent(angular.element(document.querySelector('#popupContainer')))
-    //    .clickOutsideToClose(true)
-    //    .title('This is an alert title')
-    //    .textContent('You can specify some description text in here.')
-    //    .ariaLabel('Alert Dialog Demo')
-    //    .ok('Got it!')
-    //    .targetEvent(ev)
-    //);
   };
 
   showConfirm(ev) {
@@ -60,8 +47,7 @@ export default class DialogBasicUsage {
       .ok('Please do it!')
       .cancel('Sounds like a scam')
       .targetEvent(ev);
-    this.dialog
-      .open(MdDialogBasic, this.element, config)
+    this.dialog.open(MdDialogBasic, this.element, config)
       .then((ref: MdDialogRef) => {
         ref.whenClosed.then((result) => {
           if (result) {
