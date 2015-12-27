@@ -72,6 +72,7 @@ module.exports = function (grunt) {
           {expand: true, src: 'index.html', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'config.js', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'ng2-material/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, src: 'coverage/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'dist/*.*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {
             expand: true,
