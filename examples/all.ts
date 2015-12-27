@@ -11,6 +11,7 @@ import DialogBasicUsage from './components/dialog/basic_usage';
 import ToolbarBasicUsage from './components/toolbar/basic_usage';
 import ToolbarScrollShrink from './components/toolbar/scroll_shrink';
 import ProgressLinearBasicUsage from './components/progress_linear/basic_usage';
+import ProgressCircularBasicUsage from './components/progress_circular/basic_usage';
 import RadioBasicUsage from './components/radio/basic_usage';
 import SwitchBasicUsage from './components/switch/basic_usage';
 import TabsDynamicHeight from './components/tabs/dynamic_height';
@@ -28,7 +29,8 @@ export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   TabsDynamicHeight,
   TabsDynamicTabs,
   ToolbarBasicUsage, ToolbarScrollShrink,
-  ProgressLinearBasicUsage
+  ProgressLinearBasicUsage,
+  ProgressCircularBasicUsage
 ]);
 
 export * from './example';
