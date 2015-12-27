@@ -1,7 +1,10 @@
-import {View,Component,Directive,AfterViewInit,Input,OnChanges,Attribute,OnDestroy} from "angular2/core";
+import {View,Component,Directive,AfterContentInit,Input,OnChanges,Attribute,OnDestroy} from "angular2/core";
 import {debounce,throttle, rAF} from '../../core/util/util';
 import {ElementRef} from "angular2/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {isPresent} from "angular2/src/facade/lang";
+import {isString} from "angular2/src/facade/lang";
+import {NumberWrapper} from "angular2/src/facade/lang";
 
 
 /**
@@ -54,10 +57,26 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
  * at one fourth the rate at which the user scrolls down. Default 0.5.
  */
 
-@Directive({selector: 'md-toolbar'})
-export class MdToolbar implements AfterViewInit, OnChanges, OnDestroy {
+@Directive({
+  selector: 'md-toolbar',
+  inputs: ['mdShrinkSpeed', 'mdScrollShrink']
+})
+export class MdToolbar implements AfterContentInit, OnChanges, OnDestroy {
 
-  @Input() mdShrinkSpeed: number = 0.5;
+  @Input() set mdShrinkSpeed(value: number) {
+    this._mdShrinkSpeed = isString(value) ? NumberWrapper.parseFloat(<any>value) : value;
+  }
+  get mdShrinkSpeed():number {
+    return this._mdShrinkSpeed;
+  }
+  @Input() set mdScrollShrink(value: boolean) {
+    this._mdScrollShrink = !!isPresent(value);
+  }
+  get mdScrollShrink():boolean {
+    return this._mdScrollShrink;
+  }
+
+  private _mdShrinkSpeed: number = 0.5;
 
   private _debouncedContentScroll = null;
   private _debouncedUpdateHeight = null;
@@ -67,15 +86,16 @@ export class MdToolbar implements AfterViewInit, OnChanges, OnDestroy {
   private _previousScrollTop: number = 0;
   private _currentY: number = 0;
 
-  constructor(@Attribute('md-scroll-shrink') public scrollShrink,
-              public el: ElementRef) {
+  private _mdScrollShrink: boolean = false;
+
+  constructor(public el: ElementRef) {
     this._debouncedContentScroll = throttle(this.onContentScroll, 10, this);
     this._debouncedUpdateHeight = debounce(this.updateToolbarHeight, 5 * 1000, this);
   }
 
-  ngAfterViewInit(): any {
+  ngAfterContentInit(): any {
     this.disableScrollShrink();
-    if (this.scrollShrink === null) {
+    if (!this.mdScrollShrink) {
       return;
     }
     // TODO(jdd): better way to find siblings?
@@ -105,18 +125,20 @@ export class MdToolbar implements AfterViewInit, OnChanges, OnDestroy {
 
   updateToolbarHeight() {
     this._toolbarHeight = DOM.getProperty(this.el.nativeElement, 'offsetHeight');
-    // Add a negative margin-top the size of the toolbar to the content el.
-    // The content will start transformed down the toolbarHeight amount,
-    // so everything looks normal.
-    //
-    // As the user scrolls down, the content will be transformed up slowly
-    // to put the content underneath where the toolbar was.
-    var margin = (-this._toolbarHeight * this.mdShrinkSpeed) + 'px';
+    if(this._content){
+      // Add a negative margin-top the size of the toolbar to the content el.
+      // The content will start transformed down the toolbarHeight amount,
+      // so everything looks normal.
+      //
+      // As the user scrolls down, the content will be transformed up slowly
+      // to put the content underneath where the toolbar was.
+      var margin = (-this._toolbarHeight * this.mdShrinkSpeed) + 'px';
 
-    DOM.setStyle(this._content, "margin-top", margin);
-    DOM.setStyle(this._content, "margin-bottom", margin);
+      DOM.setStyle(this._content, "margin-top", margin);
+      DOM.setStyle(this._content, "margin-bottom", margin);
 
-    this.onContentScroll();
+      this.onContentScroll();
+    }
   }
 
   onContentScroll(e?) {
