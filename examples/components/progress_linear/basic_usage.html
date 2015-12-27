@@ -24,8 +24,8 @@
     For operations where the user wants to indicate some activity or loading from the server,
     use the <b>buffer</b> indicator:
   </p>
-  <md-progress-linear class="md-warn" [mode]="modes[0]" [value]="determinateValue"
-                      [buffer-value]="determinateValue2"></md-progress-linear>
+  <md-progress-linear class="md-warn" mode="buffer" [value]="determinateValue"
+                      [bufferValue]="determinateValue2"></md-progress-linear>
 
   <h4 class="md-title">Query</h4>
 
@@ -34,30 +34,17 @@
     use the <b>query</b> indicator:
   </p>
 
-  <div class="container" [ngClass]="{'visible' : !activated}">
-    <md-progress-linear [mode]="modes[1]"></md-progress-linear>
+  <div class="container">
+    <md-progress-linear mode="query"></md-progress-linear>
     <div class="bottom-block">
       <span>Loading application libraries...</span>
     </div>
   </div>
 
-  <hr [ngClass]="{'visible' : activated}">
-
-  <div id="loaders" layout="row" layout-align="start center">
-
-    <p>Query and Buffer progress linear indicators: </p>
-
-    <md-switch
-        [checked]="activated"
-        (mdOnChange)="toggleActivation()"
-        aria-label="Enable Indicators">
-      <h5>{{ activated ? 'On' : 'Off' }}</h5>
-    </md-switch>
-  </div>
+  <hr>
 
   <p class="small">
-    Note: With the above switch -- which simply clears the mode in each <code>&lt;md-progress-linear
-    md-mode=""&gt;</code> element --
-    developers now easily disable the animations and hide their progress indicators.</p>
+    Hide indicators by adding a <code>hidden</code> attribute, or by binding to a dynamic value <code>[hidden]="yourValue"</code>
+  </p>
 
 </div>

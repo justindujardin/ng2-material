@@ -1,5 +1,4 @@
 @import "../../core/style/variables";
-
 // TODO(jelbourn): This goes away.
 @import "../../core/style/default-theme";
 
@@ -10,6 +9,10 @@ md-progress-linear {
   width: 100%;
   height: $progress-linear-bar-height;
 
+  &[hidden] {
+    display: none;
+  }
+
   *, *:before {
     box-sizing: border-box;
   }
@@ -18,7 +21,7 @@ md-progress-linear {
     overflow: hidden;
     position: relative;
     height: $progress-linear-bar-height;
-    top: $progress-linear-bar-height;
+    //top: $progress-linear-bar-height;
     transform: translate(0, 5px) scale(1, 0);
     transition: all .3s linear;
   }
@@ -37,13 +40,13 @@ md-progress-linear {
     transition: all 0.2s linear;
   }
 
-  &[mode="determinate"] {
+  &[mode=determinate] {
     .md-progress-linear-bar1 {
       display: none;
     }
   }
 
-  &[mode="indeterminate"] {
+  &[mode=indeterminate] {
     .md-progress-linear-bar1 {
       animation: indeterminate1 4s infinite linear;
     }
@@ -53,7 +56,7 @@ md-progress-linear {
     }
   }
 
-  &[mode="buffer"] {
+  &[mode=buffer] {
     .md-progress-linear-container {
       background-color: transparent !important;
     }
@@ -72,7 +75,10 @@ md-progress-linear {
     }
   }
 
-  &[mode="query"] {
+  &[mode=query] {
+    .md-progress-linear-bar1 {
+      display: none;
+    }
     .md-progress-linear-bar2 {
       animation: query .8s infinite cubic-bezier(0.390, 0.575, 0.565, 1.000);
     }
@@ -152,7 +158,7 @@ md-progress-linear {
   0% {
     transform: translateX(-50%) scale(0, 1);
   }
-  25.99%{
+  25.99% {
     transform: translateX(-50%) scale(0, 1);
   }
   28% {
@@ -209,35 +215,42 @@ md-progress-linear {
   }
 }
 
-
 // THEME
 
 md-progress-linear {
   .md-progress-linear-container {
     background-color: md-color($md-primary, 100);
   }
-
   .md-progress-linear-bar {
     background-color: md-color($md-primary);
   }
 
-  &.md-warn .md-progress-linear-container {
-    background-color: md-color($md-warn, 100);
+  &.md-warn {
+    .md-progress-linear-container {
+      background-color: md-color($md-warn, 100);
+    }
+    .md-progress-linear-bar {
+      background-color: md-color($md-warn);
+    }
   }
 
-  &.md-warn .md-progress-linear-bar {
-    background-color: md-color($md-warn);
-  }
-
-  &.md-accent .md-progress-linear-container {
-    background-color: md-color($md-accent, 100);
-  }
-
-  &.md-accent .md-progress-linear-bar {
-    background-color: md-color($md-accent);
+  &.md-accent {
+    .md-progress-linear-container {
+      background-color: md-color($md-accent, 100);
+    }
+    .md-progress-linear-bar {
+      background-color: md-color($md-accent);
+    }
   }
 
   &[mode=buffer] {
+    background-color: transparent !important;
+    transition: all 0.2s linear;
+    .md-progress-linear-display:before {
+      display: block;
+      animation: buffer 3s infinite linear;
+    }
+
     &.md-primary {
       .md-progress-linear-bar1 {
         background-color: md-color($md-primary, 100);

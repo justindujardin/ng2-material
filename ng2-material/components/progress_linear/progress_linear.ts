@@ -6,7 +6,7 @@ import {Input} from 'angular2/core';
 
 /** Different display / behavior modes for progress_linear. */
 @CONST()
-class ProgressMode {
+export class ProgressMode {
   @CONST() static DETERMINATE = 'determinate';
   @CONST() static INDETERMINATE = 'indeterminate';
   @CONST() static BUFFER = 'buffer';
@@ -15,12 +15,13 @@ class ProgressMode {
 
 @Component({
   selector: 'md-progress-linear',
-  inputs: ['value', 'bufferValue'],
+  inputs: ['value', 'bufferValue', 'mode'],
   host: {
     'role': 'progressbar',
     'aria-valuemin': '0',
     'aria-valuemax': '100',
-    '[attr.aria-valuenow]': 'value'
+    '[attr.aria-valuenow]': 'value',
+    '[attr.mode]': 'mode'
   }
 })
 @View({
@@ -76,15 +77,17 @@ export class MdProgressLinear implements OnChanges {
 
   ngOnChanges(_) {
     // If the mode does not use a value, or if there is no value, do nothing.
-    if (this.mode === ProgressMode.QUERY || this.mode === ProgressMode.INDETERMINATE ||
-        isBlank(this.value)) {
+    if (this.mode === ProgressMode.QUERY || this.mode === ProgressMode.INDETERMINATE) {
       return;
     }
 
-    this.primaryBarTransform = this.transformForValue(this.value);
+    if (!isBlank(this.value)) {
+      this.primaryBarTransform = this.transformForValue(this.value);
+    }
+
 
     // The bufferValue is only used in buffer mode.
-    if (this.mode === ProgressMode.BUFFER) {
+    if (this.mode === ProgressMode.BUFFER && !isBlank(this.bufferValue)) {
       this.secondaryBarTransform = this.transformForValue(this.bufferValue);
     }
   }
