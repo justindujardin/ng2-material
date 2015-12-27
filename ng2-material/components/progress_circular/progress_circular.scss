@@ -9,7 +9,6 @@ $progress-circular-sporadic-duration: $progress-circular-duration !default;
 $progress-border-width: 10px;
 $progress-circular-size: 10 * $progress-border-width !default;
 
-
 md-progress-circular {
   display: block;
   position: relative;
@@ -23,7 +22,7 @@ md-progress-circular {
   z-index: $z-index-progress-circular; // Used to fix a Chrome bug with spinner animation
 
   &[hidden] {
-    display: none;
+    visibility: hidden;
   }
 
   .md-spinner-wrapper {
