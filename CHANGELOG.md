@@ -1,3 +1,14 @@
+<a name="0.0.11"></a>
+## [0.0.11](https://github.com/justindujardin/ng2-material/compare/v0.0.10...v0.0.11) (2015-12-27)
+
+
+### Features
+
+* **examples:** add test coverage report to example page ([f41fb1f](https://github.com/justindujardin/ng2-material/commit/f41fb1f))
+* **progress_linear:** support buffer and query indicators and add tests ([5cb8bad](https://github.com/justindujardin/ng2-material/commit/5cb8bad))
+
+
+
 <a name="0.0.10"></a>
 ## [0.0.10](https://github.com/justindujardin/ng2-material/compare/v0.0.9...v0.0.10) (2015-12-26)
 
