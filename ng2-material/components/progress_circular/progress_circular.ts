@@ -50,13 +50,13 @@ class Defaults {
 
 export class MdProgressCircular extends MdProgressLinear {
 
-  /** Value for the progress diameter. */
+  /** Value for the circle diameter. */
   @Input('diameter') diameter_:string;
 
   /** CSS `transform` property applied to the circle diameter. */
   diameterTransformation:string;
 
-  /** CSS property length of circle side. */
+  /** CSS property length of circle preloader side. */
   outerSize:string;
 
   /** CSS `transform` property applied to the circle gap. */
