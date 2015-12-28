@@ -344,8 +344,6 @@ module.exports = function (grunt) {
       smartypants: false
     });
 
-    writeJson('public/version.json', {version: require('./package.json').version});
-
     tasks.push(function buildCoverage() {
       // Parse Lcov report and generate `coverage.json` file for site.
       var parse = require('lcov-parse');
@@ -377,7 +375,7 @@ module.exports = function (grunt) {
       });
     });
 
-    tasks.push(function buildReadme() {
+    tasks.push(function buildReadmeFiles() {
       glob("examples/components/**/readme.md", function (err, files) {
         files.forEach(function parseDemo(readmeFile) {
           var component = readableString(path.basename(path.dirname(readmeFile)));
@@ -386,6 +384,15 @@ module.exports = function (grunt) {
         });
         next();
       });
+    });
+
+    tasks.push(function buildProjectReadme() {
+      var rendered = marked(fs.readFileSync(path.join(__dirname, 'README.md')).toString());
+      writeJson('public/version.json', {
+        version: require('./package.json').version,
+        readme: rendered
+      });
+      next();
     });
 
     tasks.push(function buildExamples() {

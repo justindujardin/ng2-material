@@ -29,7 +29,6 @@ export class ComponentsService {
       http.get('public/meta.json')
         .subscribe((res: Response) => {
           this.components = res.json();
-          console.log(this.components);
           resolve();
         });
 

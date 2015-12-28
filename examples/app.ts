@@ -19,6 +19,7 @@ import {Query} from "angular2/core";
 import {QueryList} from "angular2/core";
 import {NavigationService} from "./services/navigation";
 import {AfterViewInit} from "angular2/core";
+import {VersionService} from "./services/version";
 
 //
 // PLUNKR for ng2: http://plnkr.co/edit/UPJESEgyKFsm4hyW4fWR
@@ -63,6 +64,6 @@ export class DemosApp {
 
 bootstrap(DemosApp, [
   HTTP_PROVIDERS, ROUTER_PROVIDERS, MATERIAL_PROVIDERS,
-  ComponentsService, NavigationService,
+  ComponentsService, NavigationService, VersionService,
   bind(LocationStrategy).toClass(HashLocationStrategy)
 ]);
