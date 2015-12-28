@@ -115,12 +115,20 @@ export class Media {
   }
 
   static hasMedia(size: string): boolean {
-    let query = MEDIA[size];
+    let query = Media.getQuery(size);
     if (!query) {
-      console.warn(`unknown media query size ${size}. Expected one of [${MEDIA_PRIORITY.join(',')}]`);
       return false;
     }
     return window.matchMedia(query).matches;
+  }
+
+  static getQuery(size: string): string {
+    let query = MEDIA[size];
+    if (!query) {
+      console.warn(`unknown media query size ${size}. Expected one of [${MEDIA_PRIORITY.join(',')}]`);
+      return null;
+    }
+    return query;
   }
 
 }

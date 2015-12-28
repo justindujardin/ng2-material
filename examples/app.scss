@@ -6,10 +6,9 @@ $md-font-url: '../public/font/';
 
 demos-app {
 
-  h1, h2, h3, h4, h5 {
+  > md-toolbar {
     font-family: $font-family;
   }
-
   .fixed-toolbar, .shadow-toolbar {
     position: fixed;
     top: 0;
