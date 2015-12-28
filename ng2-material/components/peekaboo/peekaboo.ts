@@ -142,7 +142,7 @@ export class MdPeekaboo implements OnDestroy {
     this._mediaListeners.push(l);
   }
 
-  private _windowScroll = this.evaluate.bind(this);
+  private _windowScroll = debounce(this.evaluate, 1, this);
 
   /**
    * Evaluate the current scroll and media breakpoint to determine what scrollTop
@@ -150,6 +150,7 @@ export class MdPeekaboo implements OnDestroy {
    * @returns number The scrollTop breakpoint that was evaluated against.
    */
   evaluate(): number {
+    let top = this.scrollTop;
     let bp: number = this.break;
     switch (this._breakpoint) {
       case 'xl':
@@ -178,7 +179,12 @@ export class MdPeekaboo implements OnDestroy {
           break;
         }
     }
-    this._active = this.scrollTop >= bp;
+    if (top >= bp && !this._active) {
+      this._active = true;
+    }
+    else if(top < bp && this._active){
+      this._active = false;
+    }
     return bp;
   }
 
