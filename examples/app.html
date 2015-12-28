@@ -1,14 +1,17 @@
-<md-toolbar class="md-whiteframe-z1">
+<md-toolbar class="fixed-toolbar md-whiteframe-z1" md-peekaboo [breaks]="190">
   <div class="md-toolbar-tools">
-    <button md-button class="md-icon-button" aria-label="Settings">
-      <i md-icon class="md-light">menu</i>
-    </button>
     <h2>
       <span>Angular2 Material</span>
       <span *ngIf="version" class="md-caption" flex>v{{version}}</span>
     </h2>
   </div>
 </md-toolbar>
+<md-toolbar class="md-hero">
+  <h1 md-peekaboo [breaks]="192" action="hide">Angular2 Material</h1>
+</md-toolbar>
+<button md-button class="md-hamburger md-icon-button" aria-label="Settings">
+  <i md-icon class="md-light">menu</i>
+</button>
 
 <md-content class="examples" md-scroll-y layout-padding>
 

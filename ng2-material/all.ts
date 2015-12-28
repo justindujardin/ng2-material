@@ -34,6 +34,9 @@ export * from './components/progress_linear/progress_linear';
 import {MdProgressCircular} from './components/progress_circular/progress_circular';
 export * from './components/progress_circular/progress_circular';
 
+import {MdPeekaboo} from './components/peekaboo/peekaboo';
+export * from './components/peekaboo/peekaboo';
+
 import {MdRadioButton, MdRadioGroup} from './components/radio/radio_button';
 import {MdRadioDispatcher} from './components/radio/radio_dispatcher';
 export * from './components/radio/radio_button';
@@ -61,6 +64,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdIcon,
   MdInput, MdInputContainer,
   MdList, MdListItem,
+  MdPeekaboo,
   MdProgressLinear,
   MdProgressCircular,
   MdRadioButton, MdRadioGroup,
