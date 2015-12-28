@@ -4,12 +4,7 @@ import {ElementRef} from "angular2/core";
 import {Input} from "angular2/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/components/dialog/dialog";
-
-
-function hasMedia(size: string) {
-  // TODO: Implement as $mdMedia
-  return true;
-}
+import {Media} from "../../../ng2-material/core/util/media";
 
 @Component({selector: 'dialog-basic-usage'})
 @View({
@@ -20,7 +15,7 @@ function hasMedia(size: string) {
 export default class DialogBasicUsage {
 
   status = '  ';
-  customFullscreen = hasMedia('xs') || hasMedia('sm');
+  customFullscreen = Media.hasMedia('xs') || Media.hasMedia('sm');
 
   constructor(public dialog: MdDialog, public element: ElementRef) {
 

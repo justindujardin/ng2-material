@@ -50,6 +50,7 @@ export * from './components/toolbar/toolbar';
 
 import {MdTabs, MdTab} from './components/tabs/tabs';
 import {UrlResolver} from "angular2/compiler";
+import {Media} from "./core/util/media";
 export * from './components/toolbar/toolbar';
 
 /**
@@ -115,6 +116,7 @@ export class MaterialTemplateResolver extends UrlResolver {
  */
 export const MATERIAL_PROVIDERS: any[] = [
   MdDialog,
+  Media,
   MdRadioDispatcher,
   provide(UrlResolver, {useValue: new MaterialTemplateResolver()})
 ];
