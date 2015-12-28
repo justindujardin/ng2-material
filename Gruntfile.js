@@ -59,6 +59,7 @@ module.exports = function (grunt) {
               './node_modules/angular2/bundles/angular2-polyfills.js',
               './node_modules/angular2/bundles/angular2.dev.js',
               './node_modules/angular2/bundles/http.dev.js',
+              './node_modules/angular2/bundles/router.dev.js',
               './node_modules/highlightjs/highlight.pack.js',
               './node_modules/es6-shim/es6-*.js',
               './node_modules/highlightjs/styles/*.css',
@@ -328,8 +329,20 @@ module.exports = function (grunt) {
     var fs = require('fs');
     var path = require('path');
     var util = require('util');
+    var marked = require('marked');
     var meta = {};
     var tasks = [];
+
+    marked.setOptions({
+      renderer: new marked.Renderer(),
+      gfm: true,
+      tables: true,
+      breaks: false,
+      pedantic: false,
+      sanitize: true,
+      smartLists: true,
+      smartypants: false
+    });
 
     writeJson('public/version.json', {version: require('./package.json').version});
 
@@ -363,6 +376,18 @@ module.exports = function (grunt) {
         next();
       });
     });
+
+    tasks.push(function buildReadme() {
+      glob("examples/components/**/readme.md", function (err, files) {
+        files.forEach(function parseDemo(readmeFile) {
+          var component = readableString(path.basename(path.dirname(readmeFile)));
+          meta[component] = meta[component] || {};
+          meta[component].readme = marked(fs.readFileSync(readmeFile).toString());
+        });
+        next();
+      });
+    });
+
     tasks.push(function buildExamples() {
       glob("examples/components/**/*.html", function (err, files) {
         files.forEach(function parseDemo(templateFile) {
@@ -370,6 +395,7 @@ module.exports = function (grunt) {
           var result = {
             template: templateFile
           };
+          var readmeFile = path.join(path.dirname(templateFile), name + '.md');
           var sourceFile = path.join(path.dirname(templateFile), name + '.ts');
           var stylesFile = path.join(path.dirname(templateFile), name + '.scss');
           if (fileExists(stylesFile)) {
@@ -377,6 +403,9 @@ module.exports = function (grunt) {
           }
           if (fileExists(sourceFile)) {
             result.source = sourceFile;
+          }
+          if (fileExists(readmeFile)) {
+            result.readme = marked(fs.readFileSync(readmeFile).toString());
           }
 
           var component = readableString(path.basename(path.dirname(templateFile)));
@@ -435,9 +464,11 @@ module.exports = function (grunt) {
       return keys.map(function (key) {
         var demos = meta[key];
         var sources = demos.files.slice();
+        var readme = demos.readme;
         delete demos.files;
+        delete demos.readme;
         var demoKeys = Object.keys(demos);
-        return {
+        var result = {
           name: key,
           sources: sources,
           id: selectorString(key),
@@ -446,6 +477,10 @@ module.exports = function (grunt) {
             return demos[key];
           })
         };
+        if (readme) {
+          result.readme = readme;
+        }
+        return result;
       });
     }
 

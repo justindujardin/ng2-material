@@ -51,6 +51,7 @@
     "karma-firefox-launcher": "0.1.7",
     "karma-jasmine": "0.2.2",
     "lcov-parse": "0.0.10",
+    "marked": "0.3.5",
     "remap-istanbul": "0.4.0",
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps"
   },
