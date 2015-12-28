@@ -17,11 +17,28 @@ $toolbar-height-mobile-portrait: 56px !default;
 $toolbar-tools-height-mobile-landscape: 48px !default;
 $toolbar-height-mobile-landscape: 48px !default;
 
-
 $toolbar-indent-margin: 64px !default;
 $toolbar-padding: 16px !default;
 
 $icon-button-margin-offset: rem(-0.800) !default;
+
+@mixin md-tall-toolbar() {
+  height: $toolbar-tall-height;
+  min-height: $toolbar-tall-height;
+  max-height: $toolbar-tall-height;
+}
+
+@mixin md-medium-tall-toolbar() {
+  height: $toolbar-medium-tall-height;
+  min-height: $toolbar-medium-tall-height;
+  max-height: $toolbar-medium-tall-height;
+}
+
+@mixin md-hero-toolbar() {
+  height: $toolbar-hero-height;
+  min-height: $toolbar-hero-height;
+  max-height: $toolbar-hero-height;
+}
 
 md-toolbar {
   box-sizing: border-box;
@@ -50,22 +67,15 @@ md-toolbar {
   }
 
   &.md-tall {
-    height: $toolbar-tall-height;
-    min-height: $toolbar-tall-height;
-    max-height: $toolbar-tall-height;
+    @include md-tall-toolbar();
   }
 
   &.md-hero {
-    height: $toolbar-hero-height;
-    min-height: $toolbar-hero-height;
-    max-height: $toolbar-hero-height;
+    @include md-hero-toolbar();
   }
 
   &.md-medium-tall {
-    height: $toolbar-medium-tall-height;
-    min-height: $toolbar-medium-tall-height;
-    max-height: $toolbar-medium-tall-height;
-
+    @include md-medium-tall-toolbar();
     .md-toolbar-tools {
       height: 48px;
       min-height: 48px;
@@ -123,14 +133,14 @@ md-toolbar {
     margin-top: 0;
     margin-bottom: 0;
   }
-  &> [md-button]:first-child {
+  & > [md-button]:first-child {
     margin-left: $icon-button-margin-offset;
   }
-  &> [md-button]:last-child {
+  & > [md-button]:last-child {
     margin-right: $icon-button-margin-offset;
   }
 
-  &> md-menu:last-child {
+  & > md-menu:last-child {
     margin-right: $icon-button-margin-offset;
     & > [md-button] {
       margin-right: 0;
@@ -143,8 +153,7 @@ md-toolbar {
 }
 
 // Handle mobile portrait
-@media only screen and (min-width: 0) and (max-width: $layout-breakpoint-sm) and
-  (orientation: portrait) {
+@media only screen and (min-width: 0) and (max-width: $layout-breakpoint-sm) and(orientation: portrait) {
   md-toolbar {
     min-height: $toolbar-height-mobile-portrait;
   }
@@ -156,8 +165,7 @@ md-toolbar {
 }
 
 // Handle mobile landscape
-@media only screen and (min-width: 0) and (max-width: $layout-breakpoint-sm) and
-  (orientation: landscape) {
+@media only screen and (min-width: 0) and (max-width: $layout-breakpoint-sm) and(orientation: landscape) {
   md-toolbar {
     min-height: $toolbar-height-mobile-landscape;
   }

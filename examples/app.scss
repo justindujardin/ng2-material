@@ -10,27 +10,20 @@ demos-app {
     font-family: $font-family;
   }
 
-
-  [md-button].md-icon-button.md-hamburger {
-    position: fixed;
-    z-index: $z-index-sidenav;
-    border: 0;
-    display: block;
-    overflow: hidden;
-    top: $baseline-grid * 1.5;
-    left: $baseline-grid * 1.5;
-  }
-
-  .fixed-toolbar {
+  .fixed-toolbar, .shadow-toolbar {
     position: fixed;
     top: 0;
     z-index: $z-index-sidenav;
-    h2 {
-      padding-left: 52px;
+    &.shadow-toolbar {
+      z-index: $z-index-sidenav - 1;
+    }
+    .md-hamburger {
+      color: md-color($md-background);
     }
   }
 
-  md-toolbar.md-hero {
+  md-toolbar.hero {
+    @include md-hero-toolbar();
     padding: 115px 16px 0;
     h1 {
       color: #fff;
@@ -41,6 +34,21 @@ demos-app {
       overflow: hidden;
       width: 1160px;
       white-space: nowrap;
+    }
+    @media screen and (max-width: $layout-breakpoint-lg) {
+      h1 {
+        width: 760px;
+      }
+    }
+    @media screen and (max-width: $layout-breakpoint-sm) {
+      height: 128px;
+      padding-top: 72px;
+      @include md-tall-toolbar();
+      h1 {
+        font-size: $title-font-size-base;
+        width: 360px;
+        margin-left: 0;
+      }
     }
   }
 
