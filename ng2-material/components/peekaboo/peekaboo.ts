@@ -7,6 +7,8 @@ import {Input} from "angular2/core";
 import {CONST} from "angular2/src/facade/lang";
 import {isPresent} from "angular2/src/facade/lang";
 import {Attribute} from "angular2/core";
+import {NumberWrapper} from "angular2/src/facade/lang";
+import {isString} from "angular2/src/facade/lang";
 
 /** Different peekaboo actions to apply when active */
 @CONST()
@@ -39,7 +41,11 @@ export class MdPeekaboo implements OnDestroy {
 
   @Input() breakAction: string;
 
-  private _active: boolean;
+  static MakeNumber(value: any): number {
+    return isString(value) ? NumberWrapper.parseInt(value, 10) : value;
+  }
+
+  private _active: boolean = false;
   get active(): boolean {
     return this._active;
   }
@@ -50,7 +56,7 @@ export class MdPeekaboo implements OnDestroy {
 
   private _breakXs: number = -1;
   @Input() set breakXs(value: number) {
-    this._breakXs = value;
+    this._breakXs = MdPeekaboo.MakeNumber(value);
   }
 
   get breakXs(): number {
@@ -59,7 +65,7 @@ export class MdPeekaboo implements OnDestroy {
 
   private _breakSm: number = -1;
   @Input() set breakSm(value: number) {
-    this._breakSm = value;
+    this._breakSm = MdPeekaboo.MakeNumber(value);
   }
 
   get breakSm(): number {
@@ -68,7 +74,7 @@ export class MdPeekaboo implements OnDestroy {
 
   private _breakMd: number = -1;
   @Input() set breakMd(value: number) {
-    this._breakMd = value;
+    this._breakMd = MdPeekaboo.MakeNumber(value);
   }
 
   get breakMd(): number {
@@ -77,7 +83,7 @@ export class MdPeekaboo implements OnDestroy {
 
   private _breakLg: number = -1;
   @Input() set breakLg(value: number) {
-    this._breakLg = value;
+    this._breakLg = MdPeekaboo.MakeNumber(value);
   }
 
   get breakLg(): number {
@@ -86,19 +92,30 @@ export class MdPeekaboo implements OnDestroy {
 
   private _breakXl: number = -1;
   @Input() set breakXl(value: number) {
-    this._breakXl = value;
+    this._breakXl = MdPeekaboo.MakeNumber(value);
   }
 
   get breakXl(): number {
     return this._breakXl;
   }
 
-  private _mediaListeners: MediaListener[] = [];
   private _breakpoint: string = null;
+  set breakpoint(size: string) {
+    this._breakpoint = size;
+    this.evaluate();
+  }
+
+  get breakpoint(): string {
+    return this._breakpoint;
+  }
+
+  private _mediaListeners: MediaListener[] = [];
+
 
   constructor(@Attribute('breakAction') action: string, public media: Media) {
-    this.breakAction = isPresent(action) ? action : PeekabooAction.SHOW;
-    this._evaluate();
+    if (isPresent(action)) {
+      this.breakAction = action;
+    }
     window.addEventListener('scroll', this._windowScroll);
     MdPeekaboo.SIZES.forEach((size: string) => {
       this._watchMediaQuery(size);
@@ -106,6 +123,7 @@ export class MdPeekaboo implements OnDestroy {
         this._breakpoint = size;
       }
     });
+    this.evaluate();
   }
 
   ngOnDestroy(): any {
@@ -119,17 +137,19 @@ export class MdPeekaboo implements OnDestroy {
   private _watchMediaQuery(size: string) {
     let l = this.media.listen(Media.getQuery(size));
     l.onMatched.subscribe((q: string) => {
-      this._breakpoint = size;
-      this._evaluate();
+      this.breakpoint = size;
     });
     this._mediaListeners.push(l);
   }
 
-  private _windowScroll = (ev: Event) => {
-    this._evaluate();
-  };
+  private _windowScroll = this.evaluate.bind(this);
 
-  private _evaluate(): void {
+  /**
+   * Evaluate the current scroll and media breakpoint to determine what scrollTop
+   * value should be used for the peekaboo active state.
+   * @returns number The scrollTop breakpoint that was evaluated against.
+   */
+  evaluate(): number {
     let bp: number = this.break;
     switch (this._breakpoint) {
       case 'xl':
@@ -159,6 +179,7 @@ export class MdPeekaboo implements OnDestroy {
         }
     }
     this._active = this.scrollTop >= bp;
+    return bp;
   }
 
 }

@@ -7,6 +7,12 @@ export function findChildByTag(parent: DebugElement, tagName: string): DebugElem
     return debugEl.nativeElement && debugEl.nativeElement.tagName && debugEl.nativeElement.tagName.toLowerCase() === tagName.toLowerCase();
   });
 }
+/** Gets a child DebugElement by attribute name. */
+export function findChildByAttribute(parent: DebugElement, attr: string): DebugElement {
+  return parent.query((debugEl) => {
+    return DOM.isElementNode(debugEl.nativeElement) && DOM.hasAttribute(debugEl.nativeElement, attr);
+  });
+}
 /** Gets all children by tag name. */
 export function findChildrenByTag(parent: DebugElement, tagName: string): DebugElement[] {
   return parent.queryAll((debugEl) => {
