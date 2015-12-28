@@ -17,7 +17,10 @@
 </md-toolbar>
 <md-toolbar class="fixed-toolbar">
   <div class="md-toolbar-tools">
-    <button md-button class="md-hamburger md-icon-button" aria-label="Settings">
+    <button md-button
+            class="md-hamburger md-icon-button"
+            [routerLink]="['Index']"
+            aria-label="Home">
       <i md-icon class="md-light">menu</i>
     </button>
     <h2 md-peekaboo
@@ -34,25 +37,30 @@
 <md-toolbar class="shadow-toolbar md-whiteframe-z1" md-peekaboo [break]="190" breakAction="show"></md-toolbar>
 
 <md-content class="examples" md-scroll-y layout-padding>
-
-  <h1 class="examples-title">Getting Started</h1>
-  <p class="examples-intro">
-    There are many examples on this page. Here's the <a href="coverage/" target="_blank">test coverage</a> report, and a
-    <a href="http://plnkr.co/edit/CnDUjVufVnevluFOBvdD?p=preview" target="_blank">plunkr template</a> to get you going.
-  </p>
-
-  <nav class="examples-toc">
-    <h1>Components</h1>
-    <ul>
-      <li *ngFor="#value of meta"><a href="#{{value.id}}">{{value.name}}</a></li>
-    </ul>
-  </nav>
-
-
-  <section *ngFor="#value of meta" [id]="value.id">
-    <h1>{{ value.name }}</h1>
-    <example *ngFor="#demo of value.examples" [model]="demo"></example>
-    <md-divider></md-divider>
-  </section>
-
+  <router-outlet></router-outlet>
 </md-content>
+
+
+<footer>
+  <div class="container" layout="row" layout-align="center center">
+    <a class="previous" flex="50" *ngIf="navigation.prevLink"
+       layout="row" layout-align="start center"
+       [routerLink]="navigation.prevLink.routeLink">
+      <i md-icon>arrow_back</i>
+      <span layout="column" hide-sm>
+        <span class="label">Previous</span>
+        <span class="name md-title">{{navigation.prevLink.brief}}</span>
+      </span>
+
+    </a>
+    <a class="next" flex="50" *ngIf="navigation.nextLink"
+       layout="row" layout-align="end center"
+       [routerLink]="navigation.nextLink.routeLink">
+      <span layout="column">
+        <span class="label">Next</span>
+        <span class="name md-title">{{navigation.nextLink.brief}}</span>
+      </span>
+      <i md-icon>arrow_forward</i>
+    </a>
+  </div>
+</footer>

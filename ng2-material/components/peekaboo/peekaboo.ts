@@ -142,7 +142,7 @@ export class MdPeekaboo implements OnDestroy {
     this._mediaListeners.push(l);
   }
 
-  private _windowScroll = debounce(this.evaluate, 1, this);
+  private _windowScroll = this.evaluate.bind(this);
 
   /**
    * Evaluate the current scroll and media breakpoint to determine what scrollTop

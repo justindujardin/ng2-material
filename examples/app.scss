@@ -6,14 +6,73 @@ $md-font-url: '../public/font/';
 
 demos-app {
 
+  md-content.examples {
+    width: 800px;
+    @media screen and (max-width: $layout-breakpoint-md) {
+      width: 640px;
+    }
+    @media screen and (max-width: $layout-breakpoint-sm) {
+      width: 480px;
+    }
+    @media screen and (max-width: $layout-breakpoint-sm) {
+      width: 360px;
+    }
+  }
+
+  footer {
+    background-color: md-color($md-primary);
+    width: 100%;
+    .container {
+      margin: auto;
+      padding: 0 25px;
+      width: 80%;
+      @media screen and (max-width: $layout-breakpoint-md) {
+        width: 640px;
+      }
+      @media screen and (max-width: $layout-breakpoint-sm) {
+        width: 480px;
+      }
+      @media screen and (max-width: $layout-breakpoint-sm) {
+        width: 360px;
+      }
+
+      a.previous, a.next {
+        font-family: $font-family;
+        color: md-color($md-primary, 50);
+        @include md-medium-tall-toolbar();
+        text-decoration: none;
+        &:visited {
+          color: md-color($md-primary, 100);
+        }
+        .label {
+          color: md-color($md-primary, 200);
+        }
+        .name {
+          font-weight: 500;
+          white-space: nowrap;
+        }
+        i {
+          padding-top: 24px;
+        }
+      }
+      .previous {
+        text-align: left;
+      }
+      .next {
+        text-align: right;
+      }
+
+    }
+  }
+
   > md-toolbar {
     font-family: $font-family;
   }
   .fixed-toolbar, .shadow-toolbar {
     position: fixed;
     top: 0;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
     z-index: $z-index-sidenav;
     &.shadow-toolbar {
       z-index: $z-index-sidenav - 1;
@@ -73,6 +132,7 @@ demos-app {
 
   .examples {
     padding-top: 80px;
+    min-height: 640px;
 
     .examples-title {
       color: md-color($md-primary);

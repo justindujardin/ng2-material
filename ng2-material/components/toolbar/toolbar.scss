@@ -88,6 +88,7 @@ md-toolbar {
   }
 
   ~ md-content {
+    overflow-y: hidden;
     > md-list {
       padding: 0;
 
