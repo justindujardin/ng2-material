@@ -81,7 +81,7 @@ md-progress-circular {
     }
   }
 
-  &[mode="indeterminate"] {
+  &[mode="indeterminate"], &:not([mode]) {
     .md-spinner-wrapper {
       animation: outer-rotate $progress-circular-outer-duration linear infinite;
       .md-inner {
