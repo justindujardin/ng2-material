@@ -23,3 +23,7 @@ examples/**/*.d.ts
 test/**/*.js
 test/**/*.js.map
 test/**/*.d.ts
+.coverage
+.sass-cache
+.tscache
+coverage
