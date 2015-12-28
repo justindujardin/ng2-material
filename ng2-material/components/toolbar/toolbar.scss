@@ -7,6 +7,7 @@ $toolbar-tools-height: 64px !default;
 $toolbar-height: 64px !default;
 $toolbar-medium-tall-height: 88px !default;
 $toolbar-tall-height: 128px !default;
+$toolbar-hero-height: 256px !default;
 
 // Mobile portrait heights
 $toolbar-tools-height-mobile-portrait: 56px !default;
@@ -52,6 +53,12 @@ md-toolbar {
     height: $toolbar-tall-height;
     min-height: $toolbar-tall-height;
     max-height: $toolbar-tall-height;
+  }
+
+  &.md-hero {
+    height: $toolbar-hero-height;
+    min-height: $toolbar-hero-height;
+    max-height: $toolbar-hero-height;
   }
 
   &.md-medium-tall {
