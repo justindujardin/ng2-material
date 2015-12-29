@@ -11,9 +11,14 @@ import {ROUTER_DIRECTIVES} from "angular2/router";
   template: `
     <h1 class="examples-title">Getting Started</h1>
     <p class="examples-intro">
-      There are many examples on this page. Here's the <a href="coverage/" target="_blank">test coverage</a> report, and a
+      There are many examples linked from this page. Here's the <a href="coverage/" target="_blank">test coverage</a> report, and a
       <a href="http://plnkr.co/edit/CnDUjVufVnevluFOBvdD?p=preview" target="_blank">plunkr template</a> to get you going.
+      <span>
+        You can find the source code for this project on <a href="https://github.com/justindujardin/ng2-material">Github</a>.
+      </span>
+
     </p>
+
 
     <nav class="examples-toc">
       <h1>Components</h1>

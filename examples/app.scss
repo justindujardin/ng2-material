@@ -77,9 +77,6 @@ demos-app {
     &.shadow-toolbar {
       z-index: $z-index-sidenav - 1;
     }
-    .md-hamburger {
-      color: md-color($md-background);
-    }
   }
 
   md-toolbar.hero {
@@ -131,7 +128,7 @@ demos-app {
   }
 
   .examples {
-    padding-top: 80px;
+    padding: 80px $baseline-grid;
     min-height: 640px;
 
     .examples-title {
