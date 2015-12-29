@@ -56,6 +56,7 @@
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps"
   },
   "contributors": [
+    "Jaroslav Řehořka <jaroslav.rehorka@gmail.com>",
     "Justin DuJardin <justindujardin@users.noreply.github.com>"
   ]
 }
