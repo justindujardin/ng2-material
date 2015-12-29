@@ -34,6 +34,7 @@
         "ng2-material/components/icon/icon.ts",
         "ng2-material/components/input/input.ts",
         "ng2-material/components/list/list.ts",
+        "ng2-material/components/peekaboo/peekaboo.ts",
         "ng2-material/components/progress_circular/progress_circular.ts",
         "ng2-material/components/progress_linear/progress_linear.ts",
         "ng2-material/components/radio/radio_button.ts",
@@ -45,6 +46,7 @@
         "ng2-material/core/key_codes.ts",
         "ng2-material/core/util/animate.ts",
         "ng2-material/core/util/ink.ts",
+        "ng2-material/core/util/media.ts",
         "ng2-material/core/util/util.ts"
     ]
 }

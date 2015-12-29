@@ -1,3 +1,20 @@
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/justindujardin/ng2-material/compare/v0.0.11...v0.1.0) (2015-12-29)
+
+
+### Features
+
+* **examples:** add version service for accessing version.json data ([b52c83d](https://github.com/justindujardin/ng2-material/commit/b52c83d))
+* **examples:** hero header for demo site ([90464af](https://github.com/justindujardin/ng2-material/commit/90464af))
+* **examples:** support rendering markdown content for examples ([3d42aa6](https://github.com/justindujardin/ng2-material/commit/3d42aa6))
+* **examples:** use router for navigation between examples ([380625e](https://github.com/justindujardin/ng2-material/commit/380625e))
+* **peekaboo:** decorator for viewport scroll actions ([d419853](https://github.com/justindujardin/ng2-material/commit/d419853))
+* **peekaboo:** different breaks for different viewport sizes ([0fff4cc](https://github.com/justindujardin/ng2-material/commit/0fff4cc))
+* **toolbar:** add md-hero height for large material page headers ([a949ba8](https://github.com/justindujardin/ng2-material/commit/a949ba8))
+* **util:** add Media injectable for media query checks and events ([edc437e](https://github.com/justindujardin/ng2-material/commit/edc437e))
+
+
+
 <a name="0.0.11"></a>
 ## [0.0.11](https://github.com/justindujardin/ng2-material/compare/v0.0.10...v0.0.11) (2015-12-27)
 
