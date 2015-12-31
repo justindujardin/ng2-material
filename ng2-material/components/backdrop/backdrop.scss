@@ -1,4 +1,5 @@
 @import "../../core/style/variables";
+@import "../../core/style/default-theme";
 
 .md-backdrop {
   position: fixed;
@@ -8,7 +9,6 @@
   right: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.12);
   transition: opacity 450ms;
   opacity: 0;
   z-index: $z-index-backdrop;
@@ -35,4 +35,21 @@
     z-index: $z-index-sidenav - 1;
   }
 
+  &.md-opaque {
+    &.md-active {
+      opacity: .48;
+    }
+  }
+}
+
+// Theme
+
+.md-backdrop {
+  background-color: md-color($md-background, 900, 0);
+  &.md-opaque {
+    background-color: md-color($md-background, 900, 1);
+    &.md-active {
+      opacity: .48;
+    }
+  }
 }

@@ -115,6 +115,7 @@ export class MdDialog {
         let backdrop: MdBackdrop = componentRef.instance;
         backdrop.clickClose = options.clickClose;
         this.renderer.setElementClass(componentRef.location, 'md-backdrop', true);
+        this.renderer.setElementClass(componentRef.location, 'md-opaque', true);
         this.renderer.setElementClass(componentRef.location, 'md-backdrop-absolute', !!options.container);
         DOM.appendChild(options.container || this._defaultContainer, componentRef.location.nativeElement);
         return backdrop.show().then(() => componentRef);

@@ -8,15 +8,15 @@ import {MATERIAL_DIRECTIVES} from "../../ng2-material/all";
 import Example from "../example";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {NavigationService} from "../services/navigation";
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
 @Component({
   selector: 'component-page',
   template: `
-    <h1 class="examples-title">{{ value.name }}</h1>
+    <h1 class="examples-title">Examples</h1>
     <p class="examples-intro" *ngIf="value.readme" [innerHtml]="value.readme"></p>
 
-    <example *ngFor="#demo of value.examples" [model]="demo"></example>
-    <md-divider></md-divider>`,
+    <example *ngFor="#demo of value.examples" [model]="demo"></example>`,
   directives: [Example, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES]
 })
 export class ComponentPage implements OnInit {
@@ -37,6 +37,8 @@ export class ComponentPage implements OnInit {
     let id = this._routeParams.get('id');
     this._components.getComponent(id).then((c: IComponentMeta) => {
       this.value = c;
+      DOM.setTitle(c.name + ' – ng2-material');
+      this._navigation.currentTitle = c.name;
       this._components.getNext(c).then((next: IComponentMeta) => {
         this._navigation.nextLink = this._navigation.componentLink(next);
       });

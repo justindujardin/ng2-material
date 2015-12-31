@@ -4,18 +4,22 @@ $md-font-url: '../public/font/';
 @import "../ng2-material/all";
 @import "example";
 
+$app-content-lg: 960px;
+$app-content-md: 580px;
+$app-content-sm: 360px;
+
 demos-app {
 
   md-content.examples {
     width: 800px;
+    @media screen and (max-width: $layout-breakpoint-lg) {
+      width: $app-content-lg;
+    }
     @media screen and (max-width: $layout-breakpoint-md) {
-      width: 640px;
+      width: $app-content-md;
     }
     @media screen and (max-width: $layout-breakpoint-sm) {
-      width: 480px;
-    }
-    @media screen and (max-width: $layout-breakpoint-sm) {
-      width: 360px;
+      width: $app-content-sm;
     }
   }
 
@@ -26,14 +30,14 @@ demos-app {
       margin: auto;
       padding: 0 25px;
       width: 80%;
+      @media screen and (max-width: $layout-breakpoint-lg) {
+        width: $app-content-lg;
+      }
       @media screen and (max-width: $layout-breakpoint-md) {
-        width: 640px;
+        width: $app-content-md;
       }
       @media screen and (max-width: $layout-breakpoint-sm) {
-        width: 480px;
-      }
-      @media screen and (max-width: $layout-breakpoint-sm) {
-        width: 360px;
+        width: $app-content-sm;
       }
 
       a.previous, a.next {
@@ -73,9 +77,14 @@ demos-app {
     top: 0;
     left: 0;
     right: 0;
-    z-index: $z-index-sidenav;
+    z-index: $z-index-toolbar;
     &.shadow-toolbar {
-      z-index: $z-index-sidenav - 1;
+      z-index: $z-index-toolbar - 1;
+    }
+    .verbose-title {
+      @media screen and (max-width: $layout-breakpoint-sm) {
+        display: none;
+      }
     }
   }
 
@@ -88,13 +97,19 @@ demos-app {
       font-weight: 400;
       line-height: 1.5;
       margin: 0 auto;
-      overflow: hidden;
+      overflow: visible;
       width: 1160px;
       white-space: nowrap;
+
     }
     @media screen and (max-width: $layout-breakpoint-lg) {
       h1 {
-        width: 760px;
+        width: $app-content-lg;
+      }
+    }
+    @media screen and (max-width: $layout-breakpoint-md) {
+      h1 {
+        width: $app-content-md;
       }
     }
     @media screen and (max-width: $layout-breakpoint-sm) {
@@ -103,7 +118,7 @@ demos-app {
       @include md-tall-toolbar();
       h1 {
         font-size: $title-font-size-base;
-        width: 360px;
+        width: $app-content-sm;
         margin-left: 0;
       }
     }

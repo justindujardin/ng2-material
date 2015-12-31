@@ -14,6 +14,7 @@ export interface INavigationLink {
 
 @Injectable()
 export class NavigationService {
+  public currentTitle:string = null;
   public nextLink: INavigationLink = null;
   public prevLink: INavigationLink = null;
 

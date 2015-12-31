@@ -2,18 +2,12 @@
             md-peekaboo
             [break]="190"
             breakAction="show">
-  <div class="md-toolbar-tools">
-    <h2>
-      <span>Angular2 Material</span>
-      <span *ngIf="version" class="md-caption" flex>v{{version}}</span>
-    </h2>
-  </div>
 </md-toolbar>
 <md-toolbar class="hero">
   <h1 md-peekaboo
       [breakMd]="72"
       [breakXs]="20"
-      breakAction="hide">Angular2 Material</h1>
+      breakAction="hide">{{navigation?.currentTitle}}</h1>
 </md-toolbar>
 <md-toolbar class="fixed-toolbar">
   <div class="md-toolbar-tools">
@@ -21,12 +15,15 @@
             class="md-hamburger md-icon-button"
             [routerLink]="['Index']"
             aria-label="Home">
-      <i md-icon class="md-dark">menu</i>
+      <i md-icon class="md-dark">{{navigation?.currentTitle == site ? 'menu' : 'arrow_back'}}</i>
     </button>
     <h2 md-peekaboo
         [breakMd]="72"
         [breakXs]="20"
-        breakAction="show">Angular2 Material</h2>
+        breakAction="show">
+      <span class="verbose-title" *ngIf="navigation?.currentTitle != site">{{site}} <small>–</small>&nbsp;</span>
+      <span>{{navigation?.currentTitle}}</span>
+    </h2>
     <span flex></span>
     <span md-peekaboo
           [breakMd]="72"
@@ -34,7 +31,7 @@
           *ngIf="version" class="md-caption">v{{version}}</span>
   </div>
 </md-toolbar>
-<md-toolbar class="shadow-toolbar md-whiteframe-z1" md-peekaboo [break]="190" breakAction="show"></md-toolbar>
+<md-toolbar class="shadow-toolbar md-whiteframe-z1" md-peekaboo [break]="210" breakAction="show"></md-toolbar>
 
 <md-content class="examples" md-scroll-y layout-padding>
   <router-outlet></router-outlet>

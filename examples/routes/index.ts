@@ -6,6 +6,7 @@ import {OnInit} from "angular2/core";
 import {NavigationService} from "../services/navigation";
 import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 import {ROUTER_DIRECTIVES} from "angular2/router";
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
 @Component({
   template: `
@@ -39,6 +40,9 @@ export class IndexPage implements OnInit {
     this._components.getComponents()
       .then((comps) => {
         this.components = comps;
+        let title = 'Angular2 Material';
+        DOM.setTitle(title);
+        this.navigation.currentTitle = title;
         this.navigation.prevLink = this.navigation.componentLink(comps[comps.length - 1]);
         this.navigation.nextLink = this.navigation.componentLink(comps[0]);
       });

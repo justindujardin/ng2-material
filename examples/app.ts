@@ -49,6 +49,9 @@ export interface IExampleData {
   directives: [MATERIAL_DIRECTIVES, ROUTER_DIRECTIVES, Example, DEMO_DIRECTIVES]
 })
 export class DemosApp {
+
+  public site:string = 'Angular2 Material';
+
   meta: any;
 
   version: string;
