@@ -6,9 +6,9 @@
 .demo-container {
   .demo-toolbar {
     button[md-button] {
-      color: rgba(255,255,255,0.6);
+      color: rgba(255, 255, 255, 0.6);
       &.active {
-        color: rgba(255,255,255,0.9);
+        color: rgba(255, 255, 255, 0.9);
       }
     }
 
@@ -17,10 +17,13 @@
 
 .layout-content,
 .doc-content {
-  max-width: 864px;
   min-width: 300px;
   margin: 16px;
   box-sizing: border-box;
+  @media screen and (max-width: $layout-breakpoint-sm) {
+    margin: 0;
+  }
+
 }
 
 docs-demo {
@@ -46,7 +49,7 @@ docs-demo {
   -webkit-transition: all 0.45s cubic-bezier(0.35, 0, 0.25, 1);
   transition: all 0.45s cubic-bezier(0.35, 0, 0.25, 1);
   height: 448px;
-  max-height:0;
+  max-height: 0;
   background: #fff;
   overflow: hidden;
   &.shown {
@@ -55,14 +58,13 @@ docs-demo {
 }
 
 .demo-source-tabs md-tabs-wrapper {
-  background-color: md-color($md-primary,400) !important;
+  background-color: md-color($md-primary, 400) !important;
 }
 
 md-tabs.demo-source-tabs [md-tab],
 md-tabs.demo-source-tabs .md-header {
   background-color: #444444 !important;
 }
-
 
 .demo-source-tabs.ng-hide {
   min-height: 0;

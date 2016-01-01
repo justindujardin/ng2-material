@@ -44,7 +44,7 @@
        layout="row" layout-align="start center"
        [routerLink]="navigation.prevLink.routeLink">
       <i md-icon>arrow_back</i>
-      <span layout="column" hide-sm>
+      <span layout="column" show-gt-sm hide>
         <span class="label">Previous</span>
         <span class="name md-title">{{navigation.prevLink.brief}}</span>
       </span>
@@ -55,7 +55,7 @@
        [routerLink]="navigation.nextLink.routeLink">
       <span layout="column">
         <span class="label">Next</span>
-        <span class="name md-title">{{navigation.nextLink.brief}}</span>
+        <div class="name md-title">{{navigation.nextLink.brief}}</div>
       </span>
       <i md-icon>arrow_forward</i>
     </a>
