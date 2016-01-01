@@ -5,7 +5,7 @@
 
     <md-radio-button value="Apple" class="md-primary">Apple</md-radio-button>
     <md-radio-button value="Banana" checked="true"> Banana</md-radio-button>
-    <md-radio-button value="Mango">Mango</md-radio-button>
+    <md-radio-button value="Mango" class="md-warn">Mango</md-radio-button>
 
   </md-radio-group>
 
@@ -15,14 +15,14 @@
 
   <md-radio-group [(value)]="data.group2" #group class="md-primary">
 
-    <md-radio-button *ngFor="#d of radioData"
+    <md-radio-button *ngFor="#d of radioData; #index = index"
                      [value]="d.value"
                      [checked]="group.value==d.value"
                      [disabled]="d.isDisabled"
-                     [ngClass]="{'md-align-top-left': $index==1}">
+                     [ngClass]="{'md-align-top-left': index==1}">
       {{ d.label }}<br/>
           <span class="ipsum"
-                *ngIf="$index == 1">
+                *ngIf="index == 1">
             Duis placerat lectus et justo mollis, nec sodales orci congue. Vestibulum semper non urna ac suscipit.
             Vestibulum tempor, ligula id laoreet hendrerit, massa augue iaculis magna,
             sit amet dapibus tortor ligula non nibh.

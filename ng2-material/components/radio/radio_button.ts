@@ -214,6 +214,7 @@ export class MdRadioGroup implements OnChanges {
     '[id]': 'id',
     '[tabindex]': 'tabindex',
     '[attr.aria-checked]': 'checked',
+    '[attr.disabled]': 'disabled ? "" : undefined',
     '[attr.aria-disabled]': 'disabled',
     '(keydown)': 'onKeydown($event)',
     '(click)': 'select($event)'
