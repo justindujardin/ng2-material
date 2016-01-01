@@ -88,7 +88,9 @@ md-toolbar {
   }
 
   ~ md-content {
-    overflow: hidden;
+    &:not([scroll-shrink]){
+      overflow: hidden;
+    }
     > md-list {
       padding: 0;
 
