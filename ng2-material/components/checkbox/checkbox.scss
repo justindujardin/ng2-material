@@ -1,11 +1,12 @@
 @import "../../core/style/variables";
 @import "../../core/style/shadows";
-
-// TODO(jelbourn): This goes away.
+@import "../../core/style/mixins";
 @import "../../core/style/default-theme";
 
 $checkbox-width: 18px !default;
 $checkbox-height: $checkbox-width !default;
+$checkbox-top-left: 12px;
+$checkbox-text-margin: 10px !default;
 
 md-checkbox {
   box-sizing: border-box;
@@ -15,6 +16,16 @@ md-checkbox {
   cursor: pointer;
   outline: none;
   user-select: none;
+  position: relative;
+
+  &.md-align-top-left .md-checkbox-container {
+    top: $checkbox-top-left;
+  }
+
+  &:last-of-type {
+    @include rtl(margin-left, inherit, 0);
+    @include rtl(margin-right, 0, inherit);
+  }
 
   *, *:after {
     box-sizing: border-box;
@@ -51,11 +62,14 @@ md-checkbox {
 }
 
 .md-checkbox-container {
-  position: relative;
-  top: 4px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   display: inline-block;
   width: $checkbox-width;
   height: $checkbox-height;
+  @include rtl(left, 0, auto);
+  @include rtl(right, auto, 0);
 
   &:after {
     content: '';
@@ -94,11 +108,14 @@ md-checkbox {
   border: 1px dotted transparent;
   position: relative;
   display: inline-block;
-  margin-left: 10px;
   vertical-align: middle;
   white-space: normal;
   pointer-events: none;
   user-select: text;
+
+  @include rtl(margin-left, $checkbox-text-margin + $checkbox-width, 0);
+  @include rtl(margin-right, 0, $checkbox-text-margin + $checkbox-width);
+
 }
 
 // THEME
@@ -166,6 +183,10 @@ md-checkbox {
   &[disabled] {
     .md-checkbox-icon {
       border-color: md-color($md-foreground, disabled);
+    }
+
+    .md-checkbox-label {
+      color: md-color($md-foreground, disabled);
     }
 
     &[aria-checked="true"] .md-checkbox-icon {
