@@ -1,4 +1,4 @@
-import {Component, View} from 'angular2/core';
+import {Component, View, enableProdMode} from 'angular2/core';
 import {bootstrap} from 'angular2/platform/browser';
 import {ROUTER_PROVIDERS} from 'angular2/router';
 
@@ -64,6 +64,8 @@ export class DemosApp {
   }
 
 }
+
+enableProdMode();
 
 bootstrap(DemosApp, [
   HTTP_PROVIDERS, ROUTER_PROVIDERS, MATERIAL_PROVIDERS,
