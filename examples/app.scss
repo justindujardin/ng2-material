@@ -4,7 +4,7 @@ $md-font-url: '../public/font/';
 @import "../ng2-material/all";
 @import "example";
 
-$app-content-lg: 960px;
+$app-content-lg: 940px;
 $app-content-md: 580px;
 $app-content-sm: 360px;
 
@@ -109,12 +109,12 @@ demos-app {
     }
     @media screen and (min-width: $layout-breakpoint-md + 1) {
       h1 {
-        width: $app-content-lg;
+        width: $app-content-lg - 32px;
       }
     }
     @media screen and (max-width: $layout-breakpoint-md) {
       h1 {
-        width: $app-content-md;
+        width: $app-content-md - 32px;
       }
     }
     @media screen and (max-width: $layout-breakpoint-sm) {
