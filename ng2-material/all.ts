@@ -1,5 +1,4 @@
 import {CONST_EXPR, Type} from 'angular2/src/facade/lang';
-import {provide} from 'angular2/core';
 
 import {MdAnchor, MdButton} from './components/button/button';
 export * from './components/button/button';
@@ -74,49 +73,11 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdTab, MdTabs
 ]);
 
-
-/**
- * Reference to specified base load URL for templates and styles.
- * @private
- */
-var BASE_URL: string = null;
-
-/**
- * Specify the baseUrl to load templates and styles from.
- * @param url
- */
-export function setBaseUrl(url: string) {
-  BASE_URL = url;
-}
-
-/**
- * This is a workaround to tell us where to load templates and styles from until
- * we have a better template bundling strategy.
- */
-export class MaterialTemplateResolver extends UrlResolver {
-  static RESOURCE_MATCHER: RegExp = /^ng2-material\/.*?\.(html|css)$/;
-
-  resolve(baseUrl: string, url: string): string {
-    if (!BASE_URL) {
-      return super.resolve(baseUrl, url);
-    }
-    if (baseUrl.startsWith(BASE_URL)) {
-      baseUrl = baseUrl.substr(0, BASE_URL.length);
-    }
-    let result = super.resolve(baseUrl, url);
-    if (MaterialTemplateResolver.RESOURCE_MATCHER.test(result)) {
-      return `${BASE_URL}${result}`;
-    }
-    return result;
-  }
-}
-
 /**
  * Collection of Material Design component providers.
  */
 export const MATERIAL_PROVIDERS: any[] = [
   MdDialog,
   Media,
-  MdRadioDispatcher,
-  provide(UrlResolver, {useValue: new MaterialTemplateResolver()})
+  MdRadioDispatcher
 ];
