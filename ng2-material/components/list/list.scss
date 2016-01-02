@@ -102,10 +102,10 @@ md-list-item, md-list-item .md-list-item-inner {
   height:auto;
 
   // Layout for controls in primary or secondary divs, or auto-infered first child
-  & > div.md-primary > md-icon:not(.md-avatar-icon),
-  & > div.md-secondary > md-icon:not(.md-avatar-icon),
-  & > md-icon:first-child:not(.md-avatar-icon),
-  > md-icon.md-secondary:not(.md-avatar-icon) {
+  & > div.md-primary > [md-icon]:not(.md-avatar-icon),
+  & > div.md-secondary > [md-icon]:not(.md-avatar-icon),
+  & > [md-icon]:first-child:not(.md-avatar-icon),
+  > [md-icon].md-secondary:not(.md-avatar-icon) {
     width: $list-item-primary-icon-width;
     margin-top: 16px;
     margin-bottom: 12px;
@@ -119,7 +119,7 @@ md-list-item, md-list-item .md-list-item-inner {
     .md-label { display: none; }
   }
 
-  & > md-icon:first-child:not(.md-avatar-icon) {
+  & > [md-icon]:first-child:not(.md-avatar-icon) {
     margin-right: $list-item-primary-width - $list-item-primary-icon-width;
   }
   & > md-checkbox {
@@ -252,7 +252,7 @@ md-list-item.md-2-line > .md-no-style {
   > .md-avatar, .md-avatar-icon {
     margin-top: $baseline-grid * 1.5;
   }
-  > md-icon:first-child {
+  > [md-icon]:first-child {
     align-self: flex-start;
   }
   .md-list-item-text {
@@ -269,7 +269,7 @@ md-list-item.md-3-line > .md-no-style {
     margin:1.6em;
   }
 
-  > md-icon:first-child,
+  > [md-icon]:first-child,
   > .md-avatar {
     margin-top: $baseline-grid * 2;
   }
@@ -294,12 +294,7 @@ md-list {
     background-color: md-color($md-background,A100);//{{background-100}}';
   }
 
-  md-list-item > .md-avatar-icon {
-    background-color: md-color($md-foreground,icon); //'{{foreground-3}}';
-    color: md-color($md-background); //'{{background-color}}';
-  }
-
-  md-list-item > md-icon {
+  md-list-item > .md-list-item-inner > [md-icon] {
     color: md-color($md-foreground,icon);//'{{foreground-2}}';
 
     &.md-highlight {
@@ -309,4 +304,9 @@ md-list {
       }
     }
   }
+  md-list-item > .md-list-item-inner > .md-avatar-icon {
+    background-color: md-color($md-foreground,icon); //'{{foreground-3}}';
+    color: md-color($md-background,100); //'{{background-color}}';
+  }
+
 }
