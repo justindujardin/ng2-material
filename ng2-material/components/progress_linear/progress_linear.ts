@@ -29,8 +29,10 @@ export class ProgressMode {
     <div class="md-progress-linear-container md-ready">
       <div class="md-progress-linear-dashed"></div>
       <div class="md-progress-linear-bar md-progress-linear-bar1"
+          [style.-webkit-transform]="secondaryBarTransform"
           [style.transform]="secondaryBarTransform"></div>
       <div class="md-progress-linear-bar md-progress-linear-bar2"
+          [style.-webkit-transform]="primaryBarTransform"
           [style.transform]="primaryBarTransform"></div>
     </div>`,
   directives: [],

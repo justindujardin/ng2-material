@@ -4,20 +4,20 @@
     send focus back to the triggering button.
   </p>
 
-  <div class="dialog-demo-content" layout-gt-md="row" layout="column" layout-wrap layout-margin>
-    <button md-raised-button class="md-primary" (click)="showAlert($event)" flex="100" flex-gt-md="auto">
+  <div class="dialog-demo-content" layout-gt-md="row" layout="column" layout-margin>
+    <button md-raised-button class="md-primary" (click)="showAlert($event)" flex="auto">
       Alert Dialog
     </button>
-    <button md-raised-button class="md-primary" (click)="showConfirm($event)" flex="100" flex-gt-md="auto">
+    <button md-raised-button class="md-primary" (click)="showConfirm($event)" flex="auto">
       Confirm Dialog
     </button>
-    <button md-raised-button disabled class="md-primary" (click)="showAdvanced($event)" flex="100" flex-gt-md="auto">
+    <button md-raised-button disabled class="md-primary" (click)="showAdvanced($event)" flex="auto">
       Custom Dialog
     </button>
     <div hide-gt-sm layout="row" layout-align="center center" flex="100">
         <md-checkbox [(checked)]="customFullscreen" aria-label="Fullscreen Custom Dialog">Custom Dialog Fullscreen</md-checkbox>
       </div>
-    <button md-raised-button disabled class="md-primary" (click)="showTabDialog($event)" flex="100" flex-gt-md="auto">
+    <button md-raised-button disabled class="md-primary" (click)="showTabDialog($event)" flex="auto">
       Tab Dialog
     </button>
   </div>

@@ -12,7 +12,7 @@ demos-app {
 
   md-content.examples {
     width: 800px;
-    @media screen and (max-width: $layout-breakpoint-lg) {
+    @media screen and (min-width: $layout-breakpoint-lg - 1) {
       width: $app-content-lg;
     }
     @media screen and (max-width: $layout-breakpoint-md) {
@@ -30,14 +30,14 @@ demos-app {
       margin: auto;
       padding: 0 25px;
       width: 80%;
-      @media screen and (max-width: $layout-breakpoint-lg) {
+      @media screen and (min-width: $layout-breakpoint-lg - 1) {
         width: $app-content-lg;
       }
       @media screen and (max-width: $layout-breakpoint-md) {
         width: $app-content-md;
       }
       @media screen and (max-width: $layout-breakpoint-sm) {
-        width: $app-content-sm;
+        width: 100%;
         margin: 0;
       }
 
@@ -107,7 +107,7 @@ demos-app {
       white-space: nowrap;
 
     }
-    @media screen and (max-width: $layout-breakpoint-lg) {
+    @media screen and (min-width: $layout-breakpoint-md + 1) {
       h1 {
         width: $app-content-lg;
       }

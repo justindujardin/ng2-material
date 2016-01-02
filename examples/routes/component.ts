@@ -37,7 +37,7 @@ export class ComponentPage implements OnInit {
     let id = this._routeParams.get('id');
     this._components.getComponent(id).then((c: IComponentMeta) => {
       this.value = c;
-      DOM.setTitle(c.name + ' – ng2-material');
+      DOM.setTitle('ng2-material – ' + c.name);
       this._navigation.currentTitle = c.name;
       this._components.getNext(c).then((next: IComponentMeta) => {
         this._navigation.nextLink = this._navigation.componentLink(next);

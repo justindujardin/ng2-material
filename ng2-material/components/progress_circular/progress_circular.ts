@@ -30,15 +30,27 @@ class Defaults {
 })
 @View({
   template: `
-    <div class="md-scale-wrapper" [style.transform]="diameterTransformation">
+    <div class="md-scale-wrapper"
+     [style.-webkit-transform]="diameterTransformation"
+     [style.transform]="diameterTransformation">
       <div class="md-spinner-wrapper">
         <div class="md-inner">
-          <div class="md-gap" [style.transition]="gapTransition"></div>
+          <div class="md-gap"
+          [style.-webkit-transition]="gapTransition"
+          [style.transition]="gapTransition"></div>
           <div class="md-left">
-            <div class="md-half-circle" [style.transform]="leftHalfTransform" [style.transition]="defaultHalfTransition"></div>
+            <div class="md-half-circle"
+              [style.-webkit-transform]="leftHalfTransform"
+              [style.transform]="leftHalfTransform"
+              [style.-webkit-transition]="defaultHalfTransition"
+              [style.transition]="defaultHalfTransition"></div>
           </div>
           <div class="md-right">
-            <div class="md-half-circle" [style.transform]="rightHalfTransform"  [style.transition]="defaultHalfTransition"></div>
+            <div class="md-half-circle"
+              [style.-webkit-transform]="rightHalfTransform"
+              [style.transform]="rightHalfTransform"
+              [style.-webkit-transition]="defaultHalfTransition"
+              [style.transition]="defaultHalfTransition"></div>
           </div>
         </div>
       </div>
@@ -126,5 +138,9 @@ export class MdProgressCircular extends MdProgressLinear {
     var value = Math.max(0, (<any>match && <any>match[1] / 100) || parseFloat(this.diameter));
 
     return (value > 1) ? value / Defaults.DEFAULT_PROGRESS_SIZE : value;
+  }
+
+  webkit(style:string) {
+    return `-webkit-${style}`;
   }
 }
