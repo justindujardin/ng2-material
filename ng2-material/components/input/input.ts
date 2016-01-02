@@ -55,7 +55,8 @@ export class MdInputContainer implements AfterContentChecked {
 
 
 @Directive({
-  selector: 'md-input-container input',
+  selector: 'input[md-input],input.md-input',
+  providers: [MdInputContainer],
   host: {
     'class': 'md-input',
     '(input)': 'updateValue($event)',
