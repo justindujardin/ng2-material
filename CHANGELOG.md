@@ -1,3 +1,20 @@
+<a name="0.1.1"></a>
+## [0.1.1](https://github.com/justindujardin/ng2-material/compare/v0.1.0...v0.1.1) (2016-01-02)
+
+
+### Bug Fixes
+
+* **examples:** make card examples mobile friendly ([77bf5c4](https://github.com/justindujardin/ng2-material/commit/77bf5c4))
+* **examples:** remove horizontal scroll on small phone screens ([22c4521](https://github.com/justindujardin/ng2-material/commit/22c4521))
+* **examples:** scroll shrink container overflow ([828e78c](https://github.com/justindujardin/ng2-material/commit/828e78c))
+
+### Features
+
+* **layout:** rebase layout styles on angular material one point x ([bcadb41](https://github.com/justindujardin/ng2-material/commit/bcadb41))
+* **radio:** support disabled, alignment, and intention color customization ([efd4627](https://github.com/justindujardin/ng2-material/commit/efd4627))
+
+
+
 <a name="0.1.0"></a>
 # [0.1.0](https://github.com/justindujardin/ng2-material/compare/v0.0.11...v0.1.0) (2015-12-29)
 
