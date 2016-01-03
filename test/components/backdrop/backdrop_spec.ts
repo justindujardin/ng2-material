@@ -96,6 +96,24 @@ export function main() {
             async.done();
           });
         }));
+        it('should not be clickable during transition animation', inject([AsyncTestCompleter], (async) => {
+          setup().then((api: IBackdropFixture) => {
+            let triggered = false;
+            api.backdrop.clickClose = true;
+            api.backdrop.hide = () => {
+              triggered = true;
+              return Promise.resolve();
+            };
+            api.backdrop.show().then(() => {
+              expect(triggered).toBe(false);
+              api.debug.nativeElement.click();
+              expect(triggered).toBe(true);
+            });
+            api.debug.nativeElement.click();
+            expect(triggered).toBe(false);
+            async.done();
+          });
+        }));
       });
       describe('show', () => {
         it('emit events before and after being shown', inject([AsyncTestCompleter], (async) => {

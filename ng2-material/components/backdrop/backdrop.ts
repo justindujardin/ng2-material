@@ -57,6 +57,7 @@ export class MdBackdrop {
 
 
   private _visible: boolean = false;
+  private _transitioning: boolean = false;
 
   /**
    * Read-only property indicating whether the backdrop is visible or not.
@@ -66,7 +67,7 @@ export class MdBackdrop {
   }
 
   onClick() {
-    if (this.clickClose && this.visible) {
+    if (this.clickClose && !this._transitioning && this.visible) {
       this.hide();
     }
   }
@@ -80,8 +81,10 @@ export class MdBackdrop {
       return Promise.resolve();
     }
     this._visible = true;
+    this._transitioning = true;
     this.onShowing.emit(this);
     return Animate.enter(this.element.nativeElement, 'md-active').then(() => {
+      this._transitioning = false;
       this.onShown.emit(this);
     });
   }
@@ -95,8 +98,10 @@ export class MdBackdrop {
       return Promise.resolve();
     }
     this._visible = false;
+    this._transitioning = true;
     this.onHiding.emit(this);
     return Animate.leave(this.element.nativeElement, 'md-active').then(() => {
+      this._transitioning = false;
       this.onHidden.emit(this);
     });
   }
