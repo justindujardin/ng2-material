@@ -13,11 +13,11 @@
 
   <p>Selected Value: <span class="radioValue">{{ data.group2 }}</span></p>
 
-  <md-radio-group [(value)]="data.group2" #group class="md-primary">
+  <md-radio-group [(value)]="data.group2" #group1 class="md-primary">
 
     <md-radio-button *ngFor="#d of radioData; #index = index"
                      [value]="d.value"
-                     [checked]="group.value==d.value"
+                     [checked]="group1.value==d.value"
                      [disabled]="d.isDisabled"
                      [ngClass]="{'md-align-top-left': index==1}">
       {{ d.label }}<br/>
