@@ -1,0 +1,47 @@
+@import "../../core/style/variables";
+@import "../../core/style/mixins";
+@import "../../core/style/default-theme";
+
+$subheader-line-height: 1em !default;
+$subheader-font-size: rem(1.4) !default;
+$subheader-padding: ($baseline-grid * 2) !default;
+$subheader-font-weight: 500 !default;
+$subheader-margin: 0 0 0 0 !default;
+$subheader-sticky-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.16) !default;
+
+.md-subheader {
+  display: block;
+  font-size: $subheader-font-size;
+  font-weight: $subheader-font-weight;
+  line-height: $subheader-line-height;
+  margin: $subheader-margin;
+  position: relative;
+
+  .md-subheader-inner {
+    display: block;
+    padding: $subheader-padding;
+  }
+
+  .md-subheader-content {
+    display: block;
+    z-index: 1;
+    position: relative;
+  }
+}
+
+// Theme
+
+.md-subheader {
+  color: md-color($md-foreground, secondary-text, 0.23); //'{{ foreground-2-0.23 }}';
+  background-color: md-color($md-background,A100); //'{{background-color}}';
+
+  &.md-primary {
+    color: md-color($md-primary); //'{{primary-color}}'
+  }
+  &.md-accent {
+    color: md-color($md-accent); //'{{accent-color}}'
+  }
+  &.md-warn {
+    color: md-color($md-warn); //'{{warn-color}}'
+  }
+}

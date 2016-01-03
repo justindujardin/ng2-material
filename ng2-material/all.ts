@@ -44,6 +44,9 @@ export * from './components/radio/radio_dispatcher';
 import {MdSwitch} from './components/switcher/switch';
 export * from './components/switcher/switch';
 
+import {MdSubheader} from "./components/subheader/subheader";
+export * from './components/subheader/subheader';
+
 import {MdToolbar} from './components/toolbar/toolbar';
 export * from './components/toolbar/toolbar';
 
@@ -68,6 +71,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdProgressLinear,
   MdProgressCircular,
   MdRadioButton, MdRadioGroup,
+  MdSubheader,
   MdSwitch,
   MdToolbar,
   MdTab, MdTabs
