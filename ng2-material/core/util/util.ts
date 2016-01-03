@@ -1,3 +1,5 @@
+import {isPresent} from "angular2/src/facade/lang";
+import {NumberWrapper} from "angular2/src/facade/lang";
 /**
  * Returns a function, that, as long as it continues to be invoked, will not
  * be triggered. The function will be called after it stops being called for
@@ -43,4 +45,8 @@ export function throttle(func, delay, scope) {
 
 export function rAF(callback) {
   window.requestAnimationFrame(callback);
+}
+
+export function parseTabIndexAttribute(attr: any): number {
+  return isPresent(attr) ? NumberWrapper.parseInt(attr, 10) : 0;
 }

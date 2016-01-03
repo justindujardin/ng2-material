@@ -4,6 +4,7 @@ import {KeyCodes} from '../../core/key_codes';
 import {KeyboardEvent} from 'angular2/src/facade/browser';
 import {NumberWrapper} from 'angular2/src/facade/lang';
 import {Input, Output, EventEmitter} from 'angular2/core';
+import {parseTabIndexAttribute} from "../../core/util/util";
 
 // TODO(jdd): ng-true-value, ng-false-value
 
@@ -44,7 +45,7 @@ export class MdCheckbox {
 
   constructor(@Attribute('tabindex') tabindex: string) {
     this.checked = false;
-    this.tabindex = isPresent(tabindex) ? NumberWrapper.parseInt(tabindex, 10) : 0;
+    this.tabindex = parseTabIndexAttribute(tabindex);
     this.disabled_ = false;
   }
 

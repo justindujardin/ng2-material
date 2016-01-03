@@ -17,14 +17,12 @@ import {Event, KeyboardEvent} from 'angular2/src/facade/browser';
 import {MdRadioDispatcher} from './radio_dispatcher';
 import {KeyCodes} from '../../core/key_codes';
 import {Output, Input} from 'angular2/core';
+import {OnDestroy} from "angular2/core";
+import {parseTabIndexAttribute} from "../../core/util/util";
 
-// TODO(jdd): [disabled] style
 
 // TODO(jelbourn): Behaviors to test
-// Radios set default tab index iff not in parent group
 // Radio name is pulled on parent group
-// Radio group changes on arrow keys
-// Radio group skips disabled radios on arrow keys
 
 var _uniqueIdCounter: number = 0;
 
@@ -35,7 +33,6 @@ var _uniqueIdCounter: number = 0;
     'role': 'radiogroup',
     '[attr.aria-disabled]': 'disabled',
     '[attr.aria-activedescendant]': 'activedescendant',
-    // TODO(jelbourn): Remove ^ when event retargeting is fixed.
     '(keydown)': 'onKeydown($event)',
     '[tabindex]': 'tabindex',
   }
@@ -45,21 +42,21 @@ var _uniqueIdCounter: number = 0;
   encapsulation: ViewEncapsulation.None
 })
 export class MdRadioGroup implements OnChanges {
+
+  @Output('valueChange')
+  change: EventEmitter<any> = new EventEmitter();
+
   /** The selected value for the radio group. The value comes from the options. */
-  @Input('value') value_: any;
+  @Input('value')
+  value_: any;
 
   get value(): any {
     return this.value_;
   }
 
   set value(value: any) {
-    let button = this.getChildByValue(value);
     this.value_ = value;
-    if (button) {
-      this.selectedRadioId = button.id;
-      this.activedescendant = button.id;
-      button.checked = true;
-    }
+    this._setChildValue(value);
   }
 
   /** The HTML name attribute applied to radio buttons in this group. */
@@ -78,7 +75,6 @@ export class MdRadioGroup implements OnChanges {
   /** The ID of the selected radio button. */
   selectedRadioId: string = '';
 
-  @Output('valueChange') change: EventEmitter<any> = new EventEmitter();
 
   tabindex: number;
 
@@ -91,7 +87,7 @@ export class MdRadioGroup implements OnChanges {
     this.disabled = isPresent(disabled);
 
     // If the user has not set a tabindex, default to zero (in the normal document flow).
-    this.tabindex = isPresent(tabindex) ? NumberWrapper.parseInt(tabindex, 10) : 0;
+    this.tabindex = parseTabIndexAttribute(tabindex);
   }
 
   /** Gets the name of this group, as to be applied in the HTML 'name' attribute. */
@@ -116,13 +112,16 @@ export class MdRadioGroup implements OnChanges {
     // child radio buttons and select the one that has a corresponding value (if any).
     if (isPresent(this.value) && this.value !== '') {
       this.radioDispatcher.notify(this.name_);
-      this.radios_.forEach(radio => {
-        if (radio.value === this.value) {
-          radio.checked = true;
-          this.selectedRadioId = radio.id;
-          this.activedescendant = radio.id;
-        }
-      });
+      this._setChildValue(this.value);
+    }
+  }
+
+  private _setChildValue(value: any) {
+    let button = this.getChildByValue(value);
+    if (button) {
+      this.selectedRadioId = button.id;
+      this.activedescendant = button.id;
+      button.checked = true;
     }
   }
 
@@ -137,6 +136,10 @@ export class MdRadioGroup implements OnChanges {
   /** Registers a child radio button with this group. */
   register(radio: MdRadioButton) {
     this.radios_.push(radio);
+  }
+  /** Unregister a child radio button with this group. */
+  unregister(radio: MdRadioButton) {
+    this.radios_ = this.radios_.filter(r => r.id !== radio.id);
   }
 
   /** Handles up and down arrow key presses to change the selected child radio. */
@@ -195,13 +198,8 @@ export class MdRadioGroup implements OnChanges {
       return;
     }
 
-    this.radioDispatcher.notify(this.name_);
+    this.updateValue(radio.value, radio.id);
     radio.checked = true;
-    ObservableWrapper.callEmit(this.change, null);
-
-    this.value = radio.value;
-    this.selectedRadioId = radio.id;
-    this.activedescendant = radio.id;
   }
 }
 
@@ -222,24 +220,19 @@ export class MdRadioGroup implements OnChanges {
 })
 @View({
   template: `
-    <!-- TODO(jelbourn): render the radio on either side of the content -->
-    <label role="radio" class="md-radio-root"
-        [class.md-radio-checked]="checked">
-      <!-- The actual radio part of the control. -->
+    <label role="radio" class="md-radio-root" [class.md-radio-checked]="checked">
       <div class="md-radio-container">
         <div class="md-radio-off"></div>
         <div class="md-radio-on"></div>
       </div>
-
-      <!-- The label for radio control. -->
       <div class="md-radio-label">
-          <ng-content></ng-content>
+        <ng-content></ng-content>
       </div>
     </label>`,
   directives: [],
   encapsulation: ViewEncapsulation.None
 })
-export class MdRadioButton implements OnInit {
+export class MdRadioButton implements OnInit, OnDestroy {
   /** Whether this radio is checked. */
   checked: boolean;
 
@@ -266,6 +259,7 @@ export class MdRadioButton implements OnInit {
   constructor(@Optional() @SkipSelf() @Host() radioGroup: MdRadioGroup,
               @Attribute('id') id: string,
               @Attribute('value') value: string,
+              @Attribute('checked') checked: string,
               @Attribute('tabindex') tabindex: string,
               radioDispatcher: MdRadioDispatcher) {
     // Assertions. Ideally these should be stripped out by the compiler.
@@ -274,7 +268,7 @@ export class MdRadioButton implements OnInit {
     this.radioGroup = radioGroup;
     this.radioDispatcher = radioDispatcher;
     this.value = value ? value : null;
-    this.checked = false;
+    this.checked = isPresent(checked) ? true : false;
 
     this.id = isPresent(id) ? id : `md-radio-${_uniqueIdCounter++}`;
 
@@ -289,11 +283,14 @@ export class MdRadioButton implements OnInit {
     if (isPresent(radioGroup)) {
       this.name = radioGroup.getName();
       this.radioGroup.register(this);
+      if (this.checked) {
+        this.radioGroup.updateValue(this.value,this.id);
+      }
     }
 
     // If the user has not set a tabindex, default to zero (in the normal document flow).
     if (!isPresent(radioGroup)) {
-      this.tabindex = isPresent(tabindex) ? NumberWrapper.parseInt(tabindex, 10) : 0;
+      this.tabindex = parseTabIndexAttribute(tabindex);
     } else {
       this.tabindex = -1;
     }
@@ -305,6 +302,13 @@ export class MdRadioButton implements OnInit {
       this.name = this.radioGroup.getName();
     }
   }
+
+  ngOnDestroy(): any {
+    if (isPresent(this.radioGroup)) {
+      this.radioGroup.unregister(this);
+    }
+  }
+
 
   /** Whether this radio button is disabled, taking the parent group into account. */
   isDisabled(): boolean {
