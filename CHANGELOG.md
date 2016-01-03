@@ -1,3 +1,23 @@
+<a name="0.1.2"></a>
+## [0.1.2](https://github.com/justindujardin/ng2-material/compare/v0.1.1...v0.1.2) (2016-01-03)
+
+
+### Bug Fixes
+
+* **backdrop:** do not dismiss when clicked while animating to show ([f829bd8](https://github.com/justindujardin/ng2-material/commit/f829bd8))
+* **input:** input elements must use md-input attribute to be recognized ([e00d578](https://github.com/justindujardin/ng2-material/commit/e00d578))
+* **providers:** remove url resolver from providers exposed ([9b6971e](https://github.com/justindujardin/ng2-material/commit/9b6971e))
+
+### Features
+
+* **examples:** add basic list item usage ([399b5f6](https://github.com/justindujardin/ng2-material/commit/399b5f6))
+* **examples:** add checkbox examples ([9fc3321](https://github.com/justindujardin/ng2-material/commit/9fc3321))
+* **examples:** add getting started instructions to main page ([ec35240](https://github.com/justindujardin/ng2-material/commit/ec35240))
+* **subheader:** add non-sticky subheader component ([8aade08](https://github.com/justindujardin/ng2-material/commit/8aade08))
+* **test:** add componentSanityCheck helper for simple component sanity ([2b308d8](https://github.com/justindujardin/ng2-material/commit/2b308d8))
+
+
+
 <a name="0.1.1"></a>
 ## [0.1.1](https://github.com/justindujardin/ng2-material/compare/v0.1.0...v0.1.1) (2016-01-02)
 
