@@ -146,6 +146,16 @@ demos-app {
     }
   }
 
+  .seed-title {
+    padding-top: 80px;
+  }
+  .seed-intro {
+    highlight {
+      border-radius:2px;
+      margin:$baseline-grid * 4 0;
+    }
+  }
+
   .examples {
     padding: 80px $baseline-grid;
     min-height: 640px;

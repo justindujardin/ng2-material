@@ -1,0 +1,79 @@
+<h1 class="examples-title">Introduction</h1>
+
+<section class="examples-intro">
+  <p>
+    Welcome to the <a href="https://github.com/justindujardin/ng2-material">ng2-material</a> examples site.
+    Here's the <a href="coverage/" target="_blank">test coverage</a> report.
+  </p>
+  <p>There are instructions for getting started at the bottom.</p>
+</section>
+
+
+<nav class="examples-toc">
+  <h1>Components</h1>
+  <ul>
+    <li *ngFor="#value of components"><a [routerLink]="['Component', {id: value.id}]">{{value.name}}</a></li>
+  </ul>
+</nav>
+
+<section class="examples-intro seed-intro">
+  <h1 class="examples-title seed-title">Starting from scratch</h1>
+  <p>
+    If you don't have an existing angular2 project, you can use
+    <a href="https://mgechev.github.io/angular2-seed/" target="_blank">Angular2 Seed</a>. I maintain a fork
+    that integrates material components into it.
+  </p>
+  <highlight type="bash" class="md-subhead">
+    git clone https://github.com/justindujardin/angular2-seed.git
+    cd angular2-seed
+    npm install
+    npm start
+  </highlight>
+
+
+</section>
+
+<md-divider></md-divider>
+
+<section class="examples-intro seed-intro">
+  <h1 class="examples-title">Installing from NPM</h1>
+  <p>
+    If you are a ninja, feel free to npm install it
+  </p>
+  <highlight type="bash" class="md-subhead">
+    npm install --save ng2-material
+  </highlight>
+  <p>
+    Then import the material directives and providers
+  </p>
+  <highlight type="typescript" class="md-subhead">
+    import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from 'ng2-material/all';
+  </highlight>
+  <p>
+    Then reference the styles in your page
+  </p>
+  <highlight type="html" class="md-subhead">
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/ng2-material/dist/ng2-material.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/ng2-material/dist/font.css&quot;&gt;
+  </highlight>
+  <p>Or <em>(more preferably)</em> import them into your SCSS files.</p>
+  <highlight type="scss" class="md-subhead">
+    $md-font-url: 'node_modules/ng2-material/dist/';
+    @import "node_modules/ng2-material/dist/font";
+    @import "node_modules/ng2-material/all";
+  </highlight>
+</section>
+
+<md-divider></md-divider>
+
+<section class="examples-intro seed-intro">
+  <h1 class="examples-title">Using a CDN build</h1>
+  <p>
+    If you can't be bothered to package your app up and include ng2-material with it, you can use the github pages
+    build for a particular commit to act as a CDN. Here's an example <a
+    href="http://plnkr.co/edit/CnDUjVufVnevluFOBvdD?p=preview" target="_blank">plunkr
+    template</a> to get you going.
+  </p>
+
+
+</section>
