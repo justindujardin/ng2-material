@@ -18,6 +18,7 @@ import TabsDynamicHeight from './components/tabs/dynamic_height';
 import TabsDynamicTabs from './components/tabs/dynamic_tabs';
 import CheckboxBasicUsage from "./components/checkbox/basic_usage";
 import CheckboxSyncing from "./components/checkbox/syncing";
+import ListBasicUsage from "./components/list/basic_usage";
 
 /**
  * Collection of Material Design component directives.
@@ -27,6 +28,7 @@ export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   ButtonBasicUsage,
   CheckboxBasicUsage, CheckboxSyncing,
   DialogBasicUsage,
+  ListBasicUsage,
   RadioBasicUsage,
   SwitchBasicUsage,
   TabsDynamicHeight,
