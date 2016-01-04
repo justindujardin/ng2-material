@@ -18,6 +18,7 @@ import {provide} from "angular2/core";
 import {UrlResolver} from "angular2/compiler";
 import {TestUrlResolver} from "./test_url_resolver";
 import {MATERIAL_DIRECTIVES} from "../ng2-material/all";
+import {TimerWrapper} from "angular2/src/facade/async";
 
 /** Gets a child DebugElement by tag name. */
 export function findChildByTag(parent: DebugElement, tagName: string): DebugElement {
@@ -85,12 +86,12 @@ export function componentSanityCheck(name: string, selector:string, template: st
 
     describe(selector, () => {
       it('should instantiate component without fail', inject([AsyncTestCompleter], (async) => {
-        setup().then(() => async.done());
+        setup().then(() => TimerWrapper.setTimeout(() => async.done(),10));
       }));
       it('should destroy component without fail', inject([AsyncTestCompleter], (async) => {
         setup().then((api:ComponentFixture) => {
           api.destroy();
-          async.done();
+          TimerWrapper.setTimeout(() => async.done(),10);
         });
       }));
     });
