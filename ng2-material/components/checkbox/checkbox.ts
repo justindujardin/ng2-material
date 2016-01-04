@@ -17,16 +17,15 @@ import {parseTabIndexAttribute} from "../../core/util/util";
     '[attr.aria-disabled]': 'disabled',
     '[tabindex]': 'tabindex',
     '(keydown)': 'onKeydown($event)',
+    '(click)': 'toggle($event)'
   }
 })
 @View({
   template: `
-    <div (click)="toggle($event)">
-      <div class="md-checkbox-container">
-        <div class="md-checkbox-icon"></div>
-      </div>
-      <div class="md-checkbox-label"><ng-content></ng-content></div>
-    </div>`,
+    <div class="md-checkbox-container">
+      <div class="md-checkbox-icon"></div>
+    </div>
+    <div class="md-checkbox-label"><ng-content></ng-content></div>`,
   directives: [],
   encapsulation: ViewEncapsulation.None
 })
