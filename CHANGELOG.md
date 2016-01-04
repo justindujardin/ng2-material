@@ -1,3 +1,19 @@
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/justindujardin/ng2-material/compare/v0.1.2...v0.1.3) (2016-01-04)
+
+
+### Bug Fixes
+
+* **grid_list:** issue with changes happening after being checked ([c449c60](https://github.com/justindujardin/ng2-material/commit/c449c60))
+
+### Features
+
+* **button:** test remaining button behaviors ([e9b208b](https://github.com/justindujardin/ng2-material/commit/e9b208b))
+* **checkbox:** complete behavioral coverage ([1e960e9](https://github.com/justindujardin/ng2-material/commit/1e960e9))
+* **radio:** support keyboard input behaviors and tests ([3aa8e0c](https://github.com/justindujardin/ng2-material/commit/3aa8e0c))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/justindujardin/ng2-material/compare/v0.1.1...v0.1.2) (2016-01-03)
 
