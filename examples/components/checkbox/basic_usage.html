@@ -1,13 +1,13 @@
 <section layout-padding>
   <fieldset class="standard">
     <legend>Using two way bindings with <code>[(checked)]</code></legend>
-    <div layout="column" layout-wrap layout-gt-sm="row">
-      <div flex-xs flex="50">
+    <div layout="row" layout-wrap>
+      <div flex-xs="100" flex="50">
         <md-checkbox [(checked)]="cb1" aria-label="Checkbox 1">
           Checkbox 1: {{ cb1 }}
         </md-checkbox>
       </div>
-      <div flex-xs flex="50">
+      <div flex-xs="100" flex="50">
         <div layout-xs="column" flex-xs="100">
           <md-checkbox
             [(checked)]="cb2"
@@ -26,17 +26,17 @@
           </md-checkbox>
         </div>
       </div>
-      <div flex-xs flex="50">
+      <div flex-xs="100" flex="50">
         <md-checkbox disabled="true" aria-label="Disabled checkbox" [(checked)]="cb3">
           Checkbox: Disabled
         </md-checkbox>
       </div>
-      <div flex-xs flex="50">
+      <div flex-xs="100" flex="50">
         <md-checkbox disabled="true" aria-label="Disabled checked checkbox" [(checked)]="cb4">
           Checkbox: Disabled, Checked
         </md-checkbox>
       </div>
-      <div flex-xs flex="50">
+      <div flex-xs="100" flex="50">
         <md-checkbox md-no-ink aria-label="Checkbox No Ink" [(checked)]="cb5" class="md-primary">
           Checkbox (md-primary): No Ink
         </md-checkbox>
