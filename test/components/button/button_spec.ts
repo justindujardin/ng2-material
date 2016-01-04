@@ -21,16 +21,22 @@ import {MdButton, MdAnchor} from '../../../ng2-material/components/button/button
 
 import {TestUrlResolver} from '../../test_url_resolver';
 import {findChildByTag} from '../../util';
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {ComponentFixture} from "angular2/testing";
+import {MATERIAL_PROVIDERS} from "../../../ng2-material/all";
+import {Ink} from "../../../ng2-material/core/util/ink";
 
 export function main() {
+
+  const defaultTemplate = `<button md-button type="button" (click)="increment()" [disabled]="isDisabled">Go</button>`;
 
   /** Test component that contains an MdButton. */
   @Component({selector: 'test-app'})
   @View({
     directives: [MdButton],
-    template: `<button md-button type="button" (click)="increment()" [disabled]="isDisabled">Go</button>`
+    template: defaultTemplate
   })
-  class TestApp {
+  class TestComponent {
     clickCount: number = 0;
     isDisabled: boolean = false;
 
@@ -40,21 +46,30 @@ export function main() {
   }
 
   describe('MdButton', () => {
+
     let builder: TestComponentBuilder;
 
-    beforeEachProviders(() => [
-      // Need a custom URL resolver for ng-material template files in order for them to work
-      // with both JS and Dart output.
-      provide(UrlResolver, {useValue: new TestUrlResolver()})
-    ]);
+    function setup(template: string = defaultTemplate): Promise<ComponentFixture> {
+      return builder
+        .overrideTemplate(TestComponent, template)
+        .createAsync(TestComponent)
+        .then((fixture: ComponentFixture) => {
+          fixture.detectChanges();
+          return fixture;
+        }).catch(console.error.bind(console));
+    }
 
+    beforeEachProviders(() => [
+      MATERIAL_PROVIDERS,
+      provide(UrlResolver, {useValue: new TestUrlResolver()}),
+    ]);
     beforeEach(inject([TestComponentBuilder], (tcb) => {
       builder = tcb;
     }));
 
     describe('button[md-button]', () => {
       it('should handle a click on the button', inject([AsyncTestCompleter], (async) => {
-        builder.createAsync(TestApp).then(fixture => {
+        setup().then((fixture: ComponentFixture) => {
           let testComponent = fixture.debugElement.componentInstance;
           let buttonDebugElement = findChildByTag(fixture.debugElement, 'button');
 
@@ -65,8 +80,51 @@ export function main() {
         });
       }), 10000);
 
+
+      it('should ink ripple when clicked', inject([AsyncTestCompleter], (async) => {
+        setup().then((fixture: ComponentFixture) => {
+          let button: DebugElement = fixture.debugElement.componentViewChildren[0];
+
+          let save = Ink.rippleEvent;
+          let fired = false;
+          Ink.rippleEvent = () => {
+            fired = true;
+            return Promise.resolve();
+          };
+
+          let event = DOM.createEvent('mouse');
+          button.triggerEventHandler('mousedown', event);
+
+
+          expect(fired).toBe(true);
+          Ink.rippleEvent = save;
+
+          async.done();
+        });
+      }));
+
+      it('should not ink ripple with md-no-ink attribute', inject([AsyncTestCompleter], (async) => {
+        let template = `<button md-button md-no-ink></button>`;
+        setup(template).then((fixture: ComponentFixture) => {
+          let button: DebugElement = fixture.debugElement.componentViewChildren[0];
+          let save = Ink.rippleEvent;
+          let fired = false;
+          Ink.rippleEvent = () => {
+            fired = true;
+            return Promise.resolve();
+          };
+
+          let event = DOM.createEvent('mouse');
+          button.triggerEventHandler('mousedown', event);
+
+          expect(fired).toBe(false);
+          Ink.rippleEvent = save;
+          async.done();
+        });
+      }));
+
       it('should disable the button', inject([AsyncTestCompleter], (async) => {
-        builder.createAsync(TestApp).then(fixture => {
+        setup().then((fixture: ComponentFixture) => {
           let testAppComponent = fixture.debugElement.componentInstance;
           let buttonDebugElement = findChildByTag(fixture.debugElement, 'button');
           let buttonElement = buttonDebugElement.nativeElement;
@@ -90,15 +148,15 @@ export function main() {
     });
 
     describe('a[md-button]', () => {
-      const anchorTemplate = `<a md-button href="http://google.com" [disabled]="isDisabled">Go</a>`;
+      const anchorTemplate = `<a md-button href="javascript:void(0);" [disabled]="isDisabled">Go</a>`;
 
       beforeEach(() => {
         builder = builder.overrideView(
-          TestApp, new ViewMetadata({template: anchorTemplate, directives: [MdAnchor]}));
+          TestComponent, new ViewMetadata({template: anchorTemplate, directives: [MdAnchor]}));
       });
 
       it('should remove disabled anchors from tab order', inject([AsyncTestCompleter], (async) => {
-        builder.createAsync(TestApp).then(fixture => {
+        builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
           let testAppComponent = fixture.debugElement.componentInstance;
           let anchorDebugElement = findChildByTag(fixture.debugElement, 'a');
           let anchorElement = anchorDebugElement.nativeElement;
@@ -115,13 +173,33 @@ export function main() {
 
           async.done();
         });
-
-        it('should preventDefault for disabled anchor clicks',
-          inject([AsyncTestCompleter], (async) => {
-            // No clear way to test this; see https://github.com/angular/angular/issues/3782
-            async.done();
-          }));
       }), 10000);
+
+      it('should not preventDefault on enabled anchor clicks', inject([AsyncTestCompleter], (async) => {
+        builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
+          let anchor: DebugElement = fixture.debugElement.componentViewChildren[0];
+          let event = DOM.createEvent('mouse');
+          let triggered = false;
+          event.preventDefault = () => triggered = true;
+          anchor.triggerEventHandler('click', event);
+          expect(triggered).toBe(false);
+          async.done();
+        });
+      }));
+      it('should preventDefault for disabled anchor clicks', inject([AsyncTestCompleter], (async) => {
+        builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
+          let anchor: DebugElement = fixture.debugElement.componentViewChildren[0];
+          let anchorComp: MdAnchor = anchor.componentInstance;
+          let event = DOM.createEvent('mouse');
+          let triggered = false;
+          event.preventDefault = () => triggered = true;
+          anchorComp.disabled = true;
+          anchor.triggerEventHandler('click', event);
+          expect(triggered).toBe(true);
+          fixture.destroy();
+          async.done();
+        });
+      }));
     });
   });
 }
