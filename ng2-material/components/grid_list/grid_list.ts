@@ -12,6 +12,7 @@ import {
 import {ListWrapper} from 'angular2/src/facade/collection';
 import {StringWrapper, isPresent, isString, NumberWrapper} from 'angular2/src/facade/lang';
 import {Math} from 'angular2/src/facade/math';
+import {AfterContentInit} from "angular2/core";
 
 // TODO(jelbourn): Set appropriate aria attributes for grid list elements.
 // TODO(jelbourn): Animations.
@@ -82,7 +83,7 @@ export class MdGridList implements AfterContentChecked {
 
       this.rowHeightMode = RowHeightMode.RATIO;
       this.rowHeightRatio =
-          NumberWrapper.parseFloat(ratioParts[0]) / NumberWrapper.parseFloat(ratioParts[1]);
+        NumberWrapper.parseFloat(ratioParts[0]) / NumberWrapper.parseFloat(ratioParts[1]);
     } else {
       this.rowHeightMode = RowHeightMode.FIXED;
       this.fixedRowHeight = value;
@@ -90,7 +91,7 @@ export class MdGridList implements AfterContentChecked {
   }
 
   ngAfterContentChecked() {
-    this.layoutTiles();
+    setTimeout(() => this.layoutTiles(), 0);
   }
 
   /** Computes and applies the size and position for all children grid tiles. */
@@ -230,14 +231,13 @@ export class MdGridList implements AfterContentChecked {
 })
 @View({
   template: `
-    <style>@import "ng2-material/components/grid_list/grid-list.css";</style>
     <figure>
       <ng-content></ng-content>
     </figure>`,
   encapsulation: ViewEncapsulation.None
 })
 export class MdGridTile implements OnDestroy,
-    OnChanges {
+  OnChanges {
   gridList: MdGridList;
   _rowspan: number;
   _colspan: number;
