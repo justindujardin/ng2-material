@@ -1,33 +1,26 @@
 language: node_js
 sudo: false
 node_js:
- - "4.0"
-addons:
-  sauce_connect: true
+- '4.0'
 before_install:
- - npm install -g karma-cli
- - export CHROME_BIN=chromium-browser
- - export DISPLAY=:99.0
- - sh -e /etc/init.d/xvfb start
- - gem install sass
-
+- npm install -g karma-cli
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- gem install sass
 before_script:
- - npm install
- - ./node_modules/.bin/grunt build
-
+- npm install
+- ./node_modules/.bin/grunt build
 script:
-# - karma start karma.conf.js --single-run
- - karma start karma.sauce.conf.js --browsers FIREFOX_V40,FIREFOX_V30,FIREFOX_V35
-# - karma start karma.sauce.conf.js --browsers CHROME_VBETA,CHROME_VDEV,CHROME_V39,CHROME_V26
-# - karma start karma.sauce.conf.js --browsers MICROSOFTEDGE_V20.10240
-# - karma start karma.sauce.conf.js --browsers ANDROID_V5.1,ANDROID_V4.4
-# - karma start karma.sauce.conf.js --browsers IE_V9,IE_V10,IE_V11
-
+- karma start karma.sauce.conf.js --browsers FIREFOX_V40,FIREFOX_V30,FIREFOX_V35
+- karma start karma.sauce.conf.js --browsers CHROME_VBETA,CHROME_VDEV,CHROME_V39,CHROME_V26
+- karma start karma.sauce.conf.js --browsers MICROSOFTEDGE_V20.10240
+- karma start karma.sauce.conf.js --browsers ANDROID_V5.1,ANDROID_V4.4
+- karma start karma.sauce.conf.js --browsers IE_V9,IE_V10,IE_V11
 after_script:
- - ./node_modules/.bin/grunt remapIstanbul
- - ./node_modules/.bin/coveralls < .coverage/lcov.info
-
+- ./node_modules/.bin/grunt remapIstanbul
+- ./node_modules/.bin/coveralls < .coverage/lcov.info
 env:
   global:
-    - secure: "imkFLJVyufiNLWGCKjkax38vAbx2SA3cfLndUKaXNlaSD9WbVcr4o8LuZCOVqQEiuhE92dKJY6kikAW4MF56UDBCIkoKsqkKi2rnlaF7QXI26QZn97SxfHuOcI2QRR36Afe7j+HR5rU/hB9LFm2hkIpGCJSIjjfZm7LejWVex9rotuByEwyYzOralsnddJkWD/lLoLf1hUfHvGaIjf1hWfedka3S+uGqr6bTI+5g8tZBWK1SMDt19+RCNJCe45GjV1DgChRqVOTkAsVH4iRfdA8XmlAxJAolFAAoNsUeJjG4o6G99h6o4Z8B0GKYbZrrnfi8AdF0NrEQzIFYTZIQS8kxXFnpUec6eyymeFUEwI4d0oW2OCE/yQ0rywvHG8jcfI+8Qfw0O9EXLivgpvFDn4GWXIUwZ0t52hOLvO6o6hxvA/vEAidteBPpjI53IXEYpq2xYjAQmRSz8nefDHk8PQTuwMUsguqJPlMkmlH/nGwzHFo/ovP0Lr1RpH8i6F8VisQm62/0cT6wun6bMqvY0WZbnGU2fVOPfca+6N1r2FUjY9NS58XYfMjzPFYq2NQAKDzgsec0A529tafqMWEJLo4a/QPXyhuVb5/Rx41pE/7HmgAOeACwXRn4jMDcG9iId2NtlCjxTaCEFL0ZEAJ9+cKXiu9wpJ5+XLGSb0+7D+c="
-    - secure: "irFJ3p/DE94b/9p+2y+tTw8gevywBjgqV4My+FFZ9brYE4ZYjldWj/B8zDhjVIjMoY1Kmdj5ZkGmpdLEB1AKqkiWYnUJruplxbz50+UO5BAMQZGcWxfddZWGBWfQQ4XxOLH8RNfNssrz7QJiVi8SxRPb3DZdK4c7ItPKYlp4YqQISE//DFxv1IiC8xVRfZY7VFkjx+pG0PsuRZ/TNoUD8C99Bzka5bMq7pK9QfIpsnVYaxOHHnWvOnIU4zzywYF8vgQ1IOKujKp6sziYiOAHt1ulH084tGBjW8hS/bnW+DD52rOuqTyMtIy4lAz+rKHVr0Fh1nJroPO2RECJsUgGgMPO/RcSvKin0VeaLq0m+FvXpQveYVu6TA6Nte9ivkVhcG/v3Y3/SYLM4EsLqaWqm7G3MlOBeHKBRmW3e2PgyjyYcbWbVqayR+5w6CqRq7BM/PfKXca2PZ4+yVu44mOtnBWFIQEVpVksSfpmJqHufZsv2UYdF83JMgHyic7/WAsk0d445Q7oQP1aclXdf+OFFwdR+au1rTm4tDK4IeGqtjgap36NVcs/CqWZhls+LfsOC0srHgYvaTDmeByYA26YhapqBfK5JUvncVN/XzWplrTZpcIzAjiPTwuiYMBgXk1YjmF/RahdtBJPBrBGknPh7nJUqFk4o6Xn2E44WqMSkn0="
+  - secure: Qn1uPoppgoPELGOYgbdsrs8eWCEgrDLYevxD/D7w8Jo3uqPySAnoVmHr/LOM1x2KWhVAWWa+N8UwPIwQMBCUmNLLz/OKbeZsYhMR+77+j/7IOf29EK4nKVxLnwowMDeGXqi2uCZygNpNzI83i0Cx9m1jNgpk2IW6TT2c17cnOFZ54CEUUSh9B+RpJXsgQK220NGU58u1vN9qBhTITLDpSaryLtdhv/5iHsKZ/hxuxdi87jKXYYml5wSTFJFMr6fCxxi69VyKdjHK1yYoCCqDJMoqCyOH1OCvFHdYOboIeDqpjjJlu+epD/4h2opLPfJKfxBuhUht8IT+KH48wNyUOSIX0rWxBFVv14FRW1rZRL6mu64DcfIzDrA0y/c9WWgrXnJT5AZSlxOD89ec7m3RTQgGr1l2uVdJUET+HFcxhrk8mgwrCyvu+PHEtHO1+hRsr8WiOSgM+DmXildbBY85K81qgkWXV3rVhBl3RoTaZWQeHDFG3AS7dZ5W6S4Rims7+721FjW3t5mR7hed7gBDl3J8G/ZtRj0Tt9HUnGzETJ2PmRx7EWXlao6jGgEyYDf14dl28HrzfwNg8tHAPymlaJzHeQDTrqZcRRZqCjeWw2xrg+OC02+3+VX5c2syiUAMurF286QVhzMFvzNsvAixYN1rj41Iay7giKm3E5ww+nE=
+  - secure: Lci/xWs6aT/0CpPJ8Eu9F/btHuNnTay3AdO4qp+UZY+sJX22j+/kwCDS4lcNzCZ9hBG2K1hCNqWmzYC1pegipvylrja8xyhb44R2fkcx2FKO4lA95cSpGgmKs+E0yeRetuZRv+xoLHPiXCrhQReG6+VKNqg9o43G2Ze5X8M2cNLpezbtxZjbPysK+jgMUih7yHFzgmLJHLcmHtAdAvAqsu2YAKyFnvglyLeuqc2B2PhtTGWtSJeIHtiPUyDKiNepQ+G8tui5qfbzqwY1DMIoMWUrMGU8/Mn8uwmDUMMJLMituNAPH7KB4XSEh37AKY4skfw4Avo+4UabSrN3Ookt7h3opBuW+0f1l7WmlOKzosaoIgA8D9n4iU5pSFfEdpuvErydVoOoba7zASdrrTmjico6lXMymzbmqcl7hpsc6EIx5jNhFfZsj1dE/hH4icN9RndFQvhcRgG4npmIUdvaZSrWGEVGR5PbSGGzMPbNJJKtg/Rte84HvvsRgQUAycbf8J/VvqdM4fhZVcisLa7M+a31JIO2z+Vyi+wGLovCg0VokgQXk8HT/OcxO8O5ExP3VUd++SiKPgdx7LzhVRCd0fHyEJVXeYee6sWmrUY/YrDfIKXM+xaDBuv8DZf2RNfbyClYWOE6DRsPOTssQ0ePLUWwTlUPXRUwpQoc2dnWZkI=
