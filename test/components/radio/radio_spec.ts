@@ -287,25 +287,6 @@ export function main() {
     });
 
     describe('md-radio-button', () => {
-      it('should not propagate click events when disabled', inject([AsyncTestCompleter], (async) => {
-        // Template that will disable the radio item after it has been clicked once.
-        let template = `
-            <md-radio-group (click)="onClick($event)">
-              <md-radio-button [disabled]="clicks > 0" value="Apple">Apple</md-radio-button>
-            </md-radio-group>`;
-        setup(template).then((fixture: ComponentFixture) => {
-          let app: TestComponent = fixture.debugElement.componentInstance;
-          fixture.detectChanges();
-          let radio = findChildByTag(fixture.debugElement, 'md-radio-button');
-          expect(app.clicks).toBe(0);
-          radio.nativeElement.click();
-          expect(app.clicks).toBe(1);
-          fixture.detectChanges();
-          radio.nativeElement.click();
-          expect(app.clicks).toBe(1);
-          async.done();
-        });
-      }));
       it('should not be selectable when disabled', inject([AsyncTestCompleter], (async) => {
         let template = `
             <md-radio-group>
