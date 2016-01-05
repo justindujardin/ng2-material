@@ -1,3 +1,13 @@
+<a name="0.1.4"></a>
+## [0.1.4](https://github.com/justindujardin/ng2-material/compare/v0.1.3...v0.1.4) (2016-01-05)
+
+
+### Bug Fixes
+
+* **build:** issue where dist css file had bad source mapping ([2cc8a74](https://github.com/justindujardin/ng2-material/commit/2cc8a74)), closes [#8](https://github.com/justindujardin/ng2-material/issues/8)
+
+
+
 <a name="0.1.3"></a>
 ## [0.1.3](https://github.com/justindujardin/ng2-material/compare/v0.1.2...v0.1.3) (2016-01-04)
 
