@@ -3,12 +3,7 @@ sudo: false
 node_js:
  - "4.0"
 addons:
-  firefox: "39.0"
-
-
-
-
-
+  sauce_connect: true
 before_install:
  - npm install -g karma-cli
  - export CHROME_BIN=chromium-browser

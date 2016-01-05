@@ -47,7 +47,7 @@ module.exports = function (config) {
 
     sauceLabs: {
       testName: 'ng2-material',
-      startConnect: true,
+      startConnect: false,
       recordVideo: false,
       recordScreenshots: false,
       options: {
