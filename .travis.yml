@@ -5,11 +5,19 @@ node_js:
 addons:
   firefox: "39.0"
 
-before_script:
+
+
+
+
+before_install:
+ - npm install -g karma-cli
+ - export CHROME_BIN=chromium-browser
  - export DISPLAY=:99.0
  - sh -e /etc/init.d/xvfb start
- - npm install
  - gem install sass
+
+before_script:
+ - npm install
  - ./node_modules/.bin/grunt build
 
 script:
@@ -20,14 +28,11 @@ script:
 # - karma start karma.sauce.conf.js --browsers ANDROID_V5.1,ANDROID_V4.4
 # - karma start karma.sauce.conf.js --browsers IE_V9,IE_V10,IE_V11
 
-before_install:
-  - npm install -g karma-cli
-
 after_script:
  - ./node_modules/.bin/grunt remapIstanbul
  - ./node_modules/.bin/coveralls < .coverage/lcov.info
 
 env:
   global:
-  - secure: MBodlIJNiw2sdPQZFtWLNXoHWBr6pNz1bPG5QxhckKnU+JzTvlQ34+hG3oYjOFMItLm/TvH/qvHUP9PA9Yh+0TwQJtH3Y2em6L3pGiAdmvzmvWXSEPavkm2sggWoB3zlhTLAH+PlanKuAIbxLe/XgxsEtLRz/WFyylohidGDNsEEz8KPALvS8KJk0TqI9ASHvxru2b2SuqjSIjX3O3ljMsVrwecphB4+RFPMf4ZtiHqsyhdITQdNQoJzJdMLu9zbHNo34SjUXUaftkjysUuEZQ+3DdvzCy6tAvrKfwHVtFGr5ztuYNGPfeRJw3aWCy+uPDFgDRXZALwFVFUyJJnRFqYg3sCN2/G1+FVpQOpDzbTuusyCNOGmJB2sP7bZYhBKAy5Uv1IaaDhEaPBuJl3BYFu1Ax8J9rgeiI/CvV96E3Tco9j0J6DLHgCx0Kn+hBATnql1KvUwlWTy5FRhSjdhte9Er2vw90oJwHawzq4yKbxwBbl/slWxmO2tAKfC2gx45LipdHk7SUzqjldKyQzsGLI0OwOA5rcCrheV6ZbUUtazkA4IletFi83tWZcIWUTrRnNh4UPeJ7f5LKipbrQicOr4P1tQa49NxIYQOS0bcgqBiav5qbFi9tMH0Cu4lCVFEe2dJBr3Z58zBPavCtUzJsDdakVuTTVJIxqP7IcF+QM=
-  - secure: lbC1OyQnHkW5HoK23YMYyxWp6mg9uYcoh9g755/Tkw3nCET3GKcZ4jKp0Ef13yJEtac0uFsHwNMCMTaWA3LdBJcp44vm8xR0dckVSPPCp/VKKV4Ho9MkbcQqE1K8Bl5voVvP9Q9jrqw2APfauS1vxPYnEI7JLce1MkXyn6VOVUv9aoWDeNOmX/SxIaWw+QPIiyN9ELVvRvkBtRNbwK+VuIovg5l9zGGSmz1BoSsDNsX1KAOElo5uaOAlqrgaoRdPZm0KjZDtdetuSpp8os4QTzCqT1aW06sTyFqMbeC6FwfcpUvD1emkXk9pILDymnjhQANbibLoEbR7ZhF2zGyyaME1k7Hr5C9qN0YHmh1h2PIDwlg2BuDjil/S/KYulKq/5Y2+WNJ3MToM4aA7fPr785e/fvfx68qp/SdJt00PfLSKw/cGA42OUZjr7Dr+fYJFeui/OTjCcFstpPaO0uyRBMqIKOhitG5RqYQjFYudqD4UdTWgtzzrkqUnDTNj4U/gYp9Us/HtWL9fNpcmof/ys8vdZjjodf9Pqx8db43IFmVqmbk0QEysnDABlqE60ykJD2oosRMRXfEkudwEw+ylUDud65z2KqDtE+JNkC0h/yCaBU4MQxibhYJkiepsBz9SJS18VBJgRzlgFKe/ot+DlB8XkbVhhTxDrxi+R3h+vAE=
+    - secure: "imkFLJVyufiNLWGCKjkax38vAbx2SA3cfLndUKaXNlaSD9WbVcr4o8LuZCOVqQEiuhE92dKJY6kikAW4MF56UDBCIkoKsqkKi2rnlaF7QXI26QZn97SxfHuOcI2QRR36Afe7j+HR5rU/hB9LFm2hkIpGCJSIjjfZm7LejWVex9rotuByEwyYzOralsnddJkWD/lLoLf1hUfHvGaIjf1hWfedka3S+uGqr6bTI+5g8tZBWK1SMDt19+RCNJCe45GjV1DgChRqVOTkAsVH4iRfdA8XmlAxJAolFAAoNsUeJjG4o6G99h6o4Z8B0GKYbZrrnfi8AdF0NrEQzIFYTZIQS8kxXFnpUec6eyymeFUEwI4d0oW2OCE/yQ0rywvHG8jcfI+8Qfw0O9EXLivgpvFDn4GWXIUwZ0t52hOLvO6o6hxvA/vEAidteBPpjI53IXEYpq2xYjAQmRSz8nefDHk8PQTuwMUsguqJPlMkmlH/nGwzHFo/ovP0Lr1RpH8i6F8VisQm62/0cT6wun6bMqvY0WZbnGU2fVOPfca+6N1r2FUjY9NS58XYfMjzPFYq2NQAKDzgsec0A529tafqMWEJLo4a/QPXyhuVb5/Rx41pE/7HmgAOeACwXRn4jMDcG9iId2NtlCjxTaCEFL0ZEAJ9+cKXiu9wpJ5+XLGSb0+7D+c="
+    - secure: "irFJ3p/DE94b/9p+2y+tTw8gevywBjgqV4My+FFZ9brYE4ZYjldWj/B8zDhjVIjMoY1Kmdj5ZkGmpdLEB1AKqkiWYnUJruplxbz50+UO5BAMQZGcWxfddZWGBWfQQ4XxOLH8RNfNssrz7QJiVi8SxRPb3DZdK4c7ItPKYlp4YqQISE//DFxv1IiC8xVRfZY7VFkjx+pG0PsuRZ/TNoUD8C99Bzka5bMq7pK9QfIpsnVYaxOHHnWvOnIU4zzywYF8vgQ1IOKujKp6sziYiOAHt1ulH084tGBjW8hS/bnW+DD52rOuqTyMtIy4lAz+rKHVr0Fh1nJroPO2RECJsUgGgMPO/RcSvKin0VeaLq0m+FvXpQveYVu6TA6Nte9ivkVhcG/v3Y3/SYLM4EsLqaWqm7G3MlOBeHKBRmW3e2PgyjyYcbWbVqayR+5w6CqRq7BM/PfKXca2PZ4+yVu44mOtnBWFIQEVpVksSfpmJqHufZsv2UYdF83JMgHyic7/WAsk0d445Q7oQP1aclXdf+OFFwdR+au1rTm4tDK4IeGqtjgap36NVcs/CqWZhls+LfsOC0srHgYvaTDmeByYA26YhapqBfK5JUvncVN/XzWplrTZpcIzAjiPTwuiYMBgXk1YjmF/RahdtBJPBrBGknPh7nJUqFk4o6Xn2E44WqMSkn0="
