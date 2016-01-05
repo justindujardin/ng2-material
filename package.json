@@ -50,10 +50,12 @@
     "karma-coverage": "0.5.3",
     "karma-firefox-launcher": "0.1.7",
     "karma-jasmine": "0.2.2",
+    "karma-sauce-launcher": "0.3.0",
     "lcov-parse": "0.0.10",
     "marked": "0.3.5",
     "remap-istanbul": "0.4.0",
-    "systemjs-builder": "justindujardin/builder.git#typescript-source-maps"
+    "systemjs-builder": "justindujardin/builder.git#typescript-source-maps",
+    "underscore": "1.8.3"
   },
   "contributors": [
     "Jaroslav Řehořka <jaroslav.rehorka@gmail.com>",

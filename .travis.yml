@@ -14,6 +14,11 @@ before_script:
 
 script:
  - karma start karma.conf.js --single-run
+ - karma start karma.sauce.conf.js --browsers FIREFOX_V40,FIREFOX_V30,FIREFOX_V35
+ - karma start karma.sauce.conf.js --browsers CHROME_VBETA,CHROME_VDEV,CHROME_V39,CHROME_V26
+ - karma start karma.sauce.conf.js --browsers MICROSOFTEDGE_V20.10240
+ - karma start karma.sauce.conf.js --browsers ANDROID_V5.1,ANDROID_V4.4
+ - karma start karma.sauce.conf.js --browsers IE_V9,IE_V10,IE_V11
 
 before_install:
   - npm install -g karma-cli
@@ -22,3 +27,7 @@ after_script:
  - ./node_modules/.bin/grunt remapIstanbul
  - ./node_modules/.bin/coveralls < .coverage/lcov.info
 
+env:
+  global:
+  - secure: MBodlIJNiw2sdPQZFtWLNXoHWBr6pNz1bPG5QxhckKnU+JzTvlQ34+hG3oYjOFMItLm/TvH/qvHUP9PA9Yh+0TwQJtH3Y2em6L3pGiAdmvzmvWXSEPavkm2sggWoB3zlhTLAH+PlanKuAIbxLe/XgxsEtLRz/WFyylohidGDNsEEz8KPALvS8KJk0TqI9ASHvxru2b2SuqjSIjX3O3ljMsVrwecphB4+RFPMf4ZtiHqsyhdITQdNQoJzJdMLu9zbHNo34SjUXUaftkjysUuEZQ+3DdvzCy6tAvrKfwHVtFGr5ztuYNGPfeRJw3aWCy+uPDFgDRXZALwFVFUyJJnRFqYg3sCN2/G1+FVpQOpDzbTuusyCNOGmJB2sP7bZYhBKAy5Uv1IaaDhEaPBuJl3BYFu1Ax8J9rgeiI/CvV96E3Tco9j0J6DLHgCx0Kn+hBATnql1KvUwlWTy5FRhSjdhte9Er2vw90oJwHawzq4yKbxwBbl/slWxmO2tAKfC2gx45LipdHk7SUzqjldKyQzsGLI0OwOA5rcCrheV6ZbUUtazkA4IletFi83tWZcIWUTrRnNh4UPeJ7f5LKipbrQicOr4P1tQa49NxIYQOS0bcgqBiav5qbFi9tMH0Cu4lCVFEe2dJBr3Z58zBPavCtUzJsDdakVuTTVJIxqP7IcF+QM=
+  - secure: lbC1OyQnHkW5HoK23YMYyxWp6mg9uYcoh9g755/Tkw3nCET3GKcZ4jKp0Ef13yJEtac0uFsHwNMCMTaWA3LdBJcp44vm8xR0dckVSPPCp/VKKV4Ho9MkbcQqE1K8Bl5voVvP9Q9jrqw2APfauS1vxPYnEI7JLce1MkXyn6VOVUv9aoWDeNOmX/SxIaWw+QPIiyN9ELVvRvkBtRNbwK+VuIovg5l9zGGSmz1BoSsDNsX1KAOElo5uaOAlqrgaoRdPZm0KjZDtdetuSpp8os4QTzCqT1aW06sTyFqMbeC6FwfcpUvD1emkXk9pILDymnjhQANbibLoEbR7ZhF2zGyyaME1k7Hr5C9qN0YHmh1h2PIDwlg2BuDjil/S/KYulKq/5Y2+WNJ3MToM4aA7fPr785e/fvfx68qp/SdJt00PfLSKw/cGA42OUZjr7Dr+fYJFeui/OTjCcFstpPaO0uyRBMqIKOhitG5RqYQjFYudqD4UdTWgtzzrkqUnDTNj4U/gYp9Us/HtWL9fNpcmof/ys8vdZjjodf9Pqx8db43IFmVqmbk0QEysnDABlqE60ykJD2oosRMRXfEkudwEw+ylUDud65z2KqDtE+JNkC0h/yCaBU4MQxibhYJkiepsBz9SJS18VBJgRzlgFKe/ot+DlB8XkbVhhTxDrxi+R3h+vAE=
