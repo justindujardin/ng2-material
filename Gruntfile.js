@@ -23,9 +23,6 @@ module.exports = function (grunt) {
       "test/**/*.js.map"
     ],
     copy: {
-      styles: {
-        files: [{src: ['<%- sourceRoot %>/all.css'], dest: 'dist/ng2-material.css'}]
-      },
       release: {
         files: [
           {src: 'package.json', dest: '<%- outPath %>/'},
@@ -34,6 +31,7 @@ module.exports = function (grunt) {
           // Individual style and html files
           // NOTE: Individual js/d.ts outputs are handled by the build task for release
           {expand: true, cwd: 'ng2-material/', src: ['**/*.css'], dest: '<%- outPath %>/'},
+          {expand: true, cwd: 'ng2-material/', src: ['**/*.css.map'], dest: '<%- outPath %>/'},
           {expand: true, cwd: 'ng2-material/', src: ['**/*.html'], dest: '<%- outPath %>/'},
 
           // Source .ts/.scss files for people that prefer to build.
@@ -104,19 +102,24 @@ module.exports = function (grunt) {
     },
     sass: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: './',
-          dest: '.',
-          src: [
-            "examples/*.scss",
-            "examples/**/*.scss",
-            "public/font/*.scss",
-            "<%- sourceRoot %>/all.scss",
-            "<%- sourceRoot %>/components/**/*.scss"
-          ],
-          ext: '.css'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: './',
+            dest: '.',
+            ext: '.css',
+            src: [
+              "examples/*.scss",
+              "examples/**/*.scss",
+              "public/font/*.scss",
+              "<%- sourceRoot %>/all.scss",
+              "<%- sourceRoot %>/components/**/*.scss"
+            ]
+          },
+          {
+            'dist/ng2-material.css': ['<%- sourceRoot %>/all.scss']
+          }
+        ]
       }
     },
     postcss: {
@@ -131,6 +134,7 @@ module.exports = function (grunt) {
           "examples/*.css",
           "examples/**/*.css",
           "public/font/*.css",
+          "dist/ng2-material.css",
           "<%- sourceRoot %>/all.css",
           "<%- sourceRoot %>/components/**/*.css"
         ]
@@ -144,7 +148,7 @@ module.exports = function (grunt) {
           'examples/**/*.scss',
           'app.scss'
         ],
-        tasks: ['sass', 'postcss:dist', 'copy:styles', 'notify:styles']
+        tasks: ['sass', 'postcss:dist', 'notify:styles']
       },
       meta: {
         files: [
@@ -246,7 +250,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('dts-generator');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.registerTask('default', ['dtsGenerator', 'ts:source', 'sass', 'postcss', 'copy:styles', 'site-meta']);
+  grunt.registerTask('default', ['dtsGenerator', 'ts:source', 'sass', 'postcss', 'site-meta']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
   grunt.registerTask('site', ['build', 'cover', 'copy:site']);
