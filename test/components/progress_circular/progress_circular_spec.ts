@@ -157,7 +157,7 @@ export function main() {
      */
     function getScale(element) {
       var transform = element.style['transform'] || element.style['-webkit-transform'];
-      var matches = /scale\(([0-9\.]+)\)/.exec(transform);
+      var matches = /scale\(\s*([0-9\.]+)\s*\)/.exec(transform);
       var scale = parseFloat(matches[1]);
 
       return Math.round(scale * 100) / 100;
