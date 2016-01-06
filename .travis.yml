@@ -12,9 +12,9 @@ before_script:
 - npm install
 - ./node_modules/.bin/grunt build
 script:
+- karma start karma.sauce.conf.js --browsers MICROSOFTEDGE_V20.10240
 - karma start karma.sauce.conf.js --browsers FIREFOX_V40,FIREFOX_V30,FIREFOX_V35
 - karma start karma.sauce.conf.js --browsers CHROME_VBETA,CHROME_VDEV,CHROME_V39,CHROME_V26
-- karma start karma.sauce.conf.js --browsers MICROSOFTEDGE_V20.10240
 - karma start karma.sauce.conf.js --browsers ANDROID_V5.1,ANDROID_V4.4
 - karma start karma.sauce.conf.js --browsers IE_V9,IE_V10,IE_V11
 after_script:

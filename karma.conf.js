@@ -33,7 +33,7 @@ module.exports = function (config) {
 
       "karma.main.js"
     ],
-    reporters: ['dots', 'coverage'],
+    reporters: ['story', 'coverage'],
     port: 9876,
     autoWatch: true,
     background: true,
