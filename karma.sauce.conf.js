@@ -62,7 +62,7 @@ module.exports = function (config) {
 
     browsers: Object.keys(sauceBrowsers),
 
-    reporters: ['dots', 'saucelabs', 'coverage'],
+    reporters: ['mocha', 'saucelabs', 'coverage'],
 
     singleRun: true,
 
