@@ -8,7 +8,7 @@ import {Input} from "angular2/core";
 @Component({selector: 'md-dialog-basic'})
 @View({
   template: `
-  <h2>{{ title }}</h2>
+  <h2 class="md-title">{{ title }}</h2>
   <p>{{ textContent }}</p>
   <md-dialog-actions>
     <button md-button *ngIf="cancel != ''" type="button" (click)="dialog.close(false)">
