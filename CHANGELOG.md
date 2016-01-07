@@ -1,3 +1,18 @@
+<a name="0.1.5"></a>
+## [0.1.5](https://github.com/justindujardin/ng2-material/compare/v0.1.4...v0.1.5) (2016-01-07)
+
+
+### Bug Fixes
+
+* issue where dialog text was blurry ([634cdf4](https://github.com/justindujardin/ng2-material/commit/634cdf4))
+
+### Features
+
+* add sauce badge to readme ([d2e782f](https://github.com/justindujardin/ng2-material/commit/d2e782f))
+* add sauce labs test execution ([92b835d](https://github.com/justindujardin/ng2-material/commit/92b835d))
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/justindujardin/ng2-material/compare/v0.1.3...v0.1.4) (2016-01-05)
 
