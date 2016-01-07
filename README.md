@@ -1,9 +1,12 @@
-Material Components for Angular2 [![Build Status](https://travis-ci.org/justindujardin/ng2-material.svg?branch=master)](https://travis-ci.org/justindujardin/ng2-material) [![Coverage Status](https://coveralls.io/repos/justindujardin/ng2-material/badge.svg?branch=master&service=github)](https://coveralls.io/github/justindujardin/ng2-material?branch=master)
+ng2-material [![Build Status](https://travis-ci.org/justindujardin/ng2-material.svg?branch=master)](https://travis-ci.org/justindujardin/ng2-material) [![Coverage Status](https://coveralls.io/repos/justindujardin/ng2-material/badge.svg?branch=master&service=github)](https://coveralls.io/github/justindujardin/ng2-material?branch=master) [![npm version](https://badge.fury.io/js/ng2-material.svg)](http://badge.fury.io/js/ng2-material)
 ---
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/ng2material.svg)](https://saucelabs.com/u/ng2material)
 
-This is an implementation of Material Design components for Angular 2. 
+This is an implementation of Material Design components for Angular 2.
 
-Check out the [examples](https://justindujardin.github.io/ng2-material/) page.
+Check out the [examples site](https://justindujardin.github.io/ng2-material/) for demos and instructions on getting started.
+
+## Credits 
 
 This project is based on the components and styles defined in the 
 [Angular Material](https://github.com/angular/material) and [Angular 2](https://github.com/angular/angular) projects. 
