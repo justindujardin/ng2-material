@@ -46,7 +46,9 @@ export class MdInputContainer implements AfterContentChecked {
 
     // Listen to input changes and focus events so that we can apply the appropriate CSS
     // classes based on the input state.
-    ObservableWrapper.subscribe(input.mdChange, value => { this.inputHasValue = value != ''; });
+    ObservableWrapper.subscribe(input.mdChange, value => {
+      this.inputHasValue = value != '';
+    });
 
     ObservableWrapper.subscribe<boolean>(input.mdFocusChange,
                                          hasFocus => this.inputHasFocus = hasFocus);
@@ -55,7 +57,7 @@ export class MdInputContainer implements AfterContentChecked {
 
 
 @Directive({
-  selector: 'input[md-input],input.md-input',
+  selector: 'input[md-input],input.md-input,textarea[md-input],textarea.md-input',
   providers: [MdInputContainer],
   host: {
     'class': 'md-input',
@@ -75,7 +77,6 @@ export class MdInput {
   constructor(@Attribute('value') value: string, @SkipSelf() @Host() container: MdInputContainer,
               @Attribute('id') id: string) {
     this.value = value == null ? '' : value;
-
     container.registerInput(this);
   }
 
