@@ -6,6 +6,7 @@ import {
   Injectable,
   ResolvedProvider,
   RenderComponentType,
+  AppViewManager,
   ViewEncapsulation,
   Injector,
   Renderer,
@@ -44,7 +45,7 @@ export class MdDialog {
    * Unique id counter for RenderComponentType.
    * @private
    */
-  static _uniqueId:number = 0;
+  static _uniqueId: number = 0;
 
   /**
    * Renderer for manipulating dialog and backdrop component elements.
@@ -52,8 +53,10 @@ export class MdDialog {
    */
   private _renderer: Renderer = null;
 
-  constructor(public componentLoader: DynamicComponentLoader,rootRenderer: RootRenderer) {
-    let type = new RenderComponentType(`__md-dialog-${MdDialog._uniqueId++}`, ViewEncapsulation.None, []);
+  constructor(public componentLoader: DynamicComponentLoader,
+              appViewManager: AppViewManager,
+              rootRenderer: RootRenderer) {
+    let type = (<any>appViewManager).createRenderComponentType(ViewEncapsulation.None, []);
     this._renderer = rootRenderer.renderComponent(type);
   }
 
