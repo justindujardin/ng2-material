@@ -21,7 +21,11 @@ export * from './components/grid_list/grid_list';
 import {MdIcon} from './components/icon/icon';
 export * from './components/icon/icon';
 
-import {MdInput, MdInputContainer} from './components/input/input';
+import {
+  MdInput, MdInputContainer,
+  MdPatternValidator, MdMaxLengthValidator,
+  INPUT_VALIDATORS
+} from './components/input/input';
 export * from './components/input/input';
 
 import {MdList, MdListItem} from './components/list/list';
@@ -65,7 +69,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdDivider,
   MdGridList, MdGridTile,
   MdIcon,
-  MdInput, MdInputContainer,
+  MdInput, MdInputContainer, MdPatternValidator, MdMaxLengthValidator,
   MdList, MdListItem,
   MdPeekaboo,
   MdProgressLinear,
@@ -83,5 +87,6 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
 export const MATERIAL_PROVIDERS: any[] = [
   MdDialog,
   Media,
-  MdRadioDispatcher
+  MdRadioDispatcher,
+  INPUT_VALIDATORS
 ];
