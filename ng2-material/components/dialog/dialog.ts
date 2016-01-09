@@ -5,7 +5,12 @@ import {
   ElementRef,
   Injectable,
   ResolvedProvider,
-  Injector
+  RenderComponentType,
+  ViewEncapsulation,
+  Injector,
+  Renderer,
+  RootRenderer,
+  APPLICATION_COMMON_PROVIDERS
 } from 'angular2/core';
 
 import {Promise} from 'angular2/src/facade/async';
@@ -16,7 +21,6 @@ import {MdDialogContainer} from './dialog_container';
 import {MdDialogBasic} from './dialog_basic';
 import {MdBackdrop} from "../backdrop/backdrop";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {Renderer} from "angular2/core";
 import {Animate} from '../../core/util/animate';
 
 export * from './dialog_config';
@@ -36,8 +40,22 @@ export * from './dialog_basic';
  */
 @Injectable()
 export class MdDialog {
-  constructor(public componentLoader: DynamicComponentLoader,
-              public renderer: Renderer) {
+
+  /**
+   * Unique id counter for RenderComponentType.
+   * @private
+   */
+  static _uniqueId:number = 0;
+
+  /**
+   * Renderer for manipulating dialog and backdrop component elements.
+   * @private
+   */
+  private _renderer: Renderer = null;
+
+  constructor(public componentLoader: DynamicComponentLoader,rootRenderer: RootRenderer) {
+    let type = new RenderComponentType(`__md-dialog-${MdDialog._uniqueId++}`, ViewEncapsulation.None, []);
+    this._renderer = rootRenderer.renderComponent(type);
   }
 
   private _defaultContainer = DOM.query('body');
@@ -56,7 +74,7 @@ export class MdDialog {
     // Create the dialogRef here so that it can be injected into the content component.
     var dialogRef = new MdDialogRef();
 
-    var bindings = Injector.resolve([provide(MdDialogRef, {useValue: dialogRef})]);
+    var bindings = Injector.resolve([APPLICATION_COMMON_PROVIDERS, provide(MdDialogRef, {useValue: dialogRef})]);
 
     var backdropRefPromise = this._openBackdrop(elementRef, bindings, options);
 
@@ -70,15 +88,15 @@ export class MdDialog {
         // Create a DOM node to serve as a physical host element for the dialog.
         var dialogElement = containerRef.location.nativeElement;
 
-        this.renderer.setElementClass(containerRef.location, 'md-dialog-absolute', !!config.container);
+        this._renderer.setElementClass(dialogElement, 'md-dialog-absolute', !!config.container);
 
         DOM.appendChild(config.container || this._defaultContainer, dialogElement);
 
         if (isPresent(config.width)) {
-          this.renderer.setElementStyle(containerRef.location, 'width', config.width);
+          this._renderer.setElementStyle(dialogElement, 'width', config.width);
         }
         if (isPresent(config.height)) {
-          this.renderer.setElementStyle(containerRef.location, 'height', config.height);
+          this._renderer.setElementStyle(dialogElement, 'height', config.height);
         }
 
         dialogRef.containerRef = containerRef;
@@ -114,9 +132,9 @@ export class MdDialog {
       .then((componentRef) => {
         let backdrop: MdBackdrop = componentRef.instance;
         backdrop.clickClose = options.clickClose;
-        this.renderer.setElementClass(componentRef.location, 'md-backdrop', true);
-        this.renderer.setElementClass(componentRef.location, 'md-opaque', true);
-        this.renderer.setElementClass(componentRef.location, 'md-backdrop-absolute', !!options.container);
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop', true);
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-opaque', true);
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop-absolute', !!options.container);
         DOM.appendChild(options.container || this._defaultContainer, componentRef.location.nativeElement);
         return backdrop.show().then(() => componentRef);
       });
