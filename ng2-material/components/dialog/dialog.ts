@@ -9,8 +9,7 @@ import {
   ViewEncapsulation,
   Injector,
   Renderer,
-  RootRenderer,
-  APPLICATION_COMMON_PROVIDERS
+  RootRenderer
 } from 'angular2/core';
 
 import {Promise} from 'angular2/src/facade/async';
@@ -74,7 +73,7 @@ export class MdDialog {
     // Create the dialogRef here so that it can be injected into the content component.
     var dialogRef = new MdDialogRef();
 
-    var bindings = Injector.resolve([APPLICATION_COMMON_PROVIDERS, provide(MdDialogRef, {useValue: dialogRef})]);
+    var bindings = Injector.resolve([provide(MdDialogRef, {useValue: dialogRef})]);
 
     var backdropRefPromise = this._openBackdrop(elementRef, bindings, options);
 
