@@ -2,7 +2,7 @@ ng2-material [![Build Status](https://travis-ci.org/justindujardin/ng2-material.
 ---
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/ng2material.svg)](https://saucelabs.com/u/ng2material)
 
-This is an implementation of Material Design components for Angular 2.
+This is an *unofficial* implementation of Material Design components for Angular 2.
 
 Check out the [examples site](https://justindujardin.github.io/ng2-material/) for demos and instructions on getting started.
 
