@@ -1,4 +1,4 @@
-// TODO(jdd): auto generate import/exports for examples during the grunt site-meta task.
+// TODO(jd): auto generate import/exports for examples during the grunt site-meta task.
 
 
 import {CONST_EXPR, Type} from 'angular2/src/facade/lang';

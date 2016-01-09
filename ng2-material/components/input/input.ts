@@ -13,6 +13,8 @@ import {TimerWrapper} from "angular2/src/facade/async";
 
 export * from './input_validators';
 
+
+// TODO(jd): <select> hasFocus/hasValue classes
 // TODO(jelbourn): validation (will depend on Forms API).
 // TODO(jelbourn): textarea resizing
 // TODO(jelbourn): max-length counter
@@ -102,7 +104,7 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
   ngOnChanges(_) {
     this.inputHasValue = this._input.value != '';
 
-    // TODO(jdd): Is there something like @ContentChild that accepts a selector? I would prefer not to
+    // TODO(jd): Is there something like @ContentChild that accepts a selector? I would prefer not to
     // use a directive for label elements because I cannot use a parent->child selector to make them
     // specific to md-input
     this.inputHasPlaceholder = !!DOM.querySelector(this._element.nativeElement, 'label') && !!this._input.placeholder;
