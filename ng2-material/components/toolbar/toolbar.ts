@@ -98,7 +98,7 @@ export class MdToolbar implements AfterContentInit, OnChanges, OnDestroy {
     if (!this.mdScrollShrink) {
       return;
     }
-    // TODO(jdd): better way to find siblings?
+    // TODO(jd): better way to find siblings?
     this._content = DOM.querySelector(DOM.parentElement(this.el.nativeElement), 'md-content');
     if (!this._content) {
       return;

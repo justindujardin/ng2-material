@@ -20,7 +20,7 @@ import {Output, Input} from 'angular2/core';
 import {OnDestroy} from "angular2/core";
 import {parseTabIndexAttribute} from "../../core/util/util";
 
-
+// TODO(jd): Use @ContentChildren instead of registering radio buttons with group parent manually.
 // TODO(jelbourn): Behaviors to test
 // Radio name is pulled on parent group
 

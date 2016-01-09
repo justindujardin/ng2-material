@@ -6,7 +6,7 @@ import {NumberWrapper} from 'angular2/src/facade/lang';
 import {Input, Output, EventEmitter} from 'angular2/core';
 import {parseTabIndexAttribute} from "../../core/util/util";
 
-// TODO(jdd): ng-true-value, ng-false-value
+// TODO(jd): ng-true-value, ng-false-value
 
 @Component({
   selector: 'md-checkbox',

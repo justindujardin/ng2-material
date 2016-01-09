@@ -6,6 +6,11 @@ This is an *unofficial* implementation of Material Design components for Angular
 
 Check out the [examples site](https://justindujardin.github.io/ng2-material/) for demos and instructions on getting started.
 
+## Getting Help
+
+Is something wrong with your installation of ng2-material? Please try to provide a Plunkr example of the
+issue you're encountering, and file an issue.
+
 ## Credits 
 
 This project is based on the components and styles defined in the 
