@@ -1,22 +1,20 @@
 <div layout="column" class="md-inline-form">
 
-  <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
-    <div>
-      <md-input-container>
-        <label>Title</label>
-        <input md-input [(value)]="user.title">
-      </md-input-container>
-
-      <md-input-container>
-        <label>Email</label>
-        <input md-input [(value)]="user.email" type="email">
-      </md-input-container>
-    </div>
-  </md-content>
-
   <md-content layout-padding>
     <div>
       <form name="userForm">
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Title</label>
+            <input md-input [(value)]="user.title">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Email</label>
+            <input md-input [(value)]="user.email" type="email">
+          </md-input-container>
+        </div>
 
         <div layout-gt-xs="row">
           <md-input-container class="md-block" flex-gt-xs>
