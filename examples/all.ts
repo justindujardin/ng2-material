@@ -19,15 +19,17 @@ import TabsDynamicTabs from './components/tabs/dynamic_tabs';
 import CheckboxBasicUsage from "./components/checkbox/basic_usage";
 import CheckboxSyncing from "./components/checkbox/syncing";
 import ListBasicUsage from "./components/list/basic_usage";
+import InputBasicUsage from "./components/input/basic_usage";
 
 /**
- * Collection of Material Design component directives.
+ * Collection of Material Design component example directives.
  */
 export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   CardBasicUsage, CardInlineActions, CardActionButtons,
   ButtonBasicUsage,
   CheckboxBasicUsage, CheckboxSyncing,
   DialogBasicUsage,
+  InputBasicUsage,
   ListBasicUsage,
   RadioBasicUsage,
   SwitchBasicUsage,
