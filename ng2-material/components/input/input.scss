@@ -215,6 +215,11 @@ md-input-container {
   .md-char-counter {
     font-size: $input-error-font-size;
     line-height: $input-error-line-height;
+
+    // Add some top padding which is equal to half the difference between the expected height
+    // and the actual height
+    padding-top: $error-padding-top;
+
     &:not(.md-char-counter) {
       // Add some padding so that the messages don't touch the character counter
       @include rtl(padding-right, rem(0.5), 0);

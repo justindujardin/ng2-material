@@ -30,6 +30,8 @@
         "ng2-material/components/dialog/dialog_container.ts",
         "ng2-material/components/dialog/dialog_ref.ts",
         "ng2-material/components/divider/divider.ts",
+        "ng2-material/components/form/messages.ts",
+        "ng2-material/components/form/validators.ts",
         "ng2-material/components/grid_list/grid_list.ts",
         "ng2-material/components/icon/icon.ts",
         "ng2-material/components/input/input.ts",

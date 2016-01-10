@@ -30,10 +30,6 @@ form {
     // Default state for messages is to be visible
     opacity: 1;
     margin-top: 0;
-
-    // Add some top padding which is equal to half the difference between the expected height
-    // and the actual height
-    padding-top: $error-padding-top;
   }
 
   .md-input-message-animation {
