@@ -8,8 +8,8 @@ Check out the [examples site](https://justindujardin.github.io/ng2-material/) fo
 
 ## Getting Help
 
-Is something wrong with your installation of ng2-material? Please try to provide a Plunkr example of the
-issue you're encountering, and file an issue.
+Is something wrong with your installation of ng2-material? Please try to provide a Plunkr example of the issue you're 
+encountering, and file an issue.
 
 ## Credits 
 
