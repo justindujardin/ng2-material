@@ -1,5 +1,9 @@
 <div layout="column" class="md-inline-form">
 
+  <md-toolbar md-hero layout="row" layout-align="center center" layout-align-gt-md="end end">
+    <i class="secret-project" md-icon>person</i>
+  </md-toolbar>
+
   <md-content layout-padding>
     <div>
       <form name="userForm">
@@ -62,12 +66,13 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>Postal Code</label>
             <input md-input ngControl="postalCode" [(value)]="user.postalCode" placeholder="12345"
-              required mdPattern="^[0-9]{5}$" #postalCode="ngForm" mdMaxLength="5">
+                   required mdPattern="^[0-9]{5}$" #postalCode="ngForm" mdMaxLength="5">
 
             <div [md-messages]="postalCode" role="alert">
               <div md-message="required">You must supply a postal code.</div>
               <div md-message="mdPattern">That doesn't look like a valid postal code.</div>
-              <div md-message="mdMaxLength">Don't use the long version silly...we don't need to be that specific...</div>
+              <div md-message="mdMaxLength">Don't use the long version silly...we don't need to be that specific...
+              </div>
             </div>
           </md-input-container>
         </div>

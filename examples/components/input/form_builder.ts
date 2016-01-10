@@ -5,15 +5,17 @@ import {FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup} from 'angular2/c
 @Component({selector: 'input-form-builder'})
 @View({
   templateUrl: 'examples/components/input/form_builder.html',
+  styleUrls: ['examples/components/input/form_builder.css'],
   directives: [MATERIAL_DIRECTIVES, FORM_DIRECTIVES]
 })
 export class InputFormBuilder {
   projectForm: ControlGroup;
-  clientName: string = '';
-  clientEmail: string = '';
-  description: string = 'Nuclear Missile Defense System';
-  rate: number = 500;
-
+  model = {
+    clientName: '',
+    clientEmail: '',
+    description: 'Nuclear Missile Defense System',
+    rate: 500
+  };
   constructor(fb: FormBuilder) {
     this.projectForm = fb.group({
       'clientName': ['', Validators.required],
