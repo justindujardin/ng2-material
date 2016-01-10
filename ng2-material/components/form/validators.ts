@@ -16,6 +16,16 @@ const PATTERN_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, {
 })
 export class MdPatternValidator implements Validator {
 
+  /**
+   * Static method that returns a validator function for use
+   * with {@see FormBuilder}.
+   * @param pattern The regular expression to match.
+   * @returns A Validator function that may be used with
+   */
+  static match(pattern:string):Function {
+    return new MdPatternValidator(pattern).validate;
+  }
+
   @Input('mdPattern') mdPattern: string;
 
   constructor(@Attribute('mdPattern') pattern: any) {

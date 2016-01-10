@@ -61,16 +61,13 @@
 
           <md-input-container class="md-block" flex-gt-sm>
             <label>Postal Code</label>
-            <!--<br>TODO: remove this: {{postalCode.errors | json}}-->
             <input md-input ngControl="postalCode" [(value)]="user.postalCode" placeholder="12345"
               required mdPattern="^[0-9]{5}$" #postalCode="ngForm" mdMaxLength="5">
 
-            <div md-messages role="alert" multiple [hidden]="postalCode.valid || postalCode.pristine">
-              <div [hidden]="!postalCode.errors?.required" md-message>You must supply a postal code.</div>
-              <div [hidden]="!postalCode.errors?.mdPattern" md-message>That doesn't look like a valid postal code.</div>
-              <div [hidden]="!postalCode.errors?.mdMaxLength" md-message>
-                Don't use the long version silly...we don't need to be that specific...
-              </div>
+            <div [md-messages]="postalCode" role="alert">
+              <div md-message="required">You must supply a postal code.</div>
+              <div md-message="mdPattern">That doesn't look like a valid postal code.</div>
+              <div md-message="mdMaxLength">Don't use the long version silly...we don't need to be that specific...</div>
             </div>
           </md-input-container>
         </div>

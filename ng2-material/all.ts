@@ -21,11 +21,12 @@ export * from './components/grid_list/grid_list';
 import {MdIcon} from './components/icon/icon';
 export * from './components/icon/icon';
 
-import {
-  MdInput, MdInputContainer,
-  MdPatternValidator, MdMaxLengthValidator,
-  INPUT_VALIDATORS
-} from './components/input/input';
+import {MdPatternValidator, MdMaxLengthValidator,INPUT_VALIDATORS} from './components/form/validators';
+export * from './components/form/validators';
+import {MdMessage, MdMessages} from './components/form/messages';
+export * from './components/form/messages';
+
+import {MdInput, MdInputContainer} from './components/input/input';
 export * from './components/input/input';
 
 import {MdList, MdListItem} from './components/list/list';
@@ -70,6 +71,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdGridList, MdGridTile,
   MdIcon,
   MdInput, MdInputContainer, MdPatternValidator, MdMaxLengthValidator,
+  MdMessage, MdMessages,
   MdList, MdListItem,
   MdPeekaboo,
   MdProgressLinear,

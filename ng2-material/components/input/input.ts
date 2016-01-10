@@ -1,6 +1,6 @@
 import {
   Directive, Attribute, Host, SkipSelf, AfterContentInit, ElementRef, forwardRef, OnChanges, ContentChild,
-  Query, QueryList, OnInit, Optional
+  Query, QueryList, Optional
 } from 'angular2/core';
 
 import {NgControlName, FORM_PROVIDERS} from 'angular2/common';
@@ -10,9 +10,6 @@ import {Input,Output} from 'angular2/core';
 import {isPresent} from 'angular2/src/facade/lang';
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {TimerWrapper} from "angular2/src/facade/async";
-
-export * from './input_validators';
-
 
 // TODO(jd): <select> hasFocus/hasValue classes
 // TODO(jelbourn): validation (will depend on Forms API).
@@ -32,7 +29,7 @@ export * from './input_validators';
   },
   providers: [FORM_PROVIDERS]
 })
-export class MdInput implements OnInit {
+export class MdInput {
   @Input('value')
   _value: string;
 
@@ -53,20 +50,10 @@ export class MdInput implements OnInit {
   mdFocusChange: EventEmitter<any> = new EventEmitter();
 
   constructor(@Attribute('value') value: string,
-              @Attribute('id') id: string,
-              @Optional() private _ctrl: NgControlName) {
+              @Attribute('id') id: string) {
     if (isPresent(value)) {
       this.value = value;
     }
-  }
-
-  ngOnInit() {
-    if(this._ctrl){
-      this._ctrl.formDirective.control.statusChanges.subscribe((c) => {
-        console.log(c);
-      });
-    }
-    console.log(this._ctrl);
   }
 
   setHasFocus(hasFocus: boolean) {
@@ -116,6 +103,10 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
       return;
     }
 
+    // TODO(jd): :sob: what is the correct way to update these variables after the component initializes?
+    //  any time I do it directly here, debug mode complains about values changing after being checked. I
+    //  need to wait until the content has been initialized so that `_input` is there
+    // For now, just wrap it in a setTimeout to let the change detection finish up, and then set the values...
     TimerWrapper.setTimeout(() => this.ngOnChanges({}), 0);
 
     // Listen to input changes and focus events so that we can apply the appropriate CSS
