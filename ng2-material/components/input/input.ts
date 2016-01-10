@@ -12,10 +12,9 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {TimerWrapper} from "angular2/src/facade/async";
 
 // TODO(jd): <select> hasFocus/hasValue classes
-// TODO(jelbourn): validation (will depend on Forms API).
+// TODO(jd): input container validation styles.
 // TODO(jelbourn): textarea resizing
 // TODO(jelbourn): max-length counter
-// TODO(jelbourn): placeholder property
 
 
 @Directive({
@@ -82,7 +81,7 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
   // Whether the input inside of this container has focus.
   inputHasFocus: boolean = false;
 
-  // Whether the intput inside of this container has a placeholder
+  // Whether the input inside of this container has a placeholder
   inputHasPlaceholder: boolean = false;
 
   constructor(@Attribute('id') id: string, private _element: ElementRef) {

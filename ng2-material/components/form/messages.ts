@@ -1,13 +1,20 @@
-import {CONST_EXPR} from "angular2/src/facade/lang";
-import {NG_VALIDATORS} from "angular2/common";
+import {CONST_EXPR} from 'angular2/src/facade/lang';
+import {NG_VALIDATORS} from 'angular2/common';
 import {
   Attribute, Input, Provider, Directive, Optional, SkipSelf, Host, OnDestroy, OnInit,
   ContentChildren, QueryList, Query, AfterContentInit
-} from "angular2/core";
-import {Validator, NgFormModel, NgControlName} from "angular2/common";
-import {Control} from "angular2/common";
-import {isPresent} from "angular2/src/facade/lang";
+} from 'angular2/core';
+import {Validator, NgFormModel, NgControlName} from 'angular2/common';
+import {Control, ControlGroup, AbstractControl} from 'angular2/common';
+import {isPresent} from 'angular2/src/facade/lang';
 
+
+// TODO(jd): Behaviors to test
+// - md-messages with no md-message children act as message for all errors in a field
+// - md-message="propName" binds to FormBuilder group by given name
+// - [md-message]="viewLocal" binds to given NgControlName referenced from the view
+// - [md-messages] adds md-valid and md-invalid class based on field validation state
+// - throws informative errors when it fails to bind to a given form field because it cannot be found.
 
 @Directive({
   selector: '[md-message]',
@@ -32,9 +39,9 @@ export class MdMessage {
   selector: '[md-messages]',
   host: {
     'md-messages': '',
-    '[hidden]': 'valid || !property?.touched',
-    '[class.md-valid]': 'valid && property?.touched',
-    '[class.md-invalid]': '!valid && property?.touched'
+    '[hidden]': 'valid || !isTouched',
+    '[class.md-valid]': 'valid && isTouched',
+    '[class.md-invalid]': '!valid && isTouched'
   }
 })
 export class MdMessages implements OnInit, OnDestroy {
@@ -42,6 +49,17 @@ export class MdMessages implements OnInit, OnDestroy {
   @Input('md-messages') property: string|NgControlName;
 
   valid: boolean;
+
+  get isTouched(): boolean {
+    if (this.property instanceof NgControlName) {
+      return (<NgControlName>this.property).touched;
+    }
+    let prop = <string>this.property;
+    let group = this.form.control;
+    let ctrl = group.controls[prop];
+    return ctrl && ctrl.touched;
+  }
+
 
   constructor(@Query(MdMessage) public messages: QueryList<MdMessage>,
               @Optional() @SkipSelf() @Host() public form: NgFormModel,
@@ -51,6 +69,11 @@ export class MdMessages implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Subscription to value changes that is to be dropped when the component is destroyed.
+   * @type {null}
+   * @private
+   */
   private _unsubscribe: any = null;
 
   ngOnInit() {
@@ -63,21 +86,41 @@ export class MdMessages implements OnInit, OnDestroy {
       if (!this.form) {
         throw new Error('md-messages cannot bind to text property without a parent NgFormModel');
       }
-      console.log('init formbuilder property: ' + this.property);
+      let prop = <string>this.property;
+      let group: ControlGroup = this.form.control;
+      if (!group) {
+        throw new Error('md-messages cannot bind to text property without a ControlGroup');
+      }
+      let ctrl: AbstractControl = group.controls[prop];
+      if (!ctrl) {
+        throw new Error(`md-messages cannot find property(${prop}) in ControlGroup!`);
+      }
+      this._unsubscribe = ctrl.valueChanges.subscribe(this._valueChanged.bind(this));
     }
   }
 
   ngOnDestroy(): any {
-    this._unsubscribe();
+    this._unsubscribe.unsubscribe();
   }
 
   private _valueChanged(newValue: string) {
-    let ctrl: NgControlName = <NgControlName>this.property;
-    this.valid = !ctrl.errors;
-    if (ctrl.errors) {
+    let errors: {[errorKey:string]:string} = null;
+    if (this.property instanceof NgControlName) {
+      let ctrl: NgControlName = <NgControlName>this.property;
+      errors = ctrl.errors;
+    }
+    else {
+      let prop = <string>this.property;
+      let group = this.form.control;
+      let ctrl: AbstractControl = group.controls[prop];
+      errors = ctrl.errors;
+    }
+    this.valid = !errors;
+    if (errors) {
       this.messages.toArray().forEach((m: MdMessage) => {
-        m.okay = !isPresent(ctrl.errors[m.errorKey]);
+        m.okay = !m.errorKey ? !errors : !isPresent(errors[m.errorKey]);
       });
     }
+
   }
 }
