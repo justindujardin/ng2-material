@@ -50,3 +50,8 @@ export function rAF(callback) {
 export function parseTabIndexAttribute(attr: any): number {
   return isPresent(attr) ? NumberWrapper.parseInt(attr, 10) : 0;
 }
+
+
+export function isNumber(value: any): boolean {
+  return toString.call(value) === '[object Number]';
+}

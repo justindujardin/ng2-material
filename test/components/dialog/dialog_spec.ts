@@ -17,7 +17,6 @@ import {ComponentFixture} from "angular2/testing";
 import {findChildByTag} from "../../util";
 import {findChildById} from "../../util";
 import {MdDialogRef, MdDialogConfig, MdDialog, MdDialogBasic} from "../../../ng2-material/components/dialog/dialog";
-import {TimerWrapper} from "angular2/src/facade/async";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
 

@@ -48,7 +48,7 @@ export class MdMessages implements OnInit, OnDestroy {
 
   @Input('md-messages') property: string|NgControlName;
 
-  valid: boolean;
+  valid: boolean = true;
 
   get isTouched(): boolean {
     if (this.property instanceof NgControlName) {

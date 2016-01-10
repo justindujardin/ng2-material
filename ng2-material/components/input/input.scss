@@ -211,41 +211,10 @@ md-input-container {
     @include rtl(padding-left, 0, $input-container-padding);
   }
 
-  //
-  // ngMessage base styles - animations moved to input.js
-  //
-  md-messages, [md-messages] {
-    position: relative;
-    order: 4;
-    overflow: hidden;
-    @include rtl(clear, left, right);
-
-    &[hidden] {
-      // Upon entering the DOM, messages should be hidden
-      md-message,
-      [md-message] {
-        opacity: 0;
-        margin-top: -100px;
-      }
-    }
-  }
-
   md-message, [md-message],
   .md-char-counter {
     font-size: $input-error-font-size;
     line-height: $input-error-line-height;
-    overflow: hidden;
-
-    transition: $swift-ease-in;
-
-    // Default state for messages is to be visible
-    opacity: 1;
-    margin-top: 0;
-
-    // Add some top padding which is equal to half the difference between the expected height
-    // and the actual height
-    padding-top: $error-padding-top;
-
     &:not(.md-char-counter) {
       // Add some padding so that the messages don't touch the character counter
       @include rtl(padding-right, rem(0.5), 0);

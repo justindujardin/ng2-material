@@ -1,5 +1,5 @@
 import {
-  Directive, Attribute, Host, SkipSelf, AfterContentInit, ElementRef, forwardRef, OnChanges, ContentChild,
+  Directive, View, Component, Attribute, Host, SkipSelf, AfterContentInit, ElementRef, forwardRef, OnChanges, ContentChild,
   Query, QueryList, Optional
 } from 'angular2/core';
 
@@ -61,13 +61,16 @@ export class MdInput {
 }
 
 
-@Directive({
+@Component({
   selector: 'md-input-container',
   host: {
     '[class.md-input-has-value]': 'inputHasValue',
     '[class.md-input-has-placeholder]': 'inputHasPlaceholder',
     '[class.md-input-focused]': 'inputHasFocus',
   }
+})
+@View({
+  template: `<ng-content></ng-content><div class="md-errors-spacer"></div>`
 })
 export class MdInputContainer implements AfterContentInit, OnChanges {
 

@@ -3,6 +3,7 @@ import {NG_VALIDATORS} from "angular2/common";
 import {Attribute, Input, Provider, Directive,forwardRef} from "angular2/core";
 import {Validator} from "angular2/common";
 import {Control} from "angular2/common";
+import {isNumber} from '../../core/util/util';
 import {isPresent, NumberWrapper} from 'angular2/src/facade/lang';
 
 const PATTERN_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, {
@@ -152,7 +153,8 @@ export class MdNumberRequiredValidator implements Validator {
    */
   static inline(): Function {
     return function validate(control: Control): {[key: string]: any} {
-      return !NumberWrapper.isNaN(control.value) ? null : {mdRequired: true};
+      let isNum = !NumberWrapper.isNaN(control.value) && isNumber(control.value);
+      return isNum ? null : {mdNumberRequired: true};
     }
   }
 
