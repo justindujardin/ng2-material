@@ -19,7 +19,7 @@ import {isPresent} from 'angular2/src/facade/lang';
 @Directive({
   selector: '[md-message]',
   host: {
-    '[hidden]': 'okay'
+    '[style.display]': 'okay ? "none" : "inherit"'
   }
 })
 export class MdMessage {
@@ -39,7 +39,7 @@ export class MdMessage {
   selector: '[md-messages]',
   host: {
     'md-messages': '',
-    '[hidden]': 'valid || !isTouched',
+    '[style.display]': '(valid || !isTouched) ? "none" : "inherit"',
     '[class.md-valid]': 'valid && isTouched',
     '[class.md-invalid]': '!valid && isTouched'
   }

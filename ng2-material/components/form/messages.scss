@@ -11,32 +11,10 @@ form {
     order: 4;
     overflow: hidden;
     @include rtl(clear, left, right);
-
-    &[hidden] {
-      // Upon entering the DOM, messages should be hidden
-      md-message,
-      [md-message] {
-        opacity: 0;
-        margin-top: -100px;
-      }
-    }
   }
 
   md-message, [md-message] {
     overflow: hidden;
-
-    transition: $swift-ease-in;
-
-    // Default state for messages is to be visible
-    opacity: 1;
-    margin-top: 0;
-  }
-
-  .md-input-message-animation {
-    &.ng-enter {
-      opacity: 0;
-      margin-top: -100px;
-    }
   }
 
 }
