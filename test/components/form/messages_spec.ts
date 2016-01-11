@@ -85,7 +85,7 @@ export function main() {
           expect(api.container.isTouched).toBe(false);
           async.done();
           api.fixture.destroy();
-        });
+        }).catch((e) => console.log(e));
       }));
       it('should bind local view references #ref="ngForm"', inject([AsyncTestCompleter], (async) => {
         setup().then((api: IFormMessagesFixture) => {
@@ -94,7 +94,7 @@ export function main() {
           expect(api.container.form).not.toBeNull();
           expect(api.fixture.componentInstance.name).toBe('MorTon');
           async.done();
-        });
+        }).catch((e) => console.log(e));
       }));
       // TODO(jd): how to test form value changes? Need to change the control and have it
       // trigger its own change events so that md-messages picks them up.
