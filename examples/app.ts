@@ -23,10 +23,6 @@ import {VersionService} from "./services/version";
 import { AppViewListener } from 'angular2/src/core/linker/view_listener';
 import { DebugElementViewListener } from 'angular2/platform/common_dom';
 
-//
-// PLUNKR for ng2: http://plnkr.co/edit/UPJESEgyKFsm4hyW4fWR
-//
-
 /**
  * Describe an example that can be dynamically loaded.
  */
