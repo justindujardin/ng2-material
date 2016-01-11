@@ -1,4 +1,4 @@
-// TODO(jdd): auto generate import/exports for examples during the grunt site-meta task.
+// TODO(jd): auto generate import/exports for examples during the grunt site-meta task.
 
 
 import {CONST_EXPR, Type} from 'angular2/src/facade/lang';
@@ -19,15 +19,19 @@ import TabsDynamicTabs from './components/tabs/dynamic_tabs';
 import CheckboxBasicUsage from "./components/checkbox/basic_usage";
 import CheckboxSyncing from "./components/checkbox/syncing";
 import ListBasicUsage from "./components/list/basic_usage";
+import InputBasicUsage from "./components/input/basic_usage";
+import {InputFormBuilder} from "./components/input/form_builder";
 
 /**
- * Collection of Material Design component directives.
+ * Collection of Material Design component example directives.
  */
 export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   CardBasicUsage, CardInlineActions, CardActionButtons,
   ButtonBasicUsage,
   CheckboxBasicUsage, CheckboxSyncing,
   DialogBasicUsage,
+  InputBasicUsage,
+  InputFormBuilder,
   ListBasicUsage,
   RadioBasicUsage,
   SwitchBasicUsage,

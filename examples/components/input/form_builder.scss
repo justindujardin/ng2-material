@@ -1,0 +1,13 @@
+@import '../../../ng2-material/core/style/variables';
+@import '../../../ng2-material/core/style/mixins';
+@import '../../../ng2-material/core/style/default-theme';
+
+md-toolbar[md-hero] {
+  margin-bottom: 40px;
+}
+
+.secret-project {
+  width: 256px;
+  height: 256px;
+  fill: white;
+}

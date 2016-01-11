@@ -1,0 +1,20 @@
+@import "../../core/style/variables";
+@import "../../core/style/default-theme";
+@import "../../core/style/mixins";
+
+form {
+  //
+  // ngMessage base styles - animations moved to input.js
+  //
+  md-messages, [md-messages] {
+    position: relative;
+    order: 4;
+    overflow: hidden;
+    @include rtl(clear, left, right);
+  }
+
+  md-message, [md-message] {
+    overflow: hidden;
+  }
+
+}

@@ -17,7 +17,6 @@ import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {findChildrenByAttribute,findChildrenByTag,findChildByTag} from "../../util";
-import {TimerWrapper} from "angular2/src/facade/async";
 import {Ink} from "../../../ng2-material/core/util/ink";
 import {MdProgressLinear, ProgressMode} from "../../../ng2-material/components/progress_linear/progress_linear";
 

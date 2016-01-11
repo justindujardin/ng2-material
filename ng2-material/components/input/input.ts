@@ -1,22 +1,81 @@
-import {Directive, Attribute, Host, SkipSelf, AfterContentChecked, ElementRef} from 'angular2/core';
+import {
+  Directive, View, Component, Attribute, Host, SkipSelf, AfterContentInit, ElementRef, forwardRef, OnChanges, ContentChild,
+  Query, QueryList, Optional
+} from 'angular2/core';
+
+import {NgControlName, FORM_PROVIDERS} from 'angular2/common';
 
 import {ObservableWrapper, EventEmitter} from 'angular2/src/facade/async';
 import {Input,Output} from 'angular2/core';
+import {isPresent} from 'angular2/src/facade/lang';
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {TimerWrapper} from "angular2/src/facade/async";
 
-// TODO(jelbourn): validation (will depend on Forms API).
+// TODO(jd): <select> hasFocus/hasValue classes
+// TODO(jd): input container validation styles.
 // TODO(jelbourn): textarea resizing
 // TODO(jelbourn): max-length counter
-// TODO(jelbourn): placeholder property
+
 
 @Directive({
+  selector: 'input[md-input],input.md-input,textarea[md-input],textarea.md-input',
+  host: {
+    'class': 'md-input',
+    '[value]': 'value',
+    '(input)': 'value=$event.target.value',
+    '(focus)': 'setHasFocus(true)',
+    '(blur)': 'setHasFocus(false)'
+  },
+  providers: [FORM_PROVIDERS]
+})
+export class MdInput {
+  @Input('value')
+  _value: string;
+
+  set value(value: string) {
+    this._value = isPresent(value) ? value : '';
+    ObservableWrapper.callEmit(this.mdChange, this.value);
+  }
+
+  get value(): string {
+    return this._value;
+  }
+
+  @Input()
+  placeholder: string;
+  @Output()
+  mdChange: EventEmitter<any> = new EventEmitter();
+  @Output()
+  mdFocusChange: EventEmitter<any> = new EventEmitter();
+
+  constructor(@Attribute('value') value: string,
+              @Attribute('id') id: string) {
+    if (isPresent(value)) {
+      this.value = value;
+    }
+  }
+
+  setHasFocus(hasFocus: boolean) {
+    ObservableWrapper.callEmit(this.mdFocusChange, hasFocus);
+  }
+}
+
+
+@Component({
   selector: 'md-input-container',
   host: {
     '[class.md-input-has-value]': 'inputHasValue',
+    '[class.md-input-has-placeholder]': 'inputHasPlaceholder',
     '[class.md-input-focused]': 'inputHasFocus',
   }
 })
-export class MdInputContainer implements AfterContentChecked {
+@View({
+  template: `<ng-content></ng-content><div class="md-errors-spacer"></div>`
+})
+export class MdInputContainer implements AfterContentInit, OnChanges {
+
   // The MdInput or MdTextarea inside of this container.
+  @ContentChild(MdInput)
   _input: MdInput = null;
 
   // Whether the input inside of this container has a non-empty value.
@@ -25,67 +84,43 @@ export class MdInputContainer implements AfterContentChecked {
   // Whether the input inside of this container has focus.
   inputHasFocus: boolean = false;
 
-  constructor(@Attribute('id') id: string) {
+  // Whether the input inside of this container has a placeholder
+  inputHasPlaceholder: boolean = false;
+
+  constructor(@Attribute('id') id: string, private _element: ElementRef) {
   }
 
-  ngAfterContentChecked() {
-    // Enforce that this directive actually contains a text input.
+  ngOnChanges(_) {
+    this.inputHasValue = this._input.value != '';
+
+    // TODO(jd): Is there something like @ContentChild that accepts a selector? I would prefer not to
+    // use a directive for label elements because I cannot use a parent->child selector to make them
+    // specific to md-input
+    this.inputHasPlaceholder = !!DOM.querySelector(this._element.nativeElement, 'label') && !!this._input.placeholder;
+  }
+
+  ngAfterContentInit() {
+    // If there is no text input, just bail and do nothing.
     if (this._input === null) {
-      throw 'No <input> or <textarea> found inside of <md-input-container>';
-    }
-  }
-
-  /** Registers the child MdInput or MdTextarea. */
-  registerInput(input) {
-    if (this._input !== null) {
-      throw 'Only one text input is allowed per <md-input-container>.';
+      return;
     }
 
-    this._input = input;
-    this.inputHasValue = input.value != '';
+    // TODO(jd): :sob: what is the correct way to update these variables after the component initializes?
+    //  any time I do it directly here, debug mode complains about values changing after being checked. I
+    //  need to wait until the content has been initialized so that `_input` is there
+    // For now, just wrap it in a setTimeout to let the change detection finish up, and then set the values...
+    TimerWrapper.setTimeout(() => this.ngOnChanges({}), 0);
 
     // Listen to input changes and focus events so that we can apply the appropriate CSS
     // classes based on the input state.
-    ObservableWrapper.subscribe(input.mdChange, value => {
+    ObservableWrapper.subscribe(this._input.mdChange, (value) => {
       this.inputHasValue = value != '';
     });
 
-    ObservableWrapper.subscribe<boolean>(input.mdFocusChange,
-                                         hasFocus => this.inputHasFocus = hasFocus);
+    ObservableWrapper.subscribe<boolean>(this._input.mdFocusChange, (hasFocus: boolean) => {
+      this.inputHasFocus = hasFocus
+    });
+
   }
 }
 
-
-@Directive({
-  selector: 'input[md-input],input.md-input,textarea[md-input],textarea.md-input',
-  providers: [MdInputContainer],
-  host: {
-    'class': 'md-input',
-    '(input)': 'updateValue($event)',
-    '(focus)': 'setHasFocus(true)',
-    '(blur)': 'setHasFocus(false)'
-  }
-})
-export class MdInput {
-  @Input() value: string;
-
-  // Events emitted by this directive. We use these special 'md-' events to communicate
-  // to the parent MdInputContainer.
-  @Output() mdChange: EventEmitter<any> = new EventEmitter();
-  @Output() mdFocusChange: EventEmitter<any> = new EventEmitter();
-
-  constructor(@Attribute('value') value: string, @SkipSelf() @Host() container: MdInputContainer,
-              @Attribute('id') id: string) {
-    this.value = value == null ? '' : value;
-    container.registerInput(this);
-  }
-
-  updateValue(event) {
-    this.value = event.target.value;
-    ObservableWrapper.callEmit(this.mdChange, this.value);
-  }
-
-  setHasFocus(hasFocus: boolean) {
-    ObservableWrapper.callEmit(this.mdFocusChange, hasFocus);
-  }
-}
