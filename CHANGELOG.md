@@ -1,3 +1,17 @@
+<a name="0.1.6"></a>
+## [0.1.6](https://github.com/justindujardin/ng2-material/compare/v0.1.5...v0.1.6) (2016-01-11)
+
+
+### Features
+
+* **examples:** add basic usage input example ([84af244](https://github.com/justindujardin/ng2-material/commit/84af244))
+* support validation errors with FormBuilder ([df03e9b](https://github.com/justindujardin/ng2-material/commit/df03e9b))
+* **examples:** inline markup and form builder input demos ([7382f75](https://github.com/justindujardin/ng2-material/commit/7382f75))
+* **form:** use md-message/md-messages for form validation errors ([14e36f4](https://github.com/justindujardin/ng2-material/commit/14e36f4))
+* **input:** add support for mdMaxLength and mdPattern validators ([13035a6](https://github.com/justindujardin/ng2-material/commit/13035a6))
+
+
+
 <a name="0.1.5"></a>
 ## [0.1.5](https://github.com/justindujardin/ng2-material/compare/v0.1.4...v0.1.5) (2016-01-07)
 
