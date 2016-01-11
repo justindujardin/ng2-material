@@ -53,5 +53,5 @@ export function parseTabIndexAttribute(attr: any): number {
 
 
 export function isNumber(value: any): boolean {
-  return toString.call(value) === '[object Number]';
+  return Object.prototype.toString.call(value) === '[object Number]';
 }
