@@ -55,7 +55,26 @@ export function findChildById(parent: DebugElement, id: string): DebugElement {
 }
 
 
-export function componentSanityCheck(name: string, selector:string, template: string) {
+/**
+ * Find a component child by it's instance type.
+ */
+export function findComponentByType(debug: DebugElement, type: any): any {
+  let found = debug.query((debugEl: DebugElement) => {
+    return debugEl.componentInstance instanceof type;
+  });
+  return found ? found.componentInstance : null;
+}
+
+/**
+ * Find a debug child by it's instance type.
+ */
+export function findDebugByType(debug: DebugElement, type: any): any {
+  return debug.query((debugEl: DebugElement) => {
+    return debugEl.componentInstance instanceof type;
+  });
+}
+
+export function componentSanityCheck(name: string, selector: string, template: string) {
   @Component({selector: 'test-app'})
   @View({
     directives: [MATERIAL_DIRECTIVES],
@@ -86,12 +105,12 @@ export function componentSanityCheck(name: string, selector:string, template: st
 
     describe(selector, () => {
       it('should instantiate component without fail', inject([AsyncTestCompleter], (async) => {
-        setup().then(() => TimerWrapper.setTimeout(() => async.done(),10));
+        setup().then(() => TimerWrapper.setTimeout(() => async.done(), 10));
       }));
       it('should destroy component without fail', inject([AsyncTestCompleter], (async) => {
-        setup().then((api:ComponentFixture) => {
+        setup().then((api: ComponentFixture) => {
           api.destroy();
-          TimerWrapper.setTimeout(() => async.done(),10);
+          TimerWrapper.setTimeout(() => async.done(), 10);
         });
       }));
     });
