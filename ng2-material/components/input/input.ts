@@ -10,6 +10,7 @@ import {Input,Output} from 'angular2/core';
 import {isPresent} from 'angular2/src/facade/lang';
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {TimerWrapper} from "angular2/src/facade/async";
+import {isBlank} from "angular2/src/facade/lang";
 
 // TODO(jd): <select> hasFocus/hasValue classes
 // TODO(jd): input container validation styles.
@@ -33,12 +34,12 @@ export class MdInput {
   _value: string;
 
   set value(value: string) {
-    this._value = isPresent(value) ? value : '';
+    this._value = value;
     ObservableWrapper.callEmit(this.mdChange, this.value);
   }
 
   get value(): string {
-    return this._value;
+    return !isBlank(this._value) ? this._value : '';
   }
 
   @Input()
@@ -50,7 +51,7 @@ export class MdInput {
 
   constructor(@Attribute('value') value: string,
               @Attribute('id') id: string) {
-    if (isPresent(value)) {
+    if (!isBlank(value)) {
       this.value = value;
     }
   }
@@ -91,7 +92,7 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
   }
 
   ngOnChanges(_) {
-    this.inputHasValue = this._input.value != '';
+    this.inputHasValue = !isBlank(this._input.value);
 
     // TODO(jd): Is there something like @ContentChild that accepts a selector? I would prefer not to
     // use a directive for label elements because I cannot use a parent->child selector to make them
@@ -114,7 +115,7 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
     // Listen to input changes and focus events so that we can apply the appropriate CSS
     // classes based on the input state.
     ObservableWrapper.subscribe(this._input.mdChange, (value) => {
-      this.inputHasValue = value != '';
+      this.inputHasValue = !isBlank(value);
     });
 
     ObservableWrapper.subscribe<boolean>(this._input.mdFocusChange, (hasFocus: boolean) => {
