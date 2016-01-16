@@ -15,9 +15,6 @@ import {MdDialog} from './components/dialog/dialog';
 import {MdDivider} from './components/divider/divider';
 export * from './components/divider/divider';
 
-import {MdGridList, MdGridTile} from './components/grid_list/grid_list';
-export * from './components/grid_list/grid_list';
-
 import {MdIcon} from './components/icon/icon';
 export * from './components/icon/icon';
 
@@ -73,7 +70,6 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdCheckbox,
   MdContent,
   MdDivider,
-  MdGridList, MdGridTile,
   MdIcon,
   MdInput, MdInputContainer,
   MdPatternValidator, MdMaxLengthValidator,
