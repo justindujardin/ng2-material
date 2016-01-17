@@ -40,27 +40,26 @@ export * from './dialog_basic';
  */
 @Injectable()
 export class MdDialog {
-
-  /**
-   * Unique id counter for RenderComponentType.
-   * @private
-   */
-  static _uniqueId: number = 0;
-
-  /**
-   * Renderer for manipulating dialog and backdrop component elements.
-   * @private
-   */
-  private _renderer: Renderer = null;
-
-  constructor(public componentLoader: DynamicComponentLoader,
-              appViewManager: AppViewManager,
-              rootRenderer: RootRenderer) {
-    let type = (<any>appViewManager).createRenderComponentType(ViewEncapsulation.None, []);
-    this._renderer = rootRenderer.renderComponent(type);
+  constructor(public componentLoader: DynamicComponentLoader) {
   }
 
   private _defaultContainer = DOM.query('body');
+
+  /**
+   * TODO: this works around the test failures of the {@see Renderer} class on
+   * internet explorer. Revisit later: https://travis-ci.org/justindujardin/ng2-material/builds/102865559
+   *
+   * Provider a helper similar to setElementClass on {@see Renderer} so that switching back is easy
+   * when the implementation is more reliable.
+   */
+  static setElementClass(nativeElement: any, className: string, add: boolean = true) {
+    if (add) {
+      DOM.addClass(nativeElement, className);
+    }
+    else {
+      DOM.removeClass(nativeElement, className);
+    }
+  }
 
   /**
    * Opens a modal dialog.
@@ -90,15 +89,15 @@ export class MdDialog {
         // Create a DOM node to serve as a physical host element for the dialog.
         var dialogElement = containerRef.location.nativeElement;
 
-        this._renderer.setElementClass(dialogElement, 'md-dialog-absolute', !!config.container);
+        MdDialog.setElementClass(dialogElement, 'md-dialog-absolute', !!config.container);
 
         DOM.appendChild(config.container || this._defaultContainer, dialogElement);
 
         if (isPresent(config.width)) {
-          this._renderer.setElementStyle(dialogElement, 'width', config.width);
+          DOM.setStyle(dialogElement, 'width', config.width);
         }
         if (isPresent(config.height)) {
-          this._renderer.setElementStyle(dialogElement, 'height', config.height);
+          DOM.setStyle(dialogElement, 'height', config.height);
         }
 
         dialogRef.containerRef = containerRef;
@@ -134,9 +133,9 @@ export class MdDialog {
       .then((componentRef) => {
         let backdrop: MdBackdrop = componentRef.instance;
         backdrop.clickClose = options.clickClose;
-        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop', true);
-        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-opaque', true);
-        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop-absolute', !!options.container);
+        MdDialog.setElementClass(componentRef.location.nativeElement, 'md-backdrop', true);
+        MdDialog.setElementClass(componentRef.location.nativeElement, 'md-opaque', true);
+        MdDialog.setElementClass(componentRef.location.nativeElement, 'md-backdrop-absolute', !!options.container);
         DOM.appendChild(options.container || this._defaultContainer, componentRef.location.nativeElement);
         return backdrop.show().then(() => componentRef);
       });
