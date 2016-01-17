@@ -1,3 +1,14 @@
+<a name="0.1.7"></a>
+## [0.1.7](https://github.com/justindujardin/ng2-material/compare/v0.1.6...v0.1.7) (2016-01-17)
+
+
+### Bug Fixes
+
+* **examples:** correct import statement for scss example ([46dd541](https://github.com/justindujardin/ng2-material/commit/46dd541)), closes [#17](https://github.com/justindujardin/ng2-material/issues/17)
+* **input:** issue where undefined values would be displayed ([294c073](https://github.com/justindujardin/ng2-material/commit/294c073))
+
+
+
 <a name="0.1.6"></a>
 ## [0.1.6](https://github.com/justindujardin/ng2-material/compare/v0.1.5...v0.1.6) (2016-01-11)
 
