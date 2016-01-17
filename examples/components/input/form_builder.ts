@@ -8,7 +8,7 @@ import {FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup} from 'angular2/c
   styleUrls: ['examples/components/input/form_builder.css'],
   directives: [MATERIAL_DIRECTIVES, FORM_DIRECTIVES]
 })
-export class InputFormBuilder {
+export default class InputFormBuilder {
   projectForm: ControlGroup;
   model = {
     clientName: '',

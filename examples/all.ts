@@ -20,7 +20,7 @@ import CheckboxBasicUsage from "./components/checkbox/basic_usage";
 import CheckboxSyncing from "./components/checkbox/syncing";
 import ListBasicUsage from "./components/list/basic_usage";
 import InputBasicUsage from "./components/input/basic_usage";
-import {InputFormBuilder} from "./components/input/form_builder";
+import InputFormBuilder from "./components/input/form_builder";
 
 /**
  * Collection of Material Design component example directives.
