@@ -1,5 +1,7 @@
 ng2-material [![Build Status](https://travis-ci.org/justindujardin/ng2-material.svg?branch=master)](https://travis-ci.org/justindujardin/ng2-material) [![Coverage Status](https://coveralls.io/repos/justindujardin/ng2-material/badge.svg?branch=master&service=github)](https://coveralls.io/github/justindujardin/ng2-material?branch=master) [![npm version](https://badge.fury.io/js/ng2-material.svg)](http://badge.fury.io/js/ng2-material)
 ---
+
+[![Join the chat at https://gitter.im/justindujardin/ng2-material](https://badges.gitter.im/justindujardin/ng2-material.svg)](https://gitter.im/justindujardin/ng2-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/ng2material.svg)](https://saucelabs.com/u/ng2material)
 
 This is an *unofficial* implementation of Material Design components for Angular 2.
