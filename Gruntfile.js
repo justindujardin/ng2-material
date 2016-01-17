@@ -112,8 +112,7 @@ module.exports = function (grunt) {
               "examples/*.scss",
               "examples/**/*.scss",
               "public/font/*.scss",
-              "<%- sourceRoot %>/all.scss",
-              "<%- sourceRoot %>/components/**/*.scss"
+              "<%- sourceRoot %>/all.scss"
             ]
           },
           {
