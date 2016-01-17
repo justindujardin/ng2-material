@@ -74,6 +74,13 @@ export function findDebugByType(debug: DebugElement, type: any): any {
   });
 }
 
+/**
+ * Run a basic lifecycle sanity check on a component. This will create the given component
+ * template, wait a few moments, then destroy it.
+ * @param name The name for the describe block
+ * @param selector The selector that's being tested (for inner describe)
+ * @param template The template that contains the component usage.
+ */
 export function componentSanityCheck(name: string, selector: string, template: string) {
   @Component({selector: 'test-app'})
   @View({
