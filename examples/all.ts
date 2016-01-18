@@ -21,6 +21,7 @@ import CheckboxSyncing from "./components/checkbox/syncing";
 import ListBasicUsage from "./components/list/basic_usage";
 import InputBasicUsage from "./components/input/basic_usage";
 import InputFormBuilder from "./components/input/form_builder";
+import WhiteframeBasicUsage from "./components/whiteframe/basic_usage";
 
 /**
  * Collection of Material Design component example directives.
@@ -39,7 +40,8 @@ export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   TabsDynamicTabs,
   ToolbarBasicUsage, ToolbarScrollShrink,
   ProgressLinearBasicUsage,
-  ProgressCircularBasicUsage
+  ProgressCircularBasicUsage,
+  WhiteframeBasicUsage
 ]);
 
 export * from './example';
