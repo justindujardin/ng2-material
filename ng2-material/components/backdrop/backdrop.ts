@@ -9,11 +9,14 @@ import {Output} from "angular2/core";
 import {EventEmitter} from "angular2/core";
 
 /**
- * A transparent overlay for content on the page.
+ * An overlay for content on the page.
+ * Can optionally dismiss when clicked on.
+ * Has outputs for show/showing and hide/hiding.
  */
 @Component({
   selector: 'md-backdrop',
   host: {
+    'class': 'md-backdrop',
     '(click)': 'onClick()',
   },
 })
@@ -51,13 +54,22 @@ export class MdBackdrop {
   @Output()
   onShown: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
 
-
   constructor(public element: ElementRef) {
   }
 
+  /**
+   * The CSS class name to transition on/off when the backdrop is hidden/shown.
+   */
+  @Input()
+  public transitionClass: string = 'md-active';
 
-  private _visible: boolean = false;
-  private _transitioning: boolean = false;
+  /**
+   * Whether to add the {@see transitionClass} or remove it when the backdrop is shown. The
+   * opposite will happen when the backdrop is hidden.
+   */
+  @Input()
+  public transitionAddClass = true;
+
 
   /**
    * Read-only property indicating whether the backdrop is visible or not.
@@ -65,6 +77,9 @@ export class MdBackdrop {
   get visible(): boolean {
     return this._visible;
   }
+
+  private _visible: boolean = false;
+  private _transitioning: boolean = false;
 
   onClick() {
     if (this.clickClose && !this._transitioning && this.visible) {
@@ -83,7 +98,8 @@ export class MdBackdrop {
     this._visible = true;
     this._transitioning = true;
     this.onShowing.emit(this);
-    return Animate.enter(this.element.nativeElement, 'md-active').then(() => {
+    let action = this.transitionAddClass ? Animate.enter : Animate.leave;
+    return action(this.element.nativeElement, this.transitionClass).then(() => {
       this._transitioning = false;
       this.onShown.emit(this);
     });
@@ -100,7 +116,8 @@ export class MdBackdrop {
     this._visible = false;
     this._transitioning = true;
     this.onHiding.emit(this);
-    return Animate.leave(this.element.nativeElement, 'md-active').then(() => {
+    let action = this.transitionAddClass ? Animate.leave : Animate.enter;
+    return action(this.element.nativeElement, this.transitionClass).then(() => {
       this._transitioning = false;
       this.onHidden.emit(this);
     });
