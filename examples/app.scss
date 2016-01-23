@@ -1,7 +1,6 @@
 $md-font-url: '../public/font/';
-
 @import "../public/font/font";
-@import "../ng2-material/all";
+@import '../ng2-material/all';
 @import "example";
 
 $app-content-lg: 940px;
@@ -9,6 +8,14 @@ $app-content-md: 580px;
 $app-content-sm: 360px;
 
 demos-app {
+
+  .app-menu {
+    md-toolbar {
+      background-color: transparent;
+      color: md-color($md-foreground, secondary-text);
+      border-bottom: 1px solid md-color($md-foreground, divider);
+    }
+  }
 
   md-content.examples {
     width: 800px;
@@ -57,11 +64,10 @@ demos-app {
           white-space: nowrap;
         }
         i {
-          height:47px;
           height: 47px;
           padding-top: 24px;
           margin: 0 10px;
-          vertical-align:bottom;
+          vertical-align: bottom;
         }
       }
       .previous {
@@ -151,8 +157,8 @@ demos-app {
   }
   .seed-intro {
     highlight {
-      border-radius:2px;
-      margin:$baseline-grid * 4 0;
+      border-radius: 2px;
+      margin: $baseline-grid * 4 0;
     }
   }
 
@@ -178,7 +184,7 @@ demos-app {
         color: md-color($md-primary);
       }
     }
-    .examples-toc {
+    .heading-list-toc {
       border-left: 5px solid md-color($md-primary);
       padding-left: 20px;
       h1 {
