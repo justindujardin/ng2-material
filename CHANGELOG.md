@@ -1,3 +1,14 @@
+<a name="0.1.8"></a>
+## [0.1.8](https://github.com/justindujardin/ng2-material/compare/v0.1.7...v0.1.8) (2016-01-23)
+
+
+### Features
+
+* **examples:** add whiteframe example ([340ee6c](https://github.com/justindujardin/ng2-material/commit/340ee6c))
+* **theme:** make it easier to override themes in scss ([23d6482](https://github.com/justindujardin/ng2-material/commit/23d6482))
+
+
+
 <a name="0.1.7"></a>
 ## [0.1.7](https://github.com/justindujardin/ng2-material/compare/v0.1.6...v0.1.7) (2016-01-17)
 
