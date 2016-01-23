@@ -16,8 +16,8 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'node_modules/es6-shim/es6-shim.js',
       'karma.ie.shims.js',
+      'node_modules/es6-shim/es6-shim.js',
       'node_modules/zone.js/dist/zone-microtask.js',
       'node_modules/zone.js/dist/long-stack-trace-zone.js',
       'node_modules/zone.js/dist/jasmine-patch.js',
