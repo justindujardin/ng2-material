@@ -1,4 +1,5 @@
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
+import {TimerWrapper} from "angular2/src/facade/async";
 
 /**
  * Provide an API for animating elements with CSS transitions
@@ -13,30 +14,42 @@ export class Animate {
   static enter(el: HTMLElement, cssClass: string): Promise<void> {
     DOM.removeClass(el, cssClass);
     return new Promise<void>((resolve)=> {
-      var duration = Animate.getTransitionDuration(el, true);
-      var callTimeout = setTimeout(() => done(), duration);
-      var done = () => {
-        clearTimeout(callTimeout);
-        removeListener();
-        resolve();
-      };
-      let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
-      DOM.addClass(el, cssClass);
+      DOM.addClass(el, cssClass + '-add');
+      TimerWrapper.setTimeout(() => {
+        var duration = Animate.getTransitionDuration(el, true);
+        var callTimeout = setTimeout(() => done(), duration);
+        var done = () => {
+          DOM.removeClass(el, cssClass + '-add-active');
+          DOM.removeClass(el, cssClass + '-add');
+          clearTimeout(callTimeout);
+          removeListener();
+          resolve();
+        };
+        let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
+        DOM.addClass(el, cssClass + '-add-active');
+        DOM.addClass(el, cssClass);
+      }, 1);
     });
   }
 
   static leave(el: HTMLElement, cssClass: string): Promise<void> {
     return new Promise<void>((resolve)=> {
-      var duration = Animate.getTransitionDuration(el, true);
-      var callTimeout = setTimeout(() => done(), duration);
+      DOM.addClass(el, cssClass + '-remove');
+      TimerWrapper.setTimeout(() => {
+        var duration = Animate.getTransitionDuration(el, true);
+        var callTimeout = setTimeout(() => done(), duration);
 
-      var done = () => {
-        clearTimeout(callTimeout);
-        removeListener();
-        resolve();
-      };
-      let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
-      DOM.removeClass(el, cssClass);
+        var done = () => {
+          DOM.removeClass(el, cssClass + '-remove-active');
+          DOM.removeClass(el, cssClass + '-remove');
+          clearTimeout(callTimeout);
+          removeListener();
+          resolve();
+        };
+        let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
+        DOM.addClass(el, cssClass + '-remove-active');
+        DOM.removeClass(el, cssClass);
+      }, 1);
     });
   }
 
