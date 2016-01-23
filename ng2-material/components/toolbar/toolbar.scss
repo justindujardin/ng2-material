@@ -22,6 +22,28 @@ $toolbar-padding: 16px !default;
 
 $icon-button-margin-offset: rem(-0.800) !default;
 
+@mixin md-toolbar() {
+  height: $toolbar-height;
+  min-height: $toolbar-height;
+  max-height: $toolbar-height;
+  // Handle mobile portrait
+  @media only screen and (min-width: 0) and (max-width: $layout-breakpoint-sm) and(orientation: portrait) {
+    min-height: $toolbar-height-mobile-portrait;
+    .md-toolbar-tools {
+      height: $toolbar-height-mobile-portrait;
+      max-height: $toolbar-height-mobile-portrait;
+    }
+  }
+  // Handle mobile landscape
+  @media only screen and (min-width: 0) and (max-width: $layout-breakpoint-sm) and(orientation: landscape) {
+    min-height: $toolbar-height-mobile-landscape;
+    .md-toolbar-tools {
+      height: $toolbar-height-mobile-landscape;
+      max-height: $toolbar-height-mobile-landscape;
+    }
+  }
+}
+
 @mixin md-tall-toolbar() {
   height: $toolbar-tall-height;
   min-height: $toolbar-tall-height;
@@ -51,6 +73,8 @@ md-toolbar {
   font-size: rem(2.0);
   min-height: $baseline-grid * 8;
   width: 100%;
+
+  @include md-toolbar();
 
   &.md-whiteframe-z1-add, &.md-whiteframe-z1-remove {
     transition: box-shadow $swift-ease-in-out-duration linear;
@@ -88,7 +112,7 @@ md-toolbar {
   }
 
   ~ md-content {
-    &:not([scroll-shrink]){
+    &:not([scroll-shrink]) {
       overflow: hidden;
     }
     > md-list {
@@ -155,30 +179,6 @@ md-toolbar {
   }
 }
 
-// Handle mobile portrait
-@media only screen and (min-width: 0) and (max-width: $layout-breakpoint-sm) and(orientation: portrait) {
-  md-toolbar {
-    min-height: $toolbar-height-mobile-portrait;
-  }
-
-  .md-toolbar-tools {
-    height: $toolbar-height-mobile-portrait;
-    max-height: $toolbar-height-mobile-portrait;
-  }
-}
-
-// Handle mobile landscape
-@media only screen and (min-width: 0) and (max-width: $layout-breakpoint-sm) and(orientation: landscape) {
-  md-toolbar {
-    min-height: $toolbar-height-mobile-landscape;
-  }
-
-  .md-toolbar-tools {
-    height: $toolbar-height-mobile-landscape;
-    max-height: $toolbar-height-mobile-landscape;
-  }
-}
-
 //
 // Theme
 //
@@ -187,7 +187,7 @@ md-toolbar:not(.md-menu-toolbar) {
   background-color: md-color($md-primary); //'{{primary-color}}';
   color: md-color($md-primary, default-contrast); //'{{primary-contrast}}';
 
-  md-icon {
+  [md-icon] {
     color: md-color($md-primary, default-contrast); //'{{primary-contrast}}';
   }
 
