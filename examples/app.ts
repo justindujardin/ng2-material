@@ -22,6 +22,8 @@ import {AfterViewInit} from "angular2/core";
 import {VersionService} from "./services/version";
 import { AppViewListener } from 'angular2/src/core/linker/view_listener';
 import { DebugElementViewListener } from 'angular2/platform/common_dom';
+import {SidenavService} from "ng2-material/components/sidenav/sidenav";
+import {IComponentMeta} from "./services/components";
 
 /**
  * Describe an example that can be dynamically loaded.
@@ -48,17 +50,32 @@ export interface IExampleData {
 })
 export class DemosApp {
 
-  public site:string = 'Angular2 Material';
+  public site: string = 'Angular2 Material';
 
   meta: any;
 
   version: string;
 
-  constructor(http: Http, public navigation: NavigationService) {
+  components: IComponentMeta[] = [];
+
+  constructor(http: Http,
+              public navigation: NavigationService,
+              private _components: ComponentsService,
+              private _sidenav: SidenavService) {
     http.get('public/version.json')
       .subscribe((res: Response) => {
         this.version = res.json().version;
       });
+
+    this._components.getComponents()
+      .then((comps) => {
+        this.components = comps;
+      });
+
+  }
+
+  showMenu(event?) {
+    this._sidenav.show('menu');
   }
 
 }
@@ -69,7 +86,7 @@ let appProviders = [
   bind(LocationStrategy).toClass(HashLocationStrategy)
 ];
 
-if(window.location.href.indexOf('github.com') !== -1){
+if (window.location.href.indexOf('github.com') !== -1) {
   enableProdMode();
 }
 else {
