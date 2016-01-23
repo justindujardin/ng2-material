@@ -46,7 +46,7 @@
     Then import the material directives and providers
   </p>
   <highlight type="typescript" class="md-subhead">
-    import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from 'ng2-material/all';
+    import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
   </highlight>
   <p>
     Then reference the styles in your page
@@ -57,9 +57,19 @@
   </highlight>
   <p>Or <em>(more preferably)</em> import them into your SCSS files.</p>
   <highlight type="scss" class="md-subhead">
-    $md-font-url: 'node_modules/ng2-material/dist/';
+    $md-font-url: "node_modules/ng2-material/dist/";
     @import "node_modules/ng2-material/dist/font";
     @import "node_modules/ng2-material/source/all";
+  </highlight>
+  <p>If you want to use custom theme colors, include the <code>core</code> styles and override the theme variables
+    before including the <code>components</code>.</p>
+  <highlight type="scss" class="md-subhead">
+    $md-font-url: "node_modules/ng2-material/dist/";
+    @import "node_modules/ng2-material/dist/font";
+    @import "node_modules/ng2-material/source/core";
+    $md-primary: md-palette($md-brown, 500, 100, 700, $md-contrast-palettes);
+    $md-accent: md-palette($md-deep-orange, 500, 300, 700, $md-contrast-palettes);
+    @import "node_modules/ng2-material/source/components";
   </highlight>
 </section>
 
