@@ -6,9 +6,9 @@ $sidenav-mobile-width: 320px !default;
 $sidenav-desktop-width: 400px !default;
 $sidenav-min-space: 56px !default;
 
-md-sidenav {
+[md-sidenav] {
   box-sizing: border-box;
-  position: absolute;
+  position: fixed;
   flex-direction: column;
   z-index: $z-index-sidenav;
 
@@ -97,13 +97,13 @@ md-sidenav {
 }
 
 @media screen and (min-width: $layout-breakpoint-sm) {
-  md-sidenav {
+  [md-sidenav] {
     max-width: $sidenav-desktop-width;
   }
 }
 
 @media screen and (max-width: $sidenav-desktop-width + $sidenav-min-space) {
-  md-sidenav {
+  [md-sidenav] {
     width: calc(100% - #{$sidenav-min-space});
     min-width: calc(100% - #{$sidenav-min-space});
     max-width: calc(100% - #{$sidenav-min-space});
@@ -120,6 +120,6 @@ md-sidenav {
 }
 
 
-md-sidenav {
-  background-color: md-color($md-background,500); //'{{background-color}}';
+[md-sidenav] {
+  background-color: md-color($md-background,A100); //'{{background-color}}';
 }
