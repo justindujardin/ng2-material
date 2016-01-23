@@ -93,12 +93,8 @@ md-switch {
     .md-switch-bar,
     .md-switch-thumb-container,
     .md-switch-thumb {
-      transition: $swift-ease-in-out;
+      transition: all 0.08s linear;
       transition-property: transform, background-color;
-    }
-    .md-switch-bar,
-    .md-switch-thumb {
-      transition-delay: 0.05s;
     }
   }
 
