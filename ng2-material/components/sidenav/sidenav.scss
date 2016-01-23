@@ -81,6 +81,7 @@ $sidenav-min-space: 56px !default;
 .md-sidenav-left {
   left: 0;
   top: 0;
+  will-change: transform;
   transform: translate3d(0%, 0, 0);
   &.md-closed {
     transform: translate3d(-100%, 0, 0);
@@ -90,6 +91,7 @@ $sidenav-min-space: 56px !default;
 .md-sidenav-right {
   left: 100%;
   top: 0;
+  will-change: transform;
   transform: translate3d(-100%, 0, 0);
   &.md-closed {
     transform: translate3d(0%, 0, 0);

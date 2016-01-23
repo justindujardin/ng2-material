@@ -1,9 +1,14 @@
 <main layout="row" flex>
   <nav md-sidenav="menu" class="examples-toc md-sidenav-left md-whiteframe-z2">
-    <h1>Components</h1>
-    <ul>
-      <li *ngFor="#value of components"><a [routerLink]="['Component', {id: value.id}]">{{value.name}}</a></li>
-    </ul>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h1>Components</h1>
+      </div>
+    </md-toolbar>
+    <md-list>
+      <md-list-item *ngFor="#value of components" [routerLink]="['Component', {id: value.id}]">{{value.name}}
+      </md-list-item>
+    </md-list>
   </nav>
   <section layout="column" layout-align="start center" flex>
     <md-toolbar class="fixed-toolbar"

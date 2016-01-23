@@ -103,6 +103,7 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
         backdrop.clickClose = true;
         this.renderer.setElementClass(componentRef.location, 'md-backdrop', true);
         this.renderer.setElementClass(componentRef.location, 'md-opaque', true);
+        this.renderer.setElementClass(componentRef.location, 'md-backdrop-absolute', false);
         DOM.appendChild(this._defaultContainer, componentRef.location.nativeElement);
 
         this._backdropRef = componentRef;
