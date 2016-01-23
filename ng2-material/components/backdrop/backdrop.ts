@@ -7,6 +7,7 @@ import {Component} from "angular2/core";
 import {Input} from "angular2/core";
 import {Output} from "angular2/core";
 import {EventEmitter} from "angular2/core";
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
 /**
  * An overlay for content on the page.
@@ -28,6 +29,12 @@ export class MdBackdrop {
    */
   @Input()
   clickClose: boolean = false;
+
+  /**
+   * When true, disable the parent container scroll while the backdrop is active.
+   */
+  @Input()
+  hideScroll: boolean = true;
 
   /**
    * Emits when the backdrop begins to hide.
@@ -80,6 +87,7 @@ export class MdBackdrop {
 
   private _visible: boolean = false;
   private _transitioning: boolean = false;
+  private _previousOverflow: string = null;
 
   onClick() {
     if (this.clickClose && !this._transitioning && this.visible) {
@@ -99,6 +107,16 @@ export class MdBackdrop {
     this._transitioning = true;
     this.onShowing.emit(this);
     let action = this.transitionAddClass ? Animate.enter : Animate.leave;
+
+    if (this.hideScroll && this.element && !this._previousOverflow) {
+      let parent = DOM.parentElement(this.element.nativeElement);
+      let style = DOM.getStyle(parent, 'overflow');
+      if (style !== 'hidden') {
+        this._previousOverflow = DOM.getStyle(parent, 'overflow');
+        DOM.setStyle(parent, 'overflow', 'hidden');
+      }
+    }
+
     return action(this.element.nativeElement, this.transitionClass).then(() => {
       this._transitioning = false;
       this.onShown.emit(this);
@@ -117,6 +135,13 @@ export class MdBackdrop {
     this._transitioning = true;
     this.onHiding.emit(this);
     let action = this.transitionAddClass ? Animate.leave : Animate.enter;
+
+    if (this.hideScroll && this.element && this._previousOverflow !== null) {
+      let parent = DOM.parentElement(this.element.nativeElement);
+      DOM.setStyle(parent, 'overflow', this._previousOverflow);
+      this._previousOverflow = null;
+    }
+
     return action(this.element.nativeElement, this.transitionClass).then(() => {
       this._transitioning = false;
       this.onHidden.emit(this);
