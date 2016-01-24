@@ -10,10 +10,16 @@ $app-content-sm: 360px;
 demos-app {
 
   .app-menu {
+    md-list-item {
+      cursor: pointer;
+    }
     md-toolbar {
       background-color: transparent;
       color: md-color($md-foreground, secondary-text);
       border-bottom: 1px solid md-color($md-foreground, divider);
+      h1 {
+        cursor: pointer;
+      }
     }
   }
 
@@ -83,19 +89,21 @@ demos-app {
   > md-toolbar {
     font-family: $font-family;
   }
-  .fixed-toolbar, .shadow-toolbar {
+  .fixed-toolbar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: $z-index-toolbar;
-    &.shadow-toolbar {
-      z-index: $z-index-toolbar - 1;
-    }
     .verbose-title {
       @media screen and (max-width: $layout-breakpoint-sm) {
         display: none;
       }
+    }
+  }
+  &.locked-open {
+    .fixed-toolbar {
+      padding-left: $sidenav-desktop-width;
     }
   }
 

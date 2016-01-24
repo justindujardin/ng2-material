@@ -33,18 +33,29 @@ import {Inject} from "angular2/core";
  * A slide-out navigation element that transitions in from the left or right.
  *
  * ```html
- * <nav md-sidenav="menu">
+ * <nav md-sidenav="menu" align="right">
  *   <h1>Components</h1>
  *   <button md-button (click)="close()">Close</button>
  * </nav>
  * ```
  */
 @Directive({
-  selector: '[md-sidenav]'
+  selector: '[md-sidenav]',
+  host: {
+    '[class.md-locked-open]': 'lockedOpen',
+    '[class.md-whiteframe-z2]': 'visible && !lockedOpen',
+    '[class.md-sidenav-left]': '_align!="right"',
+    '[class.md-sidenav-right]': '_align=="right"'
+  }
 })
 export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   @Input('md-sidenav')
   name: string = 'default';
+
+  @Input('align') private _align: string = 'left';
+
+  @Input()
+  lockedOpen: boolean = false;
 
   private _backdropRef: ComponentRef = null;
 
@@ -66,7 +77,13 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   }
 
   show(): Promise<void> {
-    return this._createBackdrop(this.element).then(() => super.show());
+    let promise: any = this.lockedOpen ? Promise.resolve() : this._createBackdrop(this.element);
+    return promise.then(() => super.show());
+  }
+  hide(): Promise<void> {
+    return super.hide().then(() => {
+      this._destroyBackdrop();
+    });
   }
 
   _destroyBackdrop(): Promise<void> {
@@ -78,8 +95,8 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   }
 
 
-  toggle(): Promise<void> {
-    return this.visible ? this.hide() : this.show();
+  toggle(open: boolean = !this.visible): Promise<void> {
+    return open ? this.hide() : this.show();
   }
 
   isOpen(): boolean {
@@ -131,6 +148,28 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
 
 @Injectable()
 export class SidenavService {
+  show(name: string): Promise<void> {
+    let instance: MdSidenav = this.find(name);
+    if (!instance) {
+      return Promise.reject<void>('invalid container');
+    }
+    return instance.show();
+  }
+
+  hide(name: string): Promise<void> {
+    let instance: MdSidenav = this.find(name);
+    if (!instance) {
+      return Promise.reject<void>('invalid container');
+    }
+    return instance.hide();
+  }
+
+  find(name: string): MdSidenav {
+    return this._instances.filter((c: MdSidenav) => {
+      return c.name === name;
+    })[0];
+  }
+
   private _instances: MdSidenav[] = [];
 
   register(instance: MdSidenav) {
@@ -143,25 +182,4 @@ export class SidenavService {
     });
   }
 
-  show(name: string): Promise<void> {
-    let instance: MdSidenav = this._findInstance(name);
-    if (!instance) {
-      return Promise.reject<void>('invalid container');
-    }
-    return instance.show();
-  }
-
-  hide(name: string): Promise<void> {
-    let instance: MdSidenav = this._findInstance(name);
-    if (!instance) {
-      return Promise.reject<void>('invalid container');
-    }
-    return instance.hide();
-  }
-
-  private _findInstance(name: string): MdSidenav {
-    return this._instances.filter((c: MdSidenav) => {
-      return c.name === name;
-    })[0];
-  }
 }

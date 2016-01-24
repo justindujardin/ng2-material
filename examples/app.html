@@ -1,5 +1,5 @@
 <main layout="row" flex>
-  <nav md-sidenav="menu" class="app-menu md-sidenav-left md-whiteframe-z2">
+  <nav md-sidenav="menu" [align]="'right'" class="app-menu" [lockedOpen]="media.hasMedia('gt-md')">
     <md-toolbar [routerLink]="['Index']">
       <div class="md-toolbar-tools">
         <h1>ng2-material</h1>
@@ -26,6 +26,7 @@
       <div class="md-toolbar-tools">
         <button md-button
                 class="md-hamburger md-icon-button"
+                hide-gt-md
                 (click)="showMenu($event)"
                 aria-label="Home">
           <i md-icon class="md-dark">menu</i>

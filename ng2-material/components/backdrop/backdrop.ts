@@ -110,7 +110,7 @@ export class MdBackdrop {
 
     if (this.hideScroll && this.element && !this._previousOverflow) {
       let parent = DOM.parentElement(this.element.nativeElement);
-      let style = DOM.getStyle(parent, 'overflow');
+      let style = parent ? DOM.getStyle(parent, 'overflow') : 'hidden';
       if (style !== 'hidden') {
         this._previousOverflow = DOM.getStyle(parent, 'overflow');
         DOM.setStyle(parent, 'overflow', 'hidden');

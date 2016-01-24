@@ -24,6 +24,7 @@ import { AppViewListener } from 'angular2/src/core/linker/view_listener';
 import { DebugElementViewListener } from 'angular2/platform/common_dom';
 import {SidenavService} from "ng2-material/components/sidenav/sidenav";
 import {IComponentMeta} from "./services/components";
+import {Media} from "ng2-material/core/util/media";
 
 /**
  * Describe an example that can be dynamically loaded.
@@ -42,7 +43,10 @@ export interface IExampleData {
 ])
 
 @Component({
-  selector: 'demos-app'
+  selector: 'demos-app',
+  host: {
+    '[class.locked-open]' : 'media.hasMedia("gt-md")'
+  }
 })
 @View({
   templateUrl: 'examples/app.html',
@@ -60,6 +64,7 @@ export class DemosApp {
 
   constructor(http: Http,
               public navigation: NavigationService,
+              public media: Media,
               private _components: ComponentsService,
               private _sidenav: SidenavService) {
     http.get('public/version.json')

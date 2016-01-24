@@ -114,6 +114,10 @@ export class Media {
     }
   }
 
+  hasMedia(size:string): boolean {
+    return Media.hasMedia(size);
+  }
+
   static hasMedia(size: string): boolean {
     let query = Media.getQuery(size);
     if (!query) {
