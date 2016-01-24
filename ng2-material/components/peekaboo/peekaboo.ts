@@ -112,10 +112,7 @@ export class MdPeekaboo implements OnDestroy {
   private _mediaListeners: MediaListener[] = [];
 
 
-  constructor(@Attribute('breakAction') action: string, public media: Media) {
-    if (isPresent(action)) {
-      this.breakAction = action;
-    }
+  constructor(public media: Media) {
     window.addEventListener('scroll', this._windowScroll);
     MdPeekaboo.SIZES.forEach((size: string) => {
       this._watchMediaQuery(size);

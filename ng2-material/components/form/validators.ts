@@ -30,13 +30,7 @@ export class MdPatternValidator implements Validator {
     }
   }
 
-  @Input('mdPattern') mdPattern: string;
-
-  constructor(@Attribute('mdPattern') pattern: any) {
-    if (isPresent(pattern)) {
-      this.mdPattern = pattern;
-    }
-  }
+  @Input() mdPattern: string;
 
   validate(control: Control): {[key: string]: any} {
     return MdPatternValidator.inline(this.mdPattern)(control);
@@ -63,13 +57,7 @@ export class MdMaxLengthValidator implements Validator {
     }
   }
 
-  @Input('mdMaxLength') mdMaxLength: string;
-
-  constructor(@Attribute('mdMaxLength') attr: any) {
-    if (isPresent(attr)) {
-      this.mdMaxLength = attr;
-    }
-  }
+  @Input() mdMaxLength: string;
 
   validate(control: Control): {[key: string]: any} {
     return MdMaxLengthValidator.inline(this.mdMaxLength)(control);
@@ -96,13 +84,7 @@ export class MdMaxValueValidator implements Validator {
     }
   }
 
-  @Input('mdMax') mdMax: string;
-
-  constructor(@Attribute('mdMax') attr: any) {
-    if (isPresent(attr)) {
-      this.mdMax = attr;
-    }
-  }
+  @Input() mdMax: string;
 
   validate(control: Control): {[key: string]: any} {
     return MdMaxValueValidator.inline(this.mdMax)(control);
@@ -129,13 +111,7 @@ export class MdMinValueValidator implements Validator {
     }
   }
 
-  @Input('mdMin') mdMin: string;
-
-  constructor(@Attribute('mdMin') attr: any) {
-    if (isPresent(attr)) {
-      this.mdMin = attr;
-    }
-  }
+  @Input() mdMin: string;
 
   validate(control: Control): {[key: string]: any} {
     return MdMaxValueValidator.inline(this.mdMin)(control);

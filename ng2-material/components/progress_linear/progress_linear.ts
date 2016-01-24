@@ -52,7 +52,7 @@ export class MdProgressLinear implements OnChanges {
   @Input() bufferValue: number;
 
   /** The render mode for the progress bar. */
-  @Input() mode: string;
+  @Input() mode: string = ProgressMode.DETERMINATE;
 
   /** CSS `transform` property applied to the primary bar. */
   primaryBarTransform: string;
@@ -60,11 +60,9 @@ export class MdProgressLinear implements OnChanges {
   /** CSS `transform` property applied to the secondary bar. */
   secondaryBarTransform: string;
 
-  constructor(@Attribute('mode') mode: string) {
+  constructor() {
     this.primaryBarTransform = '';
     this.secondaryBarTransform = '';
-
-    this.mode = isPresent(mode) ? mode : ProgressMode.DETERMINATE;
   }
 
   get value() {

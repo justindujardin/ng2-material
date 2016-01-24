@@ -32,9 +32,7 @@ export class MdTab {
   private _active: boolean = false;
 
   constructor(public viewContainer: ViewContainerRef,
-              @Attribute('disabled') disabled: string,
               public templateRef: TemplateRef) {
-    this.disabled = isPresent(disabled);
   }
 
   @Input() set active(active: boolean) {
@@ -90,9 +88,7 @@ export class MdTabs {
   @Input() mdNoScroll: boolean = false;
 
   constructor(@Query(MdTab) public panes: QueryList<MdTab>,
-              private _element: ElementRef,
-              @Attribute('mdNoScroll') noScroll: string) {
-    this.mdNoScroll = isPresent(noScroll);
+              private _element: ElementRef) {
     this.panes.changes.subscribe((_) => {
       this.panes.toArray().forEach((p: MdTab, index: number) => {
         p.active = index === this._selected;

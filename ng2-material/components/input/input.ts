@@ -49,13 +49,6 @@ export class MdInput {
   @Output()
   mdFocusChange: EventEmitter<any> = new EventEmitter();
 
-  constructor(@Attribute('value') value: string,
-              @Attribute('id') id: string) {
-    if (!isBlank(value)) {
-      this.value = value;
-    }
-  }
-
   setHasFocus(hasFocus: boolean) {
     ObservableWrapper.callEmit(this.mdFocusChange, hasFocus);
   }
@@ -88,7 +81,7 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
   // Whether the input inside of this container has a placeholder
   inputHasPlaceholder: boolean = false;
 
-  constructor(@Attribute('id') id: string, private _element: ElementRef) {
+  constructor(private _element: ElementRef) {
   }
 
   ngOnChanges(_) {

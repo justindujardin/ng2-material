@@ -31,21 +31,25 @@ import {parseTabIndexAttribute} from "../../core/util/util";
 })
 export class MdCheckbox {
 
-  @Output() checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   /** Whether this checkbox is checked. */
-  @Input() checked: boolean;
+  @Input()
+  checked: boolean = false;
 
   /** Whether this checkbox is disabled. */
-  @Input('disabled') disabled_: boolean;
+  @Input('disabled')
+  disabled_: boolean = false;
 
   /** Setter for tabindex */
-  @Input() tabindex: number;
+  @Input('tabindex') private _tabindex: number;
+  set tabindex(value: number) {
+    this._tabindex = parseTabIndexAttribute(value);
+  }
 
-  constructor(@Attribute('tabindex') tabindex: string) {
-    this.checked = false;
-    this.tabindex = parseTabIndexAttribute(tabindex);
-    this.disabled_ = false;
+  get tabindex(): number {
+    return this._tabindex;
   }
 
   get disabled() {

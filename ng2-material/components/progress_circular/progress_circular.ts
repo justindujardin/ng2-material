@@ -63,31 +63,30 @@ class Defaults {
 export class MdProgressCircular extends MdProgressLinear {
 
   /** Value for the circle diameter. */
-  @Input('diameter') diameter_:string;
+  @Input('diameter')
+  diameter_: string;
+
+  @Input()
+  mode: string;
+
 
   /** CSS `transform` property applied to the circle diameter. */
-  diameterTransformation:string;
+  diameterTransformation: string;
 
   /** CSS property length of circle preloader side. */
-  outerSize:string;
+  outerSize: string;
 
   /** CSS `transform` property applied to the circle gap. */
-  gapTransition:string;
+  gapTransition: string;
 
   /** CSS `transition` property applied to circle. */
-  defaultHalfTransition:string;
+  defaultHalfTransition: string = Defaults.DEFAULT_HALF_TRANSITION;
 
   /** CSS `transform` property applied to the left half of circle. */
-  leftHalfTransform:string;
+  leftHalfTransform: string;
 
   /** CSS `transform` property applied to the right half of circle. */
-  rightHalfTransform:string;
-
-  constructor(@Attribute('mode') mode:string) {
-    super(mode);
-
-    this.defaultHalfTransition = Defaults.DEFAULT_HALF_TRANSITION;
-  }
+  rightHalfTransform: string;
 
   get diameter() {
     return this.diameter_;
@@ -131,7 +130,7 @@ export class MdProgressCircular extends MdProgressLinear {
     this.diameterTransformation = `translate(-50%, -50%) scale( ${this.getDiameterRatio()} )`;
   }
 
-  getDiameterRatio():number {
+  getDiameterRatio(): number {
     if (!this.diameter) return Defaults.DEFAULT_SCALING;
 
     var match = /([0-9]*)%/.exec(this.diameter);
@@ -140,7 +139,7 @@ export class MdProgressCircular extends MdProgressLinear {
     return (value > 1) ? value / Defaults.DEFAULT_PROGRESS_SIZE : value;
   }
 
-  webkit(style:string) {
+  webkit(style: string) {
     return `-webkit-${style}`;
   }
 }

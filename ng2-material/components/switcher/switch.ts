@@ -30,7 +30,4 @@ import {MdCheckbox} from '../checkbox/checkbox';
   encapsulation: ViewEncapsulation.None
 })
 export class MdSwitch extends MdCheckbox {
-  constructor(@Attribute('tabindex') tabindex: string) {
-    super(tabindex);
-  }
 }

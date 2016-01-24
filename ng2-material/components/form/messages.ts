@@ -24,14 +24,7 @@ import {isPresent} from 'angular2/src/facade/lang';
 })
 export class MdMessage {
   @Input('md-message') errorKey: string;
-
   okay: boolean = true;
-
-  constructor(@Attribute('md-message') pattern: any) {
-    if (isPresent(pattern)) {
-      this.errorKey = pattern;
-    }
-  }
 }
 
 
@@ -62,11 +55,7 @@ export class MdMessages implements OnInit, OnDestroy {
 
 
   constructor(@Query(MdMessage) public messages: QueryList<MdMessage>,
-              @Optional() @SkipSelf() @Host() public form: NgFormModel,
-              @Attribute('md-messages') pattern: any) {
-    if (isPresent(pattern)) {
-      this.property = pattern;
-    }
+              @Optional() @SkipSelf() @Host() public form: NgFormModel) {
   }
 
   /**
