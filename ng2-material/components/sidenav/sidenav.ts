@@ -21,19 +21,39 @@ import {Attribute} from "angular2/core";
 import {isPresent} from "angular2/src/facade/lang";
 import {forwardRef} from "angular2/core";
 import {Inject} from "angular2/core";
+import {CONST} from "angular2/src/facade/lang";
+import {SidenavService} from "./sidenav_service";
 
-// TODO(jd): Lock open sidenav
-// TODO(jd): Right alignment
-// TODO(jd): Behaviors for testing
-// - can lock open
-// - service can find sidenavs by name
 
+@CONST()
+export class SidenavAlignment {
+  /**
+   * The sidenav will be displayed on the left side of the content.
+   */
+  @CONST() static LEFT = 'left';
+  /**
+   * The sidenav will be displayed on the right side of the content.
+   */
+  @CONST() static RIGHT = 'right';
+}
+
+@CONST()
+export class SidenavStyle {
+  /**
+   * The sidenav will hover over the content.
+   */
+  @CONST() static OVER = 'over';
+  /**
+   * The sidenav will push the content to the side and display without obscuring it.
+   */
+  @CONST() static SIDE = 'side';
+}
 
 /**
  * A slide-out navigation element that transitions in from the left or right.
  *
  * ```html
- * <nav md-sidenav="menu" align="right">
+ * <nav md-sidenav="menu" align="right" style="side">
  *   <h1>Components</h1>
  *   <button md-button (click)="close()">Close</button>
  * </nav>
@@ -42,20 +62,37 @@ import {Inject} from "angular2/core";
 @Directive({
   selector: '[md-sidenav]',
   host: {
-    '[class.md-locked-open]': 'lockedOpen',
-    '[class.md-whiteframe-z2]': 'visible && !lockedOpen',
-    '[class.md-sidenav-left]': '_align!="right"',
-    '[class.md-sidenav-right]': '_align=="right"'
+    '[class.md-style-side]': 'style=="side"',
+    '[class.md-whiteframe-z2]': 'visible',
+    '[class.md-sidenav-left]': 'align!="right"',
+    '[class.md-sidenav-right]': 'align=="right"'
   }
 })
 export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   @Input('md-sidenav')
   name: string = 'default';
 
-  @Input('align') private _align: string = 'left';
+  private _align: string = SidenavAlignment.LEFT;
 
   @Input()
-  lockedOpen: boolean = false;
+  set align(value: string) {
+    this._align = value === SidenavAlignment.RIGHT ? SidenavAlignment.RIGHT : SidenavAlignment.LEFT;
+  }
+
+  get align(): string {
+    return this._align;
+  }
+
+  private _style: string = SidenavStyle.OVER;
+
+  @Input()
+  set style(value: string) {
+    this._style = value === SidenavStyle.SIDE ? SidenavStyle.SIDE : SidenavStyle.OVER;
+  }
+
+  get style(): string {
+    return this._style;
+  }
 
   private _backdropRef: ComponentRef = null;
 
@@ -67,26 +104,35 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   constructor(public element: ElementRef,
               public dcl: DynamicComponentLoader,
               public renderer: Renderer,
-              @Inject(forwardRef(() => SidenavService)) public service: SidenavService,
-              @Attribute('md-sidenav') name: string) {
+              @Inject(forwardRef(() => SidenavService)) public service: SidenavService) {
     super(element);
     DOM.addClass(this.element.nativeElement, this.transitionClass);
-    if (isPresent(name)) {
-      this.name = name;
-    }
   }
 
   show(): Promise<void> {
-    let promise: any = this.lockedOpen ? Promise.resolve() : this._createBackdrop(this.element);
+    let promise: any = this.style === SidenavStyle.SIDE ? Promise.resolve() : this._createBackdrop(this.element);
     return promise.then(() => super.show());
   }
+
   hide(): Promise<void> {
     return super.hide().then(() => {
       this._destroyBackdrop();
     });
   }
 
-  _destroyBackdrop(): Promise<void> {
+  toggle(open: boolean = !this.visible): Promise<void> {
+    return open ? this.hide() : this.show();
+  }
+
+  ngOnInit(): any {
+    this.service.register(this);
+  }
+
+  ngOnDestroy(): any {
+    this.service.unregister(this);
+  }
+
+  private _destroyBackdrop(): Promise<void> {
     if (this._backdropRef) {
       this._backdropRef.dispose();
       this._backdropRef = null;
@@ -94,23 +140,7 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
     return Promise.resolve();
   }
 
-
-  toggle(open: boolean = !this.visible): Promise<void> {
-    return open ? this.hide() : this.show();
-  }
-
-  isOpen(): boolean {
-    return this.visible;
-  }
-
-  private _lockedOpen: boolean = false;
-
-  isLockedOpen(): boolean {
-    return this._lockedOpen;
-  }
-
-
-  _createBackdrop(elementRef: ElementRef): Promise<ComponentRef> {
+  private _createBackdrop(elementRef: ElementRef): Promise<ComponentRef> {
     if (this._backdropRef) {
       return Promise.resolve(this._backdropRef);
     }
@@ -135,51 +165,4 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
         return componentRef;
       });
   }
-
-  ngOnInit(): any {
-    this.service.register(this);
-  }
-
-  ngOnDestroy(): any {
-    this.service.unregister(this);
-  }
-
-}
-
-@Injectable()
-export class SidenavService {
-  show(name: string): Promise<void> {
-    let instance: MdSidenav = this.find(name);
-    if (!instance) {
-      return Promise.reject<void>('invalid container');
-    }
-    return instance.show();
-  }
-
-  hide(name: string): Promise<void> {
-    let instance: MdSidenav = this.find(name);
-    if (!instance) {
-      return Promise.reject<void>('invalid container');
-    }
-    return instance.hide();
-  }
-
-  find(name: string): MdSidenav {
-    return this._instances.filter((c: MdSidenav) => {
-      return c.name === name;
-    })[0];
-  }
-
-  private _instances: MdSidenav[] = [];
-
-  register(instance: MdSidenav) {
-    this._instances.push(instance);
-  }
-
-  unregister(instance: MdSidenav) {
-    this._instances = this._instances.filter((c: MdSidenav) => {
-      return c.name !== instance.name;
-    });
-  }
-
 }

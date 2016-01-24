@@ -1,5 +1,5 @@
 <main layout="row" flex>
-  <nav md-sidenav="menu" [align]="'right'" class="app-menu" [lockedOpen]="media.hasMedia('gt-md')">
+  <nav md-sidenav="menu" class="app-menu" [style]="fullPage ? 'side' : 'over'">
     <md-toolbar [routerLink]="['Index']">
       <div class="md-toolbar-tools">
         <h1>ng2-material</h1>
@@ -10,7 +10,7 @@
       </md-list-item>
     </md-list>
   </nav>
-  <section layout="column" layout-align="start center" flex>
+  <section class="app-content" layout="column" layout-align="start center" flex>
     <md-toolbar class="fixed-toolbar"
                 md-peekaboo
                 [break]="190"

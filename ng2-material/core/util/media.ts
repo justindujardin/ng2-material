@@ -46,7 +46,7 @@ export class MediaListener {
   /**
    * Emits when the query that this is listening for changes.
    */
-  @Output() onMatched: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onMatched: EventEmitter<MediaQueryList> = new EventEmitter<MediaQueryList>();
 
   /**
    * Determine if this query is currently matched by the viewport.
@@ -63,7 +63,7 @@ export class MediaListener {
   constructor(public query: string,
               private _mql: MediaQueryList,
               private _media: Media) {
-    this._listener = (mql: MediaQueryList) => this.onMatched.emit(query);
+    this._listener = (mql: MediaQueryList) => this.onMatched.emit(mql);
     this._mql.addListener(this._listener);
   }
 

@@ -54,7 +54,8 @@ export * from './components/switcher/switch';
 import {MdSubheader} from "./components/subheader/subheader";
 export * from './components/subheader/subheader';
 
-import {MdSidenav, SidenavService} from './components/sidenav/sidenav';
+import {MdSidenav} from './components/sidenav/sidenav';
+import {SidenavService} from './components/sidenav/sidenav_service';
 export * from './components/sidenav/sidenav';
 
 import {MdToolbar} from './components/toolbar/toolbar';

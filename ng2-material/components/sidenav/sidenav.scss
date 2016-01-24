@@ -35,36 +35,36 @@ $sidenav-min-space: 56px !default;
     transition: $swift-ease-out;
   }
 
-  &.md-locked-open-add,
-  &.md-locked-open-remove {
+  &.md-style-side-add,
+  &.md-style-side-remove {
     position: static;
     display: flex;
     transform: translate3d(0, 0, 0);
   }
 
-  &.md-locked-open,
-  &.md-locked-open.md-closed,
-  &.md-locked-open.md-closed.md-sidenav-left,
-  &.md-locked-open.md-closed.md-sidenav-right,
-  &.md-locked-open-remove.md-closed {
+  &.md-style-side,
+  &.md-style-side.md-closed,
+  &.md-style-side.md-closed.md-sidenav-left,
+  &.md-style-side.md-closed.md-sidenav-right,
+  &.md-style-side-remove.md-closed {
     position: static;
     display: flex;
     transform: translate3d(0, 0, 0);
   }
-  &.md-locked-open-remove-active {
+  &.md-style-side-remove-active {
     transition: width $swift-ease-in-duration $swift-ease-in-timing-function,
                 min-width $swift-ease-in-duration $swift-ease-in-timing-function;
     width: 0;
     min-width: 0;
   }
 
-  &.md-closed.md-locked-open-add {
+  &.md-closed.md-style-side-add {
     width: 0;
     min-width: 0;
     transform: translate3d(0%, 0, 0);
   }
 
-  &.md-closed.md-locked-open-add-active {
+  &.md-closed.md-style-side-add-active {
     transition: width $swift-ease-in-duration $swift-ease-in-timing-function,
                 min-width $swift-ease-in-duration $swift-ease-in-timing-function;
     width: $sidenav-mobile-width;
@@ -73,9 +73,6 @@ $sidenav-min-space: 56px !default;
   }
 
   @extend .md-sidenav-left;
-}
-.md-sidenav-backdrop.md-locked-open {
-  display: none;
 }
 
 .md-sidenav-left {

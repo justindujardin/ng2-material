@@ -9,7 +9,8 @@ import Example from "../example";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {NavigationService} from "../services/navigation";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {SidenavService} from "../../ng2-material/components/sidenav/sidenav";
+import {SidenavService} from "../../ng2-material/components/sidenav/sidenav_service";
+import {TimerWrapper} from "angular2/src/facade/async";
 
 @Component({
   selector: 'component-page',
@@ -36,7 +37,9 @@ export class ComponentPage implements OnInit {
   }
 
   ngOnInit() {
-    this._sidenav.hide('menu');
+    TimerWrapper.setTimeout(() => {
+      this._sidenav.hide('menu');
+    }, 0);
     let id = this._routeParams.get('id');
     this._components.getComponent(id).then((c: IComponentMeta) => {
       this.value = c;
