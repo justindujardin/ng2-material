@@ -23,7 +23,8 @@ import {isPresent} from 'angular2/src/facade/lang';
   }
 })
 export class MdMessage {
-  @Input('md-message') errorKey: string;
+  @Input('md-message')
+  errorKey: string;
   okay: boolean = true;
 }
 
@@ -39,9 +40,19 @@ export class MdMessage {
 })
 export class MdMessages implements OnInit, OnDestroy {
 
-  @Input('md-messages') property: string|NgControlName;
+  @Input('md-messages')
+  property: string|NgControlName;
 
-  valid: boolean = true;
+  get valid(): boolean {
+    if (this.property instanceof NgControlName) {
+      let ctrl = <NgControlName>this.property;
+      return !!ctrl.valid;
+    }
+    let prop = <string>this.property;
+    let group = this.form.control;
+    let ctrl = group.controls[prop];
+    return ctrl && ctrl.valid;
+  }
 
   get isTouched(): boolean {
     if (this.property instanceof NgControlName) {
@@ -92,7 +103,7 @@ export class MdMessages implements OnInit, OnDestroy {
     this._unsubscribe.unsubscribe();
   }
 
-  private _valueChanged(newValue: string) {
+  private _valueChanged() {
     let errors: {[errorKey:string]:string} = null;
     if (this.property instanceof NgControlName) {
       let ctrl: NgControlName = <NgControlName>this.property;
@@ -104,7 +115,6 @@ export class MdMessages implements OnInit, OnDestroy {
       let ctrl: AbstractControl = group.controls[prop];
       errors = ctrl.errors;
     }
-    this.valid = !errors;
     if (errors) {
       this.messages.toArray().forEach((m: MdMessage) => {
         m.okay = !m.errorKey ? !errors : !isPresent(errors[m.errorKey]);
