@@ -16,10 +16,9 @@ import {MdTab, MdTabs} from '../../../ng2-material/components/tabs/tabs';
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
 import {CORE_DIRECTIVES} from "angular2/common";
-import {findChildrenByAttribute,findChildrenByTag,findChildByTag} from "../../util";
 import {Ink} from "../../../ng2-material/core/util/ink";
 import {MdProgressLinear, ProgressMode} from "../../../ng2-material/components/progress_linear/progress_linear";
-
+import {By} from 'angular2/platform/browser';
 
 export function main() {
 
@@ -36,11 +35,11 @@ export function main() {
   class TestComponent {
     value: number = 25;
     bufferValue: number = 50;
-    blankValue:number;
-    modeDeterminate:string = ProgressMode.DETERMINATE;
-    modeIndeterminate:string = ProgressMode.INDETERMINATE;
-    modeBuffer:string = ProgressMode.BUFFER;
-    modeQuery:string = ProgressMode.QUERY;
+    blankValue: number;
+    modeDeterminate: string = ProgressMode.DETERMINATE;
+    modeIndeterminate: string = ProgressMode.INDETERMINATE;
+    modeBuffer: string = ProgressMode.BUFFER;
+    modeQuery: string = ProgressMode.QUERY;
   }
 
   describe('Progress Linear', () => {
@@ -52,7 +51,7 @@ export function main() {
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
       return prep.then((fixture: ComponentFixture) => {
         fixture.detectChanges();
-        let debug = findChildByTag(fixture.debugElement, 'md-progress-linear');
+        let debug = fixture.debugElement.query(By.css('md-progress-linear'));
         let component = <MdProgressLinear>debug.componentInstance;
         return {
           fixture: fixture,

@@ -14,11 +14,9 @@ import {UrlResolver} from 'angular2/compiler';
 import {TestUrlResolver} from '../../test_url_resolver';
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
-import {findChildByTag} from "../../util";
-import {findChildById} from "../../util";
 import {MdBackdrop} from "../../../ng2-material/components/backdrop/backdrop";
 import {TimerWrapper} from "angular2/src/facade/async";
-
+import {By} from 'angular2/platform/browser';
 
 export function main() {
 
@@ -44,7 +42,7 @@ export function main() {
       return builder.createAsync(TestComponent)
         .then((fixture: ComponentFixture) => {
           fixture.detectChanges();
-          let debug = findChildByTag(fixture.debugElement, 'md-backdrop');
+          let debug = fixture.debugElement.query(By.css('md-backdrop'));
           let backdrop = <MdBackdrop>debug.componentInstance;
           result = {
             fixture: fixture,

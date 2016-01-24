@@ -16,10 +16,10 @@ import {MdMessage, MdMessages} from '../../../ng2-material/components/form/messa
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgFormControl, NgFormModel, NgControlName} from "angular2/common";
-import {findChildrenByAttribute,findChildrenByTag,findChildByTag} from "../../util";
 import {TimerWrapper} from "angular2/src/facade/async";
+import {By} from "angular2/platform/browser";
 import {Ink} from "../../../ng2-material/core/util/ink";
-import {findChildByAttribute} from "../../util";
+import {Control} from "angular2/common";
 
 
 export function main() {
@@ -53,21 +53,14 @@ export function main() {
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
       return prep.then((fixture: ComponentFixture) => {
         fixture.detectChanges();
-        let container = <MdMessages>findChildByAttribute(fixture.debugElement, 'md-messages').componentInstance;
-        let messages = <MdMessage[]>findChildrenByAttribute(fixture.debugElement, 'md-message').map(b => b.componentInstance);
+        let container = <MdMessages>fixture.debugElement.query(By.css('[md-messages]')).componentInstance;
+        let messages = <MdMessage[]>fixture.debugElement.queryAll(By.css('[md-message]')).map(b => b.componentInstance);
         return {
           fixture: fixture,
           container: container,
           messages: messages
         };
       });
-    }
-
-    function getByInstance<T>(debug: DebugElement, type: any): T {
-      let found = debug.query((debugEl: DebugElement) => {
-        return debugEl.componentInstance instanceof type;
-      });
-      return <T>(found ? found.componentInstance : null);
     }
 
     beforeEachProviders(() => [MATERIAL_PROVIDERS, provide(UrlResolver, {useValue: new TestUrlResolver()}),]);
@@ -96,25 +89,20 @@ export function main() {
           async.done();
         }).catch((e) => console.log(e));
       }));
-      // TODO(jd): how to test form value changes? Need to change the control and have it
-      // trigger its own change events so that md-messages picks them up.
-      //it('should add md-valid and md-invalid classes to host', inject([AsyncTestCompleter], (async) => {
-      //  setup().then((api: IFormMessagesFixture) => {
-      //    TimerWrapper.setTimeout(()=> {
-      //      let app: TestComponent = api.fixture.componentInstance;
-      //      expect(app.name).toBe('MorTon');
-      //      expect(api.container.valid).toBe(true);
-      //      app.name = null;
-      //      let form = getByInstance<NgControlName>(api.fixture.debugElement, NgControlName);
-      //      form.control.updateValue('');
-      //      api.fixture.detectChanges();
-      //      expect(api.container.valid).toBe(false);
-      //
-      //      async.done();
-      //    }, 0);
-      //
-      //  });
-      //}));
+      it('should re-export valid from control or form', inject([AsyncTestCompleter], (async) => {
+        setup().then((api: IFormMessagesFixture) => {
+          TimerWrapper.setTimeout(()=> {
+            let ctrl: Control = (<any>api.container.property).control;
+            expect(ctrl.value).toBe(null);
+            expect(api.container.valid).toBe(false);
+            expect(api.container.valid).toBe(ctrl.valid);
+            ctrl.updateValue('MorTon', {emitEvent: true});
+            api.fixture.detectChanges();
+            expect(api.container.valid).toBe(true);
+            async.done();
+          }, 0);
+        });
+      }));
     });
 
 

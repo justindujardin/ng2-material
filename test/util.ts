@@ -20,60 +20,6 @@ import {TestUrlResolver} from "./test_url_resolver";
 import {MATERIAL_DIRECTIVES} from "../ng2-material/all";
 import {TimerWrapper} from "angular2/src/facade/async";
 
-/** Gets a child DebugElement by tag name. */
-export function findChildByTag(parent: DebugElement, tagName: string): DebugElement {
-  return parent.query((debugEl) => {
-    return debugEl.nativeElement && debugEl.nativeElement.tagName && debugEl.nativeElement.tagName.toLowerCase() === tagName.toLowerCase();
-  });
-}
-/** Gets a child DebugElement by attribute name. */
-export function findChildByAttribute(parent: DebugElement, attr: string): DebugElement {
-  return parent.query((debugEl) => {
-    return DOM.isElementNode(debugEl.nativeElement) && DOM.hasAttribute(debugEl.nativeElement, attr);
-  });
-}
-/** Gets all children by tag name. */
-export function findChildrenByTag(parent: DebugElement, tagName: string): DebugElement[] {
-  return parent.queryAll((debugEl) => {
-    return debugEl.nativeElement && debugEl.nativeElement.tagName && debugEl.nativeElement.tagName.toLowerCase() === tagName.toLowerCase();
-  });
-}
-/** Gets all children by tag name. */
-export function findChildrenByAttribute(parent: DebugElement, attr: string): DebugElement[] {
-  return parent.queryAll((debugEl) => {
-    return DOM.isElementNode(debugEl.nativeElement) && DOM.hasAttribute(debugEl.nativeElement, attr);
-  });
-
-}
-/**
- * Get a child DebugElement by id
- */
-export function findChildById(parent: DebugElement, id: string): DebugElement {
-  return parent.query((debugEl) => {
-    return debugEl.nativeElement.id.toLowerCase() === id.toLowerCase();
-  });
-}
-
-
-/**
- * Find a component child by it's instance type.
- */
-export function findComponentByType(debug: DebugElement, type: any): any {
-  let found = debug.query((debugEl: DebugElement) => {
-    return debugEl.componentInstance instanceof type;
-  });
-  return found ? found.componentInstance : null;
-}
-
-/**
- * Find a debug child by it's instance type.
- */
-export function findDebugByType(debug: DebugElement, type: any): any {
-  return debug.query((debugEl: DebugElement) => {
-    return debugEl.componentInstance instanceof type;
-  });
-}
-
 /**
  * Run a basic lifecycle sanity check on a component. This will create the given component
  * template, wait a few moments, then destroy it.

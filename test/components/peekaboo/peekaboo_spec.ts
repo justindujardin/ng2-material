@@ -15,8 +15,8 @@ import {TestUrlResolver} from '../../test_url_resolver';
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
 import {MdPeekaboo} from "../../../ng2-material/components/peekaboo/peekaboo";
-import {findChildByAttribute} from "../../util";
 import {PeekabooAction} from "../../../ng2-material/components/peekaboo/peekaboo";
+import {By} from 'angular2/platform/browser';
 
 export function main() {
 
@@ -46,7 +46,7 @@ export function main() {
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
       return prep.then((fixture: ComponentFixture) => {
         fixture.detectChanges();
-        let debug = findChildByAttribute(fixture.debugElement, 'md-peekaboo');
+        let debug = fixture.debugElement.query(By.css('[md-peekaboo]'));
         let component = <MdPeekaboo>debug.componentInstance;
         return {
           fixture: fixture,

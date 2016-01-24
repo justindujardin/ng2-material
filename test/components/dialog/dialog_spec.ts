@@ -14,11 +14,9 @@ import {UrlResolver} from 'angular2/compiler';
 import {TestUrlResolver} from '../../test_url_resolver';
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
-import {findChildByTag} from "../../util";
-import {findChildById} from "../../util";
 import {MdDialogRef, MdDialogConfig, MdDialog, MdDialogBasic} from "../../../ng2-material/components/dialog/dialog";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-
+import {By} from 'angular2/platform/browser';
 
 export function main() {
 
@@ -43,7 +41,7 @@ export function main() {
       return builder.createAsync(TestComponent)
         .then((fixture: ComponentFixture) => {
           fixture.detectChanges();
-          let debug = findChildByTag(fixture.debugElement, 'div');
+          let debug = fixture.debugElement.query(By.css('div'));
           return {
             fixture: fixture,
             debug: debug

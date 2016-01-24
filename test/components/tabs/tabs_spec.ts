@@ -16,9 +16,8 @@ import {MdTab, MdTabs} from '../../../ng2-material/components/tabs/tabs';
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
 import {CORE_DIRECTIVES} from "angular2/common";
-import {findChildrenByAttribute,findChildrenByTag,findChildByTag} from "../../util";
 import {Ink} from "../../../ng2-material/core/util/ink";
-
+import {By} from 'angular2/platform/browser';
 
 export function main() {
 
@@ -50,8 +49,8 @@ export function main() {
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
       return prep.then((fixture: ComponentFixture) => {
         fixture.detectChanges();
-        let tabs = <MdTabs>findChildByTag(fixture.debugElement, 'md-tabs').componentInstance;
-        let tabButtons = findChildrenByTag(fixture.debugElement, 'md-tab-item').map(b => b.nativeElement);
+        let tabs = <MdTabs>fixture.debugElement.query(By.css('md-tabs')).componentInstance;
+        let tabButtons = fixture.debugElement.queryAll(By.css('md-tab-item')).map(b => b.nativeElement);
         return {
           fixture: fixture,
           tabs: tabs,

@@ -17,9 +17,9 @@ import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {MdCheckbox} from "ng2-material/components/checkbox/checkbox";
-import {findChildByTag} from "../../util";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {KeyCodes} from "../../../ng2-material/core/key_codes";
+import {By} from 'angular2/platform/browser';
 
 
 export function main() {
@@ -46,7 +46,7 @@ export function main() {
 
     function setup(checked: boolean = false, disabled: boolean = false): Promise<ICheckboxFixture> {
       return builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
-        let debug = findChildByTag(fixture.debugElement, 'md-checkbox');
+        let debug = fixture.debugElement.query(By.css('md-checkbox'));
         let comp: MdCheckbox = debug.componentInstance;
         let testComp = fixture.debugElement.componentInstance;
         testComp.isDisabled = disabled;

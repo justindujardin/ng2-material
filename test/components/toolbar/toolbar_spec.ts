@@ -14,11 +14,9 @@ import {UrlResolver} from 'angular2/compiler';
 import {TestUrlResolver} from '../../test_url_resolver';
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
-import {findChildByTag} from "../../util";
-import {findChildById} from "../../util";
 import {MdToolbar} from "../../../ng2-material/components/toolbar/toolbar";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-
+import {By} from 'angular2/platform/browser';
 
 export function main() {
 
@@ -51,7 +49,7 @@ export function main() {
       it('defaults mdScrollShrink to false', inject([AsyncTestCompleter], (async) => {
         setup().then((fixture: ComponentFixture) => {
           fixture.detectChanges();
-          let toolbar = <MdToolbar>findChildByTag(fixture.debugElement, 'md-toolbar').componentInstance;
+          let toolbar = <MdToolbar>fixture.debugElement.query(By.css('md-toolbar')).componentInstance;
           expect(toolbar.mdScrollShrink).toBe(false);
           async.done();
         });
@@ -64,7 +62,7 @@ export function main() {
           </md-content>`;
         setup(template).then((fixture: ComponentFixture) => {
           fixture.detectChanges();
-          let toolbar = <MdToolbar>findChildByTag(fixture.debugElement, 'md-toolbar').componentInstance;
+          let toolbar = <MdToolbar>fixture.debugElement.query(By.css('md-toolbar')).componentInstance;
           expect(toolbar.mdScrollShrink).toBe(true);
           async.done();
         });

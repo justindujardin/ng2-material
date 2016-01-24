@@ -15,12 +15,9 @@ import {UrlResolver} from 'angular2/compiler';
 import {TestUrlResolver} from '../../test_url_resolver';
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
 import {ComponentFixture} from "angular2/testing";
-import {findChildByTag} from "../../util";
-import {findChildById} from "../../util";
 import {MdInput,MdInputContainer} from "../../../ng2-material/components/input/input";
 import {TimerWrapper} from "angular2/src/facade/async";
-import {findChildByAttribute} from "../../util";
-
+import {By} from 'angular2/platform/browser';
 
 export function main() {
 
@@ -52,8 +49,8 @@ export function main() {
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
       return prep.then((fixture: ComponentFixture) => {
         fixture.detectChanges();
-        let input = findChildByAttribute(fixture.debugElement, 'md-input');
-        let container = findChildByTag(fixture.debugElement, 'md-input-container');
+        let input = fixture.debugElement.query(By.css('[md-input]'));
+        let container = fixture.debugElement.query(By.css('md-input-container'));
         return {
           fixture: fixture,
           input: input.componentInstance,
