@@ -23,6 +23,7 @@ import {forwardRef} from "angular2/core";
 import {Inject} from "angular2/core";
 import {CONST} from "angular2/src/facade/lang";
 import {SidenavService} from "./sidenav_service";
+import {AfterViewInit} from "angular2/core";
 
 
 @CONST()
@@ -59,20 +60,20 @@ export class SidenavStyle {
  * </nav>
  * ```
  */
-@Directive({
-  selector: '[md-sidenav]',
+@Component({
+  selector: 'md-sidenav',
   host: {
     '[class.md-style-side]': 'style=="side"',
     '[class.md-whiteframe-z2]': 'visible',
     '[class.md-sidenav-left]': 'align!="right"',
     '[class.md-sidenav-right]': 'align=="right"'
-  }
+  },
+  template: `<ng-content></ng-content>`,
+  directives: [MdBackdrop]
 })
 export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
-  @Input('md-sidenav')
+  @Input()
   name: string = 'default';
-
-  private _align: string = SidenavAlignment.LEFT;
 
   @Input()
   set align(value: string) {
@@ -83,8 +84,11 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
     return this._align;
   }
 
-  private _style: string = SidenavStyle.OVER;
-
+  /**
+   * One of 'side' or 'over'. 'side' will push the content out of the way and not display
+   * a backdrop overlay, and 'over' will display the overlay and be dismissed when the user
+   * clicks on the backdrop.
+   */
   @Input()
   set style(value: string) {
     this._style = value === SidenavStyle.SIDE ? SidenavStyle.SIDE : SidenavStyle.OVER;
@@ -94,34 +98,33 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
     return this._style;
   }
 
-  private _backdropRef: ComponentRef = null;
+  /**
+   * Whether the sidenav is opened or not.
+   */
+  @Input()
+  set opened(value: boolean) {
+    this.visible = value;
+  }
 
-  private _defaultContainer = DOM.query('body');
+  get opened(): boolean {
+    return this.visible;
+  }
+
+  private _align: string = SidenavAlignment.LEFT;
+  private _style: string = SidenavStyle.OVER;
+
+  /**
+   * The backdrop element the container provides.
+   */
+  backdropRef: MdBackdrop = null;
 
   transitionClass: string = 'md-closed';
   transitionAddClass = false;
 
   constructor(public element: ElementRef,
-              public dcl: DynamicComponentLoader,
-              public renderer: Renderer,
               @Inject(forwardRef(() => SidenavService)) public service: SidenavService) {
     super(element);
     DOM.addClass(this.element.nativeElement, this.transitionClass);
-  }
-
-  show(): Promise<void> {
-    let promise: any = this.style === SidenavStyle.SIDE ? Promise.resolve() : this._createBackdrop(this.element);
-    return promise.then(() => super.show());
-  }
-
-  hide(): Promise<void> {
-    return super.hide().then(() => {
-      this._destroyBackdrop();
-    });
-  }
-
-  toggle(open: boolean = !this.visible): Promise<void> {
-    return open ? this.hide() : this.show();
   }
 
   ngOnInit(): any {
@@ -132,37 +135,49 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
     this.service.unregister(this);
   }
 
-  private _destroyBackdrop(): Promise<void> {
-    if (this._backdropRef) {
-      this._backdropRef.dispose();
-      this._backdropRef = null;
+  toggle(visible: boolean): Promise<void> {
+    if (this.backdropRef) {
+      this.backdropRef.toggle(visible);
     }
-    return Promise.resolve();
+    return super.toggle(visible);
+  }
+}
+
+@Component({
+  selector: 'md-sidenav-container',
+  template: `
+    <md-backdrop class="md-opaque" clickClose="true"></md-backdrop>
+    <ng-content></ng-content>`,
+  directives: [MdBackdrop]
+})
+export class MdSidenavContainer implements OnDestroy, AfterViewInit {
+
+  @ContentChildren(MdSidenav)
+  children: QueryList<MdSidenav>;
+
+  @ViewChild(MdBackdrop)
+  private _backdrop: MdBackdrop;
+
+  private _unsubscribe: any = null;
+
+  ngOnDestroy(): any {
+    if (this._unsubscribe) {
+      this._unsubscribe.unsubscribe();
+      this._unsubscribe = null;
+    }
   }
 
-  private _createBackdrop(elementRef: ElementRef): Promise<ComponentRef> {
-    if (this._backdropRef) {
-      return Promise.resolve(this._backdropRef);
-    }
-    return this.dcl.loadNextToLocation(MdBackdrop, elementRef)
-      .then((componentRef) => {
-        let backdrop: MdBackdrop = componentRef.instance;
-        backdrop.clickClose = true;
-        this.renderer.setElementClass(componentRef.location, 'md-backdrop', true);
-        this.renderer.setElementClass(componentRef.location, 'md-opaque', true);
-        this.renderer.setElementClass(componentRef.location, 'md-backdrop-absolute', false);
-        DOM.appendChild(this._defaultContainer, componentRef.location.nativeElement);
-
-        this._backdropRef = componentRef;
-        // When this component is shown/hidden, sync the backdrop
-        this.onShowing.subscribe(() => backdrop.show());
-        this.onHiding.subscribe(() => backdrop.hide());
-        // If the sidenav is hidden, release the backdrop
-        this.onHidden.subscribe(() => this._destroyBackdrop());
-        // If the backdrop is hidden, hide the nav
-        backdrop.onHiding.subscribe(() => this.hide());
-
-        return componentRef;
+  ngAfterViewInit(): any {
+    // Tell each child about the backdrop so they can show it
+    // when they are opened or closed.
+    this.children.toArray().forEach((m: MdSidenav) => {
+      m.backdropRef = this._backdrop;
+    });
+    // When the backdrop is hidden, close any child navs
+    this._unsubscribe = this._backdrop.onHiding.subscribe(() => {
+      this.children.toArray().forEach((m: MdSidenav) => {
+        m.visible = false;
       });
+    });
   }
 }

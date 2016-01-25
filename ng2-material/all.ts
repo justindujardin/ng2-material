@@ -54,7 +54,7 @@ export * from './components/switcher/switch';
 import {MdSubheader} from "./components/subheader/subheader";
 export * from './components/subheader/subheader';
 
-import {MdSidenav} from './components/sidenav/sidenav';
+import {MdSidenav, MdSidenavContainer} from './components/sidenav/sidenav';
 import {SidenavService} from './components/sidenav/sidenav_service';
 export * from './components/sidenav/sidenav';
 
@@ -84,7 +84,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdProgressLinear,
   MdProgressCircular,
   MdRadioButton, MdRadioGroup,
-  MdSidenav,
+  MdSidenav, MdSidenavContainer,
   MdSubheader,
   MdSwitch,
   MdToolbar,

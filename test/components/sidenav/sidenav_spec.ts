@@ -31,7 +31,7 @@ export function main() {
   @Component({selector: 'test-app'})
   @View({
     directives: [MdSidenav],
-    template: `<div md-sidenav="test"></div>`
+    template: `<md-sidenav></md-sidenav>`
   })
   class TestComponent {
   }
@@ -46,7 +46,7 @@ export function main() {
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
       return prep.then((fixture: ComponentFixture) => {
         fixture.detectChanges();
-        let debug = fixture.debugElement.query(By.css('[md-sidenav]'));
+        let debug = fixture.debugElement.query(By.css('md-sidenav'));
         return {
           fixture: fixture,
           component: debug.componentInstance,
@@ -73,19 +73,21 @@ export function main() {
       }));
       it('should be registered and unregistered with SidenavService', inject([AsyncTestCompleter], (async) => {
         expect(service.find('test')).toBeNull();
-        setup().then((api: ITestFixture) => {
+        setup(`<md-sidenav name="test"></md-sidenav>`).then((api: ITestFixture) => {
           expect(service.find('test')).not.toBeNull();
           api.fixture.destroy();
           expect(service.find('test')).toBeNull();
           async.done();
         });
       }));
-      it('should be named by md-sidenav="name" usage', inject([AsyncTestCompleter], (async) => {
-        setup().then((api: ITestFixture) => {
-          expect(api.component.name).toBe('test');
-          async.done();
-        });
-      }));
+      describe('name', () => {
+        it('should default to "default"', inject([AsyncTestCompleter], (async) => {
+          setup().then((api: ITestFixture) => {
+            expect(api.component.name).toBe('default');
+            async.done();
+          });
+        }));
+      });
 
       describe('style', () => {
         it('should default to over', inject([AsyncTestCompleter], (async) => {
@@ -95,13 +97,13 @@ export function main() {
           });
         }));
         it('should set to default when given an invalid value', inject([AsyncTestCompleter], (async) => {
-          setup(`<nav md-sidenav style="gangnam"></nav>`).then((api: ITestFixture) => {
+          setup(`<md-sidenav style="gangnam"></md-sidenav>`).then((api: ITestFixture) => {
             expect(api.component.style).toBe(SidenavStyle.OVER);
             async.done();
           });
         }));
         it('should accept "side" for content pushing', inject([AsyncTestCompleter], (async) => {
-          setup(`<nav md-sidenav style="side"></nav>`).then((api: ITestFixture) => {
+          setup(`<md-sidenav style="side"></md-sidenav>`).then((api: ITestFixture) => {
             expect(api.component.style).toBe(SidenavStyle.SIDE);
             async.done();
           });
@@ -116,13 +118,13 @@ export function main() {
           });
         }));
         it('should set to default when given an invalid value', inject([AsyncTestCompleter], (async) => {
-          setup(`<nav md-sidenav align="up"></nav>`).then((api: ITestFixture) => {
+          setup(`<md-sidenav align="up"></md-sidenav>`).then((api: ITestFixture) => {
             expect(api.component.align).toBe(SidenavAlignment.LEFT);
             async.done();
           });
         }));
         it('should accept "side" for content pushing', inject([AsyncTestCompleter], (async) => {
-          setup(`<nav md-sidenav align="right"></nav>`).then((api: ITestFixture) => {
+          setup(`<md-sidenav align="right"></md-sidenav>`).then((api: ITestFixture) => {
             expect(api.component.align).toBe(SidenavAlignment.RIGHT);
             async.done();
           });

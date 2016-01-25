@@ -29,7 +29,10 @@ export function main() {
   @Component({selector: 'test-app'})
   @View({
     directives: [MdSidenav],
-    template: `<div md-sidenav="test"></div>`
+    template: `
+    <md-sidenav-container>
+      <md-sidenav name="test"></md-sidenav>
+    </md-sidenav-container>`
   })
   class TestComponent {
   }
@@ -43,7 +46,7 @@ export function main() {
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
       return prep.then((fixture: ComponentFixture) => {
         fixture.detectChanges();
-        let debug = fixture.debugElement.query(By.css('[md-sidenav]'));
+        let debug = fixture.debugElement.query(By.css('md-sidenav'));
         return {
           fixture: fixture,
           component: debug.componentInstance,

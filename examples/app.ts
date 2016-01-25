@@ -28,6 +28,7 @@ import {Media} from "ng2-material/core/util/media";
 import {Input} from "angular2/core";
 import {OnDestroy} from "angular2/core";
 import {TimerWrapper} from "angular2/src/facade/async";
+import {ChangeDetectorRef} from "angular2/core";
 
 /**
  * Describe an example that can be dynamically loaded.
@@ -73,11 +74,13 @@ export class DemosApp implements OnDestroy {
   constructor(http: Http,
               public navigation: NavigationService,
               public media: Media,
+              public changeDetection:ChangeDetectorRef,
               private _components: ComponentsService,
               private _sidenav: SidenavService) {
     let query = Media.getQuery(DemosApp.SIDE_MENU_BREAKPOINT);
     this._subscription = media.listen(query).onMatched.subscribe((mql: MediaQueryList) => {
       this.fullPage = mql.matches;
+      changeDetection.detectChanges();
     });
     http.get('public/version.json')
       .subscribe((res: Response) => {

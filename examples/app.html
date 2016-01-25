@@ -1,5 +1,5 @@
-<main layout="row" flex>
-  <nav md-sidenav="menu" class="app-menu" [style]="fullPage ? 'side' : 'over'">
+<md-sidenav-container layout="row" flex>
+  <md-sidenav name="menu" class="app-menu" [style]="fullPage ? 'side' : 'over'">
     <md-toolbar [routerLink]="['Index']">
       <div class="md-toolbar-tools">
         <h1>ng2-material</h1>
@@ -9,7 +9,7 @@
       <md-list-item *ngFor="#value of components" [routerLink]="['Component', {id: value.id}]">{{value.name}}
       </md-list-item>
     </md-list>
-  </nav>
+  </md-sidenav>
   <section class="app-content" layout="column" layout-align="start center" flex>
     <md-toolbar class="fixed-toolbar"
                 md-peekaboo
@@ -77,5 +77,5 @@
     </footer>
 
   </section>
-</main>
+</md-sidenav-container>
 
