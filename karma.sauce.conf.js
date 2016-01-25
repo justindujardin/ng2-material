@@ -10,7 +10,6 @@ module.exports = function (config) {
     ['firefox', '41'],
     ['firefox', '40'],
     ['firefox', '35'],
-    ['firefox', '30'],
 
     ['chrome', 'beta'],
     ['chrome', 'dev'],
