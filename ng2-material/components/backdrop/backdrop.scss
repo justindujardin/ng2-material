@@ -12,6 +12,7 @@
   transition: opacity 450ms;
   opacity: 0;
   z-index: $z-index-backdrop;
+  pointer-events: none;
 
   &.md-backdrop-absolute {
     position: absolute;
@@ -19,6 +20,7 @@
 
   &.md-active {
     opacity: 1;
+    pointer-events: all;
   }
 
   &.md-select-backdrop {

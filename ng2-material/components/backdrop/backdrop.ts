@@ -79,10 +79,14 @@ export class MdBackdrop {
 
 
   /**
-   * Read-only property indicating whether the backdrop is visible or not.
+   * Whether the backdrop is visible.
    */
   get visible(): boolean {
     return this._visible;
+  }
+  @Input()
+  set visible(value: boolean) {
+    this.toggle(value);
   }
 
   private _visible: boolean = false;
@@ -95,20 +99,45 @@ export class MdBackdrop {
     }
   }
 
+
+  /**
+   * Hide the backdrop and return a promise that is resolved when the hide animations are
+   * complete.
+   */
+  hide(): Promise<void> {
+    return this.toggle(false);
+  }
+
   /**
    * Show the backdrop and return a promise that is resolved when the show animations are
    * complete.
    */
   show(): Promise<void> {
-    if (this._visible) {
+    return this.toggle(true);
+  }
+
+  /**
+   * Toggle the visibility of the backdrop.
+   * @param visible whether or not the backdrop should be visible
+   * @returns {any}
+   */
+  toggle(visible: boolean = !this.visible) {
+    if (visible === this._visible) {
       return Promise.resolve();
     }
-    this._visible = true;
-    this._transitioning = true;
-    this.onShowing.emit(this);
-    let action = this.transitionAddClass ? Animate.enter : Animate.leave;
 
-    if (this.hideScroll && this.element && !this._previousOverflow) {
+    let beginEvent = visible ? this.onShowing : this.onHiding;
+    let endEvent = visible ? this.onShown : this.onHidden;
+
+    this._visible = visible;
+    this._transitioning = true;
+    beginEvent.emit(this);
+    let action = visible ?
+      (this.transitionAddClass ? Animate.enter : Animate.leave) :
+      (this.transitionAddClass ? Animate.leave : Animate.enter);
+
+    // Page scroll
+    if (visible && this.hideScroll && this.element && !this._previousOverflow) {
       let parent = DOM.parentElement(this.element.nativeElement);
       let style = parent ? DOM.getStyle(parent, 'overflow') : 'hidden';
       if (style !== 'hidden') {
@@ -116,35 +145,16 @@ export class MdBackdrop {
         DOM.setStyle(parent, 'overflow', 'hidden');
       }
     }
-
-    return action(this.element.nativeElement, this.transitionClass).then(() => {
-      this._transitioning = false;
-      this.onShown.emit(this);
-    });
-  }
-
-  /**
-   * Hide the backdrop and return a promise that is resolved when the hide animations are
-   * complete.
-   */
-  hide(): Promise<void> {
-    if (!this._visible) {
-      return Promise.resolve();
-    }
-    this._visible = false;
-    this._transitioning = true;
-    this.onHiding.emit(this);
-    let action = this.transitionAddClass ? Animate.leave : Animate.enter;
-
-    if (this.hideScroll && this.element && this._previousOverflow !== null) {
+    else if (!visible && this.hideScroll && this.element && this._previousOverflow !== null) {
       let parent = DOM.parentElement(this.element.nativeElement);
       DOM.setStyle(parent, 'overflow', this._previousOverflow);
       this._previousOverflow = null;
     }
 
+    // Animate transition class in/out and then finally emit the completed event.
     return action(this.element.nativeElement, this.transitionClass).then(() => {
       this._transitioning = false;
-      this.onHidden.emit(this);
+      endEvent.emit(this);
     });
   }
 }
