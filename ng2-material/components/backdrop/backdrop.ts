@@ -92,6 +92,7 @@ export class MdBackdrop {
   private _visible: boolean = false;
   private _transitioning: boolean = false;
   private _previousOverflow: string = null;
+  private _body:HTMLBodyElement = DOM.query('body');
 
   onClick() {
     if (this.clickClose && !this._transitioning && this.visible) {
@@ -138,16 +139,14 @@ export class MdBackdrop {
 
     // Page scroll
     if (visible && this.hideScroll && this.element && !this._previousOverflow) {
-      let parent = DOM.parentElement(this.element.nativeElement);
-      let style = parent ? DOM.getStyle(parent, 'overflow') : 'hidden';
+      let style = DOM.getStyle(this._body, 'overflow');
       if (style !== 'hidden') {
-        this._previousOverflow = DOM.getStyle(parent, 'overflow');
-        DOM.setStyle(parent, 'overflow', 'hidden');
+        this._previousOverflow = style;
+        DOM.setStyle(this._body, 'overflow', 'hidden');
       }
     }
     else if (!visible && this.hideScroll && this.element && this._previousOverflow !== null) {
-      let parent = DOM.parentElement(this.element.nativeElement);
-      DOM.setStyle(parent, 'overflow', this._previousOverflow);
+      DOM.setStyle(this._body, 'overflow', this._previousOverflow);
       this._previousOverflow = null;
     }
 
