@@ -2,6 +2,7 @@ import {CONST} from "angular2/src/facade/lang";
 import {Injectable} from "angular2/core";
 import {Output} from "angular2/core";
 import {EventEmitter} from "angular2/core";
+import {Subject} from 'rxjs/Subject';
 
 
 /**
@@ -46,7 +47,7 @@ export class MediaListener {
   /**
    * Emits when the query that this is listening for changes.
    */
-  @Output() onMatched: EventEmitter<MediaQueryList> = new EventEmitter<MediaQueryList>();
+  onMatched: Subject<MediaQueryList> = new Subject<MediaQueryList>();
 
   /**
    * Determine if this query is currently matched by the viewport.
@@ -63,7 +64,7 @@ export class MediaListener {
   constructor(public query: string,
               private _mql: MediaQueryList,
               private _media: Media) {
-    this._listener = (mql: MediaQueryList) => this.onMatched.emit(mql);
+    this._listener = (mql: MediaQueryList) => this.onMatched.next(mql);
     this._mql.addListener(this._listener);
   }
 
