@@ -1,23 +1,19 @@
-import {DebugElement} from "angular2/core";
+///<reference path="../node_modules/angular2/typings/jasmine/jasmine.d.ts"/>
+import {DebugElement, Component, View, provide} from "angular2/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {ComponentFixture} from "angular2/testing";
-import {Component} from "angular2/core";
-import {View} from "angular2/core";
 import {
   AsyncTestCompleter,
   TestComponentBuilder,
   beforeEach,
   beforeEachProviders,
   describe,
-  expect,
   inject,
-  it,
-} from 'angular2/testing_internal';
-import {MATERIAL_PROVIDERS} from "../ng2-material/all";
-import {provide} from "angular2/core";
+  it
+} from "angular2/testing_internal";
+import {MATERIAL_PROVIDERS, MATERIAL_DIRECTIVES} from "../ng2-material/all";
 import {UrlResolver} from "angular2/compiler";
 import {TestUrlResolver} from "./test_url_resolver";
-import {MATERIAL_DIRECTIVES} from "../ng2-material/all";
 import {TimerWrapper} from "angular2/src/facade/async";
 
 /**
