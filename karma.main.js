@@ -8,10 +8,14 @@ Error.stackTraceLimit = Infinity;
 __karma__.loaded = function () {
 };
 
-
-System.import('angular2/src/platform/browser/browser_adapter')
-  .then(function (browser_adapter) {
-    browser_adapter.BrowserDomAdapter.makeCurrent();
+Promise.all([
+    System.import('angular2/testing'),
+    System.import('angular2/platform/testing/browser')
+  ])
+  .then(function (modules) {
+    var testing = modules[0];
+    var browser = modules[1];
+    testing.setBaseTestProviders(browser.TEST_BROWSER_PLATFORM_PROVIDERS, browser.TEST_BROWSER_APPLICATION_PROVIDERS);
   })
   .then(function () {
     return System.import('ng2-material/all')
