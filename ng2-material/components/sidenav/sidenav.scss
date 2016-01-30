@@ -6,10 +6,18 @@ $sidenav-mobile-width: 320px !default;
 $sidenav-desktop-width: 400px !default;
 $sidenav-min-space: 56px !default;
 
+md-sidenav-container {
+  overflow-x: hidden;
+  transition: $swift-ease-in;
+  padding-left: 0;
+  &.md-pushed {
+    padding-left: $sidenav-mobile-width;
+  }
+}
+
 md-sidenav {
   box-sizing: border-box;
   position: fixed;
-  flex-direction: column;
   z-index: $z-index-sidenav;
 
   width: $sidenav-mobile-width;
@@ -17,14 +25,12 @@ md-sidenav {
   bottom: 0;
   overflow: auto;
 
-
   &.md-closed {
-    display: none;
+    visibility: hidden;
+    transition: transform 0.2s ease-in;
   }
   &.md-closed-add,
   &.md-closed-remove {
-    display: flex;
-    transition: 0.2s ease-in all;
   }
 
   &.md-closed-add.md-closed-add-active,
@@ -34,9 +40,7 @@ md-sidenav {
 
   &.md-style-side-add,
   &.md-style-side-remove {
-    position: static;
-    display: flex;
-    transform: translate3d(0, 0, 0);
+    display: inherit;
   }
 
   &.md-style-side,
@@ -44,13 +48,12 @@ md-sidenav {
   &.md-style-side.md-closed.md-sidenav-left,
   &.md-style-side.md-closed.md-sidenav-right,
   &.md-style-side-remove.md-closed {
-    position: static;
-    display: flex;
+    visibility:visible;
     transform: translate3d(0, 0, 0);
   }
   &.md-style-side-remove-active {
     transition: width $swift-ease-in-duration $swift-ease-in-timing-function,
-                min-width $swift-ease-in-duration $swift-ease-in-timing-function;
+    min-width $swift-ease-in-duration $swift-ease-in-timing-function;
     width: 0;
     min-width: 0;
   }
@@ -63,7 +66,7 @@ md-sidenav {
 
   &.md-closed.md-style-side-add-active {
     transition: width $swift-ease-in-duration $swift-ease-in-timing-function,
-                min-width $swift-ease-in-duration $swift-ease-in-timing-function;
+    min-width $swift-ease-in-duration $swift-ease-in-timing-function;
     width: $sidenav-mobile-width;
     min-width: $sidenav-mobile-width;
     transform: translate3d(0%, 0, 0);
@@ -115,7 +118,6 @@ md-sidenav {
   }
 }
 
-
 md-sidenav {
-  background-color: md-color($md-background,A100); //'{{background-color}}';
+  background-color: md-color($md-background, A100); //'{{background-color}}';
 }

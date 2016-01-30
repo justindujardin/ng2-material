@@ -1,29 +1,24 @@
-import {Directive, Injectable} from 'angular2/core';
-import {Input} from 'angular2/core';
-import {Animate} from "../../core/util/animate";
-import {MdDialog} from "../dialog/dialog";
-import {MdDialogRef} from "../dialog/dialog_ref";
-import {Media} from "../../core/util/media";
+import {
+  Input,
+  ElementRef,
+  ContentChildren,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  Component,
+  ViewChild,
+  forwardRef,
+  Inject,
+  AfterViewInit,
+  Optional,
+  SkipSelf,
+  Host
+} from "angular2/core";
 import {MdBackdrop} from "../backdrop/backdrop";
-import {ElementRef} from "angular2/core";
-import {ContentChildren} from "angular2/core";
-import {OnDestroy} from "angular2/core";
-import {AfterContentInit} from "angular2/core";
-import {OnInit} from "angular2/core";
-import {QueryList} from "angular2/core";
-import {Component} from "angular2/core";
-import {ViewChild} from "angular2/core";
-import {ComponentRef} from "angular2/core";
-import {Renderer} from "angular2/core";
-import {DynamicComponentLoader} from "angular2/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {Attribute} from "angular2/core";
-import {isPresent} from "angular2/src/facade/lang";
-import {forwardRef} from "angular2/core";
-import {Inject} from "angular2/core";
 import {CONST} from "angular2/src/facade/lang";
 import {SidenavService} from "./sidenav_service";
-import {AfterViewInit} from "angular2/core";
+import {TimerWrapper} from "angular2/src/facade/async";
 
 
 @CONST()
@@ -31,11 +26,13 @@ export class SidenavAlignment {
   /**
    * The sidenav will be displayed on the left side of the content.
    */
-  @CONST() static LEFT = 'left';
+  @CONST()
+  static LEFT = 'left';
   /**
    * The sidenav will be displayed on the right side of the content.
    */
-  @CONST() static RIGHT = 'right';
+  @CONST()
+  static RIGHT = 'right';
 }
 
 @CONST()
@@ -43,11 +40,13 @@ export class SidenavStyle {
   /**
    * The sidenav will hover over the content.
    */
-  @CONST() static OVER = 'over';
+  @CONST()
+  static OVER = 'over';
   /**
    * The sidenav will push the content to the side and display without obscuring it.
    */
-  @CONST() static SIDE = 'side';
+  @CONST()
+  static SIDE = 'side';
 }
 
 /**
@@ -92,6 +91,11 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   @Input()
   set style(value: string) {
     this._style = value === SidenavStyle.SIDE ? SidenavStyle.SIDE : SidenavStyle.OVER;
+    if (this.container) {
+      TimerWrapper.setTimeout(() => {
+        this.container.updateStyle(this);
+      }, 0);
+    }
   }
 
   get style(): string {
@@ -122,7 +126,10 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   transitionAddClass = false;
 
   constructor(public element: ElementRef,
-              @Inject(forwardRef(() => SidenavService)) public service: SidenavService) {
+              @Inject(forwardRef(() => SidenavService))
+              public service: SidenavService,
+              @Optional() @SkipSelf() @Host() @Inject(forwardRef(() => MdSidenavContainer))
+              public container: MdSidenavContainer) {
     super(element);
     DOM.addClass(this.element.nativeElement, this.transitionClass);
   }
@@ -148,7 +155,10 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   template: `
     <md-backdrop class="md-opaque" clickClose="true"></md-backdrop>
     <ng-content></ng-content>`,
-  directives: [MdBackdrop]
+  directives: [MdBackdrop],
+  host: {
+    '[class.md-pushed]': 'isPushed'
+  }
 })
 export class MdSidenavContainer implements OnDestroy, AfterViewInit {
 
@@ -167,6 +177,9 @@ export class MdSidenavContainer implements OnDestroy, AfterViewInit {
     }
   }
 
+  @Input()
+  public isPushed: boolean = false;
+
   ngAfterViewInit(): any {
     // Tell each child about the backdrop so they can show it
     // when they are opened or closed.
@@ -179,5 +192,15 @@ export class MdSidenavContainer implements OnDestroy, AfterViewInit {
         m.visible = false;
       });
     });
+  }
+
+  updateStyle(child: MdSidenav) {
+    let pushed: boolean = false;
+    this.children && this.children.toArray().forEach((m: MdSidenav) => {
+      if (m.style === SidenavStyle.SIDE) {
+        pushed = true;
+      }
+    });
+    this.isPushed = pushed;
   }
 }

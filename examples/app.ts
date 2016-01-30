@@ -1,35 +1,25 @@
-import {Component, View, enableProdMode} from 'angular2/core';
-import {bootstrap} from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-
-import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from '../ng2-material/all';
-import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
-
-import {DEMO_DIRECTIVES} from './all';
-import Example from './example';
-import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
+import {Component, View, enableProdMode, bind, Input, OnDestroy, ApplicationRef} from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+import {
+  ROUTER_PROVIDERS,
+  ROUTER_DIRECTIVES,
+  RouteConfig,
+  HashLocationStrategy,
+  LocationStrategy
+} from "angular2/router";
+import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "../ng2-material/all";
+import {DEMO_DIRECTIVES} from "./all";
+import Example from "./example";
+import {Http, Response, HTTP_PROVIDERS} from "angular2/http";
 import {IndexPage} from "./routes/index";
 import {ComponentPage} from "./routes/component";
-import {HashLocationStrategy} from "angular2/router";
-import {LocationStrategy} from "angular2/router";
-import {bind} from "angular2/core";
-import {ComponentsService} from "./services/components";
-import {Router} from "angular2/router";
-import {Query} from "angular2/core";
-import {QueryList} from "angular2/core";
+import {ComponentsService, IComponentMeta} from "./services/components";
 import {NavigationService} from "./services/navigation";
-import {AfterViewInit} from "angular2/core";
 import {VersionService} from "./services/version";
-import { AppViewListener } from 'angular2/src/core/linker/view_listener';
-import { DebugElementViewListener } from 'angular2/platform/common_dom';
+import {AppViewListener} from "angular2/src/core/linker/view_listener";
+import {DebugElementViewListener} from "angular2/platform/common_dom";
 import {SidenavService} from "ng2-material/components/sidenav/sidenav_service";
-import {IComponentMeta} from "./services/components";
 import {Media} from "ng2-material/core/util/media";
-import {Input} from "angular2/core";
-import {OnDestroy} from "angular2/core";
-import {TimerWrapper} from "angular2/src/facade/async";
-import {ChangeDetectorRef} from "angular2/core";
-import {ApplicationRef} from "angular2/core";
 
 /**
  * Describe an example that can be dynamically loaded.

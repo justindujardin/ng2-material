@@ -3,6 +3,14 @@
 @import "../ng2-material/core/style/theme-functions";
 @import "../ng2-material/core/style/default-theme";
 
+
+example {
+  md-example-view {
+    display: block;
+    background-color: white;
+  }
+}
+
 .demo-container {
   .demo-toolbar {
     button[md-button] {

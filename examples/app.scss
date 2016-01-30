@@ -16,7 +16,12 @@ demos-app {
   .app-menu {
     border-right: 1px solid md-color($md-foreground, divider);
     md-list-item {
+      font-size:$subheader-font-size;
+      font-weight:$subheader-font-weight;
       cursor: pointer;
+      &.router-link-active {
+        color: md-color($md-primary,500);
+      }
     }
     md-toolbar {
       background-color: transparent;
