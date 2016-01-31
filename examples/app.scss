@@ -56,7 +56,7 @@ demos-app {
   > md-toolbar {
     font-family: $font-family;
   }
-  .fixed-toolbar {
+  .fixed-toolbar, .shadow-toolbar {
     position: fixed;
     top: 0;
     left: 0;

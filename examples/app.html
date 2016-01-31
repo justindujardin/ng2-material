@@ -11,6 +11,7 @@
     </md-list>
   </md-sidenav>
   <section class="app-content" layout="column" layout-align="start center" flex>
+    <md-toolbar class="shadow-toolbar md-whiteframe-z1" md-peekaboo [break]="210" breakAction="show"></md-toolbar>
     <md-toolbar class="fixed-toolbar"
                 md-peekaboo
                 [break]="190"
@@ -45,7 +46,6 @@
           *ngIf="version" class="md-caption">v{{version}}</span>
       </div>
     </md-toolbar>
-    <md-toolbar class="shadow-toolbar md-whiteframe-z1" md-peekaboo [break]="210" breakAction="show"></md-toolbar>
 
     <md-content class="examples" md-scroll-y layout-padding>
       <router-outlet></router-outlet>
