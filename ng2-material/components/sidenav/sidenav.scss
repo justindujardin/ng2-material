@@ -31,19 +31,12 @@ md-sidenav {
     visibility: hidden;
     transition: transform 0.2s ease-in;
   }
-  &.md-closed-add,
-  &.md-closed-remove {
-  }
 
   &.md-closed-add.md-closed-add-active,
   &.md-closed-remove.md-closed-remove-active {
     transition: $swift-ease-out;
   }
 
-  &.md-style-side-add,
-  &.md-style-side-remove {
-    display: inherit;
-  }
 
   &.md-style-side,
   &.md-style-side.md-closed,
@@ -53,26 +46,8 @@ md-sidenav {
     visibility: visible;
     transform: translate3d(0, 0, 0);
   }
-  &.md-style-side-remove-active {
-    transition: width $swift-ease-in-duration $swift-ease-in-timing-function,
-    min-width $swift-ease-in-duration $swift-ease-in-timing-function;
-    width: 0;
-    min-width: 0;
-  }
 
-  &.md-closed.md-style-side-add {
-    width: 0;
-    min-width: 0;
-    transform: translate3d(0%, 0, 0);
-  }
 
-  &.md-closed.md-style-side-add-active {
-    transition: width $swift-ease-in-duration $swift-ease-in-timing-function,
-    min-width $swift-ease-in-duration $swift-ease-in-timing-function;
-    width: $sidenav-mobile-width;
-    min-width: $sidenav-mobile-width;
-    transform: translate3d(0%, 0, 0);
-  }
 
   @extend .md-sidenav-left;
 }
