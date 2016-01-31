@@ -57,13 +57,16 @@ export * from './components/subheader/subheader';
 import {MdSidenav, MdSidenavContainer} from './components/sidenav/sidenav';
 import {SidenavService} from './components/sidenav/sidenav_service';
 export * from './components/sidenav/sidenav';
+export * from './components/sidenav/sidenav_service';
 
 import {MdToolbar} from './components/toolbar/toolbar';
 export * from './components/toolbar/toolbar';
 
 import {MdTabs, MdTab} from './components/tabs/tabs';
-import {UrlResolver} from "angular2/compiler";
 import {Media} from "./core/util/media";
+
+export * from './core/util/media';
+export * from './core/util/animate';
 
 /**
  * Collection of Material Design component directives.
