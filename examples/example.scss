@@ -8,10 +8,12 @@ example {
   md-example-view {
     display: block;
     background-color: white;
+    @include md-stacking-context();
   }
 }
 
 .demo-container {
+  overflow: hidden;
   .demo-toolbar {
     button[md-button] {
       color: rgba(255, 255, 255, 0.6);
