@@ -12,7 +12,8 @@ import {
   AfterViewInit,
   Optional,
   SkipSelf,
-  Host
+  Host,
+  ApplicationRef
 } from "angular2/core";
 import {MdBackdrop} from "../backdrop/backdrop";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
@@ -168,6 +169,10 @@ export class MdSidenavContainer implements OnDestroy, AfterViewInit {
   @ViewChild(MdBackdrop)
   private _backdrop: MdBackdrop;
 
+  // TODO(jd): This change detection hacking could probably be avoided if Zone.JS knew about media
+  constructor(private _app: ApplicationRef) {
+  }
+
   private _unsubscribe: any = null;
 
   ngOnDestroy(): any {
@@ -202,5 +207,6 @@ export class MdSidenavContainer implements OnDestroy, AfterViewInit {
       }
     });
     this.isPushed = pushed;
+    this._app && this._app.tick();
   }
 }

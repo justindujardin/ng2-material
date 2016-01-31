@@ -8,9 +8,11 @@ $sidenav-min-space: 56px !default;
 
 md-sidenav-container {
   overflow-x: hidden;
-  transition: $swift-ease-in;
   padding-left: 0;
+  transition: none;
+  will-change: padding-left;
   &.md-pushed {
+    transition: $swift-ease-in;
     padding-left: $sidenav-mobile-width;
   }
 }
@@ -48,7 +50,7 @@ md-sidenav {
   &.md-style-side.md-closed.md-sidenav-left,
   &.md-style-side.md-closed.md-sidenav-right,
   &.md-style-side-remove.md-closed {
-    visibility:visible;
+    visibility: visible;
     transform: translate3d(0, 0, 0);
   }
   &.md-style-side-remove-active {
