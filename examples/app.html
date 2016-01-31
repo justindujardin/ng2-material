@@ -6,7 +6,10 @@
       </div>
     </md-toolbar>
     <md-list>
-      <md-list-item *ngFor="#value of components" [routerLink]="['Component', {id: value.id}]">{{value.name}}
+      <md-list-item md-ink (inked)="navigate(['Component', {id: value.id}])"
+                    [class.md-active]="navigation?.currentTitle==value.name"
+                    *ngFor="#value of components">
+        {{value.name}}
       </md-list-item>
     </md-list>
   </md-sidenav>

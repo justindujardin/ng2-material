@@ -28,21 +28,16 @@
         <p>
           The right sidenav will focus on a specific child element.
         </p>
+        <button md-raised-button (click)="open('left')"
+                class="md-primary" hide-gt-md>
+          Toggle left
+        </button>
 
-        <div>
-          <button md-raised-button (click)="open('left')"
-                     class="md-primary" hide-gt-md>
-            Toggle left
-          </button>
-        </div>
-
-        <div>
-          <button md-raised-button (click)="open('right')"
-                     [hidden]="rightOpened"
-                     class="md-primary">
-            Toggle right
-          </button>
-        </div>
+        <button md-raised-button (click)="open('right')"
+                [hidden]="rightOpened"
+                class="md-primary">
+          Toggle right
+        </button>
       </div>
 
       <div flex></div>

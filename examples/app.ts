@@ -5,7 +5,7 @@ import {
   ROUTER_DIRECTIVES,
   RouteConfig,
   HashLocationStrategy,
-  LocationStrategy
+  LocationStrategy, Router
 } from "angular2/router";
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "../ng2-material/all";
 import {DEMO_DIRECTIVES} from "./all";
@@ -65,6 +65,7 @@ export class DemosApp implements OnDestroy {
   constructor(http: Http,
               public navigation: NavigationService,
               public media: Media,
+              public router: Router,
               public appRef: ApplicationRef,
               private _components: ComponentsService,
               private _sidenav: SidenavService) {
@@ -91,6 +92,10 @@ export class DemosApp implements OnDestroy {
 
   showMenu(event?) {
     this._sidenav.show('menu');
+  }
+
+  navigate(to:any) {
+    this.router.navigate(to);
   }
 
 }

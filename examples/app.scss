@@ -19,7 +19,9 @@ demos-app {
       font-size:$subheader-font-size;
       font-weight:$subheader-font-weight;
       cursor: pointer;
-      &.router-link-active {
+      will-change: color;
+      transition: color $swift-ease-in-duration $swift-ease-in-timing-function;
+      &.md-active {
         color: md-color($md-primary,500);
       }
     }
