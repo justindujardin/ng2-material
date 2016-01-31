@@ -18,6 +18,9 @@ export * from './components/divider/divider';
 import {MdIcon} from './components/icon/icon';
 export * from './components/icon/icon';
 
+import {MdInk} from './components/ink/ink';
+export * from './components/ink/ink';
+
 import {
   MdPatternValidator, MdMaxLengthValidator,
   MdMinValueValidator, MdMaxValueValidator,
@@ -63,9 +66,11 @@ import {MdToolbar} from './components/toolbar/toolbar';
 export * from './components/toolbar/toolbar';
 
 import {MdTabs, MdTab} from './components/tabs/tabs';
-import {Media} from "./core/util/media";
+export * from './components/tabs/tabs';
 
+import {Media} from "./core/util/media";
 export * from './core/util/media';
+
 export * from './core/util/animate';
 
 /**
@@ -77,6 +82,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdContent,
   MdDivider,
   MdIcon,
+  MdInk,
   MdInput, MdInputContainer,
   MdPatternValidator, MdMaxLengthValidator,
   MdMinValueValidator, MdMaxValueValidator,
