@@ -13,7 +13,9 @@ import {
   Optional,
   SkipSelf,
   Host,
-  ApplicationRef
+  ApplicationRef,
+  Output,
+  EventEmitter
 } from "angular2/core";
 import {MdBackdrop} from "../backdrop/backdrop";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
@@ -74,6 +76,14 @@ export class SidenavStyle {
 export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   @Input()
   name: string = 'default';
+
+  // TODO(jd): sucks that we have to re-export the outputs from a child class, but
+  // without this you cannot bind to the events in a template. :sob:
+  @Output() onHiding: EventEmitter<MdSidenav>;
+  @Output() onHidden: EventEmitter<MdSidenav>;
+  @Output() onShowing: EventEmitter<MdSidenav>;
+  @Output() onShown: EventEmitter<MdSidenav>;
+
 
   @Input()
   set align(value: string) {

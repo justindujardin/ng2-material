@@ -49,7 +49,7 @@
 
     </md-content>
 
-    <md-sidenav name="right" align="right" layout="column">
+    <md-sidenav name="right" align="right" layout="column" (onShown)="input.focus()">
       <md-toolbar class="md-theme-light">
         <h1 class="md-toolbar-tools">Sidenav Right</h1>
       </md-toolbar>
@@ -57,7 +57,7 @@
         <form>
           <md-input-container class="md-block">
             <label for="testInput">Test input</label>
-            <input type="text" id="testInput" md-input
+            <input type="text" id="testInput" md-input #input
                    [(value)]="data" md-autofocus>
           </md-input-container>
         </form>
