@@ -163,6 +163,7 @@ module.exports = function (grunt) {
           '<%- sourceRoot %>/**/*.ts',
           './*.ts',
           'examples/*.ts',
+          'examples/**/*.ts',
           'test/**/*.ts'
         ],
         tasks: ['ts:source', 'notify:source']

@@ -18,6 +18,9 @@ export * from './components/divider/divider';
 import {MdIcon} from './components/icon/icon';
 export * from './components/icon/icon';
 
+import {MdInk} from './components/ink/ink';
+export * from './components/ink/ink';
+
 import {
   MdPatternValidator, MdMaxLengthValidator,
   MdMinValueValidator, MdMaxValueValidator,
@@ -54,13 +57,21 @@ export * from './components/switcher/switch';
 import {MdSubheader} from "./components/subheader/subheader";
 export * from './components/subheader/subheader';
 
+import {MdSidenav, MdSidenavContainer} from './components/sidenav/sidenav';
+import {SidenavService} from './components/sidenav/sidenav_service';
+export * from './components/sidenav/sidenav';
+export * from './components/sidenav/sidenav_service';
+
 import {MdToolbar} from './components/toolbar/toolbar';
 export * from './components/toolbar/toolbar';
 
 import {MdTabs, MdTab} from './components/tabs/tabs';
-import {UrlResolver} from "angular2/compiler";
+export * from './components/tabs/tabs';
+
 import {Media} from "./core/util/media";
-export * from './components/toolbar/toolbar';
+export * from './core/util/media';
+
+export * from './core/util/animate';
 
 /**
  * Collection of Material Design component directives.
@@ -71,6 +82,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdContent,
   MdDivider,
   MdIcon,
+  MdInk,
   MdInput, MdInputContainer,
   MdPatternValidator, MdMaxLengthValidator,
   MdMinValueValidator, MdMaxValueValidator,
@@ -81,6 +93,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdProgressLinear,
   MdProgressCircular,
   MdRadioButton, MdRadioGroup,
+  MdSidenav, MdSidenavContainer,
   MdSubheader,
   MdSwitch,
   MdToolbar,
@@ -93,6 +106,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
 export const MATERIAL_PROVIDERS: any[] = [
   MdDialog,
   Media,
+  SidenavService,
   MdRadioDispatcher,
   INPUT_VALIDATORS
 ];

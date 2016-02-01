@@ -9,7 +9,8 @@ System.config({
     inlineSourceMap: false
   },
   meta: {
-    'angular2/*': {build: false}
+    'angular2/*': {build: false},
+    'rxjs/*': {build: false}
   },
   packages: {
     'ng2-material': {

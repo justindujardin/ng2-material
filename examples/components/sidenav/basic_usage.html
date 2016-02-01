@@ -1,0 +1,68 @@
+<div layout="column" style="height:500px;">
+
+  <md-sidenav-container layout="row" flex>
+
+    <md-sidenav name="left" [style]="hasMedia('gt-sm') ? 'side' : 'over'">
+
+      <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+      </md-toolbar>
+      <md-content layout-padding>
+        <button md-raised-button (click)="close('left')" class="md-primary" hide-gt-md>
+          Close Sidenav Left
+        </button>
+        <p hide-md show-gt-md>
+          This sidenav is locked open on your device. To go back to the default behavior,
+          narrow your display.
+        </p>
+      </md-content>
+
+    </md-sidenav>
+
+    <md-content flex layout-padding>
+
+      <div layout="column" layout-fill layout-align="top center">
+        <p>
+          The left sidenav will 'lock open' on a medium (>=960px wide) device.
+        </p>
+        <p>
+          The right sidenav will focus on a specific child element.
+        </p>
+        <button md-raised-button (click)="open('left')"
+                class="md-primary" hide-gt-md>
+          Toggle left
+        </button>
+
+        <button md-raised-button (click)="open('right')"
+                [hidden]="rightOpened"
+                class="md-primary">
+          Toggle right
+        </button>
+      </div>
+
+      <div flex></div>
+
+    </md-content>
+
+    <md-sidenav name="right" align="right" layout="column" (onShown)="input.focus()">
+      <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Sidenav Right</h1>
+      </md-toolbar>
+      <md-content layout-padding>
+        <form>
+          <md-input-container class="md-block">
+            <label for="testInput">Test input</label>
+            <input type="text" id="testInput" md-input #input
+                   [(value)]="data" md-autofocus>
+          </md-input-container>
+        </form>
+        <button md-raised-button (click)="close('right')" class="md-primary">
+          Close Sidenav Right
+        </button>
+      </md-content>
+
+    </md-sidenav>
+
+  </md-sidenav-container>
+
+</div>

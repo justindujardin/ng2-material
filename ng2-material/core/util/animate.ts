@@ -1,4 +1,5 @@
-import {DOM} from 'angular2/src/platform/dom/dom_adapter';
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {TimerWrapper} from "angular2/src/facade/async";
 
 /**
  * Provide an API for animating elements with CSS transitions
@@ -13,30 +14,42 @@ export class Animate {
   static enter(el: HTMLElement, cssClass: string): Promise<void> {
     DOM.removeClass(el, cssClass);
     return new Promise<void>((resolve)=> {
-      var duration = Animate.getTransitionDuration(el, true);
-      var callTimeout = setTimeout(() => done(), duration);
-      var done = () => {
-        clearTimeout(callTimeout);
-        removeListener();
-        resolve();
-      };
-      let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
-      DOM.addClass(el, cssClass);
+      DOM.addClass(el, cssClass + '-add');
+      TimerWrapper.setTimeout(() => {
+        var duration = Animate.getTransitionDuration(el, true);
+        var callTimeout = setTimeout(() => done(), duration);
+        var done = () => {
+          DOM.removeClass(el, cssClass + '-add-active');
+          DOM.removeClass(el, cssClass + '-add');
+          clearTimeout(callTimeout);
+          removeListener();
+          resolve();
+        };
+        let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
+        DOM.addClass(el, cssClass + '-add-active');
+        DOM.addClass(el, cssClass);
+      }, 1);
     });
   }
 
   static leave(el: HTMLElement, cssClass: string): Promise<void> {
     return new Promise<void>((resolve)=> {
-      var duration = Animate.getTransitionDuration(el, true);
-      var callTimeout = setTimeout(() => done(), duration);
+      DOM.addClass(el, cssClass + '-remove');
+      TimerWrapper.setTimeout(() => {
+        var duration = Animate.getTransitionDuration(el, true);
+        var callTimeout = setTimeout(() => done(), duration);
 
-      var done = () => {
-        clearTimeout(callTimeout);
-        removeListener();
-        resolve();
-      };
-      let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
-      DOM.removeClass(el, cssClass);
+        var done = () => {
+          DOM.removeClass(el, cssClass + '-remove-active');
+          DOM.removeClass(el, cssClass + '-remove');
+          clearTimeout(callTimeout);
+          removeListener();
+          resolve();
+        };
+        let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
+        DOM.addClass(el, cssClass + '-remove-active');
+        DOM.removeClass(el, cssClass);
+      }, 1);
     });
   }
 
@@ -49,16 +62,18 @@ export class Animate {
    * @returns {number}
    */
   static getTransitionDuration(element: HTMLElement, includeDelay: boolean = false) {
-    var prefixes = ['moz', 'webkit', 'ms', 'o', 'khtml'];
+    var prefixes = ['', 'moz', 'webkit', 'ms', 'o', 'khtml'];
     var style: any = window.getComputedStyle(element);
     for (let i = 0; i < prefixes.length; i++) {
-      let duration = style['-' + prefixes[i] + '-transition-duration'];
+      let durationProperty = (i === 0 ? '' : `-${prefixes[i]}-`) + `transition-duration`;
+      let duration = style[durationProperty];
       if (!duration) {
         continue;
       }
       duration = ( duration.indexOf('ms') > -1 ) ? parseFloat(duration) : parseFloat(duration) * 1000;
       if (includeDelay) {
-        var delay = style['-' + prefixes[i] + '-transition-delay'];
+        let delayProperty = (i === 0 ? '' : `-${prefixes[i]}-`) + `transition-delay`;
+        var delay = style[delayProperty];
         if (typeof delay !== 'undefined') {
           duration += ( delay.indexOf('ms') > -1 ) ? parseFloat(delay) : parseFloat(delay) * 1000;
         }

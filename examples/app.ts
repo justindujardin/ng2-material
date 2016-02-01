@@ -1,27 +1,25 @@
-import {Component, View, enableProdMode} from 'angular2/core';
-import {bootstrap} from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-
-import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from '../ng2-material/all';
-import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
-
-import {DEMO_DIRECTIVES} from './all';
-import Example from './example';
-import {Http, Response, HTTP_PROVIDERS} from 'angular2/http';
+import {Component, View, enableProdMode, bind, Input, OnDestroy, ApplicationRef} from "angular2/core";
+import {bootstrap} from "angular2/platform/browser";
+import {
+  ROUTER_PROVIDERS,
+  ROUTER_DIRECTIVES,
+  RouteConfig,
+  HashLocationStrategy,
+  LocationStrategy, Router
+} from "angular2/router";
+import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "../ng2-material/all";
+import {DEMO_DIRECTIVES} from "./all";
+import Example from "./example";
+import {Http, Response, HTTP_PROVIDERS} from "angular2/http";
 import {IndexPage} from "./routes/index";
 import {ComponentPage} from "./routes/component";
-import {HashLocationStrategy} from "angular2/router";
-import {LocationStrategy} from "angular2/router";
-import {bind} from "angular2/core";
-import {ComponentsService} from "./services/components";
-import {Router} from "angular2/router";
-import {Query} from "angular2/core";
-import {QueryList} from "angular2/core";
+import {ComponentsService, IComponentMeta} from "./services/components";
 import {NavigationService} from "./services/navigation";
-import {AfterViewInit} from "angular2/core";
 import {VersionService} from "./services/version";
-import { AppViewListener } from 'angular2/src/core/linker/view_listener';
-import { DebugElementViewListener } from 'angular2/platform/common_dom';
+import {AppViewListener} from "angular2/src/core/linker/view_listener";
+import {DebugElementViewListener} from "angular2/platform/common_dom";
+import {SidenavService} from "ng2-material/components/sidenav/sidenav_service";
+import {Media} from "ng2-material/core/util/media";
 
 /**
  * Describe an example that can be dynamically loaded.
@@ -40,25 +38,64 @@ export interface IExampleData {
 ])
 
 @Component({
-  selector: 'demos-app'
+  selector: 'demos-app',
+  host: {
+    '[class.push-menu]': 'fullPage'
+  }
 })
 @View({
   templateUrl: 'examples/app.html',
   directives: [MATERIAL_DIRECTIVES, ROUTER_DIRECTIVES, Example, DEMO_DIRECTIVES]
 })
-export class DemosApp {
+export class DemosApp implements OnDestroy {
 
-  public site:string = 'Angular2 Material';
+  static SIDE_MENU_BREAKPOINT: string = 'gt-md';
 
-  meta: any;
+  @Input()
+  fullPage: boolean = Media.hasMedia(DemosApp.SIDE_MENU_BREAKPOINT);
+
+  public site: string = 'Angular2 Material';
 
   version: string;
 
-  constructor(http: Http, public navigation: NavigationService) {
+  components: IComponentMeta[] = [];
+
+  private _subscription = null;
+
+  constructor(http: Http,
+              public navigation: NavigationService,
+              public media: Media,
+              public router: Router,
+              public appRef: ApplicationRef,
+              private _components: ComponentsService,
+              private _sidenav: SidenavService) {
+    let query = Media.getQuery(DemosApp.SIDE_MENU_BREAKPOINT);
+    this._subscription = media.listen(query).onMatched.subscribe((mql: MediaQueryList) => {
+      this.fullPage = mql.matches;
+      this.appRef.tick();
+    });
     http.get('public/version.json')
       .subscribe((res: Response) => {
         this.version = res.json().version;
       });
+
+    this._components.getComponents()
+      .then((comps) => {
+        this.components = comps;
+      });
+
+  }
+
+  ngOnDestroy(): any {
+    this._subscription.unsubscribe();
+  }
+
+  showMenu(event?) {
+    this._sidenav.show('menu');
+  }
+
+  navigate(to:any) {
+    this.router.navigate(to);
   }
 
 }
@@ -69,7 +106,7 @@ let appProviders = [
   bind(LocationStrategy).toClass(HashLocationStrategy)
 ];
 
-if(window.location.href.indexOf('github.com') !== -1){
+if (window.location.href.indexOf('github.com') !== -1) {
   enableProdMode();
 }
 else {

@@ -3,7 +3,17 @@
 @import "../ng2-material/core/style/theme-functions";
 @import "../ng2-material/core/style/default-theme";
 
+
+example {
+  md-example-view {
+    display: block;
+    background-color: white;
+    @include md-stacking-context();
+  }
+}
+
 .demo-container {
+  overflow: hidden;
   .demo-toolbar {
     button[md-button] {
       color: rgba(255, 255, 255, 0.6);
@@ -42,6 +52,7 @@ docs-demo {
   transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
   position: relative;
   padding-bottom: 0;
+  background-color: md-color($md-background, 50);
 }
 
 .demo-source-tabs {

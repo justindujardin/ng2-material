@@ -8,7 +8,7 @@
   <p>There are instructions for getting started at the bottom.</p>
 </section>
 
-<nav class="examples-toc">
+<nav class="heading-list-toc">
   <h1>Components</h1>
   <ul>
     <li *ngFor="#value of components"><a [routerLink]="['Component', {id: value.id}]">{{value.name}}</a></li>
@@ -90,8 +90,9 @@
 
 <section class="examples-intro">
   <h1 class="examples-title seed-title">What is Material Design?</h1>
-  <p>If you're not familiar with Material Design, here are two videos. The first introduces it very generally, and the
-    second talks about the use of color.</p>
+  <p>If you're not familiar with Google's <a
+    href="https://www.google.com/design/spec/material-design/introduction.html">Material Design</a>, here are two
+    videos. The first introduces it very generally, and the second talks about the use of color.</p>
   <div>
     <div layout="column" layout-gt-lg="row" layout-padding layout-align="start center">
       <iframe flex="100" flex-gt-lg="50" width="560" height="315" src="https://www.youtube.com/embed/Q8TXgCzxEnw"

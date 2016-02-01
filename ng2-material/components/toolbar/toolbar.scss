@@ -187,7 +187,7 @@ md-toolbar:not(.md-menu-toolbar) {
   background-color: md-color($md-primary); //'{{primary-color}}';
   color: md-color($md-primary, default-contrast); //'{{primary-contrast}}';
 
-  md-icon {
+  [md-icon] {
     color: md-color($md-primary, default-contrast); //'{{primary-contrast}}';
   }
 

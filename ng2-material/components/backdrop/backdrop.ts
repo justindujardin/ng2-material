@@ -7,13 +7,17 @@ import {Component} from "angular2/core";
 import {Input} from "angular2/core";
 import {Output} from "angular2/core";
 import {EventEmitter} from "angular2/core";
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
 /**
- * A transparent overlay for content on the page.
+ * An overlay for content on the page.
+ * Can optionally dismiss when clicked on.
+ * Has outputs for show/showing and hide/hiding.
  */
 @Component({
   selector: 'md-backdrop',
   host: {
+    'class': 'md-backdrop',
     '(click)': 'onClick()',
   },
 })
@@ -25,6 +29,12 @@ export class MdBackdrop {
    */
   @Input()
   clickClose: boolean = false;
+
+  /**
+   * When true, disable the parent container scroll while the backdrop is active.
+   */
+  @Input()
+  hideScroll: boolean = true;
 
   /**
    * Emits when the backdrop begins to hide.
@@ -51,20 +61,38 @@ export class MdBackdrop {
   @Output()
   onShown: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
 
-
   constructor(public element: ElementRef) {
   }
 
-
-  private _visible: boolean = false;
-  private _transitioning: boolean = false;
+  /**
+   * The CSS class name to transition on/off when the backdrop is hidden/shown.
+   */
+  @Input()
+  public transitionClass: string = 'md-active';
 
   /**
-   * Read-only property indicating whether the backdrop is visible or not.
+   * Whether to add the {@see transitionClass} or remove it when the backdrop is shown. The
+   * opposite will happen when the backdrop is hidden.
+   */
+  @Input()
+  public transitionAddClass = true;
+
+
+  /**
+   * Whether the backdrop is visible.
    */
   get visible(): boolean {
     return this._visible;
   }
+  @Input()
+  set visible(value: boolean) {
+    this.toggle(value);
+  }
+
+  private _visible: boolean = false;
+  private _transitioning: boolean = false;
+  private _previousOverflow: string = null;
+  private _body:HTMLBodyElement = DOM.query('body');
 
   onClick() {
     if (this.clickClose && !this._transitioning && this.visible) {
@@ -72,37 +100,60 @@ export class MdBackdrop {
     }
   }
 
-  /**
-   * Show the backdrop and return a promise that is resolved when the show animations are
-   * complete.
-   */
-  show(): Promise<void> {
-    if (this._visible) {
-      return Promise.resolve();
-    }
-    this._visible = true;
-    this._transitioning = true;
-    this.onShowing.emit(this);
-    return Animate.enter(this.element.nativeElement, 'md-active').then(() => {
-      this._transitioning = false;
-      this.onShown.emit(this);
-    });
-  }
 
   /**
    * Hide the backdrop and return a promise that is resolved when the hide animations are
    * complete.
    */
   hide(): Promise<void> {
-    if (!this._visible) {
+    return this.toggle(false);
+  }
+
+  /**
+   * Show the backdrop and return a promise that is resolved when the show animations are
+   * complete.
+   */
+  show(): Promise<void> {
+    return this.toggle(true);
+  }
+
+  /**
+   * Toggle the visibility of the backdrop.
+   * @param visible whether or not the backdrop should be visible
+   * @returns {any}
+   */
+  toggle(visible: boolean = !this.visible) {
+    if (visible === this._visible) {
       return Promise.resolve();
     }
-    this._visible = false;
+
+    let beginEvent = visible ? this.onShowing : this.onHiding;
+    let endEvent = visible ? this.onShown : this.onHidden;
+
+    this._visible = visible;
     this._transitioning = true;
-    this.onHiding.emit(this);
-    return Animate.leave(this.element.nativeElement, 'md-active').then(() => {
+    beginEvent.emit(this);
+    let action = visible ?
+      (this.transitionAddClass ? Animate.enter : Animate.leave) :
+      (this.transitionAddClass ? Animate.leave : Animate.enter);
+
+    // Page scroll
+    if (visible && this.hideScroll && this.element && !this._previousOverflow) {
+      let style = DOM.getStyle(this._body, 'overflow');
+      if (style !== 'hidden') {
+        this._previousOverflow = style;
+        DOM.setStyle(this._body, 'overflow', 'hidden');
+      }
+    }
+    else if (!visible && this.hideScroll && this.element && this._previousOverflow !== null) {
+      DOM.setStyle(this._body, 'overflow', this._previousOverflow);
+      this._previousOverflow = null;
+    }
+
+    // Animate transition class in/out and then finally emit the completed event.
+    return action(this.element.nativeElement, this.transitionClass).then(() => {
       this._transitioning = false;
-      this.onHidden.emit(this);
+      endEvent.emit(this);
     });
   }
 }
