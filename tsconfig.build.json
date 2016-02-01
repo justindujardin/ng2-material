@@ -33,6 +33,7 @@
         "ng2-material/components/form/messages.ts",
         "ng2-material/components/form/validators.ts",
         "ng2-material/components/icon/icon.ts",
+        "ng2-material/components/ink/ink.ts",
         "ng2-material/components/input/input.ts",
         "ng2-material/components/list/list.ts",
         "ng2-material/components/peekaboo/peekaboo.ts",
