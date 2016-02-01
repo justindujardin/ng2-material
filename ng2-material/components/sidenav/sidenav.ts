@@ -113,18 +113,6 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
     return this._style;
   }
 
-  /**
-   * Whether the sidenav is opened or not.
-   */
-  @Input()
-  set opened(value: boolean) {
-    this.visible = value;
-  }
-
-  get opened(): boolean {
-    return this.visible;
-  }
-
   private _align: string = SidenavAlignment.LEFT;
   private _style: string = SidenavStyle.OVER;
 
@@ -180,16 +168,13 @@ export class MdSidenavContainer implements OnDestroy, AfterViewInit {
   private _backdrop: MdBackdrop;
 
   // TODO(jd): This change detection hacking could probably be avoided if Zone.JS knew about media
-  constructor(private _app: ApplicationRef) {
+  constructor(@Optional() private _app: ApplicationRef) {
   }
 
   private _unsubscribe: any = null;
 
   ngOnDestroy(): any {
-    if (this._unsubscribe) {
-      this._unsubscribe.unsubscribe();
-      this._unsubscribe = null;
-    }
+    this._unsubscribe.unsubscribe();
   }
 
   @Input()
