@@ -1,3 +1,22 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/justindujardin/ng2-material/compare/v0.1.8...v0.2.0) (2016-02-01)
+
+
+### Features
+
+* **Animate:** add support for maybe correct ng1 css animation classes ([cb85ae4](https://github.com/justindujardin/ng2-material/commit/cb85ae4))
+* **backdrop:** add configurable transition classes ([4f847dc](https://github.com/justindujardin/ng2-material/commit/4f847dc))
+* **backdrop:** add hideScroll input to hide parent scroll while shown ([2e6240d](https://github.com/justindujardin/ng2-material/commit/2e6240d))
+* **backdrop:** add visible property setter for binding to ([635224c](https://github.com/justindujardin/ng2-material/commit/635224c))
+* **examples:** add basic menu side navigation ([684b7dc](https://github.com/justindujardin/ng2-material/commit/684b7dc))
+* **examples:** add sidenav example ([5d1ce24](https://github.com/justindujardin/ng2-material/commit/5d1ce24))
+* **examples:** focus input when sidenav is shown ([dff7050](https://github.com/justindujardin/ng2-material/commit/dff7050))
+* **ink:** add directive for applying ink to arbitrary elements ([89819d5](https://github.com/justindujardin/ng2-material/commit/89819d5))
+* **sidenav:** basic sidenav component extended from backdrop ([6043b12](https://github.com/justindujardin/ng2-material/commit/6043b12))
+* **switch:** match latest angular material animation ([abd10e7](https://github.com/justindujardin/ng2-material/commit/abd10e7))
+
+
+
 <a name="0.1.8"></a>
 ## [0.1.8](https://github.com/justindujardin/ng2-material/compare/v0.1.7...v0.1.8) (2016-01-23)
 
