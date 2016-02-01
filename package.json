@@ -59,9 +59,10 @@
     "underscore": "1.8.3"
   },
   "contributors": [
-    "Jaroslav Řehořka <jaroslav.rehorka@gmail.com>",
     "Justin DuJardin <justindujardin@users.noreply.github.com>",
+    "Jaroslav Řehořka <jaroslav.rehorka@gmail.com>",
     "Adam Busbin <aw.busbin@gmail.com>",
-    "Chris Seto <chriskseto@gmail.com>"
+    "Chris Seto <chriskseto@gmail.com>",
+    "Daniel Rasmuson <dan123911@gmail.com>"
   ]
 }
