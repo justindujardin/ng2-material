@@ -1,3 +1,13 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/justindujardin/ng2-material/compare/v0.2.0...v0.2.1) (2016-02-02)
+
+
+### Bug Fixes
+
+* **input:** check for empty string for input has value ([0f8c690](https://github.com/justindujardin/ng2-material/commit/0f8c690)), closes [#36](https://github.com/justindujardin/ng2-material/issues/36)
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/justindujardin/ng2-material/compare/v0.1.8...v0.2.0) (2016-02-01)
 
