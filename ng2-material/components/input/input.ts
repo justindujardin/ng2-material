@@ -41,7 +41,7 @@ export class MdInput {
   }
 
   get value(): string {
-    return !isBlank(this._value) ? this._value : '';
+    return this._value !== '' || !isBlank(this._value) ? this._value : '';
   }
 
   @Input()
@@ -119,4 +119,3 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
 
   }
 }
-
