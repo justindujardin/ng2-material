@@ -1,16 +1,18 @@
 import {
-  Directive, View, Component, Attribute, Host, SkipSelf, AfterContentInit, ElementRef, forwardRef, OnChanges, ContentChild,
-  Query, QueryList, Optional
-} from 'angular2/core';
-
-import {NgControlName, FORM_PROVIDERS} from 'angular2/common';
-
-import {ObservableWrapper, EventEmitter} from 'angular2/src/facade/async';
-import {Input,Output} from 'angular2/core';
-import {isPresent} from 'angular2/src/facade/lang';
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {TimerWrapper} from "angular2/src/facade/async";
+  Directive,
+  View,
+  Component,
+  AfterContentInit,
+  ElementRef,
+  OnChanges,
+  ContentChild,
+  Input,
+  Output
+} from "angular2/core";
+import {FORM_PROVIDERS} from "angular2/common";
+import {ObservableWrapper, EventEmitter, TimerWrapper} from "angular2/src/facade/async";
 import {isBlank} from "angular2/src/facade/lang";
+import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
 // TODO(jd): <select> hasFocus/hasValue classes
 // TODO(jd): input container validation styles.
@@ -85,7 +87,7 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
   }
 
   ngOnChanges(_) {
-    this.inputHasValue = !isBlank(this._input.value);
+    this.inputHasValue = this._input.value !== '';
 
     // TODO(jd): Is there something like @ContentChild that accepts a selector? I would prefer not to
     // use a directive for label elements because I cannot use a parent->child selector to make them
@@ -108,7 +110,7 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
     // Listen to input changes and focus events so that we can apply the appropriate CSS
     // classes based on the input state.
     ObservableWrapper.subscribe(this._input.mdChange, (value) => {
-      this.inputHasValue = !isBlank(value);
+      this.inputHasValue = value !== '';
     });
 
     ObservableWrapper.subscribe<boolean>(this._input.mdFocusChange, (hasFocus: boolean) => {
