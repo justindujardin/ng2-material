@@ -1,6 +1,7 @@
 .DS_Store
 .baseDir.*
 .idea
+node_modules/
 dist/
 out/
 site/
