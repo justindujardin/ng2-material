@@ -142,15 +142,7 @@ module.exports = function (grunt) {
     connect: {
       main: {
         options: {
-          port: 9001/*,
-          middleware: function (connect, options) {
-            return [
-              // Serve static files.
-              connect.static('./'),
-              // Make empty directories browsable.
-              connect.directory('./')
-            ];
-          }*/
+          port: 9001
         }
       }
     },
