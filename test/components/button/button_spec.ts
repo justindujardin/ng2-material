@@ -12,9 +12,8 @@ import {
   it,
   xit,
 } from 'angular2/testing_internal';
-import {DebugElement} from 'angular2/src/core/debug/debug_element';
 
-import {Component, View, ViewMetadata, provide} from 'angular2/core';
+import {Component, View, ViewMetadata, provide, DebugElement} from 'angular2/core';
 import {UrlResolver} from 'angular2/compiler';
 
 import {MdButton, MdAnchor} from '../../../ng2-material/components/button/button';
@@ -83,7 +82,7 @@ export function main() {
 
       it('should ink ripple when clicked', inject([AsyncTestCompleter], (async) => {
         setup().then((fixture: ComponentFixture) => {
-          let button: DebugElement = fixture.debugElement.componentViewChildren[0];
+          let button: DebugElement = fixture.debugElement.children[0];
 
           let save = Ink.rippleEvent;
           let fired = false;
@@ -106,7 +105,7 @@ export function main() {
       it('should not ink ripple with md-no-ink attribute', inject([AsyncTestCompleter], (async) => {
         let template = `<button md-button md-no-ink></button>`;
         setup(template).then((fixture: ComponentFixture) => {
-          let button: DebugElement = fixture.debugElement.componentViewChildren[0];
+          let button: DebugElement = fixture.debugElement.children[0];
           let save = Ink.rippleEvent;
           let fired = false;
           Ink.rippleEvent = () => {
@@ -177,7 +176,7 @@ export function main() {
 
       it('should not preventDefault on enabled anchor clicks', inject([AsyncTestCompleter], (async) => {
         builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
-          let anchor: DebugElement = fixture.debugElement.componentViewChildren[0];
+          let anchor: DebugElement = fixture.debugElement.children[0];
           let event = DOM.createEvent('mouse');
           let triggered = false;
           event.preventDefault = () => triggered = true;
@@ -188,7 +187,7 @@ export function main() {
       }));
       it('should preventDefault for disabled anchor clicks', inject([AsyncTestCompleter], (async) => {
         builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
-          let anchor: DebugElement = fixture.debugElement.componentViewChildren[0];
+          let anchor: DebugElement = fixture.debugElement.children[0];
           let anchorComp: MdAnchor = anchor.componentInstance;
           let event = DOM.createEvent('mouse');
           let triggered = false;

@@ -8,8 +8,7 @@ import {
   inject,
   it,
 } from 'angular2/testing_internal';
-import {DebugElement} from 'angular2/src/core/debug/debug_element';
-import {Component, View, provide} from 'angular2/core';
+import {Component, View, DebugElement, provide} from 'angular2/core';
 import {UrlResolver} from 'angular2/compiler';
 import {TestUrlResolver} from '../../test_url_resolver';
 import {MdRadioGroup, MdRadioButton} from '../../../ng2-material/components/radio/radio_button';
@@ -193,7 +192,7 @@ export function main() {
             let group = <MdRadioGroup>fixture.debugElement.query(By.css('md-radio-group')).componentInstance;
 
             expect(group.value).toBe('Banana');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.UP);
+            sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Apple');
 
             fixture.destroy();
@@ -207,9 +206,9 @@ export function main() {
             let group = <MdRadioGroup>fixture.debugElement.query(By.css('md-radio-group')).componentInstance;
 
             expect(group.value).toBe('Banana');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.UP);
+            sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Apple');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.UP);
+            sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Apple');
 
             fixture.destroy();
@@ -223,7 +222,7 @@ export function main() {
             let group = <MdRadioGroup>fixture.debugElement.query(By.css('md-radio-group')).componentInstance;
 
             expect(group.value).toBe('Banana');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.DOWN);
+            sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Mango');
 
             fixture.destroy();
@@ -237,9 +236,9 @@ export function main() {
             let group = <MdRadioGroup>fixture.debugElement.query(By.css('md-radio-group')).componentInstance;
 
             expect(group.value).toBe('Banana');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.DOWN);
+            sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Mango');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.DOWN);
+            sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Mango');
 
             fixture.destroy();
@@ -255,9 +254,9 @@ export function main() {
             group.disabled = true;
 
             expect(group.value).toBe('Banana');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.UP);
+            sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Banana');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.DOWN);
+            sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Banana');
 
             fixture.destroy();
@@ -273,9 +272,9 @@ export function main() {
             let group = <MdRadioGroup>fixture.debugElement.query(By.css('md-radio-group')).componentInstance;
 
             expect(group.value).toBe('Banana');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.DOWN);
+            sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Mango');
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.UP);
+            sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Banana');
 
             fixture.destroy();
@@ -368,7 +367,7 @@ export function main() {
             expect(radio.checked).toBe(true);
             radio.checked = false;
             expect(radio.checked).toBe(false);
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.SPACE);
+            sendKey(fixture.debugElement.children[0], KeyCodes.SPACE);
             expect(radio.checked).toBe(true);
 
             fixture.destroy();
@@ -382,7 +381,7 @@ export function main() {
 
             let radio: MdRadioButton = fixture.debugElement.query(By.css('md-radio-button')).componentInstance;
             expect(radio.checked).toBe(false);
-            sendKey(fixture.debugElement.componentViewChildren[0], KeyCodes.UP);
+            sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(radio.checked).toBe(false);
 
             fixture.destroy();

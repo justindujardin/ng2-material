@@ -8,8 +8,7 @@ import {
   inject,
   it,
 } from 'angular2/testing_internal';
-import {DebugElement} from 'angular2/src/core/debug/debug_element';
-import {Component, View, provide} from 'angular2/core';
+import {Component, View, provide, DebugElement, ElementRef} from 'angular2/core';
 import {UrlResolver} from 'angular2/compiler';
 import {TestUrlResolver} from '../../test_url_resolver';
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
@@ -22,9 +21,10 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
 export function main() {
 
   interface IBackdropFixture {
-    fixture:ComponentFixture;
-    debug:DebugElement;
-    backdrop:MdBackdrop;
+    fixture: ComponentFixture;
+    debug: DebugElement;
+    elementRef: ElementRef;
+    backdrop: MdBackdrop;
   }
 
   @Component({selector: 'test-app'})
@@ -44,6 +44,7 @@ export function main() {
           let result:IBackdropFixture = null;
           builder.createAsync(TestComponent)
         .then((fixture: ComponentFixture) => {
+          let elementRef = fixture.elementRef;
           let debug = fixture.debugElement.query(By.css('md-backdrop'));
           let backdrop = <MdBackdrop>debug.componentInstance;
               backdrop.transitionAddClass = transitionAddClass;
@@ -51,6 +52,7 @@ export function main() {
           result = {
             fixture: fixture,
             debug: debug,
+            elementRef: elementRef,
             backdrop: backdrop
           };
           if (show) {
@@ -77,14 +79,14 @@ export function main() {
       describe('transitionClass', () => {
         it('should be added to classList when shown', inject([AsyncTestCompleter], (async) => {
           setup(true).then((api: IBackdropFixture) => {
-            let el = api.debug.elementRef.nativeElement;
+            let el = api.elementRef.nativeElement;
             expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(true);
             async.done();
           });
         }));
         it('should be removed from classList when hidden', inject([AsyncTestCompleter], (async) => {
           setup(true).then((api: IBackdropFixture) => {
-            let el = api.debug.elementRef.nativeElement;
+            let el = api.elementRef.nativeElement;
             expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(true);
             api.backdrop.hide().then(() => {
               expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
@@ -97,7 +99,7 @@ export function main() {
       describe('transitionAddClass=false', () => {
         it('should remove transitionClass when shown', inject([AsyncTestCompleter], (async) => {
           setup(false, false).then((api: IBackdropFixture) => {
-            let el = api.debug.elementRef.nativeElement;
+            let el = api.elementRef.nativeElement;
             expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
             DOM.addClass(el, api.backdrop.transitionClass);
             api.backdrop.show().then(() => {
@@ -108,7 +110,7 @@ export function main() {
         }));
         it('should add transitionClass when hidden', inject([AsyncTestCompleter], (async) => {
           setup(true, false).then((api: IBackdropFixture) => {
-            let el = api.debug.elementRef.nativeElement;
+            let el = api.elementRef.nativeElement;
             expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
             api.backdrop.hide().then(() => {
               expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(true);

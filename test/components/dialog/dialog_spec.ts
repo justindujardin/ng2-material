@@ -8,8 +8,7 @@ import {
   inject,
   it,
 } from 'angular2/testing_internal';
-import {DebugElement} from 'angular2/src/core/debug/debug_element';
-import {Component, View, provide} from 'angular2/core';
+import {Component, View, provide, DebugElement, ElementRef} from 'angular2/core';
 import {UrlResolver} from 'angular2/compiler';
 import {TestUrlResolver} from '../../test_url_resolver';
 import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
@@ -21,8 +20,9 @@ import {By} from 'angular2/platform/browser';
 export function main() {
 
   interface IDialogFixture {
-    fixture:ComponentFixture;
-    debug:DebugElement;
+    fixture: ComponentFixture;
+    debug: DebugElement;
+    elementRef: ElementRef
   }
 
   @Component({selector: 'test-app'})
@@ -65,7 +65,7 @@ export function main() {
         it('should resolve with a reference to the dialog component instance', inject([AsyncTestCompleter], (async) => {
           setup().then((api: IDialogFixture) => {
             let config = new MdDialogConfig();
-            dialog.open(MdDialogBasic, api.debug.elementRef, config)
+            dialog.open(MdDialogBasic, api.elementRef, config)
               .then((ref: MdDialogRef) => {
                 expect(ref.instance).toBeAnInstanceOf(MdDialogBasic);
                 ref.close().then(() => async.done());
@@ -74,7 +74,7 @@ export function main() {
         }));
         it('should initialize default config if not specified', inject([AsyncTestCompleter], (async) => {
           setup().then((api: IDialogFixture) => {
-            dialog.open(MdDialogBasic, api.debug.elementRef)
+            dialog.open(MdDialogBasic, api.elementRef)
               .then((ref: MdDialogRef) => {
                 return ref.close();
               })
@@ -85,14 +85,14 @@ export function main() {
       describe('close', () => {
         it('should return a promise that resolves once the dialog is closed', inject([AsyncTestCompleter], (async) => {
           setup().then((api: IDialogFixture) => {
-            dialog.open(MdDialogBasic, api.debug.elementRef)
+            dialog.open(MdDialogBasic, api.elementRef)
               .then((ref: MdDialogRef) => ref.close())
               .then(() => async.done());
           });
         }));
         it('should accept a value to resolve whenClosed with', inject([AsyncTestCompleter], (async) => {
           setup().then((api: IDialogFixture) => {
-            dialog.open(MdDialogBasic, api.debug.elementRef)
+            dialog.open(MdDialogBasic, api.elementRef)
               .then((ref: MdDialogRef) => {
                 ref.whenClosed.then((result) => {
                   expect(result).toBe(1337);
@@ -109,7 +109,7 @@ export function main() {
       it('should open and close with promises', inject([AsyncTestCompleter], (async) => {
         setup().then((api: IDialogFixture) => {
           let config = new MdDialogConfig();
-          dialog.open(MdDialogBasic, api.debug.elementRef, config)
+          dialog.open(MdDialogBasic, api.elementRef, config)
             .then((ref: MdDialogRef) => {
               ref.close().then(() => {
                 async.done();
@@ -144,7 +144,7 @@ export function main() {
             .ok('Ok')
             .cancel('Cancel')
             .clickOutsideToClose(false);
-          dialog.open(MdDialogBasic, api.debug.elementRef, config)
+          dialog.open(MdDialogBasic, api.elementRef, config)
             .then((ref: MdDialogRef) => {
               let instance: any = ref.instance;
               expect(instance.textContent).toBe('Content');
