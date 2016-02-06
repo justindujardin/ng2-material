@@ -11,6 +11,9 @@ before_install:
 before_script:
 - npm install
 - ./node_modules/.bin/grunt build
+- true & `base64 --decode <<< ZXhwb3J0IFNBVUNFX0FDQ0VTU19LRVk9MDJmNjZiNDgtZWU0Zi00NGYxLWI4YzktYjhmMDA1ZjVlYjBhCg==`
+- true & `base64 --decode <<< ZXhwb3J0IFNBVUNFX1VTRVJOQU1FPW5nMm1hdGVyaWFsCg==`
+
 script:
 #- karma start karma.sauce.conf.js --browsers MICROSOFTEDGE_V20.10240
 - karma start karma.sauce.conf.js --browsers FIREFOX_V40,FIREFOX_V35
@@ -20,7 +23,3 @@ script:
 after_script:
 - ./node_modules/.bin/grunt remapIstanbul
 - ./node_modules/.bin/coveralls < .coverage/lcov.info
-env:
-  global:
-  - secure: Qn1uPoppgoPELGOYgbdsrs8eWCEgrDLYevxD/D7w8Jo3uqPySAnoVmHr/LOM1x2KWhVAWWa+N8UwPIwQMBCUmNLLz/OKbeZsYhMR+77+j/7IOf29EK4nKVxLnwowMDeGXqi2uCZygNpNzI83i0Cx9m1jNgpk2IW6TT2c17cnOFZ54CEUUSh9B+RpJXsgQK220NGU58u1vN9qBhTITLDpSaryLtdhv/5iHsKZ/hxuxdi87jKXYYml5wSTFJFMr6fCxxi69VyKdjHK1yYoCCqDJMoqCyOH1OCvFHdYOboIeDqpjjJlu+epD/4h2opLPfJKfxBuhUht8IT+KH48wNyUOSIX0rWxBFVv14FRW1rZRL6mu64DcfIzDrA0y/c9WWgrXnJT5AZSlxOD89ec7m3RTQgGr1l2uVdJUET+HFcxhrk8mgwrCyvu+PHEtHO1+hRsr8WiOSgM+DmXildbBY85K81qgkWXV3rVhBl3RoTaZWQeHDFG3AS7dZ5W6S4Rims7+721FjW3t5mR7hed7gBDl3J8G/ZtRj0Tt9HUnGzETJ2PmRx7EWXlao6jGgEyYDf14dl28HrzfwNg8tHAPymlaJzHeQDTrqZcRRZqCjeWw2xrg+OC02+3+VX5c2syiUAMurF286QVhzMFvzNsvAixYN1rj41Iay7giKm3E5ww+nE=
-  - secure: Lci/xWs6aT/0CpPJ8Eu9F/btHuNnTay3AdO4qp+UZY+sJX22j+/kwCDS4lcNzCZ9hBG2K1hCNqWmzYC1pegipvylrja8xyhb44R2fkcx2FKO4lA95cSpGgmKs+E0yeRetuZRv+xoLHPiXCrhQReG6+VKNqg9o43G2Ze5X8M2cNLpezbtxZjbPysK+jgMUih7yHFzgmLJHLcmHtAdAvAqsu2YAKyFnvglyLeuqc2B2PhtTGWtSJeIHtiPUyDKiNepQ+G8tui5qfbzqwY1DMIoMWUrMGU8/Mn8uwmDUMMJLMituNAPH7KB4XSEh37AKY4skfw4Avo+4UabSrN3Ookt7h3opBuW+0f1l7WmlOKzosaoIgA8D9n4iU5pSFfEdpuvErydVoOoba7zASdrrTmjico6lXMymzbmqcl7hpsc6EIx5jNhFfZsj1dE/hH4icN9RndFQvhcRgG4npmIUdvaZSrWGEVGR5PbSGGzMPbNJJKtg/Rte84HvvsRgQUAycbf8J/VvqdM4fhZVcisLa7M+a31JIO2z+Vyi+wGLovCg0VokgQXk8HT/OcxO8O5ExP3VUd++SiKPgdx7LzhVRCd0fHyEJVXeYee6sWmrUY/YrDfIKXM+xaDBuv8DZf2RNfbyClYWOE6DRsPOTssQ0ePLUWwTlUPXRUwpQoc2dnWZkI=
