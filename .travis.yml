@@ -1,7 +1,7 @@
 language: node_js
 sudo: false
 node_js:
-- '4.0'
+- '4.2.6'
 before_install:
 - npm install -g karma-cli
 - export CHROME_BIN=chromium-browser
