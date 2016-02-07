@@ -12,7 +12,7 @@ import {
   RootRenderer,
   APPLICATION_COMMON_PROVIDERS
 } from "angular2/core";
-import {Promise} from "angular2/src/facade/async";
+import {Promise, TimerWrapper} from "angular2/src/facade/async";
 import {isPresent, Type} from "angular2/src/facade/lang";
 import {MdDialogRef} from "./dialog_ref";
 import {MdDialogConfig} from "./dialog_config";
@@ -68,7 +68,6 @@ export class MdDialog {
   open(type: Type, elementRef: ElementRef, options: MdDialogConfig = null): Promise<MdDialogRef> {
     var config = isPresent(options) ? options : new MdDialogConfig();
 
-
     // Create the dialogRef here so that it can be injected into the content component.
     var dialogRef = new MdDialogRef();
 
@@ -78,12 +77,7 @@ export class MdDialog {
 
     // First, load the MdDialogContainer, into which the given component will be loaded.
     return this.componentLoader.loadNextToLocation(MdDialogContainer, elementRef, bindings)
-      .then(containerRef => {
-        // TODO(tbosch): clean this up when we have custom renderers
-        // (https://github.com/angular/angular/issues/1807)
-        // TODO(jelbourn): Don't use direct DOM access. Need abstraction to create an element
-        // directly on the document body (also needed for web workers stuff).
-        // Create a DOM node to serve as a physical host element for the dialog.
+      .then((containerRef: ComponentRef) => {
         var dialogElement = containerRef.location.nativeElement;
 
         this._renderer.setElementClass(dialogElement, 'md-dialog-absolute', !!config.container);
@@ -112,19 +106,28 @@ export class MdDialog {
             dialogRef.contentRef = contentRef;
             containerRef.instance.dialogRef = dialogRef;
 
-            backdropRefPromise.then(backdropRef => {
+            backdropRefPromise.then((backdropRef: ComponentRef) => {
               dialogRef.backdropRef = backdropRef;
               dialogRef.whenClosed.then((_) => {
-                backdropRef.dispose();
+                backdropRef.instance.hide().then(() => {
+                  containerRef.dispose();
+                  contentRef.dispose();
+                  // TODO(jd): The change detection doesn't like it if you dispose() a ComponentRef while it has
+                  //           pending async things that will emit() one of it's outputs. Wait a second for the
+                  //           container objects to be disposed and clean up their Change detection references to
+                  //           the backdrop's hide/show events, then dispose of the backdrop.
+                  TimerWrapper.setTimeout(()=> {
+                    backdropRef.dispose();
+                  }, 500);
+                });
               });
             });
 
             return Animate.enter(dialogElement, 'md-active').then(() => dialogRef);
           });
       })
-      .catch((e:any) => {
-        console.error(e);
-        console.error(e.stack);
+      .catch((e: any) => {
+        console.error("Error creating dialog");
       });
   }
 

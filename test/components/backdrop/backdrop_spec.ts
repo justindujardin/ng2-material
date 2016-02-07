@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement, ElementRef} from "angular2/core";
+import {Component, View, DebugElement} from "angular2/core";
 import {MdBackdrop} from "../../../ng2-material/components/backdrop/backdrop";
 import {By} from "angular2/platform/browser";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";

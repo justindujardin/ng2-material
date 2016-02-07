@@ -17,6 +17,7 @@ import {
   MdSidenavContainer
 } from "../../../ng2-material/components/sidenav/sidenav";
 import {SidenavService} from "../../../ng2-material/components/sidenav/sidenav_service";
+import {promiseWait} from "../../util";
 
 export function main() {
 
@@ -141,16 +142,18 @@ export function main() {
         return setup(template).then((api: ITestFixture) => {
           let menu: MdSidenav = service.find('menu');
           return menu.show().then(() => {
-            return new Promise((resolve) => {
-              expect(menu.visible).toBe(true);
-              menu.onHidden.subscribe(() => {
-                expect(menu.visible).toBe(false);
-                api.fixture.destroy();
-                resolve();
+              return new Promise((resolve) => {
+                expect(menu.visible).toBe(true);
+                let sub = menu.onHidden.subscribe(() => {
+                  expect(menu.visible).toBe(false);
+                  sub.unsubscribe();
+                  resolve();
+                });
+                menu.backdropRef.onClick();
               });
-              menu.backdropRef.onClick();
-            });
-          });
+            })
+            .then(() => promiseWait())
+            .then(() => api.fixture.destroy());
         });
       }));
       it('should set isPushed if any child elements are side style', injectAsync([], () => {
@@ -158,10 +161,12 @@ export function main() {
           expect(api.container.isPushed).toBe(false);
           let menu: MdSidenav = service.find('menu');
           menu.style = SidenavStyle.SIDE;
-          return menu.show().then(() => {
-            expect(api.container.isPushed).toBe(true);
-            api.fixture.destroy();
-          });
+          return menu.show()
+            .then(() => {
+              expect(api.container.isPushed).toBe(true);
+            })
+            .then(() => promiseWait())
+            .then(() => api.fixture.destroy());
         });
       }));
     });

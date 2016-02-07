@@ -135,7 +135,7 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
               @Optional() @SkipSelf() @Host() @Inject(forwardRef(() => MdSidenavContainer))
               public container: MdSidenavContainer) {
     super(element);
-    this.renderer.setElementClass(this.element.nativeElement, this.transitionClass, this.transitionAddClass);
+    this.renderer.setElementClass(this.element.nativeElement, this.transitionClass, !this.transitionAddClass);
   }
 
   ngOnInit(): any {
@@ -181,6 +181,9 @@ export class MdSidenavContainer implements OnDestroy, AfterViewInit {
   private _unsubscribe: any = null;
 
   ngOnDestroy(): any {
+    this.children.toArray().forEach((m: MdSidenav) => {
+      m.backdropRef = null;
+    });
     this._unsubscribe.unsubscribe();
   }
 

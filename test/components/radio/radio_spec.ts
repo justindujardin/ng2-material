@@ -63,7 +63,6 @@ export function main() {
           fixture.detectChanges();
           let radioGroup = <MdRadioGroup>fixture.debugElement.query(By.css('md-radio-group')).componentInstance;
           expect(radioGroup.value).toBe('Banana');
-          fixture.destroy();
         });
       }));
       it('should only have one selected child at a time', injectAsync([], () => {
@@ -179,8 +178,6 @@ export function main() {
             expect(group.value).toBe('Banana');
             sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Apple');
-
-            fixture.destroy();
           });
         }));
         it('should not step beyond the first radio when up key is pressed', injectAsync([], () => {
@@ -194,8 +191,6 @@ export function main() {
             expect(group.value).toBe('Apple');
             sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Apple');
-
-            fixture.destroy();
           });
         }));
         it('should step to the next radio when the down arrow key is pressed', injectAsync([], () => {
@@ -207,8 +202,6 @@ export function main() {
             expect(group.value).toBe('Banana');
             sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Mango');
-
-            fixture.destroy();
           });
         }));
         it('should not step beyond the last radio when down key is pressed', injectAsync([], () => {
@@ -222,8 +215,6 @@ export function main() {
             expect(group.value).toBe('Mango');
             sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Mango');
-
-            fixture.destroy();
           });
         }));
 
@@ -239,8 +230,6 @@ export function main() {
             expect(group.value).toBe('Banana');
             sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Banana');
-
-            fixture.destroy();
           });
         }));
 
@@ -256,8 +245,6 @@ export function main() {
             expect(group.value).toBe('Mango');
             sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Banana');
-
-            fixture.destroy();
           });
         }));
 
