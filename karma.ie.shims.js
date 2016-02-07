@@ -1,3 +1,5 @@
+console.log("------------------------------ INCLUDING IE SHIMS");
+
 // function.name (all IE)
 /*! @source http://stackoverflow.com/questions/6903762/function-name-not-supported-in-ie*/
 if (!Object.hasOwnProperty('name')) {
@@ -129,7 +131,6 @@ if (!window.console.assert) window.console.assert = function () { };
         };
 }());
 
-
 /*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight. Dual MIT/BSD license */
 
 window.matchMedia || (window.matchMedia = function() {
@@ -252,6 +253,3 @@ window.matchMedia || (window.matchMedia = function() {
     };
 }());
 
-// Workaround for https://github.com/angular/angular/issues/5067
-// TODO: remove as part of the issue resolution
-if (!window.Symbol) window.Symbol = {iterator: '_es6-shim iterator_'};
