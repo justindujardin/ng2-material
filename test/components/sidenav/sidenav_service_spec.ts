@@ -1,19 +1,15 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   beforeEach,
-  beforeEachProviders,
   describe,
   expect,
   inject,
   it,
-} from 'angular2/testing_internal';
-import {Component, View, provide, DebugElement} from 'angular2/core';
-import {UrlResolver} from 'angular2/compiler';
-import {TestUrlResolver} from '../../test_url_resolver';
-import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
-import {ComponentFixture} from "angular2/testing";
-import {By} from 'angular2/platform/browser';
+  injectAsync,
+  ComponentFixture
+} from "angular2/testing";
+import {Component, View, DebugElement} from "angular2/core";
+import {By} from "angular2/platform/browser";
 import {MdSidenav} from "../../../ng2-material/components/sidenav/sidenav";
 import {SidenavService} from "../../../ng2-material/components/sidenav/sidenav_service";
 
@@ -39,6 +35,7 @@ export function main() {
   describe('Sidenav Service', () => {
     let builder: TestComponentBuilder;
     let service: SidenavService;
+
     function setup(template: string = null): Promise<ITestFixture> {
       let prep = template === null ?
         builder.createAsync(TestComponent) :
@@ -53,47 +50,41 @@ export function main() {
         };
       }).catch(console.error.bind(console));
     }
-    beforeEachProviders(() => [
-      MATERIAL_PROVIDERS,
-      provide(UrlResolver, {useValue: new TestUrlResolver()}),
-    ]);
-    beforeEach(inject([TestComponentBuilder, SidenavService], (tcb,serv) => {
+
+    beforeEach(inject([TestComponentBuilder, SidenavService], (tcb, serv) => {
       builder = tcb;
       service = serv;
     }));
 
     describe('find', () => {
-      it('should find sidenav by name', inject([AsyncTestCompleter], (async) => {
-        setup().then((api: ITestFixture) => {
+      it('should find sidenav by name', injectAsync([], () => {
+        return setup().then((api: ITestFixture) => {
           expect(service.find('test')).not.toBeNull();
           expect(service.find('fake')).toBeNull();
           api.fixture.destroy();
-          async.done();
         });
       }));
     });
     describe('show', () => {
-      it('should show sidenav by name', inject([AsyncTestCompleter], (async) => {
-        setup()
-          .then(() => service.show('test'))
-          .then(() => async.done());
+      it('should show sidenav by name', injectAsync([], () => {
+        return setup()
+          .then(() => service.show('test'));
       }));
-      it('should reject with invalid sidenav name', inject([AsyncTestCompleter], (async) => {
-        setup()
+      it('should reject with invalid sidenav name', injectAsync([], () => {
+        return setup()
           .then(() => service.show('fake'))
-          .catch(() => async.done());
+          .catch(() => Promise.resolve());
       }));
     });
     describe('hide', () => {
-      it('should hide sidenav by name', inject([AsyncTestCompleter], (async) => {
-        setup()
-          .then(() => service.hide('test'))
-          .then(() => async.done());
+      it('should hide sidenav by name', injectAsync([], () => {
+        return setup()
+          .then(() => service.hide('test'));
       }));
-      it('should reject with invalid sidenav name', inject([AsyncTestCompleter], (async) => {
-        setup()
+      it('should reject with invalid sidenav name', injectAsync([], () => {
+        return setup()
           .then(() => service.hide('fake'))
-          .catch(() => async.done());
+          .catch(() => Promise.resolve());
       }));
     });
 

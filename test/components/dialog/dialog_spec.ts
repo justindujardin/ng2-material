@@ -1,28 +1,24 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   beforeEach,
-  beforeEachProviders,
   describe,
   expect,
   inject,
   it,
-} from 'angular2/testing_internal';
-import {Component, View, provide, DebugElement, ElementRef} from 'angular2/core';
-import {UrlResolver} from 'angular2/compiler';
-import {TestUrlResolver} from '../../test_url_resolver';
-import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
-import {ComponentFixture} from "angular2/testing";
+  injectAsync,
+  ComponentFixture
+} from "angular2/testing";
+import {Component, View, DebugElement, ElementRef} from "angular2/core";
 import {MdDialogRef, MdDialogConfig, MdDialog, MdDialogBasic} from "../../../ng2-material/components/dialog/dialog";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {By} from 'angular2/platform/browser';
+import {By} from "angular2/platform/browser";
 
 export function main() {
 
   interface IDialogFixture {
     fixture: ComponentFixture;
     debug: DebugElement;
-    elementRef: ElementRef
+    elementRef: ElementRef;
   }
 
   @Component({selector: 'test-app'})
@@ -43,6 +39,7 @@ export function main() {
           fixture.detectChanges();
           let debug = fixture.debugElement.query(By.css('div'));
           return {
+            elementRef: fixture.elementRef,
             fixture: fixture,
             debug: debug
           };
@@ -50,11 +47,6 @@ export function main() {
         .catch(console.error.bind(console));
     }
 
-
-    beforeEachProviders(() => [
-      MATERIAL_PROVIDERS,
-      provide(UrlResolver, {useValue: new TestUrlResolver()}),
-    ]);
     beforeEach(inject([TestComponentBuilder, MdDialog], (tcb, mdDialog) => {
       builder = tcb;
       dialog = mdDialog;
@@ -62,43 +54,38 @@ export function main() {
 
     describe('MdDialog', () => {
       describe('open', () => {
-        it('should resolve with a reference to the dialog component instance', inject([AsyncTestCompleter], (async) => {
-          setup().then((api: IDialogFixture) => {
+        it('should resolve with a reference to the dialog component instance', injectAsync([], () => {
+          return setup().then((api: IDialogFixture) => {
             let config = new MdDialogConfig();
-            dialog.open(MdDialogBasic, api.elementRef, config)
+            return dialog.open(MdDialogBasic, api.elementRef, config)
               .then((ref: MdDialogRef) => {
                 expect(ref.instance).toBeAnInstanceOf(MdDialogBasic);
-                ref.close().then(() => async.done());
+                return ref.close();
               });
           });
         }));
-        it('should initialize default config if not specified', inject([AsyncTestCompleter], (async) => {
-          setup().then((api: IDialogFixture) => {
-            dialog.open(MdDialogBasic, api.elementRef)
-              .then((ref: MdDialogRef) => {
-                return ref.close();
-              })
-              .then(() => async.done());
+        it('should initialize default config if not specified', injectAsync([], () => {
+          return setup().then((api: IDialogFixture) => {
+            return dialog.open(MdDialogBasic, api.elementRef)
+              .then((ref: MdDialogRef) => ref.close());
           });
         }));
       });
       describe('close', () => {
-        it('should return a promise that resolves once the dialog is closed', inject([AsyncTestCompleter], (async) => {
-          setup().then((api: IDialogFixture) => {
-            dialog.open(MdDialogBasic, api.elementRef)
-              .then((ref: MdDialogRef) => ref.close())
-              .then(() => async.done());
+        it('should return a promise that resolves once the dialog is closed', injectAsync([], () => {
+          return setup().then((api: IDialogFixture) => {
+            return dialog.open(MdDialogBasic, api.elementRef)
+              .then((ref: MdDialogRef) => ref.close());
           });
         }));
-        it('should accept a value to resolve whenClosed with', inject([AsyncTestCompleter], (async) => {
-          setup().then((api: IDialogFixture) => {
-            dialog.open(MdDialogBasic, api.elementRef)
+        it('should accept a value to resolve whenClosed with', injectAsync([], () => {
+          return setup().then((api: IDialogFixture) => {
+            return dialog.open(MdDialogBasic, api.elementRef)
               .then((ref: MdDialogRef) => {
                 ref.whenClosed.then((result) => {
                   expect(result).toBe(1337);
-                  async.done();
                 });
-                ref.close(1337);
+                return ref.close(1337);
               });
           });
         }));
@@ -106,37 +93,32 @@ export function main() {
     });
 
     describe('MdDialogBasic', () => {
-      it('should open and close with promises', inject([AsyncTestCompleter], (async) => {
-        setup().then((api: IDialogFixture) => {
+      it('should open and close with promises', injectAsync([], () => {
+        return setup().then((api: IDialogFixture) => {
           let config = new MdDialogConfig();
-          dialog.open(MdDialogBasic, api.elementRef, config)
-            .then((ref: MdDialogRef) => {
-              ref.close().then(() => {
-                async.done();
-              });
-            });
+          return dialog
+            .open(MdDialogBasic, api.elementRef, config)
+            .then((ref: MdDialogRef) => ref.close());
         });
       }));
     });
     describe('MdDialogConfig', () => {
-      it('can set parent container', inject([AsyncTestCompleter], (async) => {
-        setup().then(() => {
+      it('can set parent container', injectAsync([], () => {
+        return setup().then(() => {
           let config = new MdDialogConfig().parent(DOM.query('body'));
           expect(config.container).toBeAnInstanceOf(HTMLElement);
           expect(config.container.tagName.toLowerCase()).toBe('body');
-          async.done();
         });
       }));
-      it('can set targetEvent to specify dialog origin point', inject([AsyncTestCompleter], (async) => {
-        setup().then(() => {
+      it('can set targetEvent to specify dialog origin point', injectAsync([], () => {
+        return setup().then(() => {
           let ev = DOM.createMouseEvent('click');
           let config = new MdDialogConfig().targetEvent(ev);
           expect(config.sourceEvent).toBe(ev);
-          async.done();
         });
       }));
-      it('should bind content options to component instance', inject([AsyncTestCompleter], (async) => {
-        setup().then((api: IDialogFixture) => {
+      it('should bind content options to component instance', injectAsync([], () => {
+        return setup().then((api: IDialogFixture) => {
           let config = new MdDialogConfig()
             .textContent('Content')
             .title('Title')
@@ -144,7 +126,7 @@ export function main() {
             .ok('Ok')
             .cancel('Cancel')
             .clickOutsideToClose(false);
-          dialog.open(MdDialogBasic, api.elementRef, config)
+          return dialog.open(MdDialogBasic, api.elementRef, config)
             .then((ref: MdDialogRef) => {
               let instance: any = ref.instance;
               expect(instance.textContent).toBe('Content');
@@ -152,7 +134,6 @@ export function main() {
               expect(instance.ariaLabel).toBe('Aria');
               expect(instance.ok).toBe('Ok');
               expect(instance.cancel).toBe('Cancel');
-              async.done();
             });
         });
       }));

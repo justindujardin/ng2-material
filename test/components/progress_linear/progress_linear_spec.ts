@@ -1,23 +1,17 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   beforeEach,
-  beforeEachProviders,
   describe,
   expect,
   inject,
   it,
-} from 'angular2/testing_internal';
-import {Component, View, provide, DebugElement} from 'angular2/core';
-import {UrlResolver} from 'angular2/compiler';
-import {TestUrlResolver} from '../../test_url_resolver';
-import {MdTab, MdTabs} from '../../../ng2-material/components/tabs/tabs';
-import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
-import {ComponentFixture} from "angular2/testing";
+  ComponentFixture,
+  injectAsync
+} from "angular2/testing";
+import {Component, View, DebugElement} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
-import {Ink} from "../../../ng2-material/core/util/ink";
 import {MdProgressLinear, ProgressMode} from "../../../ng2-material/components/progress_linear/progress_linear";
-import {By} from 'angular2/platform/browser';
+import {By} from "angular2/platform/browser";
 
 export function main() {
 
@@ -60,10 +54,6 @@ export function main() {
       }).catch(console.error.bind(console));
     }
 
-    beforeEachProviders(() => [
-      MATERIAL_PROVIDERS,
-      provide(UrlResolver, {useValue: new TestUrlResolver()}),
-    ]);
     beforeEach(inject([TestComponentBuilder], (tcb) => {
       builder = tcb;
     }));
@@ -71,84 +61,70 @@ export function main() {
     describe('md-progress-linear', () => {
 
       describe('value', () => {
-        it('should be blank until specified', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-linear></md-progress-linear>`).then((api: IProgressFixture) => {
+        it('should be blank until specified', injectAsync([], () => {
+          return setup(`<md-progress-linear></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBeUndefined();
-            async.done();
           });
         }));
-        it('should set from binding', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-linear [value]="value"></md-progress-linear>`).then((api: IProgressFixture) => {
+        it('should set from binding', injectAsync([], () => {
+          return setup(`<md-progress-linear [value]="value"></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBe(25);
-            async.done();
           });
         }));
-        it('should do nothing with undefined value', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-linear [value]="blankValue"></md-progress-linear>`).then((api: IProgressFixture) => {
+        it('should do nothing with undefined value', injectAsync([], () => {
+          return setup(`<md-progress-linear [value]="blankValue"></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBeUndefined();
-            async.done();
           });
         }));
 
       });
 
       describe('mode', () => {
-        it('should default to determinate', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-linear></md-progress-linear>`).then((api: IProgressFixture) => {
+        it('should default to determinate', injectAsync([], () => {
+          return setup(`<md-progress-linear></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.DETERMINATE);
-            async.done();
           });
         }));
-        it('should set from attribute', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-linear mode="indeterminate"></md-progress-linear>`).then((api: IProgressFixture) => {
+        it('should set from attribute', injectAsync([], () => {
+          return setup(`<md-progress-linear mode="indeterminate"></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.INDETERMINATE);
-            async.done();
           });
         }));
-        it('should set from binding', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-linear [mode]="modeQuery"></md-progress-linear>`).then((api: IProgressFixture) => {
+        it('should set from binding', injectAsync([], () => {
+          return setup(`<md-progress-linear [mode]="modeQuery"></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.QUERY);
-            async.done();
           });
         }));
 
       });
 
       describe('bufferValue', () => {
-        it('should be blank until specified', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-linear></md-progress-linear>`).then((api: IProgressFixture) => {
+        it('should be blank until specified', injectAsync([], () => {
+          return setup(`<md-progress-linear></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.bufferValue).toBeUndefined();
-            async.done();
           });
         }));
-        it('should set from binding', inject([AsyncTestCompleter], (async) => {
+        it('should set from binding', injectAsync([], () => {
           let template = `<md-progress-linear
                               mode="buffer"
                               [value]="value"
                               [bufferValue]="bufferValue">
                           </md-progress-linear>`
-          setup(template).then((api: IProgressFixture) => {
+          return setup(template).then((api: IProgressFixture) => {
             expect(api.progress.bufferValue).toBe(50);
-            async.done();
           });
         }));
-        it('should do nothing with undefined value', inject([AsyncTestCompleter], (async) => {
+        it('should do nothing with undefined value', injectAsync([], () => {
           let template = `<md-progress-linear
                               mode="buffer"
                               [bufferValue]="blankValue">
                           </md-progress-linear>`;
-          setup(template).then((api: IProgressFixture) => {
+          return setup(template).then((api: IProgressFixture) => {
             expect(api.progress.bufferValue).toBeUndefined();
-            async.done();
           });
         }));
-
       });
-
-
     });
   });
-
-
 }
 

@@ -6,22 +6,20 @@ import {
   Injectable,
   ResolvedProvider,
   RenderComponentType,
-  AppViewManager,
   ViewEncapsulation,
   Injector,
   Renderer,
-  RootRenderer
-} from 'angular2/core';
-
-import {Promise} from 'angular2/src/facade/async';
-import {isPresent, Type} from 'angular2/src/facade/lang';
-import {MdDialogRef} from './dialog_ref';
-import {MdDialogConfig} from './dialog_config';
-import {MdDialogContainer} from './dialog_container';
-import {MdDialogBasic} from './dialog_basic';
+  RootRenderer,
+  APPLICATION_COMMON_PROVIDERS
+} from "angular2/core";
+import {Promise} from "angular2/src/facade/async";
+import {isPresent, Type} from "angular2/src/facade/lang";
+import {MdDialogRef} from "./dialog_ref";
+import {MdDialogConfig} from "./dialog_config";
+import {MdDialogContainer} from "./dialog_container";
 import {MdBackdrop} from "../backdrop/backdrop";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {Animate} from '../../core/util/animate';
+import {Animate} from "../../core/util/animate";
 
 export * from './dialog_config';
 export * from './dialog_container';
@@ -40,26 +38,25 @@ export * from './dialog_basic';
  */
 @Injectable()
 export class MdDialog {
-  constructor(public componentLoader: DynamicComponentLoader) {
+
+  /**
+   * Unique id counter for RenderComponentType.
+   * @private
+   */
+  static _uniqueId: number = 0;
+
+  /**
+   * Renderer for manipulating dialog and backdrop component elements.
+   * @private
+   */
+  private _renderer: Renderer = null;
+
+  constructor(public componentLoader: DynamicComponentLoader, rootRenderer: RootRenderer) {
+    let type = new RenderComponentType(`__md-dialog-${MdDialog._uniqueId++}`, ViewEncapsulation.None, []);
+    this._renderer = rootRenderer.renderComponent(type);
   }
 
   private _defaultContainer = DOM.query('body');
-
-  /**
-   * TODO: this works around the test failures of the {@see Renderer} class on
-   * internet explorer. Revisit later: https://travis-ci.org/justindujardin/ng2-material/builds/102865559
-   *
-   * Provider a helper similar to setElementClass on {@see Renderer} so that switching back is easy
-   * when the implementation is more reliable.
-   */
-  static setElementClass(nativeElement: any, className: string, add: boolean = true) {
-    if (add) {
-      DOM.addClass(nativeElement, className);
-    }
-    else {
-      DOM.removeClass(nativeElement, className);
-    }
-  }
 
   /**
    * Opens a modal dialog.
@@ -75,12 +72,12 @@ export class MdDialog {
     // Create the dialogRef here so that it can be injected into the content component.
     var dialogRef = new MdDialogRef();
 
-    var bindings = Injector.resolve([provide(MdDialogRef, {useValue: dialogRef})]);
+    var bindings = Injector.resolve([APPLICATION_COMMON_PROVIDERS, provide(MdDialogRef, {useValue: dialogRef})]);
 
     var backdropRefPromise = this._openBackdrop(elementRef, bindings, options);
 
     // First, load the MdDialogContainer, into which the given component will be loaded.
-    return this.componentLoader.loadNextToLocation(MdDialogContainer, elementRef)
+    return this.componentLoader.loadNextToLocation(MdDialogContainer, elementRef, bindings)
       .then(containerRef => {
         // TODO(tbosch): clean this up when we have custom renderers
         // (https://github.com/angular/angular/issues/1807)
@@ -89,15 +86,15 @@ export class MdDialog {
         // Create a DOM node to serve as a physical host element for the dialog.
         var dialogElement = containerRef.location.nativeElement;
 
-        MdDialog.setElementClass(dialogElement, 'md-dialog-absolute', !!config.container);
+        this._renderer.setElementClass(dialogElement, 'md-dialog-absolute', !!config.container);
 
         DOM.appendChild(config.container || this._defaultContainer, dialogElement);
 
         if (isPresent(config.width)) {
-          DOM.setStyle(dialogElement, 'width', config.width);
+          this._renderer.setElementStyle(dialogElement, 'width', config.width);
         }
         if (isPresent(config.height)) {
-          DOM.setStyle(dialogElement, 'height', config.height);
+          this._renderer.setElementStyle(dialogElement, 'height', config.height);
         }
 
         dialogRef.containerRef = containerRef;
@@ -124,6 +121,10 @@ export class MdDialog {
 
             return Animate.enter(dialogElement, 'md-active').then(() => dialogRef);
           });
+      })
+      .catch((e:any) => {
+        console.error(e);
+        console.error(e.stack);
       });
   }
 
@@ -133,9 +134,9 @@ export class MdDialog {
       .then((componentRef) => {
         let backdrop: MdBackdrop = componentRef.instance;
         backdrop.clickClose = options.clickClose;
-        MdDialog.setElementClass(componentRef.location.nativeElement, 'md-backdrop', true);
-        MdDialog.setElementClass(componentRef.location.nativeElement, 'md-opaque', true);
-        MdDialog.setElementClass(componentRef.location.nativeElement, 'md-backdrop-absolute', !!options.container);
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop', true);
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-opaque', true);
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop-absolute', !!options.container);
         DOM.appendChild(options.container || this._defaultContainer, componentRef.location.nativeElement);
         return backdrop.show().then(() => componentRef);
       });

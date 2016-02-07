@@ -1,18 +1,14 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   beforeEach,
-  beforeEachProviders,
   describe,
   expect,
   inject,
-  it
-} from "angular2/testing_internal";
-import {Component, View, provide, DebugElement} from "angular2/core";
-import {UrlResolver} from "angular2/compiler";
-import {TestUrlResolver} from "../../test_url_resolver";
-import {MATERIAL_PROVIDERS} from "../../../ng2-material/all";
-import {ComponentFixture} from "angular2/testing";
+  it,
+  injectAsync,
+  ComponentFixture
+} from "angular2/testing";
+import {Component, View, DebugElement} from "angular2/core";
 import {By} from "angular2/platform/browser";
 import {
   MdSidenav,
@@ -62,78 +58,63 @@ export function main() {
       }).catch(console.error.bind(console));
     }
 
-    beforeEachProviders(() => [
-      MATERIAL_PROVIDERS,
-      provide(UrlResolver, {useValue: new TestUrlResolver()}),
-    ]);
     beforeEach(inject([TestComponentBuilder, SidenavService], (tcb, serv) => {
       builder = tcb;
       service = serv;
     }));
 
     describe('md-sidenav', () => {
-      it('should be created and destroyed', inject([AsyncTestCompleter], (async) => {
-        setup().then((api: ITestFixture) => {
-          api.fixture.destroy();
-          async.done();
-        });
+      it('should be created and destroyed', injectAsync([], () => {
+        return setup().then((api: ITestFixture) => api.fixture.destroy());
       }));
-      it('should be registered and unregistered with SidenavService', inject([AsyncTestCompleter], (async) => {
+      it('should be registered and unregistered with SidenavService', injectAsync([], () => {
         expect(service.find('test')).toBeNull();
-        setup(`<md-sidenav name="test"></md-sidenav>`).then((api: ITestFixture) => {
+        return setup(`<md-sidenav name="test"></md-sidenav>`).then((api: ITestFixture) => {
           expect(service.find('test')).not.toBeNull();
           api.fixture.destroy();
           expect(service.find('test')).toBeNull();
-          async.done();
         });
       }));
       describe('name', () => {
-        it('should default to "default"', inject([AsyncTestCompleter], (async) => {
-          setup().then((api: ITestFixture) => {
+        it('should default to "default"', injectAsync([], () => {
+          return setup().then((api: ITestFixture) => {
             expect(api.component.name).toBe('default');
-            async.done();
           });
         }));
       });
 
       describe('style', () => {
-        it('should default to over', inject([AsyncTestCompleter], (async) => {
-          setup().then((api: ITestFixture) => {
+        it('should default to over', injectAsync([], () => {
+          return setup().then((api: ITestFixture) => {
             expect(api.component.style).toBe(SidenavStyle.OVER);
-            async.done();
           });
         }));
-        it('should set to default when given an invalid value', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-sidenav style="gangnam"></md-sidenav>`).then((api: ITestFixture) => {
+        it('should set to default when given an invalid value', injectAsync([], () => {
+          return setup(`<md-sidenav style="gangnam"></md-sidenav>`).then((api: ITestFixture) => {
             expect(api.component.style).toBe(SidenavStyle.OVER);
-            async.done();
           });
         }));
-        it('should accept "side" for content pushing', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-sidenav style="side"></md-sidenav>`).then((api: ITestFixture) => {
+        it('should accept "side" for content pushing', injectAsync([], () => {
+          return setup(`<md-sidenav style="side"></md-sidenav>`).then((api: ITestFixture) => {
             expect(api.component.style).toBe(SidenavStyle.SIDE);
-            async.done();
           });
         }));
       });
 
       describe('align', () => {
-        it('should default to "left"', inject([AsyncTestCompleter], (async) => {
-          setup().then((api: ITestFixture) => {
+        it('should default to "left"', injectAsync([], () => {
+          return setup().then((api: ITestFixture) => {
             expect(api.component.align).toBe(SidenavAlignment.LEFT);
-            async.done();
           });
         }));
-        it('should set to default when given an invalid value', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-sidenav align="up"></md-sidenav>`).then((api: ITestFixture) => {
+        it('should set to default when given an invalid value', injectAsync([], () => {
+          return setup(`<md-sidenav align="up"></md-sidenav>`).then((api: ITestFixture) => {
             expect(api.component.align).toBe(SidenavAlignment.LEFT);
-            async.done();
           });
         }));
-        it('should accept "side" for content pushing', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-sidenav align="right"></md-sidenav>`).then((api: ITestFixture) => {
+        it('should accept "side" for content pushing', injectAsync([], () => {
+          return setup(`<md-sidenav align="right"></md-sidenav>`).then((api: ITestFixture) => {
             expect(api.component.align).toBe(SidenavAlignment.RIGHT);
-            async.done();
           });
         }));
 
@@ -145,42 +126,41 @@ export function main() {
         <md-sidenav name="menu"></md-sidenav>
         <md-sidenav name="right" align="right"></md-sidenav>
       </md-sidenav-container>`;
-      it('should be created and destroyed', inject([AsyncTestCompleter], (async) => {
-        setup(template).then((api: ITestFixture) => {
+      it('should be created and destroyed', injectAsync([], () => {
+        return setup(template).then((api: ITestFixture) => {
           api.fixture.destroy();
-          async.done();
         });
       }));
-      it('should maintain a query list of its children', inject([AsyncTestCompleter], (async) => {
-        setup(template).then((api: ITestFixture) => {
+      it('should maintain a query list of its children', injectAsync([], () => {
+        return setup(template).then((api: ITestFixture) => {
           expect(api.container.children.length).toBe(2);
           api.fixture.destroy();
-          async.done();
         });
       }));
-      it('should hide any open children when the backdrop is hidden', inject([AsyncTestCompleter], (async) => {
-        setup(template).then((api: ITestFixture) => {
+      it('should hide any open children when the backdrop is hidden', injectAsync([], () => {
+        return setup(template).then((api: ITestFixture) => {
           let menu: MdSidenav = service.find('menu');
-          menu.show().then(() => {
-            expect(menu.visible).toBe(true);
-            menu.onHidden.subscribe(() => {
-              expect(menu.visible).toBe(false);
-              api.fixture.destroy();
-              async.done();
+          return menu.show().then(() => {
+            return new Promise((resolve) => {
+              expect(menu.visible).toBe(true);
+              menu.onHidden.subscribe(() => {
+                expect(menu.visible).toBe(false);
+                api.fixture.destroy();
+                resolve();
+              });
+              menu.backdropRef.onClick();
             });
-            menu.backdropRef.onClick();
           });
         });
       }));
-      it('should set isPushed if any child elements are side style', inject([AsyncTestCompleter], (async) => {
-        setup(template).then((api: ITestFixture) => {
+      it('should set isPushed if any child elements are side style', injectAsync([], () => {
+        return setup(template).then((api: ITestFixture) => {
           expect(api.container.isPushed).toBe(false);
           let menu: MdSidenav = service.find('menu');
           menu.style = SidenavStyle.SIDE;
-          menu.show().then(() => {
+          return menu.show().then(() => {
             expect(api.container.isPushed).toBe(true);
             api.fixture.destroy();
-            async.done();
           });
         });
       }));
