@@ -9,17 +9,9 @@ __karma__.loaded = function () {
 };
 
 Promise.all([
-    System.import('angular2/testing'),
-    System.import('angular2/platform/testing/browser')
+    System.import('test/bootstrap'),
+    System.import('ng2-material/all')
   ])
-  .then(function (modules) {
-    var testing = modules[0];
-    var browser = modules[1];
-    testing.setBaseTestProviders(browser.TEST_BROWSER_PLATFORM_PROVIDERS, browser.TEST_BROWSER_APPLICATION_PROVIDERS);
-  })
-  .then(function () {
-    return System.import('ng2-material/all')
-  })
   .then(function () {
     console.log("Importing Test modules: ");
     return Promise.all(
