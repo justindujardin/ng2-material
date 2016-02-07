@@ -125,9 +125,6 @@ export class MdDialog {
 
             return Animate.enter(dialogElement, 'md-active').then(() => dialogRef);
           });
-      })
-      .catch((e: any) => {
-        console.error("Error creating dialog");
       });
   }
 

@@ -3,6 +3,7 @@ console.log("------------------------------ INCLUDING IE SHIMS");
 // function.name (all IE)
 /*! @source http://stackoverflow.com/questions/6903762/function-name-not-supported-in-ie*/
 if (!Object.hasOwnProperty('name')) {
+  console.log("------------------------------ Applying name shim");
   Object.defineProperty(Function.prototype, 'name', {
     get: function() {
       var matches = this.toString().match(/^\s*function\s*(\S*)\s*\(/);

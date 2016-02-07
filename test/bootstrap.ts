@@ -25,13 +25,12 @@ function onlySpecFiles(path) {
 export function load(files: string[]): Promise<any[]> {
   console.log('importing test modules: ');
   let error = (e: any) => {
-    //console.error(e);
-    console.error("ERROR1");
+    console.error(e);
   };
   var myZone = zone.fork({
     onError: (e) => {
-      //console.error(e);
-      console.error("ERROR ZONE");
+      console.error("Zone Error:");
+      console.error(e);
     }
   });
 
@@ -63,8 +62,6 @@ export function load(files: string[]): Promise<any[]> {
     .keys(files)
     .filter(onlySpecFiles)
     .map(runTests);
-  return Promise.all(promises).catch((e) => {
-    console.error("promise all error");
-  });
+  return Promise.all(promises);
 
 }

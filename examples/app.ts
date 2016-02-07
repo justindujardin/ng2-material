@@ -5,7 +5,8 @@ import {
   ROUTER_DIRECTIVES,
   RouteConfig,
   HashLocationStrategy,
-  LocationStrategy, Router
+  LocationStrategy,
+  Router
 } from "angular2/router";
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "../ng2-material/all";
 import {DEMO_DIRECTIVES} from "./all";
@@ -16,7 +17,6 @@ import {ComponentPage} from "./routes/component";
 import {ComponentsService, IComponentMeta} from "./services/components";
 import {NavigationService} from "./services/navigation";
 import {VersionService} from "./services/version";
-import {ELEMENT_PROBE_PROVIDERS, ELEMENT_PROBE_PROVIDERS_PROD_MODE} from 'angular2/platform/common_dom';
 import {SidenavService} from "ng2-material/components/sidenav/sidenav_service";
 import {Media} from "ng2-material/core/util/media";
 
@@ -108,12 +108,5 @@ let appProviders = [
 if (window.location.href.indexOf('github.com') !== -1) {
   enableProdMode();
 }
-// else {
-  // AppViewListener, DebugElementViewListener have gone away.
-  // Related to the new Debug DOM. https://github.com/angular/angular/commit/e1bf3d3
-  // Leaving this code in comment as I'm not familiar with what this was here to accomplish:
-
-  // appProviders.push(bind(AppViewListener).toClass(DebugElementViewListener))
-// }
 
 bootstrap(DemosApp, appProviders);
