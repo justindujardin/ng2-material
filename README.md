@@ -19,7 +19,7 @@ Many of the components and examples are ported directly from their existing proj
 
 ## License 
 
-This project is dual licensed under the MIT and Apache2 licenses.
+This project is MIT licensed.
 
 - [Angular Material](https://github.com/angular/material) is licensed: [MIT](https://github.com/angular/material/blob/master/LICENSE)
-- [Angular 2.0 Developer Preview](https://github.com/angular/angular) is licensed: [Apache2](https://github.com/angular/angular/blob/master/LICENSE)
+- [Angular 2.0](https://github.com/angular/angular) is licensed: [MIT](https://github.com/angular/angular/blob/master/LICENSE)

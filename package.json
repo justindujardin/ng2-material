@@ -8,7 +8,7 @@
     "url": "git@github.com:justindujardin/ng2-material.git"
   },
   "author": "Justin DuJardin <justin@dujardinconsulting.com>",
-  "license": "MIT+BSD Dual License",
+  "license": "MIT",
   "readmeFilename": "README.md",
   "scripts": {
     "test": "npm install"
