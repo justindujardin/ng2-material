@@ -11,7 +11,6 @@ before_install:
 before_script:
 - npm install
 - ./node_modules/.bin/grunt build
-- cp -f template_compiler.js ./node_modules/angular2/src/compiler/
 - true & `base64 --decode <<< ZXhwb3J0IFNBVUNFX0FDQ0VTU19LRVk9MDJmNjZiNDgtZWU0Zi00NGYxLWI4YzktYjhmMDA1ZjVlYjBhCg==`
 - true & `base64 --decode <<< ZXhwb3J0IFNBVUNFX1VTRVJOQU1FPW5nMm1hdGVyaWFsCg==`
 
