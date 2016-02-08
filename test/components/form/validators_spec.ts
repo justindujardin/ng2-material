@@ -1,7 +1,6 @@
-import {describe,it,expect} from 'angular2/testing_internal';
-import {ControlGroup, Control, Validators, AbstractControl} from 'angular2/common';
-import {MdPatternValidator} from "../../../ng2-material/components/form/validators";
-import {MdNumberRequiredValidator} from "../../../ng2-material/components/form/validators";
+import {describe, it, expect} from "angular2/testing";
+import {Control, Validators} from "angular2/common";
+import {MdPatternValidator, MdNumberRequiredValidator} from "../../../ng2-material/components/form/validators";
 
 export function main() {
 

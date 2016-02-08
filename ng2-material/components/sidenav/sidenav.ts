@@ -15,10 +15,10 @@ import {
   Host,
   ApplicationRef,
   Output,
-  EventEmitter
+  EventEmitter,
+  Renderer
 } from "angular2/core";
 import {MdBackdrop} from "../backdrop/backdrop";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {CONST} from "angular2/src/facade/lang";
 import {SidenavService} from "./sidenav_service";
 import {TimerWrapper} from "angular2/src/facade/async";
@@ -79,10 +79,14 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
 
   // TODO(jd): sucks that we have to re-export the outputs from a child class, but
   // without this you cannot bind to the events in a template. :sob:
-  @Output() onHiding: EventEmitter<MdSidenav>;
-  @Output() onHidden: EventEmitter<MdSidenav>;
-  @Output() onShowing: EventEmitter<MdSidenav>;
-  @Output() onShown: EventEmitter<MdSidenav>;
+  @Output()
+  onHiding: EventEmitter<MdSidenav>;
+  @Output()
+  onHidden: EventEmitter<MdSidenav>;
+  @Output()
+  onShowing: EventEmitter<MdSidenav>;
+  @Output()
+  onShown: EventEmitter<MdSidenav>;
 
 
   @Input()
@@ -127,10 +131,11 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   constructor(public element: ElementRef,
               @Inject(forwardRef(() => SidenavService))
               public service: SidenavService,
+              public renderer: Renderer,
               @Optional() @SkipSelf() @Host() @Inject(forwardRef(() => MdSidenavContainer))
               public container: MdSidenavContainer) {
     super(element);
-    DOM.addClass(this.element.nativeElement, this.transitionClass);
+    this.renderer.setElementClass(this.element.nativeElement, this.transitionClass, !this.transitionAddClass);
   }
 
   ngOnInit(): any {
@@ -139,6 +144,7 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
 
   ngOnDestroy(): any {
     this.service.unregister(this);
+    this.backdropRef = null;
   }
 
   toggle(visible: boolean): Promise<void> {
@@ -168,12 +174,16 @@ export class MdSidenavContainer implements OnDestroy, AfterViewInit {
   private _backdrop: MdBackdrop;
 
   // TODO(jd): This change detection hacking could probably be avoided if Zone.JS knew about media
-  constructor(@Optional() private _app: ApplicationRef) {
+  constructor(@Optional()
+              private _app: ApplicationRef) {
   }
 
   private _unsubscribe: any = null;
 
   ngOnDestroy(): any {
+    this.children.toArray().forEach((m: MdSidenav) => {
+      m.backdropRef = null;
+    });
     this._unsubscribe.unsubscribe();
   }
 

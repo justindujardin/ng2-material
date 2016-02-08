@@ -8,29 +8,9 @@ Error.stackTraceLimit = Infinity;
 __karma__.loaded = function () {
 };
 
-
-System.import('angular2/src/platform/browser/browser_adapter')
-  .then(function (browser_adapter) {
-    browser_adapter.BrowserDomAdapter.makeCurrent();
-  })
-  .then(function () {
-    return System.import('ng2-material/all')
-  })
-  .then(function () {
-    console.log("Importing Test modules: ");
-    return Promise.all(
-      Object.keys(window.__karma__.files) // All files served by Karma.
-        .filter(onlySpecFiles)
-        .map(function (path) {
-          console.log(" - " + path);
-          return System.import(path).then(function (module) {
-            if (module.hasOwnProperty('main')) {
-              module.main();
-            } else {
-              console.warn(' skipping ' + path + ' which does not implement main() method.');
-            }
-          });
-        }))
+System
+  .import('test/bootstrap').then(function (tests) {
+    return tests.load(window.__karma__.files);
   })
   .then(function () {
     __karma__.start();
@@ -39,7 +19,3 @@ System.import('angular2/src/platform/browser/browser_adapter')
     __karma__.start();
   });
 
-
-function onlySpecFiles(path) {
-  return /_spec\.js$/.test(path);
-}

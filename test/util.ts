@@ -1,24 +1,14 @@
-import {DebugElement} from "angular2/core";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {ComponentFixture} from "angular2/testing";
-import {Component} from "angular2/core";
-import {View} from "angular2/core";
-import {
-  AsyncTestCompleter,
-  TestComponentBuilder,
-  beforeEach,
-  beforeEachProviders,
-  describe,
-  expect,
-  inject,
-  it,
-} from 'angular2/testing_internal';
-import {MATERIAL_PROVIDERS} from "../ng2-material/all";
-import {provide} from "angular2/core";
-import {UrlResolver} from "angular2/compiler";
-import {TestUrlResolver} from "./test_url_resolver";
+///<reference path="../node_modules/angular2/typings/jasmine/jasmine.d.ts"/>
+import {Component, View} from "angular2/core";
+import {ComponentFixture, TestComponentBuilder, beforeEach, describe, inject, it, injectAsync} from "angular2/testing";
 import {MATERIAL_DIRECTIVES} from "../ng2-material/all";
 import {TimerWrapper} from "angular2/src/facade/async";
+
+export function promiseWait(milliseconds: number = 10): Promise<void> {
+  return new Promise<void>((resolve)=> {
+    TimerWrapper.setTimeout(() => resolve(), milliseconds);
+  });
+}
 
 /**
  * Run a basic lifecycle sanity check on a component. This will create the given component
@@ -48,26 +38,21 @@ export function componentSanityCheck(name: string, selector: string, template: s
         .catch(console.error.bind(console));
     }
 
-    beforeEachProviders(() => [
-      MATERIAL_PROVIDERS,
-      provide(UrlResolver, {useValue: new TestUrlResolver()}),
-    ]);
     beforeEach(inject([TestComponentBuilder], (tcb) => {
       builder = tcb;
     }));
 
     describe(selector, () => {
-      it('should instantiate component without fail', inject([AsyncTestCompleter], (async) => {
-        setup().then(() => TimerWrapper.setTimeout(() => async.done(), 10));
+      it('should instantiate component without fail', injectAsync([], () => {
+        return setup()
+          .then(() => promiseWait());
       }));
-      it('should destroy component without fail', inject([AsyncTestCompleter], (async) => {
-        setup().then((api: ComponentFixture) => {
-          api.destroy();
-          TimerWrapper.setTimeout(() => async.done(), 10);
-        });
+      it('should destroy component without fail', injectAsync([], () => {
+        return setup()
+          .then((api: ComponentFixture) => api.destroy())
+          .then(() => promiseWait());
       }));
     });
-
   });
 
 }

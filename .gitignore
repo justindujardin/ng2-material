@@ -27,3 +27,4 @@ test/**/*.d.ts
 .sass-cache
 .tscache
 coverage
+node_modules

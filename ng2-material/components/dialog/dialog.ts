@@ -5,19 +5,21 @@ import {
   ElementRef,
   Injectable,
   ResolvedProvider,
-  Injector
-} from 'angular2/core';
-
-import {Promise} from 'angular2/src/facade/async';
-import {isPresent, Type} from 'angular2/src/facade/lang';
-import {MdDialogRef} from './dialog_ref';
-import {MdDialogConfig} from './dialog_config';
-import {MdDialogContainer} from './dialog_container';
-import {MdDialogBasic} from './dialog_basic';
+  RenderComponentType,
+  ViewEncapsulation,
+  Injector,
+  Renderer,
+  RootRenderer,
+  APPLICATION_COMMON_PROVIDERS
+} from "angular2/core";
+import {Promise, TimerWrapper} from "angular2/src/facade/async";
+import {isPresent, Type} from "angular2/src/facade/lang";
+import {MdDialogRef} from "./dialog_ref";
+import {MdDialogConfig} from "./dialog_config";
+import {MdDialogContainer} from "./dialog_container";
 import {MdBackdrop} from "../backdrop/backdrop";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {Renderer} from "angular2/core";
-import {Animate} from '../../core/util/animate';
+import {Animate} from "../../core/util/animate";
 
 export * from './dialog_config';
 export * from './dialog_container';
@@ -36,8 +38,22 @@ export * from './dialog_basic';
  */
 @Injectable()
 export class MdDialog {
-  constructor(public componentLoader: DynamicComponentLoader,
-              public renderer: Renderer) {
+
+  /**
+   * Unique id counter for RenderComponentType.
+   * @private
+   */
+  static _uniqueId: number = 0;
+
+  /**
+   * Renderer for manipulating dialog and backdrop component elements.
+   * @private
+   */
+  private _renderer: Renderer = null;
+
+  constructor(public componentLoader: DynamicComponentLoader, rootRenderer: RootRenderer) {
+    let type = new RenderComponentType(`__md-dialog-${MdDialog._uniqueId++}`, ViewEncapsulation.None, []);
+    this._renderer = rootRenderer.renderComponent(type);
   }
 
   private _defaultContainer = DOM.query('body');
@@ -52,33 +68,27 @@ export class MdDialog {
   open(type: Type, elementRef: ElementRef, options: MdDialogConfig = null): Promise<MdDialogRef> {
     var config = isPresent(options) ? options : new MdDialogConfig();
 
-
     // Create the dialogRef here so that it can be injected into the content component.
     var dialogRef = new MdDialogRef();
 
-    var bindings = Injector.resolve([provide(MdDialogRef, {useValue: dialogRef})]);
+    var bindings = Injector.resolve([APPLICATION_COMMON_PROVIDERS, provide(MdDialogRef, {useValue: dialogRef})]);
 
     var backdropRefPromise = this._openBackdrop(elementRef, bindings, options);
 
     // First, load the MdDialogContainer, into which the given component will be loaded.
-    return this.componentLoader.loadNextToLocation(MdDialogContainer, elementRef)
-      .then(containerRef => {
-        // TODO(tbosch): clean this up when we have custom renderers
-        // (https://github.com/angular/angular/issues/1807)
-        // TODO(jelbourn): Don't use direct DOM access. Need abstraction to create an element
-        // directly on the document body (also needed for web workers stuff).
-        // Create a DOM node to serve as a physical host element for the dialog.
+    return this.componentLoader.loadNextToLocation(MdDialogContainer, elementRef, bindings)
+      .then((containerRef: ComponentRef) => {
         var dialogElement = containerRef.location.nativeElement;
 
-        this.renderer.setElementClass(containerRef.location, 'md-dialog-absolute', !!config.container);
+        this._renderer.setElementClass(dialogElement, 'md-dialog-absolute', !!config.container);
 
         DOM.appendChild(config.container || this._defaultContainer, dialogElement);
 
         if (isPresent(config.width)) {
-          this.renderer.setElementStyle(containerRef.location, 'width', config.width);
+          this._renderer.setElementStyle(dialogElement, 'width', config.width);
         }
         if (isPresent(config.height)) {
-          this.renderer.setElementStyle(containerRef.location, 'height', config.height);
+          this._renderer.setElementStyle(dialogElement, 'height', config.height);
         }
 
         dialogRef.containerRef = containerRef;
@@ -96,10 +106,20 @@ export class MdDialog {
             dialogRef.contentRef = contentRef;
             containerRef.instance.dialogRef = dialogRef;
 
-            backdropRefPromise.then(backdropRef => {
+            backdropRefPromise.then((backdropRef: ComponentRef) => {
               dialogRef.backdropRef = backdropRef;
               dialogRef.whenClosed.then((_) => {
-                backdropRef.dispose();
+                backdropRef.instance.hide().then(() => {
+                  containerRef.dispose();
+                  contentRef.dispose();
+                  // TODO(jd): The change detection doesn't like it if you dispose() a ComponentRef while it has
+                  //           pending async things that will emit() one of it's outputs. Wait a second for the
+                  //           container objects to be disposed and clean up their Change detection references to
+                  //           the backdrop's hide/show events, then dispose of the backdrop.
+                  TimerWrapper.setTimeout(()=> {
+                    backdropRef.dispose();
+                  }, 500);
+                });
               });
             });
 
@@ -114,9 +134,9 @@ export class MdDialog {
       .then((componentRef) => {
         let backdrop: MdBackdrop = componentRef.instance;
         backdrop.clickClose = options.clickClose;
-        this.renderer.setElementClass(componentRef.location, 'md-backdrop', true);
-        this.renderer.setElementClass(componentRef.location, 'md-opaque', true);
-        this.renderer.setElementClass(componentRef.location, 'md-backdrop-absolute', !!options.container);
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop', true);
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-opaque', true);
+        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop-absolute', !!options.container);
         DOM.appendChild(options.container || this._defaultContainer, componentRef.location.nativeElement);
         return backdrop.show().then(() => componentRef);
       });

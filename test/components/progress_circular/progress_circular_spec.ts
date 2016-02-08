@@ -1,25 +1,18 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   beforeEach,
-  beforeEachProviders,
   describe,
   expect,
   inject,
   it,
-} from 'angular2/testing_internal';
-import {DebugElement} from 'angular2/src/core/debug/debug_element';
-import {Component, View, provide} from 'angular2/core';
-import {UrlResolver} from 'angular2/compiler';
-import {TestUrlResolver} from '../../test_url_resolver';
-import {MdTab, MdTabs} from '../../../ng2-material/components/tabs/tabs';
-import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
-import {ComponentFixture} from "angular2/testing";
+  injectAsync,
+  ComponentFixture
+} from "angular2/testing";
+import {Component, View, DebugElement} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
-import {Ink} from "../../../ng2-material/core/util/ink";
 import {ProgressMode} from "../../../ng2-material/components/progress_linear/progress_linear";
 import {MdProgressCircular} from "../../../ng2-material/components/progress_circular/progress_circular";
-import {By} from 'angular2/platform/browser';
+import {By} from "angular2/platform/browser";
 
 export function main() {
 
@@ -59,10 +52,6 @@ export function main() {
       }).catch(console.error.bind(console));
     }
 
-    beforeEachProviders(() => [
-      MATERIAL_PROVIDERS,
-      provide(UrlResolver, {useValue: new TestUrlResolver()}),
-    ]);
     beforeEach(inject([TestComponentBuilder], (tcb) => {
       builder = tcb;
     }));
@@ -70,40 +59,36 @@ export function main() {
     describe('md-progress-circular', () => {
 
       describe('value', () => {
-        it('should be blank until specified', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-circular></md-progress-circular>`).then((api: IProgressFixture) => {
+        it('should be blank until specified', injectAsync([], () => {
+          return setup(`<md-progress-circular></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBeUndefined();
-            async.done();
           });
         }));
-        it('should set from binding', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-circular [value]="value"></md-progress-circular>`).then((api: IProgressFixture) => {
+        it('should set from binding', injectAsync([], () => {
+          return setup(`<md-progress-circular [value]="value"></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBe(25);
-            async.done();
           });
         }));
-        it('should do nothing with undefined value', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-circular [value]="blankValue"></md-progress-circular>`).then((api: IProgressFixture) => {
+        it('should do nothing with undefined value', injectAsync([], () => {
+          return setup(`<md-progress-circular [value]="blankValue"></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBeUndefined();
-            async.done();
           });
         }));
 
 
-        it('should update aria-valuenow', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-circular [value]="value"></md-progress-circular>`).then((api: IProgressFixture) => {
+        it('should update aria-valuenow', injectAsync([], () => {
+          return setup(`<md-progress-circular [value]="value"></md-progress-circular>`).then((api: IProgressFixture) => {
 
             let compiled = api.fixture.nativeElement;
 
             expect(compiled.querySelector('md-progress-circular').getAttribute('aria-valuenow')).toBe('25');
-            async.done();
           });
         }));
       });
 
       describe('diameter', () => {
-        it('should set scaling using percentage values', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-circular [diameter]="'25%'"></md-progress-circular>`).then((api: IProgressFixture) => {
+        it('should set scaling using percentage values', injectAsync([], () => {
+          return setup(`<md-progress-circular [diameter]="'25%'"></md-progress-circular>`).then((api: IProgressFixture) => {
 
             let compiled = api.fixture.nativeElement;
             let indicator = compiled.querySelector('md-progress-circular');
@@ -112,14 +97,12 @@ export function main() {
             expect(getScale(scaleWrapper)).toBe(0.25);
             expect(indicator.style['height']).toBe('25px');
             expect(indicator.style['width']).toBe('25px');
-
-            async.done();
           });
         }));
 
 
-        it('should set scaling using pixel values', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-circular [diameter]="'37px'"></md-progress-circular>`).then((api: IProgressFixture) => {
+        it('should set scaling using pixel values', injectAsync([], () => {
+          return setup(`<md-progress-circular [diameter]="'37px'"></md-progress-circular>`).then((api: IProgressFixture) => {
 
             let compiled = api.fixture.nativeElement;
             let indicator = compiled.querySelector('md-progress-circular');
@@ -128,23 +111,19 @@ export function main() {
             expect(getScale(scaleWrapper)).toBe(0.37);
             expect(indicator.style['height']).toBe('37px');
             expect(indicator.style['width']).toBe('37px');
-
-            async.done();
           });
         }));
       });
 
       describe('mode', () => {
-        it('should default to determinate', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-circular></md-progress-circular>`).then((api: IProgressFixture) => {
+        it('should default to determinate', injectAsync([], () => {
+          return setup(`<md-progress-circular></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.DETERMINATE);
-            async.done();
           });
         }));
-        it('should set from attribute', inject([AsyncTestCompleter], (async) => {
-          setup(`<md-progress-circular mode="indeterminate"></md-progress-circular>`).then((api: IProgressFixture) => {
+        it('should set from attribute', injectAsync([], () => {
+          return setup(`<md-progress-circular mode="indeterminate"></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.INDETERMINATE);
-            async.done();
           });
         }));
       });

@@ -3,7 +3,7 @@
 if (!Object.hasOwnProperty('name')) {
   Object.defineProperty(Function.prototype, 'name', {
     get: function() {
-      var matches = this.toString().match(/^\s*function\s*(\S*)\s*\(/);
+      var matches = this.toString().match(/^\s*function\s*(\S[^\(]*)\s*\(/);
       var name = matches && matches.length > 1 ? matches[1] : "";
       // For better performance only parse once, and then cache the
       // result through a new accessor for repeated access.
@@ -129,7 +129,6 @@ if (!window.console.assert) window.console.assert = function () { };
         };
 }());
 
-
 /*! matchMedia() polyfill - Test a CSS media type/query in JS. Authors & copyright (c) 2012: Scott Jehl, Paul Irish, Nicholas Zakas, David Knight. Dual MIT/BSD license */
 
 window.matchMedia || (window.matchMedia = function() {
@@ -251,3 +250,4 @@ window.matchMedia || (window.matchMedia = function() {
         return mql;
     };
 }());
+

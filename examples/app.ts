@@ -5,7 +5,8 @@ import {
   ROUTER_DIRECTIVES,
   RouteConfig,
   HashLocationStrategy,
-  LocationStrategy, Router
+  LocationStrategy,
+  Router
 } from "angular2/router";
 import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "../ng2-material/all";
 import {DEMO_DIRECTIVES} from "./all";
@@ -16,8 +17,6 @@ import {ComponentPage} from "./routes/component";
 import {ComponentsService, IComponentMeta} from "./services/components";
 import {NavigationService} from "./services/navigation";
 import {VersionService} from "./services/version";
-import {AppViewListener} from "angular2/src/core/linker/view_listener";
-import {DebugElementViewListener} from "angular2/platform/common_dom";
 import {SidenavService} from "ng2-material/components/sidenav/sidenav_service";
 import {Media} from "ng2-material/core/util/media";
 
@@ -108,9 +107,6 @@ let appProviders = [
 
 if (window.location.href.indexOf('github.com') !== -1) {
   enableProdMode();
-}
-else {
-  appProviders.push(bind(AppViewListener).toClass(DebugElementViewListener))
 }
 
 bootstrap(DemosApp, appProviders);
