@@ -1,6 +1,6 @@
 {
   "name": "ng2-material",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "main": "all.ts",
   "repository": {
@@ -8,20 +8,20 @@
     "url": "git@github.com:justindujardin/ng2-material.git"
   },
   "author": "Justin DuJardin <justin@dujardinconsulting.com>",
-  "license": "MIT+BSD Dual License",
+  "license": "MIT",
   "readmeFilename": "README.md",
   "scripts": {
     "test": "npm install"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.0",
+    "angular2": "2.0.0-beta.3",
     "es6-promise": "3.0.2",
     "es6-shim": "0.33.13",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.0",
     "systemjs": "0.19.2",
     "typescript": "1.8.0-dev.20151122",
-    "zone.js": "0.5.10"
+    "zone.js": "0.5.11"
   },
   "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
@@ -63,7 +63,8 @@
     "Justin DuJardin <justindujardin@users.noreply.github.com>",
     "Jaroslav Řehořka <jaroslav.rehorka@gmail.com>",
     "Adam Busbin <aw.busbin@gmail.com>",
+    "Daniel Rasmuson <dan123911@gmail.com>",
     "Chris Seto <chriskseto@gmail.com>",
-    "Daniel Rasmuson <dan123911@gmail.com>"
+    "Sam <samuel.jones@q-free.com>"
   ]
 }

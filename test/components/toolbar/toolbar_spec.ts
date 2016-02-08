@@ -1,22 +1,16 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   beforeEach,
-  beforeEachProviders,
   describe,
   expect,
   inject,
   it,
-} from 'angular2/testing_internal';
-import {DebugElement} from 'angular2/src/core/debug/debug_element';
-import {Component, View, provide} from 'angular2/core';
-import {UrlResolver} from 'angular2/compiler';
-import {TestUrlResolver} from '../../test_url_resolver';
-import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
-import {ComponentFixture} from "angular2/testing";
+  ComponentFixture,
+  injectAsync
+} from "angular2/testing";
+import {Component, View} from "angular2/core";
 import {MdToolbar} from "../../../ng2-material/components/toolbar/toolbar";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {By} from 'angular2/platform/browser';
+import {By} from "angular2/platform/browser";
 
 export function main() {
 
@@ -37,34 +31,28 @@ export function main() {
         builder.createAsync(typeFn);
     }
 
-    beforeEachProviders(() => [
-      MATERIAL_PROVIDERS,
-      provide(UrlResolver, {useValue: new TestUrlResolver()}),
-    ]);
     beforeEach(inject([TestComponentBuilder], (tcb) => {
       builder = tcb;
     }));
 
     describe('md-toolbar', () => {
-      it('defaults mdScrollShrink to false', inject([AsyncTestCompleter], (async) => {
-        setup().then((fixture: ComponentFixture) => {
+      it('defaults mdScrollShrink to false', injectAsync([], () => {
+        return setup().then((fixture: ComponentFixture) => {
           fixture.detectChanges();
           let toolbar = <MdToolbar>fixture.debugElement.query(By.css('md-toolbar')).componentInstance;
           expect(toolbar.mdScrollShrink).toBe(false);
-          async.done();
         });
       }));
-      it('supports scroll shrink', inject([AsyncTestCompleter], (async) => {
+      it('supports scroll shrink', injectAsync([], () => {
         let template = `
           <md-content>
             <md-toolbar mdScrollShrink></md-toolbar>
             <md-content></md-content>
           </md-content>`;
-        setup(template).then((fixture: ComponentFixture) => {
+        return setup(template).then((fixture: ComponentFixture) => {
           fixture.detectChanges();
           let toolbar = <MdToolbar>fixture.debugElement.query(By.css('md-toolbar')).componentInstance;
           expect(toolbar.mdScrollShrink).toBe(true);
-          async.done();
         });
       }));
     });

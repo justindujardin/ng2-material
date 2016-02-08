@@ -65,6 +65,8 @@ module.exports = function (config) {
 
     singleRun: true,
 
+    transports:['polling'],
+
     plugins: [
       'karma-*'
     ]

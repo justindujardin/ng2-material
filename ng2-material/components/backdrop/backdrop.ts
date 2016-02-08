@@ -1,12 +1,5 @@
 import {Animate} from "../../core/util/animate";
-import {ElementRef} from "angular2/core";
-import {AfterViewInit} from "angular2/core";
-import {ViewEncapsulation} from "angular2/core";
-import {View} from "angular2/core";
-import {Component} from "angular2/core";
-import {Input} from "angular2/core";
-import {Output} from "angular2/core";
-import {EventEmitter} from "angular2/core";
+import {ElementRef, Renderer, ViewEncapsulation, View, Component, Input, Output, EventEmitter} from "angular2/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
 /**
@@ -84,6 +77,7 @@ export class MdBackdrop {
   get visible(): boolean {
     return this._visible;
   }
+
   @Input()
   set visible(value: boolean) {
     this.toggle(value);
@@ -92,7 +86,7 @@ export class MdBackdrop {
   private _visible: boolean = false;
   private _transitioning: boolean = false;
   private _previousOverflow: string = null;
-  private _body:HTMLBodyElement = DOM.query('body');
+  private _body: HTMLBodyElement = DOM.query('body');
 
   onClick() {
     if (this.clickClose && !this._transitioning && this.visible) {

@@ -1,25 +1,18 @@
 import {
-  AsyncTestCompleter,
   TestComponentBuilder,
   beforeEach,
-  beforeEachProviders,
   describe,
   expect,
   inject,
   it,
-} from 'angular2/testing_internal';
-import {DebugElement} from 'angular2/src/core/debug/debug_element';
-import {Component, View, provide} from 'angular2/core';
-import {UrlResolver} from 'angular2/compiler';
-import {TestUrlResolver} from '../../test_url_resolver';
-import {MdMessage, MdMessages} from '../../../ng2-material/components/form/messages';
-import {MATERIAL_PROVIDERS} from '../../../ng2-material/all';
-import {ComponentFixture} from "angular2/testing";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgFormControl, NgFormModel, NgControlName} from "angular2/common";
-import {TimerWrapper} from "angular2/src/facade/async";
+  injectAsync,
+  ComponentFixture
+} from "angular2/testing";
+import {Component, View} from "angular2/core";
+import {MdMessage, MdMessages} from "../../../ng2-material/components/form/messages";
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, Control} from "angular2/common";
 import {By} from "angular2/platform/browser";
-import {Ink} from "../../../ng2-material/core/util/ink";
-import {Control} from "angular2/common";
+import {promiseWait} from "../../util";
 
 
 export function main() {
@@ -63,35 +56,33 @@ export function main() {
       });
     }
 
-    beforeEachProviders(() => [MATERIAL_PROVIDERS, provide(UrlResolver, {useValue: new TestUrlResolver()}),]);
-    beforeEach(inject([TestComponentBuilder], (tcb) => builder = tcb));
+    beforeEach(inject([TestComponentBuilder], (tcb) => {
+      builder = tcb;
+    }));
 
     describe('md-messages', () => {
-      it('should error if used outside of an NgFormControl', inject([AsyncTestCompleter], (async) => {
-        setup(`<div md-messages></div>`).catch((err: any) => {
+      it('should error if used outside of an NgFormControl', injectAsync([], () => {
+        return setup(`<div md-messages></div>`).catch((err: any) => {
           expect(err).toBeDefined();
-          async.done();
         });
       }));
-      it('should initialize when given model and control group are present', inject([AsyncTestCompleter], (async) => {
-        setup().then((api: IFormMessagesFixture) => {
+      it('should initialize when given model and control group are present', injectAsync([], () => {
+        return setup().then((api: IFormMessagesFixture) => {
           expect(api.container.isTouched).toBe(false);
-          async.done();
           api.fixture.destroy();
-        }).catch((e) => console.log(e));
+        });
       }));
-      it('should bind local view references #ref="ngForm"', inject([AsyncTestCompleter], (async) => {
-        setup().then((api: IFormMessagesFixture) => {
+      it('should bind local view references #ref="ngForm"', injectAsync([], () => {
+        return setup().then((api: IFormMessagesFixture) => {
           expect(api.container.isTouched).toBe(false);
           expect(api.messages.length).toBe(1);
           expect(api.container.form).not.toBeNull();
           expect(api.fixture.componentInstance.name).toBe('MorTon');
-          async.done();
-        }).catch((e) => console.log(e));
+        });
       }));
-      it('should re-export valid from control or form', inject([AsyncTestCompleter], (async) => {
-        setup().then((api: IFormMessagesFixture) => {
-          TimerWrapper.setTimeout(()=> {
+      it('should re-export valid from control or form', injectAsync([], () => {
+        return setup().then((api: IFormMessagesFixture) => {
+          return promiseWait().then(() => {
             let ctrl: Control = (<any>api.container.property).control;
             expect(ctrl.value).toBe(null);
             expect(api.container.valid).toBe(false);
@@ -99,8 +90,7 @@ export function main() {
             ctrl.updateValue('MorTon', {emitEvent: true});
             api.fixture.detectChanges();
             expect(api.container.valid).toBe(true);
-            async.done();
-          }, 0);
+          });
         });
       }));
     });

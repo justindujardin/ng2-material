@@ -1,3 +1,18 @@
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/justindujardin/ng2-material/compare/v0.2.1...v0.2.2) (2016-02-08)
+
+
+### Bug Fixes
+
+* **build:** make ie name shim compatible with coverage code ([5e1759c](https://github.com/justindujardin/ng2-material/commit/5e1759c))
+
+### Features
+
+* update to angular2 beta1 ([2362e79](https://github.com/justindujardin/ng2-material/commit/2362e79))
+* **LICENSE:** use MIT license now that angular2 does ([e3292d1](https://github.com/justindujardin/ng2-material/commit/e3292d1))
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/justindujardin/ng2-material/compare/v0.2.0...v0.2.1) (2016-02-02)
 
