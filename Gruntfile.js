@@ -139,6 +139,13 @@ module.exports = function (grunt) {
         ]
       }
     },
+    connect: {
+      main: {
+        options: {
+          port: 9001
+        }
+      }
+    },
     watch: {
       sass: {
         files: [
@@ -242,6 +249,7 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-postcss');
@@ -252,6 +260,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('remap-istanbul');
   grunt.registerTask('default', ['dtsGenerator', 'ts:source', 'sass', 'postcss', 'site-meta']);
   grunt.registerTask('develop', ['default', 'watch']);
+  grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
   grunt.registerTask('site', ['build', 'cover', 'copy:site']);
   grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release']);
