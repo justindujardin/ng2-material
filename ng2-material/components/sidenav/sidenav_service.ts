@@ -6,7 +6,7 @@ export class SidenavService {
   show(name: string): Promise<void> {
     let instance: MdSidenav = this.find(name);
     if (!instance) {
-      return Promise.reject<void>('invalid container');
+      return Promise.reject('invalid container');
     }
     return instance.show();
   }
@@ -14,7 +14,7 @@ export class SidenavService {
   hide(name: string): Promise<void> {
     let instance: MdSidenav = this.find(name);
     if (!instance) {
-      return Promise.reject<void>('invalid container');
+      return Promise.reject('invalid container');
     }
     return instance.hide();
   }

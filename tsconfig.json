@@ -16,7 +16,8 @@
     "lib",
     "site",
     "out",
-    "vendor"
+    "vendor",
+    "typings"
   ],
   "compileOnSave": true
 }

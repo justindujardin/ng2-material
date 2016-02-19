@@ -99,7 +99,7 @@ export class MdBackdrop {
    * Hide the backdrop and return a promise that is resolved when the hide animations are
    * complete.
    */
-  hide(): Promise<void> {
+  hide(): Promise<any> {
     return this.toggle(false);
   }
 
@@ -107,7 +107,7 @@ export class MdBackdrop {
    * Show the backdrop and return a promise that is resolved when the show animations are
    * complete.
    */
-  show(): Promise<void> {
+  show(): Promise<any> {
     return this.toggle(true);
   }
 
@@ -116,7 +116,7 @@ export class MdBackdrop {
    * @param visible whether or not the backdrop should be visible
    * @returns {any}
    */
-  toggle(visible: boolean = !this.visible) {
+  toggle(visible: boolean = !this.visible): any {
     if (visible === this._visible) {
       return Promise.resolve();
     }
