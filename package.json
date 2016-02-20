@@ -28,7 +28,7 @@
     "autoprefixer": "6.2.0",
     "coveralls": "2.11.6",
     "dts-generator": "1.6.3",
-    "es6-module-loader": "^0.17.4",
+    "es6-module-loader": "0.17.4",
     "glob": "6.0.1",
     "grunt": "0.4.5",
     "grunt-bump": "0.7.0",
