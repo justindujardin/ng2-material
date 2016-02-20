@@ -29,3 +29,5 @@ test/**/*.d.ts
 .tscache
 coverage
 node_modules
+
+typings/
