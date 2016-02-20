@@ -65,30 +65,28 @@ export class MdDialog {
    * @param options
    * @returns Promise for a reference to the dialog.
    */
-  open(type: Type, elementRef: ElementRef, options: MdDialogConfig = null): Promise<MdDialogRef> {
-    var config = isPresent(options) ? options : new MdDialogConfig();
-
+  open(type: Type, elementRef: ElementRef, options: MdDialogConfig = new MdDialogConfig()): Promise<MdDialogRef> {
     // Create the dialogRef here so that it can be injected into the content component.
-    var dialogRef = new MdDialogRef();
+    let dialogRef = new MdDialogRef();
 
-    var bindings = Injector.resolve([APPLICATION_COMMON_PROVIDERS, provide(MdDialogRef, {useValue: dialogRef})]);
+    let bindings = Injector.resolve([APPLICATION_COMMON_PROVIDERS, provide(MdDialogRef, {useValue: dialogRef})]);
 
-    var backdropRefPromise = this._openBackdrop(elementRef, bindings, options);
+    let backdropRefPromise = this._openBackdrop(elementRef, bindings, options);
 
     // First, load the MdDialogContainer, into which the given component will be loaded.
     return this.componentLoader.loadNextToLocation(MdDialogContainer, elementRef, bindings)
       .then((containerRef: ComponentRef) => {
         var dialogElement = containerRef.location.nativeElement;
 
-        this._renderer.setElementClass(dialogElement, 'md-dialog-absolute', !!config.container);
+        this._renderer.setElementClass(dialogElement, 'md-dialog-absolute', !!options.container);
 
-        DOM.appendChild(config.container || this._defaultContainer, dialogElement);
+        DOM.appendChild(options.container || this._defaultContainer, dialogElement);
 
-        if (isPresent(config.width)) {
-          this._renderer.setElementStyle(dialogElement, 'width', config.width);
+        if (isPresent(options.width)) {
+          this._renderer.setElementStyle(dialogElement, 'width', options.width);
         }
-        if (isPresent(config.height)) {
-          this._renderer.setElementStyle(dialogElement, 'height', config.height);
+        if (isPresent(options.height)) {
+          this._renderer.setElementStyle(dialogElement, 'height', options.height);
         }
 
         dialogRef.containerRef = containerRef;
@@ -96,8 +94,8 @@ export class MdDialog {
         // Now load the given component into the MdDialogContainer.
         return this.componentLoader.loadNextToLocation(type, containerRef.instance.contentRef, bindings)
           .then((contentRef: ComponentRef) => {
-            Object.keys(config.context).forEach((key) => {
-              contentRef.instance[key] = config.context[key];
+            Object.keys(options.context).forEach((key) => {
+              contentRef.instance[key] = options.context[key];
             });
 
             // Wrap both component refs for the container and the content so that we can return
@@ -131,7 +129,7 @@ export class MdDialog {
   /** Loads the dialog backdrop (transparent overlay over the rest of the page). */
   _openBackdrop(elementRef: ElementRef, bindings: ResolvedProvider[], options: MdDialogConfig): Promise<ComponentRef> {
     return this.componentLoader.loadNextToLocation(MdBackdrop, elementRef, bindings)
-      .then((componentRef) => {
+      .then((componentRef: ComponentRef) => {
         let backdrop: MdBackdrop = componentRef.instance;
         backdrop.clickClose = options.clickClose;
         this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop', true);
