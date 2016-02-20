@@ -243,6 +243,9 @@ module.exports = function (grunt) {
           }
         }
       }
+    },
+    webpack: {
+      singleJs: require('./webpack.config.js')
     }
 
   });
@@ -258,12 +261,14 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('dts-generator');
   grunt.loadNpmTasks('remap-istanbul');
+  grunt.loadNpmTasks('grunt-webpack');
+
   grunt.registerTask('default', ['dtsGenerator', 'ts:source', 'sass', 'postcss', 'site-meta']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
   grunt.registerTask('site', ['build', 'cover', 'copy:site']);
-  grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release']);
+  grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release', 'webpack']);
 
 
   grunt.registerTask('dist-bundle', 'Build a single-file javascript output.', function () {
