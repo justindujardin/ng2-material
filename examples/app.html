@@ -43,10 +43,12 @@
           <span>{{navigation?.currentTitle}}</span>
         </h2>
         <span flex></span>
-    <span md-peekaboo
-          [breakMd]="72"
-          breakAction="show"
-          *ngIf="version" class="md-caption">v{{version}}</span>
+        <a md-peekaboo
+           href="https://github.com/justindujardin/ng2-material/releases/tag/v{{version}}"
+           target="_blank"
+           [breakMd]="72"
+           breakAction="show"
+           *ngIf="version" class="md-caption">v{{version}}</a>
       </div>
     </md-toolbar>
 

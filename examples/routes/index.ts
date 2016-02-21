@@ -7,6 +7,7 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {Highlight} from "../highlight";
 import {SidenavService} from "../../ng2-material/components/sidenav/sidenav_service";
 import {TimerWrapper} from "angular2/src/facade/async";
+import {Http, Response} from "angular2/http";
 
 @Component({
   templateUrl: 'examples/routes/index.html',
@@ -15,12 +16,22 @@ import {TimerWrapper} from "angular2/src/facade/async";
 export class IndexPage implements OnInit {
   public components: IComponentMeta[] = [];
 
+  public angularVersion: string = '';
+
   constructor(private _components: ComponentsService,
               private _sidenav: SidenavService,
+              public http: Http,
               public navigation: NavigationService) {
   }
 
   ngOnInit(): any {
+
+    this.http.get('public/version.json')
+      .subscribe((res: Response) => {
+        this.angularVersion = res.json().angular2;
+      });
+
+
     TimerWrapper.setTimeout(() => {
       this._sidenav.hide('menu');
     }, 0);

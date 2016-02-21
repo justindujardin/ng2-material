@@ -404,9 +404,11 @@ module.exports = function (grunt) {
 
     tasks.push(function buildProjectReadme() {
       var rendered = marked(fs.readFileSync(path.join(__dirname, 'README.md')).toString());
+      var pkg = require('./package.json');
       writeJson('public/version.json', {
-        version: require('./package.json').version,
-        readme: rendered
+        version: pkg.version,
+        readme: rendered,
+        angular2: pkg.dependencies.angular2
       });
       next();
     });
