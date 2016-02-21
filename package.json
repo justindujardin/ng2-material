@@ -12,7 +12,7 @@
   "readmeFilename": "README.md",
   "scripts": {
     "test": "npm install",
-    "postinstall":"typings install"
+    "postinstall": "typings install"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.7",
@@ -71,9 +71,12 @@
   "contributors": [
     "Justin DuJardin <justindujardin@users.noreply.github.com>",
     "Jaroslav Řehořka <jaroslav.rehorka@gmail.com>",
-    "Adam Busbin <aw.busbin@gmail.com>",
+    "Sam <samuel.jones@q-free.com>",
+    "Sylvain Dumont <sylvain.dumont35@gmail.com>",
+    "Dotan Simha <dotansimha@gmail.com>",
     "Daniel Rasmuson <dan123911@gmail.com>",
+    "Miloš Stanić <milos.stanic@gmail.com>",
     "Chris Seto <chriskseto@gmail.com>",
-    "Sam <samuel.jones@q-free.com>"
+    "Adam Busbin <aw.busbin@gmail.com>"
   ]
 }
