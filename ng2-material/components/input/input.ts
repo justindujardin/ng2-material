@@ -32,9 +32,9 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
   providers: [FORM_PROVIDERS]
 })
 export class MdInput {
-  @Input('value')
   _value: string;
 
+  @Input('value')
   set value(value: string) {
     this._value = value;
     ObservableWrapper.callEmit(this.mdChange, this.value);
