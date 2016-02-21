@@ -5,13 +5,13 @@ import {ElementRef} from "angular2/core";
 import {ComponentRef} from "angular2/core";
 import {IExampleData} from "./app";
 import {DEMO_DIRECTIVES} from "./all";
-import {MATERIAL_DIRECTIVES} from "ng2-material/all";
+import {MATERIAL_DIRECTIVES} from "../ng2-material/all";
 import {Http} from "angular2/http";
 import {Response} from "angular2/http";
 import {Highlight} from './highlight';
 import {TimerWrapper} from "angular2/src/facade/async";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {MdTabs} from "ng2-material/components/tabs/tabs";
+import {MdTabs} from "../ng2-material/components/tabs/tabs";
 import {Query} from "angular2/core";
 import {QueryList} from "angular2/core";
 

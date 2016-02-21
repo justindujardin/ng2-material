@@ -17,8 +17,8 @@ import {ComponentPage} from "./routes/component";
 import {ComponentsService, IComponentMeta} from "./services/components";
 import {NavigationService} from "./services/navigation";
 import {VersionService} from "./services/version";
-import {SidenavService} from "ng2-material/components/sidenav/sidenav_service";
-import {Media} from "ng2-material/core/util/media";
+import {SidenavService} from "../ng2-material/components/sidenav/sidenav_service";
+import {Media} from "../ng2-material/core/util/media";
 
 /**
  * Describe an example that can be dynamically loaded.

@@ -1,5 +1,5 @@
 import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {MATERIAL_DIRECTIVES} from '../../../ng2-material/all';
 
 @Component({selector: 'switch-basic-usage'})
 @View({templateUrl: 'examples/components/switch/basic_usage.html', directives: [MATERIAL_DIRECTIVES]})
