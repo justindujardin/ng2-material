@@ -1,3 +1,17 @@
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/justindujardin/ng2-material/compare/v0.2.3...v0.2.4) (2016-02-21)
+
+
+### Bug Fixes
+
+* **dialog:** no more blurry text ([7baaaee](https://github.com/justindujardin/ng2-material/commit/7baaaee)), closes [#10](https://github.com/justindujardin/ng2-material/issues/10)
+* **input:** support two way binding with value ([dc63f19](https://github.com/justindujardin/ng2-material/commit/dc63f19)), closes [#62](https://github.com/justindujardin/ng2-material/issues/62)
+* **input:** work with async value bindings ([0014bc4](https://github.com/justindujardin/ng2-material/commit/0014bc4)), closes [#40](https://github.com/justindujardin/ng2-material/issues/40) [#39](https://github.com/justindujardin/ng2-material/issues/39) [#59](https://github.com/justindujardin/ng2-material/issues/59)
+* **install:** use typings explicitly from node_modules ([7bef97d](https://github.com/justindujardin/ng2-material/commit/7bef97d)), closes [#74](https://github.com/justindujardin/ng2-material/issues/74)
+* **MdMinValueValidator:** do not use max validator logic ([f67e508](https://github.com/justindujardin/ng2-material/commit/f67e508)), closes [#61](https://github.com/justindujardin/ng2-material/issues/61)
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/justindujardin/ng2-material/compare/v0.2.2...v0.2.3) (2016-02-21)
 
