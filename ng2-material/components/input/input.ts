@@ -46,7 +46,7 @@ export class MdInput {
 
   @Input()
   placeholder: string;
-  @Output()
+  @Output('valueChange')
   mdChange: EventEmitter<any> = new EventEmitter();
   @Output()
   mdFocusChange: EventEmitter<any> = new EventEmitter();
