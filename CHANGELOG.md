@@ -1,3 +1,14 @@
+<a name="0.2.5"></a>
+## [0.2.5](https://github.com/justindujardin/ng2-material/compare/v0.2.4...v0.2.5) (2016-02-21)
+
+
+### Bug Fixes
+
+* **build:** remove need for installing typings from the internet ([9acfd14](https://github.com/justindujardin/ng2-material/commit/9acfd14)), closes [#74](https://github.com/justindujardin/ng2-material/issues/74)
+* **build:** remove triple slash reference from types file ([fd50eb8](https://github.com/justindujardin/ng2-material/commit/fd50eb8))
+
+
+
 <a name="0.2.4"></a>
 ## [0.2.4](https://github.com/justindujardin/ng2-material/compare/v0.2.3...v0.2.4) (2016-02-21)
 
