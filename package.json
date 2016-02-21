@@ -11,24 +11,25 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "scripts": {
-    "test": "npm install"
+    "test": "npm install",
+    "postinstall":"typings install"
   },
   "dependencies": {
-    "angular2": "2.0.0-beta.3",
+    "angular2": "2.0.0-beta.7",
     "es6-promise": "3.0.2",
     "es6-shim": "0.33.13",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.0",
+    "rxjs": "5.0.0-beta.2",
     "systemjs": "0.19.2",
     "typescript": "1.8.0-dev.20151122",
-    "zone.js": "0.5.11"
+    "zone.js": "0.5.15"
   },
   "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
     "autoprefixer": "6.2.0",
     "coveralls": "2.11.6",
     "dts-generator": "1.6.3",
-    "es6-module-loader": "^0.17.4",
+    "es6-module-loader": "0.17.4",
     "glob": "6.0.1",
     "grunt": "0.4.5",
     "grunt-bump": "0.7.0",
@@ -57,6 +58,7 @@
     "marked": "0.3.5",
     "remap-istanbul": "0.4.0",
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps",
+    "typings": "0.6.8",
     "underscore": "1.8.3"
   },
   "contributors": [

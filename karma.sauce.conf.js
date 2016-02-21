@@ -11,8 +11,8 @@ module.exports = function (config) {
     ['firefox', '40'],
     ['firefox', '35'],
 
-    ['chrome', 'beta'],
-    ['chrome', 'dev'],
+    ['chrome', 'beta', 'Windows 8'],
+    ['chrome', 'dev', 'Windows 8'],
     ['chrome', '39'],
     ['chrome', '26'],
 

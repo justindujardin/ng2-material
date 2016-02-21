@@ -36,9 +36,9 @@ export class Ink {
    * @param element The element to apply a ripple to
    * @param x The x position inside the element for the ripple to originate from
    * @param y The y position inside the element for the ripple to originate from
-   * @returns {Promise<void>} A promise that resolves when the ripple has faded
+   * @returns {Promise<any>} A promise that resolves when the ripple has faded
    */
-  static ripple(element: HTMLElement, x: number, y: number): Promise<void> {
+  static ripple(element: HTMLElement, x: number, y: number): Promise<any> {
     let fit: boolean = isPresent(DOM.getAttribute(element, 'md-fab'));
 
     let container = DOM.createElement('div');
@@ -85,9 +85,9 @@ export class Ink {
    *
    * @param element The element to ripple on.
    * @param event The mouse event to indicate where the ripple should start at
-   * @returns {Promise<void>} A promise that resolves when the ripple has faded.
+   * @returns {Promise<any>} A promise that resolves when the ripple has faded.
    */
-  static rippleEvent(element: HTMLElement, event: MouseEvent): Promise<void> {
+  static rippleEvent(element: HTMLElement, event: MouseEvent): Promise<any> {
     let rippleX = event.offsetX;
     let rippleY = event.offsetY;
     if (element !== event.srcElement) {

@@ -1,4 +1,4 @@
-///<reference path="../node_modules/angular2/typings/jasmine/jasmine.d.ts"/>
+///<reference path="../typings/main.d.ts"/>
 import {Component, View} from "angular2/core";
 import {ComponentFixture, TestComponentBuilder, beforeEach, describe, inject, it, injectAsync} from "angular2/testing";
 import {MATERIAL_DIRECTIVES} from "../ng2-material/all";

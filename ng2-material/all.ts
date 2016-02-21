@@ -1,3 +1,5 @@
+///<reference path="../node_modules/angular2/typings/browser.d.ts"/>
+
 import {CONST_EXPR, Type} from 'angular2/src/facade/lang';
 
 import {MdAnchor, MdButton} from './components/button/button';

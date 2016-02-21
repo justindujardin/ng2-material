@@ -133,7 +133,7 @@ export class MdPeekaboo implements OnDestroy {
 
   private _watchMediaQuery(size: string) {
     let l = this.media.listen(Media.getQuery(size));
-    l.onMatched.subscribe((q: string) => {
+    l.onMatched.subscribe((mql:MediaQueryList) => {
       this.breakpoint = size;
     });
     this._mediaListeners.push(l);
