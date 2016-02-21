@@ -12,7 +12,7 @@
   "readmeFilename": "README.md",
   "scripts": {
     "test": "npm install",
-    "postinstall": "typings install"
+    "postinstall": "./node_modules/.bin/typings install"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.7",
@@ -21,7 +21,8 @@
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
     "systemjs": "0.19.2",
-    "typescript": "1.8.0-dev.20151122",
+    "typescript": "1.8.0",
+    "typings": "0.6.8",
     "zone.js": "0.5.15"
   },
   "typings": "dist/ng2-material.d.ts",
@@ -63,7 +64,6 @@
     "style-loader": "0.13.0",
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps",
     "underscore": "1.8.3",
-    "typings": "0.6.8",
     "url-loader": "0.5.7",
     "webpack": "1.12.13",
     "webpack-dev-server": "1.14.1"
