@@ -51,6 +51,8 @@
         "ng2-material/core/util/animate.ts",
         "ng2-material/core/util/ink.ts",
         "ng2-material/core/util/media.ts",
-        "ng2-material/core/util/util.ts"
+        "ng2-material/core/util/util.ts",
+        "ng2-material/webpack_all.ts",
+        "ng2-material/webpack_styles.ts"
     ]
 }
