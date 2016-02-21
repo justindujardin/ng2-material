@@ -1,3 +1,17 @@
+<a name="0.2.3"></a>
+## [0.2.3](https://github.com/justindujardin/ng2-material/compare/v0.2.2...v0.2.3) (2016-02-21)
+
+
+### Bug Fixes
+
+* **dialog:** null reference error when not specifying dialog config ([6e60b34](https://github.com/justindujardin/ng2-material/commit/6e60b34))
+
+### Features
+
+* **examples:** add angular2 compatible version to main page ([5031819](https://github.com/justindujardin/ng2-material/commit/5031819))
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](https://github.com/justindujardin/ng2-material/compare/v0.2.1...v0.2.2) (2016-02-08)
 
