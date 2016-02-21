@@ -38,6 +38,11 @@
     opacity: 1;
     transition: $swift-ease-out;
     transform: translate3d(-50%, -50%, 0) scale(1.0);
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -ms-filter: blur(0px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
+    filter: none;
   }
 
   &.md-dialog-absolute {
