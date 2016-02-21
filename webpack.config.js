@@ -1,7 +1,7 @@
 module.exports = {
   entry: {
-    'all-webpack': './webpack/all.js',
-    'all-styles': './webpack/style.js'
+    'all.webpack': './ng2-material/webpack_all.js',
+    'all.webpack.styles': './ng2-material/webpack_styles.js'
   },
   output: {
     // We use CommonJS because of Meteor 1.3 specification that uses it
