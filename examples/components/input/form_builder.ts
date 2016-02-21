@@ -1,5 +1,5 @@
 import {View, Component} from 'angular2/core';
-import {MdPatternValidator, MdMinValueValidator, MdNumberRequiredValidator, MdMaxValueValidator, MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {MdPatternValidator, MdMinValueValidator, MdNumberRequiredValidator, MdMaxValueValidator, MATERIAL_DIRECTIVES} from '../../../ng2-material/all';
 import {FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup} from 'angular2/common';
 
 @Component({selector: 'input-form-builder'})

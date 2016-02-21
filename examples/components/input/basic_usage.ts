@@ -1,5 +1,5 @@
 import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {MATERIAL_DIRECTIVES} from '../../../ng2-material/all';
 import {FORM_DIRECTIVES, Validators} from 'angular2/common';
 
 @Component({selector: 'input-basic-usage'})
