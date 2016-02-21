@@ -13,7 +13,9 @@
     },
     "filesGlob": [
         "node_modules/angular2/typings/browser.d.ts",
-        "ng2-material/**/*.ts"
+        "ng2-material/**/*.ts",
+        "examples/**.*.ts",
+        "test/**/*.ts"
     ],
     "compileOnSave": true,
     "files": [
@@ -53,6 +55,28 @@
         "ng2-material/core/util/media.ts",
         "ng2-material/core/util/util.ts",
         "ng2-material/webpack_all.ts",
-        "ng2-material/webpack_styles.ts"
+        "ng2-material/webpack_styles.ts",
+        "test/bootstrap.ts",
+        "test/components/backdrop/backdrop_spec.ts",
+        "test/components/button/button_spec.ts",
+        "test/components/checkbox/checkbox_spec.ts",
+        "test/components/dialog/dialog_spec.ts",
+        "test/components/form/messages_spec.ts",
+        "test/components/form/validators_spec.ts",
+        "test/components/ink/ink_spec.ts",
+        "test/components/input/input_spec.ts",
+        "test/components/list/list_spec.ts",
+        "test/components/peekaboo/peekaboo_spec.ts",
+        "test/components/progress_circular/progress_circular_spec.ts",
+        "test/components/progress_linear/progress_linear_spec.ts",
+        "test/components/radio/radio_spec.ts",
+        "test/components/sidenav/sidenav_service_spec.ts",
+        "test/components/sidenav/sidenav_spec.ts",
+        "test/components/subheader/subheader_spec.ts",
+        "test/components/switch/switch_spec.ts",
+        "test/components/tabs/tabs_spec.ts",
+        "test/components/toolbar/toolbar_spec.ts",
+        "test/test_url_resolver.ts",
+        "test/util.ts"
     ]
 }
