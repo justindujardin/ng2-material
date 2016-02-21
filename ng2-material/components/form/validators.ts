@@ -114,7 +114,7 @@ export class MdMinValueValidator implements Validator {
   @Input() mdMin: string;
 
   validate(control: Control): {[key: string]: any} {
-    return MdMaxValueValidator.inline(this.mdMin)(control);
+    return MdMinValueValidator.inline(this.mdMin)(control);
   }
 }
 
