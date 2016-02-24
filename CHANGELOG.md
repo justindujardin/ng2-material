@@ -1,3 +1,17 @@
+<a name="0.2.6"></a>
+## [0.2.6](https://github.com/justindujardin/ng2-material/compare/v0.2.5...v0.2.6) (2016-02-24)
+
+
+### Bug Fixes
+
+* use synchronous event emitters to workaround dehydrated detectors ([85cab59](https://github.com/justindujardin/ng2-material/commit/85cab59)), closes [#55](https://github.com/justindujardin/ng2-material/issues/55)
+
+### Features
+
+* **README:** add purpose statement ([792e4af](https://github.com/justindujardin/ng2-material/commit/792e4af))
+
+
+
 <a name="0.2.5"></a>
 ## [0.2.5](https://github.com/justindujardin/ng2-material/compare/v0.2.4...v0.2.5) (2016-02-21)
 
