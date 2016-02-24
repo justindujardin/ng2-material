@@ -33,26 +33,26 @@ export class MdBackdrop {
    * Emits when the backdrop begins to hide.
    */
   @Output()
-  onHiding: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
+  onHiding: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>(false);
 
   /**
    * Emits when the backdrop has finished being hidden.
    */
   @Output()
-  onHidden: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
+  onHidden: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>(false);
 
 
   /**
    * Emits when the backdrop begins to be shown.
    */
   @Output()
-  onShowing: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
+  onShowing: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>(false);
 
   /**
    * Emits when the backdrop has finished being shown.
    */
   @Output()
-  onShown: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
+  onShown: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>(false);
 
   constructor(public element: ElementRef) {
   }

@@ -26,8 +26,6 @@ export * from './dialog_container';
 export * from './dialog_ref';
 export * from './dialog_basic';
 
-// TODO(jelbourn): body scrolling is disabled while dialog is open.
-// TODO(jelbourn): Don't manually construct and configure a DOM element. See #1402
 // TODO(jelbourn): Wrap focus from end of dialog back to the start. Blocked on #1251
 // TODO(jelbourn): Focus the dialog element when it is opened.
 // TODO(jelbourn): Pre-built `alert` and `confirm` dialogs.
@@ -110,13 +108,7 @@ export class MdDialog {
                 backdropRef.instance.hide().then(() => {
                   containerRef.dispose();
                   contentRef.dispose();
-                  // TODO(jd): The change detection doesn't like it if you dispose() a ComponentRef while it has
-                  //           pending async things that will emit() one of it's outputs. Wait a second for the
-                  //           container objects to be disposed and clean up their Change detection references to
-                  //           the backdrop's hide/show events, then dispose of the backdrop.
-                  TimerWrapper.setTimeout(()=> {
-                    backdropRef.dispose();
-                  }, 500);
+                  backdropRef.dispose();
                 });
               });
             });

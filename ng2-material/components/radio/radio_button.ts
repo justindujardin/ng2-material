@@ -44,7 +44,7 @@ var _uniqueIdCounter: number = 0;
 export class MdRadioGroup implements OnChanges {
 
   @Output('valueChange')
-  change: EventEmitter<any> = new EventEmitter();
+  change: EventEmitter<any> = new EventEmitter(false);
 
   /** The selected value for the radio group. The value comes from the options. */
   @Input('value')

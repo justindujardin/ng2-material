@@ -32,7 +32,7 @@ import {parseTabIndexAttribute} from "../../core/util/util";
 export class MdCheckbox {
 
   @Output()
-  checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   /** Whether this checkbox is checked. */
   @Input()

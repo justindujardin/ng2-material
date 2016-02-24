@@ -47,9 +47,9 @@ export class MdInput {
   @Input()
   placeholder: string;
   @Output('valueChange')
-  mdChange: EventEmitter<any> = new EventEmitter();
+  mdChange: EventEmitter<any> = new EventEmitter(false);
   @Output()
-  mdFocusChange: EventEmitter<any> = new EventEmitter();
+  mdFocusChange: EventEmitter<any> = new EventEmitter(false);
 
   setHasFocus(hasFocus: boolean) {
     ObservableWrapper.callEmit(this.mdFocusChange, hasFocus);
