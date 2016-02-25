@@ -15,6 +15,9 @@ ng2-material/**/*.js
 ng2-material/**/*.js.map
 ng2-material/**/*.d.ts
 
+public/font/*.css
+public/font/*.css.map
+
 examples/**/*.css
 examples/**/*.css.map
 examples/**/*.js
