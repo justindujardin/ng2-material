@@ -1,3 +1,13 @@
+<a name="0.2.7"></a>
+## [0.2.7](https://github.com/justindujardin/ng2-material/compare/v0.2.6...v0.2.7) (2016-02-26)
+
+
+### Bug Fixes
+
+* issue where sidenav would generate change after check exception ([1456097](https://github.com/justindujardin/ng2-material/commit/1456097))
+
+
+
 <a name="0.2.6"></a>
 ## [0.2.6](https://github.com/justindujardin/ng2-material/compare/v0.2.5...v0.2.6) (2016-02-24)
 
