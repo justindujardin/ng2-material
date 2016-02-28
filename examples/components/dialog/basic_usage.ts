@@ -54,43 +54,10 @@ export default class DialogBasicUsage {
   };
 
   showAdvanced(ev) {
-    //var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && this.customFullscreen;
-    //
-    //this.dialog.show({
-    //    controller: DialogController,
-    //    templateUrl: 'dialog1.tmpl.html',
-    //    parent: angular.element(document.body),
-    //    targetEvent: ev,
-    //    clickOutsideToClose: true,
-    //    fullscreen: useFullScreen
-    //  })
-    //  .then((answer) => {
-    //    $scope.status = 'You said the information was "' + answer + '".';
-    //  }, () =>{
-    //    $scope.status = 'You cancelled the dialog.';
-    //  });
-    //
-    //
-    //$scope.$watch(() =>{
-    //  return $mdMedia('xs') || $mdMedia('sm');
-    //}, (wantsFullScreen) => {
-    //  this.customFullscreen = (wantsFullScreen === true);
-    //});
 
   };
 
   showTabDialog(ev) {
-    //this.dialog.show({
-    //    controller: DialogController,
-    //    templateUrl: 'tabDialog.tmpl.html',
-    //    parent: angular.element(document.body),
-    //    targetEvent: ev,
-    //    clickOutsideToClose: true
-    //  })
-    //  .then((answer) => {
-    //    this.status = 'You said the information was "' + answer + '".';
-    //  }, () =>{
-    //    this.status = 'You cancelled the dialog.';
-    //  });
+
   };
 }
