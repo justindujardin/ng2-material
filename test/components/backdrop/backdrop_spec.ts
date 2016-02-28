@@ -141,7 +141,7 @@ export function main() {
             };
             let promise = api.backdrop.show();
             api.debug.nativeElement.click();
-            expect(triggered).toBe(false);
+              expect(triggered).toBe(false);
             return promise.then(() => {
               expect(triggered).toBe(false);
               api.debug.nativeElement.click();

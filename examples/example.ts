@@ -1,11 +1,10 @@
 import {Component, Input, DynamicComponentLoader, ElementRef, ComponentRef, Query, QueryList} from "angular2/core";
 import {IExampleData} from "./app";
 import {DEMO_DIRECTIVES} from "./all";
-import {MATERIAL_DIRECTIVES} from "ng2-material/all";
+import {MATERIAL_DIRECTIVES, MdTabs} from "ng2-material/all";
 import {Http, Response} from "angular2/http";
 import {Highlight} from "./highlight";
 import {TimerWrapper} from "angular2/src/facade/async";
-import {MdTabs} from "ng2-material/components/tabs/tabs";
 
 
 export interface ISourceFile {

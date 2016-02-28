@@ -1,7 +1,8 @@
 import {Directive, OnDestroy, Input, ApplicationRef} from "angular2/core";
 import {Media, MediaListener} from "../../core/util/media";
-import {CONST, NumberWrapper, isString, isPresent} from "angular2/src/facade/lang";
 import {debounce} from "../../core/util/util";
+import {CONST, NumberWrapper, isString, isPresent} from "angular2/src/facade/lang";
+import {ViewportHelper} from "../../core/util/viewport";
 
 /** Different peekaboo actions to apply when active */
 @CONST()
@@ -26,7 +27,8 @@ export class PeekabooAction {
   providers: [],
   host: {
     '[class.md-peekaboo-active]': 'active',
-    '[attr.breakAction]': 'breakAction'
+    '[attr.breakAction]': 'breakAction',
+    '(window:scroll)': '_windowScroll($event)'
   }
 })
 export class MdPeekaboo implements OnDestroy {
@@ -46,10 +48,6 @@ export class MdPeekaboo implements OnDestroy {
   private _active: boolean = false;
   get active(): boolean {
     return this._active;
-  }
-
-  get scrollTop(): number {
-    return window.pageYOffset || document.documentElement.scrollTop;
   }
 
   private _breakXs: number = -1;
@@ -110,11 +108,10 @@ export class MdPeekaboo implements OnDestroy {
   private _mediaListeners: MediaListener[] = [];
 
 
-  constructor(public media: Media, private _app: ApplicationRef) {
-    window.addEventListener('scroll', this._windowScroll);
+  constructor(public media: Media, public viewport: ViewportHelper, private _app: ApplicationRef) {
     MdPeekaboo.SIZES.forEach((size: string) => {
       this._watchMediaQuery(size);
-      if (Media.hasMedia(size)) {
+      if (this.media.hasMedia(size)) {
         this._breakpoint = size;
       }
     });
@@ -131,7 +128,6 @@ export class MdPeekaboo implements OnDestroy {
       l.destroy();
     });
     this._mediaListeners = [];
-    window.removeEventListener('scroll', this._windowScroll);
   }
 
   private _watchMediaQuery(size: string) {
@@ -151,7 +147,7 @@ export class MdPeekaboo implements OnDestroy {
    * @returns number The scrollTop breakpoint that was evaluated against.
    */
   evaluate(): number {
-    let top = this.scrollTop;
+    let top = this.viewport.scrollTop();
     let bp: number = this.break;
     switch (this._breakpoint) {
       case 'xl':

@@ -10,12 +10,13 @@ import {MATERIAL_DIRECTIVES, Media, SidenavService} from "ng2-material/all";
 })
 export default class SidenavBasicUsage {
 
-  constructor(public sidenav: SidenavService) {
+  constructor(public sidenav: SidenavService,
+              public media: Media) {
 
   }
 
   hasMedia(breakSize: string): boolean {
-    return Media.hasMedia(breakSize);
+    return this.media.hasMedia(breakSize);
   }
 
   open(name: string) {

@@ -45,7 +45,8 @@
 <script src="./node_modules/highlightjs/highlight.pack.js"></script>
 <script src="./config.js"></script>
 <script>
-  System.import('examples/app.js')
+  var type = typeof process === 'undefined' ? 'browser' : 'node';
+  System.import('examples/platform/' + type + '/bootstrap.js')
     .then(function () {
       console.log("loaded app");
     })

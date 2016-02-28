@@ -1,7 +1,8 @@
 import {Directive, AfterContentInit, Input, OnChanges, OnDestroy, ElementRef} from "angular2/core";
-import {debounce, throttle, rAF} from "../../core/util/util";
+import {debounce, throttle} from "../../core/util/util";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {isPresent, isString, NumberWrapper} from "angular2/src/facade/lang";
+import {ViewportHelper} from "../../core/util/viewport";
 
 
 /**
@@ -88,7 +89,7 @@ export class MdToolbar implements AfterContentInit, OnChanges, OnDestroy {
 
   private _mdScrollShrink: boolean = false;
 
-  constructor(public el: ElementRef) {
+  constructor(public el: ElementRef, public viewport: ViewportHelper) {
     this._debouncedContentScroll = throttle(this.onContentScroll, 10, this);
     this._debouncedUpdateHeight = debounce(this.updateToolbarHeight, 5 * 1000, this);
   }
@@ -105,7 +106,7 @@ export class MdToolbar implements AfterContentInit, OnChanges, OnDestroy {
     }
     this._cancelScrollShrink = DOM.onAndCancel(this._content, 'scroll', this._debouncedContentScroll);
     DOM.setAttribute(this._content, 'scroll-shrink', 'true');
-    rAF(this.updateToolbarHeight.bind(this));
+    this.viewport.requestFrame(this.updateToolbarHeight.bind(this));
   }
 
   ngOnChanges(changes: {}): any {
@@ -160,7 +161,7 @@ export class MdToolbar implements AfterContentInit, OnChanges, OnDestroy {
 
     this._previousScrollTop = scrollTop;
 
-    rAF(() => {
+    this.viewport.requestFrame(() => {
       var hasWhiteFrame = DOM.hasClass(this.el.nativeElement, 'md-whiteframe-z1');
 
       if (hasWhiteFrame && !this._currentY) {

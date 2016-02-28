@@ -75,7 +75,7 @@ export class Animate {
    */
   static getTransitionDuration(element: HTMLElement, includeDelay: boolean = false) {
     var prefixes = ['', 'moz', 'webkit', 'ms', 'o', 'khtml'];
-    var style: any = window.getComputedStyle(element);
+    var style: any = DOM.getComputedStyle(element);
     for (let i = 0; i < prefixes.length; i++) {
       let durationProperty = (i === 0 ? '' : `-${prefixes[i]}-`) + `transition-duration`;
       let duration = style[durationProperty];
@@ -104,6 +104,9 @@ export class Animate {
 
   /* From Modernizr */
   static whichTransitionEvent(): string {
+    if(typeof document === 'undefined') {
+      return 'transitionend';
+    }
     var t: string;
     var el: any = document.createElement('fakeelement');
     var transitions: {[prefix: string]: string} = {
