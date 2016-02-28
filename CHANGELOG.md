@@ -1,3 +1,13 @@
+<a name="0.2.8"></a>
+## [0.2.8](https://github.com/justindujardin/ng2-material/compare/v0.2.7...v0.2.8) (2016-02-28)
+
+
+### Bug Fixes
+
+* **examples:** add SidenavService to providers in sidenav example ([1fc09bd](https://github.com/justindujardin/ng2-material/commit/1fc09bd))
+
+
+
 <a name="0.2.7"></a>
 ## [0.2.7](https://github.com/justindujardin/ng2-material/compare/v0.2.6...v0.2.7) (2016-02-26)
 
