@@ -1,0 +1,37 @@
+/**
+ * Media Query Listener implementation
+ */
+export interface ViewportMediaMatch {
+  matches: boolean;
+  media: string;
+  addListener(listener: MediaQueryListListener): void;
+  removeListener(listener: MediaQueryListListener): void;
+}
+
+/**
+ * Interact with the window and document in a cross-platform friendly way.
+ *
+ * Rather than interacting with the window, inject this service and use it.
+ */
+export abstract class ViewportHelper {
+
+  abstract matchMedia(query: string): ViewportMediaMatch;
+
+  abstract scrollTop():number;
+  
+  abstract requestFrame(fn:(elapsed?:number)=>any);
+}
+
+export class BrowserViewportHelper extends ViewportHelper {
+  requestFrame(fn: (elapsed?: number)=>any) {
+    return window.requestAnimationFrame(fn);
+  }
+  matchMedia(query: string): ViewportMediaMatch {
+    return window.matchMedia(query);
+  }
+
+  scrollTop(): number {
+    return window.pageYOffset || document.documentElement.scrollTop;
+  }
+
+}

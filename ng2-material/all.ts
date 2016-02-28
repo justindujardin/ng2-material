@@ -74,6 +74,9 @@ export * from './components/tabs/tabs';
 
 export * from './core/util/media';
 
+import {ViewportHelper, BrowserViewportHelper} from "./core/util/viewport";
+import {provide} from "angular2/core";
+export * from './core/util/viewport';
 export * from './core/util/animate';
 
 /**
@@ -105,12 +108,29 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
 ]);
 
 /**
- * Collection of Material Design component providers.
+ * Material Design component providers for use in a Node.JS environment.
  */
-export const MATERIAL_PROVIDERS: any[] = [
+export const MATERIAL_NODE_PROVIDERS: any[] = CONST_EXPR([
   MdDialog,
   Media,
   SidenavService,
   MdRadioDispatcher,
   INPUT_VALIDATORS
-];
+]);
+
+/**
+ * Material Design component providers for use in the browser.
+ */
+export const MATERIAL_BROWSER_PROVIDERS: any[] = CONST_EXPR([
+  MATERIAL_NODE_PROVIDERS,
+  provide(ViewportHelper, {useClass: BrowserViewportHelper})
+]);
+
+
+/**
+ * Please use {@see MATERIAL_NODE_PROVIDERS} or {@see MATERIAL_BROWSER_PROVIDERS}
+ * as appropriate.
+ *
+ * @deprecated
+ */
+export const MATERIAL_PROVIDERS = MATERIAL_BROWSER_PROVIDERS;

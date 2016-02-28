@@ -2,10 +2,9 @@ import {Component, OnInit} from "angular2/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {ComponentsService, IComponentMeta} from "../services/components";
 import {NavigationService} from "../services/navigation";
-import {MATERIAL_DIRECTIVES} from "ng2-material/all";
+import {MATERIAL_DIRECTIVES, SidenavService} from "ng2-material/all";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {Highlight} from "../highlight";
-import {SidenavService} from "../../ng2-material/components/sidenav/sidenav_service";
 import {TimerWrapper} from "angular2/src/facade/async";
 import {Http, Response} from "angular2/http";
 
