@@ -1,3 +1,13 @@
+<a name="0.2.9"></a>
+## [0.2.9](https://github.com/justindujardin/ng2-material/compare/v0.2.8...v0.2.9) (2016-03-05)
+
+
+### Features
+
+* **angular2:** update to beta 8 ([1d5c8e5](https://github.com/justindujardin/ng2-material/commit/1d5c8e5))
+
+
+
 <a name="0.2.8"></a>
 ## [0.2.8](https://github.com/justindujardin/ng2-material/compare/v0.2.7...v0.2.8) (2016-02-28)
 
