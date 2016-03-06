@@ -1,3 +1,13 @@
+<a name="0.2.10"></a>
+## [0.2.10](https://github.com/justindujardin/ng2-material/compare/v0.2.9...v0.2.10) (2016-03-06)
+
+
+### Bug Fixes
+
+* **ink:** ink correctly radiates from under click on safari ([21e288f](https://github.com/justindujardin/ng2-material/commit/21e288f))
+
+
+
 <a name="0.2.9"></a>
 ## [0.2.9](https://github.com/justindujardin/ng2-material/compare/v0.2.8...v0.2.9) (2016-03-05)
 
