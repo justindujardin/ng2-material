@@ -71,6 +71,9 @@ export class Animate {
         continue;
       }
       duration = ( duration.indexOf('ms') > -1 ) ? parseFloat(duration) : parseFloat(duration) * 1000;
+      if (duration === 0) {
+        continue;
+      }
       if (includeDelay) {
         let delayProperty = (i === 0 ? '' : `-${prefixes[i]}-`) + `transition-delay`;
         var delay = style[delayProperty];
@@ -117,6 +120,9 @@ export class Animate {
         if (saveDuration !== -1) {
           Animate.setTransitionDuration(element, saveDuration);
         }
+        else {
+          DOM.removeStyle(element, 'transition-duration');
+        }
         animResolve();
       };
       let removeListener = DOM.onAndCancel(element, Animate.TRANSITION_EVENT, done);
@@ -140,8 +146,24 @@ export class Animate {
       if (saveDuration !== -1) {
         Animate.setTransitionDuration(element, saveDuration);
       }
+      else {
+        DOM.removeStyle(element, 'transition-duration');
+      }
       resolve();
     });
   }
+
+
+  /**
+   * Wait a period of time, then resolve a promise.
+   * @param milliseconds The period to wait before resolving.
+   * @returns {Promise<void>|Promise} A promise that resolves after a period of time.
+   */
+  static wait(milliseconds: number = 10): Promise<void> {
+    return new Promise<void>((resolve)=> {
+      TimerWrapper.setTimeout(() => resolve(), milliseconds);
+    });
+  }
+
 
 }

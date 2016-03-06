@@ -34,50 +34,45 @@ export class Ink {
    * Apply an ink ripple to an element at the given position.
    *
    * @param element The element to apply a ripple to
-   * @param x The x position inside the element for the ripple to originate from
-   * @param y The y position inside the element for the ripple to originate from
+   * @param left The x position inside the element for the ripple to originate from
+   * @param top The y position inside the element for the ripple to originate from
    * @returns {Promise<any>} A promise that resolves when the ripple has faded
    */
-  static ripple(element: HTMLElement, x: number, y: number): Promise<any> {
+  static ripple(element: HTMLElement, left: number, top: number): Promise<any> {
     let fit: boolean = isPresent(DOM.getAttribute(element, 'md-fab'));
 
-    let container = DOM.createElement('div');
-    DOM.addClass(container, 'md-ripple-container');
+    let container = DOM.querySelector(element, '.md-ripple-container');
+    if (!container) {
+      container = DOM.createElement('div');
+      DOM.addClass(container, 'md-ripple-container');
+      DOM.appendChild(element, container);
+    }
 
     let ripple = DOM.createElement('div');
     DOM.addClass(ripple, 'md-ripple');
-    DOM.appendChild(container, ripple);
 
-    DOM.appendChild(element, container);
-
-    let getHostSize = () => {
-      let elX = element.offsetWidth;
-      let elY = element.offsetHeight;
-      return Ink.getSize(fit, elX, elY);
-    };
     let getInitialStyles = (): any => {
-      let size = getHostSize();
       let color = DOM.getComputedStyle(element).color || 'rgb(0,0,0)';
+      let size = Ink.getSize(fit, element.clientWidth, element.clientHeight);
       return {
         'background-color': color,
-        left: `${x - size / 2}px`,
-        top: `${y - size / 2}px`,
+        left: `${left}px`,
+        top: `${top}px`,
         width: `${size}px`,
-        height: `${size}px`,
-        opacity: 0.2,
-        transform: 'scale(0.01)'
+        height: `${size}px`
       };
     };
 
     return Animate.setStyles(ripple, getInitialStyles())
-      .then(() => Animate.animateStyles(ripple, {
-        left: '50%',
-        top: '50%',
-        opacity: 0.1,
-        transform: 'translate(-50%, -50%) scale(1)'
-      }, 450))
-      .then(() => Animate.animateStyles(ripple, {opacity: 0}, 650))
-      .then(() => DOM.removeChild(element, container));
+      .then(() => DOM.appendChild(container, ripple))
+      .then(() => DOM.addClass(ripple, 'md-ripple-placed'))
+      .then(() => Animate.wait())
+      .then(() => DOM.addClass(ripple, 'md-ripple-scaled'))
+      .then(() => DOM.addClass(ripple, 'md-ripple-active'))
+      .then(() => Animate.wait(450))
+      .then(() => DOM.removeClass(ripple, 'md-ripple-active'))
+      .then(() => Animate.wait(650))
+      .then(() => DOM.removeChild(container, ripple));
   }
 
   /**

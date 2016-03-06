@@ -1,3 +1,5 @@
+@import 'variables';
+
 html, body {
   height: 100%;
   color: rgba(0,0,0,0.87);
@@ -111,10 +113,42 @@ input {
   height: 100%;
 }
 
+/*
+ * A container inside of a rippling element (eg a button),
+ * which contains all of the individual ripples
+ */
+.md-ripple-container {
+  pointer-events: none;
+  position: absolute;
+  overflow: hidden;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.55s $swift-ease-out-timing-function;
+}
+
 .md-ripple {
-  position: relative;
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: 50% 50%;
   opacity: 0;
   border-radius: 50%;
+  &.md-ripple-placed {
+    $sizeDuration: 0.45s * 2;
+    transition: margin $sizeDuration $swift-ease-out-timing-function,
+                border $sizeDuration $swift-ease-out-timing-function,
+                width $sizeDuration $swift-ease-out-timing-function,
+                height $sizeDuration $swift-ease-out-timing-function,
+                opacity $sizeDuration $swift-ease-out-timing-function,
+                transform $sizeDuration $swift-ease-out-timing-function;
+  }
+  &.md-ripple-scaled {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  &.md-ripple-active, &.md-ripple-full, &.md-ripple-visible {
+    opacity: 0.20;
+  }
 }
 
 .md-padding {
