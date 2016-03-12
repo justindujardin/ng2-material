@@ -327,6 +327,23 @@ module.exports = function (grunt) {
   grunt.registerTask('publish', 'Publish new npm package', function (tag) {
     var exec = require('child_process').exec;
     var done = this.async();
+
+    // Swap dependencies for peerDependencies in the published package.
+    // http://stackoverflow.com/a/34645112
+    var fs = require('fs');
+    var path = require('path');
+    try {
+      var file = fs.readFileSync(path.join(__dirname, 'package.json')).toString();
+      var rendered = JSON.parse(file);
+      rendered.peerDependencies = rendered.dependencies;
+      delete rendered.dependencies;
+      fs.writeFileSync('out/package.json', JSON.stringify(rendered, null, 2));
+    }
+    catch (e) {
+      console.error('failed: ' + e);
+    }
+
+    // Switch to "out" path and publish the npm package from there.
     process.chdir('out');
     exec('npm publish' + (tag ? ' --tag ' + tag : ''), function (err) {
       process.chdir('../');
