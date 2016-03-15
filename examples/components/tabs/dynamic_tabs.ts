@@ -9,9 +9,7 @@ export interface ITabData {
 
 @Component({
   selector: 'tabs-dynamic-tabs',
-  properties: ['selectedIndex']
-})
-@View({
+  properties: ['selectedIndex'],
   templateUrl: 'examples/components/tabs/dynamic_tabs.html',
   styleUrls: ['examples/components/tabs/dynamic_tabs.css'],
   encapsulation: ViewEncapsulation.None,

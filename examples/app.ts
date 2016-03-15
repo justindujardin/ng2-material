@@ -38,13 +38,11 @@ export interface IExampleData {
 
 @Component({
   selector: 'demos-app',
+  templateUrl: 'examples/app.html',
+  directives: [MATERIAL_DIRECTIVES, ROUTER_DIRECTIVES, Example, DEMO_DIRECTIVES],
   host: {
     '[class.push-menu]': 'fullPage'
   }
-})
-@View({
-  templateUrl: 'examples/app.html',
-  directives: [MATERIAL_DIRECTIVES, ROUTER_DIRECTIVES, Example, DEMO_DIRECTIVES]
 })
 export class DemosApp implements OnDestroy {
 

@@ -26,8 +26,8 @@ export function main() {
   }
 
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdRadioGroup, MdRadioButton],
     template: `
     <md-radio-group (click)="onClick($event)" [(value)]="selected">

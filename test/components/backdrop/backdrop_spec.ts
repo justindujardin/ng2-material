@@ -22,8 +22,8 @@ export function main() {
     backdrop: MdBackdrop;
   }
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdBackdrop],
     template: `<md-backdrop></md-backdrop>`
   })

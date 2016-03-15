@@ -4,11 +4,9 @@ import {MATERIAL_DIRECTIVES, Media, SidenavService} from 'ng2-material/all';
 
 @Component({
   selector: 'sidenav-basic-usage',
-  providers: [SidenavService]
-})
-@View({
   templateUrl: 'examples/components/sidenav/basic_usage.html',
-  directives: [MATERIAL_DIRECTIVES]
+  directives: [MATERIAL_DIRECTIVES],
+  providers: [SidenavService]
 })
 export default class SidenavBasicUsage {
 

@@ -18,8 +18,8 @@ export function main() {
 
   const defaultTemplate = `<div md-ink></div>`;
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdInk],
     template: defaultTemplate
   })

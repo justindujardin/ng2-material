@@ -13,16 +13,14 @@ const BUTTON_TEMPLATE = `<span class="md-button-wrapper"><ng-content></ng-conten
 
 @Component({
   selector: '[md-button]:not(a), [md-fab]:not(a), [md-raised-button]:not(a)',
+  template: BUTTON_TEMPLATE,
+  encapsulation: ViewEncapsulation.None,
   host: {
     '(mousedown)': 'onMousedown($event)',
     '(focus)': 'onFocus()',
     '(blur)': 'onBlur()',
     '[class.md-button-focus]': 'isKeyboardFocused',
   },
-})
-@View({
-  template: BUTTON_TEMPLATE,
-  encapsulation: ViewEncapsulation.None,
 })
 export class MdButton {
   /** Whether a mousedown has occured on this element in the last 100ms. */
@@ -62,6 +60,8 @@ export class MdButton {
 @Component({
   selector: 'a[md-button], a[md-raised-button], a[md-fab]',
   inputs: ['disabled'],
+  template: BUTTON_TEMPLATE,
+  encapsulation: ViewEncapsulation.None,
   host: {
     '(click)': 'onClick($event)',
     '(mousedown)': 'onMousedown()',
@@ -71,10 +71,6 @@ export class MdButton {
     '[class.md-button-focus]': 'isKeyboardFocused',
     '[attr.aria-disabled]': 'isAriaDisabled',
   },
-})
-@View({
-  template: BUTTON_TEMPLATE,
-  encapsulation: ViewEncapsulation.None
 })
 export class MdAnchor extends MdButton implements OnChanges {
   tabIndex: number;

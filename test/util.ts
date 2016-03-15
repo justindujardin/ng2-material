@@ -18,8 +18,8 @@ export function promiseWait(milliseconds: number = 10): Promise<void> {
  * @param template The template that contains the component usage.
  */
 export function componentSanityCheck(name: string, selector: string, template: string) {
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MATERIAL_DIRECTIVES],
     template: template
   })

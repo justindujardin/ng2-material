@@ -26,8 +26,8 @@ export function main() {
     containerDebug:DebugElement;
   }
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdInput, MdInputContainer],
     template: template
   })

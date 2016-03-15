@@ -22,8 +22,8 @@ export function main() {
     container:MdMessages;
     messages:MdMessage[];
   }
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MdMessage, MdMessages],
     template: `
     <form>

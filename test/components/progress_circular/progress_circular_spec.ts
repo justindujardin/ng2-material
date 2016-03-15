@@ -21,8 +21,8 @@ export function main() {
     progress:MdProgressCircular;
     debug:DebugElement;
   }
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [CORE_DIRECTIVES, MdProgressCircular],
     template: `<md-progress-circular mode="determinate" [value]="value"></md-progress-circular>`
   })

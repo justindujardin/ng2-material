@@ -20,8 +20,8 @@ export function main() {
     progress:MdProgressLinear;
     debug:DebugElement;
   }
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [CORE_DIRECTIVES, MdProgressLinear],
     template: `<md-progress-linear mode="determinate" [value]="value"></md-progress-linear>`
   })

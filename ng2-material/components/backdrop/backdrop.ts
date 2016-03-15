@@ -9,12 +9,13 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
  */
 @Component({
   selector: 'md-backdrop',
+  template: '', 
+  encapsulation: ViewEncapsulation.None,
   host: {
     'class': 'md-backdrop',
     '(click)': 'onClick()',
   },
 })
-@View({template: '', encapsulation: ViewEncapsulation.None})
 export class MdBackdrop {
 
   /**

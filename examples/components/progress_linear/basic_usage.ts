@@ -1,8 +1,8 @@
 import {View, Component} from 'angular2/core';
 import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
 
-@Component({selector: 'progress-linear-basic-usage'})
-@View({
+@Component({
+  selector: 'progress-linear-basic-usage',
   templateUrl: 'examples/components/progress_linear/basic_usage.html',
   styleUrls: ['examples/components/progress_linear/basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]

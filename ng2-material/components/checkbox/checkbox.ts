@@ -11,6 +11,13 @@ import {parseTabIndexAttribute} from "../../core/util/util";
 @Component({
   selector: 'md-checkbox',
   inputs: ['checked', 'disabled'],
+  template: `
+    <div class="md-checkbox-container">
+      <div class="md-checkbox-icon"></div>
+    </div>
+    <div class="md-checkbox-label"><ng-content></ng-content></div>`,
+  directives: [],
+  encapsulation: ViewEncapsulation.None,
   host: {
     'role': 'checkbox',
     '[attr.aria-checked]': 'checked',
@@ -19,15 +26,6 @@ import {parseTabIndexAttribute} from "../../core/util/util";
     '(keydown)': 'onKeydown($event)',
     '(click)': 'toggle($event)'
   }
-})
-@View({
-  template: `
-    <div class="md-checkbox-container">
-      <div class="md-checkbox-icon"></div>
-    </div>
-    <div class="md-checkbox-label"><ng-content></ng-content></div>`,
-  directives: [],
-  encapsulation: ViewEncapsulation.None
 })
 export class MdCheckbox {
 

@@ -35,9 +35,7 @@ var _uniqueIdCounter: number = 0;
     '[attr.aria-activedescendant]': 'activedescendant',
     '(keydown)': 'onKeydown($event)',
     '[tabindex]': 'tabindex',
-  }
-})
-@View({
+  },
   template: `<ng-content></ng-content>`,
   encapsulation: ViewEncapsulation.None
 })
@@ -216,9 +214,7 @@ export class MdRadioGroup implements OnChanges {
     '[attr.aria-disabled]': 'disabled',
     '(keydown)': 'onKeydown($event)',
     '(click)': 'select($event)'
-  }
-})
-@View({
+  },
   template: `
     <label role="radio" class="md-radio-root" [class.md-radio-checked]="checked">
       <div class="md-radio-container">

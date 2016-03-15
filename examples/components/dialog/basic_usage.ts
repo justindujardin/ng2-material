@@ -6,8 +6,8 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/components/dialog/dialog";
 import {Media} from "../../../ng2-material/core/util/media";
 
-@Component({selector: 'dialog-basic-usage'})
-@View({
+@Component({
+  selector: 'dialog-basic-usage',
   templateUrl: 'examples/components/dialog/basic_usage.html',
   styleUrls: ['examples/components/dialog/basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]

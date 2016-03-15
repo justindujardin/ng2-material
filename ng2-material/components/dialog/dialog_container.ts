@@ -14,18 +14,16 @@ import {SkipSelf} from "angular2/core";
  */
 @Component({
   selector: 'md-dialog-container',
+  encapsulation: ViewEncapsulation.None,
+  template: `
+    <md-dialog-content></md-dialog-content>
+    <div tabindex="0" (focus)="wrapFocus()"></div>`,
+  directives: [forwardRef(() => MdDialogContent)],
   host: {
     'class': 'md-dialog',
     'tabindex': '0',
     '(body:keydown)': 'documentKeypress($event)',
   },
-})
-@View({
-  encapsulation: ViewEncapsulation.None,
-  template: `
-    <md-dialog-content></md-dialog-content>
-    <div tabindex="0" (focus)="wrapFocus()"></div>`,
-  directives: [forwardRef(() => MdDialogContent)]
 })
 export class MdDialogContainer {
   // Ref to the dialog content. Used by the DynamicComponentLoader to load the dialog content.

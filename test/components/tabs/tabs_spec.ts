@@ -21,8 +21,8 @@ export function main() {
     tabs:MdTabs;
     tabButtons:HTMLElement[];
   }
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [CORE_DIRECTIVES, MdTabs, MdTab],
     template: `
     <md-tabs>

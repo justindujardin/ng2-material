@@ -16,7 +16,10 @@ import {ViewEncapsulation} from "angular2/core";
  * </hljs>
  *
  */
-@Component({selector: 'md-divider'})
-@View({template: '', encapsulation: ViewEncapsulation.None})
+@Component({
+  selector: 'md-divider',
+  template: '', 
+  encapsulation: ViewEncapsulation.None
+})
 export class MdDivider {
 }

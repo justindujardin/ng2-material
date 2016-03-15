@@ -23,9 +23,7 @@ export interface ISourceFile {
 
 @Component({
   selector: 'example',
-  properties: ['templateData', 'stylesData', 'sourceData', 'showSource', 'orderedFiles']
-})
-@View({
+  properties: ['templateData', 'stylesData', 'sourceData', 'showSource', 'orderedFiles'],
   templateUrl: 'examples/example.html',
   directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES, Highlight]
 })
@@ -87,8 +85,11 @@ export default class Example {
 
     // Render the example component into the view.
     let template = `<${model.component}></${model.component}>`;
-    @Component({selector: 'md-example-view'})
-    @View({template: template, directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES]})
+    @Component({
+      selector: 'md-example-view',
+      template: template, 
+      directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES]
+    })
     class CompiledComponent {
     }
     this.dcl.loadIntoLocation(CompiledComponent, this._element, 'example')

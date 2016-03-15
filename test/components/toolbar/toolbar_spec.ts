@@ -14,8 +14,8 @@ import {By} from "angular2/platform/browser";
 
 export function main() {
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdToolbar],
     template: `<md-toolbar></md-toolbar>`
   })
