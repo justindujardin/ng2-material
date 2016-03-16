@@ -20,8 +20,8 @@ export function main() {
     debug:DebugElement;
   }
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdPeekaboo],
     template: `<div md-peekaboo></div>`
   })

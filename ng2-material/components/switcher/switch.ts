@@ -13,9 +13,7 @@ import {MdCheckbox} from '../checkbox/checkbox';
     '[attr.aria-disabled]': 'disabled_',
     '(keydown)': 'onKeydown($event)',
     '(click)': 'toggle($event)'
-  }
-})
-@View({
+  },
   template: `
     <div class="md-switch-container">
       <div class="md-switch-bar"></div>

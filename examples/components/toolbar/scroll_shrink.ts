@@ -8,8 +8,8 @@ interface ITodo {
   notes:string;
 }
 
-@Component({selector: 'toolbar-scroll-shrink'})
-@View({
+@Component({
+  selector: 'toolbar-scroll-shrink',
   templateUrl: 'examples/components/toolbar/scroll_shrink.html',
   styleUrls: ['examples/components/toolbar/scroll_shrink.css'],
   directives: [MATERIAL_DIRECTIVES]

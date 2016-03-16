@@ -8,9 +8,7 @@ declare var hljs: any;
 
 @Component({
   selector: 'highlight',
-  properties: ['type', 'text']
-})
-@View({
+  properties: ['type', 'text'],
   template: `<pre><code class="highlight" [innerHtml]="rendered || text"><ng-content></ng-content></code></pre>`,
   styleUrls: ['examples/highlight.css'],
   encapsulation: ViewEncapsulation.None

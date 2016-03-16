@@ -5,8 +5,8 @@ import {Component} from "angular2/core";
 import {MdDialogRef} from "./dialog_ref";
 import {Input} from "angular2/core";
 
-@Component({selector: 'md-dialog-basic'})
-@View({
+@Component({
+  selector: 'md-dialog-basic',
   template: `
   <h2 class="md-title">{{ title }}</h2>
   <p>{{ textContent }}</p>

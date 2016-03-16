@@ -21,8 +21,8 @@ export function main() {
     elementRef: ElementRef;
   }
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdDialogBasic],
     template: `<div></div>`
   })

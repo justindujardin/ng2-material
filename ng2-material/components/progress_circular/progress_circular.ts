@@ -26,9 +26,7 @@ class Defaults {
     '[attr.aria-valuenow]': 'value',
     '[style.width]': 'outerSize',
     '[style.height]': 'outerSize'
-  }
-})
-@View({
+  },
   template: `
     <div class="md-scale-wrapper"
      [style.-webkit-transform]="diameterTransformation"
@@ -58,8 +56,6 @@ class Defaults {
   directives: [],
   encapsulation: ViewEncapsulation.None
 })
-
-
 export class MdProgressCircular extends MdProgressLinear {
 
   /** Value for the circle diameter. */

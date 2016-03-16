@@ -72,9 +72,7 @@ export class MdList {
   host: {
     'role': 'listitem'
   },
-  properties: ['wrap']
-})
-@View({
+  properties: ['wrap'],
   template: `
     <div class="md-no-style md-list-item-inner">
       <ng-content></ng-content>

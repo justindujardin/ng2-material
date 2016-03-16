@@ -3,8 +3,8 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
 
 let imagePath = 'public/images/avatars/avatar11.svg';
 
-@Component({selector: 'list-basic-usage'})
-@View({
+@Component({
+  selector: 'list-basic-usage',
   templateUrl: 'examples/components/list/basic_usage.html',
   styleUrls: ['examples/components/list/basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]

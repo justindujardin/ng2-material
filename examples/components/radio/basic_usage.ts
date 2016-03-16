@@ -3,8 +3,8 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
 
 // TODO (jdd):
 
-@Component({selector: 'radio-basic-usage'})
-@View({
+@Component({
+  selector: 'radio-basic-usage',
   templateUrl: 'examples/components/radio/basic_usage.html',
   styleUrls: ['examples/components/radio/basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]

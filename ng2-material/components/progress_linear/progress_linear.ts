@@ -22,9 +22,7 @@ export class ProgressMode {
     'aria-valuemax': '100',
     '[attr.aria-valuenow]': 'value',
     '[attr.mode]': 'mode'
-  }
-})
-@View({
+  },
   template: `
     <div class="md-progress-linear-container md-ready">
       <div class="md-progress-linear-dashed"></div>

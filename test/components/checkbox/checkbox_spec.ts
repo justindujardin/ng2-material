@@ -24,8 +24,8 @@ export function main() {
     comp:MdCheckbox;
     debug:DebugElement;
   }
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [CORE_DIRECTIVES, MdCheckbox],
     template: `<md-checkbox [(checked)]="isChecked" [disabled]="isDisabled"></md-checkbox>`
   })
