@@ -31,6 +31,11 @@ export class MdDialogConfig {
     return this;
   }
 
+  HTMLContent(html: string): MdDialogConfig {
+    this.context.HTMLContent = html;
+    return this;
+  }
+
   ariaLabel(text: string): MdDialogConfig {
     this.context.ariaLabel = text;
     return this;

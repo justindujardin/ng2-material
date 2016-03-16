@@ -10,6 +10,7 @@ import {Input} from "angular2/core";
   template: `
   <h2 class="md-title">{{ title }}</h2>
   <p>{{ textContent }}</p>
+  <md-dialog-content [innerHTML]="HTMLContent"></md-dialog-content>
   <md-dialog-actions>
     <button md-button *ngIf="cancel != ''" type="button" (click)="dialog.close(false)">
       <span>{{ cancel }}</span>
@@ -23,6 +24,7 @@ import {Input} from "angular2/core";
 export class MdDialogBasic {
   @Input() title: string = '';
   @Input() textContent: string = '';
+  @Input() HTMLContent: string = '';
   @Input() cancel: string = '';
   @Input() ok: string = '';
   @Input() type: string = 'alert';
