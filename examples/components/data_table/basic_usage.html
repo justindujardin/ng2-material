@@ -1,0 +1,22 @@
+<md-content class="md-padding" layout="row" layout-wrap layout-align="center start">
+  <div flex="50" layout="column" flex-xs="100">
+
+    <md-data-table>
+      <thead>
+      <tr>
+        <th class="md-data-table-cell-non-numeric">Material</th>
+        <th>Quantity</th>
+        <th>Unit price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="#material of materials" >
+        <td class="md-data-table-cell-non-numeric">{{ material.name }}</td>
+        <td>{{ material.quantity }}</td>
+        <td>{{ material.price }}</td>
+      </tr>
+      </tbody>
+    </md-data-table>
+
+  </div>
+</md-content>
