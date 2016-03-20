@@ -1,15 +1,16 @@
 import {
-  Component, Directive, Input, QueryList, Attribute, AfterViewInit,
-  ViewContainerRef, TemplateRef, ContentChildren, forwardRef
-} from 'angular2/core';
-import {isPresent} from "angular2/src/facade/lang";
+  Component,
+  Directive,
+  Input,
+  QueryList,
+  ViewContainerRef,
+  TemplateRef,
+  ViewEncapsulation,
+  Query,
+  ElementRef
+} from "angular2/core";
 import {Ink} from "../../core/util/ink";
-import {ViewEncapsulation} from "angular2/core";
 import {NgFor} from "angular2/common";
-import {Host} from "angular2/core";
-import {SkipSelf} from "angular2/core";
-import {Query} from "angular2/core";
-import {ElementRef} from "angular2/core";
 
 
 // TODO: behaviors to test
@@ -27,8 +28,10 @@ import {ElementRef} from "angular2/core";
   selector: '[md-tab]'
 })
 export class MdTab {
-  @Input() label: string;
-  @Input() disabled: boolean = false;
+  @Input()
+  label: string;
+  @Input()
+  disabled: boolean = false;
   private _active: boolean = false;
 
   constructor(public viewContainer: ViewContainerRef,
@@ -59,16 +62,17 @@ export class MdTab {
       <md-tab-data></md-tab-data>
       <md-tabs-canvas role="tablist">
         <md-pagination-wrapper>
+          <template ngFor [ngForOf]="panes" #pane="$implicit" #index="i">
           <md-tab-item tabindex="-1"
                        class="md-tab"
                        (click)="onTabClick(pane,$event)"
                        [class.md-active]="selectedTab == pane"
                        [disabled]="pane.disabled"
                        [style.max-width]="maxTabWidth + 'px'"
-                       *ngFor="#pane of panes"
                        role="tab">
             {{pane.label}}
           </md-tab-item>
+          </template>
           <md-ink-bar></md-ink-bar>
         </md-pagination-wrapper>
       </md-tabs-canvas>
@@ -85,9 +89,11 @@ export class MdTab {
 })
 export class MdTabs {
 
-  @Input() mdNoScroll: boolean = false;
+  @Input()
+  mdNoScroll: boolean = false;
 
-  constructor(@Query(MdTab) public panes: QueryList<MdTab>,
+  constructor(@Query(MdTab)
+              public panes: QueryList<MdTab>,
               private _element: ElementRef) {
     this.panes.changes.subscribe((_) => {
       this.panes.toArray().forEach((p: MdTab, index: number) => {

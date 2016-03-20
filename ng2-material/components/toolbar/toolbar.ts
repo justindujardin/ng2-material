@@ -1,10 +1,7 @@
-import {View,Component,Directive,AfterContentInit,Input,OnChanges,Attribute,OnDestroy} from "angular2/core";
-import {debounce,throttle, rAF} from '../../core/util/util';
-import {ElementRef} from "angular2/core";
+import {Directive, AfterContentInit, Input, OnChanges, OnDestroy, ElementRef} from "angular2/core";
+import {debounce, throttle, rAF} from "../../core/util/util";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {isPresent} from "angular2/src/facade/lang";
-import {isString} from "angular2/src/facade/lang";
-import {NumberWrapper} from "angular2/src/facade/lang";
+import {isPresent, isString, NumberWrapper} from "angular2/src/facade/lang";
 
 
 /**
@@ -66,13 +63,16 @@ export class MdToolbar implements AfterContentInit, OnChanges, OnDestroy {
   @Input() set mdShrinkSpeed(value: number) {
     this._mdShrinkSpeed = isString(value) ? NumberWrapper.parseFloat(<any>value) : value;
   }
-  get mdShrinkSpeed():number {
+
+  get mdShrinkSpeed(): number {
     return this._mdShrinkSpeed;
   }
+
   @Input() set mdScrollShrink(value: boolean) {
     this._mdScrollShrink = !!isPresent(value);
   }
-  get mdScrollShrink():boolean {
+
+  get mdScrollShrink(): boolean {
     return this._mdScrollShrink;
   }
 
@@ -125,7 +125,7 @@ export class MdToolbar implements AfterContentInit, OnChanges, OnDestroy {
 
   updateToolbarHeight() {
     this._toolbarHeight = DOM.getProperty(this.el.nativeElement, 'offsetHeight');
-    if(this._content){
+    if (this._content) {
       // Add a negative margin-top the size of the toolbar to the content el.
       // The content will start transformed down the toolbarHeight amount,
       // so everything looks normal.

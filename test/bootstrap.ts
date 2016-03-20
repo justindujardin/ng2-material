@@ -1,5 +1,5 @@
 declare var System: any;
-declare var zone: any;
+declare var Zone: any;
 
 import {TEST_BROWSER_PLATFORM_PROVIDERS, TEST_BROWSER_APPLICATION_PROVIDERS} from "angular2/platform/testing/browser";
 import {setBaseTestProviders} from "angular2/testing";
@@ -27,7 +27,8 @@ export function load(files: string[]): Promise<any[]> {
   let error = (e: any) => {
     console.error(e);
   };
-  var myZone = zone.fork({
+  var myZone = new Zone();
+  myZone.fork({
     onError: (e) => {
       console.error("Zone Error:");
       console.error(e);

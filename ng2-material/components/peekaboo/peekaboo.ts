@@ -1,20 +1,14 @@
-import {Directive} from "angular2/core";
-import {Media, MediaListener, MEDIA_PRIORITY} from '../../core/util/media';
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {OnDestroy} from "angular2/core";
-import {debounce} from "../../core/util/util";
-import {Input} from "angular2/core";
-import {CONST} from "angular2/src/facade/lang";
-import {isPresent} from "angular2/src/facade/lang";
-import {Attribute} from "angular2/core";
-import {NumberWrapper} from "angular2/src/facade/lang";
-import {isString} from "angular2/src/facade/lang";
+import {Directive, OnDestroy, Input} from "angular2/core";
+import {Media, MediaListener} from "../../core/util/media";
+import {CONST, NumberWrapper, isString} from "angular2/src/facade/lang";
 
 /** Different peekaboo actions to apply when active */
 @CONST()
 export class PeekabooAction {
-  @CONST() static SHOW = 'show';
-  @CONST() static HIDE = 'hide';
+  @CONST()
+  static SHOW = 'show';
+  @CONST()
+  static HIDE = 'hide';
 }
 
 /**
@@ -37,9 +31,11 @@ export class MdPeekaboo implements OnDestroy {
 
   static SIZES: string[] = ['xs', 'sm', 'md', 'lg', 'xl'];
 
-  @Input() break: number = 100;
+  @Input()
+  break: number = 100;
 
-  @Input() breakAction: string;
+  @Input()
+  breakAction: string;
 
   static MakeNumber(value: any): number {
     return isString(value) ? NumberWrapper.parseInt(value, 10) : value;
@@ -133,7 +129,7 @@ export class MdPeekaboo implements OnDestroy {
 
   private _watchMediaQuery(size: string) {
     let l = this.media.listen(Media.getQuery(size));
-    l.onMatched.subscribe((mql:MediaQueryList) => {
+    l.onMatched.subscribe((mql: MediaQueryList) => {
       this.breakpoint = size;
     });
     this._mediaListeners.push(l);
@@ -179,7 +175,7 @@ export class MdPeekaboo implements OnDestroy {
     if (top >= bp && !this._active) {
       this._active = true;
     }
-    else if(top < bp && this._active){
+    else if (top < bp && this._active) {
       this._active = false;
     }
     return bp;

@@ -16,25 +16,20 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      {pattern: 'node_modules/es6-shim/es6-shim.js', included: true, watched: true},
-      {pattern: 'node_modules/angular2/bundles/angular2-polyfills.js', included: true, watched: true},
+      {pattern: 'node_modules/es6-shim/es6-shim.min.js', included: true, watched: true},
       {pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: true, watched: true},
+      'karma.ie.shims.js',
+
+      // Angular 2 polyfills *must* be loaded after es6-shim and system-polyfills in order to
+      // setup the monkey-patches for zones.
+      {pattern: 'node_modules/angular2/bundles/angular2-polyfills.js', included: true, watched: true},
       {pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: true},
       {pattern: 'node_modules/rxjs/bundles/Rx.js', included: true, watched: true},
-      //{pattern: 'node_modules/angular2/bundles/angular2.dev.js', included: true, watched: true},
-      //{pattern: 'node_modules/angular2/bundles/testing.dev.js', included: true, watched: true},
-      'karma.ie.shims.js',
-      //'node_modules/zone.js/dist/zone-microtask.js',
-      //'node_modules/zone.js/dist/long-stack-trace-zone.js',
-      //'node_modules/zone.js/dist/jasmine-patch.js',
-      //'node_modules/es6-module-loader/dist/es6-module-loader.js',
-      'node_modules/systemjs/dist/system.src.js',
       'node_modules/reflect-metadata/Reflect.js',
-      "config.karma.js",
-      {pattern: 'ng2-material/**/*.*', watched: true, included: false},
-      //{pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: false, watched: false},
       {pattern: 'node_modules/angular2/**/*.js', included: false, watched: false},
       {pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false},
+      "config.karma.js",
+      {pattern: 'ng2-material/**/*.*', watched: true, included: false},
       {pattern: 'test/**/*.js', included: false, watched: true},
 
       "karma.main.js"

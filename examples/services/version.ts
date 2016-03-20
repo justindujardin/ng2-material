@@ -1,10 +1,9 @@
 import {Injectable} from "angular2/core";
-import {Http} from "angular2/http";
-import {Response} from "angular2/http";
+import {Http, Response} from "angular2/http";
 
 export interface IVersionMeta {
-  version:string;
-  readme:string;
+  version: string;
+  readme: string;
 }
 
 @Injectable()

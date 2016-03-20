@@ -1,5 +1,5 @@
 ///<reference path="../typings/main.d.ts"/>
-import {Component, View} from "angular2/core";
+import {Component} from "angular2/core";
 import {ComponentFixture, TestComponentBuilder, beforeEach, describe, inject, it, injectAsync} from "angular2/testing";
 import {MATERIAL_DIRECTIVES} from "../ng2-material/all";
 import {TimerWrapper} from "angular2/src/facade/async";

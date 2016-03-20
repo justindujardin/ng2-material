@@ -1,9 +1,6 @@
-import {Component, View, Attribute, ViewEncapsulation} from 'angular2/core';
-import {isPresent} from 'angular2/src/facade/lang';
-import {KeyCodes} from '../../core/key_codes';
-import {KeyboardEvent} from 'angular2/src/facade/browser';
-import {NumberWrapper} from 'angular2/src/facade/lang';
-import {Input, Output, EventEmitter} from 'angular2/core';
+import {Component, ViewEncapsulation, Input, Output, EventEmitter} from "angular2/core";
+import {isPresent} from "angular2/src/facade/lang";
+import {KeyCodes} from "../../core/key_codes";
 import {parseTabIndexAttribute} from "../../core/util/util";
 
 // TODO(jd): ng-true-value, ng-false-value
@@ -41,7 +38,8 @@ export class MdCheckbox {
   disabled_: boolean = false;
 
   /** Setter for tabindex */
-  @Input('tabindex') private _tabindex: number;
+  @Input('tabindex')
+  private _tabindex: number;
   set tabindex(value: number) {
     this._tabindex = parseTabIndexAttribute(value);
   }

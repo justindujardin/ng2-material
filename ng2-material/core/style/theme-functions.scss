@@ -14,7 +14,6 @@
   @return map-get(map-get($contrast-color-map, $color-map), $hue);
 }
 
-
 // Creates a map of hues to colors for a theme.
 // $color-map
 // $primary
@@ -25,7 +24,6 @@
     default: map-get($color-map, $primary),
     lighter: map-get($color-map, $lighter),
     darker: map-get($color-map, $darker),
-
     default-contrast: md-contrast($color-map, $primary, $contrast-color-map),
     lighter-contrast: md-contrast($color-map, $lighter, $contrast-color-map),
     darker-contrast: md-contrast($color-map, $darker, $contrast-color-map)

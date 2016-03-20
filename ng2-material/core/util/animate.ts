@@ -17,15 +17,21 @@ export class Animate {
       DOM.addClass(el, cssClass + '-add');
       TimerWrapper.setTimeout(() => {
         var duration = Animate.getTransitionDuration(el, true);
-        var callTimeout = setTimeout(() => done(), duration);
-        var done = () => {
+        var callTimeout = TimerWrapper.setTimeout(() => done(true), duration);
+        var done = (timeout) => {
+          if (!removeListener) {
+            return;
+          }
           DOM.removeClass(el, cssClass + '-add-active');
           DOM.removeClass(el, cssClass + '-add');
-          clearTimeout(callTimeout);
+          if (!timeout) {
+            TimerWrapper.clearTimeout(callTimeout);
+          }
           removeListener();
+          removeListener = null;
           resolve();
         };
-        let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
+        let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, () => done(false));
         DOM.addClass(el, cssClass + '-add-active');
         DOM.addClass(el, cssClass);
       }, 1);
@@ -37,13 +43,19 @@ export class Animate {
       DOM.addClass(el, cssClass + '-remove');
       TimerWrapper.setTimeout(() => {
         var duration = Animate.getTransitionDuration(el, true);
-        var callTimeout = setTimeout(() => done(), duration);
+        var callTimeout = TimerWrapper.setTimeout(() => done(true), duration);
 
-        var done = () => {
+        var done = (timeout) => {
+          if (!removeListener) {
+            return;
+          }
           DOM.removeClass(el, cssClass + '-remove-active');
           DOM.removeClass(el, cssClass + '-remove');
-          clearTimeout(callTimeout);
+          if (!timeout) {
+            TimerWrapper.clearTimeout(callTimeout);
+          }
           removeListener();
+          removeListener = null;
           resolve();
         };
         let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
@@ -94,7 +106,7 @@ export class Animate {
   static whichTransitionEvent(): string {
     var t: string;
     var el: any = document.createElement('fakeelement');
-    var transitions: {[prefix:string]:string} = {
+    var transitions: {[prefix: string]: string} = {
       'transition': 'transitionend',
       'OTransition': 'oTransitionEnd',
       'MozTransition': 'transitionend',
@@ -108,15 +120,21 @@ export class Animate {
     }
   }
 
-  static animateStyles(element: HTMLElement, styles: {[style:string]:string|number}, durationMs: number): Promise<void> {
+  static animateStyles(element: HTMLElement, styles: {[style: string]: string|number}, durationMs: number): Promise<void> {
     let saveDuration = Animate.getTransitionDuration(element);
     Animate.setTransitionDuration(element, durationMs);
     return new Promise<void>((animResolve, animReject) => {
-      let callTimeout = setTimeout(() => done(), durationMs);
+      let callTimeout = TimerWrapper.setTimeout(() => done(true), durationMs);
 
-      let done = () => {
-        clearTimeout(callTimeout);
+      let done = (timeout) => {
+        if (!removeListener) {
+          return;
+        }
+        if (timeout) {
+          TimerWrapper.clearTimeout(callTimeout);
+        }
         removeListener();
+        removeListener = null;
         if (saveDuration !== -1) {
           Animate.setTransitionDuration(element, saveDuration);
         }
@@ -125,7 +143,7 @@ export class Animate {
         }
         animResolve();
       };
-      let removeListener = DOM.onAndCancel(element, Animate.TRANSITION_EVENT, done);
+      let removeListener = DOM.onAndCancel(element, Animate.TRANSITION_EVENT, () => done(false));
       Object.keys(styles).forEach((key: string) => {
         DOM.setStyle(element, key, `${styles[key]}`);
       });
@@ -136,7 +154,7 @@ export class Animate {
   /**
    * Set CSS styles immediately by turning off transition duration and restoring it afterward
    */
-  static setStyles(element: HTMLElement, styles: {[style:string]:string|number}): Promise<void> {
+  static setStyles(element: HTMLElement, styles: {[style: string]: string|number}): Promise<void> {
     let saveDuration = Animate.getTransitionDuration(element);
     Animate.setTransitionDuration(element, 0);
     return new Promise<void>((resolve, reject) => {

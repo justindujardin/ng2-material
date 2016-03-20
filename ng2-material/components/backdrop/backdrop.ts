@@ -1,5 +1,5 @@
 import {Animate} from "../../core/util/animate";
-import {ElementRef, Renderer, ViewEncapsulation, View, Component, Input, Output, EventEmitter} from "angular2/core";
+import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter} from "angular2/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
 /**
@@ -9,7 +9,7 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
  */
 @Component({
   selector: 'md-backdrop',
-  template: '', 
+  template: '',
   encapsulation: ViewEncapsulation.None,
   host: {
     'class': 'md-backdrop',

@@ -9,7 +9,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {MdCheckbox} from "ng2-material/components/checkbox/checkbox";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
@@ -20,9 +20,9 @@ import {By} from "angular2/platform/browser";
 export function main() {
 
   interface ICheckboxFixture {
-    fixture:ComponentFixture;
-    comp:MdCheckbox;
-    debug:DebugElement;
+    fixture: ComponentFixture;
+    comp: MdCheckbox;
+    debug: DebugElement;
   }
   @Component({
     selector: 'test-app',

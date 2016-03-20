@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {By} from "angular2/platform/browser";
 import {MdSidenav} from "../../../ng2-material/components/sidenav/sidenav";
 import {SidenavService} from "../../../ng2-material/components/sidenav/sidenav_service";
@@ -16,9 +16,9 @@ import {SidenavService} from "../../../ng2-material/components/sidenav/sidenav_s
 export function main() {
 
   interface ITestFixture {
-    fixture:ComponentFixture;
-    component:MdSidenav;
-    debug:DebugElement;
+    fixture: ComponentFixture;
+    component: MdSidenav;
+    debug: DebugElement;
   }
 
   @Component({

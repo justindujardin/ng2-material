@@ -1,5 +1,5 @@
-import {Component, View, ViewEncapsulation, Attribute} from 'angular2/core';
-import {MdCheckbox} from '../checkbox/checkbox';
+import {Component, ViewEncapsulation} from "angular2/core";
+import {MdCheckbox} from "../checkbox/checkbox";
 
 // TODO(jelbourn): add gesture support
 // TODO(jelbourn): clean up CSS.

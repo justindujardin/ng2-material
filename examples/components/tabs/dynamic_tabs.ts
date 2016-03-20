@@ -1,10 +1,10 @@
-import {View, Component, Input, ViewEncapsulation} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {Component, Input, ViewEncapsulation} from "angular2/core";
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 
 export interface ITabData {
-  title:string;
-  content:string;
-  disabled?:boolean;
+  title: string;
+  content: string;
+  disabled?: boolean;
 }
 
 @Component({

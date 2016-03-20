@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {MdRadioGroup, MdRadioButton} from "../../../ng2-material/components/radio/radio_button";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {KeyCodes} from "../../../ng2-material/core/key_codes";

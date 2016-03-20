@@ -1,6 +1,5 @@
 import {
   Directive,
-  View,
   Component,
   AfterContentInit,
   ElementRef,

@@ -1,10 +1,7 @@
-import {Component, View, ViewEncapsulation, OnChanges} from 'angular2/core';
-
-import {TimerWrapper} from 'angular2/src/facade/async';
-import {isPresent} from 'angular2/src/facade/lang';
-import {ElementRef} from "angular2/core";
+import {Component, ViewEncapsulation, OnChanges, ElementRef} from "angular2/core";
+import {TimerWrapper} from "angular2/src/facade/async";
+import {isPresent} from "angular2/src/facade/lang";
 import {Ink} from "../../core/util/ink";
-import {Attribute} from "angular2/core";
 
 
 const BUTTON_TEMPLATE = `<span class="md-button-wrapper"><ng-content></ng-content></span>`;
