@@ -1,6 +1,5 @@
 import {
   Component,
-  View,
   ViewEncapsulation,
   Host,
   SkipSelf,

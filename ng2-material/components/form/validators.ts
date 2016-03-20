@@ -1,10 +1,11 @@
 import {CONST_EXPR} from "angular2/src/facade/lang";
-import {NG_VALIDATORS} from "angular2/common";
+import {NG_VALIDATORS, AbstractControl} from "angular2/common";
 import {Attribute, Input, Provider, Directive,forwardRef} from "angular2/core";
 import {Validator} from "angular2/common";
 import {Control} from "angular2/common";
 import {isNumber} from '../../core/util/util';
 import {isPresent, NumberWrapper} from 'angular2/src/facade/lang';
+import {ValidatorFn} from "angular2/src/common/forms/directives/validators";
 
 const PATTERN_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, {
   useExisting: forwardRef(() => MdPatternValidator),
@@ -19,7 +20,7 @@ export class MdPatternValidator implements Validator {
   /**
    * Returns a validator that checks to see if a string matches a given Regular Expression
    */
-  static inline(pattern: string): Function {
+  static inline(pattern: string): ValidatorFn {
     return function validate(control: Control): {[key: string]: any} {
       if (control.value === '' || new RegExp(pattern).test(control.value)) {
         return null;
@@ -73,7 +74,7 @@ export class MdMaxValueValidator implements Validator {
   /**
    * Returns a validator that checks for a maximum number value
    */
-  static inline(length: number|string): Function {
+  static inline(length: number|string): ValidatorFn {
     return function validate(control: Control): {[key: string]: any} {
       if (NumberWrapper.isNaN(control.value) || control.value <= length) {
         return null;
@@ -100,7 +101,7 @@ export class MdMinValueValidator implements Validator {
   /**
    * Returns a validator that checks for a minimum number value
    */
-  static inline(length: number|string): Function {
+  static inline(length: number|string): ValidatorFn {
     return function validate(control: Control): {[key: string]: any} {
       if (NumberWrapper.isNaN(control.value) || control.value >= length) {
         return null;
@@ -127,7 +128,7 @@ export class MdNumberRequiredValidator implements Validator {
   /**
    * Returns a validator that checks for the existence of a truthy value
    */
-  static inline(): Function {
+  static inline(): ValidatorFn {
     return function validate(control: Control): {[key: string]: any} {
       let isNum = !NumberWrapper.isNaN(control.value) && isNumber(control.value);
       return isNum ? null : {mdNumberRequired: true};

@@ -8,7 +8,7 @@ import {
   ComponentFixture,
   injectAsync
 } from "angular2/testing";
-import {Component, View} from "angular2/core";
+import {Component} from "angular2/core";
 import {MdTab, MdTabs} from "../../../ng2-material/components/tabs/tabs";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {Ink} from "../../../ng2-material/core/util/ink";

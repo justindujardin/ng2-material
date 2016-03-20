@@ -1,4 +1,4 @@
-import {Component,View, ElementRef} from "angular2/core";
+import {Component, ElementRef} from "angular2/core";
 import {ViewEncapsulation} from "angular2/core";
 
 /**

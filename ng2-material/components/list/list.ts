@@ -7,7 +7,6 @@ import {Query} from "angular2/core";
 import {Component} from "angular2/core";
 import {ViewEncapsulation} from "angular2/core";
 import {Renderer} from "angular2/core";
-import {View} from "angular2/core";
 import {Attribute} from "angular2/core";
 import {DynamicComponentLoader, ComponentRef} from "angular2/core";
 import {Input} from "angular2/core";

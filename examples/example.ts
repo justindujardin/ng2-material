@@ -1,4 +1,4 @@
-import {View, Component} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Input} from 'angular2/core';
 import {DynamicComponentLoader} from "angular2/core";
 import {ElementRef} from "angular2/core";
