@@ -1,4 +1,4 @@
-import {Component, View, ViewEncapsulation, Attribute, Input, SimpleChange} from 'angular2/core';
+import {Component, ViewEncapsulation, Attribute, Input, SimpleChange} from 'angular2/core';
 import {CONST, isBlank, isPresent} from 'angular2/src/facade/lang';
 import {MdProgressLinear} from '../progress_linear/progress_linear';
 import {Math} from 'angular2/src/facade/math';

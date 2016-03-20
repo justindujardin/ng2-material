@@ -9,7 +9,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement, Input} from "angular2/core";
+import {Component, DebugElement, Input} from "angular2/core";
 import {MdInput, MdInputContainer} from "../../../ng2-material/components/input/input";
 import {By} from "angular2/platform/browser";
 

@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {MdPeekaboo, PeekabooAction} from "../../../ng2-material/components/peekaboo/peekaboo";
 import {By} from "angular2/platform/browser";
 

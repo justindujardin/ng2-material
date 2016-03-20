@@ -8,7 +8,7 @@ import {
   ComponentFixture,
   injectAsync
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {MdProgressLinear, ProgressMode} from "../../../ng2-material/components/progress_linear/progress_linear";
 import {By} from "angular2/platform/browser";

@@ -1,4 +1,4 @@
-import {Component, View, enableProdMode, bind, Input, OnDestroy, ApplicationRef} from "angular2/core";
+import {Component, enableProdMode, bind, Input, OnDestroy, ApplicationRef} from "angular2/core";
 import {bootstrap} from "angular2/platform/browser";
 import {
   ROUTER_PROVIDERS,

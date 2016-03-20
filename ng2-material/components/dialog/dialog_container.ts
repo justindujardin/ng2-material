@@ -1,5 +1,4 @@
 import {ViewEncapsulation} from "angular2/core";
-import {View} from "angular2/core";
 import {Component} from "angular2/core";
 import {ElementRef} from "angular2/core";
 import {MdDialogRef} from "./dialog_ref";

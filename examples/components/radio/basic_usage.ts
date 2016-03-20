@@ -1,4 +1,4 @@
-import {View, Component} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
 
 // TODO (jdd):

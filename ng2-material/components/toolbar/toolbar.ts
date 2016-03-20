@@ -1,4 +1,4 @@
-import {View,Component,Directive,AfterContentInit,Input,OnChanges,Attribute,OnDestroy} from "angular2/core";
+import {Component,Directive,AfterContentInit,Input,OnChanges,Attribute,OnDestroy} from "angular2/core";
 import {debounce,throttle, rAF} from '../../core/util/util';
 import {ElementRef} from "angular2/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";

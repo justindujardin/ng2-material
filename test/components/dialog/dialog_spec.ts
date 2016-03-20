@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement, ElementRef} from "angular2/core";
+import {Component, DebugElement, ElementRef} from "angular2/core";
 import {MdDialogRef, MdDialogConfig, MdDialog, MdDialogBasic} from "../../../ng2-material/components/dialog/dialog";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {By} from "angular2/platform/browser";

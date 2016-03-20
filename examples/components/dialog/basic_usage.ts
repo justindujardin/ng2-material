@@ -1,4 +1,4 @@
-import {View, Component} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {MATERIAL_DIRECTIVES,MdDialog} from 'ng2-material/all';
 import {ElementRef} from "angular2/core";
 import {Input} from "angular2/core";

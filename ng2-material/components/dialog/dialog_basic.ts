@@ -1,6 +1,5 @@
 import {NgIf} from "angular2/common";
 import {MdButton} from "../button/button";
-import {View} from "angular2/core";
 import {Component} from "angular2/core";
 import {MdDialogRef} from "./dialog_ref";
 import {Input} from "angular2/core";
