@@ -1,4 +1,4 @@
-import {Component, View, enableProdMode, bind, Input, OnDestroy, ApplicationRef} from "angular2/core";
+import {Component, enableProdMode, bind, Input, OnDestroy, ApplicationRef} from "angular2/core";
 import {bootstrap} from "angular2/platform/browser";
 import {
   ROUTER_PROVIDERS,
@@ -24,11 +24,11 @@ import {Media} from "ng2-material/core/util/media";
  * Describe an example that can be dynamically loaded.
  */
 export interface IExampleData {
-  template:string;
-  source:string;
-  styles:string;
-  component:string;
-  name:string;
+  template: string;
+  source: string;
+  styles: string;
+  component: string;
+  name: string;
 }
 
 @RouteConfig([
@@ -91,7 +91,7 @@ export class DemosApp implements OnDestroy {
     this._sidenav.show('menu');
   }
 
-  navigate(to:any) {
+  navigate(to: any) {
     this.router.navigate(to);
   }
 

@@ -1,12 +1,8 @@
-import {Component} from 'angular2/core';
-import {RouteConfig, RouterOutlet} from 'angular2/router';
-import {RouteParams} from "angular2/router";
-import {Router} from "angular2/router";
-import {OnInit} from "angular2/core";
+import {Component, OnInit} from "angular2/core";
+import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 import {ComponentsService, IComponentMeta} from "../services/components";
 import {MATERIAL_DIRECTIVES} from "../../ng2-material/all";
 import Example from "../example";
-import {ROUTER_DIRECTIVES} from "angular2/router";
 import {NavigationService} from "../services/navigation";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {SidenavService} from "../../ng2-material/components/sidenav/sidenav_service";

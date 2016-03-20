@@ -324,7 +324,6 @@ $md-blue-grey: (
   A700: #455a64,
 );
 
-
 $md-light-theme-foreground: (
   divider: rgba(black, 0.12),
   dividers: rgba(black, 0.12),
@@ -348,7 +347,6 @@ $md-dark-theme-foreground: (
   icons: white,
   text: white
 );
-
 
 // Contrast colors. These are hard-coded because it is too difficult to calculate them.
 // These contrast colors are pulled from the public Material Design spec swatches. While the

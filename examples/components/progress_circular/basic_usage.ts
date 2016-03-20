@@ -1,5 +1,5 @@
-import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {Component} from "angular2/core";
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 
 @Component({
   selector: 'progress-circular-basic-usage',
@@ -8,9 +8,9 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class ProgressCircularBasicUsage {
-  public determinateValue:number = 30;
-  public deactivated:boolean = false;
-  public mode:string;
+  public determinateValue: number = 30;
+  public deactivated: boolean = false;
+  public mode: string;
 
   constructor() {
     // Iterate every 100ms, non-stop

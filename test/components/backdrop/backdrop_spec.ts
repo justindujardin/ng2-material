@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {MdBackdrop} from "../../../ng2-material/components/backdrop/backdrop";
 import {By} from "angular2/platform/browser";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
@@ -38,7 +38,7 @@ export function main() {
       return promiseWait()
         .then(() => builder.createAsync(TestComponent))
         .then((fixture: ComponentFixture) => {
-          let debug:DebugElement = fixture.debugElement.query(By.css('md-backdrop'));
+          let debug: DebugElement = fixture.debugElement.query(By.css('md-backdrop'));
           let backdrop = <MdBackdrop>debug.componentInstance;
           backdrop.transitionAddClass = transitionAddClass;
           fixture.detectChanges();
@@ -139,13 +139,14 @@ export function main() {
               triggered = true;
               return Promise.resolve();
             };
-            api.backdrop.show().then(() => {
+            let promise = api.backdrop.show();
+            api.debug.nativeElement.click();
+            expect(triggered).toBe(false);
+            return promise.then(() => {
               expect(triggered).toBe(false);
               api.debug.nativeElement.click();
               expect(triggered).toBe(true);
             });
-            api.debug.nativeElement.click();
-            expect(triggered).toBe(false);
           });
         }));
       });

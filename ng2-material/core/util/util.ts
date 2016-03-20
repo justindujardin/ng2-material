@@ -1,5 +1,4 @@
-import {isPresent} from "angular2/src/facade/lang";
-import {NumberWrapper} from "angular2/src/facade/lang";
+import {isPresent, NumberWrapper} from "angular2/src/facade/lang";
 /**
  * Returns a function, that, as long as it continues to be invoked, will not
  * be triggered. The function will be called after it stops being called for
@@ -7,13 +6,15 @@ import {NumberWrapper} from "angular2/src/facade/lang";
  * @param wait Integer value of msecs to delay (since last debounce reset); default value 10 msecs
  */
 export function debounce(func, wait, scope) {
-  var timer;
+  var timer = null;
 
   return function debounced() {
     var context = scope,
         args    = Array.prototype.slice.call(arguments);
 
-    clearTimeout(timer);
+    if(timer) {
+      clearTimeout(timer);
+    }
     timer = setTimeout(function () {
 
       timer = undefined;

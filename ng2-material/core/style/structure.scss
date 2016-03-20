@@ -2,7 +2,7 @@
 
 html, body {
   height: 100%;
-  color: rgba(0,0,0,0.87);
+  color: rgba(0, 0, 0, 0.87);
   background: white;
   position: relative;
 }
@@ -15,6 +15,7 @@ body {
 [tabindex='-1']:focus {
   outline: none;
 }
+
 .inset {
   padding: 10px;
 }
@@ -91,6 +92,7 @@ input {
 .md-shadow-bottom-z-1 {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
 }
+
 .md-shadow-bottom-z-2 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 }
@@ -137,11 +139,11 @@ input {
   &.md-ripple-placed {
     $sizeDuration: 0.45s * 2;
     transition: margin $sizeDuration $swift-ease-out-timing-function,
-                border $sizeDuration $swift-ease-out-timing-function,
-                width $sizeDuration $swift-ease-out-timing-function,
-                height $sizeDuration $swift-ease-out-timing-function,
-                opacity $sizeDuration $swift-ease-out-timing-function,
-                transform $sizeDuration $swift-ease-out-timing-function;
+    border $sizeDuration $swift-ease-out-timing-function,
+    width $sizeDuration $swift-ease-out-timing-function,
+    height $sizeDuration $swift-ease-out-timing-function,
+    opacity $sizeDuration $swift-ease-out-timing-function,
+    transform $sizeDuration $swift-ease-out-timing-function;
   }
   &.md-ripple-scaled {
     transform: translate(-50%, -50%) scale(1);
@@ -186,6 +188,7 @@ input {
   -ms-user-select: none;
   user-select: none;
 }
+
 @media (min-width: $layout-breakpoint-sm) {
   .md-padding {
     padding: 16px;

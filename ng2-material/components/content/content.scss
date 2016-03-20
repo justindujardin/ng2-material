@@ -2,7 +2,6 @@
 @import "../../core/style/shadows";
 @import "../../core/style/default-theme";
 
-
 md-content {
 
   display: block;
@@ -34,7 +33,7 @@ md-content {
 
 md-content {
   color: md-color($md-foreground, text);
-  background-color: md-color($md-background,A100);
+  background-color: md-color($md-background, A100);
 }
 
 

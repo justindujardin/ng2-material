@@ -25,11 +25,11 @@ md-divider {
 // Theme
 
 md-divider {
-  border-top-color: md-color($md-foreground,divider);
+  border-top-color: md-color($md-foreground, divider);
 }
 
 .layout-row {
   & > md-divider {
-    border-right-color: md-color($md-foreground,divider);
+    border-right-color: md-color($md-foreground, divider);
   }
 }

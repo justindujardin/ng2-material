@@ -81,8 +81,8 @@ export class MediaListener {
 }
 
 interface IMediaQueryCache {
-  references:number;
-  mql:MediaQueryList;
+  references: number;
+  mql: MediaQueryList;
 }
 
 /**
@@ -90,7 +90,7 @@ interface IMediaQueryCache {
  */
 @Injectable()
 export class Media {
-  private _cache: {[query:string]:IMediaQueryCache} = {};
+  private _cache: {[query: string]: IMediaQueryCache} = {};
 
   listen(query: string): MediaListener {
     let listener = this._cache[query];
@@ -112,7 +112,7 @@ export class Media {
     }
   }
 
-  hasMedia(size:string): boolean {
+  hasMedia(size: string): boolean {
     return Media.hasMedia(size);
   }
 

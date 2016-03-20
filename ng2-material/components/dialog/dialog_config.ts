@@ -1,5 +1,3 @@
-
-
 import {MdDialogRef} from "./dialog_ref";
 
 /** Configuration for a dialog to be opened. */

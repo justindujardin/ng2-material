@@ -1,23 +1,20 @@
 import {
   Component,
-  View,
   ViewEncapsulation,
   Host,
   SkipSelf,
   Attribute,
   Optional,
   OnChanges,
-  OnInit
-} from 'angular2/core';
-
-import {isPresent, StringWrapper, NumberWrapper} from 'angular2/src/facade/lang';
-import {ObservableWrapper, EventEmitter} from 'angular2/src/facade/async';
-import {Event, KeyboardEvent} from 'angular2/src/facade/browser';
-
-import {MdRadioDispatcher} from './radio_dispatcher';
-import {KeyCodes} from '../../core/key_codes';
-import {Output, Input} from 'angular2/core';
-import {OnDestroy} from "angular2/core";
+  OnInit,
+  Output,
+  Input,
+  OnDestroy
+} from "angular2/core";
+import {isPresent, StringWrapper} from "angular2/src/facade/lang";
+import {ObservableWrapper, EventEmitter} from "angular2/src/facade/async";
+import {MdRadioDispatcher} from "./radio_dispatcher";
+import {KeyCodes} from "../../core/key_codes";
 import {parseTabIndexAttribute} from "../../core/util/util";
 
 // TODO(jd): Use @ContentChildren instead of registering radio buttons with group parent manually.
@@ -135,6 +132,7 @@ export class MdRadioGroup implements OnChanges {
   register(radio: MdRadioButton) {
     this.radios_.push(radio);
   }
+
   /** Unregister a child radio button with this group. */
   unregister(radio: MdRadioButton) {
     this.radios_ = this.radios_.filter(r => r.id !== radio.id);
@@ -280,7 +278,7 @@ export class MdRadioButton implements OnInit, OnDestroy {
       this.name = radioGroup.getName();
       this.radioGroup.register(this);
       if (this.checked) {
-        this.radioGroup.updateValue(this.value,this.id);
+        this.radioGroup.updateValue(this.value, this.id);
       }
     }
 

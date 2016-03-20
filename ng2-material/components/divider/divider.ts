@@ -1,5 +1,4 @@
-import {Component,View, ElementRef} from "angular2/core";
-import {ViewEncapsulation} from "angular2/core";
+import {Component, ViewEncapsulation} from "angular2/core";
 
 /**
  * @name mdDivider
@@ -18,7 +17,7 @@ import {ViewEncapsulation} from "angular2/core";
  */
 @Component({
   selector: 'md-divider',
-  template: '', 
+  template: '',
   encapsulation: ViewEncapsulation.None
 })
 export class MdDivider {

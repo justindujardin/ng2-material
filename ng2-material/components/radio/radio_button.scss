@@ -103,8 +103,11 @@ md-radio-group {
 }
 
 // TODO
-.md-radio-checked .md-ink-ripple { }
-.md-radio-container .md-ripple { }
+.md-radio-checked .md-ink-ripple {
+}
+
+.md-radio-container .md-ripple {
+}
 
 md-radio-group:not([disabled]) md-radio-button:not([disabled]) {
 

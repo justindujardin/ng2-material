@@ -9,7 +9,8 @@ import {Ink} from "../../core/util/ink";
 })
 export class MdInk {
 
-  @Output() inked:EventEmitter<MdInk> = new EventEmitter<MdInk>(false);
+  @Output()
+  inked: EventEmitter<MdInk> = new EventEmitter<MdInk>(false);
 
   constructor(private _element: ElementRef) {
   }
