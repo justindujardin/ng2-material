@@ -17,6 +17,7 @@ export class IndexPage implements OnInit {
   public components: IComponentMeta[] = [];
 
   public angularVersion: string = '';
+  public linkTag: string = '';
 
   constructor(private _components: ComponentsService,
               private _sidenav: SidenavService,
@@ -29,6 +30,7 @@ export class IndexPage implements OnInit {
     this.http.get('public/version.json')
       .subscribe((res: Response) => {
         this.angularVersion = res.json().angular2;
+        this.linkTag = res.json().angular2.replace(/[>=^~]/g,'');
       });
 
 
