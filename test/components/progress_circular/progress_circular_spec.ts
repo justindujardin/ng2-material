@@ -89,7 +89,6 @@ export function main() {
       describe('diameter', () => {
         it('should set scaling using percentage values', injectAsync([], () => {
           return setup(`<md-progress-circular [diameter]="'25%'"></md-progress-circular>`).then((api: IProgressFixture) => {
-
             let compiled = api.fixture.nativeElement;
             let indicator = compiled.querySelector('md-progress-circular');
             let scaleWrapper = compiled.querySelector('.md-scale-wrapper');
@@ -134,8 +133,8 @@ export function main() {
      */
     function getScale(element) {
       var transform = element.style['transform'] || element.style['-webkit-transform'];
-      var matches = /scale\(\s*([0-9\.]+)\s*\)/.exec(transform);
-      var scale = parseFloat(matches[1]);
+      var matches = /scale\(\s*([0-9,\.]+)\s*\)/.exec(transform);
+      var scale = parseFloat(matches[1].replace(',', '.'));
 
       return Math.round(scale * 100) / 100;
     }
