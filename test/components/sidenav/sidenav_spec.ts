@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {By} from "angular2/platform/browser";
 import {
   MdSidenav,
@@ -22,15 +22,15 @@ import {promiseWait} from "../../util";
 export function main() {
 
   interface ITestFixture {
-    fixture:ComponentFixture;
-    component:MdSidenav;
-    container?:MdSidenavContainer;
-    cdebug:DebugElement;
-    debug:DebugElement;
+    fixture: ComponentFixture;
+    component: MdSidenav;
+    container?: MdSidenavContainer;
+    cdebug: DebugElement;
+    debug: DebugElement;
   }
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdSidenav, MdSidenavContainer],
     template: `<md-sidenav></md-sidenav>`
   })

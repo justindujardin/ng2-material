@@ -1,13 +1,11 @@
 @import "../../core/style/variables";
 @import "../../core/style/shadows";
-
 // TODO(jelbourn): This goes away.
 @import "../../core/style/default-theme";
 
 // TODO(jelbourn): Move variables and mixins into a partial file.
 // TODO(jelbourn): Measure perf benefits for translate3d and will-change.
 // TODO(jelbourn): Figure out if anchor hover underline actually happens in any browser.
-
 
 // Standard button sizing.
 $md-button-padding: 0 rem(0.600) !default;
@@ -104,7 +102,7 @@ $md-icon-border-radius: $md-fab-border-radius;
 
   // Animation.
   transition: background $swift-ease-out-duration $swift-ease-out-timing-function,
-              box-shadow $swift-ease-out-duration $swift-ease-out-timing-function;
+  box-shadow $swift-ease-out-duration $swift-ease-out-timing-function;
 
   // Hide the browser focus indicator, instead applying our own focus style on background-color.
   &:focus {
@@ -142,7 +140,6 @@ $md-icon-border-radius: $md-fab-border-radius;
   &.md-icon-button {
     @include md-button-icon();
   }
-
 
   // Use the [disabled] attribute instead of the :disabled pseudo-class because anchors
   // cannot technically be :disabled.
@@ -192,16 +189,16 @@ $md-icon-border-radius: $md-fab-border-radius;
   }
 
   &.md-warn {
-    color: md-color($md-warn,default-contrast); //'{{warn-contrast}}';
+    color: md-color($md-warn, default-contrast); //'{{warn-contrast}}';
     background-color: md-color($md-warn); //'{{warn-color}}';
     [md-icon] {
-      color: md-color($md-warn,default-contrast); //'{{warn-contrast}}';
+      color: md-color($md-warn, default-contrast); //'{{warn-contrast}}';
     }
     &:hover {
       background-color: md-color($md-warn); //'{{warn-color}}';
     }
     &.md-focused {
-      background-color: md-color($md-warn,700); //'{{warn-700}}';
+      background-color: md-color($md-warn, 700); //'{{warn-700}}';
     }
   }
 
@@ -216,7 +213,6 @@ $md-icon-border-radius: $md-fab-border-radius;
   }
 
 }
-
 
 [md-button] {
   @include md-button-base();
@@ -246,16 +242,16 @@ $md-icon-border-radius: $md-fab-border-radius;
   vertical-align: middle;
 
   background-color: md-color($md-accent); //'{{accent-color}}';
-  color: md-color($md-accent,default-contrast); //'{{accent-contrast}}';
+  color: md-color($md-accent, default-contrast); //'{{accent-contrast}}';
   [md-icon] {
-    color: md-color($md-accent,default-contrast); //'{{accent-contrast}}';
+    color: md-color($md-accent, default-contrast); //'{{accent-contrast}}';
   }
   &:not([disabled]) {
     &:hover {
       background-color: md-color($md-accent); //'{{accent-color}}';
     }
     &.md-focused {
-      background-color: md-color($md-accent,A700); //'{{accent-A700}}';
+      background-color: md-color($md-accent, A700); //'{{accent-A700}}';
     }
   }
 
@@ -263,8 +259,6 @@ $md-icon-border-radius: $md-fab-border-radius;
     border-radius: $md-fab-border-radius;
     @include md-ripple-base();
   }
-
-
 
   &.md-mini {
     line-height: $md-fab-mini-line-height;

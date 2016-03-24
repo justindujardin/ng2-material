@@ -38,7 +38,7 @@ export class MdDialogRef {
    * The backdrop hiding subscription
    * @private
    */
-  private _subscription:any = null;
+  private _subscription: any = null;
 
   set backdropRef(value: ComponentRef) {
     this._backdropRef = value;
@@ -76,10 +76,10 @@ export class MdDialogRef {
    * Closes the dialog. This operation is asynchronous.
    */
   close(result: any = null): Promise<void> {
-    if(this.isClosed){
+    if (this.isClosed) {
       return this.whenClosedDeferred.promise;
     }
-    if(this._subscription){
+    if (this._subscription) {
       this._subscription.unsubscribe();
     }
     this.isClosed = true;
@@ -88,10 +88,8 @@ export class MdDialogRef {
       if (this._backdropRef) {
         otherAsync = this._backdropRef.instance.hide();
       }
-      return this.contentRefDeferred.promise.then((_) => {
-        otherAsync.then(() => {
-          this.whenClosedDeferred.resolve(result);
-        });
+      return otherAsync.then(() => {
+        this.whenClosedDeferred.resolve(result);
       });
     });
   }

@@ -8,14 +8,14 @@ import {
   ComponentFixture,
   injectAsync
 } from "angular2/testing";
-import {Component, View} from "angular2/core";
+import {Component} from "angular2/core";
 import {MdToolbar} from "../../../ng2-material/components/toolbar/toolbar";
 import {By} from "angular2/platform/browser";
 
 export function main() {
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdToolbar],
     template: `<md-toolbar></md-toolbar>`
   })

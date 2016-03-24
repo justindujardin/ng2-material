@@ -1,19 +1,24 @@
-import {Component, View, ViewEncapsulation, Attribute, Input, SimpleChange} from 'angular2/core';
-import {CONST, isBlank, isPresent} from 'angular2/src/facade/lang';
-import {MdProgressLinear} from '../progress_linear/progress_linear';
-import {Math} from 'angular2/src/facade/math';
+import {Component, ViewEncapsulation, Input} from "angular2/core";
+import {CONST, isBlank, isPresent} from "angular2/src/facade/lang";
+import {MdProgressLinear} from "../progress_linear/progress_linear";
+import {Math} from "angular2/src/facade/math";
 
 @CONST()
 class ProgressMode {
-  @CONST() static DETERMINATE = 'determinate';
-  @CONST() static INDETERMINATE = 'indeterminate';
+  @CONST()
+  static DETERMINATE = 'determinate';
+  @CONST()
+  static INDETERMINATE = 'indeterminate';
 }
 
 @CONST()
 class Defaults {
-  @CONST() static DEFAULT_PROGRESS_SIZE = 100;
-  @CONST() static DEFAULT_SCALING = 0.5;
-  @CONST() static DEFAULT_HALF_TRANSITION = 'transform 0.1s linear';
+  @CONST()
+  static DEFAULT_PROGRESS_SIZE = 100;
+  @CONST()
+  static DEFAULT_SCALING = 0.5;
+  @CONST()
+  static DEFAULT_HALF_TRANSITION = 'transform 0.1s linear';
 }
 
 @Component({
@@ -26,9 +31,7 @@ class Defaults {
     '[attr.aria-valuenow]': 'value',
     '[style.width]': 'outerSize',
     '[style.height]': 'outerSize'
-  }
-})
-@View({
+  },
   template: `
     <div class="md-scale-wrapper"
      [style.-webkit-transform]="diameterTransformation"
@@ -58,8 +61,6 @@ class Defaults {
   directives: [],
   encapsulation: ViewEncapsulation.None
 })
-
-
 export class MdProgressCircular extends MdProgressLinear {
 
   /** Value for the circle diameter. */

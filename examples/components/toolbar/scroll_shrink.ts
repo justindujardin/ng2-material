@@ -1,15 +1,15 @@
-import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {Component} from "angular2/core";
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 
 interface ITodo {
-  face:string;
-  what:string;
-  who:string;
-  notes:string;
+  face: string;
+  what: string;
+  who: string;
+  notes: string;
 }
 
-@Component({selector: 'toolbar-scroll-shrink'})
-@View({
+@Component({
+  selector: 'toolbar-scroll-shrink',
   templateUrl: 'examples/components/toolbar/scroll_shrink.html',
   styleUrls: ['examples/components/toolbar/scroll_shrink.css'],
   directives: [MATERIAL_DIRECTIVES]

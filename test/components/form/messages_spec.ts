@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View} from "angular2/core";
+import {Component} from "angular2/core";
 import {MdMessage, MdMessages} from "../../../ng2-material/components/form/messages";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, Control} from "angular2/common";
 import {By} from "angular2/platform/browser";
@@ -18,12 +18,12 @@ import {promiseWait} from "../../util";
 export function main() {
 
   interface IFormMessagesFixture {
-    fixture:ComponentFixture;
-    container:MdMessages;
-    messages:MdMessage[];
+    fixture: ComponentFixture;
+    container: MdMessages;
+    messages: MdMessage[];
   }
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MdMessage, MdMessages],
     template: `
     <form>

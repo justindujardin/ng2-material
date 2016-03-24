@@ -1,6 +1,5 @@
 import {
   Directive,
-  View,
   Component,
   AfterContentInit,
   ElementRef,
@@ -59,14 +58,12 @@ export class MdInput {
 
 @Component({
   selector: 'md-input-container',
+  template: `<ng-content></ng-content><div class="md-errors-spacer"></div>`,
   host: {
     '[class.md-input-has-value]': 'inputHasValue',
     '[class.md-input-has-placeholder]': 'inputHasPlaceholder',
     '[class.md-input-focused]': 'inputHasFocus',
   }
-})
-@View({
-  template: `<ng-content></ng-content><div class="md-errors-spacer"></div>`
 })
 export class MdInputContainer implements AfterContentInit, OnChanges {
 

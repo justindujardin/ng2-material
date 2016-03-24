@@ -1,4 +1,4 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from "angular2/core";
 
 /**
  * Class for radio buttons to coordinate unique selection based on name.

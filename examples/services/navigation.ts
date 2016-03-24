@@ -5,16 +5,16 @@ export interface INavigationLink {
   /**
    * Brief description of no more than a few words
    */
-  brief:string;
+  brief: string;
   /**
    * Value to bind to routeLink.
    */
-  routeLink:any[];
+  routeLink: any[];
 }
 
 @Injectable()
 export class NavigationService {
-  public currentTitle:string = null;
+  public currentTitle: string = null;
   public nextLink: INavigationLink = null;
   public prevLink: INavigationLink = null;
 

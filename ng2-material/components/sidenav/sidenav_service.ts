@@ -21,8 +21,8 @@ export class SidenavService {
 
   find(name: string): MdSidenav {
     return this._instances.filter((c: MdSidenav) => {
-      return c.name === name;
-    })[0] || null;
+        return c.name === name;
+      })[0] || null;
   }
 
   private _instances: MdSidenav[] = [];

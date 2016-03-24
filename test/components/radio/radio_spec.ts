@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {MdRadioGroup, MdRadioButton} from "../../../ng2-material/components/radio/radio_button";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {KeyCodes} from "../../../ng2-material/core/key_codes";
@@ -26,8 +26,8 @@ export function main() {
   }
 
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdRadioGroup, MdRadioButton],
     template: `
     <md-radio-group (click)="onClick($event)" [(value)]="selected">

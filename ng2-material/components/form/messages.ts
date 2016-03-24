@@ -1,12 +1,6 @@
-import {CONST_EXPR} from 'angular2/src/facade/lang';
-import {NG_VALIDATORS} from 'angular2/common';
-import {
-  Attribute, Input, Provider, Directive, Optional, SkipSelf, Host, OnDestroy, OnInit,
-  ContentChildren, QueryList, Query, AfterContentInit
-} from 'angular2/core';
-import {Validator, NgFormModel, NgControlName} from 'angular2/common';
-import {Control, ControlGroup, AbstractControl} from 'angular2/common';
-import {isPresent} from 'angular2/src/facade/lang';
+import {isPresent} from "angular2/src/facade/lang";
+import {NgFormModel, NgControlName, ControlGroup, AbstractControl} from "angular2/common";
+import {Input, Directive, Optional, SkipSelf, Host, OnDestroy, OnInit, QueryList, Query} from "angular2/core";
 
 
 // TODO(jd): Behaviors to test
@@ -65,8 +59,10 @@ export class MdMessages implements OnInit, OnDestroy {
   }
 
 
-  constructor(@Query(MdMessage) public messages: QueryList<MdMessage>,
-              @Optional() @SkipSelf() @Host() public form: NgFormModel) {
+  constructor(@Query(MdMessage)
+              public messages: QueryList<MdMessage>,
+              @Optional() @SkipSelf() @Host()
+              public form: NgFormModel) {
   }
 
   /**
@@ -104,7 +100,7 @@ export class MdMessages implements OnInit, OnDestroy {
   }
 
   private _valueChanged() {
-    let errors: {[errorKey:string]:string} = null;
+    let errors: {[errorKey: string]: string} = null;
     if (this.property instanceof NgControlName) {
       let ctrl: NgControlName = <NgControlName>this.property;
       errors = ctrl.errors;

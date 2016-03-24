@@ -1,3 +1,17 @@
+<a name="0.2.12"></a>
+## [0.2.12](https://github.com/justindujardin/ng2-material/compare/v0.2.11...v0.2.12) (2016-03-20)
+
+
+### Bug Fixes
+
+* **examples:** link to angular2 tag on index page ([98b642c](https://github.com/justindujardin/ng2-material/commit/98b642c))
+
+### Features
+
+* **angular2:** update to beta 11 ([603ba25](https://github.com/justindujardin/ng2-material/commit/603ba25))
+
+
+
 <a name="0.2.11"></a>
 ## [0.2.11](https://github.com/justindujardin/ng2-material/compare/v0.2.10...v0.2.11) (2016-03-12)
 

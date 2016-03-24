@@ -1,16 +1,18 @@
-import {Component, View, ViewEncapsulation, Attribute, OnChanges} from 'angular2/core';
-import {CONST} from 'angular2/src/facade/lang';
-import {isPresent, isBlank} from 'angular2/src/facade/lang';
-import {Math} from 'angular2/src/facade/math';
-import {Input} from 'angular2/core';
+import {Component, ViewEncapsulation, OnChanges, Input} from "angular2/core";
+import {CONST, isPresent, isBlank} from "angular2/src/facade/lang";
+import {Math} from "angular2/src/facade/math";
 
 /** Different display / behavior modes for progress_linear. */
 @CONST()
 export class ProgressMode {
-  @CONST() static DETERMINATE = 'determinate';
-  @CONST() static INDETERMINATE = 'indeterminate';
-  @CONST() static BUFFER = 'buffer';
-  @CONST() static QUERY = 'query';
+  @CONST()
+  static DETERMINATE = 'determinate';
+  @CONST()
+  static INDETERMINATE = 'indeterminate';
+  @CONST()
+  static BUFFER = 'buffer';
+  @CONST()
+  static QUERY = 'query';
 }
 
 @Component({
@@ -22,9 +24,7 @@ export class ProgressMode {
     'aria-valuemax': '100',
     '[attr.aria-valuenow]': 'value',
     '[attr.mode]': 'mode'
-  }
-})
-@View({
+  },
   template: `
     <div class="md-progress-linear-container md-ready">
       <div class="md-progress-linear-dashed"></div>
@@ -46,13 +46,16 @@ export class MdProgressLinear implements OnChanges {
 
 
   /** Value for the primary bar. */
-  @Input('value') value_: number;
+  @Input('value')
+  value_: number;
 
   /** Value for the secondary bar. */
-  @Input() bufferValue: number;
+  @Input()
+  bufferValue: number;
 
   /** The render mode for the progress bar. */
-  @Input() mode: string = ProgressMode.DETERMINATE;
+  @Input()
+  mode: string = ProgressMode.DETERMINATE;
 
   /** CSS `transform` property applied to the primary bar. */
   primaryBarTransform: string;

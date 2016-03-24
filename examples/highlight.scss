@@ -133,7 +133,6 @@ highlight .hljs-constant,
   opacity: 0.5;
 }
 
-
 /*******************
  * CODE HIGHLIGHTING
  *******************/
@@ -159,7 +158,6 @@ pre, code {
   overflow-wrap: break-word;
 }
 
-
 pre > code.highlight {
   background-color: transparent;
   font-weight: 400;
@@ -184,6 +182,7 @@ code:not(.highlight) {
   padding: 0.125em 0.35em;
   border-radius: 2px;
 }
+
 .layout-content code.highlight {
   margin-bottom: 15px;
 }

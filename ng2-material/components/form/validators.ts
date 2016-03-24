@@ -1,10 +1,7 @@
-import {CONST_EXPR} from "angular2/src/facade/lang";
-import {NG_VALIDATORS} from "angular2/common";
-import {Attribute, Input, Provider, Directive,forwardRef} from "angular2/core";
-import {Validator} from "angular2/common";
-import {Control} from "angular2/common";
-import {isNumber} from '../../core/util/util';
-import {isPresent, NumberWrapper} from 'angular2/src/facade/lang';
+import {CONST_EXPR, NumberWrapper} from "angular2/src/facade/lang";
+import {NG_VALIDATORS, Validator, Control, AbstractControl} from "angular2/common";
+import {Input, Provider, Directive, forwardRef} from "angular2/core";
+import {isNumber} from "../../core/util/util";
 
 const PATTERN_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, {
   useExisting: forwardRef(() => MdPatternValidator),
@@ -19,8 +16,8 @@ export class MdPatternValidator implements Validator {
   /**
    * Returns a validator that checks to see if a string matches a given Regular Expression
    */
-  static inline(pattern: string): Function {
-    return function validate(control: Control): {[key: string]: any} {
+  static inline(pattern: string): any {
+    return function validate(control: AbstractControl): {[key: string]: any} {
       if (control.value === '' || new RegExp(pattern).test(control.value)) {
         return null;
       }
@@ -30,7 +27,8 @@ export class MdPatternValidator implements Validator {
     }
   }
 
-  @Input() mdPattern: string;
+  @Input()
+  mdPattern: string;
 
   validate(control: Control): {[key: string]: any} {
     return MdPatternValidator.inline(this.mdPattern)(control);
@@ -46,8 +44,8 @@ export class MdMaxLengthValidator implements Validator {
   /**
    * Returns a validator that checks for a maximum length of a string
    */
-  static inline(length: number|string): Function {
-    return function validate(control: Control): {[key: string]: any} {
+  static inline(length: number|string): any {
+    return function validate(control: AbstractControl): {[key: string]: any} {
       if (!control.value || control.value.length <= length) {
         return null;
       }
@@ -57,7 +55,8 @@ export class MdMaxLengthValidator implements Validator {
     }
   }
 
-  @Input() mdMaxLength: string;
+  @Input()
+  mdMaxLength: string;
 
   validate(control: Control): {[key: string]: any} {
     return MdMaxLengthValidator.inline(this.mdMaxLength)(control);
@@ -73,8 +72,8 @@ export class MdMaxValueValidator implements Validator {
   /**
    * Returns a validator that checks for a maximum number value
    */
-  static inline(length: number|string): Function {
-    return function validate(control: Control): {[key: string]: any} {
+  static inline(length: number|string): any {
+    return function validate(control: AbstractControl): {[key: string]: any} {
       if (NumberWrapper.isNaN(control.value) || control.value <= length) {
         return null;
       }
@@ -84,7 +83,8 @@ export class MdMaxValueValidator implements Validator {
     }
   }
 
-  @Input() mdMax: string;
+  @Input()
+  mdMax: string;
 
   validate(control: Control): {[key: string]: any} {
     return MdMaxValueValidator.inline(this.mdMax)(control);
@@ -100,8 +100,8 @@ export class MdMinValueValidator implements Validator {
   /**
    * Returns a validator that checks for a minimum number value
    */
-  static inline(length: number|string): Function {
-    return function validate(control: Control): {[key: string]: any} {
+  static inline(length: number|string): any {
+    return function validate(control: AbstractControl): {[key: string]: any} {
       if (NumberWrapper.isNaN(control.value) || control.value >= length) {
         return null;
       }
@@ -111,7 +111,8 @@ export class MdMinValueValidator implements Validator {
     }
   }
 
-  @Input() mdMin: string;
+  @Input()
+  mdMin: string;
 
   validate(control: Control): {[key: string]: any} {
     return MdMinValueValidator.inline(this.mdMin)(control);
@@ -127,8 +128,8 @@ export class MdNumberRequiredValidator implements Validator {
   /**
    * Returns a validator that checks for the existence of a truthy value
    */
-  static inline(): Function {
-    return function validate(control: Control): {[key: string]: any} {
+  static inline(): any {
+    return function validate(control: AbstractControl): {[key: string]: any} {
       let isNum = !NumberWrapper.isNaN(control.value) && isNumber(control.value);
       return isNum ? null : {mdNumberRequired: true};
     }

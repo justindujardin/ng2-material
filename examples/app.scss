@@ -16,13 +16,13 @@ demos-app {
   .app-menu {
     border-right: 1px solid md-color($md-foreground, divider);
     md-list-item {
-      font-size:$subheader-font-size;
-      font-weight:$subheader-font-weight;
+      font-size: $subheader-font-size;
+      font-weight: $subheader-font-weight;
       cursor: pointer;
       will-change: color;
       transition: color $swift-ease-in-duration $swift-ease-in-timing-function;
       &.md-active {
-        color: md-color($md-primary,500);
+        color: md-color($md-primary, 500);
       }
     }
     md-toolbar {

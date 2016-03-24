@@ -12,7 +12,6 @@ import {
   RootRenderer,
   APPLICATION_COMMON_PROVIDERS
 } from "angular2/core";
-import {TimerWrapper} from "angular2/src/facade/async";
 import {isPresent, Type} from "angular2/src/facade/lang";
 import {MdDialogRef} from "./dialog_ref";
 import {MdDialogConfig} from "./dialog_config";

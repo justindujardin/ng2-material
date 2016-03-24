@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, ViewMetadata, DebugElement} from "angular2/core";
+import {Component, ViewMetadata, DebugElement} from "angular2/core";
 import {MdButton, MdAnchor} from "../../../ng2-material/components/button/button";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {Ink} from "../../../ng2-material/core/util/ink";
@@ -19,8 +19,8 @@ export function main() {
   const defaultTemplate = `<button md-button type="button" (click)="increment()" [disabled]="isDisabled">Go</button>`;
 
   /** Test component that contains an MdButton. */
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdButton],
     template: defaultTemplate
   })

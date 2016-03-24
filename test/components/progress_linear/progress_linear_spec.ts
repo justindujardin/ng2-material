@@ -8,7 +8,7 @@ import {
   ComponentFixture,
   injectAsync
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {MdProgressLinear, ProgressMode} from "../../../ng2-material/components/progress_linear/progress_linear";
 import {By} from "angular2/platform/browser";
@@ -16,12 +16,12 @@ import {By} from "angular2/platform/browser";
 export function main() {
 
   interface IProgressFixture {
-    fixture:ComponentFixture;
-    progress:MdProgressLinear;
-    debug:DebugElement;
+    fixture: ComponentFixture;
+    progress: MdProgressLinear;
+    debug: DebugElement;
   }
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [CORE_DIRECTIVES, MdProgressLinear],
     template: `<md-progress-linear mode="determinate" [value]="value"></md-progress-linear>`
   })

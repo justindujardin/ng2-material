@@ -1,8 +1,11 @@
-import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {Component} from "angular2/core";
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 
-@Component({selector: 'switch-basic-usage'})
-@View({templateUrl: 'examples/components/switch/basic_usage.html', directives: [MATERIAL_DIRECTIVES]})
+@Component({
+  selector: 'switch-basic-usage',
+  templateUrl: 'examples/components/switch/basic_usage.html',
+  directives: [MATERIAL_DIRECTIVES]
+})
 export default class SwitchBasicUsage {
   public data: any = {
     cb1: true,

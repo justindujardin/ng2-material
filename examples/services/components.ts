@@ -1,21 +1,20 @@
 import {Injectable} from "angular2/core";
-import {Http} from "angular2/http";
-import {Response} from "angular2/http";
+import {Http, Response} from "angular2/http";
 
 export interface IComponentExample {
-  component:string;
-  name:string;
-  source:string;
-  styles:string;
-  template:string;
+  component: string;
+  name: string;
+  source: string;
+  styles: string;
+  template: string;
 }
 
 export interface IComponentMeta {
-  id:string;
-  readme?:string;
-  name:string;
-  sources:string[];
-  examples:IComponentExample[];
+  id: string;
+  readme?: string;
+  name: string;
+  sources: string[];
+  examples: IComponentExample[];
 }
 
 @Injectable()

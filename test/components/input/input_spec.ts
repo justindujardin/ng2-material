@@ -9,7 +9,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement, Input} from "angular2/core";
+import {Component, DebugElement, Input} from "angular2/core";
 import {MdInput, MdInputContainer} from "../../../ng2-material/components/input/input";
 import {By} from "angular2/platform/browser";
 
@@ -19,21 +19,22 @@ export function main() {
   componentSanityCheck('Input Container', 'md-input-container', template);
 
   interface IInputFixture {
-    fixture:ComponentFixture;
-    input:MdInput;
-    container:MdInputContainer;
-    inputDebug:DebugElement;
-    containerDebug:DebugElement;
+    fixture: ComponentFixture;
+    input: MdInput;
+    container: MdInputContainer;
+    inputDebug: DebugElement;
+    containerDebug: DebugElement;
   }
 
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MdInput, MdInputContainer],
     template: template
   })
   class TestComponent {
 
-    @Input() boundValue;
+    @Input()
+    boundValue;
   }
 
   describe('Input', () => {

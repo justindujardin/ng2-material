@@ -1,8 +1,8 @@
-import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {Component} from "angular2/core";
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 
-@Component({selector: 'checkbox-basic-usage'})
-@View({
+@Component({
+  selector: 'checkbox-basic-usage',
   templateUrl: 'examples/components/checkbox/basic_usage.html',
   styleUrls: ['examples/components/checkbox/basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]

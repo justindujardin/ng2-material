@@ -33,7 +33,7 @@ $subheader-sticky-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.16) !default;
 
 .md-subheader {
   color: md-color($md-foreground, secondary-text, 0.23); //'{{ foreground-2-0.23 }}';
-  background-color: md-color($md-background,A100); //'{{background-color}}';
+  background-color: md-color($md-background, A100); //'{{background-color}}';
 
   &.md-primary {
     color: md-color($md-primary); //'{{primary-color}}'

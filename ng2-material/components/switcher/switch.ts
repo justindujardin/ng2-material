@@ -1,5 +1,5 @@
-import {Component, View, ViewEncapsulation, Attribute} from 'angular2/core';
-import {MdCheckbox} from '../checkbox/checkbox';
+import {Component, ViewEncapsulation} from "angular2/core";
+import {MdCheckbox} from "../checkbox/checkbox";
 
 // TODO(jelbourn): add gesture support
 // TODO(jelbourn): clean up CSS.
@@ -13,9 +13,7 @@ import {MdCheckbox} from '../checkbox/checkbox';
     '[attr.aria-disabled]': 'disabled_',
     '(keydown)': 'onKeydown($event)',
     '(click)': 'toggle($event)'
-  }
-})
-@View({
+  },
   template: `
     <div class="md-switch-container">
       <div class="md-switch-bar"></div>

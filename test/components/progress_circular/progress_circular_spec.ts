@@ -8,7 +8,7 @@ import {
   injectAsync,
   ComponentFixture
 } from "angular2/testing";
-import {Component, View, DebugElement} from "angular2/core";
+import {Component, DebugElement} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {ProgressMode} from "../../../ng2-material/components/progress_linear/progress_linear";
 import {MdProgressCircular} from "../../../ng2-material/components/progress_circular/progress_circular";
@@ -17,12 +17,12 @@ import {By} from "angular2/platform/browser";
 export function main() {
 
   interface IProgressFixture {
-    fixture:ComponentFixture;
-    progress:MdProgressCircular;
-    debug:DebugElement;
+    fixture: ComponentFixture;
+    progress: MdProgressCircular;
+    debug: DebugElement;
   }
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [CORE_DIRECTIVES, MdProgressCircular],
     template: `<md-progress-circular mode="determinate" [value]="value"></md-progress-circular>`
   })

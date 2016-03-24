@@ -1,31 +1,22 @@
-import {ViewEncapsulation} from "angular2/core";
-import {View} from "angular2/core";
-import {Component} from "angular2/core";
-import {ElementRef} from "angular2/core";
+import {ViewEncapsulation, Component, ElementRef, forwardRef, Directive, Host, SkipSelf} from "angular2/core";
 import {MdDialogRef} from "./dialog_ref";
 import {KeyCodes} from "../../core/key_codes";
-import {forwardRef} from "angular2/core";
-import {Directive} from "angular2/core";
-import {Host} from "angular2/core";
-import {SkipSelf} from "angular2/core";
 
 /**
  * Container for user-provided dialog content.
  */
 @Component({
   selector: 'md-dialog-container',
+  encapsulation: ViewEncapsulation.None,
+  template: `
+    <md-dialog-content></md-dialog-content>
+    <div tabindex="0" (focus)="wrapFocus()"></div>`,
+  directives: [forwardRef(() => MdDialogContent)],
   host: {
     'class': 'md-dialog',
     'tabindex': '0',
     '(body:keydown)': 'documentKeypress($event)',
   },
-})
-@View({
-  encapsulation: ViewEncapsulation.None,
-  template: `
-    <md-dialog-content></md-dialog-content>
-    <div tabindex="0" (focus)="wrapFocus()"></div>`,
-  directives: [forwardRef(() => MdDialogContent)]
 })
 export class MdDialogContainer {
   // Ref to the dialog content. Used by the DynamicComponentLoader to load the dialog content.

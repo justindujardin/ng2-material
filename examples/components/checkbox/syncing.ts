@@ -1,8 +1,8 @@
-import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {Component} from "angular2/core";
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 
-@Component({selector: 'checkbox-syncing'})
-@View({
+@Component({
+  selector: 'checkbox-syncing',
   templateUrl: 'examples/components/checkbox/syncing.html',
   styleUrls: ['examples/components/checkbox/syncing.css'],
   directives: [MATERIAL_DIRECTIVES]

@@ -1,9 +1,9 @@
-import {View, Component} from 'angular2/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material/all';
+import {Component} from "angular2/core";
+import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 
 
-@Component({selector: 'button-basic-usage'})
-@View({
+@Component({
+  selector: 'button-basic-usage',
   templateUrl: 'examples/components/button/basic_usage.html',
   styleUrls: ['examples/components/button/basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]

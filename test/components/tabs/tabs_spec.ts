@@ -8,7 +8,7 @@ import {
   ComponentFixture,
   injectAsync
 } from "angular2/testing";
-import {Component, View} from "angular2/core";
+import {Component} from "angular2/core";
 import {MdTab, MdTabs} from "../../../ng2-material/components/tabs/tabs";
 import {CORE_DIRECTIVES} from "angular2/common";
 import {Ink} from "../../../ng2-material/core/util/ink";
@@ -17,12 +17,12 @@ import {By} from "angular2/platform/browser";
 export function main() {
 
   interface ITabsFixture {
-    fixture:ComponentFixture;
-    tabs:MdTabs;
-    tabButtons:HTMLElement[];
+    fixture: ComponentFixture;
+    tabs: MdTabs;
+    tabButtons: HTMLElement[];
   }
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [CORE_DIRECTIVES, MdTabs, MdTab],
     template: `
     <md-tabs>

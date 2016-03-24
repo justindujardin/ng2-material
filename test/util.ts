@@ -1,5 +1,5 @@
 ///<reference path="../typings/main.d.ts"/>
-import {Component, View} from "angular2/core";
+import {Component} from "angular2/core";
 import {ComponentFixture, TestComponentBuilder, beforeEach, describe, inject, it, injectAsync} from "angular2/testing";
 import {MATERIAL_DIRECTIVES} from "../ng2-material/all";
 import {TimerWrapper} from "angular2/src/facade/async";
@@ -18,8 +18,8 @@ export function promiseWait(milliseconds: number = 10): Promise<void> {
  * @param template The template that contains the component usage.
  */
 export function componentSanityCheck(name: string, selector: string, template: string) {
-  @Component({selector: 'test-app'})
-  @View({
+  @Component({
+    selector: 'test-app',
     directives: [MATERIAL_DIRECTIVES],
     template: template
   })

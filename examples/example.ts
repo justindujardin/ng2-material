@@ -1,31 +1,21 @@
-import {View, Component} from 'angular2/core';
-import {Input} from 'angular2/core';
-import {DynamicComponentLoader} from "angular2/core";
-import {ElementRef} from "angular2/core";
-import {ComponentRef} from "angular2/core";
+import {Component, Input, DynamicComponentLoader, ElementRef, ComponentRef, Query, QueryList} from "angular2/core";
 import {IExampleData} from "./app";
 import {DEMO_DIRECTIVES} from "./all";
 import {MATERIAL_DIRECTIVES} from "ng2-material/all";
-import {Http} from "angular2/http";
-import {Response} from "angular2/http";
-import {Highlight} from './highlight';
+import {Http, Response} from "angular2/http";
+import {Highlight} from "./highlight";
 import {TimerWrapper} from "angular2/src/facade/async";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {MdTabs} from "ng2-material/components/tabs/tabs";
-import {Query} from "angular2/core";
-import {QueryList} from "angular2/core";
 
 
 export interface ISourceFile {
-  data:string;
-  type:string;
+  data: string;
+  type: string;
 }
 
 @Component({
   selector: 'example',
-  properties: ['templateData', 'stylesData', 'sourceData', 'showSource', 'orderedFiles']
-})
-@View({
+  properties: ['templateData', 'stylesData', 'sourceData', 'showSource', 'orderedFiles'],
   templateUrl: 'examples/example.html',
   directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES, Highlight]
 })
@@ -50,7 +40,8 @@ export default class Example {
 
   constructor(private _element: ElementRef,
               public http: Http,
-              @Query(MdTabs) public panes: QueryList<MdTabs>,
+              @Query(MdTabs)
+              public panes: QueryList<MdTabs>,
               public dcl: DynamicComponentLoader) {
   }
 
@@ -69,7 +60,8 @@ export default class Example {
   /**
    * The selected type of source to view.
    */
-  @Input() public selected: string = 'html';
+  @Input()
+  public selected: string = 'html';
 
   applyModel(model: IExampleData) {
     this.orderedFiles = [];
@@ -87,8 +79,11 @@ export default class Example {
 
     // Render the example component into the view.
     let template = `<${model.component}></${model.component}>`;
-    @Component({selector: 'md-example-view'})
-    @View({template: template, directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES]})
+    @Component({
+      selector: 'md-example-view',
+      template: template,
+      directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES]
+    })
     class CompiledComponent {
     }
     this.dcl.loadIntoLocation(CompiledComponent, this._element, 'example')
@@ -115,7 +110,7 @@ export default class Example {
   }
 
   toggleSource() {
-    if(this.showSource){
+    if (this.showSource) {
       this.showTabs = false;
       TimerWrapper.setTimeout(() => {
         this.showSource = false;
