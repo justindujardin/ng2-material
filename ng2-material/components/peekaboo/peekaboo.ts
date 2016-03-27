@@ -1,6 +1,7 @@
-import {Directive, OnDestroy, Input} from "angular2/core";
+import {Directive, OnDestroy, Input, ApplicationRef} from "angular2/core";
 import {Media, MediaListener} from "../../core/util/media";
 import {CONST, NumberWrapper, isString} from "angular2/src/facade/lang";
+import {debounce} from "../../core/util/util";
 
 /** Different peekaboo actions to apply when active */
 @CONST()
@@ -108,7 +109,7 @@ export class MdPeekaboo implements OnDestroy {
   private _mediaListeners: MediaListener[] = [];
 
 
-  constructor(public media: Media) {
+  constructor(public media: Media, private _app: ApplicationRef) {
     window.addEventListener('scroll', this._windowScroll);
     MdPeekaboo.SIZES.forEach((size: string) => {
       this._watchMediaQuery(size);
@@ -136,6 +137,9 @@ export class MdPeekaboo implements OnDestroy {
   }
 
   private _windowScroll = this.evaluate.bind(this);
+  private _scrollTick = debounce(() => {
+    this._app.tick();
+  }, 100, this);
 
   /**
    * Evaluate the current scroll and media breakpoint to determine what scrollTop
@@ -174,9 +178,11 @@ export class MdPeekaboo implements OnDestroy {
     }
     if (top >= bp && !this._active) {
       this._active = true;
+      this._scrollTick();
     }
     else if (top < bp && this._active) {
       this._active = false;
+      this._scrollTick();
     }
     return bp;
   }
