@@ -1,6 +1,4 @@
 @import "../../core/style/variables";
-
-// TODO(jelbourn): This goes away.
 @import "../../core/style/default-theme";
 
 md-data-table {
@@ -14,21 +12,21 @@ md-data-table {
   tr {
     vertical-align: top;
   }
+  th, td {
+    text-align: right;
+    &.md-text-cell { text-align: left; }
+  }
   th {
     padding: 22px 12px;
     font-size: 12px;
     font-weight: 600;
-    text-align: left;
-    color: md-color($md-foreground, text);
+    color: md-color($md-foreground, secondary-text);
   }
   td {
     border-top: 1px solid md-color($md-foreground, divider);
     padding: 14px 12px;
     font-size: 13px;
-    text-align: right;
-    color: md-color($md-foreground, secondary-text);
-
-    &.md-data-table-cell-non-numeric { text-align: left; }
+    color: md-color($md-foreground, text);
   }
   th:first-child, td:first-child{
     padding-left: 24px;

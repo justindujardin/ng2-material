@@ -5,7 +5,7 @@ MdDataTable is an enhancment of classic data tables.
 ### Classes
 | Name | Target | Description |
 | --- | --- | --- |
-| md-data-table-cell-non-numeric | thead th, tbody td | Disable the automatic right alignement of the cells. |
+| md-text-cell | thead th, tbody td | Declare a cell as non-numeric and left align its text. |
 
 ## Selectable data table
 ### Properties
@@ -24,14 +24,14 @@ MdDataTable is an enhancment of classic data tables.
 <md-data-table [selectable]="true">
   <thead>
   <tr>
-    <th class="md-data-table-cell-non-numeric">Material</th>
+    <th class="md-text-cell">Material</th>
     <th>Quantity</th>
     <th>Unit price</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="#material of materials" [selectableValue]="material.id">
-    <td class="md-data-table-cell-non-numeric">{{ material.name }}</td>
+    <td class="md-text-cell">{{ material.name }}</td>
     <td>{{ material.quantity }}</td>
     <td>{{ material.price }}</td>
   </tr>
