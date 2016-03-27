@@ -1,3 +1,14 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/justindujardin/ng2-material/compare/v0.2.13...v0.3.0) (2016-03-27)
+
+
+### Features
+
+* Data table component with selectable rows ([9e8f0ac](https://github.com/justindujardin/ng2-material/commit/9e8f0ac))
+* **angular2:** update to beta 12 ([887042e](https://github.com/justindujardin/ng2-material/commit/887042e))
+
+
+
 <a name="0.2.13"></a>
 ## [0.2.13](https://github.com/justindujardin/ng2-material/compare/v0.2.12...v0.2.13) (2016-03-27)
 
