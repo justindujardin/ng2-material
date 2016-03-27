@@ -15,12 +15,12 @@
     "test": "$(npm bin)/grunt karma"
   },
   "dependencies": {
-    "angular2": ">=2.0.0-beta.11",
+    "angular2": ">=2.0.0-beta.12",
     "es6-promise": ">=3.0.2",
     "es6-shim": ">=0.35.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
-    "zone.js": ">=0.6.4"
+    "zone.js": ">=0.6.6"
   },
   "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
