@@ -2,7 +2,7 @@ ng2-material [![Build Status](https://travis-ci.org/justindujardin/ng2-material.
 ---
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/ng2material.svg)](https://saucelabs.com/u/ng2material)
 
-## Purpose
+## Purpose 
 
 This is an implementation of [Material Design](https://www.google.com/design/spec/material-design/) components for Angular 2. It is meant to be a workable set of components that can be used until an official implementation is provided by Google. As the [angular/material2](https://github.com/angular/material2) components become more usable, this project will explore ways to migrate to the official implementation.
 
