@@ -1,3 +1,14 @@
+<a name="0.2.13"></a>
+## [0.2.13](https://github.com/justindujardin/ng2-material/compare/v0.2.12...v0.2.13) (2016-03-27)
+
+
+### Bug Fixes
+
+* package.json to run tests and serve the app ([799c8d1](https://github.com/justindujardin/ng2-material/commit/799c8d1))
+* rxjs-dependency version need to be frozen for the moment. When Angular team will ([53d3bf9](https://github.com/justindujardin/ng2-material/commit/53d3bf9))
+
+
+
 <a name="0.2.12"></a>
 ## [0.2.12](https://github.com/justindujardin/ng2-material/compare/v0.2.11...v0.2.12) (2016-03-20)
 
