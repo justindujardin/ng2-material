@@ -1,3 +1,9 @@
+<a name="0.3.2"></a>
+## [0.3.2](https://github.com/justindujardin/ng2-material/compare/v0.3.1...v0.3.2) (2016-03-27)
+
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/justindujardin/ng2-material/compare/v0.3.0...v0.3.1) (2016-03-27)
 
