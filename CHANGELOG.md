@@ -1,3 +1,13 @@
+<a name="0.3.1"></a>
+## [0.3.1](https://github.com/justindujardin/ng2-material/compare/v0.3.0...v0.3.1) (2016-03-27)
+
+
+### Bug Fixes
+
+* **angular2:** beta 12 has a change detection bug that misses peekaboo scroll ([5a58a05](https://github.com/justindujardin/ng2-material/commit/5a58a05))
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/justindujardin/ng2-material/compare/v0.2.13...v0.3.0) (2016-03-27)
 
