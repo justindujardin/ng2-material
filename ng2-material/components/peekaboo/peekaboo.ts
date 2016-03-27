@@ -23,6 +23,7 @@ export class PeekabooAction {
 @Directive({
   selector: '[md-peekaboo]',
   inputs: ['break', 'breakXs', 'breakSm', 'breakMd', 'breakLg', 'breakXl'],
+  providers: [ApplicationRef],
   host: {
     '[class.md-peekaboo-active]': 'active',
     '[attr.breakAction]': 'breakAction'
