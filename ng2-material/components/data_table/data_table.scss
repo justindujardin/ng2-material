@@ -1,0 +1,44 @@
+@import "../../core/style/variables";
+@import "../../core/style/default-theme";
+
+md-data-table {
+  display: table;
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  md-checkbox {
+    margin: 0;
+  }
+  tr {
+    vertical-align: top;
+  }
+  th, td {
+    text-align: right;
+    &.md-text-cell { text-align: left; }
+  }
+  th {
+    padding: 22px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: md-color($md-foreground, secondary-text);
+  }
+  td {
+    border-top: 1px solid md-color($md-foreground, divider);
+    padding: 14px 12px;
+    font-size: 13px;
+    color: md-color($md-foreground, text);
+  }
+  th:first-child, td:first-child{
+    padding-left: 24px;
+  }
+  th:last-child, td:last-child{
+    padding-right: 24px;
+  }
+
+  tr:hover td {
+    background-color: md-color($md-grey, 200);
+  }
+  .active td {
+    background-color: md-color($md-grey, 100);
+  }
+}

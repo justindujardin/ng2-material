@@ -1,0 +1,16 @@
+<md-data-table layout-fill>
+  <thead>
+  <tr>
+    <th class="md-text-cell">Material</th>
+    <th>Quantity</th>
+    <th>Unit price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="#material of materials">
+    <td class="md-text-cell">{{ material.name }}</td>
+    <td>{{ material.quantity }}</td>
+    <td>{{ material.price }}</td>
+  </tr>
+  </tbody>
+</md-data-table>
