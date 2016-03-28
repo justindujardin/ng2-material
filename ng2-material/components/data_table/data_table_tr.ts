@@ -1,4 +1,4 @@
-import {Component, Input, Inject, forwardRef, ElementRef, AfterContentInit} from "angular2/core";
+import {Component, Input, Inject, Optional, forwardRef, ElementRef, AfterContentInit} from "angular2/core";
 import {MdDataTable} from "./data_table";
 import {MdCheckbox} from "../checkbox/checkbox";
 import "rxjs/add/operator/map";
@@ -32,7 +32,7 @@ export class MdDataTableTr implements AfterContentInit {
   thDisplayed: boolean = false;
   tdDisplayed: boolean = false;
 
-  constructor(@Inject(forwardRef(() => MdDataTable))
+  constructor(@Optional() @Inject(forwardRef(() => MdDataTable))
               public table: MdDataTable, private _element: ElementRef) {
   }
 
@@ -64,15 +64,17 @@ export class MdDataTableTr implements AfterContentInit {
   }
 
   ngAfterContentInit() {
-    let element = this._element.nativeElement;
-    this.isInHeader = element.parentElement.localName === 'thead';
-    this._initListeners();
+    if (null !== this.table && undefined !== this.table) {
+      let element = this._element.nativeElement;
+      this.isInHeader = element.parentElement.localName === 'thead';
+      this._initListeners();
 
-    this.thDisplayed = this.table.selectable && this.isInHeader;
-    this.tdDisplayed = this.table.selectable && !this.isInHeader;
+      this.thDisplayed = this.table.selectable && this.isInHeader;
+      this.tdDisplayed = this.table.selectable && !this.isInHeader;
 
-    if (this.isInHeader === false && this.selectableValue === undefined) {
-      this.selectableValue = Array.prototype.indexOf.call(element.parentNode.children, element).toString();
+      if (this.isInHeader === false && this.selectableValue === undefined) {
+        this.selectableValue = Array.prototype.indexOf.call(element.parentNode.children, element).toString();
+      }
     }
   }
 }
