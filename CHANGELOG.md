@@ -1,3 +1,13 @@
+<a name="0.3.4"></a>
+## [0.3.4](https://github.com/justindujardin/ng2-material/compare/v0.3.3...v0.3.4) (2016-03-29)
+
+
+### Bug Fixes
+
+* md-data-table injection on md-data-table-tr ([89d63f4](https://github.com/justindujardin/ng2-material/commit/89d63f4))
+
+
+
 <a name="0.3.3"></a>
 ## [0.3.3](https://github.com/justindujardin/ng2-material/compare/v0.3.2...v0.3.3) (2016-03-28)
 
