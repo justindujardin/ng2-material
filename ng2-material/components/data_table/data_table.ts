@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter, ContentChildren, QueryList} from "angular2/core";
-import {MdDataTableTr} from "./data_table_tr";
+import {MdDataTableHeaderRow, MdDataTableRow, ITableRow} from "./data_table_tr";
 import "rxjs/add/operator/share";
 
 export * from './data_table_tr';
@@ -17,7 +17,7 @@ export interface ITableSelectionChange {
 @Component({
   selector: 'md-data-table',
   template: `<ng-content></ng-content>`,
-  directives: [MdDataTableTr],
+  directives: [MdDataTableHeaderRow, MdDataTableRow],
   host: {
     '[class.md-data-table]': 'true',
     '[class.md-data-table-selectable]': 'selectable',
@@ -31,8 +31,8 @@ export class MdDataTable {
   @Output()
   onSelectableChange: EventEmitter<any> = new EventEmitter(false);
 
-  @ContentChildren(MdDataTableTr, true)
-  _rows: QueryList<MdDataTableTr>;
+  @ContentChildren(MdDataTableRow, true)
+  _rows: QueryList<MdDataTableRow>;
   selected: Array<string> = [];
 
   constructor() {
@@ -42,16 +42,15 @@ export class MdDataTable {
   /**
    * Fill/Empty the array of selected values
    *
-   * @param {MdDataTableTr} tr
+   * @param {MdDataTableRow} tr
    */
-  toggleActivity(tr: MdDataTableTr) {
+  toggleActivity(tr: ITableRow) {
     let event: ITableSelectionChange = {
       name: 'selectable_change',
       allSelected: false,
       values: []
     };
-
-    if (tr.isInHeader === true) {
+    if (tr instanceof MdDataTableHeaderRow === true) {
       if (tr.isActive === true) {
         event.allSelected = true;
         event.values = this._getRowsValues();
@@ -79,8 +78,7 @@ export class MdDataTable {
    */
   _getRowsValues(): any[] {
     return this._rows.toArray()
-      .filter((data, index) => index > 0)
-      .map((tr: MdDataTableTr) => tr.selectableValue);
+      .map((tr: MdDataTableRow) => tr.selectableValue);
   }
 
 }

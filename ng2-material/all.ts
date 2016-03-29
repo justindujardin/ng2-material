@@ -2,7 +2,7 @@ import {CONST_EXPR, Type} from "angular2/src/facade/lang";
 import {MdAnchor, MdButton} from "./components/button/button";
 import {MdCheckbox} from "./components/checkbox/checkbox";
 import {MdContent} from "./components/content/content";
-import {MdDataTable, MdDataTableTr} from './components/data_table/data_table';
+import {MdDataTable, MdDataTableHeaderRow, MdDataTableRow} from './components/data_table/data_table';
 import {MdDialog} from "./components/dialog/dialog";
 import {MdDivider} from "./components/divider/divider";
 import {MdIcon} from "./components/icon/icon";
@@ -83,6 +83,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdAnchor, MdButton,
   MdCheckbox,
   MdContent,
+  MdDataTable, MdDataTableHeaderRow, MdDataTableRow,
   MdDivider,
   MdIcon,
   MdInk,
@@ -100,8 +101,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdSubheader,
   MdSwitch,
   MdToolbar,
-  MdTab, MdTabs,
-  MdDataTable, MdDataTableTr
+  MdTab, MdTabs
 ]);
 
 /**

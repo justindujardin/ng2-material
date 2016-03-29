@@ -1,17 +1,71 @@
-import {Component, Input, Inject, Optional, forwardRef, ElementRef, AfterContentInit} from "angular2/core";
+import {Component, Input, Inject, forwardRef, ElementRef, AfterContentInit} from "angular2/core";
+import {isPresent} from "angular2/src/facade/lang";
 import {MdDataTable} from "./data_table";
 import {MdCheckbox} from "../checkbox/checkbox";
 import "rxjs/add/operator/map";
 
+
+/**
+ * MdDataTable row
+ */
+export interface ITableRow {
+  selectableValue: string;
+  isActive: boolean;
+}
+
 @Component({
-  selector: 'tr',
+  selector: 'tr[md-data-table-header-row]',
   template: `
-        <template [ngIf]="thDisplayed">
+        <template [ngIf]="table?.selectable">
           <th>
-              <md-checkbox #check (click)="change()" [checked]="isActive"></md-checkbox>
+              <md-checkbox #check [checked]="isActive"></md-checkbox>
           </th>
         </template>
-        <template [ngIf]="tdDisplayed">
+        <ng-content></ng-content>
+    `,
+  directives: [MdCheckbox],
+  host: {
+    '[class.active]': 'isActive',
+    '(click)': 'table?.selectable && change()'
+  }
+})
+export class MdDataTableHeaderRow implements AfterContentInit, ITableRow {
+  @Input('selectable-value')
+  selectableValue: string;
+  isActive: boolean = false;
+
+  constructor(@Inject(forwardRef(() => MdDataTable))
+              public table: MdDataTable) {
+  }
+
+  /**
+   * Change active status
+   */
+  change() {
+    this.isActive = !this.isActive;
+    this.table.toggleActivity(this);
+  }
+
+  /**
+   * init listener to selectableChange event
+   */
+  _initListeners() {
+    this.table.onSelectableChange
+      .map(event => event.allSelected)
+      .subscribe(newActiveStatus => this.isActive = newActiveStatus);
+  }
+
+  ngAfterContentInit() {
+    if (isPresent(this.table)) {
+      this._initListeners();
+    }
+  }
+}
+
+@Component({
+  selector: 'tr[md-data-table-row]',
+  template: `
+        <template [ngIf]="table?.selectable">
           <td>
             <md-checkbox #check [checked]="isActive"></md-checkbox>
           </td>
@@ -21,18 +75,15 @@ import "rxjs/add/operator/map";
   directives: [MdCheckbox],
   host: {
     '[class.active]': 'isActive',
-    '(click)': 'table?.selectable && !thDisplayed && change()'
+    '(click)': 'table?.selectable && change()'
   }
 })
-export class MdDataTableTr implements AfterContentInit {
-  @Input()
+export class MdDataTableRow implements AfterContentInit, ITableRow {
+  @Input('selectable-value')
   selectableValue: string;
-  isInHeader: boolean = false;
   isActive: boolean = false;
-  thDisplayed: boolean = false;
-  tdDisplayed: boolean = false;
 
-  constructor(@Optional() @Inject(forwardRef(() => MdDataTable))
+  constructor(@Inject(forwardRef(() => MdDataTable))
               public table: MdDataTable, private _element: ElementRef) {
   }
 
@@ -48,31 +99,21 @@ export class MdDataTableTr implements AfterContentInit {
    * init listener to selectableChange event
    */
   _initListeners() {
-    if (this.isInHeader === true) {
-      this.table.onSelectableChange
-        .map(event => event.allSelected)
-        .subscribe(newActiveStatus => this.isActive = newActiveStatus);
-    } else {
-      this.table.onSelectableChange
-        .map(event => {
-          return event.values !== undefined &&
-            event.values.length &&
-            (event.values.findIndex((value: string) => value === this.selectableValue)) !== -1;
-        })
-        .subscribe(newActiveStatus => this.isActive = newActiveStatus);
-    }
+    this.table.onSelectableChange
+      .map(event => {
+        return event.values !== undefined &&
+          event.values.length &&
+          (event.values.findIndex((value: string) => value === this.selectableValue)) !== -1;
+      })
+      .subscribe(newActiveStatus => this.isActive = newActiveStatus);
   }
 
   ngAfterContentInit() {
-    if (null !== this.table && undefined !== this.table) {
+    if (isPresent(this.table)) {
       let element = this._element.nativeElement;
-      this.isInHeader = element.parentElement.localName === 'thead';
       this._initListeners();
 
-      this.thDisplayed = this.table.selectable && this.isInHeader;
-      this.tdDisplayed = this.table.selectable && !this.isInHeader;
-
-      if (this.isInHeader === false && this.selectableValue === undefined) {
+      if (this.selectableValue === undefined) {
         this.selectableValue = Array.prototype.indexOf.call(element.parentNode.children, element).toString();
       }
     }
