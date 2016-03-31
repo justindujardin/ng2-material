@@ -1,4 +1,4 @@
-import {componentSanityCheck} from "../../util";
+import {componentSanityCheck} from '../../util';
 import {
   TestComponentBuilder,
   beforeEach,
@@ -8,15 +8,12 @@ import {
   it,
   injectAsync,
   ComponentFixture
-} from "angular2/testing";
-import {Component, DebugElement} from "angular2/core";
-import {CORE_DIRECTIVES} from "angular2/common";
-import {MdDataTable, MdDataTableRow} from 'ng2-material/components/data_table/data_table';
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {KeyCodes} from "../../../ng2-material/core/key_codes";
-import {By} from "angular2/platform/browser";
-import {MdDataTableHeaderRow} from '../../../ng2-material/components/data_table/data_table_tr';
-
+} from 'angular2/testing';
+import {Component, DebugElement} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
+import {MdDataTable} from 'ng2-material/components/data_table/data_table';
+import {By} from 'angular2/platform/browser';
+import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow} from '../../../ng2-material/components/data_table/data_table_selectable_tr';
 
 export function main() {
 
@@ -27,18 +24,18 @@ export function main() {
   }
   @Component({
     selector: 'test-app',
-    directives: [CORE_DIRECTIVES, MdDataTable, MdDataTableHeaderRow, MdDataTableRow],
+    directives: [CORE_DIRECTIVES, MdDataTable, MdDataTableHeaderSelectableRow, MdDataTableSelectableRow],
     template: `<md-data-table [selectable]="true">
       <thead>
-        <tr md-data-table-header-row>
+        <tr md-data-table-header-selectable-row>
           <th>Unit price</th>
         </tr>
       </thead>
       <tbody>
-        <tr md-data-table-row>
+        <tr md-data-table-selectable-row>
           <td>$2.90</td>
         </tr>
-        <tr md-data-table-row>
+        <tr md-data-table-selectable-row>
           <td>$1.25</td>
         </tr>
       </tbody>
