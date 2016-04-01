@@ -5,6 +5,10 @@ MdDataTable is an enhancment of classic data tables.
 ### Classes
 | Name | Target | Description |
 | --- | --- | --- |
+| md-data-table | table | Style table, without using md-data-table component |
+| sortable | th | mark column as sortable |
+| sorted-ascending | th | mark column as sorted ascending |
+| sorted-descending | th | mark column as sorted descending |
 | md-text-cell | thead th, tbody td | Declare a cell as non-numeric and left align its text. |
 
 ## Selectable data table
