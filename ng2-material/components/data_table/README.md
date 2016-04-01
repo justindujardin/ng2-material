@@ -11,26 +11,48 @@ MdDataTable is an enhancment of classic data tables.
 ### Properties
 | Name | Target | Type | Description |
 | --- | --- | --- | --- |
-| selectable | md-data-table | boolean | Enable one checkbox per line and a master checkbox to rule them all. |   
-| selectableValue | tbody tr | string | value of the checkbox. If it's not set the checkbox's value will be the index of the row. |
+| selectable | md-data-table | boolean | Enable listeners to children's checkbox.   
 
 ### Events
 | Name | Description |
 | --- | --- |
-| selectable_change | Emmited when the user select or unselect a row |
+| onSelectableChange | Emitted when the user select or unselect a row |
+
+## Selectable header row
+### Properties
+| Name | Target | Type | Description |
+| --- | --- | --- | --- |
+| md-data-table-header-selectable-row | thead tr | boolean | Enable the master checkbox on header. |
+
+### Events
+| Name | Description |
+| --- | --- |
+| onChange | Emitted when the user check or uncheck the master checkbox |
+
+## Selectable header row
+### Properties
+| Name | Target | Type | Description |
+| --- | --- | --- | --- |
+| md-data-table-selectable-row | tbody tr | boolean | Enable a checkbox for this row. |
+| selectable-value | tbody tr | string | value of the checkbox. If it's not set the checkbox's value will be the index of the row. |
+
+### Events
+| Name | Description |
+| --- | --- |
+| onChange | Emitted when the user check or uncheck the checkbox |
 
 ## Examples
 ```
 <md-data-table [selectable]="true">
   <thead>
-  <tr>
+  <tr md-data-table-header-selectable-row>
     <th class="md-text-cell">Material</th>
     <th>Quantity</th>
     <th>Unit price</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="#material of materials" [selectableValue]="material.id">
+  <tr *ngFor="#material of materials"  md-data-table-selectable-row [selectable-value]="material.id">
     <td class="md-text-cell">{{ material.name }}</td>
     <td>{{ material.quantity }}</td>
     <td>{{ material.price }}</td>

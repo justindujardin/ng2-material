@@ -1,8 +1,9 @@
-import {Component, Input, Output, EventEmitter, ContentChildren, QueryList} from "angular2/core";
-import {MdDataTableTr} from "./data_table_tr";
-import "rxjs/add/operator/share";
+import {Component, Input, Output, EventEmitter, ContentChild, ContentChildren, QueryList, AfterContentInit} from 'angular2/core';
+import {isPresent} from "angular2/src/facade/lang";
+import 'rxjs/add/operator/share';
+import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow, ITableSelectableRowSelectionChange} from './data_table_selectable_tr';
 
-export * from './data_table_tr';
+export * from './data_table_selectable_tr';
 
 /**
  * Selectable change event data
@@ -13,17 +14,16 @@ export interface ITableSelectionChange {
   values: any[];
 }
 
-
 @Component({
   selector: 'md-data-table',
   template: `<ng-content></ng-content>`,
-  directives: [MdDataTableTr],
+  directives: [MdDataTableHeaderSelectableRow, MdDataTableSelectableRow],
   host: {
     '[class.md-data-table]': 'true',
     '[class.md-data-table-selectable]': 'selectable',
   }
 })
-export class MdDataTable {
+export class MdDataTable implements AfterContentInit {
   @Input()
   selectable: boolean;
   @Output()
@@ -31,47 +31,45 @@ export class MdDataTable {
   @Output()
   onSelectableChange: EventEmitter<any> = new EventEmitter(false);
 
-  @ContentChildren(MdDataTableTr, true)
-  _rows: QueryList<MdDataTableTr>;
+  @ContentChild(MdDataTableHeaderSelectableRow)
+  _masterRow: MdDataTableHeaderSelectableRow;
+
+  @ContentChildren(MdDataTableSelectableRow, true)
+  _rows: QueryList<MdDataTableSelectableRow>;
+
   selected: Array<string> = [];
 
   constructor() {
     this.onSelectableChange.share();
   }
 
-  /**
-   * Fill/Empty the array of selected values
-   *
-   * @param {MdDataTableTr} tr
-   */
-  toggleActivity(tr: MdDataTableTr) {
-    let event: ITableSelectionChange = {
+  change(event: ITableSelectableRowSelectionChange) {
+    let outputEvent: ITableSelectionChange = {
       name: 'selectable_change',
       allSelected: false,
       values: []
     };
-
-    if (tr.isInHeader === true) {
-      if (tr.isActive === true) {
-        event.allSelected = true;
-        event.values = this._getRowsValues();
+    if (event.target instanceof MdDataTableHeaderSelectableRow === true) {
+      if (event.isActive === true) {
+        outputEvent.allSelected = true;
+        outputEvent.values = this._getRowsValues();
       }
     } else {
-      event.values = this.selected.slice(0);
+      outputEvent.values = this.selected.slice(0);
 
-      if (tr.isActive === true) {
-        event.values.push(tr.selectableValue);
+      if (event.isActive === true) {
+        outputEvent.values.push(event.selectableValue);
       } else {
-        let index = event.values.indexOf(tr.selectableValue);
+        let index = outputEvent.values.indexOf(event.selectableValue);
         if (index !== -1) {
-          event.values.splice(index, 1);
+          outputEvent.values.splice(index, 1);
         }
       }
     }
 
     // dispatch change
-    this.selected = event.values;
-    this.onSelectableChange.emit(event);
+    this.selected = outputEvent.values;
+    this.onSelectableChange.emit(outputEvent);
   }
 
   /**
@@ -79,8 +77,20 @@ export class MdDataTable {
    */
   _getRowsValues(): any[] {
     return this._rows.toArray()
-      .filter((data, index) => index > 0)
-      .map((tr: MdDataTableTr) => tr.selectableValue);
+      .map((tr: MdDataTableSelectableRow) => tr.selectableValue);
+  }
+
+  ngAfterContentInit() {
+    if (this.selectable === true) {
+      if (isPresent(this._masterRow)) {
+        this._masterRow.onChange.subscribe(this.change.bind(this));
+      }
+
+      this._rows.toArray()
+        .map((tr: MdDataTableSelectableRow) => {
+          tr.onChange.subscribe(this.change.bind(this));
+        });
+    }
   }
 
 }

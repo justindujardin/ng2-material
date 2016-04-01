@@ -29,7 +29,7 @@
         "ng2-material/components/checkbox/checkbox.ts",
         "ng2-material/components/content/content.ts",
         "ng2-material/components/data_table/data_table.ts",
-        "ng2-material/components/data_table/data_table_tr.ts",
+        "ng2-material/components/data_table/data_table_selectable_tr.ts",
         "ng2-material/components/dialog/dialog.ts",
         "ng2-material/components/dialog/dialog_basic.ts",
         "ng2-material/components/dialog/dialog_config.ts",
