@@ -267,43 +267,7 @@ module.exports = function (grunt) {
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
   grunt.registerTask('site', ['build', 'cover', 'copy:site']);
-  grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release', 'webpack']);
-
-
-  grunt.registerTask('dist-bundle', 'Build a single-file javascript output.', function () {
-    var done = this.async();
-    var Builder = require('systemjs-builder');
-    var builder = new Builder('./', './config.bundle.js');
-
-    // Strip the extension off of the output System js import names.
-
-    //var fs = require('fs');
-    //
-    //function fixPaths(file) {
-    //  var contents = fs.readFileSync(file).toString();
-    //  contents = contents.replace(/("ng2-material\/.*?\.ts")/g, function (match) {
-    //    return match.replace('.ts', '');
-    //  });
-    //  fs.writeFileSync(file, contents, 'utf-8');
-    //}
-
-    builder
-      .bundle('ng2-material', 'dist/ng2-material.js', {
-        minify: false,
-        sourceMaps: true
-      })
-      .then(function () {
-        //fixPaths('dist/ng2-material.js');
-        return builder.bundle('ng2-material', 'dist/ng2-material.min.js', {
-          minify: true,
-          sourceMaps: true
-        });
-      })
-      .then(function () {
-        //fixPaths('dist/ng2-material.min.js');
-        done();
-      });
-  });
+  grunt.registerTask('build', ['default', 'ts:release', 'webpack', 'copy:release']);
 
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-conventional-changelog');

@@ -65,11 +65,13 @@
     "style-loader": "0.13.0",
     "systemjs": "0.19.2",
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps",
+    "ts-loader": "^0.8.1",
     "typescript": "1.8.0",
     "underscore": "1.8.3",
     "url-loader": "0.5.7",
     "webpack": "1.12.13",
-    "webpack-dev-server": "1.14.1"
+    "webpack-dev-server": "1.14.1",
+    "webpack-merge": "^0.8.4"
   },
   "contributors": [
     "Justin DuJardin <justindujardin@users.noreply.github.com>",
