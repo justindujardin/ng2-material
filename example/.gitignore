@@ -1,0 +1,5 @@
+# Don't version the typings files
+typings/
+
+# Don't version the built packages
+dist/

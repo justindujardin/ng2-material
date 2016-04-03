@@ -1,0 +1,53 @@
+{
+  "name": "angular2-universal-starter",
+  "version": "2.0.0",
+  "description": "Angular 2 Universal starter kit by @AngularClass",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angular/universal-starter.git"
+  },
+  "scripts": {
+    "postinstall": "typings install",
+    "render": "npm run render:gulp",
+    "render:gulp": "./node_modules/.bin/gulp prerender",
+    "watch": "webpack --watch",
+    "prebuild": "rimraf dist",
+    "build": "webpack",
+    "prestart": "npm run build",
+    "server": "nodemon dist/server/bundle.js",
+    "start": "npm run server",
+    "predebug": "npm run build",
+    "debug": "node --debug-brk dist/server/bundle.js"
+  },
+  "license": "MIT",
+  "contributors": [
+    "AngularClass <hello@angularclass.com>",
+    "PatrickJS <patrick@angularclass.com>",
+    "Jeff Whelpley <jeff@gethuman.com>",
+    "Jeff Cross <crossj@google.com>"
+  ],
+  "dependencies": {
+    "angular2": "2.0.0-beta.13",
+    "angular2-universal-preview": "~0.85.1",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.3",
+    "preboot": "^2.0.5",
+    "rxjs": "5.0.0-beta.2"
+  },
+  "devDependencies": {
+    "angular2-gulp-prerender": "^0.6.1",
+    "connect-history-api-fallback": "^1.2.0",
+    "gulp": "^3.9.1",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.8.1",
+    "rimraf": "^2.5.0",
+    "serve-static": "^1.10.2",
+    "ts-loader": "^0.8.1",
+    "ts-node": "^0.7.1",
+    "typescript": "^1.8.7",
+    "typings": "^0.7.9",
+    "webpack": "^1.12.10",
+    "webpack-dev-server": "^1.14.0",
+    "webpack-merge": "^0.8.4"
+  }
+}
