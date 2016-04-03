@@ -13,11 +13,11 @@ module.exports = function (grunt) {
       "<%- sourceRoot %>/**/*.js.map",
       "<%- sourceRoot %>/**/*.css",
       "<%- sourceRoot %>/**/*.css.map",
-      "examples/**/*.js",
-      "examples/**/*.d.ts",
-      "examples/**/*.js.map",
-      "examples/**/*.css",
-      "examples/**/*.css.map",
+      "example/**/*.js",
+      "example/**/*.d.ts",
+      "example/**/*.js.map",
+      "example/**/*.css",
+      "example/**/*.css.map",
       "test/**/*.js",
       "test/**/*.d.ts",
       "test/**/*.js.map"
@@ -81,7 +81,7 @@ module.exports = function (grunt) {
             dest: '<%- sitePath %>/<%- pkg.version %>/dist/'
           },
           {expand: true, src: 'public/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'examples/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
+          {expand: true, src: 'example/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
         ]
       }
     },
@@ -109,8 +109,8 @@ module.exports = function (grunt) {
             dest: '.',
             ext: '.css',
             src: [
-              "examples/*.scss",
-              "examples/**/*.scss",
+              "example/src/app/*.scss",
+              "example/src/app/**/*.scss",
               "public/font/*.scss",
               "<%- sourceRoot %>/all.scss"
             ]
@@ -130,8 +130,8 @@ module.exports = function (grunt) {
       },
       dist: {
         src: [
-          "examples/*.css",
-          "examples/**/*.css",
+          "example/src/app/*.css",
+          "example/src/app/**/*.css",
           "public/font/*.css",
           "dist/ng2-material.css",
           "<%- sourceRoot %>/all.css",
@@ -151,17 +151,17 @@ module.exports = function (grunt) {
         files: [
           '<%- sourceRoot %>/**/*.scss',
           '<%- sourceRoot %>/*.scss',
-          'examples/**/*.scss',
+          'example/**/*.scss',
           'app.scss'
         ],
         tasks: ['sass', 'postcss:dist', 'notify:styles']
       },
       meta: {
         files: [
-          'examples/**/*.html',
-          'examples/**/*.ts',
-          'examples/**/*.scss',
-          'examples/*.*'
+          'example/**/*.html',
+          'example/**/*.ts',
+          'example/**/*.scss',
+          'example/*.*'
         ],
         tasks: ['site-meta', 'notify:meta']
       },
@@ -169,8 +169,8 @@ module.exports = function (grunt) {
         files: [
           '<%- sourceRoot %>/**/*.ts',
           './*.ts',
-          'examples/*.ts',
-          'examples/**/*.ts',
+          'example/*.ts',
+          'example/**/*.ts',
           'test/**/*.ts'
         ],
         tasks: ['ts:source', 'notify:source']
@@ -407,7 +407,7 @@ module.exports = function (grunt) {
     });
 
     tasks.push(function buildReadmeFiles() {
-      glob("examples/components/**/readme.md", function (err, files) {
+      glob("example/src/app/components/**/readme.md", function (err, files) {
         files.forEach(function parseDemo(readmeFile) {
           var component = readableString(path.basename(path.dirname(readmeFile)));
           meta[component] = meta[component] || {};
@@ -429,7 +429,7 @@ module.exports = function (grunt) {
     });
 
     tasks.push(function buildExamples() {
-      glob("examples/components/**/*.html", function (err, files) {
+      glob("example/src/app/components/**/*.html", function (err, files) {
         files.forEach(function parseDemo(templateFile) {
           var name = path.basename(templateFile, '.html');
           var result = {

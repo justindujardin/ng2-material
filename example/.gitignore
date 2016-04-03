@@ -3,3 +3,10 @@ typings/
 
 # Don't version the built packages
 dist/
+
+
+./src/**/*.css
+./src/**/*.css.map
+./src/**/*.js
+./src/**/*.js.map
+./src/**/*.d.ts
