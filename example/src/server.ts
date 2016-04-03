@@ -16,7 +16,6 @@ import {APP_BASE_HREF} from 'angular2/router';
 
 // Application
 import {App} from './app/app.component';
-import {Html} from './server-only-app/html.component';
 
 let app = express();
 let root = path.join(path.resolve(__dirname, '..'));
@@ -35,7 +34,7 @@ function ngApp(req, res) {
   let baseUrl = '/';
   let url = req.originalUrl || '/';
   res.render('index', {
-    directives: [ Html ],
+    directives: [ App ],
     providers: [
       provide(APP_BASE_HREF, {useValue: baseUrl}),
       provide(REQUEST_URL, {useValue: url}),
