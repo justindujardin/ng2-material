@@ -1,7 +1,9 @@
 System.config({
   packages: {
     'ng2-material': {
-      defaultExtension: 'js'
+      format: 'cjs',
+      defaultExtension: 'js',
+      main: 'all.js'
     },
     'examples': {
       defaultExtension: 'js'
