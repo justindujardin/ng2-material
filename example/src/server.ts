@@ -1,21 +1,22 @@
-import * as path from 'path';
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-// Angular 2
-import 'angular2-universal-preview/polyfills';
+import "angular2-universal-preview/polyfills";
+import * as path from "path";
+import * as express from "express";
+import * as bodyParser from "body-parser";
 import {
   expressEngine,
   REQUEST_URL,
   NODE_ROUTER_PROVIDERS,
-  NODE_HTTP_PROVIDERS
-} from 'angular2-universal-preview';
+  NODE_HTTP_PROVIDERS,
+  BASE_URL
+} from "angular2-universal-preview";
+import {provide, enableProdMode} from "angular2/core";
+import {APP_BASE_HREF} from "angular2/router";
+import {App} from "./app";
 
-import {provide, enableProdMode} from 'angular2/core';
-import {APP_BASE_HREF} from 'angular2/router';
+// Angular 2
 
 
 // Application
-import {App} from './app/app.component';
 
 let app = express();
 let root = path.join(path.resolve(__dirname, '..'));
@@ -34,10 +35,11 @@ function ngApp(req, res) {
   let baseUrl = '/';
   let url = req.originalUrl || '/';
   res.render('index', {
-    directives: [ App ],
+    directives: [App],
     providers: [
       provide(APP_BASE_HREF, {useValue: baseUrl}),
       provide(REQUEST_URL, {useValue: url}),
+      provide(BASE_URL, {useValue: path.resolve(__dirname)}),
       NODE_ROUTER_PROVIDERS,
       NODE_HTTP_PROVIDERS,
     ],

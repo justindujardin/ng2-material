@@ -6,7 +6,7 @@ import {ROUTER_PROVIDERS} from 'angular2/router';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {enableProdMode} from 'angular2/core';
 
-import {App} from './app/app.component';
+import {App} from './app';
 
 enableProdMode();
 

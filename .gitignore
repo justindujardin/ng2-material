@@ -18,11 +18,6 @@ ng2-material/**/*.d.ts
 public/font/*.css
 public/font/*.css.map
 
-examples/**/*.css
-examples/**/*.css.map
-examples/**/*.js
-examples/**/*.js.map
-examples/**/*.d.ts
 
 test/**/*.js
 test/**/*.js.map

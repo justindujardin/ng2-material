@@ -2,7 +2,8 @@ System.config({
   baseUrl: './',
   transpiler: 'typescript',
   typescriptOptions: {
-    module: "system",
+    "target": "es5",
+    module: "commonjs",
     resolveTypings: true,
     emitDecoratorMetadata: true,
     sourceMap: true,
@@ -14,10 +15,6 @@ System.config({
   },
   packages: {
     'ng2-material': {
-      main: './all.ts',
-      defaultExtension: 'ts'
-    },
-    'examples': {
       main: './all.ts',
       defaultExtension: 'ts'
     },
