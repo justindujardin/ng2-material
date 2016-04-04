@@ -45,6 +45,7 @@ export default class TabsDynamicTabs {
   removeTab(tab: ITabData) {
     var index = this.tabs.indexOf(tab);
     this.tabs.splice(index, 1);
+    this.selectedIndex = Math.min(index, this.tabs.length-1);
   }
 
 }
