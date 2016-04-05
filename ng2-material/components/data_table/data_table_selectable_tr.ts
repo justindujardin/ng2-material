@@ -60,7 +60,7 @@ export abstract class AbstractMdDataTableSelectableRow implements AfterContentIn
 @Component({
   selector: 'tr[md-data-table-header-selectable-row]',
   template: `
-        <th>
+        <th class="md-data-check-cell">
             <md-checkbox #check [checked]="isActive"></md-checkbox>
         </th>
         <ng-content></ng-content>
@@ -94,7 +94,7 @@ export class MdDataTableHeaderSelectableRow extends AbstractMdDataTableSelectabl
 @Component({
   selector: 'tr[md-data-table-selectable-row]',
   template: `
-        <td>
+        <td class="md-data-check-cell">
           <md-checkbox #check [checked]="isActive"></md-checkbox>
         </td>
         <ng-content></ng-content>
