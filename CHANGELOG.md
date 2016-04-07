@@ -500,3 +500,4 @@
 * **test:** support generating coverage report with istanbul ([6af23c9](https://github.com/justindujardin/ng2-material/commit/6af23c9))
 
 
+
