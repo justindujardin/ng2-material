@@ -1,27 +1,3 @@
-<a name="0.3.5"></a>
-## [0.3.5](https://github.com/justindujardin/ng2-material/compare/v0.3.4...v0.3.5) (2016-04-07)
-
-
-### Bug Fixes
-
-* fix ProgressCircular tests about diameter ([9c6ae37](https://github.com/justindujardin/ng2-material/commit/9c6ae37))
-
-### Features
-
-* revamp interaction between table and rows. Now it only works with EventEmitter ([115ba65](https://github.com/justindujardin/ng2-material/commit/115ba65))
-* **md-data-table:** Add data-table style hooks ([f1f3c68](https://github.com/justindujardin/ng2-material/commit/f1f3c68))
-* **universal:** export node and browser compatible services ([67e8054](https://github.com/justindujardin/ng2-material/commit/67e8054))
-* updated material icon font ([c313b2c](https://github.com/justindujardin/ng2-material/commit/c313b2c))
-
-
-### BREAKING CHANGES
-
-* universal: Remove static `Media.hasMedia` method and utility `rAF` function. Inject the `ViewportHelper` service for rAF, and the `Media` service for hasMedia. This static method referred to the window directly.
-
-The use of `MATERIAL_PROVIDERS` has been deprecated. Please use either `MATERIAL_NODE_PROVIDERS` or `MATERIAL_BROWSER_PROVIDERS` as is appropriate for your platform.
-
-
-
 <a name="0.3.4"></a>
 ## [0.3.4](https://github.com/justindujardin/ng2-material/compare/v0.3.3...v0.3.4) (2016-03-29)
 
@@ -522,6 +498,5 @@ The use of `MATERIAL_PROVIDERS` has been deprecated. Please use either `MATERIAL
 * **mdCheckbox:** support two-way binding to checked property ([d220c42](https://github.com/justindujardin/ng2-material/commit/d220c42))
 * **radioGroup:** allow two way binding to value ([9e8ae62](https://github.com/justindujardin/ng2-material/commit/9e8ae62))
 * **test:** support generating coverage report with istanbul ([6af23c9](https://github.com/justindujardin/ng2-material/commit/6af23c9))
-
 
 

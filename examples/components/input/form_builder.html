@@ -15,7 +15,8 @@
     <form [ngFormModel]="projectForm">
 
       <md-input-container class="md-block">
-        <label for="description">Description</label>[(value)]="model.description">
+        <label for="description">Description</label>
+        <input md-input type="text" ngControl="description" id="description" />
         <div md-messages="description">
           <div md-message="required">This is required.</div>
           <div md-message="maxlength">The name has to be less than 30 characters long.</div>
