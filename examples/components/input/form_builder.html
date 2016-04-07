@@ -16,7 +16,7 @@
 
       <md-input-container class="md-block">
         <label for="description">Description</label>
-        <input md-input ngControl="description" id="description" [(value)]="model.description">
+        <input md-input type="text" ngControl="description" id="description" />
         <div md-messages="description">
           <div md-message="required">This is required.</div>
           <div md-message="maxlength">The name has to be less than 30 characters long.</div>
@@ -25,7 +25,7 @@
 
       <md-input-container class="md-block">
         <label for="clientName">Client Name</label>
-        <input md-input ngControl="clientName" id="clientName" [(value)]="model.clientName">
+        <input md-input ngControl="clientName" id="clientName" >
         <div md-messages="clientName" role="alert">
           <div md-message="required">This is required.</div>
         </div>
@@ -33,7 +33,7 @@
 
       <md-input-container class="md-block">
         <label for="clientEmail">Client Email</label>
-        <input md-input type="email" ngControl="clientEmail" id="clientEmail" [(value)]="model.clientEmail"/>
+        <input md-input type="email" ngControl="clientEmail" id="clientEmail" />
         <div md-messages="clientEmail" role="alert">
           <div md-message>Your email must be between 10 and 100 characters long and look like an e-mail address.</div>
         </div>
@@ -41,7 +41,7 @@
 
       <md-input-container class="md-block">
         <label for="rate">Hourly Rate (USD)</label>
-        <input md-input type="number" step="any" ngControl="rate" id="rate" [(value)]="model.rate" #rateInput/>
+        <input md-input type="number" step="any" ngControl="rate" id="rate"  #rateInput/>
         <div md-messages="rate" role="alert">
           <div md-message="mdNumberRequired">
             You've got to charge something! You can't just <b>give away</b> a Missile Defense
@@ -61,7 +61,7 @@
       </md-input-container>
     </form>
     <strong>Model</strong>
-    <pre class="md-padding">{{model | json}}</pre>
+    <pre class="md-padding">{{projectForm.value | json}}</pre>
   </md-content>
 
 </div>

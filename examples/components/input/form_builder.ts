@@ -16,17 +16,11 @@ import {FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup} from "angular2/c
 })
 export default class InputFormBuilder {
   projectForm: ControlGroup;
-  model = {
-    clientName: '',
-    clientEmail: '',
-    description: 'Nuclear Missile Defense System',
-    rate: 500
-  };
-
+  
   constructor(fb: FormBuilder) {
     this.projectForm = fb.group({
       'clientName': ['', Validators.required],
-      'description': ['', Validators.compose([
+      'description': ['Nuclear Missile Defense System', Validators.compose([
         Validators.required,
         Validators.maxLength(30)
       ])],
@@ -36,7 +30,7 @@ export default class InputFormBuilder {
         Validators.minLength(10),
         Validators.maxLength(100)
       ])],
-      'rate': ['', Validators.compose([
+      'rate': [500, Validators.compose([
         MdNumberRequiredValidator.inline(),
         MdPatternValidator.inline('^1234$'),
         MdMinValueValidator.inline(800),
