@@ -6,9 +6,10 @@ import {
   OnChanges,
   ContentChild,
   Input,
-  Output
+  Output,
+  Optional
 } from "angular2/core";
-import {FORM_PROVIDERS} from "angular2/common";
+import {NgModel, NgControl, FORM_PROVIDERS} from "angular2/common";
 import {ObservableWrapper, EventEmitter, TimerWrapper} from "angular2/src/facade/async";
 import {isBlank} from "angular2/src/facade/lang";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
@@ -33,6 +34,10 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
 export class MdInput {
   _value: string;
 
+  constructor(@Optional() private model: NgModel,
+              @Optional() private control: NgControl) {
+  }
+
   @Input('value')
   set value(value: string) {
     this._value = value;
@@ -40,7 +45,8 @@ export class MdInput {
   }
 
   get value(): string {
-    return !isBlank(this._value) ? this._value : '';
+    let val = this.model ? this.model.value : this.control ? this.control.value : this._value;
+    return !isBlank(val) ? val : '';
   }
 
   @Input()
