@@ -15,7 +15,7 @@
     "test": "$(npm bin)/grunt karma"
   },
   "dependencies": {
-    "angular2": ">=2.0.0-beta.12",
+    "angular2": ">=2.0.0-beta.14",
     "es6-promise": ">=3.0.2",
     "es6-shim": ">=0.35.0",
     "reflect-metadata": "0.1.2",
@@ -24,7 +24,8 @@
   },
   "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
-    "angular2-universal-preview": "*",
+    "angular2-universal-polyfills": "^0.3.4",
+    "angular2-universal": "0.90.2",
     "autoprefixer": "6.2.0",
     "coveralls": "2.11.6",
     "css": "^2.2.1",

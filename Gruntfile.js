@@ -246,14 +246,7 @@ module.exports = function (grunt) {
     },
     webpack: {
       singleJs: require('./webpack.config.js')
-    },
-
-    universal: {
-      examples: {
-        src: 'index.html'
-      }
     }
-
   });
 
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -359,98 +352,6 @@ module.exports = function (grunt) {
       grunt.log.ok('Published to NPM' + (tag ? ' @' + tag : ''));
       done();
     });
-  });
-
-  // NOTE: This task does not work.  It is WIP.
-  grunt.registerMultiTask('universal', 'Prerender examples app as static HTML', function () {
-    var done = this.async();
-    /*
-     * based on angular2-grunt-prerender
-     * https://github.com/angular/universal
-     *
-     * Copyright (c) 2016 Wassim Chegham
-     * Licensed under the MIT license.
-     */
-    try {
-      var proxyquire = require('proxyquire');
-      var zone = require('zone.js');
-      var reflect = require('reflect-metadata');
-      var provide = require('angular2/core');
-      var router = require('angular2/router');
-      var ng2material = require('./ng2-material/all');
-      ng2material['@global'] = true;
-      ng2material['@noCallThru'] = true;
-      var app = proxyquire('./examples/app', {
-        'ng2-material/all': ng2material
-      });
-      var all = proxyquire('./examples/all', {
-        'ng2-material/all': ng2material
-      });
-      var universal = require('angular2-universal-preview');
-      var options = this.options({
-        component: [app.DemosApp],
-        providers: ng2material.MATERIAL_NODE_PROVIDERS,
-        platformProviders: [
-          universal.NODE_LOCATION_PROVIDERS,
-        ],
-        directives: ng2material.MATERIAL_DIRECTIVES.concat(all.DEMO_DIRECTIVES),
-        preboot: false,
-        separator: '\r\n'
-      });
-      var angular2Prerender = function (file) {
-        var clientHtml = file.toString();
-        // bootstrap and render component to string
-        var bootloader = options.bootloader;
-        if (!options.bootloader) {
-          options.bootloader = {
-            component: options.component,
-            document: universal.parseDocument(clientHtml),
-            providers: options.providers,
-            componentProviders: options.componentProviders,
-            platformProviders: options.platformProviders,
-            directives: options.directives,
-            preboot: options.preboot
-          };
-        }
-        bootloader = universal.Bootloader.create(options.bootloader);
-        return bootloader.serializeApplication().then(function (html) {
-          return new Buffer(html);
-        });
-      };
-      this.files.forEach(function (f) {
-        var src = f.src.filter(function (filepath) {
-            if (!grunt.file.exists(filepath)) {
-              grunt.log.warn('Source file "' + filepath + '" not found.');
-              return false;
-            }
-            else {
-              return true;
-            }
-          })
-          .map(function (filepath) {
-            return grunt.file.read(filepath);
-          })
-          .join(grunt.util.normalizelf(options.separator));
-        // Handle options.
-        angular2Prerender(src)
-          .then(function (buffer) {
-            return src = buffer;
-          })
-          .then(function (_src) {
-            return grunt.file.write(f.dest, _src);
-          })
-          .then(function (_) {
-            return grunt.log.writeln('File "' + f.dest + '" created.');
-            done();
-          });
-      });
-
-    }
-    catch (e) {
-      console.error(e.stack);
-      return;
-    }
-
   });
 
   grunt.registerTask('site-meta', 'Build metadata files describing example usages', function (tag) {
