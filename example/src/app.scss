@@ -1,7 +1,7 @@
-$md-font-url: '../public/font/';
-@import "../public/font/font";
-@import '../ng2-material/all';
-@import "example";
+$md-font-url: '../../public/font/';
+@import "../node_modules/ng2-material/font/font.scss";
+@import "../node_modules/ng2-material/source/all";
+@import "./components/example";
 
 $app-content-lg: 940px;
 $app-content-md: 580px;

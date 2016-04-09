@@ -26,7 +26,7 @@ export interface ISourceFile {
 @Component({
   selector: 'example',
   properties: ['templateData', 'stylesData', 'sourceData', 'showSource', 'orderedFiles'],
-  templateUrl: 'src/example.html',
+  templateUrl: 'src/components/example.html',
   directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES, Highlight]
 })
 export default class Example implements AfterViewInit {

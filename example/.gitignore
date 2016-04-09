@@ -1,3 +1,5 @@
+/gulpfile.js.map
+/gulpfile.js
 # Don't version the typings files
 typings/
 
