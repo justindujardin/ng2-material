@@ -1,4 +1,4 @@
-import "angular2-universal-preview/polyfills";
+import "angular2-universal/polyfills";
 import * as path from "path";
 import * as express from "express";
 import * as bodyParser from "body-parser";
@@ -8,7 +8,7 @@ import {
   NODE_ROUTER_PROVIDERS,
   NODE_HTTP_PROVIDERS,
   BASE_URL
-} from "angular2-universal-preview";
+} from "angular2-universal";
 import {provide, enableProdMode} from "angular2/core";
 import {APP_BASE_HREF} from "angular2/router";
 import {App} from "./app";
@@ -38,7 +38,7 @@ app.use('public', express.static(path.join(__dirname, '../../../public/')));
 
 // Express View
 app.engine('.html', expressEngine);
-app.set('views', __dirname);
+app.set('views', root);
 app.set('view engine', 'html');
 
 function ngApp(req, res) {
@@ -50,10 +50,10 @@ function ngApp(req, res) {
       provide(APP_BASE_HREF, {useValue: baseUrl}),
       provide(REQUEST_URL, {useValue: url}),
       provide(BASE_URL, {useValue: root}),
-      MATERIAL_NODE_PROVIDERS,
-      DEMO_PROVIDERS,
-      NODE_ROUTER_PROVIDERS,
-      NODE_HTTP_PROVIDERS,
+      ...MATERIAL_NODE_PROVIDERS,
+      ...DEMO_PROVIDERS,
+      ...NODE_ROUTER_PROVIDERS,
+      ...NODE_HTTP_PROVIDERS
     ],
     async: true,
     preboot: false // { appRoot: 'app' } // your top level app component selector
@@ -77,3 +77,5 @@ app.use('/home', ngApp);
 app.listen(3000, () => {
   console.log('Listen on http://localhost:3000');
 });
+
+

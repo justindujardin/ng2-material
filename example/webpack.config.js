@@ -61,7 +61,7 @@ var defaultConfig = {
   },
   context: __dirname,
   resolve: {
-    root: path.join(__dirname, '/src')
+    root: path.join(__dirname, 'src')
   },
   output: {
     publicPath: path.resolve(__dirname),
