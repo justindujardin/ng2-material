@@ -116,14 +116,14 @@ export const MATERIAL_NODE_PROVIDERS: any[] = CONST_EXPR([
   Media,
   SidenavService,
   MdRadioDispatcher,
-  INPUT_VALIDATORS
+  ...INPUT_VALIDATORS
 ]);
 
 /**
  * Material Design component providers for use in the browser.
  */
 export const MATERIAL_BROWSER_PROVIDERS: any[] = CONST_EXPR([
-  MATERIAL_NODE_PROVIDERS,
+  ...MATERIAL_NODE_PROVIDERS,
   provide(ViewportHelper, {useClass: BrowserViewportHelper})
 ]);
 
