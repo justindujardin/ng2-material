@@ -109,8 +109,6 @@ module.exports = function (grunt) {
             dest: '.',
             ext: '.css',
             src: [
-              "example/src/app/*.scss",
-              "example/src/app/**/*.scss",
               "public/font/*.scss",
               "<%- sourceRoot %>/all.scss"
             ]
