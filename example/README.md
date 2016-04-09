@@ -1,9 +1,6 @@
-# Angular 2 Universal Starter [![Universal Angular 2](https://img.shields.io/badge/universal-angular2-brightgreen.svg?style=flat)](https://github.com/angular/universal)
+# ng2-material docs site
 
-A minimal Angular 2 starter for Universal JavaScript using TypeScript and Webpack
-
-> If you're looking for the repo from the AngularConnect talk look in the [angular-connect branch](https://github.com/angular/universal-starter/tree/angular-connect)  
-If you're looking for a SystemJS version of the repo look in the [systemjs branch](https://github.com/angular/universal-starter/tree/systemjs)
+A universal module for documenting the usage of ng2-material components.
 
 ## Installation
 

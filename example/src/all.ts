@@ -6,8 +6,8 @@ import CardBasicUsage from "./components/card/basic_usage";
 import CardInlineActions from "./components/card/inline_actions";
 import ButtonBasicUsage from "./components/button/basic_usage";
 import CardActionButtons from "./components/card/action_buttons";
-import DataTableBasicUsage from './components/data_table/basic_usage';
-import DataTableSelectableUsage from './components/data_table/selectable_usage';
+import DataTableBasicUsage from "./components/data_table/basic_usage";
+import DataTableSelectableUsage from "./components/data_table/selectable_usage";
 import DialogBasicUsage from "./components/dialog/basic_usage";
 import ToolbarBasicUsage from "./components/toolbar/basic_usage";
 import ToolbarScrollShrink from "./components/toolbar/scroll_shrink";
@@ -24,6 +24,9 @@ import InputBasicUsage from "./components/input/basic_usage";
 import InputFormBuilder from "./components/input/form_builder";
 import WhiteframeBasicUsage from "./components/whiteframe/basic_usage";
 import SidenavBasicUsage from "./components/sidenav/basic_usage";
+import {ComponentsService} from "./services/components";
+import {NavigationService} from "./services/navigation";
+import {VersionService} from "./services/version";
 
 /**
  * Collection of Material Design component example directives.
@@ -46,6 +49,13 @@ export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   ProgressCircularBasicUsage,
   SidenavBasicUsage,
   WhiteframeBasicUsage
+]);
+
+/**
+ * Collection of providers for example app
+ */
+export const DEMO_PROVIDERS: Type[] = CONST_EXPR([
+  ComponentsService, NavigationService, VersionService
 ]);
 
 export * from './components/example';

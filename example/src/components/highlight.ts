@@ -7,7 +7,7 @@ declare var hljs: any;
   selector: 'highlight',
   properties: ['type', 'text'],
   template: `<pre><code class="highlight" [innerHtml]="rendered || text"><ng-content></ng-content></code></pre>`,
-  styleUrls: ['src/highlight.css'],
+  styleUrls: ['src/components/highlight.css'],
   encapsulation: ViewEncapsulation.None
 })
 export class Highlight implements AfterContentInit {

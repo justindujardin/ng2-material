@@ -28,7 +28,7 @@ export interface IExampleData {
 @Component({
   selector: 'app',
   templateUrl: 'src/app.html',
-  // directives: [MATERIAL_DIRECTIVES, ROUTER_DIRECTIVES, Example, DEMO_DIRECTIVES],
+  directives: [MATERIAL_DIRECTIVES, ROUTER_DIRECTIVES, Example, DEMO_DIRECTIVES],
   host: {
     '[class.push-menu]': 'fullPage'
   }
@@ -60,14 +60,13 @@ export class App implements OnDestroy {
       this.fullPage = mql.matches;
       this.appRef.tick();
     });
-    http.get('public/version.json')
-      .subscribe((res: Response) => {
-        this.version = res.json().version;
-      });
-
     this._components.getComponents()
       .then((comps) => {
         this.components = comps;
+      });
+    http.get('public/version.json')
+      .subscribe((res: Response) => {
+        this.version = res.json().version;
       });
 
   }

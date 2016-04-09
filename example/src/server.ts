@@ -12,24 +12,34 @@ import {
 import {provide, enableProdMode} from "angular2/core";
 import {APP_BASE_HREF} from "angular2/router";
 import {App} from "./app";
+import {MATERIAL_NODE_PROVIDERS} from "ng2-material/all";
+import {DEMO_PROVIDERS} from "./all";
 
 // Angular 2
 
 
 // Application
-
+var morgan = require('morgan');
 let app = express();
-let root = path.join(path.resolve(__dirname, '..'));
+let root = path.resolve(path.join(__dirname, '..'));
+
+
+// setup the logger
+app.use(morgan('combined'));
 
 enableProdMode();
+
+app.use(bodyParser.json());
+
+// Serve static files
+app.use(express.static(root, {index: false}));
+app.use('public', express.static(path.join(__dirname, '../../../public/')));
+// app.use('src', express.static(__dirname));
 
 // Express View
 app.engine('.html', expressEngine);
 app.set('views', __dirname);
 app.set('view engine', 'html');
-
-app.use(bodyParser.json());
-
 
 function ngApp(req, res) {
   let baseUrl = '/';
@@ -39,7 +49,9 @@ function ngApp(req, res) {
     providers: [
       provide(APP_BASE_HREF, {useValue: baseUrl}),
       provide(REQUEST_URL, {useValue: url}),
-      provide(BASE_URL, {useValue: path.resolve(__dirname)}),
+      provide(BASE_URL, {useValue: root}),
+      MATERIAL_NODE_PROVIDERS,
+      DEMO_PROVIDERS,
       NODE_ROUTER_PROVIDERS,
       NODE_HTTP_PROVIDERS,
     ],
@@ -48,8 +60,6 @@ function ngApp(req, res) {
   });
 }
 
-// Serve static files
-app.use(express.static(root, {index: false}));
 
 // Our API for demos only
 app.get('/data.json', (req, res) => {
