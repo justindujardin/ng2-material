@@ -1,10 +1,10 @@
-import "angular2-universal-preview/polyfills";
+import "angular2-universal/polyfills";
 import {provide, enableProdMode} from "angular2/core";
 import {APP_BASE_HREF} from "angular2/router";
 import {UrlResolver} from "angular2/compiler";
 import {prerender} from "angular2-gulp-prerender";
 import {App} from "./src/app";
-import {NODE_HTTP_PROVIDERS, NODE_ROUTER_PROVIDERS, BASE_URL, REQUEST_URL} from "angular2-universal-preview";
+import {NODE_HTTP_PROVIDERS, NODE_ROUTER_PROVIDERS, BASE_URL, REQUEST_URL} from "angular2-universal";
 import {MATERIAL_NODE_PROVIDERS, MATERIAL_DIRECTIVES} from "ng2-material/all";
 import {DEMO_PROVIDERS} from './src/all';
 import gulp = require('gulp');

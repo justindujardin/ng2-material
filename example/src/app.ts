@@ -28,7 +28,7 @@ export interface IExampleData {
 @Component({
   selector: 'app',
   templateUrl: 'src/app.html',
-  directives: [MATERIAL_DIRECTIVES, ROUTER_DIRECTIVES, Example, DEMO_DIRECTIVES],
+  directives: [Example],
   host: {
     '[class.push-menu]': 'fullPage'
   }
