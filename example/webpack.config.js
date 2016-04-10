@@ -8,7 +8,7 @@ var commonConfig = {
   module: {
     loaders: [
       // TypeScript
-      { test: /\.ts$/, loader: 'ts-loader' }
+      {test: /\.ts$/, loader: 'ts-loader'}
     ]
   },
   plugins: [
@@ -40,6 +40,7 @@ var serverConfig = {
     path: path.join(__dirname, 'dist', 'server')
   },
   externals: checkNodeImport,
+  devtool: "source-map",
   node: {
     global: true,
     __dirname: true,
@@ -48,7 +49,6 @@ var serverConfig = {
     Buffer: true
   }
 };
-
 
 
 // Default config
@@ -83,7 +83,8 @@ module.exports = [
 // Helpers
 function checkNodeImport(context, request, cb) {
   if (!path.isAbsolute(request) && request.charAt(0) !== '.') {
-    cb(null, 'commonjs ' + request); return;
+    cb(null, 'commonjs ' + request);
+    return;
   }
   cb();
 }
