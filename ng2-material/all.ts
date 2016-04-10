@@ -74,7 +74,7 @@ export * from './components/tabs/tabs';
 
 export * from './core/util/media';
 
-import {ViewportHelper, BrowserViewportHelper} from "./core/util/viewport";
+import {ViewportHelper, BrowserViewportHelper, NodeViewportHelper} from "./core/util/viewport";
 import {provide} from "angular2/core";
 export * from './core/util/viewport';
 export * from './core/util/animate';
@@ -111,6 +111,7 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
  * Material Design component providers for use in a Node.JS environment.
  */
 export const MATERIAL_NODE_PROVIDERS: any[] = CONST_EXPR([
+  provide(ViewportHelper, {useClass: NodeViewportHelper}),
   MdDialog,
   Media,
   SidenavService,

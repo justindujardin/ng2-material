@@ -60,7 +60,6 @@
         "ng2-material/core/util/util.ts",
         "ng2-material/core/util/viewport.ts",
         "ng2-material/webpack_all.ts",
-        "ng2-material/webpack_scripts.ts",
         "ng2-material/webpack_styles.ts"
     ]
 }

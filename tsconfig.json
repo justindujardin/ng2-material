@@ -1,14 +1,10 @@
 {
-    "version": "1.6.0",
     "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "declaration": false,
-        "noImplicitAny": false,
-        "removeComments": true,
-        "noLib": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "target": "es5",
+        "module": "commonjs",
+        "removeComments": true,
         "sourceMap": true
     },
     "filesGlob": [
