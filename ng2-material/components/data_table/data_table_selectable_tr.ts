@@ -82,6 +82,8 @@ export class MdDataTableHeaderSelectableRow extends AbstractMdDataTableSelectabl
     this.table.onSelectableChange
       .map(event => event.allSelected)
       .subscribe(newActiveStatus => this.isActive = newActiveStatus);
+
+    this.onChange.subscribe(this.table.change.bind(this.table));
   }
 
   ngAfterContentInit() {
@@ -129,6 +131,8 @@ export class MdDataTableSelectableRow extends AbstractMdDataTableSelectableRow {
           (event.values.findIndex((value: string) => value === this.selectableValue)) !== -1;
       })
       .subscribe(newActiveStatus => this.isActive = newActiveStatus);
+
+    this.onChange.subscribe(this.table.change.bind(this.table));
   }
 
   ngAfterContentInit() {

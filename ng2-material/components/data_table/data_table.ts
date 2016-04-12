@@ -44,32 +44,36 @@ export class MdDataTable implements AfterContentInit {
   }
 
   change(event: ITableSelectableRowSelectionChange) {
-    let outputEvent: ITableSelectionChange = {
-      name: 'selectable_change',
-      allSelected: false,
-      values: []
-    };
-    if (event.target instanceof MdDataTableHeaderSelectableRow === true) {
-      if (event.isActive === true) {
-        outputEvent.allSelected = true;
-        outputEvent.values = this._getRowsValues();
-      }
-    } else {
-      outputEvent.values = this.selected.slice(0);
+    if (this.selectable === true) {
 
-      if (event.isActive === true) {
-        outputEvent.values.push(event.selectableValue);
+      let outputEvent: ITableSelectionChange = {
+        name: 'selectable_change',
+        allSelected: false,
+        values: []
+      };
+      if (event.target instanceof MdDataTableHeaderSelectableRow === true) {
+        if (event.isActive === true) {
+          outputEvent.allSelected = true;
+          outputEvent.values = this._getRowsValues();
+        }
       } else {
-        let index = outputEvent.values.indexOf(event.selectableValue);
-        if (index !== -1) {
-          outputEvent.values.splice(index, 1);
+        outputEvent.values = this.selected.slice(0);
+
+        if (event.isActive === true) {
+          outputEvent.values.push(event.selectableValue);
+        } else {
+          let index = outputEvent.values.indexOf(event.selectableValue);
+          if (index !== -1) {
+            outputEvent.values.splice(index, 1);
+          }
         }
       }
-    }
 
-    // dispatch change
-    this.selected = outputEvent.values;
-    this.onSelectableChange.emit(outputEvent);
+      // dispatch change
+      this.selected = outputEvent.values;
+      this.onSelectableChange.emit(outputEvent);
+      
+    }
   }
 
   /**
@@ -80,17 +84,6 @@ export class MdDataTable implements AfterContentInit {
       .map((tr: MdDataTableSelectableRow) => tr.selectableValue);
   }
 
-  ngAfterContentInit() {
-    if (this.selectable === true) {
-      if (isPresent(this._masterRow)) {
-        this._masterRow.onChange.subscribe(this.change.bind(this));
-      }
-
-      this._rows.toArray()
-        .map((tr: MdDataTableSelectableRow) => {
-          tr.onChange.subscribe(this.change.bind(this));
-        });
-    }
-  }
+  ngAfterContentInit() {}
 
 }
