@@ -11,7 +11,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": true,
-        "sourceRoot": "ng2-material"
+        "sourceRoot": "ng2-material/source"
     },
     "filesGlob": [
         "node_modules/angular2/typings/browser.d.ts",
