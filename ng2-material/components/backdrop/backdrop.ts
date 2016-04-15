@@ -86,7 +86,7 @@ export class MdBackdrop {
     this.toggle(value);
   }
 
-  private _visible: boolean = false;
+  protected _visible: boolean = false;
   private _transitioning: boolean = false;
   private _previousOverflow: string = null;
   private _body: HTMLElement = null;
