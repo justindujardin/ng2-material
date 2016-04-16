@@ -24,8 +24,6 @@
   },
   "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
-    "angular2-universal-polyfills": "^0.3.4",
-    "angular2-universal": "0.90.2",
     "autoprefixer": "6.2.0",
     "coveralls": "2.11.6",
     "css": "^2.2.1",
