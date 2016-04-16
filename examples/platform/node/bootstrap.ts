@@ -1,4 +1,5 @@
-import {bootstrap} from "angular2-universal";
+// import {bootstrap} from "angular2-universal";
+import {bootstrap} from "angular2/platform/browser";
 import {ROUTER_PROVIDERS} from "angular2/router"; 
 import {MATERIAL_NODE_PROVIDERS} from "ng2-material/all";
 import {HTTP_PROVIDERS} from "angular2/http";
