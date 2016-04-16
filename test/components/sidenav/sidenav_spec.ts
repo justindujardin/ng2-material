@@ -120,6 +120,15 @@ export function main() {
         }));
 
       });
+
+      describe('visible', () => {
+        it('should accept "true" for content pushing', injectAsync([], () => {
+          return setup(`<md-sidenav [visible]="true"></md-sidenav>`).then((api: ITestFixture) => {
+            expect(api.component.visible).toBe(true);
+          });
+        }));
+
+      });
     });
     describe('md-sidenav-container', () => {
       let template = `

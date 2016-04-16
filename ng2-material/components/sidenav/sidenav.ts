@@ -122,6 +122,18 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   private _style: string = SidenavStyle.OVER;
 
   /**
+   * allow backdrop visibility Input
+   */
+  get visible(): boolean {
+    return this._visible;
+  }
+
+  @Input()
+  set visible(value: boolean) {
+    this.toggle(value);
+  }
+
+  /**
    * The backdrop element the container provides.
    */
   backdropRef: MdBackdrop = null;
