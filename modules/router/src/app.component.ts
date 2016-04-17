@@ -4,7 +4,7 @@ import {ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
 @Component({
   selector: 'home',
   template: `
-    Home
+    Home 2 
   `
 })
 export class Home {
@@ -17,7 +17,7 @@ export class Home {
   `
 })
 export class About {
-}
+} 
 
 
 @Component({
