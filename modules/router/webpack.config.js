@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var commonConfig = {
   resolve: {
@@ -21,7 +22,7 @@ var clientConfig = {
   target: 'web',
   entry: './src/client',
   output: {
-    path: path.join(__dirname, 'dist', 'client')
+    path: path.join(__dirname, 'dist')
   },
   node: {
     global: true,
@@ -29,7 +30,13 @@ var clientConfig = {
     __filename: true,
     process: true,
     Buffer: false
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([
+      {from: path.join(__dirname, 'src/**/*.html')},
+      {from: path.join(__dirname, 'src/**/*.css')}
+    ])
+  ]
 };
 
 // Default config

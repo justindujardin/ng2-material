@@ -1,5 +1,6 @@
 import {Component} from "angular2/core";
 import {ROUTER_DIRECTIVES, RouteConfig} from "angular2/router";
+import {ButtonBasicUsage} from "./components/button/basic_usage";
 
 @Component({
   selector: 'home',
@@ -12,8 +13,10 @@ export class Home {
 
 @Component({
   selector: 'about',
+  directives:[ButtonBasicUsage],
   template: `
     About
+    <button-basic-usage></button-basic-usage>
   `
 })
 export class About {

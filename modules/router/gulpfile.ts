@@ -21,26 +21,25 @@ function renderAsPath(routePath: string = '', outPath: string = '') {
 
   // Resolve
   let distBase = path.resolve(path.join(__dirname, 'dist'));
-  console.log(distBase + ' <-- distBase');
-
   outPath = path.join(distBase, outPath);
-  console.log(outPath + ' <-- outPath');
-
-  let bundlePath = path.resolve(path.join(distBase, 'client/bundle.js'));
-  console.log(bundlePath + ' <-- bundle');
-
   let relativePath = path.relative(outPath, distBase);
   // add a . to no relative path result because we prepend
   // to a / for BASE_URL below. 
   if (relativePath === '') {
     relativePath = '.';
   }
-  console.log(relativePath + ' <-- relative');
 
+  let stableTime: number = -1;
   let baseUrl = '/';
   return gulp.src('./index.html')
     .pipe(prerender({
       directives: [Html],
+      // NOTE: It is assumed that this is not called until the zone is stable.
+      ngOnStable: () => {
+        return new Promise((resolve) => {
+          setTimeout(resolve, 500);
+        });
+      },
       providers: [
         provide(APP_BASE_HREF, {useValue: baseUrl}),
         provide(BASE_URL, {useValue: relativePath + '/'}),
@@ -56,15 +55,11 @@ function renderAsPath(routePath: string = '', outPath: string = '') {
 
 }
 
-gulp.task('prerender', () => {
+gulp.task('render', () => {
   renderAsPath();
   renderAsPath('about', 'about');
 });
 
-gulp.task('watch:prerender', () => {
-  gulp.watch(['./index.html', './src/**'], ['prerender']);
-});
-
-gulp.task('default', ['prerender'], () => {
+gulp.task('default', ['render'], () => {
   console.log('welcome');
 });
