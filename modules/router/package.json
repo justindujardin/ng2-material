@@ -30,15 +30,17 @@
   },
   "devDependencies": {
     "angular2-gulp-prerender": "^0.10.1",
+    "copy-webpack-plugin": "^2.1.1",
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
     "highlightjs": "8.7.0",
+    "ng2-material": "file:../../out",
     "systemjs": "0.19.2",
     "ts-loader": "^0.8.1",
     "ts-node": "^0.7.1",
     "typescript": "^1.8.7",
     "typings": "^0.7.9",
-    "webpack": "^1.12.10",
+    "webpack": "^1.13.0",
     "webpack-merge": "^0.8.4"
   }
 }
