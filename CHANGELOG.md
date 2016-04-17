@@ -1,3 +1,18 @@
+<a name="0.3.6"></a>
+## [0.3.6](https://github.com/justindujardin/ng2-material/compare/v0.3.5...v0.3.6) (2016-04-17)
+
+
+### Bug Fixes
+
+* update messages when form validation status changes ([99df994](https://github.com/justindujardin/ng2-material/commit/99df994))
+
+### Features
+
+* make visibility input available for sidenav (#173) ([b735650](https://github.com/justindujardin/ng2-material/commit/b735650))
+* **JetBrains:** free OS licenses of WebStorm for major contributors ([195ee4c](https://github.com/justindujardin/ng2-material/commit/195ee4c))
+
+
+
 <a name="0.3.5"></a>
 ## [0.3.5](https://github.com/justindujardin/ng2-material/compare/v0.3.4...v0.3.5) (2016-04-10)
 
