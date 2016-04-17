@@ -3,8 +3,8 @@ import {provide, enableProdMode} from "angular2/core";
 import {APP_BASE_HREF} from "angular2/router";
 import {UrlResolver} from "angular2/compiler";
 import {prerender} from "angular2-gulp-prerender";
-import {App} from "./src/app";
 import {NODE_HTTP_PROVIDERS, NODE_ROUTER_PROVIDERS, BASE_URL, REQUEST_URL} from "angular2-universal";
+import {Html} from "./src/html.component";
 import gulp = require('gulp');
 import path = require('path');
 var rename = require('gulp-rename');
@@ -29,13 +29,18 @@ function renderAsPath(routePath: string = '', outPath: string = '') {
   let bundlePath = path.resolve(path.join(distBase, 'client/bundle.js'));
   console.log(bundlePath + ' <-- bundle');
 
-  let relativePath = path.relative(outPath,distBase);
+  let relativePath = path.relative(outPath, distBase);
+  // add a . to no relative path result because we prepend
+  // to a / for BASE_URL below. 
+  if (relativePath === '') {
+    relativePath = '.';
+  }
   console.log(relativePath + ' <-- relative');
 
   let baseUrl = '/';
   return gulp.src('./index.html')
     .pipe(prerender({
-      directives: [App],
+      directives: [Html],
       providers: [
         provide(APP_BASE_HREF, {useValue: baseUrl}),
         provide(BASE_URL, {useValue: relativePath + '/'}),

@@ -32,25 +32,6 @@ var clientConfig = {
   }
 };
 
-
-var serverConfig = {
-  target: 'node',
-  entry: './src/server',
-  output: {
-    path: path.join(__dirname, 'dist', 'server')
-  },
-  externals: checkNodeImport,
-  devtool: "source-map",
-  node: {
-    global: true,
-    __dirname: true,
-    __filename: true,
-    process: true,
-    Buffer: true
-  }
-};
-
-
 // Default config
 var defaultConfig = {
   module: {
@@ -67,24 +48,11 @@ var defaultConfig = {
     publicPath: path.resolve(__dirname),
     filename: 'bundle.js'
   }
-}
-
+};
 
 
 var webpackMerge = require('webpack-merge');
 module.exports = [
   // Client
-  webpackMerge({}, defaultConfig, commonConfig, clientConfig),
-
-  // Server
-  webpackMerge({}, defaultConfig, commonConfig, serverConfig)
-]
-
-// Helpers
-function checkNodeImport(context, request, cb) {
-  if (!path.isAbsolute(request) && request.charAt(0) !== '.') {
-    cb(null, 'commonjs ' + request);
-    return;
-  }
-  cb();
-}
+  webpackMerge({}, defaultConfig, commonConfig, clientConfig)
+];
