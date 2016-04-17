@@ -22,8 +22,8 @@ Many of the components and examples are ported directly from their existing proj
 
 ng2-material is an open source project sponsored by JetBrains. Any major contributors to the project are entitled to an all-products license for development of ng2-material features, which includes WebStorm.
 
-<a href="https://www.jetbrains.com/" target="_blank"><img src="./public/images/logo_jetbrains.svg" width="256"></a>
-<a href="https://www.jetbrains.com/webstorm/" target="_blank"><img src="./public/images/logo_webstorm.svg" width="256"></a>
+<a href="https://www.jetbrains.com/" target="_blank"><img src="https://rawgit.com/justindujardin/ng2-material/master/public/images/logo_jetbrains.svg" width="256"></a>
+<a href="https://www.jetbrains.com/webstorm/" target="_blank"><img src="https://rawgit.com/justindujardin/ng2-material/master/public/images/logo_webstorm.svg" width="256"></a>
 
 
 ## License 
