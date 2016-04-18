@@ -212,9 +212,7 @@ export class MdSidenavContainer implements OnDestroy, AfterViewInit {
     });
     // When the backdrop is hidden, close any child navs
     this._unsubscribe = this._backdrop.onHiding.subscribe(() => {
-      this.children.toArray().forEach((m: MdSidenav) => {
-        m.visible = false;
-      });
+       this.children.toArray()[0].visible = false;
     });
   }
 
