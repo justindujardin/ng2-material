@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter, ContentChild, ContentChildren, QueryList, AfterContentInit} from 'angular2/core';
-import {isPresent} from "angular2/src/facade/lang";
-import 'rxjs/add/operator/share';
-import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow, ITableSelectableRowSelectionChange} from './data_table_selectable_tr';
+import {Component, Input, Output, EventEmitter,
+        ContentChild, ContentChildren, QueryList} from 'angular2/core';
+import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow,
+        ITableSelectableRowSelectionChange} from './data_table_selectable_tr';
 
 export * from './data_table_selectable_tr';
 
@@ -23,7 +23,7 @@ export interface ITableSelectionChange {
     '[class.md-data-table-selectable]': 'selectable',
   }
 })
-export class MdDataTable implements AfterContentInit {
+export class MdDataTable {
   @Input()
   selectable: boolean;
   @Output()
@@ -72,7 +72,7 @@ export class MdDataTable implements AfterContentInit {
       // dispatch change
       this.selected = outputEvent.values;
       this.onSelectableChange.emit(outputEvent);
-      
+
     }
   }
 
@@ -83,7 +83,4 @@ export class MdDataTable implements AfterContentInit {
     return this._rows.toArray()
       .map((tr: MdDataTableSelectableRow) => tr.selectableValue);
   }
-
-  ngAfterContentInit() {}
-
 }

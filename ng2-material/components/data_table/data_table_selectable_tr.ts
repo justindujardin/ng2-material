@@ -1,8 +1,9 @@
-import {Component, Output, Input, EventEmitter, Inject, Optional, forwardRef, ElementRef, AfterContentInit} from "angular2/core";
-import {isPresent} from "angular2/src/facade/lang";
+import {Component, Output, Input, EventEmitter,
+        Inject, Optional, forwardRef, ElementRef, AfterContentInit} from 'angular2/core';
+import {isPresent} from 'angular2/src/facade/lang';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/map';
-import {MdCheckbox} from "../checkbox/checkbox";
+import {MdCheckbox} from '../checkbox/checkbox';
 import {MdDataTable} from './data_table';
 
 /**
@@ -50,7 +51,8 @@ export abstract class AbstractMdDataTableSelectableRow implements AfterContentIn
       target: this,
       isActive: this.isActive,
       selectableValue: this.selectableValue
-    }
+    };
+
     this.onChange.emit(event);
   }
 
