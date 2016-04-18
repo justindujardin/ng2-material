@@ -16,6 +16,7 @@ export class SidenavService {
     if (!instance) {
       return Promise.reject('invalid container');
     }
+    instance.visible = false;
     return instance.hide();
   }
 
