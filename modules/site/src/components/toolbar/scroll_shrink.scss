@@ -1,0 +1,10 @@
+@import "../../../node_modules/ng2-material/source/core/style/variables";
+
+div.scroll-shrink {
+  height: 600px;
+  overflow-y: hidden;
+  @media screen and (max-width: $layout-breakpoint-sm) {
+    height: 200px;
+  }
+}
+

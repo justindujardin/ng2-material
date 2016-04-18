@@ -4,7 +4,6 @@
 node_modules/
 dist/
 out/
-site/
 /public/coverage.json
 /public/meta.json
 /public/version.json
