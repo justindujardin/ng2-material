@@ -25,7 +25,6 @@ import {DOM} from "angular2/src/platform/dom/dom_adapter";
   host: {
     'class': 'md-input',
     '[value]': 'value',
-    '(input)': 'value=$event.target.value',
     '(focus)': 'setHasFocus(true)',
     '(blur)': 'setHasFocus(false)'
   },
