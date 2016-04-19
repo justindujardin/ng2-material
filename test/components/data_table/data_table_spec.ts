@@ -35,7 +35,7 @@ export function main() {
         <tr md-data-table-selectable-row>
           <td>$2.90</td>
         </tr>
-        <tr md-data-table-selectable-row>
+        <tr md-data-table-selectable-row selectable-value="$1.25">
           <td>$1.25</td>
         </tr>
         <tr md-data-table-selectable-row *ngFor="#price of prices" class="dynamic">
@@ -114,7 +114,7 @@ export function main() {
             expect(masterRow.componentInstance.isActive).toBe(true);
             row.click();
             expect(api.comp.selected.length).toEqual(1);
-            expect(api.comp.selected[0]).toEqual('1');
+            expect(api.comp.selected[0]).toEqual('$1.25');
             expect(masterRow.componentInstance.isActive).toBe(false);
             api.fixture.destroy();
           });
@@ -168,7 +168,7 @@ export function main() {
             let masterRow = api.debug.query(By.css('thead tr:first-child'));
             masterRow.nativeElement.click();
             expect(api.comp.selected.length).toEqual(3);
-            expect(api.comp.selected).toEqual(['0', '1', '2']);
+            expect(api.comp.selected).toEqual(['0', '$1.25', '2']);
             masterRow.nativeElement.click();
             expect(api.comp.selected.length).toEqual(0);
             api.fixture.destroy();
@@ -184,7 +184,7 @@ export function main() {
             expect(masterRow.componentInstance.isActive).toBe(true);
             dynamicRow.click();
             expect(api.comp.selected.length).toEqual(2);
-            expect(api.comp.selected).toEqual(['0', '1']);
+            expect(api.comp.selected).toEqual(['0', '$1.25']);
             expect(masterRow.componentInstance.isActive).toBe(false);
             api.fixture.destroy();
           });
