@@ -56,7 +56,7 @@ export abstract class AbstractMdDataTableSelectableRow implements AfterContentIn
     this.onChange.emit(event);
   }
 
-  ngAfterContentInit() {}
+  abstract ngAfterContentInit();
 }
 
 @Component({
