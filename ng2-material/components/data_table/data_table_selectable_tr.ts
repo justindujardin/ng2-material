@@ -162,5 +162,13 @@ export class MdDataTableSelectableRow extends AbstractMdDataTableSelectableRow {
 
   ngOnDestroy() {
     this._subscriptions.forEach(subscription => subscription.unsubscribe());
+    if (this.isActive) {
+      this.table.change({
+        name: 'selectable_row_change',
+        target: this,
+        isActive: this.isActive = false,
+        selectableValue: this.selectableValue
+      });
+    }
   }
 }
