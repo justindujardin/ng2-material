@@ -3,7 +3,7 @@ import {provide, enableProdMode} from "angular2/core";
 import {APP_BASE_HREF} from "angular2/router";
 import {UrlResolver} from "angular2/compiler";
 import {prerender} from "angular2-gulp-prerender";
-import {NODE_HTTP_PROVIDERS, NODE_ROUTER_PROVIDERS, BASE_URL, REQUEST_URL} from "angular2-universal";
+import {NODE_HTTP_PROVIDERS, NODE_ROUTER_PROVIDERS, BASE_URL, REQUEST_URL, ORIGIN_URL} from "angular2-universal";
 import {Html} from "./src/html.component";
 import gulp = require('gulp');
 var sass = require('gulp-sass');
@@ -36,9 +36,10 @@ function renderAsPath(routePath: string = '', outPath: string = '') {
       // TODO: This is a hack to wait for components to render because Universal
       // does not patch fs and wait for my fs calls to complete.
       ngOnStable: () => new Promise((resolve) => setTimeout(resolve, 500)),
-      providers: [
+      platformProviders: [
         provide(APP_BASE_HREF, {useValue: baseUrl}),
         provide(BASE_URL, {useValue: relativePath + '/'}),
+        provide(ORIGIN_URL, {useValue: '/'}),
         provide(REQUEST_URL, {useValue: `${baseUrl}${routePath}`}),
         provide(UrlResolver, {useValue: new NodeUrlResolver}),
         NODE_ROUTER_PROVIDERS,
@@ -131,7 +132,7 @@ gulp.task('site-meta', (done) => {
     writeJson('public/version.json', {
       version: pkg.version,
       readme: rendered,
-      angular2: pkg.dependencies.angular2
+      dependencies: pkg.dependencies
     });
     next();
   });

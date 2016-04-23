@@ -26,7 +26,7 @@ export class IndexPage implements OnInit {
 
   ngOnInit(): any {
 
-    this.http.get('public/version.json')
+    this.http.get('version.json')
       .subscribe((res: Response) => {
         this.angularVersion = res.json().angular2;
         this.linkTag = res.json().angular2.replace(/[>=^~]/g,'');

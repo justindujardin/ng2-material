@@ -34,6 +34,7 @@ var clientConfig = {
   plugins: [
     new CopyWebpackPlugin([
       {from: path.join(__dirname, 'src/**/*.html')},
+      {from: path.join(__dirname, 'node_modules/ng2-material/dist/*.*')},
       {from: path.join(__dirname, 'src/**/*.css')}
     ])
   ]
