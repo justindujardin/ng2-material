@@ -1,8 +1,8 @@
 {
   "name": "ng2-material",
-  "version": "0.3.4",
+  "version": "0.3.6",
   "description": "",
-  "main": "all.ts",
+  "main": "dist/ng2-material.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:justindujardin/ng2-material.git"
@@ -24,8 +24,6 @@
   },
   "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
-    "angular2-universal-polyfills": "^0.3.4",
-    "angular2-universal": "0.90.2",
     "autoprefixer": "6.2.0",
     "coveralls": "2.11.6",
     "css": "^2.2.1",
@@ -75,19 +73,23 @@
   },
   "contributors": [
     "Justin DuJardin <justindujardin@users.noreply.github.com>",
+    "Grégory Copin <gregcop1@gmail.com>",
     "Jaroslav Řehořka <jaroslav.rehorka@gmail.com>",
     "Sam <samuel.jones@q-free.com>",
-    "Grégory Copin <gregcop1@gmail.com>",
     "Sylvain Dumont <sylvain.dumont35@gmail.com>",
     "Dotan Simha <dotansimha@gmail.com>",
-    "N. Schipper <n.schippper@twensoc.nl>",
-    "Sam Van Brussel <sam.vanbrussel@linqed.be>",
-    "Lukas Ruebbelke <simpul@gmail.com>",
-    "Chris Seto <chriskseto@gmail.com>",
-    "Daniel Rasmuson <dan123911@gmail.com>",
-    "Adam Busbin <aw.busbin@gmail.com>",
-    "Maks3w <github.maks3w@virtualplanets.net>",
     "Milos Stanic <milos.stanic@gmail.com>",
-    "Miloš Stanić <milos.stanic@gmail.com>"
+    "Miloš Stanić <milos.stanic@gmail.com>",
+    "N. Schipper <n.schippper@twensoc.nl>",
+    "Paul Robinson <paul.robinson@kyndling.com>",
+    "Sam Van Brussel <sam.vanbrussel@linqed.be>",
+    "Adam Busbin <aw.busbin@gmail.com>",
+    "samuel.jones <samuel.jones@q-free.com>",
+    "Chris Seto <chriskseto@gmail.com>",
+    "Dan MacFarlane <dan@dancity.com>",
+    "Daniel Rasmuson <dan123911@gmail.com>",
+    "Ferdinand Torggler <ferdinand.torggler@gmail.com>",
+    "Lukas Ruebbelke <simpul@gmail.com>",
+    "Maks3w <github.maks3w@virtualplanets.net>"
   ]
 }

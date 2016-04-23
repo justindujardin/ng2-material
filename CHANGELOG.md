@@ -1,3 +1,44 @@
+<a name="0.3.6"></a>
+## [0.3.6](https://github.com/justindujardin/ng2-material/compare/v0.3.5...v0.3.6) (2016-04-17)
+
+
+### Bug Fixes
+
+* update messages when form validation status changes ([99df994](https://github.com/justindujardin/ng2-material/commit/99df994))
+
+### Features
+
+* make visibility input available for sidenav (#173) ([b735650](https://github.com/justindujardin/ng2-material/commit/b735650))
+* **JetBrains:** free OS licenses of WebStorm for major contributors ([195ee4c](https://github.com/justindujardin/ng2-material/commit/195ee4c))
+
+
+
+<a name="0.3.5"></a>
+## [0.3.5](https://github.com/justindujardin/ng2-material/compare/v0.3.4...v0.3.5) (2016-04-10)
+
+
+### Bug Fixes
+
+* fix ProgressCircular tests about diameter ([9c6ae37](https://github.com/justindujardin/ng2-material/commit/9c6ae37))
+* **universal:** workaround incomplete parse5 adapter ([0cf5608](https://github.com/justindujardin/ng2-material/commit/0cf5608))
+
+### Features
+
+* revamp interaction between table and rows. Now it only works with EventEmitter ([115ba65](https://github.com/justindujardin/ng2-material/commit/115ba65))
+* updated material icon font ([c313b2c](https://github.com/justindujardin/ng2-material/commit/c313b2c))
+* **angular2:** update to beta 14 ([7afdd23](https://github.com/justindujardin/ng2-material/commit/7afdd23))
+* **md-data-table:** Add data-table style hooks ([f1f3c68](https://github.com/justindujardin/ng2-material/commit/f1f3c68))
+* **universal:** export node and browser compatible services ([67e8054](https://github.com/justindujardin/ng2-material/commit/67e8054))
+
+
+### BREAKING CHANGES
+
+* universal: Remove static `Media.hasMedia` method and utility `rAF` function. Inject the `ViewportHelper` service for rAF, and the `Media` service for hasMedia. This static method referred to the window directly.
+
+The use of `MATERIAL_PROVIDERS` has been deprecated. Please use either `MATERIAL_NODE_PROVIDERS` or `MATERIAL_BROWSER_PROVIDERS` as is appropriate for your platform.
+
+
+
 <a name="0.3.4"></a>
 ## [0.3.4](https://github.com/justindujardin/ng2-material/compare/v0.3.3...v0.3.4) (2016-03-29)
 

@@ -22,6 +22,7 @@ import {MdBackdrop} from "../backdrop/backdrop";
 import {CONST} from "angular2/src/facade/lang";
 import {SidenavService} from "./sidenav_service";
 import {TimerWrapper} from "angular2/src/facade/async";
+import {ViewportHelper} from "../../core/util/viewport";
 
 
 @CONST()
@@ -121,6 +122,18 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   private _style: string = SidenavStyle.OVER;
 
   /**
+   * allow backdrop visibility Input
+   */
+  get visible(): boolean {
+    return this._visible;
+  }
+
+  @Input()
+  set visible(value: boolean) {
+    this.toggle(value);
+  }
+
+  /**
    * The backdrop element the container provides.
    */
   backdropRef: MdBackdrop = null;
@@ -129,12 +142,13 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   transitionAddClass = false;
 
   constructor(public element: ElementRef,
+              public viewport: ViewportHelper,
               @Inject(forwardRef(() => SidenavService))
               public service: SidenavService,
               public renderer: Renderer,
               @Optional() @SkipSelf() @Host() @Inject(forwardRef(() => MdSidenavContainer))
               public container: MdSidenavContainer) {
-    super(element);
+    super(element, viewport);
     this.renderer.setElementClass(this.element.nativeElement, this.transitionClass, !this.transitionAddClass);
   }
 

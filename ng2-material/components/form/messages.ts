@@ -91,7 +91,7 @@ export class MdMessages implements OnInit, OnDestroy {
       if (!ctrl) {
         throw new Error(`md-messages cannot find property(${prop}) in ControlGroup!`);
       }
-      this._unsubscribe = ctrl.valueChanges.subscribe(this._valueChanged.bind(this));
+      this._unsubscribe = ctrl.statusChanges.subscribe(this._valueChanged.bind(this));
     }
   }
 
@@ -114,6 +114,10 @@ export class MdMessages implements OnInit, OnDestroy {
     if (errors) {
       this.messages.toArray().forEach((m: MdMessage) => {
         m.okay = !m.errorKey ? !errors : !isPresent(errors[m.errorKey]);
+      });
+    } else {
+      this.messages.toArray().forEach(function (m) {
+          m.okay = true;
       });
     }
 

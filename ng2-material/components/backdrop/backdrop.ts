@@ -1,6 +1,7 @@
 import {Animate} from "../../core/util/animate";
 import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter} from "angular2/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {ViewportHelper} from "../../core/util/viewport";
 
 /**
  * An overlay for content on the page.
@@ -55,7 +56,8 @@ export class MdBackdrop {
   @Output()
   onShown: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
 
-  constructor(public element: ElementRef) {
+  constructor(public element: ElementRef, public viewport: ViewportHelper) {
+    this._body = DOM.querySelector(viewport.getDocumentNativeElement(), 'body');
   }
 
   /**
@@ -84,10 +86,10 @@ export class MdBackdrop {
     this.toggle(value);
   }
 
-  private _visible: boolean = false;
+  protected _visible: boolean = false;
   private _transitioning: boolean = false;
   private _previousOverflow: string = null;
-  private _body: HTMLBodyElement = DOM.query('body');
+  private _body: HTMLElement = null;
 
   onClick() {
     if (this.clickClose && !this._transitioning && this.visible) {

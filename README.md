@@ -8,14 +8,23 @@ Check out the [examples site](https://justindujardin.github.io/ng2-material/) fo
 
 ## Getting Help
 
-Is something wrong with your installation of ng2-material? Please try to provide a Plunkr example of the issue you're 
-encountering, and file an issue.
+**IMPORTANT**: This project is provided as-is, and no commercial level of support is given to it. If you need perfect compatbility with IE or great getting started materials for your specific use-case, you may be better off waiting for an official release of material2.
+
+That being said, if something is wrong with your installation or with the existing examples or materials, please try to provide a Plunkr example reproducing your problem, and file an issue.
 
 ## Credits 
 
 This project is based on the components and styles defined in the 
 [Angular Material](https://github.com/angular/material) and [Angular 2](https://github.com/angular/angular) projects. 
 Many of the components and examples are ported directly from their existing projects.
+
+## Sponsors
+
+ng2-material is an open source project sponsored by JetBrains. Any major contributors to the project are entitled to an all-products license for development of ng2-material features, which includes WebStorm.
+
+<a href="https://www.jetbrains.com/" target="_blank"><img src="https://rawgit.com/justindujardin/ng2-material/master/public/images/logo_jetbrains.svg" width="256"></a>
+<a href="https://www.jetbrains.com/webstorm/" target="_blank"><img src="https://rawgit.com/justindujardin/ng2-material/master/public/images/logo_webstorm.svg" width="256"></a>
+
 
 ## License 
 
