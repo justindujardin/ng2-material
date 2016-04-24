@@ -7,7 +7,8 @@ import {
   ContentChild,
   Input,
   Output,
-  Optional
+  Optional,
+  HostBinding
 } from "angular2/core";
 import {NgModel, NgControl, FORM_PROVIDERS} from "angular2/common";
 import {ObservableWrapper, EventEmitter, TimerWrapper} from "angular2/src/facade/async";
@@ -41,7 +42,7 @@ export class MdInput {
   @Input('value')
   set value(value: string) {
     this._value = value;
-    ObservableWrapper.callEmit(this.mdChange, this.value);
+    TimerWrapper.setTimeout(() => this.mdChange.emit(this.value), 1);
   }
 
   get value(): string {
@@ -64,12 +65,7 @@ export class MdInput {
 
 @Component({
   selector: 'md-input-container',
-  template: `<ng-content></ng-content><div class="md-errors-spacer"></div>`,
-  host: {
-    '[class.md-input-has-value]': 'inputHasValue',
-    '[class.md-input-has-placeholder]': 'inputHasPlaceholder',
-    '[class.md-input-focused]': 'inputHasFocus',
-  }
+  template: `<ng-content></ng-content><div class="md-errors-spacer"></div>`
 })
 export class MdInputContainer implements AfterContentInit, OnChanges {
 
@@ -78,12 +74,15 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
   _input: MdInput = null;
 
   // Whether the input inside of this container has a non-empty value.
+  @HostBinding('class.md-input-has-value')
   inputHasValue: boolean = false;
 
   // Whether the input inside of this container has focus.
+  @HostBinding('class.md-input-focused')
   inputHasFocus: boolean = false;
 
   // Whether the input inside of this container has a placeholder
+  @HostBinding('class.md-input-has-placeholder')
   inputHasPlaceholder: boolean = false;
 
   constructor(private _element: ElementRef) {
@@ -112,11 +111,11 @@ export class MdInputContainer implements AfterContentInit, OnChanges {
 
     // Listen to input changes and focus events so that we can apply the appropriate CSS
     // classes based on the input state.
-    ObservableWrapper.subscribe(this._input.mdChange, (value) => {
+    this._input.mdChange.subscribe((value: string) => {
       this.inputHasValue = value !== '';
     });
 
-    ObservableWrapper.subscribe<boolean>(this._input.mdFocusChange, (hasFocus: boolean) => {
+    this._input.mdFocusChange.subscribe((hasFocus: boolean) => {
       this.inputHasFocus = hasFocus
     });
 
