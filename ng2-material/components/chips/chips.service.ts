@@ -1,42 +1,30 @@
 import {Injectable} from "angular2/core";
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/share';
+import {Observable} from "rxjs/Observable";
+import {Subscriber} from "rxjs/Subscriber";
+import "rxjs/add/operator/share";
 
 
 @Injectable()
 export class MdChipsService {
-  public collection$: Observable<Array<string>>;
-  private _collectionObserver: any;
-  private _collection: Array<string>;
+  public collection$: Observable<string[]> = new Observable(observer => {
+    this._collectionObserver = observer;
+  }).share();
 
-  constructor() {
-    this._collection = [];
-
-    this.collection$ = new Observable(observer => {
-      this._collectionObserver = observer;
-    }).share();
-  }
-
+  private _collectionObserver: Subscriber<string[]>;
+  private _collection: string[] = [];
 
   add(chipValue: string) {
     this._collection.push(chipValue);
     this._collectionObserver.next(this._collection);
   }
 
+  remove(label: string) {
+    this._collection = this._collection.filter((c) => c !== label);
+    this._collectionObserver.next(this._collection);
+  }
 
-  remove(chipValue: string, removeLast: boolean) {
-
-    if (removeLast) {
-      //Remove last chip
-
-
-    } else {
-      //remove chip
-      this._collection.forEach((c, index) => {
-        if (c === chipValue) { this._collection.splice(index, 1); }
-      });
-    }
-
+  set(labels: string[]) {
+    this._collection = labels.splice(0);
     this._collectionObserver.next(this._collection);
   }
 }

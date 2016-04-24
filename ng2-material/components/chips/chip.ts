@@ -1,36 +1,28 @@
-import { Component, Input, Output } from "angular2/core";
-import {ObservableWrapper, EventEmitter} from "angular2/src/facade/async";
+import {Component, Input} from "angular2/core";
 import {MdIcon} from "../icon/icon";
+import {MdChipsService} from "./chips.service";
 
 @Component({
-    selector: 'md-chip',
-    directives: [MdIcon],
-    template: `
-    <div class="md-chip-content" role="button">
-      <md-chip-template>
-        <span>{{chip}}</span>
-      </md-chip-template>
-    </div>
+  selector: 'md-chip',
+  directives: [MdIcon],
+  template: `
+    <div class="md-chip-content" role="button">{{label}}</div>
     <div class="md-chip-remove-container">
-      <button class="md-chip-remove" (click)="removeChip(chip)" type="button">
-        <i md-icon>close</i>
+      <button class="md-chip-remove" (click)="removeChip(label)" type="button">
+        <i md-icon>cancel</i>
         <span class="md-visually-hidden">close</span>
       </button>
     </div>`
 })
 export class MdChip {
 
-    constructor() {}
+  constructor(private chips: MdChipsService) {
+  }
 
-    @Input()
-    chip: any;
+  @Input() label: string;
 
-
-    @Output()
-    mdRemoveChip: EventEmitter<any> = new EventEmitter();
-
-    removeChip(chipValue) {
-        ObservableWrapper.callEmit(this.mdRemoveChip, chipValue);
-    }
+  removeChip(label: string) {
+    this.chips.remove(label);
+  }
 
 }
