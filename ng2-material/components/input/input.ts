@@ -41,7 +41,7 @@ export class MdInput {
   @Input('value')
   set value(value: string) {
     this._value = value;
-    ObservableWrapper.callEmit(this.mdChange, this.value);
+     TimerWrapper.setTimeout(() => ObservableWrapper.callEmit(this.mdChange, this.value), 1);
   }
 
   get value(): string {
