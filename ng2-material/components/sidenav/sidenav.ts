@@ -210,12 +210,16 @@ export class MdSidenavContainer implements OnDestroy, AfterViewInit {
     this.children.toArray().forEach((m: MdSidenav) => {
       m.backdropRef = this._backdrop;
     });
+    
+    /*
     // When the backdrop is hidden, close any child navs
+    
     this._unsubscribe = this._backdrop.onHiding.subscribe(() => {
       this.children.toArray().forEach((m: MdSidenav) => {
         m.visible = false;
       });
     });
+    */
   }
 
   updateStyle(child: MdSidenav) {
