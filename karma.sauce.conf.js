@@ -51,8 +51,8 @@ module.exports = function (config) {
       recordScreenshots: false,
       options: {
         'selenium-version': '2.53.0',
-        'command-timeout': 1200,
-        'idle-timeout': 1200,
+        'command-timeout': 600,
+        'idle-timeout': 600,
         'max-duration': 5400
       }
     },
