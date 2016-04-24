@@ -1,39 +1,22 @@
-import {Component, Output, HostListener, ViewChild, HostBinding, Input} from "angular2/core";
-import "rxjs/add/operator/share";
+import {Component, Output, HostListener, ViewChild, HostBinding, Input, ChangeDetectionStrategy} from "angular2/core";
 import {EventEmitter} from "angular2/src/facade/async";
 import {MdChip} from "./chip";
-import {MdChipsService} from "./chips.service";
+import {MdChipsService, IMdChipData} from "./chips.service";
 import {MdChipInput} from "./chip_input";
+import "rxjs/add/operator/share";
+import {Subscription} from "rxjs/Subscription";
 
 
-/**
- * @name mdChips
- *
- * @description
- * The `<md-chips>` component
- *
- * @usage
- *
- * <md-chips>
- *     <div class="md-chip-input-container">
- *         <input md-chip-input placeholder="" >
- *     </div>
- * </md-chips>
- * <div class="md-errors-spacer"></div>
- *
- */
 @Component({
   selector: 'md-chips',
   directives: [MdChip, MdChipInput],
   providers: [MdChipsService],
   template: `
-<md-chips-wrapper>
-  <md-chip *ngFor="#chip of chips.collection$ | async" [label]="chip"></md-chip>
+  <md-chip *ngFor="#chip of state.collection$ | async" [chip]="chip" [deletable]="deletable"></md-chip>
   <md-chip-input-container>
-    <input md-chip-input>
-  </md-chip-input-container>
-</md-chips-wrapper>
-<div class="md-errors-spacer"></div>`
+    <input (focus)="onFocus()" (blur)="onBlur()" md-chip-input>
+  </md-chip-input-container>`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MdChips {
 
@@ -42,18 +25,28 @@ export class MdChips {
    */
   @Input() deletable: boolean = true;
 
-  @HostBinding('class.md-focused') get focused() {
-    return this.input ? this.input.focused : false;
-  }
-
-  constructor(public chips: MdChipsService) {
-  }
+  @HostBinding('class.md-focused') focused: boolean = false;
 
   @ViewChild(MdChipInput) input: MdChipInput;
 
-  @Output() value: EventEmitter<any> = new EventEmitter();
+  @Output() value: EventEmitter<IMdChipData[]> = new EventEmitter();
 
   @HostListener('click') focusInput() {
-    this.input.focus();
+    if (!this.focused) {
+      this.input.focus();
+    }
+  }
+
+  private subscription:Subscription;
+  constructor(public state: MdChipsService) {
+    this.subscription = state.collection$.subscribe((c:IMdChipData[]) => this.value.emit(c));
+  }
+
+  onFocus() {
+    this.focused = true;
+  }
+
+  onBlur() {
+    this.focused = false;
   }
 }

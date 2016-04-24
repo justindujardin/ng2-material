@@ -1,6 +1,16 @@
 <div layout="column" class="md-inline-form">
-  <md-content layout-padding>
-    <md-chips>
-    </md-chips>
+
+  <md-toolbar layout-padding layout="row">
+    <div class="md-toolbar-tools">
+      <span flex>{{(chips.state.collection$ | async)?.length || 0}} chips</span>
+      <md-checkbox [(checked)]="deletable">Deletable</md-checkbox>
+    </div>
+  </md-toolbar>
+  <md-content>
+    <md-subheader>Type into the below area</md-subheader>
+    <md-divider></md-divider>
+    <section layout-padding>
+      <md-chips [deletable]="deletable" #chips></md-chips>
+    </section>
   </md-content>
 </div>

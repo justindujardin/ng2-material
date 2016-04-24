@@ -7,23 +7,12 @@ import {MdChipsService} from "./chips.service";
 export class MdChipInput {
   private input: HTMLInputElement = null;
 
-  @HostListener('focus') onFocus() {
-    this.focused = true;
-  }
-
-  @HostListener('blur') onBlur() {
-    this.focused = false;
-  }
-
-  // Whether the input inside of this container has focus.
-  focused: boolean = false;
-
   constructor(private elementRef: ElementRef, private chips: MdChipsService) {
     this.input = elementRef.nativeElement;
   }
 
   focus() {
-    if (this.input && !this.focused) {
+    if (this.input) {
       this.input.focus();
     }
   }
@@ -32,5 +21,12 @@ export class MdChipInput {
   submitValue(input: HTMLInputElement) {
     this.chips.add(input.value);
     input.value = null;
+  }
+
+  @HostListener('keydown.backspace', ['$event.target'])
+  onBackspace(input: HTMLInputElement) {
+    if (input.value === '') {
+      this.chips.removeLast();
+    }
   }
 }

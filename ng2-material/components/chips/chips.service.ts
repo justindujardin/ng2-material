@@ -2,29 +2,50 @@ import {Injectable} from "angular2/core";
 import {Observable} from "rxjs/Observable";
 import {Subscriber} from "rxjs/Subscriber";
 import "rxjs/add/operator/share";
+import {uuid} from "../../core/util/uuid";
+
+/**
+ * Basic data object for a chip.
+ */
+export interface IMdChipData {
+  /**
+   * Human readable text to show on the chip
+   */
+  label: string;
+  /**
+   * Unique ID to differentiate the chip from others in the list
+   */
+  id: any;
+
+  /**
+   * Arbitrary user data associated with a chip.
+   */
+  data?: any;
+}
 
 
 @Injectable()
 export class MdChipsService {
-  public collection$: Observable<string[]> = new Observable(observer => {
+  public collection$: Observable<IMdChipData[]> = new Observable(observer => {
     this._collectionObserver = observer;
   }).share();
 
-  private _collectionObserver: Subscriber<string[]>;
-  private _collection: string[] = [];
+  private _collectionObserver: Subscriber<IMdChipData[]>;
+  private _collection: IMdChipData[] = [];
+  private _next = () => this._collectionObserver && this._collectionObserver.next(this._collection);
 
-  add(chipValue: string) {
-    this._collection.push(chipValue);
-    this._collectionObserver.next(this._collection);
+  add(chip: string, id: string = uuid()) {
+    this._collection.push({label: chip, id: id});
+    this._next();
   }
 
-  remove(label: string) {
-    this._collection = this._collection.filter((c) => c !== label);
-    this._collectionObserver.next(this._collection);
+  remove(chip: IMdChipData) {
+    this._collection = this._collection.filter((c) => c.id !== chip.id);
+    this._next();
   }
 
-  set(labels: string[]) {
-    this._collection = labels.splice(0);
-    this._collectionObserver.next(this._collection);
+  removeLast() {
+    this._collection = this._collection.splice(0, this._collection.length - 1);
+    this._next();
   }
 }
