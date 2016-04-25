@@ -1,10 +1,16 @@
-import {Directive, ElementRef, HostListener} from "angular2/core";
+import {Directive, ElementRef, HostListener, Input} from "angular2/core";
 import {MdChipsService} from "./chips.service";
 
 @Directive({
   selector: 'input[md-chip-input]'
 })
 export class MdChipInput {
+  
+  /**
+   * Chips are unique(no two chips have the same label)
+   */
+  @Input() unique: boolean = true;
+  
   private input: HTMLInputElement = null;
 
   constructor(private elementRef: ElementRef, private chips: MdChipsService) {
@@ -19,8 +25,10 @@ export class MdChipInput {
 
   @HostListener('keyup.enter', ['$event.target'])
   submitValue(input: HTMLInputElement) {
-    this.chips.add(input.value);
-    input.value = null;
+    if (input.value !== '') {
+      this.chips.add(input.value, this.unique);
+      input.value = null;
+    }
   }
 
   @HostListener('keydown.backspace', ['$event.target'])

@@ -34,9 +34,11 @@ export class MdChipsService {
   private _collection: IMdChipData[] = [];
   private _next = () => this._collectionObserver && this._collectionObserver.next(this._collection);
 
-  add(chip: string, id: string = uuid()) {
-    this._collection.push({label: chip, id: id});
-    this._next();
+  add(chip: string, unique: boolean, id: string = uuid()) {
+    if(!unique || !this.isInCollection(chip)) {
+      this._collection.push({label: chip, id: id});
+      this._next();
+    }
   }
 
   remove(chip: IMdChipData) {
@@ -47,5 +49,14 @@ export class MdChipsService {
   removeLast() {
     this._collection = this._collection.splice(0, this._collection.length - 1);
     this._next();
+  }
+
+  isInCollection(chip: string) {
+    for (var i = 0; i < this._collection.length; i++) {
+      if(this._collection[i].label == chip) {
+        return true
+      }
+    }
+    return false;
   }
 }

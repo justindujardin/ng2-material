@@ -14,7 +14,7 @@ import {Subscription} from "rxjs/Subscription";
   template: `
   <md-chip *ngFor="#chip of state.collection$ | async" [chip]="chip" [deletable]="deletable"></md-chip>
   <md-chip-input-container>
-    <input (focus)="onFocus()" (blur)="onBlur()" md-chip-input>
+    <input *ngIf="!readonly" (focus)="onFocus()" (blur)="onBlur()" [unique]="unique" [placeholder]="placeholder" md-chip-input>
   </md-chip-input-container>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -25,6 +25,21 @@ export class MdChips {
    */
   @Input() deletable: boolean = true;
 
+  /**
+   * Chips are readonly (no input field)
+   */
+  @Input() readonly: boolean = false;
+
+  /**
+   * Chips are unique(no two chips have the same label)
+   */
+  @Input() unique: boolean = true;
+
+  /**
+   * Placeholder for input
+   */
+  @Input() placeholder: string = "";
+
   @HostBinding('class.md-focused') focused: boolean = false;
 
   @ViewChild(MdChipInput) input: MdChipInput;
@@ -32,7 +47,7 @@ export class MdChips {
   @Output() value: EventEmitter<IMdChipData[]> = new EventEmitter();
 
   @HostListener('click') focusInput() {
-    if (!this.focused) {
+    if (!this.focused && !this.readonly) {
       this.input.focus();
     }
   }
