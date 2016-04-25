@@ -1,75 +1,67 @@
-/**
- * @name mdChips
- *
- * @description
- * The `<md-chips>` component
- *
- * @usage
- *
- * <md-chips>
- *     <div class="md-chip-input-container">
- *         <input md-chip-input placeholder="" >
- *     </div>
- * </md-chips>
- * <div class="md-errors-spacer"></div>
- *
- */
-import { Component, Input, Output } from "angular2/core";
-import 'rxjs/add/operator/share';
-import {ObservableWrapper, EventEmitter} from "angular2/src/facade/async";
+import {Component, Output, HostListener, ViewChild, HostBinding, Input, ChangeDetectionStrategy} from "angular2/core";
+import {EventEmitter} from "angular2/src/facade/async";
 import {MdChip} from "./chip";
-import {MdChipsService} from "./chips.service";
+import {MdChipsService, IMdChipData} from "./chips.service";
+import {MdChipInput} from "./chip_input";
+import "rxjs/add/operator/share";
+import {Subscription} from "rxjs/Subscription";
 
 
 @Component({
   selector: 'md-chips',
-  directives: [MdChip],
+  directives: [MdChip, MdChipInput],
   providers: [MdChipsService],
   template: `
-    <md-chips-wrapper>
-        <md-chip *ngFor="#chip of chips$" [chip]="chip" (mdRemoveChip)="_mdChipService.remove(chip, false)"></md-chip>
-        <md-chip-input-container>
-          <input md-chip-input
-          (focus)="onFocus()"
-          (blur)="onBlur()" 
-          (keyup.enter)="submitValue($event)">
-        </md-chip-input-container>
-    </md-chips-wrapper>
-    <div class="md-errors-spacer"></div>`,
-  host: {
-    '[class.md-focused]': 'inputHasFocus'
-  }
+  <md-chip *ngFor="#chip of state.collection$ | async" [chip]="chip" [deletable]="deletable"></md-chip>
+  <md-chip-input-container>
+    <input *ngIf="!readonly" (focus)="onFocus()" (blur)="onBlur()" [unique]="unique" [placeholder]="placeholder" md-chip-input>
+  </md-chip-input-container>`,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MdChips {
 
-  // Whether the input inside of this container has focus.
-  private inputHasFocus: boolean = false;
+  /**
+   * Chips are deletable by clicking on their (x) button when true
+   */
+  @Input() deletable: boolean = true;
 
-  private chips$: Array<string> = [];
+  /**
+   * Chips are readonly (no input field)
+   */
+  @Input() readonly: boolean = false;
 
-  constructor(private _mdChipService: MdChipsService) { }
+  /**
+   * Chips are unique(no two chips have the same label)
+   */
+  @Input() unique: boolean = true;
 
+  /**
+   * Placeholder for input
+   */
+  @Input() placeholder: string = "";
 
-  ngOnInit() {
+  @HostBinding('class.md-focused') focused: boolean = false;
 
-    this._mdChipService.collection$.subscribe(latestCollection => {
-      this.chips$ = latestCollection;
-    });
+  @ViewChild(MdChipInput) input: MdChipInput;
 
+  @Output() value: EventEmitter<IMdChipData[]> = new EventEmitter();
+
+  @HostListener('click') focusInput() {
+    if (!this.focused && !this.readonly) {
+      this.input.focus();
+    }
   }
 
-  @Output() value: EventEmitter<any> = new EventEmitter();
-
+  private subscription:Subscription;
+  constructor(public state: MdChipsService) {
+    this.subscription = state.collection$.subscribe((c:IMdChipData[]) => this.value.emit(c));
+  }
 
   onFocus() {
-    this.inputHasFocus = true;
-  }
-  onBlur() {
-    this.inputHasFocus = false;
+    this.focused = true;
   }
 
-  submitValue($event) {
-    this._mdChipService.add($event.target.value);
-    $event.target.value = null;
+  onBlur() {
+    this.focused = false;
   }
 }

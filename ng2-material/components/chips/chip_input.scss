@@ -1,0 +1,21 @@
+@import './_shared';
+
+input[md-chip-input] {
+  height: $chip-height;
+  line-height: $chip-height;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  &:not([type]), &[type="email"], &[type="number"], &[type="tel"], &[type="url"], &[type="text"] {
+    border: 0;
+    height: $chip-height;
+    line-height: $chip-height;
+    padding: 0;
+    &:focus {
+      outline: none;
+    }
+  }
+  &:focus {
+    outline: none;
+  }
+}

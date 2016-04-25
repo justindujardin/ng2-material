@@ -1,42 +1,62 @@
 import {Injectable} from "angular2/core";
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/share';
+import {Observable} from "rxjs/Observable";
+import {Subscriber} from "rxjs/Subscriber";
+import "rxjs/add/operator/share";
+import {uuid} from "../../core/util/uuid";
+
+/**
+ * Basic data object for a chip.
+ */
+export interface IMdChipData {
+  /**
+   * Human readable text to show on the chip
+   */
+  label: string;
+  /**
+   * Unique ID to differentiate the chip from others in the list
+   */
+  id: any;
+
+  /**
+   * Arbitrary user data associated with a chip.
+   */
+  data?: any;
+}
 
 
 @Injectable()
 export class MdChipsService {
-  public collection$: Observable<Array<string>>;
-  private _collectionObserver: any;
-  private _collection: Array<string>;
+  public collection$: Observable<IMdChipData[]> = new Observable(observer => {
+    this._collectionObserver = observer;
+  }).share();
 
-  constructor() {
-    this._collection = [];
+  private _collectionObserver: Subscriber<IMdChipData[]>;
+  private _collection: IMdChipData[] = [];
+  private _next = () => this._collectionObserver && this._collectionObserver.next(this._collection);
 
-    this.collection$ = new Observable(observer => {
-      this._collectionObserver = observer;
-    }).share();
-  }
-
-
-  add(chipValue: string) {
-    this._collection.push(chipValue);
-    this._collectionObserver.next(this._collection);
-  }
-
-
-  remove(chipValue: string, removeLast: boolean) {
-
-    if (removeLast) {
-      //Remove last chip
-
-
-    } else {
-      //remove chip
-      this._collection.forEach((c, index) => {
-        if (c === chipValue) { this._collection.splice(index, 1); }
-      });
+  add(chip: string, unique: boolean, id: string = uuid()) {
+    if(!unique || !this.isInCollection(chip)) {
+      this._collection.push({label: chip, id: id});
+      this._next();
     }
+  }
 
-    this._collectionObserver.next(this._collection);
+  remove(chip: IMdChipData) {
+    this._collection = this._collection.filter((c) => c.id !== chip.id);
+    this._next();
+  }
+
+  removeLast() {
+    this._collection = this._collection.splice(0, this._collection.length - 1);
+    this._next();
+  }
+
+  isInCollection(chip: string) {
+    for (var i = 0; i < this._collection.length; i++) {
+      if(this._collection[i].label == chip) {
+        return true
+      }
+    }
+    return false;
   }
 }
