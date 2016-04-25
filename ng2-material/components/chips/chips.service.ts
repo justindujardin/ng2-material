@@ -34,7 +34,7 @@ export class MdChipsService {
   private _collection: IMdChipData[] = [];
   private _next = () => this._collectionObserver && this._collectionObserver.next(this._collection);
 
-  add(chip: string, unique: boolean, id: string = uuid()) {
+  add(chip: string, unique: boolean = false, id: string = uuid()) {
     if(!unique || !this.isInCollection(chip)) {
       this._collection.push({label: chip, id: id});
       this._next();
@@ -43,6 +43,11 @@ export class MdChipsService {
 
   remove(chip: IMdChipData) {
     this._collection = this._collection.filter((c) => c.id !== chip.id);
+    this._next();
+  }
+
+  setLabels(chips: string[]) {
+    this._collection = chips.map((c:string) => ({label: c, id: uuid()}));
     this._next();
   }
 
