@@ -7,6 +7,7 @@ import {
   TemplateRef,
   ViewEncapsulation,
   Query,
+  ViewChild,
   ElementRef
 } from "angular2/core";
 import {Ink} from "../../core/util/ink";
@@ -23,6 +24,18 @@ import {NgFor} from "angular2/common";
 //  - If you set the disabled attribute on a tab, it becomes unselectable
 //  - If you set md-theme=\"green\" on the md-tabs element, you'll get green tabs
 
+@Component({
+  selector: 'md-ink-bar',
+  template: ``
+})
+export class MdInkBar {
+  constructor(private _el: ElementRef) {
+  }
+
+  get elementRef(): ElementRef {
+    return this._el;
+  }
+}
 
 @Directive({
   selector: '[md-tab]'
@@ -83,11 +96,13 @@ export class MdTab {
         <ng-content></ng-content>
       </md-tab-content>
     </md-tabs-content-wrapper>`,
-  directives: [NgFor],
+  directives: [NgFor, MdInkBar],
   properties: ['selected'],
   encapsulation: ViewEncapsulation.None
 })
 export class MdTabs {
+  @ViewChild(MdInkBar)
+  inkBarComponent: MdInkBar;
 
   @Input()
   mdNoScroll: boolean = false;
@@ -98,6 +113,11 @@ export class MdTabs {
     this.panes.changes.subscribe((_) => {
       this.panes.toArray().forEach((p: MdTab, index: number) => {
         p.active = index === this._selected;
+        if (p.active) {
+          Ink.updateInkbar(this._element.nativeElement, 
+                    this.inkBarComponent.elementRef.nativeElement, 
+                    this._selected);
+        }
       });
     });
   }
@@ -138,9 +158,15 @@ export class MdTabs {
   }
 
   onTabClick(pane: MdTab, event?) {
+    let initialSelect = this._selected;
+    
     if (event && Ink.canApply(this._element.nativeElement)) {
       Ink.rippleEvent(event.target, event);
     }
     this.selectedTab = pane;
+    Ink.updateInkbar(this._element.nativeElement, 
+                        this.inkBarComponent.elementRef.nativeElement, 
+                        this._selected,
+                        initialSelect);  
   }
 }

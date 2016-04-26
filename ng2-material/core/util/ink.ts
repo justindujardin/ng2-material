@@ -92,5 +92,34 @@ export class Ink {
     }
     return Ink.ripple(element, rippleX, rippleY);
   }
+  
+  /**
+   * Move the position of the inkbar to the active tab name
+   *
+   * @param element The parent element that holds the tabs
+   * @param inkbar The element for the inkbar
+   * @param activeIndex The index of the active tab
+   * @returns {Promise<any>} A promise that resolves when the ripple has faded.
+   */
+  static updateInkbar(element: HTMLElement, inkbar: HTMLElement, activeIndex: number, previousIndex?: number): Promise<any> {
+    let containers = DOM.querySelectorAll(element, 'md-tab-item');
 
+    if (activeIndex > containers.length) {
+      return Promise.resolve();
+    }
+
+    let getDirection = (): string => {
+      return (previousIndex > activeIndex) ? 'md-left' : 'md-right';
+    };
+
+    // Get new active tab
+    let container = containers[activeIndex];
+    let left = container.getBoundingClientRect().left - containers[0].getBoundingClientRect().left;
+    let width = container.getBoundingClientRect().width;
+
+    DOM.addClass(inkbar, getDirection())
+    return Animate.setStyles(inkbar, { left: `${left}px`, width: `${width}px` })
+      .then(() => Animate.wait(250))
+      .then(() => DOM.removeClass(inkbar, getDirection()));
+  }
 }
