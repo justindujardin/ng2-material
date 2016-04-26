@@ -27,9 +27,9 @@ export class MdDataTable {
   @Input()
   selectable: boolean;
   @Output()
-  onSelectableAll: EventEmitter<any> = new EventEmitter();
+  onSelectableAll: EventEmitter<any> = new EventEmitter(false);
   @Output()
-  onSelectableChange: EventEmitter<any> = new EventEmitter();
+  onSelectableChange: EventEmitter<any> = new EventEmitter(false);
 
   @ContentChild(MdDataTableHeaderSelectableRow)
   _masterRow: MdDataTableHeaderSelectableRow;
