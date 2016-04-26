@@ -67,9 +67,9 @@ md-menu-content {
     }
   }
   i {
-  margin-top: 5px;
-  margin-right: 5px;
-}
+    margin-top: 5px;
+    margin-right: 5px;
+  }
 }
 
 md-menu-item {
@@ -79,14 +79,12 @@ md-menu-item {
   height: $menu-item-height;
   align-content: center;
   justify-content: flex-start;
-
   > * {
     width: 100%;
     margin: auto 0;
     padding-left: 2*$baseline-grid;
     padding-right: 2*$baseline-grid;
   }
-
   > .md-button {
     border-radius: 0;
     margin: auto 0;

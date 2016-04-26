@@ -1,1 +1,1 @@
-This is a very first and basic implementation of md-men.
+This is a very first and basic implementation of md-menu.
