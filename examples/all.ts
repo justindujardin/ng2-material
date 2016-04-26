@@ -2,6 +2,7 @@
 
 
 import {CONST_EXPR, Type} from "angular2/src/facade/lang";
+import AutocompleteBasicUsage from "./components/autocomplete/basic_usage";
 import CardBasicUsage from "./components/card/basic_usage";
 import CardInlineActions from "./components/card/inline_actions";
 import ButtonBasicUsage from "./components/button/basic_usage";
@@ -29,6 +30,7 @@ import SidenavBasicUsage from "./components/sidenav/basic_usage";
  * Collection of Material Design component example directives.
  */
 export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
+  AutocompleteBasicUsage,
   CardBasicUsage, CardInlineActions, CardActionButtons,
   ButtonBasicUsage,
   CheckboxBasicUsage, CheckboxSyncing,
