@@ -1,3 +1,13 @@
+<a name="0.3.7"></a>
+## [0.3.7](https://github.com/justindujardin/ng2-material/compare/v0.3.6...v0.3.7) (2016-04-24)
+
+
+### Bug Fixes
+
+* **input:** issue when typing rapidly into an input ([4386d56](https://github.com/justindujardin/ng2-material/commit/4386d56))
+
+
+
 <a name="0.3.6"></a>
 ## [0.3.6](https://github.com/justindujardin/ng2-material/compare/v0.3.5...v0.3.6) (2016-04-17)
 
