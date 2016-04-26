@@ -1,6 +1,6 @@
 {
   "name": "ng2-material",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "",
   "main": "dist/ng2-material.js",
   "repository": {
@@ -81,6 +81,8 @@
     "Sam <samuel.jones@q-free.com>",
     "Sylvain Dumont <sylvain.dumont35@gmail.com>",
     "Dotan Simha <dotansimha@gmail.com>",
+    "Lukas Ruebbelke <simpul@gmail.com>",
+    "Maks3w <github.maks3w@virtualplanets.net>",
     "Milos Stanic <milos.stanic@gmail.com>",
     "Miloš Stanić <milos.stanic@gmail.com>",
     "N. Schipper <n.schippper@twensoc.nl>",
@@ -88,11 +90,11 @@
     "Sam Van Brussel <sam.vanbrussel@linqed.be>",
     "Adam Busbin <aw.busbin@gmail.com>",
     "samuel.jones <samuel.jones@q-free.com>",
+    "BIZID Amine <amine.bizid@gmail.com>",
     "Chris Seto <chriskseto@gmail.com>",
+    "Christian Beilschmidt <fyaa@ntacity.de>",
     "Dan MacFarlane <dan@dancity.com>",
     "Daniel Rasmuson <dan123911@gmail.com>",
-    "Ferdinand Torggler <ferdinand.torggler@gmail.com>",
-    "Lukas Ruebbelke <simpul@gmail.com>",
-    "Maks3w <github.maks3w@virtualplanets.net>"
+    "Ferdinand Torggler <ferdinand.torggler@gmail.com>"
   ]
 }
