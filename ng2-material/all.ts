@@ -30,6 +30,8 @@ import {SidenavService} from "./components/sidenav/sidenav_service";
 import {MdToolbar} from "./components/toolbar/toolbar";
 import {MdTabs, MdTab} from "./components/tabs/tabs";
 import {Media} from "./core/util/media";
+import {MdMenu} from "./components/menu/menu";
+
 export * from './components/button/button';
 
 export * from './components/checkbox/checkbox';
@@ -74,10 +76,14 @@ export * from './components/tabs/tabs';
 
 export * from './core/util/media';
 
+export * from './components/menu/menu';
+
 import {ViewportHelper, BrowserViewportHelper, NodeViewportHelper} from "./core/util/viewport";
 import {provide} from "angular2/core";
 export * from './core/util/viewport';
 export * from './core/util/animate';
+
+
 
 /**
  * Collection of Material Design component directives.
@@ -104,7 +110,8 @@ export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdSubheader,
   MdSwitch,
   MdToolbar,
-  MdTab, MdTabs
+  MdTab, MdTabs,
+  MdMenu
 ]);
 
 /**
