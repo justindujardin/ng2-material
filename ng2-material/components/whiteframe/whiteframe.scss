@@ -1,100 +1,100 @@
 @import "../../core/style/variables";
-@import "../../core/style/shadows";
+@import "../../core/style/elevation";
 
 .md-whiteframe-1dp, .md-whiteframe-z1 {
-  box-shadow: $whiteframe-shadow-1dp;
+  @include $md-elevation(1);
 }
 
 .md-whiteframe-2dp {
-  box-shadow: $whiteframe-shadow-2dp;
+  @include $md-elevation(2);
 }
 
 .md-whiteframe-3dp {
-  box-shadow: $whiteframe-shadow-3dp;
+  @include $md-elevation(3);
 }
 
 .md-whiteframe-4dp, .md-whiteframe-z2 {
-  box-shadow: $whiteframe-shadow-4dp;
+  @include $md-elevation(4);
 }
 
 .md-whiteframe-5dp {
-  box-shadow: $whiteframe-shadow-5dp;
+  @include $md-elevation(5);
 }
 
 .md-whiteframe-6dp {
-  box-shadow: $whiteframe-shadow-6dp;
+  @include $md-elevation(6);
 }
 
 .md-whiteframe-7dp, .md-whiteframe-z3 {
-  box-shadow: $whiteframe-shadow-7dp;
+  @include $md-elevation(7);
 }
 
 .md-whiteframe-8dp {
-  box-shadow: $whiteframe-shadow-8dp;
+  @include $md-elevation(8);
 }
 
 .md-whiteframe-9dp {
-  box-shadow: $whiteframe-shadow-9dp;
+  @include $md-elevation(9);
 }
 
 .md-whiteframe-10dp, .md-whiteframe-z4 {
-  box-shadow: $whiteframe-shadow-10dp;
+  @include $md-elevation(10);
 }
 
 .md-whiteframe-11dp {
-  box-shadow: $whiteframe-shadow-11dp;
+  @include $md-elevation(11);
 }
 
 .md-whiteframe-12dp {
-  box-shadow: $whiteframe-shadow-12dp;
+  @include $md-elevation(12);
 }
 
 .md-whiteframe-13dp, .md-whiteframe-z5 {
-  box-shadow: $whiteframe-shadow-13dp;
+  @include $md-elevation(13);
 }
 
 .md-whiteframe-14dp {
-  box-shadow: $whiteframe-shadow-14dp;
+  @include $md-elevation(14);
 }
 
 .md-whiteframe-15dp {
-  box-shadow: $whiteframe-shadow-15dp;
+  @include $md-elevation(15);
 }
 
 .md-whiteframe-16dp {
-  box-shadow: $whiteframe-shadow-16dp;
+  @include $md-elevation(16);
 }
 
 .md-whiteframe-17dp {
-  box-shadow: $whiteframe-shadow-17dp;
+  @include $md-elevation(17);
 }
 
 .md-whiteframe-18dp {
-  box-shadow: $whiteframe-shadow-18dp;
+  @include $md-elevation(18);
 }
 
 .md-whiteframe-19dp {
-  box-shadow: $whiteframe-shadow-19dp;
+  @include $md-elevation(19);
 }
 
 .md-whiteframe-20dp {
-  box-shadow: $whiteframe-shadow-20dp;
+  @include $md-elevation(20);
 }
 
 .md-whiteframe-21dp {
-  box-shadow: $whiteframe-shadow-21dp;
+  @include $md-elevation(21);
 }
 
 .md-whiteframe-22dp {
-  box-shadow: $whiteframe-shadow-22dp;
+  @include $md-elevation(22);
 }
 
 .md-whiteframe-23dp {
-  box-shadow: $whiteframe-shadow-23dp;
+  @include $md-elevation(23);
 }
 
 .md-whiteframe-24dp {
-  box-shadow: $whiteframe-shadow-24dp;
+  @include $md-elevation(24);
 }
 
 @media screen and (-ms-high-contrast: active) {
