@@ -2,12 +2,13 @@
 
   <md-toolbar layout-padding layout="row">
     <div class="md-toolbar-tools">
-      <span flex>{{(chips.state.collection$ | async)?.length || 0}} chips</span>
+      <span flex>{{chipCount$ | async}} chips</span>
     </div>
   </md-toolbar>
   <md-content layout="column" layout-padding>
     <section layout-padding>
       <md-chips [readonly]="readonly"
+                [labels]="chipLabels$ | async"
                 [unique]="unique"
                 [deletable]="deletable"
                 [placeholder]="placeholder"
@@ -28,7 +29,7 @@
     </section>
     <strong>Output</strong>
     <section>
-      <pre>{{chips$ | async | json}}</pre>
+      <pre>{{chips.labels$ | async | json}}</pre>
     </section>
   </md-content>
 </div>

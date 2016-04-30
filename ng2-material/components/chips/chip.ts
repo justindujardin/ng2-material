@@ -1,6 +1,7 @@
-import {Component, Input, HostBinding, ChangeDetectionStrategy} from "angular2/core";
+import {Component, Input, ChangeDetectionStrategy, forwardRef, Inject} from "angular2/core";
 import {MdIcon} from "../icon/icon";
-import {MdChipsService, IMdChipData} from "./chips.service";
+import {MdChips, IMdChipData} from "./chips";
+
 
 @Component({
   selector: 'md-chip',
@@ -13,14 +14,14 @@ import {MdChipsService, IMdChipData} from "./chips.service";
         <span class="md-visually-hidden">close</span>
       </button>
     </div>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[class.md-deletable]': 'chips.deletable$ | async'
+  }
 })
 export class MdChip {
-  constructor(private chips: MdChipsService) {
+  constructor(@Inject(forwardRef(() => MdChips)) private chips: MdChips) {
   }
 
   @Input() chip: IMdChipData;
-
-  @HostBinding('class.md-deletable')
-  @Input() deletable: boolean = true;
 }
