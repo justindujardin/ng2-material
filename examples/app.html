@@ -8,7 +8,7 @@
     <md-list>
       <md-list-item md-ink (inked)="navigate(['Component', {id: value.id}])"
                     [class.md-active]="navigation?.currentTitle==value.name"
-                    *ngFor="#value of components">
+                    *ngFor="let value of components">
         {{value.name}}
       </md-list-item>
     </md-list>

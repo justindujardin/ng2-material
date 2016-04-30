@@ -56,7 +56,7 @@ MdDataTable is an enhancment of classic data tables.
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="#material of materials"  md-data-table-selectable-row [selectable-value]="material.id">
+  <tr *ngFor="let material of materials"  md-data-table-selectable-row [selectable-value]="material.id">
     <td class="md-text-cell">{{ material.name }}</td>
     <td>{{ material.quantity }}</td>
     <td>{{ material.price }}</td>

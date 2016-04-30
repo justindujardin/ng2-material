@@ -5,7 +5,7 @@ import {
   expect,
   inject,
   it,
-  injectAsync,
+  async,
   ComponentFixture
 } from "angular2/testing";
 import {Component, DebugElement} from "angular2/core";
@@ -57,35 +57,35 @@ export function main() {
     }));
 
     describe('find', () => {
-      it('should find sidenav by name', injectAsync([], () => {
+      it('should find sidenav by name', async(inject([], () => {
         return setup().then((api: ITestFixture) => {
           expect(service.find('test')).not.toBeNull();
           expect(service.find('fake')).toBeNull();
           api.fixture.destroy();
         });
-      }));
+      })));
     });
     describe('show', () => {
-      it('should show sidenav by name', injectAsync([], () => {
+      it('should show sidenav by name', async(inject([], () => {
         return setup()
           .then(() => service.show('test'));
-      }));
-      it('should reject with invalid sidenav name', injectAsync([], () => {
+      })));
+      it('should reject with invalid sidenav name', async(inject([], () => {
         return setup()
           .then(() => service.show('fake'))
           .catch(() => Promise.resolve());
-      }));
+      })));
     });
     describe('hide', () => {
-      it('should hide sidenav by name', injectAsync([], () => {
+      it('should hide sidenav by name', async(inject([], () => {
         return setup()
           .then(() => service.hide('test'));
-      }));
-      it('should reject with invalid sidenav name', injectAsync([], () => {
+      })));
+      it('should reject with invalid sidenav name', async(inject([], () => {
         return setup()
           .then(() => service.hide('fake'))
           .catch(() => Promise.resolve());
-      }));
+      })));
     });
 
   });

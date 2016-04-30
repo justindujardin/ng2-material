@@ -12,7 +12,7 @@
 
     <md-list>
 
-      <md-list-item class="md-3-line" *ngFor="#item of todos">
+      <md-list-item class="md-3-line" *ngFor="let item of todos">
         <img [src]="item.face" [alt]="item.who" class="md-avatar">
 
         <div class="md-list-item-text">

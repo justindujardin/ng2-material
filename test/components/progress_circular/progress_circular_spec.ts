@@ -5,7 +5,7 @@ import {
   expect,
   inject,
   it,
-  injectAsync,
+  async,
   ComponentFixture
 } from "angular2/testing";
 import {Component, DebugElement} from "angular2/core";
@@ -59,35 +59,35 @@ export function main() {
     describe('md-progress-circular', () => {
 
       describe('value', () => {
-        it('should be blank until specified', injectAsync([], () => {
+        it('should be blank until specified', async(inject([], () => {
           return setup(`<md-progress-circular></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBeUndefined();
           });
-        }));
-        it('should set from binding', injectAsync([], () => {
+        })));
+        it('should set from binding', async(inject([], () => {
           return setup(`<md-progress-circular [value]="value"></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBe(25);
           });
-        }));
-        it('should do nothing with undefined value', injectAsync([], () => {
+        })));
+        it('should do nothing with undefined value', async(inject([], () => {
           return setup(`<md-progress-circular [value]="blankValue"></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBeUndefined();
           });
-        }));
+        })));
 
 
-        it('should update aria-valuenow', injectAsync([], () => {
+        it('should update aria-valuenow', async(inject([], () => {
           return setup(`<md-progress-circular [value]="value"></md-progress-circular>`).then((api: IProgressFixture) => {
 
             let compiled = api.fixture.nativeElement;
 
             expect(compiled.querySelector('md-progress-circular').getAttribute('aria-valuenow')).toBe('25');
           });
-        }));
+        })));
       });
 
       describe('diameter', () => {
-        it('should set scaling using percentage values', injectAsync([], () => {
+        it('should set scaling using percentage values', async(inject([], () => {
           return setup(`<md-progress-circular [diameter]="'25%'"></md-progress-circular>`).then((api: IProgressFixture) => {
             let compiled = api.fixture.nativeElement;
             let indicator = compiled.querySelector('md-progress-circular');
@@ -97,10 +97,10 @@ export function main() {
             expect(indicator.style['height']).toBe('25px');
             expect(indicator.style['width']).toBe('25px');
           });
-        }));
+        })));
 
 
-        it('should set scaling using pixel values', injectAsync([], () => {
+        it('should set scaling using pixel values', async(inject([], () => {
           return setup(`<md-progress-circular [diameter]="'37px'"></md-progress-circular>`).then((api: IProgressFixture) => {
 
             let compiled = api.fixture.nativeElement;
@@ -111,20 +111,20 @@ export function main() {
             expect(indicator.style['height']).toBe('37px');
             expect(indicator.style['width']).toBe('37px');
           });
-        }));
+        })));
       });
 
       describe('mode', () => {
-        it('should default to determinate', injectAsync([], () => {
+        it('should default to determinate', async(inject([], () => {
           return setup(`<md-progress-circular></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.DETERMINATE);
           });
-        }));
-        it('should set from attribute', injectAsync([], () => {
+        })));
+        it('should set from attribute', async(inject([], () => {
           return setup(`<md-progress-circular mode="indeterminate"></md-progress-circular>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.INDETERMINATE);
           });
-        }));
+        })));
       });
     });
 

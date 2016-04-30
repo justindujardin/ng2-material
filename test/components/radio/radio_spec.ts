@@ -5,7 +5,7 @@ import {
   expect,
   inject,
   it,
-  injectAsync,
+  async,
   ComponentFixture
 } from "angular2/testing";
 import {Component, DebugElement} from "angular2/core";
@@ -58,14 +58,14 @@ export function main() {
     }));
 
     describe('md-radio-group', () => {
-      it('should set value from initial binding', injectAsync([], () => {
+      it('should set value from initial binding', async(inject([], () => {
         return builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
           fixture.detectChanges();
           let radioGroup = <MdRadioGroup>fixture.debugElement.query(By.css('md-radio-group')).componentInstance;
           expect(radioGroup.value).toBe('Banana');
         });
-      }));
-      it('should only have one selected child at a time', injectAsync([], () => {
+      })));
+      it('should only have one selected child at a time', async(inject([], () => {
         let template = `
             <md-radio-group>
               <md-radio-button id="rdo1" value="Apple"></md-radio-button>
@@ -87,8 +87,8 @@ export function main() {
           expect(radio.componentInstance.checked).toBe(false);
           expect(group.value).toBe('Banana');
         });
-      }));
-      it('should select a child by value when value is initially set on group', injectAsync([], () => {
+      })));
+      it('should select a child by value when value is initially set on group', async(inject([], () => {
         let template = `
             <md-radio-group [value]="selected">
               <md-radio-button id="rdo1" value="Apple"></md-radio-button>
@@ -102,9 +102,9 @@ export function main() {
           expect(group.value).toBe('Banana');
           expect(radio2.componentInstance.checked).toBe(true);
         });
-      }));
+      })));
 
-      it('should select a child by value when value is set on group', injectAsync([], () => {
+      it('should select a child by value when value is set on group', async(inject([], () => {
         let template = `
             <md-radio-group>
               <md-radio-button id="rdo1" value="Apple"></md-radio-button>
@@ -121,8 +121,8 @@ export function main() {
           expect(radio.componentInstance.checked).toBe(true);
           expect(group.value).toBe('Apple');
         });
-      }));
-      it('should accept value even if no matching child is found', injectAsync([], () => {
+      })));
+      it('should accept value even if no matching child is found', async(inject([], () => {
         let template = `<md-radio-group></md-radio-group>`;
         return setup(template).then((fixture: ComponentFixture) => {
           let group = <MdRadioGroup>fixture.debugElement.query(By.css('md-radio-group')).componentInstance;
@@ -131,8 +131,8 @@ export function main() {
           fixture.detectChanges();
           expect(group.value).toBe('Apple');
         });
-      }));
-      it('should disable child radio buttons when disabled', injectAsync([], () => {
+      })));
+      it('should disable child radio buttons when disabled', async(inject([], () => {
         var template = `
             <md-radio-group disabled>
               <md-radio-button>Apple</md-radio-button>
@@ -145,8 +145,8 @@ export function main() {
           let radio = <MdRadioButton>fixture.debugElement.query(By.css('md-radio-button')).componentInstance;
           expect(radio.disabled).toBe(true);
         });
-      }));
-      it('should initialize value from checked child radio', injectAsync([], () => {
+      })));
+      it('should initialize value from checked child radio', async(inject([], () => {
         let template = `
             <md-radio-group>
               <md-radio-button checked value="Apple"></md-radio-button>
@@ -157,7 +157,7 @@ export function main() {
           let group = <MdRadioGroup>fixture.debugElement.query(By.css('md-radio-group')).componentInstance;
           expect(group.value).toBe('Apple');
         });
-      }));
+      })));
 
 
       describe('Keyboard', () => {
@@ -169,7 +169,7 @@ export function main() {
             <md-radio-button value="Mango"></md-radio-button>
           </md-radio-group>`;
 
-        it('should step to the previous radio when the up arrow key is pressed', injectAsync([], () => {
+        it('should step to the previous radio when the up arrow key is pressed', async(inject([], () => {
           return setup(template).then((fixture: ComponentFixture) => {
             fixture.detectChanges();
 
@@ -179,8 +179,8 @@ export function main() {
             sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Apple');
           });
-        }));
-        it('should not step beyond the first radio when up key is pressed', injectAsync([], () => {
+        })));
+        it('should not step beyond the first radio when up key is pressed', async(inject([], () => {
           return setup(template).then((fixture: ComponentFixture) => {
             fixture.detectChanges();
 
@@ -192,8 +192,8 @@ export function main() {
             sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Apple');
           });
-        }));
-        it('should step to the next radio when the down arrow key is pressed', injectAsync([], () => {
+        })));
+        it('should step to the next radio when the down arrow key is pressed', async(inject([], () => {
           return setup(template).then((fixture: ComponentFixture) => {
             fixture.detectChanges();
 
@@ -203,8 +203,8 @@ export function main() {
             sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Mango');
           });
-        }));
-        it('should not step beyond the last radio when down key is pressed', injectAsync([], () => {
+        })));
+        it('should not step beyond the last radio when down key is pressed', async(inject([], () => {
           return setup(template).then((fixture: ComponentFixture) => {
             fixture.detectChanges();
 
@@ -216,9 +216,9 @@ export function main() {
             sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Mango');
           });
-        }));
+        })));
 
-        it('should not step forward or back when radio group is disabled', injectAsync([], () => {
+        it('should not step forward or back when radio group is disabled', async(inject([], () => {
           return setup(template).then((fixture: ComponentFixture) => {
             fixture.detectChanges();
 
@@ -231,10 +231,10 @@ export function main() {
             sendKey(fixture.debugElement.children[0], KeyCodes.DOWN);
             expect(group.value).toBe('Banana');
           });
-        }));
+        })));
 
 
-        it('should skip over disabled radios when up/down keys are pressed', injectAsync([], () => {
+        it('should skip over disabled radios when up/down keys are pressed', async(inject([], () => {
           return setup(template).then((fixture: ComponentFixture) => {
             fixture.detectChanges();
 
@@ -246,14 +246,14 @@ export function main() {
             sendKey(fixture.debugElement.children[0], KeyCodes.UP);
             expect(group.value).toBe('Banana');
           });
-        }));
+        })));
 
 
       });
     });
 
     describe('md-radio-button', () => {
-      it('should not be selectable when disabled', injectAsync([], () => {
+      it('should not be selectable when disabled', async(inject([], () => {
         let template = `
             <md-radio-group>
               <md-radio-button disabled value="Apple">Apple</md-radio-button>
@@ -267,9 +267,9 @@ export function main() {
           fixture.detectChanges();
           expect(group.getSelectedRadioIndex()).toBe(-1);
         });
-      }));
+      })));
 
-      it('should update parent group value when when selected', injectAsync([], () => {
+      it('should update parent group value when when selected', async(inject([], () => {
         let template = `
             <md-radio-group>
               <md-radio-button value="Apple">Apple</md-radio-button>
@@ -281,9 +281,9 @@ export function main() {
           radio.nativeElement.click();
           expect(group.value).toBe('Apple');
         });
-      }));
+      })));
 
-      it('should default tabindex to 0 when used outside of a md-radio-group', injectAsync([], () => {
+      it('should default tabindex to 0 when used outside of a md-radio-group', async(inject([], () => {
         let template = `<md-radio-button></md-radio-button>`;
         return setup(template).then((fixture: ComponentFixture) => {
           fixture.detectChanges();
@@ -291,8 +291,8 @@ export function main() {
           expect(radio.tabindex).toBe(0);
           fixture.destroy();
         });
-      }));
-      it('should set tabindex by attribute when used outside of a md-radio-group', injectAsync([], () => {
+      })));
+      it('should set tabindex by attribute when used outside of a md-radio-group', async(inject([], () => {
         let template = `<md-radio-button tabindex="17"></md-radio-button>`;
         return setup(template).then((fixture: ComponentFixture) => {
           fixture.detectChanges();
@@ -300,9 +300,9 @@ export function main() {
           expect(radio.tabindex).toBe(17);
           fixture.destroy();
         });
-      }));
+      })));
 
-      it('should be checkable without a md-radio-group', injectAsync([], () => {
+      it('should be checkable without a md-radio-group', async(inject([], () => {
         let template = `<md-radio-button value="Apple">Apple</md-radio-button>`;
         return setup(template).then((fixture: ComponentFixture) => {
           fixture.detectChanges();
@@ -313,10 +313,10 @@ export function main() {
           expect(radio.checked).toBe(true);
           fixture.destroy();
         });
-      }));
+      })));
 
       describe('Keyboard', () => {
-        it('should check the focused radio when the space key is pressed', injectAsync([], () => {
+        it('should check the focused radio when the space key is pressed', async(inject([], () => {
           let template = `<md-radio-button></md-radio-button>`;
           return setup(template).then((fixture: ComponentFixture) => {
             fixture.detectChanges();
@@ -333,8 +333,8 @@ export function main() {
 
             fixture.destroy();
           });
-        }));
-        it('should do nothing with other keypresses', injectAsync([], () => {
+        })));
+        it('should do nothing with other keypresses', async(inject([], () => {
           let template = `<md-radio-button></md-radio-button>`;
           return setup(template).then((fixture: ComponentFixture) => {
             fixture.detectChanges();
@@ -346,7 +346,7 @@ export function main() {
 
             fixture.destroy();
           });
-        }));
+        })));
 
       });
     });

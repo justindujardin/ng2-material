@@ -6,7 +6,7 @@ import {
   inject,
   it,
   ComponentFixture,
-  injectAsync
+  async
 } from "angular2/testing";
 import {Component} from "angular2/core";
 import {MdToolbar} from "../../../ng2-material/components/toolbar/toolbar";
@@ -36,25 +36,25 @@ export function main() {
     }));
 
     describe('md-toolbar', () => {
-      it('defaults mdScrollShrink to false', injectAsync([], () => {
-        return setup().then((fixture: ComponentFixture) => {
+      it('defaults mdScrollShrink to false', async(inject([], () => {
+        setup().then((fixture: ComponentFixture) => {
           fixture.detectChanges();
           let toolbar = <MdToolbar>fixture.debugElement.query(By.css('md-toolbar')).componentInstance;
           expect(toolbar.mdScrollShrink).toBe(false);
         });
-      }));
-      it('supports scroll shrink', injectAsync([], () => {
+      })));
+      it('supports scroll shrink', async(inject([], () => {
         let template = `
           <md-content>
             <md-toolbar mdScrollShrink></md-toolbar>
             <md-content></md-content>
           </md-content>`;
-        return setup(template).then((fixture: ComponentFixture) => {
+        setup(template).then((fixture: ComponentFixture) => {
           fixture.detectChanges();
           let toolbar = <MdToolbar>fixture.debugElement.query(By.css('md-toolbar')).componentInstance;
           expect(toolbar.mdScrollShrink).toBe(true);
         });
-      }));
+      })));
     });
 
   });

@@ -6,7 +6,7 @@ import {
   inject,
   it,
   ComponentFixture,
-  injectAsync
+  async
 } from "angular2/testing";
 import {Component, DebugElement} from "angular2/core";
 import {CORE_DIRECTIVES} from "angular2/common";
@@ -61,50 +61,50 @@ export function main() {
     describe('md-progress-linear', () => {
 
       describe('value', () => {
-        it('should be blank until specified', injectAsync([], () => {
+        it('should be blank until specified', async(inject([], () => {
           return setup(`<md-progress-linear></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBeUndefined();
           });
-        }));
-        it('should set from binding', injectAsync([], () => {
+        })));
+        it('should set from binding', async(inject([], () => {
           return setup(`<md-progress-linear [value]="value"></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBe(25);
           });
-        }));
-        it('should do nothing with undefined value', injectAsync([], () => {
+        })));
+        it('should do nothing with undefined value', async(inject([], () => {
           return setup(`<md-progress-linear [value]="blankValue"></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.value).toBeUndefined();
           });
-        }));
+        })));
 
       });
 
       describe('mode', () => {
-        it('should default to determinate', injectAsync([], () => {
+        it('should default to determinate', async(inject([], () => {
           return setup(`<md-progress-linear></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.DETERMINATE);
           });
-        }));
-        it('should set from attribute', injectAsync([], () => {
+        })));
+        it('should set from attribute', async(inject([], () => {
           return setup(`<md-progress-linear mode="indeterminate"></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.INDETERMINATE);
           });
-        }));
-        it('should set from binding', injectAsync([], () => {
+        })));
+        it('should set from binding', async(inject([], () => {
           return setup(`<md-progress-linear [mode]="modeQuery"></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.mode).toBe(ProgressMode.QUERY);
           });
-        }));
+        })));
 
       });
 
       describe('bufferValue', () => {
-        it('should be blank until specified', injectAsync([], () => {
+        it('should be blank until specified', async(inject([], () => {
           return setup(`<md-progress-linear></md-progress-linear>`).then((api: IProgressFixture) => {
             expect(api.progress.bufferValue).toBeUndefined();
           });
-        }));
-        it('should set from binding', injectAsync([], () => {
+        })));
+        it('should set from binding', async(inject([], () => {
           let template = `<md-progress-linear
                               mode="buffer"
                               [value]="value"
@@ -113,8 +113,8 @@ export function main() {
           return setup(template).then((api: IProgressFixture) => {
             expect(api.progress.bufferValue).toBe(50);
           });
-        }));
-        it('should do nothing with undefined value', injectAsync([], () => {
+        })));
+        it('should do nothing with undefined value', async(inject([], () => {
           let template = `<md-progress-linear
                               mode="buffer"
                               [bufferValue]="blankValue">
@@ -122,7 +122,7 @@ export function main() {
           return setup(template).then((api: IProgressFixture) => {
             expect(api.progress.bufferValue).toBeUndefined();
           });
-        }));
+        })));
       });
     });
   });

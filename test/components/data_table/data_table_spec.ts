@@ -6,7 +6,7 @@ import {
   expect,
   inject,
   it,
-  injectAsync,
+  async,
   ComponentFixture
 } from 'angular2/testing';
 import {Component, DebugElement} from 'angular2/core';
@@ -70,14 +70,14 @@ export function main() {
     }));
 
     describe('md-data-table', () => {
-      it('should initialize selected', injectAsync([], () => {
+      it('should initialize selected', async(inject([], () => {
         return setup().then((api: IDataTableFixture) => {
           expect(api.comp.selected.length).toEqual(0);
           api.fixture.destroy();
         });
-      }));
+      })));
 
-      it('should toggle checked value when a click is fired on a row checkbox', injectAsync([], () => {
+      it('should toggle checked value when a click is fired on a row checkbox', async(inject([], () => {
         return setup(true).then((api: IDataTableFixture) => {
           let row = api.debug.query(By.css('tbody tr:first-child'));
           row.nativeElement.click();
@@ -87,9 +87,9 @@ export function main() {
           expect(api.comp.selected.length).toEqual(0);
           api.fixture.destroy();
         });
-      }));
+      })));
 
-      it('should check all row checkbox when a click is fired on master checkbox', injectAsync([], () => {
+      it('should check all row checkbox when a click is fired on master checkbox', async(inject([], () => {
         return setup(true).then((api: IDataTableFixture) => {
             let masterRow = api.debug.query(By.css('thead tr:first-child'));
             masterRow.nativeElement.click();
@@ -99,9 +99,9 @@ export function main() {
             expect(api.comp.selected.length).toEqual(0);
             api.fixture.destroy();
           });
-      }));
+      })));
 
-      it('should uncheck master checkbox if a row checkbox is unchecked', injectAsync([], () => {
+      it('should uncheck master checkbox if a row checkbox is unchecked', async(inject([], () => {
         return setup(true).then((api: IDataTableFixture) => {
             let masterRow = api.debug.query(By.css('thead tr:first-child')),
               row =  api.debug.query(By.css('tbody tr:first-child')).nativeElement;
@@ -114,9 +114,9 @@ export function main() {
             expect(masterRow.componentInstance.isActive).toBe(false);
             api.fixture.destroy();
           });
-      }));
+      })));
 
-      it('should fire a selectable_change event when a row checkbox change', injectAsync([], () => {
+      it('should fire a selectable_change event when a row checkbox change', async(inject([], () => {
         return setup(true).then((api: IDataTableFixture) => {
           let row = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
 
@@ -127,7 +127,7 @@ export function main() {
           row.click();
           api.fixture.destroy();
         });
-      }));
+      })));
     });
   });
 

@@ -5,7 +5,7 @@ import {
   expect,
   inject,
   it,
-  injectAsync,
+  async,
   ComponentFixture
 } from "angular2/testing";
 import {Component, DebugElement} from "angular2/core";
@@ -45,8 +45,8 @@ export function main() {
     }));
 
     describe('[md-ink]', () => {
-      it('should ink ripple when clicked', injectAsync([], () => {
-        return setup().then((fixture: ComponentFixture) => {
+      it('should ink ripple when clicked', async(inject([], () => {
+        setup().then((fixture: ComponentFixture) => {
           let element: DebugElement = fixture.debugElement.query(By.css('[md-ink]'));
 
           let save = Ink.rippleEvent;
@@ -63,11 +63,11 @@ export function main() {
           expect(fired).toBe(true);
           Ink.rippleEvent = save;
         });
-      }));
+      })));
 
-      it('should not ink ripple with md-no-ink attribute', injectAsync([], () => {
+      it('should not ink ripple with md-no-ink attribute', async(inject([], () => {
         let template = `<div md-ink md-no-ink></div>`;
-        return setup(template).then((fixture: ComponentFixture) => {
+        setup(template).then((fixture: ComponentFixture) => {
           let element: DebugElement = fixture.debugElement.query(By.css('[md-ink]'));
           let save = Ink.rippleEvent;
           let fired = false;
@@ -82,7 +82,7 @@ export function main() {
           expect(fired).toBe(false);
           Ink.rippleEvent = save;
         });
-      }));
+      })));
     });
   });
 }

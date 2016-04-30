@@ -57,7 +57,7 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>State</label>
             <select [(value)]="user.state">
-              <option *ngFor="#state of states" [value]="state.abbrev">
+              <option *ngFor="let state of states" [value]="state.abbrev">
                 {{state.abbrev}}
               </option>
             </select>

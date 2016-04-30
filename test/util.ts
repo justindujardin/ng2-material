@@ -1,6 +1,6 @@
 ///<reference path="../typings/main.d.ts"/>
 import {Component} from "angular2/core";
-import {ComponentFixture, TestComponentBuilder, beforeEach, describe, inject, it, injectAsync} from "angular2/testing";
+import {ComponentFixture, TestComponentBuilder, beforeEach, describe, inject, it, async} from "angular2/testing";
 import {MATERIAL_DIRECTIVES} from "../ng2-material/all";
 import {TimerWrapper} from "angular2/src/facade/async";
 
@@ -43,15 +43,15 @@ export function componentSanityCheck(name: string, selector: string, template: s
     }));
 
     describe(selector, () => {
-      it('should instantiate component without fail', injectAsync([], () => {
-        return setup()
+      it('should instantiate component without fail', async(inject([], () => {
+        setup()
           .then(() => promiseWait());
-      }));
-      it('should destroy component without fail', injectAsync([], () => {
-        return setup()
+      })));
+      it('should destroy component without fail', async(inject([], () => {
+        setup()
           .then((api: ComponentFixture) => api.destroy())
           .then(() => promiseWait());
-      }));
+      })));
     });
   });
 

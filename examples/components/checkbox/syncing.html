@@ -10,7 +10,7 @@
         <fieldset class="standard">
           <legend>Using <code>md-checkbox</code> with <code>[checked]</code></legend>
           <div layout="row" layout-wrap flex>
-            <div flex="50" *ngFor="#item of items">
+            <div flex="50" *ngFor="let item of items">
               <md-checkbox [checked]="exists(item, selected)" (click)="toggle(item, selected)">
                 {{ item }} <span *ngIf="exists(item, selected)">selected</span>
               </md-checkbox>
@@ -25,7 +25,7 @@
         <fieldset class="standard">
           <legend>Using <code>&lt;input type="checkbox"&gt;</code></legend>
           <div layout="row" layout-wrap flex>
-            <div *ngFor="#item of items" class="standard" flex="50">
+            <div *ngFor="let item of items" class="standard" flex="50">
               <label>
                 <input type="checkbox" [checked]="exists(item, selected)" (click)="toggle(item, selected)"/>
                 {{ item }}

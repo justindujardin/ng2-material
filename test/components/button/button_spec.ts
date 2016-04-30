@@ -5,7 +5,7 @@ import {
   expect,
   inject,
   it,
-  injectAsync,
+  async,
   ComponentFixture
 } from "angular2/testing";
 import {Component, ViewMetadata, DebugElement} from "angular2/core";
@@ -52,7 +52,7 @@ export function main() {
     }));
 
     describe('button[md-button]', () => {
-      it('should handle a click on the button', injectAsync([], () => {
+      it('should handle a click on the button', async(() => {
         return setup().then((fixture: ComponentFixture) => {
           let testComponent = fixture.debugElement.componentInstance;
           let buttonDebugElement = fixture.debugElement.query(By.css('button'));
@@ -63,7 +63,7 @@ export function main() {
       }), 10000);
 
 
-      it('should ink ripple when clicked', injectAsync([], () => {
+      it('should ink ripple when clicked', async(() => {
         return setup().then((fixture: ComponentFixture) => {
           let button: DebugElement = fixture.debugElement.children[0];
 
@@ -83,7 +83,7 @@ export function main() {
         });
       }));
 
-      it('should not ink ripple with md-no-ink attribute', injectAsync([], () => {
+      it('should not ink ripple with md-no-ink attribute', async(inject([], () => {
         let template = `<button md-button md-no-ink></button>`;
         return setup(template).then((fixture: ComponentFixture) => {
           let button: DebugElement = fixture.debugElement.children[0];
@@ -100,9 +100,9 @@ export function main() {
           expect(fired).toBe(false);
           Ink.rippleEvent = save;
         });
-      }));
+      })));
 
-      it('should disable the button', injectAsync([], () => {
+      it('should disable the button', async(() => {
         return setup().then((fixture: ComponentFixture) => {
           let testAppComponent = fixture.debugElement.componentInstance;
           let buttonDebugElement = fixture.debugElement.query(By.css('button'));
@@ -133,7 +133,7 @@ export function main() {
           TestComponent, new ViewMetadata({template: anchorTemplate, directives: [MdAnchor]}));
       });
 
-      it('should remove disabled anchors from tab order', injectAsync([], () => {
+      it('should remove disabled anchors from tab order', async(() => {
         return builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
           let testAppComponent = fixture.debugElement.componentInstance;
           let anchorDebugElement = fixture.debugElement.query(By.css('a'));
@@ -152,7 +152,7 @@ export function main() {
         });
       }), 10000);
 
-      it('should not preventDefault on enabled anchor clicks', injectAsync([], () => {
+      it('should not preventDefault on enabled anchor clicks', async(inject([], () => {
         return builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
           let anchor: DebugElement = fixture.debugElement.children[0];
           let event = DOM.createEvent('mouse');
@@ -161,8 +161,8 @@ export function main() {
           anchor.triggerEventHandler('click', event);
           expect(triggered).toBe(false);
         });
-      }));
-      it('should preventDefault for disabled anchor clicks', injectAsync([], () => {
+      })));
+      it('should preventDefault for disabled anchor clicks', async(inject([], () => {
         return builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
           let anchor: DebugElement = fixture.debugElement.children[0];
           let anchorComp: MdAnchor = anchor.componentInstance;
@@ -174,7 +174,7 @@ export function main() {
           expect(triggered).toBe(true);
           fixture.destroy();
         });
-      }));
+      })));
     });
   });
 }

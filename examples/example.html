@@ -25,7 +25,7 @@
                [ngClass]="{ shown: showTabs }"
                mdNoScroll="true"
                class="demo-source-tabs md-primary md-no-scroll">
-        <template md-tab *ngFor="#file of orderedFiles" [label]="file?.type">
+        <template md-tab *ngFor="let file of orderedFiles" [label]="file?.type">
           <md-content md-scroll-y class="demo-source-container">
             <highlight [text]="file.data" [type]="file.type" class="no-header"></highlight>
           </md-content>

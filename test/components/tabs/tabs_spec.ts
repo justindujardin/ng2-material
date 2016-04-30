@@ -6,7 +6,7 @@ import {
   inject,
   it,
   ComponentFixture,
-  injectAsync
+  async
 } from "angular2/testing";
 import {Component} from "angular2/core";
 import {MdTab, MdTabs} from "../../../ng2-material/components/tabs/tabs";
@@ -59,13 +59,13 @@ export function main() {
     }));
 
     describe('md-tabs', () => {
-      it('should initialize with first tab selected', injectAsync([], () => {
+      it('should initialize with first tab selected', async(inject([], () => {
         return setup().then((api: ITabsFixture) => {
           expect(api.tabs.selected).toBe(0);
           expect(api.tabs.selectedTab).toBe(null);
         });
-      }));
-      it('should update selected and selectedTab when changed by clicking on tab buttons', injectAsync([], () => {
+      })));
+      it('should update selected and selectedTab when changed by clicking on tab buttons', async(inject([], () => {
         return setup().then((api: ITabsFixture) => {
           api.tabButtons[1].click();
           expect(api.tabs.selected).toBe(1);
@@ -75,8 +75,8 @@ export function main() {
           expect(api.tabs.selected).toBe(0);
           expect(api.tabs.selectedTab).not.toBeNull();
         });
-      }));
-      it('should update selectedTab when selected is set', injectAsync([], () => {
+      })));
+      it('should update selectedTab when selected is set', async(inject([], () => {
         return setup().then((api: ITabsFixture) => {
           expect(api.tabs.selectedTab).toBeNull();
           api.tabs.selected = 1;
@@ -88,9 +88,9 @@ export function main() {
           api.tabs.selected = -1;
           expect(api.tabs.selectedTab).toBeNull();
         });
-      }));
+      })));
 
-      it('should bind [selected] to an index', injectAsync([], () => {
+      it('should bind [selected] to an index', async(inject([], () => {
         let template = `
           <md-tabs [selected]="selectedIndex">
             <template md-tab label="Tab1"><span>Tab1</span></template>
@@ -101,9 +101,9 @@ export function main() {
         return setup(template).then((api: ITabsFixture) => {
           expect(api.tabs.selected).toBe(2);
         });
-      }));
+      })));
 
-      it('md-tabs should ripple when tab buttons are clicked', injectAsync([], () => {
+      it('md-tabs should ripple when tab buttons are clicked', async(inject([], () => {
         let template = `
           <md-tabs [selected]="selectedIndex">
             <template md-tab label="Tab1"><span>Tab1</span></template>
@@ -120,9 +120,9 @@ export function main() {
           expect(fired).toBe(true);
           Ink.rippleEvent = save;
         });
-      }));
+      })));
 
-      it('md-tabs[md-no-ink] should not ripple when tab buttons are clicked', injectAsync([], () => {
+      it('md-tabs[md-no-ink] should not ripple when tab buttons are clicked', async(inject([], () => {
         let template = `
           <md-tabs md-no-ink [selected]="selectedIndex">
             <template md-tab label="Tab1"><span>Tab1</span></template>
@@ -139,7 +139,7 @@ export function main() {
           expect(fired).toBe(false);
           Ink.rippleEvent = save;
         });
-      }));
+      })));
     });
   });
 

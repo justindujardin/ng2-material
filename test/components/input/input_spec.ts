@@ -6,7 +6,7 @@ import {
   expect,
   inject,
   it,
-  injectAsync,
+  async,
   ComponentFixture
 } from "angular2/testing";
 import {Component, DebugElement, Input} from "angular2/core";
@@ -63,13 +63,13 @@ export function main() {
     }));
 
     describe('input[md-input]', () => {
-      it('should initialize with empty string value', injectAsync([], () => {
+      it('should initialize with empty string value', async(inject([], () => {
         return setup().then((api: IInputFixture) => {
           api.fixture.destroy();
           expect(api.input.value).toBe('');
         });
-      }));
-      it('should emit change event when value binding is updated after init', injectAsync([], () => {
+      })));
+      it('should emit change event when value binding is updated after init', async(inject([], () => {
         let tpl = `
         <md-input-container>
           <input md-input type="text" [value]="boundValue">
@@ -88,7 +88,7 @@ export function main() {
             });
           });
         });
-      }));
+      })));
     });
   });
 

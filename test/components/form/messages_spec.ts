@@ -5,7 +5,7 @@ import {
   expect,
   inject,
   it,
-  injectAsync,
+  async,
   ComponentFixture
 } from "angular2/testing";
 import {Component} from "angular2/core";
@@ -61,26 +61,26 @@ export function main() {
     }));
 
     describe('md-messages', () => {
-      it('should error if used outside of an NgFormControl', injectAsync([], () => {
+      it('should error if used outside of an NgFormControl', async(inject([], () => {
         return setup(`<div md-messages></div>`).catch((err: any) => {
           expect(err).toBeDefined();
         });
-      }));
-      it('should initialize when given model and control group are present', injectAsync([], () => {
+      })));
+      it('should initialize when given model and control group are present', async(inject([], () => {
         return setup().then((api: IFormMessagesFixture) => {
           expect(api.container.isTouched).toBe(false);
           api.fixture.destroy();
         });
-      }));
-      it('should bind local view references #ref="ngForm"', injectAsync([], () => {
+      })));
+      it('should bind local view references #ref="ngForm"', async(inject([], () => {
         return setup().then((api: IFormMessagesFixture) => {
           expect(api.container.isTouched).toBe(false);
           expect(api.messages.length).toBe(1);
           expect(api.container.form).not.toBeNull();
           expect(api.fixture.componentInstance.name).toBe('MorTon');
         });
-      }));
-      it('should re-export valid from control or form', injectAsync([], () => {
+      })));
+      it('should re-export valid from control or form', async(inject([], () => {
         return setup().then((api: IFormMessagesFixture) => {
           return promiseWait().then(() => {
             let ctrl: Control = (<any>api.container.property).control;
@@ -92,7 +92,7 @@ export function main() {
             expect(api.container.valid).toBe(true);
           });
         });
-      }));
+      })));
     });
 
 

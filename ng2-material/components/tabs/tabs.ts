@@ -62,7 +62,7 @@ export class MdTab {
       <md-tab-data></md-tab-data>
       <md-tabs-canvas role="tablist">
         <md-pagination-wrapper>
-          <template ngFor [ngForOf]="panes" #pane="$implicit" #index="i">
+          <template ngFor [ngForOf]="panes" let-pane="$implicit" let-index="i">
           <md-tab-item tabindex="-1"
                        class="md-tab"
                        (click)="onTabClick(pane,$event)"

@@ -23,6 +23,8 @@ module.exports = function (config) {
       // Angular 2 polyfills *must* be loaded after es6-shim and system-polyfills in order to
       // setup the monkey-patches for zones.
       {pattern: 'node_modules/angular2/bundles/angular2-polyfills.js', included: true, watched: true},
+      {pattern: 'node_modules/zone.js/dist/async-test.js', included: true, watched: true},
+
       {pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: true},
       {pattern: 'node_modules/rxjs/bundles/Rx.js', included: true, watched: true},
       'node_modules/reflect-metadata/Reflect.js',

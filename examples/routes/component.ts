@@ -13,7 +13,7 @@ import {TimerWrapper} from "angular2/src/facade/async";
     <h1 class="examples-title">Examples</h1>
     <p class="examples-intro" *ngIf="value.readme" [innerHtml]="value.readme"></p>
 
-    <example *ngFor="#demo of value.examples" [model]="demo"></example>`,
+    <example *ngFor="let demo of value.examples" [model]="demo"></example>`,
   directives: [Example, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES]
 })
 export class ComponentPage implements OnInit {

@@ -13,7 +13,7 @@
 <nav class="heading-list-toc">
   <h1>Components</h1>
   <ul>
-    <li *ngFor="#value of components"><a [routerLink]="['Component', {id: value.id}]">{{value.name}}</a></li>
+    <li *ngFor="let value of components"><a [routerLink]="['Component', {id: value.id}]">{{value.name}}</a></li>
   </ul>
 </nav>
 <!-- BRING THIS BACK WITH #86 -->

@@ -5,7 +5,7 @@ import {
   expect,
   inject,
   it,
-  injectAsync,
+  async,
   ComponentFixture
 } from "angular2/testing";
 import {Component, DebugElement} from "angular2/core";
@@ -61,14 +61,14 @@ export function main() {
     describe('md-backdrop', () => {
 
       describe('transitionClass', () => {
-        it('should be added to classList when shown', injectAsync([], () => {
+        it('should be added to classList when shown', async(inject([], () => {
           return setup(true).then((api: IBackdropFixture) => {
             api.fixture.detectChanges();
             let el = api.debug.nativeElement;
             expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(true);
           });
-        }));
-        it('should be removed from classList when hidden', injectAsync([], () => {
+        })));
+        it('should be removed from classList when hidden', async(inject([], () => {
           return setup(true).then((api: IBackdropFixture) => {
             return promiseWait().then(() => {
               let el = api.debug.nativeElement;
@@ -81,11 +81,11 @@ export function main() {
                 });
             });
           });
-        }));
+        })));
       });
 
       describe('transitionAddClass=false', () => {
-        it('should remove transitionClass when shown', injectAsync([], () => {
+        it('should remove transitionClass when shown', async(inject([], () => {
           return setup(false, false).then((api: IBackdropFixture) => {
             let el = api.debug.nativeElement;
             expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
@@ -94,8 +94,8 @@ export function main() {
               expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
             });
           });
-        }));
-        it('should add transitionClass when hidden', injectAsync([], () => {
+        })));
+        it('should add transitionClass when hidden', async(inject([], () => {
           return setup(true, false).then((api: IBackdropFixture) => {
             let el = api.debug.nativeElement;
             expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
@@ -103,11 +103,11 @@ export function main() {
               expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(true);
             });
           });
-        }));
+        })));
       });
 
       describe('clickClose', () => {
-        it('should be hidden by a click when true', injectAsync([], () => {
+        it('should be hidden by a click when true', async(inject([], () => {
           return setup(true).then((api: IBackdropFixture) => {
             let triggered = false;
             api.backdrop.clickClose = true;
@@ -118,8 +118,8 @@ export function main() {
             api.debug.nativeElement.click();
             expect(triggered).toBe(true);
           });
-        }));
-        it('should not be hidden when clickClose is false', injectAsync([], () => {
+        })));
+        it('should not be hidden when clickClose is false', async(inject([], () => {
           return setup(true).then((api: IBackdropFixture) => {
             let triggered = false;
             api.backdrop.clickClose = false;
@@ -130,8 +130,8 @@ export function main() {
             api.debug.nativeElement.click();
             expect(triggered).toBe(false);
           });
-        }));
-        it('should not be clickable during transition animation', injectAsync([], () => {
+        })));
+        it('should not be clickable during transition animation', async(inject([], () => {
           return setup().then((api: IBackdropFixture) => {
             let triggered = false;
             api.backdrop.clickClose = true;
@@ -148,10 +148,10 @@ export function main() {
               expect(triggered).toBe(true);
             });
           });
-        }));
+        })));
       });
       describe('show', () => {
-        it('emit events before and after being shown', injectAsync([], () => {
+        it('emit events before and after being shown', async(inject([], () => {
           return setup().then((api: IBackdropFixture) => {
             let changes: string[] = [];
             expect(api.backdrop.visible).toBe(false);
@@ -166,8 +166,8 @@ export function main() {
                 expect(changes[1]).toBe('shown');
               });
           });
-        }));
-        it('does not emit events events if already shown', injectAsync([], () => {
+        })));
+        it('does not emit events events if already shown', async(inject([], () => {
           return setup(true).then((api: IBackdropFixture) => {
             let changes: number = 0;
             api.backdrop.onShowing.subscribe(() => changes++);
@@ -179,11 +179,11 @@ export function main() {
                 expect(changes).toBe(0);
               });
           });
-        }));
+        })));
       });
 
       describe('hide', () => {
-        it('hide emits events before and after being hidden', injectAsync([], () => {
+        it('hide emits events before and after being hidden', async(inject([], () => {
           return setup(true).then((api: IBackdropFixture) => {
             let changes: string[] = [];
             api.backdrop.onHiding.subscribe(() => changes.push('hiding'));
@@ -197,8 +197,8 @@ export function main() {
                 expect(changes[1]).toBe('hidden');
               });
           });
-        }));
-        it('does not emit events events if already hidden', injectAsync([], () => {
+        })));
+        it('does not emit events events if already hidden', async(inject([], () => {
           return setup().then((api: IBackdropFixture) => {
             let changes: number = 0;
             expect(api.backdrop.visible).toBe(false);
@@ -211,7 +211,7 @@ export function main() {
                 expect(changes).toBe(0);
               });
           });
-        }));
+        })));
       });
     });
 

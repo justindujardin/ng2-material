@@ -15,7 +15,7 @@
 
   <md-radio-group [(value)]="data.group2" #group1 class="md-primary">
 
-    <md-radio-button *ngFor="#d of radioData; #index = index"
+    <md-radio-button *ngFor="let d of radioData; let index = index"
                      [value]="d.value"
                      [checked]="group1.value==d.value"
                      [disabled]="d.isDisabled"
@@ -44,7 +44,7 @@
   <p style="margin-top: 0;">Selected Avatar: <span class="radioValue">{{ data.group3 }}</span></p>
 
   <md-radio-group #group [(value)]="data.group3">
-    <md-radio-button *ngFor="#it of avatarData"
+    <md-radio-button *ngFor="let it of avatarData"
                      [checked]="group.value==it.value"
                      [value]="it.value"
                      [aria-label]="it.title">

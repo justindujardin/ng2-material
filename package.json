@@ -15,12 +15,12 @@
     "test": "$(npm bin)/grunt karma"
   },
   "dependencies": {
-    "angular2": ">=2.0.0-beta.14",
+    "angular2": ">=2.0.0-beta.17",
     "es6-promise": ">=3.0.2",
     "es6-shim": ">=0.35.0",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.2",
-    "zone.js": ">=0.6.6"
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": ">=0.6.12"
   },
   "typings": "dist/ng2-material.d.ts",
   "devDependencies": {
@@ -65,7 +65,7 @@
     "style-loader": "0.13.0",
     "systemjs": "0.19.2",
     "systemjs-builder": "justindujardin/builder.git#typescript-source-maps",
-    "typescript": "1.8.0",
+    "typescript": "1.8.10",
     "underscore": "1.8.3",
     "url-loader": "0.5.7",
     "webpack": "1.12.13",

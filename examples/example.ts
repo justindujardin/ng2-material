@@ -1,4 +1,14 @@
-import {Component, Input, DynamicComponentLoader, ElementRef, ComponentRef, Query, QueryList} from "angular2/core";
+import {
+  Component,
+  Input,
+  DynamicComponentLoader,
+  ElementRef,
+  ComponentRef,
+  Query,
+  QueryList,
+  ViewContainerRef,
+  ViewChild
+} from "angular2/core";
 import {IExampleData} from "./app";
 import {DEMO_DIRECTIVES} from "./all";
 import {MATERIAL_DIRECTIVES, MdTabs} from "ng2-material/all";
@@ -62,6 +72,9 @@ export default class Example {
   @Input()
   public selected: string = 'html';
 
+  @ViewChild('example', {read: ViewContainerRef})
+  private exampleRef;
+
   applyModel(model: IExampleData) {
     this.orderedFiles = [];
     this._loaded = false;
@@ -79,16 +92,16 @@ export default class Example {
     // Render the example component into the view.
     let template = `<${model.component}></${model.component}>`;
     @Component({
-      selector: 'md-example-view',
+      selector: `md-example-${model.component}`,
       template: template,
       directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES]
     })
     class CompiledComponent {
     }
-    this.dcl.loadIntoLocation(CompiledComponent, this._element, 'example')
+    this.dcl.loadNextToLocation(CompiledComponent, this.exampleRef)
       .then((ref: ComponentRef) => {
         if (this._reference) {
-          this._reference.dispose();
+          this._reference.destroy();
         }
         this._loaded = true;
         this._reference = ref;
