@@ -67,7 +67,7 @@ export class SidenavStyle {
   selector: 'md-sidenav',
   host: {
     '[class.md-style-side]': 'style=="side"',
-    '[class.md-whiteframe-z2]': 'visible',
+    '[class.md-elevation-z2]': 'visible',
     '[class.md-sidenav-left]': 'align!="right"',
     '[class.md-sidenav-right]': 'align=="right"'
   },

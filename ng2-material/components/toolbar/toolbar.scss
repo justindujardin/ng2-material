@@ -52,7 +52,7 @@ md-toolbar {
   min-height: $baseline-grid * 8;
   width: 100%;
 
-  &.md-whiteframe-z1-add, &.md-whiteframe-z1-remove {
+  &.md-elevation-z2-add, &.md-elevation-z2-remove {
     transition: box-shadow $swift-ease-in-out-duration linear;
   }
 

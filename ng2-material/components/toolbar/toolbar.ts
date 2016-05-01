@@ -162,12 +162,12 @@ export class MdToolbar implements AfterContentInit, OnChanges, OnDestroy {
     this._previousScrollTop = scrollTop;
 
     this.viewport.requestFrame(() => {
-      var hasWhiteFrame = DOM.hasClass(this.el.nativeElement, 'md-whiteframe-z1');
+      var hasElevation = DOM.hasClass(this.el.nativeElement, 'md-elevation-z2');
 
-      if (hasWhiteFrame && !this._currentY) {
-        DOM.removeClass(this.el.nativeElement, 'md-whiteframe-z1');
-      } else if (!hasWhiteFrame && this._currentY) {
-        DOM.addClass(this.el.nativeElement, 'md-whiteframe-z1');
+      if (hasElevation && !this._currentY) {
+        DOM.removeClass(this.el.nativeElement, 'md-elevation-z2');
+      } else if (!hasElevation && this._currentY) {
+        DOM.addClass(this.el.nativeElement, 'md-elevation-z2');
       }
     });
 
