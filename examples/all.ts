@@ -5,6 +5,7 @@ import {CONST_EXPR, Type} from "angular2/src/facade/lang";
 import CardBasicUsage from "./components/card/basic_usage";
 import CardInlineActions from "./components/card/inline_actions";
 import ButtonBasicUsage from "./components/button/basic_usage";
+import ChipsBasicUsage from "./components/chips/basic_usage";
 import CardActionButtons from "./components/card/action_buttons";
 import DataTableBasicUsage from './components/data_table/basic_usage';
 import DataTableSelectableUsage from './components/data_table/selectable_usage';
@@ -31,6 +32,7 @@ import SidenavBasicUsage from "./components/sidenav/basic_usage";
 export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   CardBasicUsage, CardInlineActions, CardActionButtons,
   ButtonBasicUsage,
+  ChipsBasicUsage,
   CheckboxBasicUsage, CheckboxSyncing,
   DataTableBasicUsage, DataTableSelectableUsage,
   DialogBasicUsage,

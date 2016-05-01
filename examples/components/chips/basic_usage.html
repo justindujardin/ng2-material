@@ -1,0 +1,26 @@
+<div layout="column" class="md-inline-form">
+
+  <md-toolbar layout-padding layout="row">
+    <div class="md-toolbar-tools">
+      <span flex>{{(chips.state.collection$ | async)?.length || 0}} chips</span>
+      <md-checkbox [(checked)]="deletable">Deletable</md-checkbox>
+      <md-checkbox [(checked)]="unique">Unique</md-checkbox>
+      <md-checkbox [(checked)]="readonly">Read only</md-checkbox>
+      <md-input-container class="md-block">
+        <label>Placeholder</label>
+        <input md-input [(value)]="placeholder">
+      </md-input-container>
+    </div>
+  </md-toolbar>
+  <md-content>
+    <md-subheader>Type into the below area</md-subheader>
+    <md-divider></md-divider>
+    <section layout-padding>
+      <md-chips [readonly]="readonly" [unique]="unique" [deletable]="deletable" [placeholder]="placeholder" #chips></md-chips>
+    </section>
+    <section layout-padding>
+      <h2>Output</h2>
+      <span *ngFor="#chip of chips.state.collection$ | async">{{chip.label}} </span>
+    </section>
+  </md-content>
+</div>

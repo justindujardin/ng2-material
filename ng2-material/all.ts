@@ -1,6 +1,8 @@
 import {CONST_EXPR, Type} from "angular2/src/facade/lang";
 import {MdAnchor, MdButton} from "./components/button/button";
 import {MdCheckbox} from "./components/checkbox/checkbox";
+import {MdChips} from "./components/chips/chips";
+import {MdChipsService} from "./components/chips/chips.service";
 import {MdContent} from "./components/content/content";
 import {MdDataTable, MdDataTableHeaderSelectableRow, MdDataTableSelectableRow} from './components/data_table/data_table';
 import {MdDialog} from "./components/dialog/dialog";
@@ -33,6 +35,9 @@ import {Media} from "./core/util/media";
 export * from './components/button/button';
 
 export * from './components/checkbox/checkbox';
+
+export * from './components/chips/chips';
+
 
 export * from './components/content/content';
 
@@ -85,6 +90,7 @@ export * from './core/util/animate';
 export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
   MdAnchor, MdButton,
   MdCheckbox,
+  MdChips,
   MdContent,
   MdDataTable, MdDataTableHeaderSelectableRow, MdDataTableSelectableRow,
   MdDivider,
@@ -116,7 +122,8 @@ export const MATERIAL_NODE_PROVIDERS: any[] = CONST_EXPR([
   Media,
   SidenavService,
   MdRadioDispatcher,
-  INPUT_VALIDATORS
+  INPUT_VALIDATORS,
+  MdChipsService
 ]);
 
 /**
