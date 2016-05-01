@@ -1,5 +1,4 @@
-import {Directive, ElementRef, AfterViewInit, Component} from "angular2/core";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {Directive, Component} from "angular2/core";
 
 
 /**
@@ -59,35 +58,12 @@ export class MdList {
 @Component({
   selector: 'md-list-item',
   host: {
-    'role': 'listitem'
+    'role': 'listitem',
   },
-  properties: ['wrap'],
   template: `
     <div class="md-no-style md-list-item-inner">
       <ng-content></ng-content>
     </div>`
 })
-export class MdListItem implements AfterViewInit {
-  constructor(private _element: ElementRef) {
-  }
-
-  ngAfterViewInit(): any {
-    this.setupToggleAria();
-  }
-
-  setupToggleAria() {
-    let toggleTypes = ['md-switch', 'md-checkbox'];
-    let toggle;
-    let el = this._element.nativeElement;
-
-    for (var i = 0, toggleType; toggleType = toggleTypes[i]; ++i) {
-      if (toggle = DOM.querySelector(el, toggleType)) {
-        if (!toggle.hasAttribute('aria-label')) {
-          var p = DOM.querySelector(el, 'p');
-          if (!p) return;
-          toggle.setAttribute('aria-label', 'Toggle ' + p.textContent);
-        }
-      }
-    }
-  }
+export class MdListItem {
 }

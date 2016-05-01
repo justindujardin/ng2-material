@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input} from "angular2/core";
+import {Component, ViewContainerRef, Input} from "angular2/core";
 import {MATERIAL_DIRECTIVES, MdDialog, Media, MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/all";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
@@ -15,7 +15,7 @@ export default class DialogBasicUsage {
 
   constructor(public dialog: MdDialog,
               public media: Media,
-              public element: ElementRef) {
+              public view: ViewContainerRef) {
 
   }
 
@@ -26,7 +26,7 @@ export default class DialogBasicUsage {
       .title('This is an alert title')
       .ok('Got it!')
       .targetEvent(ev);
-    this.dialog.open(MdDialogBasic, this.element, config);
+    this.dialog.open(MdDialogBasic, this.view, config);
   };
 
   showConfirm(ev) {
@@ -38,7 +38,7 @@ export default class DialogBasicUsage {
       .ok('Please do it!')
       .cancel('Sounds like a scam')
       .targetEvent(ev);
-    this.dialog.open(MdDialogBasic, this.element, config)
+    this.dialog.open(MdDialogBasic, this.view, config)
       .then((ref: MdDialogRef) => {
         ref.whenClosed.then((result) => {
           if (result) {
@@ -56,7 +56,7 @@ export default class DialogBasicUsage {
       .fruit("Mango")
       .clickOutsideToClose(false)
       .targetEvent(ev);
-    this.dialog.open(DialogCustom, this.element, config)
+    this.dialog.open(DialogCustom, this.view, config)
       .then((ref: MdDialogRef) => {
         ref.whenClosed.then((interesting) => {
           if (interesting) {

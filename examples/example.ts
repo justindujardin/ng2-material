@@ -7,6 +7,7 @@ import {
   Query,
   QueryList,
   ViewContainerRef,
+  AfterViewInit,
   ViewChild
 } from "angular2/core";
 import {IExampleData} from "./app";
@@ -28,7 +29,7 @@ export interface ISourceFile {
   templateUrl: 'examples/example.html',
   directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES, Highlight]
 })
-export default class Example {
+export default class Example implements AfterViewInit {
   private _model: IExampleData = null;
   private _reference: ComponentRef = null;
 
@@ -54,6 +55,8 @@ export default class Example {
               public dcl: DynamicComponentLoader) {
   }
 
+  private _init: boolean = false;
+
   /**
    * The set of source files associated with the example
    */
@@ -75,7 +78,18 @@ export default class Example {
   @ViewChild('example', {read: ViewContainerRef})
   private exampleRef;
 
+  ngAfterViewInit(): any {
+    this._init = true;
+    if (this._model) {
+      this.applyModel(this._model);
+    }
+  }
+
+
   applyModel(model: IExampleData) {
+    if (!this._init) {
+      return;
+    }
     this.orderedFiles = [];
     this._loaded = false;
     // Fetch template, styles, and source strings for display.

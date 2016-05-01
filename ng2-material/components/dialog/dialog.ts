@@ -2,14 +2,15 @@ import {
   provide,
   ComponentRef,
   DynamicComponentLoader,
-  ElementRef,
   Injectable,
   RenderComponentType,
   ViewEncapsulation,
-  Injector,
+  ViewContainerRef,
   Renderer,
   RootRenderer,
-  APPLICATION_COMMON_PROVIDERS, ReflectiveInjector, ResolvedReflectiveProvider
+  APPLICATION_COMMON_PROVIDERS,
+  ReflectiveInjector,
+  ResolvedReflectiveProvider
 } from "angular2/core";
 import {isPresent, Type} from "angular2/src/facade/lang";
 import {MdDialogRef} from "./dialog_ref";
@@ -57,20 +58,20 @@ export class MdDialog {
   /**
    * Opens a modal dialog.
    * @param type The component to open.
-   * @param elementRef The logical location into which the component will be opened.
+   * @param viewRef The logical view into which the component will be opened.
    * @param options
    * @returns Promise for a reference to the dialog.
    */
-  open(type: Type, elementRef: ElementRef, options: MdDialogConfig = new MdDialogConfig()): Promise<MdDialogRef> {
+  open(type: Type, viewRef: ViewContainerRef, options: MdDialogConfig = new MdDialogConfig()): Promise<MdDialogRef> {
     // Create the dialogRef here so that it can be injected into the content component.
     let dialogRef = new MdDialogRef();
 
     let bindings = ReflectiveInjector.resolve([APPLICATION_COMMON_PROVIDERS, provide(MdDialogRef, {useValue: dialogRef})]);
 
-    let backdropRefPromise = this._openBackdrop(elementRef, bindings, options);
+    let backdropRefPromise = this._openBackdrop(viewRef, bindings, options);
 
     // First, load the MdDialogContainer, into which the given component will be loaded.
-    return this.componentLoader.loadNextToLocation(MdDialogContainer, elementRef, bindings)
+    return this.componentLoader.loadNextToLocation(MdDialogContainer, viewRef, bindings)
       .then((containerRef: ComponentRef) => {
         var dialogElement = containerRef.location.nativeElement;
 
@@ -117,8 +118,8 @@ export class MdDialog {
   }
 
   /** Loads the dialog backdrop (transparent overlay over the rest of the page). */
-  _openBackdrop(elementRef: ElementRef, bindings: ResolvedReflectiveProvider[], options: MdDialogConfig): Promise<ComponentRef> {
-    return this.componentLoader.loadNextToLocation(MdBackdrop, elementRef, bindings)
+  _openBackdrop(viewRef: ViewContainerRef, bindings: ResolvedReflectiveProvider[], options: MdDialogConfig): Promise<ComponentRef> {
+    return this.componentLoader.loadNextToLocation(MdBackdrop, viewRef, bindings)
       .then((componentRef: ComponentRef) => {
         let backdrop: MdBackdrop = componentRef.instance;
         backdrop.clickClose = options.clickClose;
