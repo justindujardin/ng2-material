@@ -8,7 +8,7 @@ import {MdChips, IMdChipData} from "./chips";
   directives: [MdIcon],
   template: `
     <div class="md-chip-content" role="button">{{chip.label}}</div>
-    <div class="md-chip-remove-container">
+    <div class="md-chip-remove-container" *ngIf="chips.deletable$ | async">
       <button class="md-chip-remove" (click)="chips.remove(chip)" type="button">
         <i md-icon>cancel</i>
         <span class="md-visually-hidden">close</span>

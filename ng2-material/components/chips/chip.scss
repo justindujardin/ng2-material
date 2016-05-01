@@ -27,12 +27,6 @@ md-chip {
       outline: none;
     }
   }
-  &.md-chip-content-edit-is-enabled {
-    -webkit-user-select: none; /* webkit (safari, chrome) browsers */
-    -moz-user-select: none; /* mozilla browsers */
-    -khtml-user-select: none; /* webkit (konqueror) browsers */
-    -ms-user-select: none; /* IE10+ */
-  }
   .md-chip-remove-container {
     float: left;
   }
@@ -47,7 +41,6 @@ md-chip {
     border: none;
     box-shadow: none;
     position: relative;
-    display: none;
     &:focus {
       outline: none;
     }
@@ -61,9 +54,6 @@ md-chip {
   }
 
   &.md-deletable {
-    .md-chip-remove {
-      display: initial;
-    }
     padding-right: 0;
   }
 
