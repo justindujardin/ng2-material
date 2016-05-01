@@ -33,7 +33,7 @@ export interface IMdChipData {
   template: `
   <md-chip *ngFor="#chip of collection$ | async" [chip]="chip"></md-chip>
   <md-chip-input-container *ngIf="!(readonly$ | async)">
-    <input *ngIf="!readonly" (focus)="onFocus()" (blur)="onBlur()" [placeholder]="placeholder$ | async" md-chip-input>
+    <input *ngIf="!readonly" (focus)="onFocus()" (blur)="onBlur()" [attr.placeholder]="placeholder$ | async" md-chip-input>
   </md-chip-input-container>`,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
