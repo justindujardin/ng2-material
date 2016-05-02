@@ -1,4 +1,13 @@
-import {Component, Output, HostListener, ViewChild, HostBinding, Input, ChangeDetectionStrategy} from "angular2/core";
+import {
+  Component,
+  Output,
+  HostListener,
+  ViewChild,
+  Input,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  ApplicationRef
+} from "angular2/core";
 import {MdChip} from "./chip";
 import {MdChipInput} from "./chip_input";
 import "rxjs/add/operator/share";
@@ -6,7 +15,6 @@ import {BehaviorSubject} from "rxjs/Rx";
 import {Subject} from "rxjs/Subject";
 import {uuid} from "../../core/util/uuid";
 import {Observable} from "rxjs/Observable";
-import {ViewportHelper} from "../../core/util/viewport";
 
 /** Basic data object for a chip. */
 export interface IMdChipData {
@@ -29,6 +37,9 @@ export interface IMdChipData {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MdChips {
+
+  constructor(public cdr: ChangeDetectorRef, public app: ApplicationRef) {
+  }
 
   @ViewChild(MdChipInput) input: MdChipInput;
 

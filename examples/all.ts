@@ -25,6 +25,7 @@ import InputBasicUsage from "./components/input/basic_usage";
 import InputFormBuilder from "./components/input/form_builder";
 import WhiteframeBasicUsage from "./components/whiteframe/basic_usage";
 import SidenavBasicUsage from "./components/sidenav/basic_usage";
+import ChipsPortal from "./components/chips/portal";
 
 /**
  * Collection of Material Design component example directives.
@@ -33,6 +34,7 @@ export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   CardBasicUsage, CardInlineActions, CardActionButtons,
   ButtonBasicUsage,
   ChipsBasicUsage,
+  ChipsPortal,
   CheckboxBasicUsage, CheckboxSyncing,
   DataTableBasicUsage, DataTableSelectableUsage,
   DialogBasicUsage,

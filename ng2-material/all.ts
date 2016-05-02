@@ -1,3 +1,5 @@
+import '@angular2-material/core/core';
+
 import {CONST_EXPR, Type} from "angular2/src/facade/lang";
 import {MdAnchor, MdButton} from "./components/button/button";
 import {MdCheckbox} from "./components/checkbox/checkbox";
