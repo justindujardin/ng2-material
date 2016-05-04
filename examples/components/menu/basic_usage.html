@@ -1,0 +1,23 @@
+<div layout="row" layout-align="center">
+  <md-menu>
+    <button md-button aria-label="Open phone interactions menu">
+          <i md-icon>phone</i>
+      </button>
+    <md-menu-content width="4">
+      <md-menu-item>
+        <button md-button (click)="test()">
+          <div layout="row">
+               <i md-icon >dialpad</i>
+               <span>Redial</span>
+          </div>
+          </button>
+      </md-menu-item>
+      <md-divider></md-divider>
+      <md-menu-item>
+        <button md-button disabled (click)="test()">
+               <i md-icon>voicemail</i>Call
+          </button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+</div>
