@@ -7,11 +7,17 @@ import {
   TemplateRef,
   ViewEncapsulation,
   Query,
+  ViewChild,
   ElementRef
 } from "angular2/core";
 import {Ink} from "../../core/util/ink";
-import {NgFor} from "angular2/common";
+import {NgClass, NgFor} from "angular2/common";
 
+export enum TabPositionType {
+    left = 0,
+    active = 1,
+    right = 2
+};
 
 // TODO: behaviors to test
 //  - Tabs will become paginated if there isn't enough room for them
@@ -23,35 +29,59 @@ import {NgFor} from "angular2/common";
 //  - If you set the disabled attribute on a tab, it becomes unselectable
 //  - If you set md-theme=\"green\" on the md-tabs element, you'll get green tabs
 
+@Component({
+  selector: 'md-ink-bar',
+  template: ``
+})
+export class MdInkBar {
+  constructor(private _el: ElementRef) {
+  }
 
-@Directive({
-  selector: '[md-tab]'
+  get elementRef(): ElementRef {
+    return this._el;
+  }
+}
+
+@Component({
+  selector: 'md-tab',
+  template: `
+       <md-tab-content role="tabpanel" 
+              [ngClass]="{ 'md-active': active, 'md-left': left, 'md-right': right, 'md-no-scroll': mdNoScroll }">
+         <ng-content></ng-content>
+       </md-tab-content>
+  `,
+  directives: [NgClass]
 })
 export class MdTab {
   @Input()
   label: string;
   @Input()
   disabled: boolean = false;
-  private _active: boolean = false;
+  @Input()
+  mdNoScroll: boolean = false;
+  private _position: TabPositionType = TabPositionType.right;
 
-  constructor(public viewContainer: ViewContainerRef,
-              public templateRef: TemplateRef) {
-  }
-
-  @Input() set active(active: boolean) {
-    if (active == this._active) {
-      return;
-    }
-    this._active = active;
-    if (active) {
-      this.viewContainer.createEmbeddedView(this.templateRef);
-    } else {
-      this.viewContainer.remove(0);
-    }
+  constructor() {
   }
 
   get active(): boolean {
-    return this._active;
+    return this._position === TabPositionType.active;
+  }
+
+  get position() {
+    return this._position;
+  }
+  
+  set position(value: TabPositionType) {
+    this._position = value;
+  }
+  
+  get left(): boolean {
+    return this._position === TabPositionType.left;
+  }
+
+  get right(): boolean {
+    return this._position === TabPositionType.right;
   }
 }
 
@@ -77,17 +107,16 @@ export class MdTab {
         </md-pagination-wrapper>
       </md-tabs-canvas>
     </md-tabs-wrapper>
-    <md-tabs-content-wrapper>
-      <md-tab-content role="tabpanel" class="md-active"
-                      [class.md-no-scroll]="mdNoScroll">
-        <ng-content></ng-content>
-      </md-tab-content>
+    <md-tabs-content-wrapper [class.md-no-scroll]="mdNoScroll">
+          <ng-content></ng-content>
     </md-tabs-content-wrapper>`,
-  directives: [NgFor],
+  directives: [NgFor, MdInkBar, MdTab],
   properties: ['selected'],
   encapsulation: ViewEncapsulation.None
 })
 export class MdTabs {
+  @ViewChild(MdInkBar)
+  inkBarComponent: MdInkBar;
 
   @Input()
   mdNoScroll: boolean = false;
@@ -96,15 +125,30 @@ export class MdTabs {
               public panes: QueryList<MdTab>,
               private _element: ElementRef) {
     this.panes.changes.subscribe((_) => {
-      this.panes.toArray().forEach((p: MdTab, index: number) => {
-        p.active = index === this._selected;
-      });
+      let tabs = this.panes.toArray();
+      this.markSelected(tabs, tabs[this._selected], this._selected);
     });
-  }
+  } 
 
   private _selected: number = 0;
   get selected(): number {
     return this._selected;
+  }
+
+  private markSelected(panes: MdTab[], newSelected: MdTab, lastSelectedIndex: number) {
+      let position = TabPositionType.left;
+      panes.forEach((p: MdTab, index: number) => {
+        if (p === newSelected) {
+          Ink.updateInkbar(this._element.nativeElement, 
+                    this.inkBarComponent.elementRef.nativeElement, 
+                    index,
+                    lastSelectedIndex);
+          p.position = TabPositionType.active;
+          position = TabPositionType.right;        
+        } else {
+          p.position = position;
+        }
+      });
   }
 
   @Input()
@@ -120,24 +164,23 @@ export class MdTabs {
 
   get selectedTab(): MdTab {
     let result = null;
-    this.panes.toArray().forEach((p: MdTab) => {
+    this.panes.toArray().some((p: MdTab, index: number) => {
       if (p.active) {
         result = p;
+        return true;
       }
+      return false;
     });
     return result;
   }
 
   set selectedTab(value: MdTab) {
-    this.panes.toArray().forEach((p: MdTab, index: number) => {
-      p.active = p == value;
-      if (p.active) {
-        this._selected = index;
-      }
-    });
+    this.markSelected(this.panes.toArray(), value, this._selected);
   }
 
   onTabClick(pane: MdTab, event?) {
+    let initialSelect = this._selected;
+    
     if (event && Ink.canApply(this._element.nativeElement)) {
       Ink.rippleEvent(event.target, event);
     }

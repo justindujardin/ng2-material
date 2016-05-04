@@ -1,6 +1,6 @@
 <md-content class="md-padding">
   <md-tabs [selected]="selectedIndex" md-border-bottom md-autoselect>
-    <template md-tab *ngFor="var tab of tabs"
+    <md-tab *ngFor="#tab of tabs"
               [disabled]="tab.disabled"
               [label]="tab.title">
       <div class="demo-tab tab{{index%4}}" style="padding: 25px; text-align: center;">
@@ -9,7 +9,7 @@
         <button md-raised-button class="md-primary" (click)="removeTab( tab )" [disabled]="tabs.length <= 1">Remove Tab
         </button>
       </div>
-    </template>
+    </md-tab>
   </md-tabs>
 </md-content>
 
