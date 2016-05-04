@@ -1,4 +1,5 @@
 import {CONST_EXPR, Type} from "angular2/src/facade/lang";
+import {MdAutocompleteContainer} from "./components/autocomplete/autocomplete";
 import {MdAnchor, MdButton} from "./components/button/button";
 import {MdCheckbox} from "./components/checkbox/checkbox";
 import {MdContent} from "./components/content/content";
@@ -30,6 +31,9 @@ import {SidenavService} from "./components/sidenav/sidenav_service";
 import {MdToolbar} from "./components/toolbar/toolbar";
 import {MdTabs, MdTab} from "./components/tabs/tabs";
 import {Media} from "./core/util/media";
+
+export * from './components/autocomplete/autocomplete';
+
 export * from './components/button/button';
 
 export * from './components/checkbox/checkbox';
@@ -83,6 +87,7 @@ export * from './core/util/animate';
  * Collection of Material Design component directives.
  */
 export const MATERIAL_DIRECTIVES: Type[] = CONST_EXPR([
+  MdAutocompleteContainer,
   MdAnchor, MdButton,
   MdCheckbox,
   MdContent,
