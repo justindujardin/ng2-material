@@ -1,0 +1,31 @@
+@import './_shared';
+
+md-chips {
+  @include pie-clearfix();
+  display: block;
+  font-family: $font-family;
+  font-size: $chip-font-size;
+  padding: $chips-padding;
+  position: relative;
+  margin: 18px 0;
+  vertical-align: middle;
+  border: none;
+
+  md-chip-input-container {
+    display: block;
+    line-height: $chip-height;
+    margin: $chip-margin;
+    padding: $chip-input-padding;
+    float: left;
+  }
+}
+
+// IE only
+@media screen and (-ms-high-contrast: active) {
+  md-chip-input-container {
+    border: 1px solid #fff;
+  }
+}
+
+@import "./chip";
+@import "./chip_input";

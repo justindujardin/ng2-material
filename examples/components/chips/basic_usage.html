@@ -1,0 +1,35 @@
+<div layout="column" class="md-inline-form">
+
+  <md-toolbar layout-padding layout="row">
+    <div class="md-toolbar-tools">
+      <span flex>{{chipCount$ | async}} chips</span>
+    </div>
+  </md-toolbar>
+  <md-content layout="column" layout-padding>
+    <section layout-padding>
+      <md-chips [readonly]="readonly"
+                [labels]="chipLabels$ | async"
+                [unique]="unique"
+                [deletable]="deletable"
+                [placeholder]="placeholder"
+                #chips>
+      </md-chips>
+    </section>
+    <strong>Options</strong>
+    <section layout="row">
+      <md-checkbox [(checked)]="deletable">Deletable</md-checkbox>
+      <md-checkbox [(checked)]="unique">Unique</md-checkbox>
+      <md-checkbox [(checked)]="readonly">Read only</md-checkbox>
+    </section>
+    <section>
+      <md-input-container class="md-block">
+        <label>Placeholder</label>
+        <input md-input [(value)]="placeholder">
+      </md-input-container>
+    </section>
+    <strong>Output</strong>
+    <section>
+      <pre>{{chips.labels$ | async | json}}</pre>
+    </section>
+  </md-content>
+</div>

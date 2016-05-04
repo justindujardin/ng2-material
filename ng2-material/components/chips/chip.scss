@@ -1,0 +1,67 @@
+@import './_shared';
+
+md-chip {
+  cursor: default;
+  border-radius: $chip-height / 2;
+  display: block;
+  height: $chip-height;
+  line-height: $chip-height;
+  margin: $chip-margin;
+  padding: $chip-padding;
+  float: left;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: $chip-height;
+  position: relative;
+  background: rgb(224, 224, 224);
+  color: rgb(66, 66, 66);
+
+  .md-chip-content {
+    display: block;
+    float: left;
+    white-space: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:focus {
+      outline: none;
+    }
+  }
+  .md-chip-remove-container {
+    float: left;
+  }
+  .md-chip-remove {
+    text-align: center;
+    width: $chip-delete-icon-size;
+    height: $chip-delete-icon-size;
+    margin: 0 $chip-remove-margin-horizontal;
+    min-width: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    position: relative;
+    &:focus {
+      outline: none;
+    }
+    i[md-icon] {
+      line-height: $chip-height;
+      height: $chip-delete-icon-size;
+      width: $chip-delete-icon-size;
+      color: md-color($md-foreground, secondary-text);
+      font-size: rem(2);
+    }
+  }
+
+  &.md-deletable {
+    padding-right: 0;
+  }
+
+}
+
+// IE only
+@media screen and (-ms-high-contrast: active) {
+  md-chip {
+    border: 1px solid #fff;
+  }
+}

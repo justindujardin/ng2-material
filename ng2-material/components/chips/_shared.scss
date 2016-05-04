@@ -1,0 +1,24 @@
+@import "../../core/style/variables";
+@import "../../core/style/default-theme";
+@import "../../core/style/mixins";
+
+@mixin input-placeholder-color($color) {
+  &::-webkit-input-placeholder,
+  &::-moz-placeholder, /* Firefox 19+ */
+  &:-moz-placeholder, /* Firefox 18- */
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+$chips-padding: 2px !default;
+$chip-font-size: rem(1.3) !default;
+$chip-height: rem(3.2) !default;
+$chip-padding-horizontal: rem(1.2);
+$chip-padding: 0 $chip-padding-horizontal !default;
+$chip-input-padding: 0 !default;
+$chip-remove-margin-horizontal: rem(0.4) !default;
+$chip-margin: rem(0.8) rem(0.8) 0 0 !default;
+$chip-delete-icon-size: rem(2.4) !default;
+$input-container-padding: 2px !default;
+$input-border-width-default: 1px !default;
+$input-border-width-focused: 2px !default;
