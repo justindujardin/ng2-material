@@ -37,18 +37,6 @@ $icon-size: rem(2.4);
 $toast-height: $baseline-grid * 3 !default;
 $toast-margin: $baseline-grid * 1 !default;
 
-// Whiteframes
-$whiteframe-shadow-z1: 0px 2px 5px 0 rgba(0, 0, 0, 0.26) !default;
-$whiteframe-zindex-z1: 1 !default;
-$whiteframe-shadow-z2: 0px 8px 17px rgba(0, 0, 0, 0.2) !default;
-$whiteframe-zindex-z2: 2 !default;
-$whiteframe-shadow-z3: 0px 17px 50px rgba(0, 0, 0, 0.19) !default;
-$whiteframe-zindex-z3: 3 !default;
-$whiteframe-shadow-z4: 0px 16px 28px 0 rgba(0, 0, 0, 0.22) !default;
-$whiteframe-zindex-z4: 4 !default;
-$whiteframe-shadow-z5: 0px 27px 24px 0 rgba(0, 0, 0, 0.2) !default;
-$whiteframe-zindex-z5: 5 !default;
-
 // Z-indexes
 $z-index-tooltip: 100 !default;
 $z-index-dialog: 80 !default;
@@ -62,6 +50,10 @@ $z-index-fab: 20 !default;
 $z-index-progress-circular: 2 !default; // Used to fix animation bug in Chrome
 
 // Easing Curves
+$md-linear-out-slow-in-timing-function: cubic-bezier(0.0, 0.0, 0.2, 0.1) !default;
+$md-fast-out-slow-in-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
+$md-fast-out-linear-in-timing-function: cubic-bezier(0.4, 0.0, 1, 1) !default;
+
 $swift-ease-out-duration: 0.4s !default;
 $swift-ease-out-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default;
 $swift-ease-out: all $swift-ease-out-duration $swift-ease-out-timing-function !default;

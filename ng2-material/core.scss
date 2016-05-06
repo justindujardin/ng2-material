@@ -4,3 +4,8 @@
 @import "core/style/typography";
 @import "core/style/layout";
 @import "core/style/default-theme";
+
+// Core styles that can be used to apply material design treatments to any element.
+
+@import '../node_modules/@angular2-material/core/style/core.scss';
+

@@ -1,5 +1,5 @@
 @import "../../core/style/variables";
-@import "../../core/style/shadows";
+@import "../../core/style/elevation";
 @import "../../core/style/default-theme";
 
 .md-dialog {
@@ -14,7 +14,7 @@
 
   padding: $baseline-grid * 3;
 
-  box-shadow: $whiteframe-shadow-13dp;
+  @include md-elevation(13);
   display: flex;
   flex-direction: column;
 

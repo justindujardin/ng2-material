@@ -1,5 +1,5 @@
 @import "../../core/style/variables";
-@import "../../core/style/shadows";
+@import "../../core/style/elevation";
 // TODO(jelbourn): This goes away.
 @import "../../core/style/default-theme";
 
@@ -157,13 +157,19 @@ $md-icon-border-radius: $md-fab-border-radius;
 @mixin md-raised-button() {
   @include md-button-base();
 
+
+  @include md-elevation(2);
+
   // Force hardware acceleration.
   transform: translate3d(0, 0, 0);
 
-  box-shadow: $md-shadow-bottom-z-1;
+  // Animation.
+  transition: background $swift-ease-out-duration $swift-ease-out-timing-function,
+  md-elevation-transition-property-value();
+
 
   &:active {
-    box-shadow: $md-shadow-bottom-z-2;
+    @include md-elevation(8);
   }
 
   &[disabled] {

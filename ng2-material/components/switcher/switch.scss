@@ -1,4 +1,5 @@
 @import "../../core/style/variables";
+@import "../../core/style/elevation";
 // TODO(jelbourn): This goes away.
 @import "../../core/style/default-theme";
 
@@ -73,7 +74,7 @@ md-switch {
     height: $switch-thumb-size;
     width: $switch-thumb-size;
     border-radius: 50%;
-    box-shadow: $whiteframe-shadow-z1;
+    @include md-elevation(2);
 
     // todo
     .md-ripple-container {

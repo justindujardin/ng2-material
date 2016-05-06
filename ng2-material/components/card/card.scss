@@ -1,9 +1,8 @@
 @import "../../core/style/variables";
-@import "../../core/style/shadows";
+@import "../../core/style/elevation";
 @import "../../core/style/default-theme";
 
 $card-padding: 16px !default;
-$card-box-shadow: $whiteframe-shadow-z1 !default;
 
 md-card {
   box-sizing: border-box;
@@ -11,7 +10,7 @@ md-card {
   flex-direction: column;
   margin: $baseline-grid;
 
-  box-shadow: $card-box-shadow;
+  @include md-elevation(2);
 
   md-card-header {
     padding: $card-padding;
