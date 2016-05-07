@@ -6,7 +6,7 @@ import {
   MdDataTableHeaderSelectableRow,
   MdDataTableSelectableRow
 } from "./components/data_table/data_table";
-import {MdDialog} from "./components/dialog/dialog";
+import {MdDialog, MdDialogTitle, MdDialogActions} from "./components/dialog/dialog";
 import {MdDivider} from "./components/divider/divider";
 import {MdIcon} from "./components/icon/icon";
 import {MdInk} from "./components/ink/ink";
@@ -28,6 +28,7 @@ import {SidenavService} from "./components/sidenav/sidenav_service";
 import {MdTabs, MdTab} from "./components/tabs/tabs";
 import {Media} from "./core/util/media";
 import {ViewportHelper, BrowserViewportHelper, NodeViewportHelper} from "./core/util/viewport";
+import {OVERLAY_CONTAINER_TOKEN, createOverlayContainer} from "@angular2-material/core/overlay/overlay";
 export * from './components/button/button';
 
 export * from './components/content/content';
@@ -70,6 +71,7 @@ export const MATERIAL_DIRECTIVES: any[] = [
   MdContent,
   MdDataTable, MdDataTableHeaderSelectableRow, MdDataTableSelectableRow,
   MdDivider,
+  MdDialog, MdDialogActions, MdDialogTitle,
   MdIcon,
   MdInk,
   MdPatternValidator, MdMaxLengthValidator,
@@ -89,7 +91,6 @@ export const MATERIAL_DIRECTIVES: any[] = [
  */
 export const MATERIAL_NODE_PROVIDERS: any[] = [
   provide(ViewportHelper, {useClass: NodeViewportHelper}),
-  MdDialog,
   Media,
   SidenavService,
   ...INPUT_VALIDATORS
@@ -100,7 +101,9 @@ export const MATERIAL_NODE_PROVIDERS: any[] = [
  */
 export const MATERIAL_BROWSER_PROVIDERS: any[] = [
   ...MATERIAL_NODE_PROVIDERS,
-  provide(ViewportHelper, {useClass: BrowserViewportHelper})
+  provide(ViewportHelper, {useClass: BrowserViewportHelper}),
+  // TODO(jd): should this be here? Or in the example app bootstrap?
+  provide(OVERLAY_CONTAINER_TOKEN, {useValue: createOverlayContainer()}),
 ];
 
 

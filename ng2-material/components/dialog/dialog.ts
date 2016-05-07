@@ -1,117 +1,50 @@
-import {
-  provide,
-  ComponentRef,
-  DynamicComponentLoader,
-  Injectable,
-  RenderComponentType,
-  ViewEncapsulation,
-  ViewContainerRef,
-  Renderer,
-  RootRenderer,
-  APPLICATION_COMMON_PROVIDERS,
-  ReflectiveInjector,
-  ResolvedReflectiveProvider
-} from "@angular/core";
-import {MdDialogRef} from "./dialog_ref";
-import {MdDialogConfig} from "./dialog_config";
-import {MdDialogContainer} from "./dialog_container";
-import {MdBackdrop} from "../backdrop/backdrop";
-import {Animate} from "../../core/util/animate";
+import {Component, Input, ChangeDetectionStrategy} from "@angular/core";
 
-export * from './dialog_config';
-export * from './dialog_container';
-export * from './dialog_ref';
-export * from './dialog_basic';
 
-/** Service for opening modal dialogs. */
-@Injectable()
+@Component({
+  selector: 'md-dialog-title',
+  template: `<ng-content></ng-content>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class MdDialogTitle {
+}
+
+@Component({
+  selector: 'md-dialog-actions',
+  template: `<ng-content></ng-content>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class MdDialogActions {
+}
+
+
+@Component({
+  selector: 'md-dialog',
+  directives: [MdDialogTitle, MdDialogActions],
+  template: `
+<ng-content select="md-dialog-title">
+  <h2 class="md-title">{{ title }}</h2>
+</ng-content>
+<ng-content></ng-content>
+<ng-content select="md-dialog-actions">
+  <md-dialog-actions>
+    <button *ngIf="cancel != ''" md-button type="button" (click)="dialog.close(false)">
+      <span>{{ cancel }}</span>
+    </button>    
+    <button *ngIf="ok != ''" md-button class="md-primary" type="button" (click)="dialog.close(true)">
+      <span>{{ ok }}</span>
+    </button>
+  </md-dialog-actions>
+</ng-content>
+`
+})
 export class MdDialog {
+  @Input() title: string = '';
+  @Input() text: string = '';
+  @Input() cancel: string = '';
+  @Input() ok: string = '';
 
-  /**
-   * Unique id counter for RenderComponentType.
-   * @private
-   */
-  static _uniqueId: number = 0;
-
-  /**
-   * Renderer for manipulating dialog and backdrop component elements.
-   * @private
-   */
-  private _renderer: Renderer = null;
-
-  constructor(public componentLoader: DynamicComponentLoader, rootRenderer: RootRenderer) {
-    let type = new RenderComponentType(`__md-dialog-${MdDialog._uniqueId++}`, '', 1, ViewEncapsulation.None, []);
-    this._renderer = rootRenderer.renderComponent(type);
-  }
-
-  private _defaultContainer = document.body;
-
-  /**
-   * Opens a modal dialog.
-   * @param type The component to open.
-   * @param viewRef The logical view into which the component will be opened.
-   * @param options
-   * @returns Promise for a reference to the dialog.
-   */
-  open(type: any, viewRef: ViewContainerRef, options: MdDialogConfig = new MdDialogConfig()): Promise<MdDialogRef> {
-    // Create the dialogRef here so that it can be injected into the content component.
-    let dialogRef = new MdDialogRef();
-
-    let bindings = ReflectiveInjector.resolve([APPLICATION_COMMON_PROVIDERS, provide(MdDialogRef, {useValue: dialogRef})]);
-
-    let backdropRefPromise = this._openBackdrop(viewRef, bindings, options);
-
-    // First, load the MdDialogContainer, into which the given component will be loaded.
-    return this.componentLoader.loadNextToLocation(MdDialogContainer, viewRef, bindings)
-      .then((containerRef: ComponentRef<MdDialogContainer>) => {
-        var dialogElement = containerRef.location.nativeElement;
-
-        this._renderer.setElementClass(dialogElement, 'md-dialog-absolute', !!options.container);
-
-        (options.container || this._defaultContainer).appendChild(dialogElement);
-
-        dialogRef.containerRef = containerRef;
-
-        // Now load the given component into the MdDialogContainer.
-        return this.componentLoader.loadNextToLocation(type, containerRef.instance.contentRef, bindings)
-          .then((contentRef: ComponentRef<any>) => {
-            Object.keys(options.context).forEach((key) => {
-              contentRef.instance[key] = options.context[key];
-            });
-
-            // Wrap both component refs for the container and the content so that we can return
-            // the `instance` of the content but the dispose method of the container back to the
-            // opener.
-            dialogRef.contentRef = contentRef;
-            containerRef.instance.dialogRef = dialogRef;
-
-            backdropRefPromise.then((backdropRef: ComponentRef<MdBackdrop>) => {
-              dialogRef.backdropRef = backdropRef;
-              dialogRef.whenClosed.then((_) => {
-                backdropRef.instance.hide().then(() => {
-                  containerRef.destroy();
-                  contentRef.destroy();
-                  backdropRef.destroy();
-                });
-              });
-            });
-
-            return Animate.enter(dialogElement, 'md-active').then(() => dialogRef);
-          });
-      });
-  }
-
-  /** Loads the dialog backdrop (transparent overlay over the rest of the page). */
-  _openBackdrop(viewRef: ViewContainerRef, bindings: ResolvedReflectiveProvider[], options: MdDialogConfig): Promise<ComponentRef<MdBackdrop>> {
-    return this.componentLoader.loadNextToLocation(MdBackdrop, viewRef, bindings)
-      .then((componentRef: ComponentRef<MdBackdrop>) => {
-        let backdrop: MdBackdrop = componentRef.instance;
-        backdrop.clickClose = options.clickClose;
-        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop', true);
-        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-opaque', true);
-        this._renderer.setElementClass(componentRef.location.nativeElement, 'md-backdrop-absolute', !!options.container);
-        (options.container || this._defaultContainer).appendChild(componentRef.location.nativeElement);
-        return backdrop.show().then(() => componentRef);
-      });
+  show():Promise<MdDialog> {
+    return Promise.resolve(null);
   }
 }

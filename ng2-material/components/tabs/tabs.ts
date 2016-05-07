@@ -35,7 +35,7 @@ export class MdTab {
   private _active: boolean = false;
 
   constructor(public viewContainer: ViewContainerRef,
-              public templateRef: TemplateRef) {
+              public templateRef: TemplateRef<any>) {
   }
 
   @Input() set active(active: boolean) {
