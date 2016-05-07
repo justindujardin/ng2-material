@@ -1,14 +1,6 @@
-import {CONST} from "angular2/src/facade/lang";
-
-// Can't use an enum because Dart doesn't support enum initializers.
-@CONST()
-export class KeyCodes {
-  @CONST()
-  static ESCAPE = 27;
-  @CONST()
-  static SPACE = 32;
-  @CONST()
-  static UP = 38;
-  @CONST()
-  static DOWN = 40;
+export enum KeyCodes {
+  ESCAPE = 27,
+  SPACE  = 32,
+  UP     = 38,
+  DOWN   = 40,
 }

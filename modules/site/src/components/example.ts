@@ -9,14 +9,12 @@ import {
   ViewContainerRef,
   AfterViewInit,
   ViewChild
-} from "angular2/core";
+} from "@angular/core";
 import {IExampleData} from "../app";
 import {DEMO_DIRECTIVES} from "../all";
 import {MATERIAL_DIRECTIVES, MdTabs} from "ng2-material/all";
-import {Http, Response} from "angular2/http";
+import {Http, Response} from "@angular/http";
 import {Highlight} from "./highlight";
-import {TimerWrapper} from "angular2/src/facade/async";
-
 
 export interface ISourceFile {
   data: string;
@@ -138,13 +136,13 @@ export default class Example implements AfterViewInit {
   toggleSource() {
     if (this.showSource) {
       this.showTabs = false;
-      TimerWrapper.setTimeout(() => {
+      setTimeout(() => {
         this.showSource = false;
       }, 500);
     }
     else {
       this.showSource = true;
-      TimerWrapper.setTimeout(() => {
+      setTimeout(() => {
         this.showTabs = true;
       }, 25);
     }

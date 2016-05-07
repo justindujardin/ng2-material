@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit} from "@angular/core";
 import {RouteParams, ROUTER_DIRECTIVES} from "angular2/router";
 import {ComponentsService, IComponentMeta} from "../services/components";
 import {MATERIAL_DIRECTIVES, SidenavService} from "ng2-material/all";

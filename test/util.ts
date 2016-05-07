@@ -1,12 +1,12 @@
 ///<reference path="../typings/main.d.ts"/>
-import {Component} from "angular2/core";
-import {ComponentFixture, TestComponentBuilder, beforeEach, describe, inject, it, async} from "angular2/testing";
+import {Component} from "@angular/core";
+import {beforeEach, describe, inject, it, async} from "@angular/core/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
 import {MATERIAL_DIRECTIVES} from "../ng2-material/all";
-import {TimerWrapper} from "angular2/src/facade/async";
 
 export function promiseWait(milliseconds: number = 10): Promise<void> {
   return new Promise<void>((resolve)=> {
-    TimerWrapper.setTimeout(() => resolve(), milliseconds);
+    setTimeout(() => resolve(), milliseconds);
   });
 }
 
@@ -31,7 +31,7 @@ export function componentSanityCheck(name: string, selector: string, template: s
 
     function setup(): Promise<any> {
       return builder.createAsync(TestComponent)
-        .then((fixture: ComponentFixture) => {
+        .then((fixture: ComponentFixture<TestComponent>) => {
           fixture.detectChanges();
           return fixture;
         })
@@ -49,7 +49,7 @@ export function componentSanityCheck(name: string, selector: string, template: s
       })));
       it('should destroy component without fail', async(inject([], () => {
         setup()
-          .then((api: ComponentFixture) => api.destroy())
+          .then((api: ComponentFixture<TestComponent>) => api.destroy())
           .then(() => promiseWait());
       })));
     });

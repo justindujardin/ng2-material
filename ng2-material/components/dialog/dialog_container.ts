@@ -1,4 +1,4 @@
-import {ViewEncapsulation, Component, ElementRef, forwardRef, Directive, Host, SkipSelf} from "angular2/core";
+import {ViewEncapsulation, Component, ElementRef, forwardRef, Directive, Host, SkipSelf} from "@angular/core";
 import {MdDialogRef} from "./dialog_ref";
 import {KeyCodes} from "../../core/key_codes";
 

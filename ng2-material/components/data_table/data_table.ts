@@ -1,5 +1,4 @@
-import {Component, Input, Output, EventEmitter, ContentChild, ContentChildren, QueryList, AfterContentInit} from 'angular2/core';
-import {isPresent} from "angular2/src/facade/lang";
+import {Component, Input, Output, EventEmitter, ContentChild, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
 import 'rxjs/add/operator/share';
 import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow, ITableSelectableRowSelectionChange} from './data_table_selectable_tr';
 
@@ -82,7 +81,7 @@ export class MdDataTable implements AfterContentInit {
 
   ngAfterContentInit() {
     if (this.selectable === true) {
-      if (isPresent(this._masterRow)) {
+      if (!!this._masterRow) {
         this._masterRow.onChange.subscribe(this.change.bind(this));
       }
 

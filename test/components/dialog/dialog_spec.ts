@@ -1,23 +1,21 @@
 import {
-  TestComponentBuilder,
   beforeEach,
   describe,
   expect,
   inject,
   it,
-  async,
-  ComponentFixture
-} from "angular2/testing";
-import {Component, DebugElement, ViewContainerRef, ViewChild, ElementRef} from "angular2/core";
+  async
+} from "@angular/core/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {Component, DebugElement, ViewContainerRef, ViewChild, ElementRef} from "@angular/core";
 import {MdDialogRef, MdDialogConfig, MdDialog, MdDialogBasic} from "../../../ng2-material/components/dialog/dialog";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {By} from "angular2/platform/browser";
+import {By} from "@angular/platform-browser";
 
 export function main() {
 
   interface IDialogFixture {
     view: ViewContainerRef;
-    fixture: ComponentFixture;
+    fixture: ComponentFixture<TestComponent>;
     debug: DebugElement;
     elementRef: ElementRef;
   }
@@ -39,7 +37,7 @@ export function main() {
     function setup(): Promise<IDialogFixture> {
       return new Promise<IDialogFixture>((resolve) => {
         builder.createAsync(TestComponent)
-          .then((fixture: ComponentFixture) => {
+          .then((fixture: ComponentFixture<TestComponent>) => {
             fixture.detectChanges();
             let debug = fixture.debugElement.query(By.css('div'));
             return resolve({
@@ -111,14 +109,15 @@ export function main() {
     describe('MdDialogConfig', () => {
       it('can set parent container', async(inject([], () => {
         setup().then(() => {
-          let config = new MdDialogConfig().parent(DOM.query('body'));
+          let config = new MdDialogConfig().parent(document.body);
           expect(config.container).toBeAnInstanceOf(HTMLElement);
           expect(config.container.tagName.toLowerCase()).toBe('body');
         });
       })));
       it('can set targetEvent to specify dialog origin point', async(inject([], () => {
         setup().then(() => {
-          let ev = DOM.createMouseEvent('click');
+          let ev = document.createEvent('mouse');
+          ev.type = 'click';
           let config = new MdDialogConfig().targetEvent(ev);
           expect(config.sourceEvent).toBe(ev);
         });

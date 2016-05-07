@@ -1,11 +1,8 @@
-import {Component} from "angular2/core";
+import {Component, Inject} from "@angular/core";
 import {App} from "./app";
-import {RouteConfig} from 'angular2/router';
-import {BASE_URL} from 'angular2-universal';
-import {Inject} from "angular2/core";
-import {MATERIAL_DIRECTIVES} from "ng2-material/all";
-
-import {MATERIAL_NODE_PROVIDERS} from "ng2-material/all";
+import {RouteConfig} from "@angular/router-deprecated";
+import {BASE_URL} from "angular2-universal";
+import {MATERIAL_DIRECTIVES, MATERIAL_NODE_PROVIDERS} from "ng2-material/all";
 import {ComponentPage} from "./routes/component";
 import {IndexPage} from "./routes/index";
 import {DEMO_DIRECTIVES, DEMO_NODE_PROVIDERS} from "./all";
@@ -40,7 +37,8 @@ export class Html {
     src: 'bundle.js',
     title: 'ng2-material static site'
   };
-  constructor(@Inject(BASE_URL) public url:string) {
+
+  constructor(@Inject(BASE_URL) public url: string) {
     this.seo.baseUrl = url;
     this.seo.src = `${url}${this.seo.src}`;
   }

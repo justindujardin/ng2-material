@@ -1,6 +1,6 @@
-import {NgIf} from "angular2/common";
+import {NgIf} from "@angular/common";
 import {MdButton} from "../button/button";
-import {Component, Input} from "angular2/core";
+import {Component, Input} from "@angular/core";
 import {MdDialogRef} from "./dialog_ref";
 
 @Component({

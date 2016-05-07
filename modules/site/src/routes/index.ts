@@ -1,4 +1,4 @@
-import {Component, OnInit} from "angular2/core";
+import {Component, OnInit} from "@angular/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {ComponentsService, IComponentMeta} from "../services/components";
 import {NavigationService} from "../services/navigation";
@@ -6,7 +6,7 @@ import {MATERIAL_DIRECTIVES, SidenavService} from "ng2-material/all";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {Highlight} from "../components/highlight";
 import {TimerWrapper} from "angular2/src/facade/async";
-import {Http, Response} from "angular2/http";
+import {Http, Response} from "@angular/http";
 
 @Component({
   templateUrl: 'src/routes/index.html',

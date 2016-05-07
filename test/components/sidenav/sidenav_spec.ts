@@ -1,15 +1,14 @@
 import {
-  TestComponentBuilder,
   beforeEach,
   describe,
   expect,
   inject,
   it,
-  async,
-  ComponentFixture
-} from "angular2/testing";
-import {Component, DebugElement} from "angular2/core";
-import {By} from "angular2/platform/browser";
+  async
+} from "@angular/core/testing";
+import {TestComponentBuilder, ComponentFixture} from "@angular/compiler/testing";
+import {Component, DebugElement} from "@angular/core";
+import {By} from "@angular/platform-browser";
 import {
   MdSidenav,
   SidenavStyle,
@@ -22,7 +21,7 @@ import {promiseWait} from "../../util";
 export function main() {
 
   interface ITestFixture {
-    fixture: ComponentFixture;
+    fixture: ComponentFixture<TestComponent>;
     component: MdSidenav;
     container?: MdSidenavContainer;
     cdebug: DebugElement;
@@ -45,7 +44,7 @@ export function main() {
       let prep = template === null ?
         builder.createAsync(TestComponent) :
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
-      return prep.then((fixture: ComponentFixture) => {
+      return prep.then((fixture: ComponentFixture<TestComponent>) => {
         fixture.detectChanges();
         let debug = fixture.debugElement.query(By.css('md-sidenav'));
         let cdebug = fixture.debugElement.query(By.css('md-sidenav-container'));

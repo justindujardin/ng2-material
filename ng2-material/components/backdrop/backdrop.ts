@@ -1,6 +1,5 @@
 import {Animate} from "../../core/util/animate";
-import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter} from "angular2/core";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter} from "@angular/core";
 import {ViewportHelper} from "../../core/util/viewport";
 
 /**
@@ -57,7 +56,6 @@ export class MdBackdrop {
   onShown: EventEmitter<MdBackdrop> = new EventEmitter<MdBackdrop>();
 
   constructor(public element: ElementRef, public viewport: ViewportHelper) {
-    this._body = DOM.querySelector(viewport.getDocumentNativeElement(), 'body');
   }
 
   /**
@@ -89,7 +87,7 @@ export class MdBackdrop {
   protected _visible: boolean = false;
   private _transitioning: boolean = false;
   private _previousOverflow: string = null;
-  private _body: HTMLElement = null;
+  private _body: HTMLElement = document.body;
 
   onClick() {
     if (this.clickClose && !this._transitioning && this.visible) {
@@ -136,14 +134,14 @@ export class MdBackdrop {
 
     // Page scroll
     if (visible && this.hideScroll && this.element && !this._previousOverflow) {
-      let style = DOM.getStyle(this._body, 'overflow');
+      let style = this._body.style['overflow'];
       if (style !== 'hidden') {
         this._previousOverflow = style;
-        DOM.setStyle(this._body, 'overflow', 'hidden');
+        this._body.style['overflow'] = 'hidden';
       }
     }
     else if (!visible && this.hideScroll && this.element && this._previousOverflow !== null) {
-      DOM.setStyle(this._body, 'overflow', this._previousOverflow);
+      this._body.style['overflow'] = this._previousOverflow;
       this._previousOverflow = null;
     }
 

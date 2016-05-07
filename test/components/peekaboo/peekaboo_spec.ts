@@ -1,21 +1,20 @@
 import {
-  TestComponentBuilder,
   beforeEach,
   describe,
   expect,
   inject,
   it,
-  async,
-  ComponentFixture
-} from "angular2/testing";
-import {Component, DebugElement} from "angular2/core";
-import {MdPeekaboo, PeekabooAction} from "../../../ng2-material/components/peekaboo/peekaboo";
-import {By} from "angular2/platform/browser";
+  async
+} from "@angular/core/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {Component, DebugElement} from "@angular/core";
+import {MdPeekaboo} from "../../../ng2-material/components/peekaboo/peekaboo";
+import {By} from "@angular/platform-browser";
 
 export function main() {
 
   interface IPeekabooFixture {
-    fixture: ComponentFixture;
+    fixture: ComponentFixture<TestComponent>;
     peek: MdPeekaboo;
     debug: DebugElement;
   }
@@ -26,8 +25,8 @@ export function main() {
     template: `<div md-peekaboo></div>`
   })
   class TestComponent {
-    hideBinding: string = PeekabooAction.HIDE;
-    showBinding: string = PeekabooAction.SHOW;
+    hideBinding: string = 'hide';
+    showBinding: string = 'show';
     sizeBinding: number = 50;
   }
 
@@ -38,7 +37,7 @@ export function main() {
       let prep = template === null ?
         builder.createAsync(TestComponent) :
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
-      return prep.then((fixture: ComponentFixture) => {
+      return prep.then((fixture: ComponentFixture<TestComponent>) => {
         fixture.detectChanges();
         let debug = fixture.debugElement.query(By.css('[md-peekaboo]'));
         let component = <MdPeekaboo>debug.componentInstance;
@@ -69,12 +68,12 @@ export function main() {
         })));
         it('should be set by attribute', async(inject([], () => {
           return setup(`<div md-peekaboo breakAction="show"></div>`).then((api: IPeekabooFixture) => {
-            expect(api.peek.breakAction).toBe(PeekabooAction.SHOW);
+            expect(api.peek.breakAction).toBe('show');
           });
         })));
         it('should be set by binding', async(inject([], () => {
           return setup(`<div md-peekaboo [breakAction]="hideBinding"></div>`).then((api: IPeekabooFixture) => {
-            expect(api.peek.breakAction).toBe(PeekabooAction.HIDE);
+            expect(api.peek.breakAction).toBe('hide');
           });
         })));
       });

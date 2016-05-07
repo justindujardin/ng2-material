@@ -1,24 +1,23 @@
 import {
-  TestComponentBuilder,
   beforeEach,
   describe,
   expect,
   inject,
   it,
-  async,
-  ComponentFixture
-} from "angular2/testing";
-import {Component} from "angular2/core";
+  async
+} from "@angular/core/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {Component} from "@angular/core";
 import {MdMessage, MdMessages} from "../../../ng2-material/components/form/messages";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, Control} from "angular2/common";
-import {By} from "angular2/platform/browser";
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, Control} from "@angular/common";
+import {By} from "@angular/platform-browser";
 import {promiseWait} from "../../util";
 
 
 export function main() {
 
   interface IFormMessagesFixture {
-    fixture: ComponentFixture;
+    fixture: ComponentFixture<TestComponent>;
     container: MdMessages;
     messages: MdMessage[];
   }
@@ -44,7 +43,7 @@ export function main() {
       let prep = template === null ?
         builder.createAsync(TestComponent) :
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
-      return prep.then((fixture: ComponentFixture) => {
+      return prep.then((fixture: ComponentFixture<TestComponent>) => {
         fixture.detectChanges();
         let container = <MdMessages>fixture.debugElement.query(By.css('[md-messages]')).componentInstance;
         let messages = <MdMessage[]>fixture.debugElement.queryAll(By.css('[md-message]')).map(b => b.componentInstance);

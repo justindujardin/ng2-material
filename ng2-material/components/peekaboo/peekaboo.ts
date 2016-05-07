@@ -1,17 +1,9 @@
-import {Directive, OnDestroy, Input, ApplicationRef} from "angular2/core";
+import {Directive, OnDestroy, Input, ApplicationRef} from "@angular/core";
 import {Media, MediaListener} from "../../core/util/media";
 import {debounce} from "../../core/util/util";
-import {CONST, NumberWrapper, isString, isPresent} from "angular2/src/facade/lang";
 import {ViewportHelper} from "../../core/util/viewport";
 
-/** Different peekaboo actions to apply when active */
-@CONST()
-export class PeekabooAction {
-  @CONST()
-  static SHOW = 'show';
-  @CONST()
-  static HIDE = 'hide';
-}
+export type BreakAction = 'hide' | 'show';
 
 /**
  * @name mdPeekaboo
@@ -39,10 +31,10 @@ export class MdPeekaboo implements OnDestroy {
   break: number = 100;
 
   @Input()
-  breakAction: string;
+  breakAction: BreakAction = 'hide';
 
   static MakeNumber(value: any): number {
-    return isString(value) ? NumberWrapper.parseInt(value, 10) : value;
+    return typeof value === 'string' ? parseInt(value, 10) : value;
   }
 
   private _active: boolean = false;
@@ -117,7 +109,7 @@ export class MdPeekaboo implements OnDestroy {
     });
     this.evaluate();
     this._scrollTick = debounce(() => {
-      if (isPresent(this._app.tick)) {
+      if (!!this._app.tick) {
         this._app.tick();
       }
     }, 100, this);

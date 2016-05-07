@@ -1,6 +1,4 @@
-import {Component, ViewEncapsulation, OnChanges, ElementRef} from "angular2/core";
-import {TimerWrapper} from "angular2/src/facade/async";
-import {isPresent} from "angular2/src/facade/lang";
+import {Component, ViewEncapsulation, OnChanges, ElementRef} from "@angular/core";
 import {Ink} from "../../core/util/ink";
 
 
@@ -35,7 +33,7 @@ export class MdButton {
     // button continues to look :active after clicking.
     // @see http://marcysutton.com/button-focus-hell/
     this.isMouseDown = true;
-    TimerWrapper.setTimeout(() => {
+    setTimeout(() => {
       this.isMouseDown = false
     }, 100);
 
@@ -79,7 +77,7 @@ export class MdAnchor extends MdButton implements OnChanges {
 
   set disabled(value) {
     // The presence of *any* disabled value makes the component disabled, *except* for false.
-    this.disabled_ = isPresent(value) && this.disabled !== false;
+    this.disabled_ = !!value && this.disabled !== false;
   }
 
   onClick(event) {

@@ -1,22 +1,25 @@
 declare var System: any;
 declare var Zone: any;
 
-import {TEST_BROWSER_PLATFORM_PROVIDERS, TEST_BROWSER_APPLICATION_PROVIDERS} from "angular2/platform/testing/browser";
-import {setBaseTestProviders, MockApplicationRef} from "angular2/testing";
-import {MATERIAL_PROVIDERS} from "../ng2-material/all";
+import {
+  TEST_BROWSER_STATIC_PLATFORM_PROVIDERS,
+  TEST_BROWSER_STATIC_APPLICATION_PROVIDERS
+} from "@angular/platform-browser/testing";
+import {setBaseTestProviders, MockApplicationRef} from "@angular/core/testing";
+import {MATERIAL_BROWSER_PROVIDERS} from "../ng2-material/all";
 import {TestUrlResolver} from "./test_url_resolver";
-import {UrlResolver} from "angular2/compiler";
-import {provide, ApplicationRef} from "angular2/core";
+import {UrlResolver} from "@angular/compiler";
+import {provide, ApplicationRef} from "@angular/core";
 
 /**
  * The providers for our tests
  */
-const TEST_APP_PROVIDERS = TEST_BROWSER_APPLICATION_PROVIDERS.concat([
-  MATERIAL_PROVIDERS,
-  provide(ApplicationRef, { useClass: MockApplicationRef }),
+const TEST_APP_PROVIDERS = TEST_BROWSER_STATIC_APPLICATION_PROVIDERS.concat([
+  MATERIAL_BROWSER_PROVIDERS,
+  provide(ApplicationRef, {useClass: MockApplicationRef}),
   provide(UrlResolver, {useValue: new TestUrlResolver()})
 ]);
-setBaseTestProviders(TEST_BROWSER_PLATFORM_PROVIDERS, TEST_APP_PROVIDERS);
+setBaseTestProviders(TEST_BROWSER_STATIC_PLATFORM_PROVIDERS, TEST_APP_PROVIDERS);
 
 
 function onlySpecFiles(path) {

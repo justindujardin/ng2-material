@@ -1,6 +1,5 @@
-import {isPresent} from "angular2/src/facade/lang";
-import {NgFormModel, NgControlName, ControlGroup, AbstractControl} from "angular2/common";
-import {Input, Directive, Optional, SkipSelf, Host, OnDestroy, OnInit, QueryList, Query} from "angular2/core";
+import {NgFormModel, NgControlName, ControlGroup, AbstractControl} from "@angular/common";
+import {Input, Directive, Optional, SkipSelf, Host, OnDestroy, OnInit, QueryList, Query} from "@angular/core";
 
 
 // TODO(jd): Behaviors to test
@@ -113,7 +112,7 @@ export class MdMessages implements OnInit, OnDestroy {
     }
     if (errors) {
       this.messages.toArray().forEach((m: MdMessage) => {
-        m.okay = !m.errorKey ? !errors : !isPresent(errors[m.errorKey]);
+        m.okay = !m.errorKey ? !errors : !errors.hasOwnProperty(m.errorKey);
       });
     } else {
       this.messages.toArray().forEach(function (m) {

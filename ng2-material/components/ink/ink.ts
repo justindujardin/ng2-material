@@ -1,4 +1,4 @@
-import {ElementRef, Directive, Output, EventEmitter} from "angular2/core";
+import {ElementRef, Directive, Output, EventEmitter} from "@angular/core";
 import {Ink} from "../../core/util/ink";
 
 @Directive({

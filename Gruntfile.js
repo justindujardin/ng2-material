@@ -211,16 +211,7 @@ module.exports = function (grunt) {
         commitMessage: 'chore(attribution): update contributors'
       }
     },
-    dtsGenerator: {
-      options: {
-        name: 'ng2-material',
-        baseDir: '<%- sourceRoot %>',
-        out: 'dist/<%=pkg.name%>.d.ts'
-      },
-      default: {
-        src: ['<%- sourceRoot %>/**/*.ts']
-      }
-    },
+
     karma: {
       cover: {
         options: {
@@ -260,7 +251,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('remap-istanbul');
   grunt.loadNpmTasks('grunt-webpack');
 
-  grunt.registerTask('default', ['dtsGenerator', 'ts:source', 'sass', 'postcss', 'site-meta']);
+  grunt.registerTask('default', ['ts:source', 'sass', 'postcss', 'site-meta']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);

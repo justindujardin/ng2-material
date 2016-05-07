@@ -1,6 +1,6 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 import {MATERIAL_DIRECTIVES} from "ng2-material/all";
-import {FORM_DIRECTIVES} from "angular2/common";
+import {FORM_DIRECTIVES} from "@angular/common";
 
 @Component({
   selector: 'input-basic-usage',

@@ -1,20 +1,21 @@
-import {ComponentRef} from "angular2/core";
-import {PromiseWrapper} from "angular2/src/facade/promise";
+import {ComponentRef} from "@angular/core";
 import {Animate} from "../../core/util/animate";
-import {isPresent} from "angular2/src/facade/lang";
+import {MdDialogContainer, MdDialogContent} from "./dialog_container";
+import {MdBackdrop} from "../backdrop/backdrop";
+import {PromiseCompleter} from '@angular2-material/core/async/promise-completer';
 
 /**
  * Reference to an opened dialog.
  */
 export class MdDialogRef {
   // Reference to the MdDialogContainer component.
-  containerRef: ComponentRef;
+  containerRef: ComponentRef<MdDialogContainer>;
 
   // Reference to the MdBackdrop component.
-  _backdropRef: ComponentRef;
+  _backdropRef: ComponentRef<MdBackdrop>;
 
   // Reference to the Component loaded as the dialog content.
-  _contentRef: ComponentRef;
+  _contentRef: ComponentRef<any>;
 
   // Whether the dialog is closed.
   isClosed: boolean;
@@ -30,8 +31,8 @@ export class MdDialogRef {
     this.containerRef = null;
     this.isClosed = false;
 
-    this.contentRefDeferred = PromiseWrapper.completer();
-    this.whenClosedDeferred = PromiseWrapper.completer();
+    this.contentRefDeferred = new PromiseCompleter();
+    this.whenClosedDeferred = new PromiseCompleter();
   }
 
   /**
@@ -40,7 +41,7 @@ export class MdDialogRef {
    */
   private _subscription: any = null;
 
-  set backdropRef(value: ComponentRef) {
+  set backdropRef(value: ComponentRef<MdBackdrop>) {
     this._backdropRef = value;
     if (this._backdropRef) {
       this._subscription = this._backdropRef.instance.onHiding.subscribe(() => {
@@ -50,7 +51,7 @@ export class MdDialogRef {
     }
   }
 
-  set contentRef(value: ComponentRef) {
+  set contentRef(value: ComponentRef<MdDialogContent>) {
     this._contentRef = value;
     this.contentRefDeferred.resolve(value);
   }
@@ -59,9 +60,7 @@ export class MdDialogRef {
    * Gets the component instance for the content of the dialog.
    */
   get instance() {
-    if (isPresent(this._contentRef)) {
-      return this._contentRef.instance;
-    }
+    return this._contentRef.instance || null;
   }
 
 

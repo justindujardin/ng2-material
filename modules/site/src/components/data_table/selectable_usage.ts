@@ -1,4 +1,4 @@
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material/all";
 
 @Component({

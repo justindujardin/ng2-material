@@ -1,8 +1,7 @@
-import {Component, Output, Input, EventEmitter, Inject, Optional, forwardRef, ElementRef, AfterContentInit} from "angular2/core";
-import {isPresent} from "angular2/src/facade/lang";
+import {Component, Output, Input, EventEmitter, Inject, Optional, forwardRef, ElementRef, AfterContentInit} from "@angular/core";
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/map';
-import {MdCheckbox} from "../checkbox/checkbox";
+import {MdCheckbox} from "@angular2-material/checkbox";
 import {MdDataTable} from './data_table';
 
 /**
@@ -85,7 +84,7 @@ export class MdDataTableHeaderSelectableRow extends AbstractMdDataTableSelectabl
   }
 
   ngAfterContentInit() {
-    if (isPresent(this.table)) {
+    if (!!this.table) {
       this._bindListener();
     }
   }
@@ -137,7 +136,7 @@ export class MdDataTableSelectableRow extends AbstractMdDataTableSelectableRow {
       this.selectableValue = this._getIndex(element);
     }
 
-    if (isPresent(this.table)) {
+    if (!!this.table) {
       this._bindListener();
     }
   }

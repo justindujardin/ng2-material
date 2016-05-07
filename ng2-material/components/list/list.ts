@@ -1,4 +1,4 @@
-import {Directive, Component} from "angular2/core";
+import {Directive, Component} from "@angular/core";
 
 
 /**

@@ -1,5 +1,5 @@
-import {Component, Input, ViewEncapsulation, AfterContentInit, ElementRef} from "angular2/core";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {Component, Input, ViewEncapsulation, AfterContentInit, ElementRef} from "@angular/core";
+import {BrowserDomAdapter} from "@angular/platform-browser";
 import {PlatformHost} from "../platform/index";
 
 @Component({

@@ -1,23 +1,21 @@
 import {
-  TestComponentBuilder,
   beforeEach,
   describe,
   expect,
   inject,
   it,
-  async,
-  ComponentFixture
-} from "angular2/testing";
-import {Component, DebugElement} from "angular2/core";
+  async
+} from "@angular/core/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {Component, DebugElement} from "@angular/core";
 import {MdBackdrop} from "../../../ng2-material/components/backdrop/backdrop";
-import {By} from "angular2/platform/browser";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
+import {By} from "@angular/platform-browser";
 import {promiseWait} from "../../util";
 
 export function main() {
 
   interface IBackdropFixture {
-    fixture: ComponentFixture;
+    fixture: ComponentFixture<TestComponent>;
     debug: DebugElement;
     backdrop: MdBackdrop;
   }
@@ -37,7 +35,7 @@ export function main() {
       let result: IBackdropFixture = null;
       return promiseWait()
         .then(() => builder.createAsync(TestComponent))
-        .then((fixture: ComponentFixture) => {
+        .then((fixture: ComponentFixture<TestComponent>) => {
           let debug: DebugElement = fixture.debugElement.query(By.css('md-backdrop'));
           let backdrop = <MdBackdrop>debug.componentInstance;
           backdrop.transitionAddClass = transitionAddClass;
@@ -65,19 +63,19 @@ export function main() {
           return setup(true).then((api: IBackdropFixture) => {
             api.fixture.detectChanges();
             let el = api.debug.nativeElement;
-            expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(true);
+            expect(el.classList.contains(api.backdrop.transitionClass)).toBe(true);
           });
         })));
         it('should be removed from classList when hidden', async(inject([], () => {
           return setup(true).then((api: IBackdropFixture) => {
             return promiseWait().then(() => {
               let el = api.debug.nativeElement;
-              expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(true);
+              expect(el.classList.contains(api.backdrop.transitionClass)).toBe(true);
               return api.backdrop
                 .hide()
                 .then(() => promiseWait())
                 .then(() => {
-                  expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
+                  expect(el.classList.contains(api.backdrop.transitionClass)).toBe(false);
                 });
             });
           });
@@ -88,19 +86,19 @@ export function main() {
         it('should remove transitionClass when shown', async(inject([], () => {
           return setup(false, false).then((api: IBackdropFixture) => {
             let el = api.debug.nativeElement;
-            expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
-            DOM.addClass(el, api.backdrop.transitionClass);
+            expect(el.classList.contains(api.backdrop.transitionClass)).toBe(false);
+            el.classList.contains(api.backdrop.transitionClass);
             return api.backdrop.show().then(() => {
-              expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
+              expect(el.classList.contains(api.backdrop.transitionClass)).toBe(false);
             });
           });
         })));
         it('should add transitionClass when hidden', async(inject([], () => {
           return setup(true, false).then((api: IBackdropFixture) => {
             let el = api.debug.nativeElement;
-            expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(false);
+            expect(el.classList.contains(api.backdrop.transitionClass)).toBe(false);
             return api.backdrop.hide().then(() => {
-              expect(DOM.hasClass(el, api.backdrop.transitionClass)).toBe(true);
+              expect(el.classList.contains(api.backdrop.transitionClass)).toBe(true);
             });
           });
         })));

@@ -1,7 +1,5 @@
 // TODO(jd): auto generate import/exports for examples during the grunt site-meta task.
 
-
-import {CONST_EXPR, Type} from "angular2/src/facade/lang";
 import CardBasicUsage from "./components/card/basic_usage";
 import CardInlineActions from "./components/card/inline_actions";
 import ButtonBasicUsage from "./components/button/basic_usage";
@@ -29,13 +27,13 @@ import {NavigationService} from "./services/navigation";
 import {VersionService} from "./services/version";
 import {PlatformHost} from "./platform/index";
 import {NodePlatformHost} from "./platform/node";
-import {provide} from "angular2/core";
+import {provide} from "@angular/core";
 import {BrowserPlatformHost} from "./platform/browser";
 
 /**
  * Collection of Material Design component example directives.
  */
-export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
+export const DEMO_DIRECTIVES: any[] = [
   CardBasicUsage, CardInlineActions, CardActionButtons,
   ButtonBasicUsage,
   CheckboxBasicUsage, CheckboxSyncing,
@@ -53,16 +51,15 @@ export const DEMO_DIRECTIVES: Type[] = CONST_EXPR([
   ProgressCircularBasicUsage,
   SidenavBasicUsage,
   WhiteframeBasicUsage
-]);
-
+];
 
 
 /**
  * Collection of providers for example app
  */
-export const DEMO_PROVIDERS: Type[] = CONST_EXPR([
+export const DEMO_PROVIDERS: any[] = [
   ComponentsService, NavigationService, VersionService
-]);
+];
 
 
 /**

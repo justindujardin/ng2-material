@@ -8,9 +8,9 @@ import {
   ViewEncapsulation,
   Query,
   ElementRef
-} from "angular2/core";
+} from "@angular/core";
 import {Ink} from "../../core/util/ink";
-import {NgFor} from "angular2/common";
+import {NgFor} from "@angular/common";
 
 
 // TODO: behaviors to test

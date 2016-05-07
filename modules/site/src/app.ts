@@ -1,14 +1,14 @@
-import {Component, Input, OnDestroy, ApplicationRef} from "angular2/core";
-import {ROUTER_DIRECTIVES, RouteConfig, Router} from "angular2/router";
+import {Component, Input, OnDestroy, ApplicationRef} from "@angular/core";
+import {ROUTER_DIRECTIVES, RouteConfig, Router} from "@angular/router-deprecated";
 import {DEMO_DIRECTIVES} from "./all";
 import Example from "./components/example";
-import {Http, Response} from "angular2/http";
+import {Http, Response} from "@angular/http";
 import {IndexPage} from "./routes/index";
 import {ComponentPage} from "./routes/component";
 import {ComponentsService, IComponentMeta} from "./services/components";
 import {NavigationService} from "./services/navigation";
 import {Media, MATERIAL_DIRECTIVES, SidenavService} from "ng2-material/all";
-// import {bootstrap} from "angular2/bootstrap";
+
 
 /**
  * Describe an example that can be dynamically loaded.

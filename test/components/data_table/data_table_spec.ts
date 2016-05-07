@@ -1,24 +1,15 @@
-import {componentSanityCheck} from '../../util';
-import {
-  TestComponentBuilder,
-  beforeEach,
-  describe,
-  expect,
-  inject,
-  it,
-  async,
-  ComponentFixture
-} from 'angular2/testing';
-import {Component, DebugElement} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
-import {MdDataTable} from 'ng2-material/components/data_table/data_table';
-import {By} from 'angular2/platform/browser';
-import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow} from '../../../ng2-material/components/data_table/data_table_selectable_tr';
+import {componentSanityCheck} from "../../util";
+import {beforeEach, describe, expect, inject, it, async} from "@angular/core/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {Component, DebugElement} from "@angular/core";
+import {CORE_DIRECTIVES} from "@angular/common";
+import {By} from "@angular/platform-browser";
+import {MdDataTableHeaderSelectableRow, MdDataTable, MdDataTableSelectableRow} from "../../../ng2-material/all";
 
 export function main() {
 
   interface IDataTableFixture {
-    fixture: ComponentFixture;
+    fixture: ComponentFixture<TestComponent>;
     comp: MdDataTable;
     debug: DebugElement;
   }
@@ -51,7 +42,7 @@ export function main() {
     let builder: TestComponentBuilder;
 
     function setup(checked: boolean = false, disabled: boolean = false): Promise<IDataTableFixture> {
-      return builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
+      return builder.createAsync(TestComponent).then((fixture: ComponentFixture<TestComponent>) => {
         let debug = fixture.debugElement.query(By.css('md-data-table'));
         let comp: MdDataTable = debug.componentInstance;
         let testComp = fixture.debugElement.componentInstance;
@@ -91,29 +82,29 @@ export function main() {
 
       it('should check all row checkbox when a click is fired on master checkbox', async(inject([], () => {
         return setup(true).then((api: IDataTableFixture) => {
-            let masterRow = api.debug.query(By.css('thead tr:first-child'));
-            masterRow.nativeElement.click();
-            expect(api.comp.selected.length).toEqual(2);
-            expect(api.comp.selected[0]).toEqual('0');
-            masterRow.nativeElement.click();
-            expect(api.comp.selected.length).toEqual(0);
-            api.fixture.destroy();
-          });
+          let masterRow = api.debug.query(By.css('thead tr:first-child'));
+          masterRow.nativeElement.click();
+          expect(api.comp.selected.length).toEqual(2);
+          expect(api.comp.selected[0]).toEqual('0');
+          masterRow.nativeElement.click();
+          expect(api.comp.selected.length).toEqual(0);
+          api.fixture.destroy();
+        });
       })));
 
       it('should uncheck master checkbox if a row checkbox is unchecked', async(inject([], () => {
         return setup(true).then((api: IDataTableFixture) => {
-            let masterRow = api.debug.query(By.css('thead tr:first-child')),
-              row =  api.debug.query(By.css('tbody tr:first-child')).nativeElement;
+          let masterRow = api.debug.query(By.css('thead tr:first-child')),
+              row       = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
 
-            masterRow.nativeElement.click();
-            expect(masterRow.componentInstance.isActive).toBe(true);
-            row.click();
-            expect(api.comp.selected.length).toEqual(1);
-            expect(api.comp.selected[0]).toEqual('1');
-            expect(masterRow.componentInstance.isActive).toBe(false);
-            api.fixture.destroy();
-          });
+          masterRow.nativeElement.click();
+          expect(masterRow.componentInstance.isActive).toBe(true);
+          row.click();
+          expect(api.comp.selected.length).toEqual(1);
+          expect(api.comp.selected[0]).toEqual('1');
+          expect(masterRow.componentInstance.isActive).toBe(false);
+          api.fixture.destroy();
+        });
       })));
 
       it('should fire a selectable_change event when a row checkbox change', async(inject([], () => {

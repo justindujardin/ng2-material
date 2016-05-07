@@ -1,12 +1,9 @@
-import 'angular2-universal/polyfills';
-import {prebootComplete} from 'angular2-universal';
-
-import {bootstrap} from 'angular2/platform/browser';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {enableProdMode} from 'angular2/core';
-
-import {App} from './app';
+import "angular2-universal/polyfills";
+import {prebootComplete, bootstrap} from "angular2-universal";
+import {ROUTER_PROVIDERS} from "@angular/router-deprecated";
+import {HTTP_PROVIDERS} from "@angular/http";
+import {enableProdMode} from "@angular/core";
+import {App} from "./app";
 import {MATERIAL_BROWSER_PROVIDERS} from "ng2-material/all";
 import {DEMO_BROWSER_PROVIDERS} from "./all";
 
@@ -18,4 +15,4 @@ bootstrap(App, [
   ...DEMO_BROWSER_PROVIDERS,
   ...MATERIAL_BROWSER_PROVIDERS
 ])
-.then(prebootComplete);
+  .then(prebootComplete);

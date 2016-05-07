@@ -17,39 +17,31 @@ import {
   Output,
   EventEmitter,
   Renderer
-} from "angular2/core";
+} from "@angular/core";
 import {MdBackdrop} from "../backdrop/backdrop";
-import {CONST} from "angular2/src/facade/lang";
 import {SidenavService} from "./sidenav_service";
-import {TimerWrapper} from "angular2/src/facade/async";
 import {ViewportHelper} from "../../core/util/viewport";
 
 
-@CONST()
 export class SidenavAlignment {
   /**
    * The sidenav will be displayed on the left side of the content.
    */
-  @CONST()
   static LEFT = 'left';
   /**
    * The sidenav will be displayed on the right side of the content.
    */
-  @CONST()
   static RIGHT = 'right';
 }
 
-@CONST()
 export class SidenavStyle {
   /**
    * The sidenav will hover over the content.
    */
-  @CONST()
   static OVER = 'over';
   /**
    * The sidenav will push the content to the side and display without obscuring it.
    */
-  @CONST()
   static SIDE = 'side';
 }
 
@@ -108,7 +100,7 @@ export class MdSidenav extends MdBackdrop implements OnInit, OnDestroy {
   set style(value: string) {
     this._style = value === SidenavStyle.SIDE ? SidenavStyle.SIDE : SidenavStyle.OVER;
     if (this.container) {
-      TimerWrapper.setTimeout(() => {
+      setTimeout(() => {
         this.container.updateStyle(this);
       }, 0);
     }

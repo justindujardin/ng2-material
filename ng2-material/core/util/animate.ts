@@ -1,6 +1,3 @@
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
-import {TimerWrapper} from "angular2/src/facade/async";
-
 /**
  * Provide an API for animating elements with CSS transitions
  */
@@ -12,55 +9,57 @@ export class Animate {
   static TRANSITION_EVENT: string = Animate.whichTransitionEvent();
 
   static enter(el: HTMLElement, cssClass: string): Promise<void> {
-    DOM.removeClass(el, cssClass);
+    el.classList.remove(cssClass);
     return new Promise<void>((resolve)=> {
-      DOM.addClass(el, cssClass + '-add');
-      TimerWrapper.setTimeout(() => {
+      el.classList.add(cssClass + '-add');
+      setTimeout(() => {
         var duration = Animate.getTransitionDuration(el, true);
-        var callTimeout = TimerWrapper.setTimeout(() => done(true), duration);
+        let removeListener = () => done(false);
+        var callTimeout = setTimeout(() => done(true), duration);
         var done = (timeout) => {
           if (!removeListener) {
             return;
           }
-          DOM.removeClass(el, cssClass + '-add-active');
-          DOM.removeClass(el, cssClass + '-add');
+          el.classList.remove(cssClass + '-add-active');
+          el.classList.remove(cssClass + '-add');
           if (!timeout) {
-            TimerWrapper.clearTimeout(callTimeout);
+            clearTimeout(callTimeout);
           }
-          removeListener();
+          el.removeEventListener(Animate.TRANSITION_EVENT, removeListener);
           removeListener = null;
           resolve();
         };
-        let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, () => done(false));
-        DOM.addClass(el, cssClass + '-add-active');
-        DOM.addClass(el, cssClass);
+        el.addEventListener(Animate.TRANSITION_EVENT, removeListener);
+        el.classList.add(cssClass + '-add-active');
+        el.classList.add(cssClass);
       }, 1);
     });
   }
 
   static leave(el: HTMLElement, cssClass: string): Promise<void> {
     return new Promise<void>((resolve)=> {
-      DOM.addClass(el, cssClass + '-remove');
-      TimerWrapper.setTimeout(() => {
+      el.classList.add(cssClass + '-remove');
+      setTimeout(() => {
         var duration = Animate.getTransitionDuration(el, true);
-        var callTimeout = TimerWrapper.setTimeout(() => done(true), duration);
+        var callTimeout = setTimeout(() => done(true), duration);
+        let removeListener = () => done(false);
 
         var done = (timeout) => {
           if (!removeListener) {
             return;
           }
-          DOM.removeClass(el, cssClass + '-remove-active');
-          DOM.removeClass(el, cssClass + '-remove');
+          el.classList.remove(cssClass + '-remove-active');
+          el.classList.remove(cssClass + '-remove');
           if (!timeout) {
-            TimerWrapper.clearTimeout(callTimeout);
+            clearTimeout(callTimeout);
           }
-          removeListener();
+          el.removeEventListener(Animate.TRANSITION_EVENT, removeListener);
           removeListener = null;
           resolve();
         };
-        let removeListener = DOM.onAndCancel(el, Animate.TRANSITION_EVENT, done);
-        DOM.addClass(el, cssClass + '-remove-active');
-        DOM.removeClass(el, cssClass);
+        el.addEventListener(Animate.TRANSITION_EVENT, removeListener);
+        el.classList.add(cssClass + '-remove-active');
+        el.classList.remove(cssClass);
       }, 1);
     });
   }
@@ -75,7 +74,7 @@ export class Animate {
    */
   static getTransitionDuration(element: HTMLElement, includeDelay: boolean = false) {
     var prefixes = ['', 'moz', 'webkit', 'ms', 'o', 'khtml'];
-    var style: any = DOM.getComputedStyle(element);
+    var style: any = window.getComputedStyle(element);
     for (let i = 0; i < prefixes.length; i++) {
       let durationProperty = (i === 0 ? '' : `-${prefixes[i]}-`) + `transition-duration`;
       let duration = style[durationProperty];
@@ -99,12 +98,12 @@ export class Animate {
   }
 
   static setTransitionDuration(element: HTMLElement, delayMs: number) {
-    DOM.setStyle(element, 'transition-duration', `${delayMs}ms`);
+    element.style['transition-duration'] = `${delayMs}ms`;
   }
 
   /* From Modernizr */
   static whichTransitionEvent(): string {
-    if(typeof document === 'undefined') {
+    if (typeof document === 'undefined') {
       return 'transitionend';
     }
     var t: string;
@@ -127,28 +126,29 @@ export class Animate {
     let saveDuration = Animate.getTransitionDuration(element);
     Animate.setTransitionDuration(element, durationMs);
     return new Promise<void>((animResolve, animReject) => {
-      let callTimeout = TimerWrapper.setTimeout(() => done(true), durationMs);
+      let callTimeout = setTimeout(() => done(true), durationMs);
+      let removeListener = () => done(false);
 
       let done = (timeout) => {
         if (!removeListener) {
           return;
         }
         if (timeout) {
-          TimerWrapper.clearTimeout(callTimeout);
+          clearTimeout(callTimeout);
         }
-        removeListener();
+        element.removeEventListener(Animate.TRANSITION_EVENT, removeListener);
         removeListener = null;
         if (saveDuration !== -1) {
           Animate.setTransitionDuration(element, saveDuration);
         }
         else {
-          DOM.removeStyle(element, 'transition-duration');
+          delete element.style['transition-duration'];
         }
         animResolve();
       };
-      let removeListener = DOM.onAndCancel(element, Animate.TRANSITION_EVENT, () => done(false));
+      element.addEventListener(Animate.TRANSITION_EVENT, removeListener);
       Object.keys(styles).forEach((key: string) => {
-        DOM.setStyle(element, key, `${styles[key]}`);
+        element.style[key] = `${styles[key]}`;
       });
 
     });
@@ -162,13 +162,13 @@ export class Animate {
     Animate.setTransitionDuration(element, 0);
     return new Promise<void>((resolve, reject) => {
       Object.keys(styles).forEach((key: string) => {
-        DOM.setStyle(element, key, `${styles[key]}`);
+        element.style[key] = `${styles[key]}`;
       });
       if (saveDuration !== -1) {
         Animate.setTransitionDuration(element, saveDuration);
       }
       else {
-        DOM.removeStyle(element, 'transition-duration');
+        delete element.style['transition-duration'];
       }
       resolve();
     });
@@ -182,7 +182,7 @@ export class Animate {
    */
   static wait(milliseconds: number = 10): Promise<void> {
     return new Promise<void>((resolve)=> {
-      TimerWrapper.setTimeout(() => resolve(), milliseconds);
+      setTimeout(() => resolve(), milliseconds);
     });
   }
 

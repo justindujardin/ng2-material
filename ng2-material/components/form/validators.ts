@@ -1,12 +1,11 @@
-import {CONST_EXPR, NumberWrapper} from "angular2/src/facade/lang";
-import {NG_VALIDATORS, Validator, Control, AbstractControl} from "angular2/common";
-import {Input, Provider, Directive, forwardRef} from "angular2/core";
+import {NG_VALIDATORS, Validator, Control, AbstractControl} from "@angular/common";
+import {Input, Provider, Directive, forwardRef} from "@angular/core";
 import {isNumber} from "../../core/util/util";
 
-const PATTERN_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, {
+const PATTERN_VALIDATOR = new Provider(NG_VALIDATORS, {
   useExisting: forwardRef(() => MdPatternValidator),
   multi: true
-}));
+});
 
 @Directive({
   selector: '[mdPattern]',
@@ -35,10 +34,10 @@ export class MdPatternValidator implements Validator {
   }
 }
 
-const MAXLENGTH_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, {
+const MAXLENGTH_VALIDATOR = new Provider(NG_VALIDATORS, {
   useExisting: forwardRef(() => MdMaxLengthValidator),
   multi: true
-}));
+});
 @Directive({selector: '[mdMaxLength]', providers: [MAXLENGTH_VALIDATOR]})
 export class MdMaxLengthValidator implements Validator {
   /**
@@ -63,10 +62,10 @@ export class MdMaxLengthValidator implements Validator {
   }
 }
 
-const MAXVALUE_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, {
+const MAXVALUE_VALIDATOR = new Provider(NG_VALIDATORS, {
   useExisting: forwardRef(() => MdMaxValueValidator),
   multi: true
-}));
+});
 @Directive({selector: '[mdMax]', providers: [MAXVALUE_VALIDATOR]})
 export class MdMaxValueValidator implements Validator {
   /**
@@ -74,7 +73,7 @@ export class MdMaxValueValidator implements Validator {
    */
   static inline(length: number|string): any {
     return function validate(control: AbstractControl): {[key: string]: any} {
-      if (NumberWrapper.isNaN(control.value) || control.value <= length) {
+      if (isNaN(control.value) || control.value <= length) {
         return null;
       }
       return {
@@ -91,10 +90,10 @@ export class MdMaxValueValidator implements Validator {
   }
 }
 
-const MINVALUE_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, {
+const MINVALUE_VALIDATOR = new Provider(NG_VALIDATORS, {
   useExisting: forwardRef(() => MdMinValueValidator),
   multi: true
-}));
+});
 @Directive({selector: '[mdMin]', providers: [MINVALUE_VALIDATOR]})
 export class MdMinValueValidator implements Validator {
   /**
@@ -102,7 +101,7 @@ export class MdMinValueValidator implements Validator {
    */
   static inline(length: number|string): any {
     return function validate(control: AbstractControl): {[key: string]: any} {
-      if (NumberWrapper.isNaN(control.value) || control.value >= length) {
+      if (isNaN(control.value) || control.value >= length) {
         return null;
       }
       return {
@@ -119,10 +118,10 @@ export class MdMinValueValidator implements Validator {
   }
 }
 
-const NUMBER_REQUIRED_VALIDATOR = CONST_EXPR(new Provider(NG_VALIDATORS, {
+const NUMBER_REQUIRED_VALIDATOR = new Provider(NG_VALIDATORS, {
   useExisting: forwardRef(() => MdNumberRequiredValidator),
   multi: true
-}));
+});
 @Directive({selector: '[mdNumberRequired]', providers: [NUMBER_REQUIRED_VALIDATOR]})
 export class MdNumberRequiredValidator implements Validator {
   /**
@@ -130,7 +129,7 @@ export class MdNumberRequiredValidator implements Validator {
    */
   static inline(): any {
     return function validate(control: AbstractControl): {[key: string]: any} {
-      let isNum = !NumberWrapper.isNaN(control.value) && isNumber(control.value);
+      let isNum = !isNaN(control.value) && isNumber(control.value);
       return isNum ? null : {mdNumberRequired: true};
     }
   }

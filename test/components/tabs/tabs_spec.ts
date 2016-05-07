@@ -1,23 +1,15 @@
-import {
-  TestComponentBuilder,
-  beforeEach,
-  describe,
-  expect,
-  inject,
-  it,
-  ComponentFixture,
-  async
-} from "angular2/testing";
-import {Component} from "angular2/core";
+import {beforeEach, describe, expect, inject, it, async} from "@angular/core/testing";
+import {TestComponentBuilder, ComponentFixture} from "@angular/compiler/testing";
+import {Component} from "@angular/core";
 import {MdTab, MdTabs} from "../../../ng2-material/components/tabs/tabs";
-import {CORE_DIRECTIVES} from "angular2/common";
+import {CORE_DIRECTIVES} from "@angular/common";
 import {Ink} from "../../../ng2-material/core/util/ink";
-import {By} from "angular2/platform/browser";
+import {By} from "@angular/platform-browser";
 
 export function main() {
 
   interface ITabsFixture {
-    fixture: ComponentFixture;
+    fixture: ComponentFixture<TestComponent>;
     tabs: MdTabs;
     tabButtons: HTMLElement[];
   }
@@ -42,7 +34,7 @@ export function main() {
       let prep = template === null ?
         builder.createAsync(TestComponent) :
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
-      return prep.then((fixture: ComponentFixture) => {
+      return prep.then((fixture: ComponentFixture<TestComponent>) => {
         fixture.detectChanges();
         let tabs = <MdTabs>fixture.debugElement.query(By.css('md-tabs')).componentInstance;
         let tabButtons = fixture.debugElement.queryAll(By.css('md-tab-item')).map(b => b.nativeElement);

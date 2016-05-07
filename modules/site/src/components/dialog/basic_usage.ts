@@ -1,6 +1,5 @@
-import {Component, ViewContainerRef, Input} from "angular2/core";
+import {Component, ViewContainerRef, Input} from "@angular/core";
 import {MATERIAL_DIRECTIVES, MdDialog, Media, MdDialogConfig, MdDialogBasic, MdDialogRef} from "ng2-material/all";
-import {DOM} from "angular2/src/platform/dom/dom_adapter";
 
 @Component({
   selector: 'dialog-basic-usage',
@@ -21,7 +20,7 @@ export default class DialogBasicUsage {
 
   showAlert(ev) {
     let config = new MdDialogConfig()
-      .parent(DOM.query('#popupContainer'))
+      .parent(document.body.querySelector('#popupContainer') as HTMLElement)
       .textContent('You can specify some description text in here')
       .title('This is an alert title')
       .ok('Got it!')
