@@ -15,26 +15,25 @@ module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
+
     files: [
-      {pattern: 'node_modules/es6-shim/es6-shim.min.js', included: true, watched: true},
-      {pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: true, watched: true},
+      { pattern: 'node_modules/es6-shim/es6-shim.js', included: true, watched: false },
+      { pattern: 'node_modules/zone.js/dist/zone.js', included: true, watched: false },
+      { pattern: 'node_modules/reflect-metadata/Reflect.js', included: true, watched: false },
+      { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: true, watched: false },
+      { pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: false },
+      { pattern: 'node_modules/zone.js/dist/async-test.js', included: true, watched: false },
+      { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/@angular/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/@angular2-material/**/*.js', included: false, watched: false },
       'karma.ie.shims.js',
-
-      // Angular 2 polyfills *must* be loaded after es6-shim and system-polyfills in order to
-      // setup the monkey-patches for zones.
-      {pattern: 'node_modules/angular2/bundles/angular2-polyfills.js', included: true, watched: true},
-      {pattern: 'node_modules/zone.js/dist/async-test.js', included: true, watched: true},
-
-      {pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: true},
-      {pattern: 'node_modules/rxjs/bundles/Rx.js', included: true, watched: true},
-      'node_modules/reflect-metadata/Reflect.js',
-      {pattern: 'node_modules/angular2/**/*.js', included: false, watched: false},
-      {pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false},
       "config.karma.js",
-      {pattern: 'ng2-material/**/*.*', watched: true, included: false},
-      {pattern: 'test/**/*.js', included: false, watched: true},
-
+      { pattern: 'dist/**/*', included: false, watched: true },
       "karma.main.js"
+    ],
+    exclude: [
+      // Vendor packages might include spec files. We don't want to use those.
+      'node_modules/**/*.spec.js'
     ],
     reporters: ['mocha', 'coverage'],
     port: 9876,
@@ -47,9 +46,6 @@ module.exports = function (config) {
     reportSlowerThan: 500,
     plugins: [
       'karma-*'
-    ],
-    exclude: [
-      'node_modules/angular2/**/*_spec.js'
     ],
 
     preprocessors: (process.env.TRAVIS || coverageDebug) ? {"ng2-material/**/*.js": "coverage"} : {},

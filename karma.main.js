@@ -9,7 +9,7 @@ __karma__.loaded = function () {
 };
 
 System
-  .import('test/bootstrap').then(function (tests) {
+  .import('dist/platform/testing/bootstrap').then(function (tests) {
     return tests.load(window.__karma__.files);
   })
   .then(function () {

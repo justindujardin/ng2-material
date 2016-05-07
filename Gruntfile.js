@@ -1,8 +1,8 @@
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    sourceRoot: 'ng2-material',
-    outPath: 'out',
+    sourceRoot: 'src',
+    outPath: 'dist',
     sitePath: 'site',
     clean: [
       "dist/",
@@ -13,37 +13,15 @@ module.exports = function (grunt) {
       "<%- sourceRoot %>/**/*.js.map",
       "<%- sourceRoot %>/**/*.css",
       "<%- sourceRoot %>/**/*.css.map",
-      "example/**/*.js",
-      "example/**/*.d.ts",
-      "example/**/*.js.map",
-      "example/**/*.css",
-      "example/**/*.css.map",
-      "test/**/*.js",
-      "test/**/*.d.ts",
-      "test/**/*.js.map"
     ],
     copy: {
-      release: {
+      npm: {
         files: [
           {src: 'package.json', dest: '<%- outPath %>/'},
           {src: 'CHANGELOG.md', dest: '<%- outPath %>/'},
           {src: 'README.md', dest: '<%- outPath %>/'},
-          // Individual style and html files
-          // NOTE: Individual js/d.ts outputs are handled by the build task for release
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.css'], dest: '<%- outPath %>/'},
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.css.map'], dest: '<%- outPath %>/'},
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.html'], dest: '<%- outPath %>/'},
-
-          // Source .ts/.scss files for people that prefer to build.
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.scss'], dest: '<%- outPath %>/source'},
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.ts'], dest: '<%- outPath %>/source'},
-
-          // Bundled js and css files
-          {expand: true, cwd: 'dist/', src: ['*.*'], dest: '<%- outPath %>/dist'},
-          {expand: true, cwd: 'public/font/', src: ['*.*'], dest: '<%- outPath %>/dist'},
-
-
-          // Material Icons web font
+          {expand: true, cwd: 'src/', src: ['**/*.scss'], dest: '<%- outPath %>/src'},
+          {expand: true, cwd: 'src/', src: ['**/*.ts'], dest: '<%- outPath %>/src'},
           {expand: true, cwd: 'public/', src: ['font/*.*'], dest: '<%- outPath %>/'}
         ]
       },
@@ -70,7 +48,7 @@ module.exports = function (grunt) {
           {expand: true, src: 'package.json', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'index.html', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'config.js', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'ng2-material/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, src: 'src/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'coverage/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'dist/*.*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {
@@ -95,9 +73,6 @@ module.exports = function (grunt) {
     ts: {
       source: {
         tsconfig: true
-      },
-      release: {
-        tsconfig: 'tsconfig.build.json'
       }
     },
     sass: {
@@ -127,14 +102,7 @@ module.exports = function (grunt) {
         ]
       },
       dist: {
-        src: [
-          "example/src/app/*.css",
-          "example/src/app/**/*.css",
-          "public/font/*.css",
-          "dist/ng2-material.css",
-          "<%- sourceRoot %>/all.css",
-          "<%- sourceRoot %>/components/**/*.css"
-        ]
+        src: ["dist/*.css"]
       }
     },
     connect: {
@@ -148,28 +116,22 @@ module.exports = function (grunt) {
       sass: {
         files: [
           '<%- sourceRoot %>/**/*.scss',
-          '<%- sourceRoot %>/*.scss',
-          'example/**/*.scss',
-          'app.scss'
+          '<%- sourceRoot %>/*.scss'
         ],
         tasks: ['sass', 'postcss:dist', 'notify:styles']
       },
       meta: {
         files: [
-          'example/**/*.html',
-          'example/**/*.ts',
-          'example/**/*.scss',
-          'example/*.*'
+          'modules/docs/**/*.html',
+          'example/docs/**/*.ts',
+          'example/docs/**/*.scss',
+          'example/docs/*.*'
         ],
         tasks: ['site-meta', 'notify:meta']
       },
       ts: {
         files: [
-          '<%- sourceRoot %>/**/*.ts',
-          './*.ts',
-          'example/*.ts',
-          'example/**/*.ts',
-          'test/**/*.ts'
+          '<%- sourceRoot %>/**/*.ts'
         ],
         tasks: ['ts:source', 'notify:source']
       }
@@ -218,7 +180,7 @@ module.exports = function (grunt) {
           singleRun: true
         },
         configFile: './karma.conf.js',
-        preprocessors: {"ng2-material/**/*.js": "coverage"}
+        preprocessors: {"src/**/*.js": "coverage"}
       }
     },
     remapIstanbul: {
@@ -232,9 +194,6 @@ module.exports = function (grunt) {
           }
         }
       }
-    },
-    webpack: {
-      singleJs: require('./webpack.config.js')
     }
   });
 
@@ -247,16 +206,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ts');
-  grunt.loadNpmTasks('dts-generator');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.loadNpmTasks('grunt-webpack');
-
-  grunt.registerTask('default', ['ts:source', 'sass', 'postcss', 'site-meta']);
+  grunt.registerTask('default', ['ts', 'sass', 'postcss', 'site-meta']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
   grunt.registerTask('site', ['build', 'cover', 'copy:site']);
-  grunt.registerTask('build', ['default', 'ts:release', 'webpack', 'copy:release']);
+  grunt.registerTask('build', ['default', 'copy:npm']);
 
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-conventional-changelog');
@@ -269,17 +225,14 @@ module.exports = function (grunt) {
       'npm-contributors',
       'bump:' + type + ':bump-only',
       'conventionalChangelog',
-      'copy:release',
+      'copy:npm',
       'bump-commit',
       'publish'
     ]);
   });
 
-
-  grunt.registerTask('publish', 'Publish new npm package', function (tag) {
-    var exec = require('child_process').exec;
-    var done = this.async();
-
+  grunt.registerTask('build-npm', ['build', 'build-npm-package-json']);
+  grunt.registerTask('build-npm-package-json', function () {
     // Swap dependencies for peerDependencies in the published package.
     // http://stackoverflow.com/a/34645112
     var fs = require('fs');
@@ -289,14 +242,19 @@ module.exports = function (grunt) {
       var rendered = JSON.parse(file);
       rendered.peerDependencies = rendered.dependencies;
       delete rendered.dependencies;
-      fs.writeFileSync('out/package.json', JSON.stringify(rendered, null, 2));
+      fs.writeFileSync('dist/package.json', JSON.stringify(rendered, null, 2));
     }
     catch (e) {
       console.error('failed: ' + e);
     }
+  });
 
-    // Switch to "out" path and publish the npm package from there.
-    process.chdir('out');
+  grunt.registerTask('publish', 'Publish new npm package', function (tag) {
+    var exec = require('child_process').exec;
+    var done = this.async();
+
+    // Switch to "dist" path and publish the npm package from there.
+    process.chdir('dist');
     exec('npm publish' + (tag ? ' --tag ' + tag : ''), function (err) {
       process.chdir('../');
       if (err) {
@@ -410,7 +368,7 @@ module.exports = function (grunt) {
         });
 
 
-        glob("ng2-material/components/**/*.ts", function (err, files) {
+        glob("src/components/**/*.ts", function (err, files) {
           files.forEach(function linkComponentsToExamples(sourceFile) {
             var component = readableString(path.basename(path.dirname(sourceFile)));
             if (!meta[component]) {
