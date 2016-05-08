@@ -41,7 +41,7 @@
     "gulp-sass": "^2.2.0",
     "highlight.js": "^9.3.0",
     "highlightjs": "8.7.0",
-    "ng2-material": "file:../../out",
+    "ng2-material": "file:../../dist",
     "systemjs": "0.19.2",
     "ts-loader": "^0.8.1",
     "ts-node": "^0.7.1",
