@@ -2,9 +2,10 @@ import {Component, ViewContainerRef, Input} from '@angular/core';
 import {MATERIAL_DIRECTIVES, MdDialog, Media} from 'ng2-material';
 
 @Component({
+  moduleId: module.id,
   selector: 'dialog-basic-usage',
-  templateUrl: 'src/components/dialog/basic_usage.html',
-  styleUrls: ['src/components/dialog/basic_usage.css'],
+  templateUrl: 'basic_usage.html',
+  styleUrls: ['basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class DialogBasicUsage {

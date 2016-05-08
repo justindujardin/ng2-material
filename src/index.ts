@@ -23,8 +23,6 @@ import {MdList, MdListItem} from "./components/list/list";
 import {MdPeekaboo} from "./components/peekaboo/peekaboo";
 import {MdSwitch} from "./components/switcher/switch";
 import {MdSubheader} from "./components/subheader/subheader";
-import {MdSidenav, MdSidenavContainer} from "./components/sidenav/sidenav";
-import {SidenavService} from "./components/sidenav/sidenav_service";
 import {MdTabs, MdTab} from "./components/tabs/tabs";
 import {Media} from "./core/util/media";
 import {ViewportHelper, BrowserViewportHelper, NodeViewportHelper} from "./core/util/viewport";
@@ -55,9 +53,6 @@ export * from './components/switcher/switch';
 
 export * from './components/subheader/subheader';
 
-export * from './components/sidenav/sidenav';
-export * from './components/sidenav/sidenav_service';
-
 export * from './components/tabs/tabs';
 
 export * from './core/util/media';
@@ -84,7 +79,6 @@ export const MATERIAL_DIRECTIVES: any[] = [
   MdMessage, MdMessages,
   MdList, MdListItem,
   MdPeekaboo,
-  MdSidenav, MdSidenavContainer,
   MdSubheader,
   MdSwitch,
   MdTab, MdTabs
@@ -96,7 +90,6 @@ export const MATERIAL_DIRECTIVES: any[] = [
 export const MATERIAL_NODE_PROVIDERS: any[] = [
   provide(ViewportHelper, {useClass: NodeViewportHelper}),
   Media,
-  SidenavService,
   ...INPUT_VALIDATORS
 ];
 

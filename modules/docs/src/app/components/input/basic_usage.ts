@@ -3,9 +3,10 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material';
 import {FORM_DIRECTIVES} from '@angular/common';
 
 @Component({
+  moduleId: module.id,
   selector: 'input-basic-usage',
-  templateUrl: 'src/components/input/basic_usage.html',
-  styleUrls: ['src/components/input/basic_usage.css'],
+  templateUrl: 'basic_usage.html',
+  styleUrls: ['basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES, FORM_DIRECTIVES]
 })
 export default class InputBasicUsage {

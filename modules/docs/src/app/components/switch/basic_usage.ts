@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
 
 @Component({
+  moduleId: module.id,
   selector: 'switch-basic-usage',
-  templateUrl: 'src/components/switch/basic_usage.html',
+  templateUrl: 'basic_usage.html',
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class SwitchBasicUsage {

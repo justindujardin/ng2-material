@@ -3,9 +3,10 @@ import {MdPatternValidator, MdMinValueValidator, MdNumberRequiredValidator, MdMa
 import {FORM_DIRECTIVES, Validators, FormBuilder, ControlGroup} from '@angular/common';
 
 @Component({
+  moduleId: module.id,
   selector: 'input-form-builder',
-  templateUrl: 'src/components/input/form_builder.html',
-  styleUrls: ['src/components/input/form_builder.css'],
+  templateUrl: 'form_builder.html',
+  styleUrls: ['form_builder.css'],
   directives: [MATERIAL_DIRECTIVES, FORM_DIRECTIVES]
 })
 export default class InputFormBuilder {

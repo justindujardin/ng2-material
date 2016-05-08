@@ -9,7 +9,7 @@ export interface INavigationLink {
   /**
    * Value to bind to routeLink.
    */
-  routeLink: any[];
+  routeLink: string;
 }
 
 @Injectable()
@@ -19,6 +19,6 @@ export class NavigationService {
   public prevLink: INavigationLink = null;
 
   componentLink(comp: IComponentMeta): INavigationLink {
-    return {brief: comp.name, routeLink: ['Component', {id: comp.id}]};
+    return {brief: comp.name, routeLink: '/components/' + comp.id};
   }
 }

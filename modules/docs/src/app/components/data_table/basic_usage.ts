@@ -2,8 +2,9 @@ import {Component} from '@angular/core';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
 
 @Component({
+  moduleId: module.id,
   selector: 'data-table-basic-usage',
-  templateUrl: 'src/components/data_table/basic_usage.html',
+  templateUrl: 'basic_usage.html',
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class DataTableBasicUsage {

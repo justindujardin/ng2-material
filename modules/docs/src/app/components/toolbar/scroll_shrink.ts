@@ -9,9 +9,10 @@ interface ITodo {
 }
 
 @Component({
+  moduleId: module.id,
   selector: 'toolbar-scroll-shrink',
-  templateUrl: 'src/components/toolbar/scroll_shrink.html',
-  styleUrls: ['src/components/toolbar/scroll_shrink.css'],
+  templateUrl: 'scroll_shrink.html',
+  styleUrls: ['scroll_shrink.css'],
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class ToolbarScrollShrink {

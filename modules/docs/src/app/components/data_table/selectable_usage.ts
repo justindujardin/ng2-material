@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {MATERIAL_DIRECTIVES, ITableSelectionChange} from 'ng2-material';
 
 @Component({
+  moduleId: module.id,
   selector: 'data-table-selectable-usage',
-  templateUrl: 'src/components/data_table/selectable_usage.html',
-  styleUrls: ['src/components/data_table/selectable_usage.css'],
+  templateUrl: 'selectable_usage.html',
+  styleUrls: ['selectable_usage.css'],
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class DataTableSelectableUsage {

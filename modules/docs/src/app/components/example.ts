@@ -10,10 +10,10 @@ export interface ISourceFile {
 }
 
 @Component({
+  moduleId: module.id,
   selector: 'example',
-  properties: ['templateData', 'stylesData', 'sourceData', 'showSource', 'orderedFiles'],
-  templateUrl: 'src/components/example.html',
-  directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES, Highlight]
+  templateUrl: 'example.html',
+  directives: [MATERIAL_DIRECTIVES, Highlight]
 })
 export default class Example implements AfterViewInit {
   private _model: IExampleData = null;
@@ -30,8 +30,7 @@ export default class Example implements AfterViewInit {
   private _loaded: boolean = false;
   get loaded(): boolean { return this._loaded; }
 
-  constructor(
-      private _element: ElementRef, public http: Http,
+  constructor(public http: Http,
       @Query(MdTabs) public panes: QueryList<MdTabs>, public dcl: DynamicComponentLoader) {}
 
   private _init: boolean = false;
@@ -39,14 +38,14 @@ export default class Example implements AfterViewInit {
   /**
    * The set of source files associated with the example
    */
-  public orderedFiles: ISourceFile[] = [];
+  @Input() public orderedFiles: ISourceFile[] = [];
 
   /**
    * True to show the source code for the example
    */
-  public showSource: boolean = false;
+  @Input() public showSource: boolean = false;
 
-  private showTabs: boolean = false;
+  @Input() private showTabs: boolean = false;
 
   /**
    * The selected type of source to view.

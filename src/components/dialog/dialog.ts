@@ -21,21 +21,18 @@ export class MdDialogActions {
 @Component({
   selector: 'md-dialog',
   directives: [MdDialogTitle, MdDialogActions],
-  template: `
-<ng-content select="md-dialog-title">
-  <h2 class="md-title">{{ title }}</h2>
-</ng-content>
+  template: `<md-dialog-title><h2 class="md-title">{{ title }}</h2></md-dialog-title>
+<md-dialog-actions>
+  <button *ngIf="cancel != ''" md-button type="button" (click)="dialog.close(false)">
+    <span>{{ cancel }}</span>
+  </button>
+  <button *ngIf="ok != ''" md-button class="md-primary" type="button" (click)="dialog.close(true)">
+    <span>{{ ok }}</span>
+  </button>
+</md-dialog-actions>
+<ng-content select="md-dialog-title"></ng-content>
 <ng-content></ng-content>
-<ng-content select="md-dialog-actions">
-  <md-dialog-actions>
-    <button *ngIf="cancel != ''" md-button type="button" (click)="dialog.close(false)">
-      <span>{{ cancel }}</span>
-    </button>    
-    <button *ngIf="ok != ''" md-button class="md-primary" type="button" (click)="dialog.close(true)">
-      <span>{{ ok }}</span>
-    </button>
-  </md-dialog-actions>
-</ng-content>
+<ng-content select="md-dialog-actions"></ng-content>
 `
 })
 export class MdDialog {
@@ -44,7 +41,7 @@ export class MdDialog {
   @Input() cancel: string = '';
   @Input() ok: string = '';
 
-  show():Promise<MdDialog> {
+  show(): Promise<MdDialog> {
     return Promise.resolve(null);
   }
 }

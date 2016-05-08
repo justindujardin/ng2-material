@@ -7,7 +7,7 @@ describe('App: Site', () => {
   it('should create the app',
      inject([SiteAppComponent], (app: SiteAppComponent) => { expect(app).toBeTruthy(); }));
 
-  it('should have as title \'site works!\'', inject([SiteAppComponent], (app: SiteAppComponent) => {
-       expect(app.title).toEqual('site works!');
+  it('should have a name', inject([SiteAppComponent], (app: SiteAppComponent) => {
+       expect(app.site).toEqual('Angular2 Material');
      }));
 });

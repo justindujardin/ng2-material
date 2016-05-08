@@ -4,9 +4,10 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material';
 let imagePath = 'public/images/avatars/avatar11.svg';
 
 @Component({
+  moduleId: module.id,
   selector: 'list-basic-usage',
-  templateUrl: 'src/components/list/basic_usage.html',
-  styleUrls: ['src/components/list/basic_usage.css'],
+  templateUrl: 'basic_usage.html',
+  styleUrls: ['basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class ListBasicUsage {

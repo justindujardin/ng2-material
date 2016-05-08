@@ -14,7 +14,7 @@ export class VersionService {
 
   constructor(http: Http) {
     this._promise = new Promise<void>((resolve) => {
-      http.get('public/version.json').subscribe((res: Response) => {
+      http.get('version.json').subscribe((res: Response) => {
         this.meta = res.json();
         resolve();
       });

@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
 
 @Component({
+  moduleId: module.id,
   selector: 'progress-linear-basic-usage',
-  templateUrl: 'src/components/progress_linear/basic_usage.html',
-  styleUrls: ['src/components/progress_linear/basic_usage.css'],
+  templateUrl: 'basic_usage.html',
+  styleUrls: ['basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class ProgressLinearBasicUsage {

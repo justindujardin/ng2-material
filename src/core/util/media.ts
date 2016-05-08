@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs/Subject";
 import {ViewportHelper} from "./viewport";
+import {BehaviorSubject} from "rxjs/BehaviorSubject";
 
 
 /**
@@ -45,7 +46,7 @@ export class MediaListener {
   /**
    * Emits when the query that this is listening for changes.
    */
-  onMatched: Subject<MediaQueryList> = new Subject<MediaQueryList>();
+  onMatched: Subject<MediaQueryList> = new BehaviorSubject<MediaQueryList>(this._mql);
 
   /**
    * Determine if this query is currently matched by the viewport.
@@ -94,7 +95,7 @@ export class Media {
   private _cache: {[query: string]: IMediaQueryCache} = {};
 
   constructor(public viewport:ViewportHelper) {
-    
+
   }
 
   listen(query: string): MediaListener {

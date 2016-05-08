@@ -20,7 +20,7 @@ module.exports = function (grunt) {
           {src: 'package.json', dest: '<%- outPath %>/'},
           {src: 'CHANGELOG.md', dest: '<%- outPath %>/'},
           {src: 'README.md', dest: '<%- outPath %>/'},
-          {expand: true, cwd: 'src/', src: ['**/*.scss'], dest: '<%- outPath %>/src'},
+          {expand: true, cwd: 'src/', src: ['**/*.scss'], dest: '<%- outPath %>/'},
           {expand: true, cwd: 'src/', src: ['**/*.ts'], dest: '<%- outPath %>/src'},
           {expand: true, cwd: 'public/', src: ['font/*.*'], dest: '<%- outPath %>/'}
         ]
@@ -122,10 +122,7 @@ module.exports = function (grunt) {
       },
       meta: {
         files: [
-          'modules/docs/**/*.html',
-          'example/docs/**/*.ts',
-          'example/docs/**/*.scss',
-          'example/docs/*.*'
+          'modules/docs/**/*.html'
         ],
         tasks: ['site-meta', 'notify:meta']
       },
@@ -312,13 +309,13 @@ module.exports = function (grunt) {
           d.branches.percent = percent(d.branches);
           return d;
         });
-        writeJson('public/coverage.json', outMeta);
+        writeJson('modules/docs/public/coverage.json', outMeta);
         next();
       });
     });
 
     tasks.push(function buildReadmeFiles() {
-      glob("example/src/app/components/**/readme.md", function (err, files) {
+      glob("modules/docs/src/app/components/**/readme.md", function (err, files) {
         files.forEach(function parseDemo(readmeFile) {
           var component = readableString(path.basename(path.dirname(readmeFile)));
           meta[component] = meta[component] || {};
@@ -331,16 +328,19 @@ module.exports = function (grunt) {
     tasks.push(function buildProjectReadme() {
       var rendered = marked(fs.readFileSync(path.join(__dirname, 'README.md')).toString());
       var pkg = require('./package.json');
-      writeJson('public/version.json', {
+      var data = {
         version: pkg.version,
-        readme: rendered,
-        angular2: pkg.dependencies.angular2
+        readme: rendered
+      };
+      Object.keys(pkg.dependencies).forEach(function(depKey) {
+        data[depKey] = pkg.dependencies[depKey];
       });
+      writeJson('modules/docs/public/version.json', data);
       next();
     });
 
     tasks.push(function buildExamples() {
-      glob("example/src/app/components/**/*.html", function (err, files) {
+      glob("modules/docs/src/app/components/**/*.html", function (err, files) {
         files.forEach(function parseDemo(templateFile) {
           var name = path.basename(templateFile, '.html');
           var result = {
@@ -376,7 +376,7 @@ module.exports = function (grunt) {
             }
             meta[component].files.push(sourceFile);
           });
-          writeJson('public/meta.json', prepareMeta());
+          writeJson('modules/docs/public/meta.json', prepareMeta());
           next();
         });
       });

@@ -1,3 +1,4 @@
-<p>
-  components works!
-</p>
+<h1 class="examples-title">Examples</h1>
+<p class="examples-intro" *ngIf="value.readme" [innerHtml]="value.readme"></p>
+
+<example *ngFor="let demo of value.examples" [model]="demo"></example>

@@ -4,9 +4,10 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material';
 // TODO (jdd):
 
 @Component({
+  moduleId: module.id,
   selector: 'radio-basic-usage',
-  templateUrl: 'src/components/radio/basic_usage.html',
-  styleUrls: ['src/components/radio/basic_usage.css'],
+  templateUrl: 'basic_usage.html',
+  styleUrls: ['basic_usage.css'],
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class RadioBasicUsage {

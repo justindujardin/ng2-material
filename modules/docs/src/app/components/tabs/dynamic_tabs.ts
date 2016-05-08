@@ -8,10 +8,11 @@ export interface ITabData {
 }
 
 @Component({
+  moduleId: module.id,
   selector: 'tabs-dynamic-tabs',
   properties: ['selectedIndex'],
-  templateUrl: 'src/components/tabs/dynamic_tabs.html',
-  styleUrls: ['src/components/tabs/dynamic_tabs.css'],
+  templateUrl: 'dynamic_tabs.html',
+  styleUrls: ['dynamic_tabs.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [MATERIAL_DIRECTIVES]
 })

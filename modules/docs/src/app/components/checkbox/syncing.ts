@@ -2,9 +2,10 @@ import {Component} from '@angular/core';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
 
 @Component({
+  moduleId: module.id,
   selector: 'checkbox-syncing',
-  templateUrl: 'src/components/checkbox/syncing.html',
-  styleUrls: ['src/components/checkbox/syncing.css'],
+  templateUrl: 'syncing.html',
+  styleUrls: ['syncing.css'],
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class CheckboxSyncing {
