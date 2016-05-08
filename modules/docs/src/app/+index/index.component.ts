@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
+import {ComponentsService} from '../shared';
 
 @Component({
   moduleId: module.id,
@@ -9,7 +10,7 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material';
   styleUrls: ['index.component.css']
 })
 export class IndexComponent implements OnInit {
-  constructor() {}
+  constructor(private components: ComponentsService) {}
 
   ngOnInit() {}
 }

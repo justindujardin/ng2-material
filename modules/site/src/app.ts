@@ -10,16 +10,6 @@ import {NavigationService} from "./services/navigation";
 import {Media, MATERIAL_DIRECTIVES, SidenavService} from "ng2-material/all";
 
 
-/**
- * Describe an example that can be dynamically loaded.
- */
-export interface IExampleData {
-  template: string;
-  source: string;
-  styles: string;
-  component: string;
-  name: string;
-}
 
 @RouteConfig([
   {path: '/', name: 'Index', component: IndexPage, useAsDefault: true},
