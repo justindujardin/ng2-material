@@ -1,15 +1,13 @@
 import {Component} from '@angular/core';
-import {MATERIAL_DIRECTIVES, Media} from 'ng2-material';
+import {MD_SIDENAV_DIRECTIVES} from '@angular2-material/sidenav';
 
 
 @Component({
   moduleId: module.id,
   selector: 'sidenav-basic-usage',
   templateUrl: 'basic_usage.html',
-  directives: [MATERIAL_DIRECTIVES]
+  directives: [MD_SIDENAV_DIRECTIVES]
 })
 export default class SidenavBasicUsage {
-  constructor(public media: Media) {}
 
-  hasMedia(breakSize: string): boolean { return this.media.hasMedia(breakSize); }
 }

@@ -7,12 +7,15 @@
 # dependencies
 /node_modules
 /bower_components
+/modules/*/node_modules
 
 # IDEs and editors
 /.idea
 
 # misc
 /.sass-cache
+/.coverage
+/.tscache
 /connect.lock
 /coverage/*
 /libpeerconnection.log
