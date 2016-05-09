@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {MdCheckbox} from "@angular2-material/checkbox";
+import {Component} from '@angular/core';
+import {MdCheckbox} from '@angular2-material/checkbox';
 
 @Component({
   moduleId: module.id,
@@ -20,7 +20,5 @@ export default class CheckboxSyncing {
       list.push(item);
   }
 
-  exists(item, list) {
-    return list.indexOf(item) > -1;
-  }
+  exists(item, list) { return list.indexOf(item) > -1; }
 }

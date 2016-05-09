@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {MdProgressCircle} from "@angular2-material/progress-circle";
+import {Component} from '@angular/core';
+import {MdProgressCircle} from '@angular2-material/progress-circle';
 
 @Component({
   moduleId: module.id,
@@ -22,5 +22,4 @@ export default class ProgressCircleBasicUsage {
       }
     }, 100, 0, true);
   }
-
 }

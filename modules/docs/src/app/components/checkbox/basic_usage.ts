@@ -1,5 +1,5 @@
-import {Component} from "@angular/core";
-import {MdCheckbox} from "@angular2-material/checkbox";
+import {Component} from '@angular/core';
+import {MdCheckbox} from '@angular2-material/checkbox';
 
 @Component({
   moduleId: module.id,

@@ -1,9 +1,9 @@
-import {Component} from "@angular/core";
-import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from "@angular/router";
-import {NavigationService} from "../shared/navigation.service";
-import {ComponentsService, IComponentMeta} from "../shared/components.service";
-import Example from "../components/example";
-import {MATERIAL_DIRECTIVES} from "ng2-material";
+import {Component} from '@angular/core';
+import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
+import {NavigationService} from '../shared/navigation.service';
+import {ComponentsService, IComponentMeta} from '../shared/components.service';
+import Example from '../components/example';
+import {MATERIAL_DIRECTIVES} from 'ng2-material';
 
 
 @Component({
@@ -21,9 +21,7 @@ export class ComponentsComponent implements OnActivate {
   public next: IComponentMeta = null;
   public previous: IComponentMeta = null;
 
-  constructor(private _components: ComponentsService,
-              private _navigation: NavigationService) {
-  }
+  constructor(private _components: ComponentsService, private _navigation: NavigationService) {}
 
   routerOnActivate(curr: RouteSegment): void {
     this.id = curr.getParam('id');
@@ -39,5 +37,4 @@ export class ComponentsComponent implements OnActivate {
       });
     });
   }
-
 }

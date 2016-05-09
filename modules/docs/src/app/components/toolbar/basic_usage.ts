@@ -1,6 +1,6 @@
-import {Component} from "@angular/core";
-import {MdToolbar} from "@angular2-material/toolbar";
-import {MdIcon} from "@angular2-material/icon";
+import {Component} from '@angular/core';
+import {MdToolbar} from '@angular2-material/toolbar';
+import {MdIcon} from '@angular2-material/icon';
 
 @Component({
   moduleId: module.id,
@@ -10,7 +10,5 @@ import {MdIcon} from "@angular2-material/icon";
   directives: [MdToolbar, MdIcon]
 })
 export default class ToolbarBasicUsage {
-  clicked(message: string) {
-    alert(message);
-  }
+  clicked(message: string) { alert(message); }
 }

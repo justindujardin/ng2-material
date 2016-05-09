@@ -1,15 +1,15 @@
-import {ChangeDetectorRef,Component, OnInit, OnDestroy, Input, ViewChild, NgZone, AfterViewInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, OnDestroy, Input, ViewChild, NgZone, AfterViewInit} from '@angular/core';
 import {IndexComponent} from './+index';
 import {Routes, ROUTER_DIRECTIVES, Router} from '@angular/router';
 import {ComponentsComponent} from './+components';
 import {MATERIAL_DIRECTIVES, Media} from 'ng2-material';
 import {NavigationService} from './shared/navigation.service';
 import {MD_SIDENAV_DIRECTIVES, MdSidenav} from '@angular2-material/sidenav';
-import {MdIcon,MdIconRegistry} from '@angular2-material/icon';
+import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {ComponentsService, IComponentMeta} from './shared/components.service';
 import {Response, Http} from '@angular/http';
-import {FooterComponent} from "./shared/footer/footer.component";
+import {FooterComponent} from './shared/footer/footer.component';
 
 @Component({
   moduleId: module.id,
@@ -17,14 +17,10 @@ import {FooterComponent} from "./shared/footer/footer.component";
   templateUrl: 'site.component.html',
   styleUrls: ['site.component.css'],
   directives: [
-    ROUTER_DIRECTIVES,
-    MATERIAL_DIRECTIVES,
-    MD_SIDENAV_DIRECTIVES,
-    MdIcon,
-    MdToolbar,
+    ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MD_SIDENAV_DIRECTIVES, MdIcon, MdToolbar,
     FooterComponent
   ],
-  providers:[MdIconRegistry]
+  providers: [MdIconRegistry]
 })
 @Routes([
   {path: '/index', component: IndexComponent},
@@ -51,8 +47,9 @@ export class SiteAppComponent implements OnInit,
   private _subscription = null;
 
   constructor(
-      private http: Http, private navigation: NavigationService, private media: Media, private cdr:ChangeDetectorRef,
-      private router: Router, private zone: NgZone, private _components: ComponentsService) {}
+      private http: Http, private navigation: NavigationService, private media: Media,
+      private cdr: ChangeDetectorRef, private router: Router, private zone: NgZone,
+      private _components: ComponentsService) {}
   ngAfterViewInit(): any {
     let query = Media.getQuery(SiteAppComponent.SIDE_MENU_BREAKPOINT);
     this._subscription = this.media.listen(query).onMatched.subscribe((mql: MediaQueryList) => {

@@ -6,7 +6,7 @@
 
   > md-sidenav-layout {
     md-sidenav {
-      width: 320px;
+      width: $app-sidenav-width;
     }
     > md-content {
       width: 100%;
