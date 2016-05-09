@@ -1,8 +1,9 @@
-import {Component, Output, Input, EventEmitter, Inject, Optional, forwardRef, ElementRef, AfterContentInit} from "angular2/core";
-import {isPresent} from "angular2/src/facade/lang";
+import {Component, Output, Input, EventEmitter, AfterContentInit, OnDestroy,
+        Inject, Optional, forwardRef, ElementRef} from 'angular2/core';
+import {isPresent} from 'angular2/src/facade/lang';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/map';
-import {MdCheckbox} from "../checkbox/checkbox";
+import {MdCheckbox} from '../checkbox/checkbox';
 import {MdDataTable} from './data_table';
 
 /**
@@ -26,7 +27,7 @@ export interface ITableSelectableRowSelectionChange {
   selectableValue: string;
 }
 
-export abstract class AbstractMdDataTableSelectableRow implements AfterContentInit, ITableSelectableRow {
+export abstract class AbstractMdDataTableSelectableRow implements AfterContentInit, OnDestroy, ITableSelectableRow {
   @Input('selectable-value')
   selectableValue: string;
   @Output()
@@ -50,11 +51,14 @@ export abstract class AbstractMdDataTableSelectableRow implements AfterContentIn
       target: this,
       isActive: this.isActive,
       selectableValue: this.selectableValue
-    }
+    };
+
     this.onChange.emit(event);
   }
 
-  ngAfterContentInit() {}
+  abstract ngAfterContentInit();
+
+  abstract ngOnDestroy();
 }
 
 @Component({
@@ -72,6 +76,8 @@ export abstract class AbstractMdDataTableSelectableRow implements AfterContentIn
   }
 })
 export class MdDataTableHeaderSelectableRow extends AbstractMdDataTableSelectableRow {
+  private _subscriptions = [];
+
   constructor(@Optional()
               @Inject(forwardRef(() => MdDataTable))
               public table: MdDataTable, protected _element: ElementRef) {
@@ -79,15 +85,22 @@ export class MdDataTableHeaderSelectableRow extends AbstractMdDataTableSelectabl
   }
 
   _bindListener(): void {
-    this.table.onSelectableChange
-      .map(event => event.allSelected)
-      .subscribe(newActiveStatus => this.isActive = newActiveStatus);
+    this._subscriptions = [
+      this.table.onSelectableChange
+        .map(event => event.allSelected)
+        .subscribe(newActiveStatus => this.isActive = newActiveStatus),
+      this.onChange.subscribe(this.table.change.bind(this.table))
+    ];
   }
 
   ngAfterContentInit() {
     if (isPresent(this.table)) {
       this._bindListener();
     }
+  }
+
+  ngOnDestroy() {
+    this._subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }
 
@@ -106,6 +119,8 @@ export class MdDataTableHeaderSelectableRow extends AbstractMdDataTableSelectabl
   }
 })
 export class MdDataTableSelectableRow extends AbstractMdDataTableSelectableRow {
+  private _subscriptions = [];
+
   constructor(@Optional()
               @Inject(forwardRef(() => MdDataTable))
               public table: MdDataTable, protected _element: ElementRef) {
@@ -122,13 +137,16 @@ export class MdDataTableSelectableRow extends AbstractMdDataTableSelectableRow {
   }
 
   _bindListener(): void {
-    this.table.onSelectableChange
-      .map(event => {
-        return event.values !== undefined &&
-          event.values.length &&
-          (event.values.findIndex((value: string) => value === this.selectableValue)) !== -1;
-      })
-      .subscribe(newActiveStatus => this.isActive = newActiveStatus);
+    this._subscriptions = [
+      this.table.onSelectableChange
+        .map(event => {
+          return event.values !== undefined &&
+            event.values.length &&
+            (event.values.findIndex((value: string) => value === this.selectableValue)) !== -1;
+        })
+        .subscribe(newActiveStatus => this.isActive = newActiveStatus),
+      this.onChange.subscribe(this.table.change.bind(this.table))
+    ];
   }
 
   ngAfterContentInit() {
@@ -139,6 +157,18 @@ export class MdDataTableSelectableRow extends AbstractMdDataTableSelectableRow {
 
     if (isPresent(this.table)) {
       this._bindListener();
+    }
+  }
+
+  ngOnDestroy() {
+    this._subscriptions.forEach(subscription => subscription.unsubscribe());
+    if (this.isActive) {
+      this.table.change({
+        name: 'selectable_row_change',
+        target: this,
+        isActive: this.isActive = false,
+        selectableValue: this.selectableValue
+      });
     }
   }
 }

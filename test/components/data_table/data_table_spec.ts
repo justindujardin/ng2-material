@@ -35,14 +35,18 @@ export function main() {
         <tr md-data-table-selectable-row>
           <td>$2.90</td>
         </tr>
-        <tr md-data-table-selectable-row>
+        <tr md-data-table-selectable-row selectable-value="$1.25">
           <td>$1.25</td>
+        </tr>
+        <tr md-data-table-selectable-row *ngFor="#price of prices" class="dynamic">
+          <td>{{price}}</td>
         </tr>
       </tbody>
     </md-data-table>`
   })
   class TestComponent {
     selected: Array<any> = [];
+    prices: Array<any> = [];
   }
 
   componentSanityCheck('Data table', 'md-data-table', `<md-data-table></md-data-table>`);
@@ -110,7 +114,7 @@ export function main() {
             expect(masterRow.componentInstance.isActive).toBe(true);
             row.click();
             expect(api.comp.selected.length).toEqual(1);
-            expect(api.comp.selected[0]).toEqual('1');
+            expect(api.comp.selected[0]).toEqual('$1.25');
             expect(masterRow.componentInstance.isActive).toBe(false);
             api.fixture.destroy();
           });
@@ -128,6 +132,78 @@ export function main() {
           api.fixture.destroy();
         });
       }));
+
+      describe('Dynamic md-data-table-selectable-row', () => {
+
+        function setupDynamic(checked: boolean = false, disabled: boolean = false): Promise<IDataTableFixture> {
+          return builder.createAsync(TestComponent).then((fixture: ComponentFixture) => {
+            let debug = fixture.debugElement.query(By.css('md-data-table'));
+            let comp: MdDataTable = debug.componentInstance;
+            let testComp = fixture.debugElement.componentInstance;
+            testComp.selected = [];
+            testComp.prices.push('$4.95');
+            fixture.detectChanges();
+            return {
+              fixture: fixture,
+              comp: comp,
+              debug: debug
+            };
+          }).catch(console.error.bind(console));
+        }
+
+        it('should toggle checked value when a click is fired on a dynamically added row checkbox', injectAsync([], () => {
+          return setupDynamic(true).then((api: IDataTableFixture) => {
+            let dynamicRow = api.debug.query(By.css('tbody tr.dynamic'));
+            dynamicRow.nativeElement.click();
+            expect(api.comp.selected.length).toEqual(1);
+            expect(api.comp.selected).toContain('2');
+            dynamicRow.nativeElement.click();
+            expect(api.comp.selected.length).toEqual(0);
+            api.fixture.destroy();
+          });
+        }));
+
+        it('should check all row checkbox when a click is fired on master checkbox', injectAsync([], () => {
+          return setupDynamic(true).then((api: IDataTableFixture) => {
+            let masterRow = api.debug.query(By.css('thead tr:first-child'));
+            masterRow.nativeElement.click();
+            expect(api.comp.selected.length).toEqual(3);
+            expect(api.comp.selected).toEqual(['0', '$1.25', '2']);
+            masterRow.nativeElement.click();
+            expect(api.comp.selected.length).toEqual(0);
+            api.fixture.destroy();
+          });
+        }));
+
+        it('should uncheck master checkbox if a dynamically added row checkbox is unchecked', injectAsync([], () => {
+          return setupDynamic(true).then((api: IDataTableFixture) => {
+            let masterRow = api.debug.query(By.css('thead tr:first-child')),
+              dynamicRow = api.debug.query(By.css('tbody tr.dynamic')).nativeElement;
+
+            masterRow.nativeElement.click();
+            expect(masterRow.componentInstance.isActive).toBe(true);
+            dynamicRow.click();
+            expect(api.comp.selected.length).toEqual(2);
+            expect(api.comp.selected).toEqual(['0', '$1.25']);
+            expect(masterRow.componentInstance.isActive).toBe(false);
+            api.fixture.destroy();
+          });
+        }));
+
+        it('should fire a selectable_change event when a dynamically added row checkbox change', injectAsync([], () => {
+          return setupDynamic(true).then((api: IDataTableFixture) => {
+            let dynamicRaw = api.debug.query(By.css('tbody tr.dynamic')).nativeElement;
+
+            api.comp.onSelectableAll.subscribe((event) => {
+              expect(event.name).toBe('selectable_change');
+            });
+
+            dynamicRaw.click();
+            api.fixture.destroy();
+          });
+        }));
+      });
+
     });
   });
 

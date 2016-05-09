@@ -1,7 +1,7 @@
-import {Component, Input, Output, EventEmitter, ContentChild, ContentChildren, QueryList, AfterContentInit} from 'angular2/core';
-import {isPresent} from "angular2/src/facade/lang";
-import 'rxjs/add/operator/share';
-import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow, ITableSelectableRowSelectionChange} from './data_table_selectable_tr';
+import {Component, Input, Output, EventEmitter,
+        ContentChild, ContentChildren, QueryList} from 'angular2/core';
+import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow,
+        ITableSelectableRowSelectionChange} from './data_table_selectable_tr';
 
 export * from './data_table_selectable_tr';
 
@@ -23,7 +23,7 @@ export interface ITableSelectionChange {
     '[class.md-data-table-selectable]': 'selectable',
   }
 })
-export class MdDataTable implements AfterContentInit {
+export class MdDataTable {
   @Input()
   selectable: boolean;
   @Output()
@@ -44,32 +44,36 @@ export class MdDataTable implements AfterContentInit {
   }
 
   change(event: ITableSelectableRowSelectionChange) {
-    let outputEvent: ITableSelectionChange = {
-      name: 'selectable_change',
-      allSelected: false,
-      values: []
-    };
-    if (event.target instanceof MdDataTableHeaderSelectableRow === true) {
-      if (event.isActive === true) {
-        outputEvent.allSelected = true;
-        outputEvent.values = this._getRowsValues();
-      }
-    } else {
-      outputEvent.values = this.selected.slice(0);
+    if (this.selectable === true) {
 
-      if (event.isActive === true) {
-        outputEvent.values.push(event.selectableValue);
+      let outputEvent: ITableSelectionChange = {
+        name: 'selectable_change',
+        allSelected: false,
+        values: []
+      };
+      if (event.target instanceof MdDataTableHeaderSelectableRow === true) {
+        if (event.isActive === true) {
+          outputEvent.allSelected = true;
+          outputEvent.values = this._getRowsValues();
+        }
       } else {
-        let index = outputEvent.values.indexOf(event.selectableValue);
-        if (index !== -1) {
-          outputEvent.values.splice(index, 1);
+        outputEvent.values = this.selected.slice(0);
+
+        if (event.isActive === true) {
+          outputEvent.values.push(event.selectableValue);
+        } else {
+          let index = outputEvent.values.indexOf(event.selectableValue);
+          if (index !== -1) {
+            outputEvent.values.splice(index, 1);
+          }
         }
       }
-    }
 
-    // dispatch change
-    this.selected = outputEvent.values;
-    this.onSelectableChange.emit(outputEvent);
+      // dispatch change
+      this.selected = outputEvent.values;
+      this.onSelectableChange.emit(outputEvent);
+
+    }
   }
 
   /**
@@ -79,18 +83,4 @@ export class MdDataTable implements AfterContentInit {
     return this._rows.toArray()
       .map((tr: MdDataTableSelectableRow) => tr.selectableValue);
   }
-
-  ngAfterContentInit() {
-    if (this.selectable === true) {
-      if (isPresent(this._masterRow)) {
-        this._masterRow.onChange.subscribe(this.change.bind(this));
-      }
-
-      this._rows.toArray()
-        .map((tr: MdDataTableSelectableRow) => {
-          tr.onChange.subscribe(this.change.bind(this));
-        });
-    }
-  }
-
 }
