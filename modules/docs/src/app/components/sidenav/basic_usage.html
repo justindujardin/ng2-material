@@ -1,16 +1,24 @@
 
 <div layout="column" style="height:500px;">
   <md-sidenav-layout>
-    <md-sidenav #start (open)="mybutton.focus()">
-      Start Sidenav.
+
+    <md-sidenav #left (open)="mybutton.focus()" [opened]="true" mode="side" layout-padding>
+      <h2>Left Sidenav.</h2>
       <br>
-      <button md-button #mybutton (click)="start.close()">Close</button>
-    </md-sidenav>
-    <md-sidenav #end align="end">
-      End Sidenav.
-      <button md-button (click)="end.close()">Close</button>
+      <button md-raised-button class="md-raised md-primary" #mybutton (click)="left.close()">Close</button>
     </md-sidenav>
 
-    My regular content. This will be moved into the proper DOM at runtime.
+    <md-sidenav #right align="end" layout-padding>
+      <h2>Right Sidenav.</h2>
+      <button md-raised-button class="md-raised md-primary" (click)="right.close()">Close</button>
+    </md-sidenav>
+
+    <md-content layout-padding>
+      <p style="height:350px;">My regular content. This will be moved into the proper DOM at runtime.</p>
+      <md-divider></md-divider>
+      <button md-raised-button class="md-raised md-primary" (click)="left.toggle()">Toggle Left Sidenav</button>
+      <button md-raised-button class="md-raised md-primary" (click)="right.toggle()">Toggle Right Sidenav</button>
+    </md-content>
+
   </md-sidenav-layout>
 </div>
