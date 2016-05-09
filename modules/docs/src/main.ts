@@ -6,8 +6,8 @@ import {HTTP_PROVIDERS} from '@angular/http';
 import {MATERIAL_BROWSER_PROVIDERS} from 'ng2-material';
 
 
-if (environment.production) {
   enableProdMode();
+if (environment.production) {
 }
 
 bootstrap(

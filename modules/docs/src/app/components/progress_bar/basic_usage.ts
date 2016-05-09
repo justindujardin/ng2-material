@@ -1,14 +1,14 @@
 import {Component} from '@angular/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material';
+import {MdProgressBar} from '@angular2-material/progress-bar';
 
 @Component({
   moduleId: module.id,
-  selector: 'progress-linear-basic-usage',
+  selector: 'progress-bar-basic-usage',
   templateUrl: 'basic_usage.html',
   styleUrls: ['basic_usage.css'],
-  directives: [MATERIAL_DIRECTIVES]
+  directives: [MdProgressBar]
 })
-export default class ProgressLinearBasicUsage {
+export default class ProgressBarBasicUsage {
   public determinateValue: number = 30;
   public determinateValue2: number = 30;
 

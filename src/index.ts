@@ -21,7 +21,7 @@ import {
 import {MdMessage, MdMessages} from "./components/form/messages";
 import {MdList, MdListItem} from "./components/list/list";
 import {MdPeekaboo} from "./components/peekaboo/peekaboo";
-import {MdSwitch} from "./components/switcher/switch";
+import {MdSwitch} from "./components/switch/switch";
 import {MdSubheader} from "./components/subheader/subheader";
 import {MdTabs, MdTab} from "./components/tabs/tabs";
 import {Media} from "./core/util/media";
@@ -49,7 +49,7 @@ export * from './components/list/list';
 
 export * from './components/peekaboo/peekaboo';
 
-export * from './components/switcher/switch';
+export * from './components/switch/switch';
 
 export * from './components/subheader/subheader';
 

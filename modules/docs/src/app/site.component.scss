@@ -1,52 +1,4 @@
-$md-font-url: 'vendor/ng2-material/font/';
-
-@import "font/font.scss";
-@import "core";
-// TODO(jd): Material2 has no theming yet? Just force our theme to match. :grimacing:
-$md-primary: md-palette($md-teal, 500, 100, 700, $md-contrast-palettes);
-$md-accent: md-palette($md-purple, 500, 300,800, $md-contrast-palettes);
-$md-warn: md-palette($md-red, 500, 300, 900, $md-contrast-palettes);
-@import "components";
-@import "./components/example.scss";
-
-$app-content-lg: 940px;
-$app-content-md: 580px;
-$app-content-sm: 360px;
-
-// Standard/Desktop Heights
-$toolbar-medium-tall-height: 88px !default;
-$toolbar-tall-height: 128px !default;
-$toolbar-hero-height: 256px !default;
-
-@mixin md-hero-toolbar() {
-  height: $toolbar-hero-height;
-  min-height: $toolbar-hero-height;
-  max-height: $toolbar-hero-height;
-}
-
-@mixin md-tall-toolbar() {
-  height: $toolbar-tall-height;
-  min-height: $toolbar-tall-height;
-  max-height: $toolbar-tall-height;
-}
-
-@mixin md-medium-tall-toolbar() {
-  height: $toolbar-medium-tall-height;
-  min-height: $toolbar-medium-tall-height;
-  max-height: $toolbar-medium-tall-height;
-}
-
-md-toolbar {
-  &.hero {
-    @include md-hero-toolbar();
-  }
-  &.tall {
-    @include md-tall-toolbar();
-  }
-  &.medium-tall {
-    @include md-tall-toolbar();
-  }
-}
+@import "shared/styles";
 
 :host {
   display: block;
@@ -57,9 +9,14 @@ md-toolbar {
       width: 320px;
     }
     > md-content {
-      margin-left:auto;
-      margin-right:auto;
       width: 100%;
+    }
+  }
+
+  main {
+    md-content {
+      margin-left: auto;
+      margin-right: auto;
     }
   }
   .app-menu {
@@ -226,54 +183,4 @@ md-toolbar {
       }
     }
   }
-
-  md-toolbar.footer {
-    width: 100%;
-    .container {
-      margin: auto;
-      padding: 0 25px;
-      width: 80%;
-      @media screen and (min-width: $layout-breakpoint-lg - 1) {
-        width: $app-content-lg;
-      }
-      @media screen and (max-width: $layout-breakpoint-md) {
-        width: $app-content-md;
-      }
-      @media screen and (max-width: $layout-breakpoint-sm) {
-        width: 100%;
-        margin: 0;
-      }
-
-      a.previous, a.next {
-        font-family: $font-family;
-        color: md-color($md-primary, 50);
-        @include md-medium-tall-toolbar();
-        text-decoration: none;
-        &:visited {
-          color: md-color($md-primary, 100);
-        }
-        .label {
-          color: md-color($md-primary, 200);
-        }
-        .name {
-          font-weight: 500;
-          white-space: nowrap;
-        }
-        i {
-          height: 47px;
-          padding-top: 24px;
-          margin: 0 10px;
-          vertical-align: bottom;
-        }
-      }
-      .previous {
-        text-align: left;
-      }
-      .next {
-        text-align: right;
-      }
-
-    }
-  }
-
 }

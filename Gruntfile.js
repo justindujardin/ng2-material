@@ -340,20 +340,24 @@ module.exports = function (grunt) {
     });
 
     tasks.push(function buildExamples() {
-      glob("modules/docs/src/app/components/**/*.html", function (err, files) {
+      const pathPrefix = 'modules/docs/src/';
+      glob(pathPrefix + "app/components/**/*.html", function (err, files) {
+        const resolvePath = function(input) {
+
+        };
         files.forEach(function parseDemo(templateFile) {
           var name = path.basename(templateFile, '.html');
           var result = {
-            template: templateFile
+            template: fs.readFileSync(templateFile).toString()
           };
           var readmeFile = path.join(path.dirname(templateFile), name + '.md');
           var sourceFile = path.join(path.dirname(templateFile), name + '.ts');
           var stylesFile = path.join(path.dirname(templateFile), name + '.scss');
           if (fileExists(stylesFile)) {
-            result.styles = stylesFile;
+            result.styles = fs.readFileSync(stylesFile).toString();
           }
           if (fileExists(sourceFile)) {
-            result.source = sourceFile;
+            result.source = fs.readFileSync(sourceFile).toString();
           }
           if (fileExists(readmeFile)) {
             result.readme = marked(fs.readFileSync(readmeFile).toString());
@@ -457,7 +461,6 @@ module.exports = function (grunt) {
     }
 
     function lintDemo(outputMeta) {
-      grunt.log.ok('checking ' + outputMeta.source + ' no lint present');
     }
 
     function fileExists(filePath) {

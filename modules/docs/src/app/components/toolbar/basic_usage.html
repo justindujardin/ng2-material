@@ -1,51 +1,34 @@
-<md-content>
-  <br>
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <button md-button class="md-icon-button" aria-label="Settings" (click)="clicked('Menu')">
-        <i md-icon>menu</i>
-      </button>
-      <h2>
-        <span>Toolbar with Icon Buttons</span>
-      </h2>
-      <span flex></span>
-      <button md-button class="md-icon-button" aria-label="Favorite" (click)="clicked('Favorite')">
-        <i class="green" md-icon>favorite</i>
-      </button>
-      <button md-button class="md-icon-button" aria-label="More" (click)="clicked('Show More')">
-        <i md-icon>more_vert</i>
-      </button>
-    </div>
-  </md-toolbar>
-  <br>
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <button md-button aria-label="Go Back">
-        Go Back
-      </button>
-      <h2>
-        <span>Toolbar with Standard Buttons</span>
-      </h2>
-      <span flex></span>
-      <button md-raised-button aria-label="Learn More" (click)="clicked('Learn More')">
-        Learn More
-      </button>
-      <button md-fab class="md-mini md-warn" aria-label="Favorite">
-        <i md-icon>favorite</i>
-      </button>
-    </div>
-  </md-toolbar>
-  <br>
-  <md-toolbar class="md-tall md-accent">
-    <h2 class="md-toolbar-tools">
-      <span>Toolbar: tall (md-accent)</span>
-    </h2>
-  </md-toolbar>
-  <br>
-  <md-toolbar class="md-tall md-warn md-hue-3">
-    <span flex></span>
-    <h2 class="md-toolbar-tools md-toolbar-tools-bottom">
-      <span class="md-flex">Toolbar: tall with actions pin to the bottom (md-warn md-hue-3)</span>
-    </h2>
-  </md-toolbar>
-</md-content>
+<md-toolbar>
+  <button md-button class="md-icon-button" aria-label="Settings">
+    <md-icon>menu</md-icon>
+  </button>
+  <span>Toolbar with Icon Buttons</span>
+  <span flex></span>
+  <button md-button class="md-icon-button" aria-label="Favorite">
+    <md-icon>favorite</md-icon>
+  </button>
+  <button md-button class="md-icon-button" aria-label="More">
+    <md-icon>more_vert</md-icon>
+  </button>
+</md-toolbar>
+<br>
+<md-toolbar>
+  <button md-button aria-label="Go Back">
+    Go Back
+  </button>
+  Toolbar with Standard Buttons
+  <span flex></span>
+  <button md-raised-button aria-label="Learn More">
+    Learn More
+  </button>
+</md-toolbar>
+<br>
+<md-toolbar color="accent">
+  <md-toolbar-row></md-toolbar-row>
+  <span>Toolbar: tall (color="accent")</span>
+</md-toolbar>
+<br>
+<md-toolbar color="warn">
+  <md-toolbar-row flex></md-toolbar-row>
+  <md-toolbar-row>Toolbar: tall with actions pin to the bottom (color="warn")</md-toolbar-row>
+</md-toolbar>

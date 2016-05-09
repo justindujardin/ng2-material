@@ -1,18 +1,15 @@
-<div class="doc-demo-content doc-content">
+<div class="doc-content">
   <div flex layout="column" style="z-index:1">
 
-    <section class="demo-container md-whiteframe-z1"
-             [ngClass]="{'show-source': showSource}">
-
+    <section class="demo-container md-whiteframe-z1" [ngClass]="{'show-source': showSource}">
       <md-toolbar class="demo-toolbar" color="primary">
-        <h3>{{ model?.name }}</h3>
+        {{ model?.name }}
         <span flex></span>
         <button md-button
                 class="md-icon-button"
                 aria-label="View Source"
                 [ngClass]="{ active: showSource }"
                 (click)="toggleSource()">
-          <!--<md-tooltip md-autohide>View Source</md-tooltip>-->
           <i md-icon>code</i>
         </button>
       </md-toolbar>

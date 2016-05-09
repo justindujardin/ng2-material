@@ -1,8 +1,19 @@
-import {Component, Input, DynamicComponentLoader, ElementRef, ComponentRef, Query, QueryList, ViewContainerRef, AfterViewInit, ViewChild} from '@angular/core';
-import {DEMO_DIRECTIVES, IExampleData} from '../index';
-import {MATERIAL_DIRECTIVES, MdTabs} from 'ng2-material';
-import {Http, Response} from '@angular/http';
-import {Highlight} from './highlight';
+import {
+  Component,
+  Input,
+  DynamicComponentLoader,
+  ComponentRef,
+  Query,
+  QueryList,
+  ViewContainerRef,
+  AfterViewInit,
+  ViewChild
+} from "@angular/core";
+import {DEMO_DIRECTIVES, IExampleData} from "../index";
+import {MATERIAL_DIRECTIVES, MdTabs} from "ng2-material";
+import {Http} from "@angular/http";
+import {Highlight} from "./highlight";
+import {MdToolbar} from "@angular2-material/toolbar";
 
 export interface ISourceFile {
   data: string;
@@ -13,7 +24,7 @@ export interface ISourceFile {
   moduleId: module.id,
   selector: 'example',
   templateUrl: 'example.html',
-  directives: [MATERIAL_DIRECTIVES, Highlight]
+  directives: [MATERIAL_DIRECTIVES, Highlight, MdToolbar]
 })
 export default class Example implements AfterViewInit {
   private _model: IExampleData = null;
@@ -25,13 +36,18 @@ export default class Example implements AfterViewInit {
     this.applyModel(value);
   }
 
-  get model(): IExampleData { return this._model; }
+  get model(): IExampleData {
+    return this._model;
+  }
 
   private _loaded: boolean = false;
-  get loaded(): boolean { return this._loaded; }
+  get loaded(): boolean {
+    return this._loaded;
+  }
 
   constructor(public http: Http,
-      @Query(MdTabs) public panes: QueryList<MdTabs>, public dcl: DynamicComponentLoader) {}
+              @Query(MdTabs) public panes: QueryList<MdTabs>, public dcl: DynamicComponentLoader) {
+  }
 
   private _init: boolean = false;
 
@@ -89,28 +105,32 @@ export default class Example implements AfterViewInit {
     class CompiledComponent {
     }
     this.dcl.loadNextToLocation(CompiledComponent, this.exampleRef)
-        .then((ref: ComponentRef<CompiledComponent>) => {
-          if (this._reference) {
-            this._reference.destroy();
-          }
-          this._loaded = true;
-          this._reference = ref;
-        });
+      .then((ref: ComponentRef<CompiledComponent>) => {
+        if (this._reference) {
+          this._reference.destroy();
+        }
+        this._loaded = true;
+        this._reference = ref;
+      });
   }
 
-  addFile(url: string, type: string) {
-    let desc: ISourceFile = {type: type, data: ''};
-    this.http.get(url).subscribe((res: Response) => { desc.data = res.text(); });
+  addFile(data: string, type: string) {
+    let desc: ISourceFile = {type: type, data: data};
+    //this.http.get(url).subscribe((res: Response) => { desc.data = res.text(); });
     this.orderedFiles.push(desc);
   }
 
   toggleSource() {
     if (this.showSource) {
       this.showTabs = false;
-      setTimeout(() => { this.showSource = false; }, 500);
+      setTimeout(() => {
+        this.showSource = false;
+      }, 500);
     } else {
       this.showSource = true;
-      setTimeout(() => { this.showTabs = true; }, 25);
+      setTimeout(() => {
+        this.showTabs = true;
+      }, 25);
     }
   }
 }

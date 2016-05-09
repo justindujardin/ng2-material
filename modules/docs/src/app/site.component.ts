@@ -5,9 +5,11 @@ import {ComponentsComponent} from './+components';
 import {MATERIAL_DIRECTIVES, Media} from 'ng2-material';
 import {NavigationService} from './shared/navigation.service';
 import {MD_SIDENAV_DIRECTIVES, MdSidenav} from '@angular2-material/sidenav';
+import {MdIcon,MdIconRegistry} from '@angular2-material/icon';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {ComponentsService, IComponentMeta} from './shared/components.service';
 import {Response, Http} from '@angular/http';
+import {FooterComponent} from "./shared/footer/footer.component";
 
 @Component({
   moduleId: module.id,
@@ -18,9 +20,11 @@ import {Response, Http} from '@angular/http';
     ROUTER_DIRECTIVES,
     MATERIAL_DIRECTIVES,
     MD_SIDENAV_DIRECTIVES,
+    MdIcon,
     MdToolbar,
-
-  ]
+    FooterComponent
+  ],
+  providers:[MdIconRegistry]
 })
 @Routes([
   {path: '/index', component: IndexComponent},

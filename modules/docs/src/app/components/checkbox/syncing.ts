@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material';
+import {Component} from "@angular/core";
+import {MdCheckbox} from "@angular2-material/checkbox";
 
 @Component({
   moduleId: module.id,
   selector: 'checkbox-syncing',
   templateUrl: 'syncing.html',
   styleUrls: ['syncing.css'],
-  directives: [MATERIAL_DIRECTIVES]
+  directives: [MdCheckbox]
 })
 export default class CheckboxSyncing {
   items = [1, 2, 3, 4, 5];
@@ -20,5 +20,7 @@ export default class CheckboxSyncing {
       list.push(item);
   }
 
-  exists(item, list) { return list.indexOf(item) > -1; }
+  exists(item, list) {
+    return list.indexOf(item) > -1;
+  }
 }

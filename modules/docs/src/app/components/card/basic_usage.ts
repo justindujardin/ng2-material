@@ -9,5 +9,5 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material';
   directives: [MATERIAL_DIRECTIVES]
 })
 export default class CardBasicUsage {
-  public imagePath: string = 'public/images/washedout.png';
+  public imagePath: string = 'images/washedout.png';
 }

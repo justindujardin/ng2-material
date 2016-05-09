@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material';
+import {Component} from "@angular/core";
+import {MdCheckbox} from "@angular2-material/checkbox";
 
 @Component({
   moduleId: module.id,
   selector: 'checkbox-basic-usage',
   templateUrl: 'basic_usage.html',
   styleUrls: ['basic_usage.css'],
-  directives: [MATERIAL_DIRECTIVES]
+  directives: [MdCheckbox]
 })
 export default class CheckboxBasicUsage {
   public cb1 = true;

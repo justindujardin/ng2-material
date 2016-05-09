@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
-import {MATERIAL_DIRECTIVES, ITableSelectionChange} from 'ng2-material';
+import {Component} from "@angular/core";
+import {MATERIAL_DIRECTIVES, ITableSelectionChange} from "ng2-material";
+import {MdToolbar} from "@angular2-material/toolbar";
 
 @Component({
   moduleId: module.id,
   selector: 'data-table-selectable-usage',
   templateUrl: 'selectable_usage.html',
   styleUrls: ['selectable_usage.css'],
-  directives: [MATERIAL_DIRECTIVES]
+  directives: [MATERIAL_DIRECTIVES, MdToolbar]
 })
 export default class DataTableSelectableUsage {
   selection: string;

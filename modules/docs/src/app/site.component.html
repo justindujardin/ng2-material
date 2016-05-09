@@ -1,9 +1,7 @@
 <md-sidenav-layout layout="row" fullscreen>
   <md-sidenav #menu class="app-menu" mode="over">
     <md-toolbar routerLink="/index">
-      <div class="md-toolbar-tools">
-        <h3>ng2-material</h3>
-      </div>
+      <h3>ng2-material</h3>
     </md-toolbar>
     <md-list>
       <md-list-item md-ink [routerLink]="'/components/' + value.id"
@@ -50,36 +48,11 @@
     </div>
   </md-toolbar>
 
-  <div layout="row" layout-align="center center">
-  <md-content class="examples" md-scroll-y layout-padding>
-    <router-outlet></router-outlet>
-  </md-content>
+  <main layout="row" layout-align="center center">
+    <md-content class="examples" md-scroll-y layout-padding>
+      <router-outlet></router-outlet>
+    </md-content>
+  </main>
 
-  </div>
-
-
-  <md-toolbar class="tall footer" color="primary">
-    <div class="container" layout="row" layout-align="start space-between">
-      <a class="previous" flex="50" *ngIf="navigation.prevLink"
-         layout="row" layout-align="start center"
-         [routerLink]="navigation.prevLink.routeLink">
-        <i md-icon>arrow_back</i>
-          <span layout="column" show-gt-sm hide>
-            <span class="label">Previous</span>
-            <span class="name md-title">{{navigation.prevLink.brief}}</span>
-          </span>
-
-      </a>
-      <a class="next" flex="50" *ngIf="navigation.nextLink"
-         layout="row" layout-align="end center"
-         [routerLink]="navigation.nextLink.routeLink">
-          <span layout="column">
-            <span class="label">Next</span>
-            <div class="name md-title">{{navigation.nextLink.brief}}</div>
-          </span>
-        <i md-icon>arrow_forward</i>
-      </a>
-    </div>
-  </md-toolbar>
-
+  <app-footer></app-footer>
 </md-sidenav-layout>

@@ -1,0 +1,55 @@
+@import '../styles';
+
+:host {
+  width: 100%;
+  display: block;
+  .md-toolbar-layout {
+    width: 100%;
+  }
+  md-toolbar-row {
+    @include md-medium-tall-toolbar();
+    margin: auto;
+    padding: 0 25px;
+    width: 80%;
+    @media screen and (min-width: $layout-breakpoint-lg - 1) {
+      width: $app-content-lg;
+    }
+    @media screen and (max-width: $layout-breakpoint-md) {
+      width: $app-content-md;
+    }
+    @media screen and (max-width: $layout-breakpoint-sm) {
+      width: 100%;
+      margin: 0;
+    }
+
+    a.previous, a.next {
+      font-family: $font-family;
+      color: md-color($md-primary, 50);
+      text-decoration: none;
+      &:visited {
+        color: md-color($md-primary, 100);
+      }
+      .label {
+        color: md-color($md-primary, 200);
+      }
+      .name {
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      i {
+        height: 47px;
+        padding-top: 24px;
+        margin: 0 10px;
+        vertical-align: bottom;
+      }
+    }
+    .previous {
+      text-align: left;
+    }
+    .next {
+      text-align: right;
+    }
+
+  }
+}
+

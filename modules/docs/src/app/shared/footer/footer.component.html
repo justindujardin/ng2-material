@@ -1,0 +1,21 @@
+<md-toolbar class="footer" color="primary" layout="row" layout-align="start space-between">
+    <a class="previous" flex="50" *ngIf="navigation.prevLink"
+       layout="row" layout-align="start center"
+       [routerLink]="navigation.prevLink.routeLink">
+      <i md-icon>arrow_back</i>
+      <span layout="column" show-gt-sm hide>
+        <span class="label">Previous</span>
+        <span class="name md-title">{{navigation.prevLink.brief}}</span>
+      </span>
+    </a>
+    <a class="next" flex="50" *ngIf="navigation.nextLink"
+       layout="row" layout-align="end center"
+       [routerLink]="navigation.nextLink.routeLink">
+      <span flex></span>
+      <span layout="column">
+        <span class="label">Next</span>
+        <div class="name md-title">{{navigation.nextLink.brief}}</div>
+      </span>
+      <i md-icon>arrow_forward</i>
+    </a>
+</md-toolbar>

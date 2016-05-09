@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
 
-let imagePath = 'public/images/avatars/avatar11.svg';
+let imagePath = 'images/avatars/avatar11.svg';
 
 @Component({
   moduleId: module.id,

@@ -22,6 +22,8 @@ const barrels: string[] = [
 
   // App specific barrels.
   'app', 'app/shared', 'app/+index', 'app/+components',
+  'app/footer',
+  'app/shared/footer',
   /** @cli-barrel */
 
 ];
@@ -30,7 +32,7 @@ const cliSystemConfigPackages: any = {};
 barrels.forEach((barrelName: string) => { cliSystemConfigPackages[barrelName] = {main: 'index'}; });
 
 // Material2 specific barrels.
-['core', 'checkbox', 'progress-circle', 'progress-bar', 'radio', 'toolbar', 'sidenav'
+['core', 'checkbox', 'progress-circle', 'progress-bar', 'radio', 'toolbar', 'sidenav', 'icon'
 
 ].forEach((pkgName: string) => {
   cliSystemConfigPackages['@angular2-material/' + pkgName] = {

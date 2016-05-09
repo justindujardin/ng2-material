@@ -1,12 +1,8 @@
-<md-toolbar>
-  <div class="md-toolbar-tools" *ngIf="!selection">
-    <span>Materials</span>
-  </div>
-  <div class="md-toolbar-tools selection" *ngIf="selection">
-    <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
-    <span flex hide show-gt-md></span>
-    <span class="md-caption" hide show-gt-md>{{selection}}</span>
-  </div>
+<md-toolbar *ngIf="!selection">Materials</md-toolbar>
+<md-toolbar color="accent" *ngIf="selection">
+  <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
+  <span flex hide show-gt-md></span>
+  <span class="md-caption" hide show-gt-md>{{selection}}</span>
 </md-toolbar>
 <md-data-table layout-fill [selectable]="true" (onSelectableChange)="change($event)">
   <thead>

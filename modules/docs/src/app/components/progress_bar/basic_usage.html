@@ -7,7 +7,7 @@
     indicator.
     They give users a quick sense of how long an operation will take.
   </p>
-  <md-progress-linear mode="determinate" [value]="determinateValue"></md-progress-linear>
+  <md-progress-bar mode="determinate" [value]="determinateValue"></md-progress-bar>
 
   <h4 class="md-title">Indeterminate</h4>
 
@@ -16,7 +16,7 @@
     necessary to expose what's happening behind the scenes and how long it will take, use an
     <b>indeterminate</b> indicator:
   </p>
-  <md-progress-linear mode="indeterminate"></md-progress-linear>
+  <md-progress-bar mode="indeterminate"></md-progress-bar>
 
   <h4 class="md-title">Buffer</h4>
 
@@ -24,8 +24,8 @@
     For operations where the user wants to indicate some activity or loading from the server,
     use the <b>buffer</b> indicator:
   </p>
-  <md-progress-linear class="md-warn" mode="buffer" [value]="determinateValue"
-                      [bufferValue]="determinateValue2"></md-progress-linear>
+  <md-progress-bar class="md-warn" mode="buffer" [value]="determinateValue"
+                      [bufferValue]="determinateValue2"></md-progress-bar>
 
   <h4 class="md-title">Query</h4>
 
@@ -35,7 +35,7 @@
   </p>
 
   <div class="container">
-    <md-progress-linear mode="query"></md-progress-linear>
+    <md-progress-bar mode="query"></md-progress-bar>
     <div class="bottom-block">
       <span>Loading application libraries...</span>
     </div>

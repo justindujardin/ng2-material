@@ -1,16 +1,15 @@
-import {Component} from '@angular/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material';
+import {Component} from "@angular/core";
+import {MdProgressCircle} from "@angular2-material/progress-circle";
 
 @Component({
   moduleId: module.id,
-  selector: 'progress-circular-basic-usage',
+  selector: 'progress-circle-basic-usage',
   templateUrl: 'basic_usage.html',
   styleUrls: ['basic_usage.css'],
-  directives: [MATERIAL_DIRECTIVES]
+  directives: [MdProgressCircle]
 })
-export default class ProgressCircularBasicUsage {
+export default class ProgressCircleBasicUsage {
   public determinateValue: number = 30;
-  public deactivated: boolean = false;
   public mode: string;
 
   constructor() {
@@ -24,8 +23,4 @@ export default class ProgressCircularBasicUsage {
     }, 100, 0, true);
   }
 
-  toogleActivation() {
-    this.deactivated = !this.deactivated;
-    this.mode = this.deactivated ? 'indeterminate' : '';
-  }
 }
