@@ -1,4 +1,4 @@
-import {Directive, OnDestroy, Input, ApplicationRef} from "@angular/core";
+import {Directive, OnDestroy, Input, ApplicationRef, ElementRef} from "@angular/core";
 import {Media, MediaListener} from "../../core/util/media";
 import {debounce} from "../../core/util/util";
 import {ViewportHelper} from "../../core/util/viewport";
@@ -97,10 +97,29 @@ export class MdPeekaboo implements OnDestroy {
     return this._breakpoint;
   }
 
+
+  private _scroller: any = null;
+  @Input() set scroller(scroll: any) {
+    if (this._scroller) {
+      this._scroller.removeEventListener('scroll', this._windowScroll);
+    }
+    this._scroller = scroll;
+    if (this._scroller) {
+      this._scroller.addEventListener('scroll', this._windowScroll, true);
+    }
+  }
+
+  get scroller(): any {
+    return this._scroller;
+  }
+
   private _mediaListeners: MediaListener[] = [];
 
 
-  constructor(public media: Media, public viewport: ViewportHelper, private _app: ApplicationRef) {
+  constructor(public media: Media,
+              private element: ElementRef,
+              public viewport: ViewportHelper,
+              private _app: ApplicationRef) {
     MdPeekaboo.SIZES.forEach((size: string) => {
       this._watchMediaQuery(size);
       if (this.media.hasMedia(size)) {
@@ -139,7 +158,7 @@ export class MdPeekaboo implements OnDestroy {
    * @returns number The scrollTop breakpoint that was evaluated against.
    */
   evaluate(): number {
-    let top = this.viewport.scrollTop();
+    let top = this._scroller ? this._scroller.scrollTop : this.viewport.scrollTop();
     let bp: number = this.break;
     switch (this._breakpoint) {
       case 'xl':
