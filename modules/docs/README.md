@@ -34,3 +34,21 @@ Then navigate back to the docs project folder and link ng2-material into it:
  > npm link ng2-material
  
 If you want to unlink it later you can run the same commands, but with `unlink` instead of `link`
+
+# Contributing Examples
+
+Create a new component by specifying the component type that is being demonstrated, and the 
+behavior that the example demonstrates. Specify the by giving `ng generate component` a path of the
+form `components/[component-type]/[what-it-demonstrates]`. Here are a few examples:
+
+ > ng generate component components/button/floating-action-buttons --flat
+ > ng generate component components/sidenav/content-push --flat
+ > ng generate component components/sidenav/responsive-mode --flat
+ > ng generate component components/data-table/pagination --flat
+ 
+If you are creating the first most basic example for a component, specify the name `basic-usage`:
+
+ > ng generate component components/data-table/basic-usage --flat
+ 
+Note the use of the `--flat` argument, this is important so that the components files are put in the directory 
+for the containing component, rather than in a sub directory.
