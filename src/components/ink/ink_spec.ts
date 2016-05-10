@@ -1,8 +1,8 @@
-import {beforeEach, describe, expect, inject, it, async} from "@angular/core/testing";
-import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
-import {Component, DebugElement} from "@angular/core";
-import {Ink, MdInk} from "../../index";
-import {By} from "@angular/platform-browser";
+import {beforeEach, describe, expect, inject, it, async} from '@angular/core/testing';
+import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {Component, DebugElement} from '@angular/core';
+import {Ink, MdInk} from '../../index';
+import {By} from '@angular/platform-browser';
 
 export function main() {
 
@@ -15,6 +15,12 @@ export function main() {
   })
   class TestComponent {
   }
+
+  let createEvent = (): MouseEvent => {
+    var event = document.createEvent('MouseEvent');
+    event.initEvent('mouse', true, true);
+    return event;
+  };
 
   describe('MdInk', () => {
 
@@ -46,7 +52,7 @@ export function main() {
             return Promise.resolve();
           };
 
-          let event = document.createEvent('mouse');
+          let event = createEvent();
           element.triggerEventHandler('mousedown', event);
 
 
@@ -66,7 +72,7 @@ export function main() {
             return Promise.resolve();
           };
 
-          let event = document.createEvent('mouse');
+          let event = createEvent();
           element.triggerEventHandler('mousedown', event);
 
           expect(fired).toBe(false);

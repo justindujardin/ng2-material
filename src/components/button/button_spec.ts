@@ -1,8 +1,8 @@
-import {beforeEach, describe, expect, inject, it, async} from "@angular/core/testing";
-import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
-import {Component, ViewMetadata, DebugElement} from "@angular/core";
-import {MdButton, MdAnchor, Ink} from "../../index";
-import {By} from "@angular/platform-browser";
+import {beforeEach, describe, expect, inject, it, async} from '@angular/core/testing';
+import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {Component, ViewMetadata, DebugElement} from '@angular/core';
+import {MdButton, MdAnchor, Ink} from '../../index';
+import {By} from '@angular/platform-browser';
 
 export function main() {
 
@@ -22,6 +22,12 @@ export function main() {
       this.clickCount++;
     }
   }
+  
+  let createEvent = (): MouseEvent => {
+    var event = document.createEvent('MouseEvent');
+    event.initEvent('mouse', true, true);
+    return event;
+  };
 
   describe('MdButton', () => {
 
@@ -64,7 +70,7 @@ export function main() {
             return Promise.resolve();
           };
 
-          let event = document.createEvent('mouse');
+          let event = createEvent();
           button.triggerEventHandler('mousedown', event);
 
 
@@ -84,7 +90,7 @@ export function main() {
             return Promise.resolve();
           };
 
-          let event = document.createEvent('mouse');
+          let event = createEvent();
           button.triggerEventHandler('mousedown', event);
 
           expect(fired).toBe(false);
@@ -145,7 +151,7 @@ export function main() {
       it('should not preventDefault on enabled anchor clicks', async(inject([], () => {
         return builder.createAsync(TestComponent).then((fixture: ComponentFixture<TestComponent>) => {
           let anchor: DebugElement = fixture.debugElement.children[0];
-          let event = document.createEvent('mouse');
+          let event = createEvent();
           let triggered = false;
           event.preventDefault = () => triggered = true;
           anchor.triggerEventHandler('click', event);
@@ -156,7 +162,7 @@ export function main() {
         return builder.createAsync(TestComponent).then((fixture: ComponentFixture<TestComponent>) => {
           let anchor: DebugElement = fixture.debugElement.children[0];
           let anchorComp: MdAnchor = anchor.componentInstance;
-          let event = document.createEvent('mouse');
+          let event = createEvent();
           let triggered = false;
           event.preventDefault = () => triggered = true;
           anchorComp.disabled = true;

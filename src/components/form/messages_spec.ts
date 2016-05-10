@@ -1,17 +1,10 @@
-import {
-  beforeEach,
-  describe,
-  expect,
-  inject,
-  it,
-  async
-} from "@angular/core/testing";
-import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
-import {Component} from "@angular/core";
-import {MdMessage, MdMessages} from "../../index";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, Control} from "@angular/common";
-import {By} from "@angular/platform-browser";
-import {promiseWait} from "../../platform/testing/util";
+import {beforeEach, describe, expect, inject, it, async} from '@angular/core/testing';
+import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {Component} from '@angular/core';
+import {MdMessage, MdMessages} from '../../index';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, Control} from '@angular/common';
+import {By} from '@angular/platform-browser';
+import {promiseWait} from '../../platform/testing/util';
 
 
 export function main() {
@@ -45,8 +38,8 @@ export function main() {
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
       return prep.then((fixture: ComponentFixture<TestComponent>) => {
         fixture.detectChanges();
-        let container = <MdMessages>fixture.debugElement.query(By.css('[md-messages]')).componentInstance;
-        let messages = <MdMessage[]>fixture.debugElement.queryAll(By.css('[md-message]')).map(b => b.componentInstance);
+        let container = fixture.debugElement.query(By.directive(MdMessages)).injector.get(MdMessages) as MdMessages;
+        let messages = fixture.debugElement.queryAll(By.directive(MdMessage)).map(b => b.injector.get(MdMessage)) as MdMessage[];
         return {
           fixture: fixture,
           container: container,

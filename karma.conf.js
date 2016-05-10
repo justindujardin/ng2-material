@@ -28,7 +28,10 @@ module.exports = function (config) {
       { pattern: 'node_modules/@angular2-material/**/*.js', included: false, watched: false },
       'karma.ie.shims.js',
       "config.karma.js",
-      { pattern: 'dist/**/*', included: false, watched: true },
+      { pattern: 'dist/*.*', included: false, watched: true },
+      { pattern: 'dist/components/**/*.js', included: false, watched: true },
+      { pattern: 'dist/core/**/*.js', included: false, watched: true },
+      { pattern: 'dist/platform/**/*.js', included: false, watched: true },
       "karma.main.js"
     ],
     exclude: [

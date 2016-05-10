@@ -39,8 +39,8 @@ export function main() {
         builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
       return prep.then((fixture: ComponentFixture<TestComponent>) => {
         fixture.detectChanges();
-        let debug = fixture.debugElement.query(By.css('[md-peekaboo]'));
-        let component = <MdPeekaboo>debug.componentInstance;
+        let debug = fixture.debugElement.query(By.directive(MdPeekaboo));
+        let component = debug.injector.get(MdPeekaboo) as MdPeekaboo;
         return {
           fixture: fixture,
           peek: component,

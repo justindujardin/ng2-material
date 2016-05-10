@@ -15,8 +15,6 @@ export type BreakAction = 'hide' | 'show';
  */
 @Directive({
   selector: '[md-peekaboo]',
-  inputs: ['break', 'breakXs', 'breakSm', 'breakMd', 'breakLg', 'breakXl'],
-  providers: [],
   host: {
     '[class.md-peekaboo-active]': 'active',
     '[attr.breakAction]': 'breakAction',
@@ -31,7 +29,7 @@ export class MdPeekaboo implements OnDestroy {
   break: number = 100;
 
   @Input()
-  breakAction: BreakAction = 'hide';
+  breakAction: BreakAction;
 
   static MakeNumber(value: any): number {
     return typeof value === 'string' ? parseInt(value, 10) : value;
