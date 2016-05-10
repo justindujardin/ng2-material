@@ -6,6 +6,7 @@
 
 # dependencies
 /node_modules
+/modules/*/node_modules
 /bower_components
 
 # IDEs and editors
@@ -13,6 +14,8 @@
 
 # misc
 /.sass-cache
+/.coverage
+/.tscache
 /connect.lock
 /coverage/*
 /libpeerconnection.log
