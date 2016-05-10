@@ -14,6 +14,7 @@ export interface ISourceFile {
   moduleId: module.id,
   selector: 'example',
   templateUrl: 'example.html',
+  styleUrls: ['example.css'],
   directives: [MATERIAL_DIRECTIVES, Highlight, MdToolbar]
 })
 export default class Example implements AfterViewInit {
