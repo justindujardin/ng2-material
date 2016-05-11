@@ -53,7 +53,3 @@ export interface IExampleData {
  * Collection of providers for example app
  */
 export const DEMO_PROVIDERS: any[] = [ComponentsService, NavigationService, VersionService];
-
-
-export * from './components/example';
-export * from './components/highlight';

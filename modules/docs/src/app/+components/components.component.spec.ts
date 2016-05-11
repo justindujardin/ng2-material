@@ -29,7 +29,7 @@ describe('Component: Components', () => {
 @Component({
   selector: 'test',
   template: `
-    <app-components></app-components>
+    <docs-components></docs-components>
   `,
   directives: [ComponentsComponent]
 })

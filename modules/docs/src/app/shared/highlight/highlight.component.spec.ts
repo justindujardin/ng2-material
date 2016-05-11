@@ -2,23 +2,24 @@ import {beforeEach, beforeEachProviders, describe, expect, it, inject,} from '@a
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {FooterComponent} from './footer.component';
+import {HighlightComponent} from './highlight.component';
 
-describe('Component: Footer', () => {
+describe('Component: Highlight', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [FooterComponent]);
+  beforeEachProviders(() => [HighlightComponent]);
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 
-  it('should inject the component', inject([FooterComponent], (component: FooterComponent) => {
+  it('should inject the component',
+     inject([HighlightComponent], (component: HighlightComponent) => {
        expect(component).toBeTruthy();
      }));
 
   it('should create the component', inject([], () => {
-       return builder.createAsync(FooterComponentTestController)
+       return builder.createAsync(HighlightComponentTestController)
            .then((fixture: ComponentFixture<any>) => {
-             let query = fixture.debugElement.query(By.directive(FooterComponent));
+             let query = fixture.debugElement.query(By.directive(HighlightComponent));
              expect(query).toBeTruthy();
              expect(query.componentInstance).toBeTruthy();
            });
@@ -28,9 +29,9 @@ describe('Component: Footer', () => {
 @Component({
   selector: 'test',
   template: `
-    <docs-footer></docs-footer>
+    <docs-highlight></docs-highlight>
   `,
-  directives: [FooterComponent]
+  directives: [HighlightComponent]
 })
-class FooterComponentTestController {
+class HighlightComponentTestController {
 }

@@ -1,17 +1,15 @@
 import {Component} from '@angular/core';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
-import {NavigationService} from '../shared/navigation.service';
-import {ComponentsService, IComponentMeta} from '../shared/components.service';
-import Example from '../components/example';
+import {ComponentsService, IComponentMeta, NavigationService, ExampleComponent} from '../shared';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
 
 
 @Component({
   moduleId: module.id,
-  selector: 'app-components',
+  selector: 'docs-components',
   templateUrl: 'components.component.html',
   styleUrls: ['components.component.css'],
-  directives: [Example, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES]
+  directives: [ExampleComponent, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES]
 })
 export class ComponentsComponent implements OnActivate {
   public id: string;

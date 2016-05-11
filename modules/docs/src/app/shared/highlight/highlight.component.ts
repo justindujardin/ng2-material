@@ -4,12 +4,11 @@ declare var hljs: any;
 
 @Component({
   moduleId: module.id,
-  selector: 'highlight',
-  properties: ['type', 'text'],
-  template: `<pre><code class="highlight" [innerHtml]="rendered || text"><ng-content></ng-content></code></pre>`,
-  styleUrls: ['highlight.css']
+  selector: 'docs-highlight',
+  styleUrls: ['highlight.component.css'],
+  template: `<pre><code class="highlight" [innerHtml]="rendered || text"><ng-content></ng-content></code></pre>`
 })
-export class Highlight implements AfterContentInit {
+export class HighlightComponent implements AfterContentInit {
   get type(): string { return this._type; }
 
   @Input('type')

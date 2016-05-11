@@ -6,7 +6,7 @@ import {NavigationService} from '../navigation.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'app-footer',
+  selector: 'docs-footer',
   templateUrl: 'footer.component.html',
   styleUrls: ['footer.component.css'],
   directives: [ROUTER_DIRECTIVES, MdToolbar, MATERIAL_DIRECTIVES]

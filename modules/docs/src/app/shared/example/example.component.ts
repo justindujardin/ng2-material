@@ -1,9 +1,9 @@
 import {Component, Input, DynamicComponentLoader, ComponentRef, Query, QueryList, ViewContainerRef, AfterViewInit, ViewChild} from '@angular/core';
-import {DEMO_DIRECTIVES, IExampleData} from '../index';
 import {MATERIAL_DIRECTIVES, MdTabs} from 'ng2-material';
 import {Http} from '@angular/http';
-import {Highlight} from './highlight';
 import {MdToolbar} from '@angular2-material/toolbar';
+import {IExampleData, DEMO_DIRECTIVES} from '../../index';
+import {HighlightComponent} from '../highlight/highlight.component';
 
 export interface ISourceFile {
   data: string;
@@ -12,12 +12,12 @@ export interface ISourceFile {
 
 @Component({
   moduleId: module.id,
-  selector: 'example',
-  templateUrl: 'example.html',
-  styleUrls: ['example.css'],
-  directives: [MATERIAL_DIRECTIVES, Highlight, MdToolbar]
+  selector: 'docs-example',
+  templateUrl: 'example.component.html',
+  styleUrls: ['example.component.css'],
+  directives: [MATERIAL_DIRECTIVES, HighlightComponent, MdToolbar]
 })
-export default class Example implements AfterViewInit {
+export class ExampleComponent implements AfterViewInit {
   private _model: IExampleData = null;
   private _reference: ComponentRef<any> = null;
 

@@ -27,7 +27,7 @@ describe('Component: Index', () => {
 @Component({
   selector: 'test',
   template: `
-    <app-index></app-index>
+    <docs-index></docs-index>
   `,
   directives: [IndexComponent]
 })
