@@ -2,12 +2,20 @@
 
 <section class="examples-intro">
   <p>
-    Welcome to the <a href="https://github.com/justindujardin/ng2-material">ng2-material</a> examples site.
-    Here's the <a href="coverage/" target="_blank">test coverage</a> report.
+    Examples of how to use various <a href="https://www.google.com/design/spec/material-design/introduction.html"
+                                      target="_blank">material design</a>
+    inspired components with <a href="https://angular.io" target="_blank">angular2</a>.
   </p>
-  <p>Compatible with: <a attr.href="https://github.com/angular/angular/releases/tag/{{linkTag}}" target="_blank">angular2@{{angularVersion}}</a>.
+  <p>
+    There are a number of community developed components available in the <a
+    href="https://www.npmjs.com/package/ng2-material" target="_blank">ng2-material
+    package</a>.
   </p>
-  <p>There are instructions for getting started at the bottom.</p>
+  <p>
+    There are also a number of examples demonstrating the use of the official Google developed <a
+    href="https://www.npmjs.com/~angular2-material" target="_blank">material2
+    packages</a>.
+  </p>
 </section>
 
 <nav class="heading-list-toc">
@@ -22,10 +30,11 @@
 <section class="examples-intro seed-intro">
   <h1 class="examples-title">Installing from NPM</h1>
   <p>
-    If you are a ninja, feel free to npm install it
+    Install the ng2-material and the material2 core libraries:
   </p>
+
   <docs-highlight type="bash" class="md-subhead">
-    npm install --save ng2-material
+    npm install --save ng2-material @angular2-material/core
   </docs-highlight>
   <p>
     Then import the material directives and providers
@@ -37,38 +46,18 @@
     Then reference the styles in your page
   </p>
   <docs-highlight type="html" class="md-subhead">
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/ng2-material/dist/ng2-material.css&quot;&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/ng2-material/dist/font.css&quot;&gt;
-  </docs-highlight>
-  <p>Or <em>(more preferably)</em> import them into your SCSS files.</p>
-  <docs-highlight type="scss" class="md-subhead">
-    $md-font-url: "node_modules/ng2-material/dist/";
-    @import "node_modules/ng2-material/dist/font";
-    @import "node_modules/ng2-material/source/all";
-  </docs-highlight>
-  <p>If you want to use custom theme colors, include the <code>core</code> styles and override the theme variables
-    before including the <code>components</code>.</p>
-  <docs-highlight type="scss" class="md-subhead">
-    $md-font-url: "node_modules/ng2-material/dist/";
-    @import "node_modules/ng2-material/dist/font";
-    @import "node_modules/ng2-material/source/core";
-    $md-primary: md-palette($md-brown, 500, 100, 700, $md-contrast-palettes);
-    $md-accent: md-palette($md-deep-orange, 500, 300, 700, $md-contrast-palettes);
-    @import "node_modules/ng2-material/source/components";
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/ng2-material/ng2-material.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/ng2-material/font/font.css&quot;&gt;
   </docs-highlight>
 </section>
 
-<md-divider></md-divider>
-
-<section class="examples-intro seed-intro">
-  <h1 class="examples-title">Using a CDN build</h1>
+<section>
+  <h1 class="examples-title">Using Material2 Components</h1>
   <p>
-    If you can't be bothered to package your app up and include ng2-material with it, you can use the github pages
-    build for a particular commit to act as a CDN. Here's an example <a
-    href="http://plnkr.co/edit/d83ZQIAemyA40OhE3vYI?p=preview" target="_blank">plunkr
-    template</a> to get you going.
+    To make use of the official google material2 components you will need to install them alongside ng2-material
+    as needed. ng2-material has peerDependencies on the components that it uses internally. The various examples
+    of official components describe how to install them.
   </p>
-
 </section>
 
 <md-divider></md-divider>
