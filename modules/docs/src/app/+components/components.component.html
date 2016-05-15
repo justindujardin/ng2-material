@@ -1,4 +1,5 @@
-<h1 class="examples-title">Examples</h1>
 <p class="examples-intro" *ngIf="value.readme" [innerHtml]="value.readme"></p>
+
+<h1 class="examples-title">Examples</h1>
 
 <docs-example *ngFor="let demo of value.examples" [model]="demo"></docs-example>

@@ -51,7 +51,12 @@ module.exports = function (config) {
       'karma-*'
     ],
 
-    preprocessors: (process.env.TRAVIS || coverageDebug) ? {"ng2-material/**/*.js": "coverage"} : {},
+    preprocessors: (process.env.TRAVIS || coverageDebug) ? {
+      "dist/*.js": "coverage",
+      "dist/components/**/*.js": "coverage",
+      "dist/core/**/*.js": "coverage",
+      "src/platform/**/*.js": "coverage"
+    } : {},
     coverageReporter: {
       dir: '.coverage',
 

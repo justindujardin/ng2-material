@@ -87,7 +87,7 @@ export class ExampleComponent implements AfterViewInit {
     @Component({
       selector: `md-example-${model.component}`,
       template: template,
-      directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES]
+      directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES, HighlightComponent]
     })
     class CompiledComponent {
     }

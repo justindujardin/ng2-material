@@ -12,7 +12,7 @@ module.exports = function (grunt) {
       "<%- sourceRoot %>/**/*.d.ts",
       "<%- sourceRoot %>/**/*.js.map",
       "<%- sourceRoot %>/**/*.css",
-      "<%- sourceRoot %>/**/*.css.map",
+      "<%- sourceRoot %>/**/*.css.map"
     ],
     copy: {
       npm: {
@@ -122,7 +122,7 @@ module.exports = function (grunt) {
       },
       meta: {
         files: [
-          'modules/docs/**/*.html'
+          'modules/docs/src/**/*.*'
         ],
         tasks: ['site-meta', 'notify:meta']
       },
@@ -176,8 +176,7 @@ module.exports = function (grunt) {
         options: {
           singleRun: true
         },
-        configFile: './karma.conf.js',
-        preprocessors: {"src/**/*.js": "coverage"}
+        configFile: './karma.conf.js'
       }
     },
     remapIstanbul: {
@@ -269,6 +268,7 @@ module.exports = function (grunt) {
     var path = require('path');
     var util = require('util');
     var marked = require('marked');
+    var npm = require("npm");
     var meta = {};
     var tasks = [];
 
@@ -282,6 +282,40 @@ module.exports = function (grunt) {
       smartLists: true,
       smartypants: false
     });
+
+    function ifError(err) {
+      if (err) {
+        return grunt.fatal(err.message.replace(/\n$/, '.'));
+      }
+    }
+
+    // npm.load({loaded: false}, function (err) {
+    //   ifError(err);
+    //   var file = fs.readFileSync(path.join(__dirname, 'package.json')).toString();
+    //   var rendered = JSON.parse(file);
+    //   var depNames = Object.keys(rendered.dependencies);
+    //   console.log('--> Getting version information for (' + depNames.length + ') package dependencies');
+    //   depNames.forEach(function (packageName) {
+    //     const version = rendered.dependencies[packageName];
+    //     tasks.push(function getComponentVersions() {
+    //       var save = process.stdout.write;
+    //       // NPM will write all of the stuff we query to the console
+    //       // so go ahead and suppress the duplicate output.
+    //       process.stdout.write = function (msg) {
+    //       };
+    //       // catch errors
+    //       npm.commands.info([packageName], function (err, data) {
+    //         ifError(err);
+    //         process.stdout.write = save;
+    //         console.log('    ' + packageName + ' (' + version + ') OK');
+    //         // console.log(data);
+    //         next();
+    //       });
+    //     });
+    //   });
+    //   // Once we've queried the dependent components, kick off the tasks
+    //   next();
+    // });
 
     tasks.push(function buildCoverage() {
       // Parse Lcov report and generate `coverage.json` file for site.
@@ -315,7 +349,7 @@ module.exports = function (grunt) {
     });
 
     tasks.push(function buildReadmeFiles() {
-      glob("modules/docs/src/app/components/**/readme.md", function (err, files) {
+      glob("modules/docs/src/app/examples/**/readme.md", function (err, files) {
         files.forEach(function parseDemo(readmeFile) {
           var component = readableString(path.basename(path.dirname(readmeFile)));
           meta[component] = meta[component] || {};
@@ -332,7 +366,7 @@ module.exports = function (grunt) {
         version: pkg.version,
         readme: rendered
       };
-      Object.keys(pkg.dependencies).forEach(function(depKey) {
+      Object.keys(pkg.dependencies).forEach(function (depKey) {
         data[depKey] = pkg.dependencies[depKey];
       });
       writeJson('modules/docs/public/version.json', data);
@@ -341,10 +375,7 @@ module.exports = function (grunt) {
 
     tasks.push(function buildExamples() {
       const pathPrefix = 'modules/docs/src/';
-      glob(pathPrefix + "app/components/**/*.html", function (err, files) {
-        const resolvePath = function(input) {
-
-        };
+      glob(pathPrefix + "app/examples/**/*.html", function (err, files) {
         files.forEach(function parseDemo(templateFile) {
           var name = path.basename(templateFile, '.html');
           var result = {
@@ -364,10 +395,11 @@ module.exports = function (grunt) {
           }
 
           var component = readableString(path.basename(path.dirname(templateFile)));
-          result.component = selectorString(component + ' ' + readableString(name));
+          var readable = readableString(name).replace('.component','');
+          result.component = selectorString(readable);
           meta[component] = meta[component] || {};
           meta[component].files = [];
-          meta[component][readableString(name)] = result;
+          meta[component][readable] = result;
           lintDemo(result);
         });
 
@@ -451,9 +483,9 @@ module.exports = function (grunt) {
         .join('-');
     }
 
-    function readableString(snakeCaseString) {
-      return snakeCaseString
-        .split('_')
+    function readableString(hyphenatedString) {
+      return hyphenatedString
+        .split('-')
         .map(function (c) {
           return c[0].toUpperCase() + c.slice(1);
         })

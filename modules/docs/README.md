@@ -41,14 +41,13 @@ Create a new component by specifying the component type that is being demonstrat
 behavior that the example demonstrates. Specify the by giving `ng generate component` a path of the
 form `components/[component-type]/[what-it-demonstrates]`. Here are a few examples:
 
- > ng generate component components/button/floating-action-buttons --flat
- > ng generate component components/sidenav/content-push --flat
- > ng generate component components/sidenav/responsive-mode --flat
- > ng generate component components/data-table/pagination --flat
+ > ng generate component examples/button-basic-usage --prefix=false
+ > ng generate component examples/button-floating-action-buttons --prefix=false
+ > ng generate component examples/sidenav-content-push --prefix=false
+ > ng generate component examples/sidenav-responsive-mode --prefix=false
+ > ng generate component examples/data-table-pagination --prefix=false
  
 If you are creating the first most basic example for a component, specify the name `basic-usage`:
 
- > ng generate component components/data-table/basic-usage --flat
+ > ng generate component examples/data-table-basic-usage --prefix=false
  
-Note the use of the `--flat` argument, this is important so that the components files are put in the directory 
-for the containing component, rather than in a sub directory.

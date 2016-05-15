@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 import {ComponentsService, IComponentMeta, NavigationService, ExampleComponent} from '../shared';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
+import {HighlightComponent} from '../shared/highlight/highlight.component';
 
 
 @Component({
@@ -9,7 +10,7 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material';
   selector: 'docs-components',
   templateUrl: 'components.component.html',
   styleUrls: ['components.component.css'],
-  directives: [ExampleComponent, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES]
+  directives: [ExampleComponent, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, HighlightComponent]
 })
 export class ComponentsComponent implements OnActivate {
   public id: string;

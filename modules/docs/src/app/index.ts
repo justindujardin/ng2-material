@@ -1,40 +1,49 @@
+import {ButtonBasicUsageComponent} from './examples/button/button-basic-usage.component';
+import {ElevationBasicUsageComponent} from './examples/elevation/elevation-basic-usage.component';
+import {ComponentsService, NavigationService, VersionService} from './shared';
+import {CardActionButtonsComponent} from './examples/card/card-action-buttons.component';
+import {CardBasicUsageComponent} from './examples/card/card-basic-usage.component';
+import {CardInlineActionsComponent} from './examples/card/card-inline-actions.component';
+import {CheckboxBasicUsageComponent} from './examples/checkbox/checkbox-basic-usage.component';
+import {DataTableBasicUsageComponent} from './examples/data-table/data-table-basic-usage.component';
+import {DataTableSelectableRowsComponent} from './examples/data-table/data-table-selectable-rows.component';
+import DialogBasicUsageComponent from './examples/dialog/dialog-basic-usage.component';
+import InputBasicUsageComponent from './examples/input/input-basic-usage.component';
+import {ListBasicUsageComponent} from './examples/list/list-basic-usage.component';
+import {ProgressBarBasicUsageComponent} from './examples/progress-bar/progress-bar-basic-usage.component';
+import {ProgressCircleBasicUsageComponent} from './examples/progress-circle/progress-circle-basic-usage.component';
+import {RadioBasicUsageComponent} from './examples/radio/radio-basic-usage.component';
+import {SidenavBasicUsageComponent} from './examples/sidenav/sidenav-basic-usage.component';
+import {SwitchBasicUsageComponent} from './examples/switch/switch-basic-usage.component';
+import {TabsDynamicHeightComponent} from './examples/tabs/tabs-dynamic-height.component';
+import {TabsDynamicTabsComponent} from './examples/tabs/tabs-dynamic-tabs.component';
+import {ToolbarBasicUsageComponent} from './examples/toolbar/toolbar-basic-usage.component';
 export {environment} from './environment';
 export {SiteAppComponent} from './site.component';
-// TODO(jd): auto generate import/exports for examples during the grunt site-meta task.
-
-import CardBasicUsage from './components/card/basic_usage';
-import CardInlineActions from './components/card/inline_actions';
-import ButtonBasicUsage from './components/button/basic_usage';
-import CardActionButtons from './components/card/action_buttons';
-import DataTableBasicUsage from './components/data_table/basic_usage';
-import DataTableSelectableUsage from './components/data_table/selectable_usage';
-import DialogBasicUsage from './components/dialog/basic_usage';
-import ToolbarBasicUsage from './components/toolbar/basic_usage';
-import ProgressBarBasicUsage from './components/progress_bar/basic_usage';
-import ProgressCircleBasicUsage from './components/progress_circle/basic_usage';
-import RadioBasicUsage from './components/radio/basic_usage';
-import SwitchBasicUsage from './components/switch/basic_usage';
-import TabsDynamicHeight from './components/tabs/dynamic_height';
-import TabsDynamicTabs from './components/tabs/dynamic_tabs';
-import CheckboxBasicUsage from './components/checkbox/basic_usage';
-import CheckboxSyncing from './components/checkbox/syncing';
-import ListBasicUsage from './components/list/basic_usage';
-import InputBasicUsage from './components/input/basic_usage';
-import InputFormBuilder from './components/input/form_builder';
-import WhiteframeBasicUsage from './components/whiteframe/basic_usage';
-import SidenavBasicUsage from './components/sidenav/basic_usage';
-import {ComponentsService, NavigationService, VersionService} from './shared';
 
 /**
  * Collection of Material Design component example directives.
  */
 export const DEMO_DIRECTIVES: any[] = [
-  CardBasicUsage,      CardInlineActions,     CardActionButtons,        ButtonBasicUsage,
-  CheckboxBasicUsage,  CheckboxSyncing,       DataTableBasicUsage,      DataTableSelectableUsage,
-  DialogBasicUsage,    InputBasicUsage,       InputFormBuilder,         ListBasicUsage,
-  RadioBasicUsage,     SwitchBasicUsage,      TabsDynamicHeight,        TabsDynamicTabs,
-  ToolbarBasicUsage,   ProgressBarBasicUsage, ProgressCircleBasicUsage, SidenavBasicUsage,
-  WhiteframeBasicUsage
+  ElevationBasicUsageComponent,
+  ButtonBasicUsageComponent,
+  CardActionButtonsComponent,
+  CardBasicUsageComponent,
+  CardInlineActionsComponent,
+  CheckboxBasicUsageComponent,
+  DataTableBasicUsageComponent,
+  DataTableSelectableRowsComponent,
+  DialogBasicUsageComponent,
+  InputBasicUsageComponent,
+  ListBasicUsageComponent,
+  ProgressBarBasicUsageComponent,
+  ProgressCircleBasicUsageComponent,
+  RadioBasicUsageComponent,
+  SidenavBasicUsageComponent,
+  SwitchBasicUsageComponent,
+  TabsDynamicHeightComponent,
+  TabsDynamicTabsComponent,
+  ToolbarBasicUsageComponent
 ];
 
 

@@ -23,7 +23,7 @@ import {FooterComponent} from './shared/footer/footer.component';
   providers: [MdIconRegistry]
 })
 @Routes([
-  {path: '/index', component: IndexComponent},
+  {path: '/', component: IndexComponent},
   {path: '/components/:id', component: ComponentsComponent}
 ])
 export class SiteAppComponent implements OnInit,
