@@ -13,7 +13,7 @@ before_script:
 - true & `base64 --decode <<< ZXhwb3J0IFNBVUNFX1VTRVJOQU1FPW5nMm1hdGVyaWFsCg==`
 
 install:
-- npm install
+- npm install --loglevel=error
 - ./node_modules/.bin/grunt build
 
 script:
