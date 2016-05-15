@@ -83,9 +83,6 @@ export class SiteAppComponent implements OnInit,
 
   @Input()
   get scrollWidth(): number {
-    if (this.over) {
-      return 0;
-    }
     var inner = document.createElement('p');
     inner.style.width = '100%';
     inner.style.height = '200px';

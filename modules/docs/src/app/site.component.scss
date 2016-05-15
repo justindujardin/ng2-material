@@ -71,6 +71,10 @@
       transform: translateY(-100%);
       opacity:0;
     }
+    .md-caption {
+      text-decoration: none;
+      color: md-color($md-primary, 50);
+    }
     .verbose-title {
       @media screen and (max-width: $layout-breakpoint-sm) {
         display: none;
