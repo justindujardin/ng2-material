@@ -8,7 +8,7 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material';
   styleUrls: ['dialog-basic-usage.component.css'],
   directives: [MATERIAL_DIRECTIVES]
 })
-export default class DialogBasicUsageComponent {
+export class DialogBasicUsageComponent {
 }
 
 @Component({

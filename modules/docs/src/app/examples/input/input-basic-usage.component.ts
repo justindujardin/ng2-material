@@ -11,7 +11,7 @@ import {MdToolbar} from '@angular2-material/toolbar';
   styleUrls: ['input-basic-usage.component.css'],
   directives: [MATERIAL_DIRECTIVES, MdToolbar, MD_INPUT_DIRECTIVES, FORM_DIRECTIVES]
 })
-export default class InputBasicUsageComponent {
+export class InputBasicUsageComponent {
   user = {
     title: 'Developer',
     email: 'ipsum@lorem.com',
@@ -22,7 +22,8 @@ export default class InputBasicUsageComponent {
     address2: '',
     city: 'Mountain View',
     state: 'CA',
-    biography: 'Loves kittens, snowboarding, and can type at 130 WPM.\n\nAnd rumor has it she bouldered up Castle Craig!',
+    biography:
+        'Loves kittens, snowboarding, and can type at 130 WPM.\n\nAnd rumor has it she bouldered up Castle Craig!',
     postalCode: '94043'
   };
 
@@ -31,7 +32,5 @@ export default class InputBasicUsageComponent {
     'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT',
     'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI',
     'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
-  ].map(function (state) {
-    return {abbrev: state};
-  })
+  ].map(function(state) { return {abbrev: state}; })
 }

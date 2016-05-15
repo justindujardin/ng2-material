@@ -52,5 +52,4 @@ export class ListBasicUsageComponent {
       notes: ' I\'ll be in your neighborhood doing errands'
     },
   ];
-
 }

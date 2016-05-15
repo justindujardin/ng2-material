@@ -62,6 +62,15 @@
     left: 0;
     right: 0;
     z-index: $z-index-toolbar;
+    width: auto;
+    transition: transform 0.2s ease-out, opacity 0.1s ease-in;
+    will-change: transform, opacity, left;
+    opacity:1;
+    &.hide {
+      transition: transform 0.2s ease-out, opacity 0.1s ease-in;
+      transform: translateY(-100%);
+      opacity:0;
+    }
     .verbose-title {
       @media screen and (max-width: $layout-breakpoint-sm) {
         display: none;

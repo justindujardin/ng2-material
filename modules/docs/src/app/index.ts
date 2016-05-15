@@ -7,8 +7,8 @@ import {CardInlineActionsComponent} from './examples/card/card-inline-actions.co
 import {CheckboxBasicUsageComponent} from './examples/checkbox/checkbox-basic-usage.component';
 import {DataTableBasicUsageComponent} from './examples/data-table/data-table-basic-usage.component';
 import {DataTableSelectableRowsComponent} from './examples/data-table/data-table-selectable-rows.component';
-import DialogBasicUsageComponent from './examples/dialog/dialog-basic-usage.component';
-import InputBasicUsageComponent from './examples/input/input-basic-usage.component';
+import {DialogBasicUsageComponent} from './examples/dialog/dialog-basic-usage.component';
+import {InputBasicUsageComponent} from './examples/input/input-basic-usage.component';
 import {ListBasicUsageComponent} from './examples/list/list-basic-usage.component';
 import {ProgressBarBasicUsageComponent} from './examples/progress-bar/progress-bar-basic-usage.component';
 import {ProgressCircleBasicUsageComponent} from './examples/progress-circle/progress-circle-basic-usage.component';
@@ -25,24 +25,12 @@ export {SiteAppComponent} from './site.component';
  * Collection of Material Design component example directives.
  */
 export const DEMO_DIRECTIVES: any[] = [
-  ElevationBasicUsageComponent,
-  ButtonBasicUsageComponent,
-  CardActionButtonsComponent,
-  CardBasicUsageComponent,
-  CardInlineActionsComponent,
-  CheckboxBasicUsageComponent,
-  DataTableBasicUsageComponent,
-  DataTableSelectableRowsComponent,
-  DialogBasicUsageComponent,
-  InputBasicUsageComponent,
-  ListBasicUsageComponent,
-  ProgressBarBasicUsageComponent,
-  ProgressCircleBasicUsageComponent,
-  RadioBasicUsageComponent,
-  SidenavBasicUsageComponent,
-  SwitchBasicUsageComponent,
-  TabsDynamicHeightComponent,
-  TabsDynamicTabsComponent,
+  ElevationBasicUsageComponent, ButtonBasicUsageComponent, CardActionButtonsComponent,
+  CardBasicUsageComponent, CardInlineActionsComponent, CheckboxBasicUsageComponent,
+  DataTableBasicUsageComponent, DataTableSelectableRowsComponent, DialogBasicUsageComponent,
+  InputBasicUsageComponent, ListBasicUsageComponent, ProgressBarBasicUsageComponent,
+  ProgressCircleBasicUsageComponent, RadioBasicUsageComponent, SidenavBasicUsageComponent,
+  SwitchBasicUsageComponent, TabsDynamicHeightComponent, TabsDynamicTabsComponent,
   ToolbarBasicUsageComponent
 ];
 

@@ -9,5 +9,4 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material';
   encapsulation: ViewEncapsulation.None
 })
 export class TabsDynamicHeightComponent {
-
 }

@@ -1,37 +1,29 @@
-import {
-  beforeEach,
-  beforeEachProviders,
-  describe,
-  expect,
-  it,
-  inject,
-} from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { ButtonBasicUsageComponent } from './button-basic-usage.component';
+import {beforeEach, beforeEachProviders, describe, expect, it, inject,} from '@angular/core/testing';
+import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {Component} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {ButtonBasicUsageComponent} from './button-basic-usage.component';
 
 describe('Component: ButtonBasicUsage', () => {
   let builder: TestComponentBuilder;
 
   beforeEachProviders(() => [ButtonBasicUsageComponent]);
-  beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
-    builder = tcb;
-  }));
+  beforeEach(
+      inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 
-  it('should inject the component', inject([ButtonBasicUsageComponent],
-      (component: ButtonBasicUsageComponent) => {
-    expect(component).toBeTruthy();
-  }));
+  it('should inject the component',
+     inject([ButtonBasicUsageComponent], (component: ButtonBasicUsageComponent) => {
+       expect(component).toBeTruthy();
+     }));
 
   it('should create the component', inject([], () => {
-    return builder.createAsync(ButtonBasicUsageComponentTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(ButtonBasicUsageComponent));
-        expect(query).toBeTruthy();
-        expect(query.componentInstance).toBeTruthy();
-      });
-  }));
+       return builder.createAsync(ButtonBasicUsageComponentTestController)
+           .then((fixture: ComponentFixture<any>) => {
+             let query = fixture.debugElement.query(By.directive(ButtonBasicUsageComponent));
+             expect(query).toBeTruthy();
+             expect(query.componentInstance).toBeTruthy();
+           });
+     }));
 });
 
 @Component({
@@ -43,4 +35,3 @@ describe('Component: ButtonBasicUsage', () => {
 })
 class ButtonBasicUsageComponentTestController {
 }
-

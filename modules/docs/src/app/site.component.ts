@@ -27,7 +27,7 @@ import {FooterComponent} from './shared/footer/footer.component';
   {path: '/components/:id', component: ComponentsComponent}
 ])
 export class SiteAppComponent implements OnInit,
-    OnDestroy, AfterViewInit {
+  OnDestroy, AfterViewInit {
   static SIDE_MENU_BREAKPOINT: string = 'gt-md';
 
   @ViewChild(MdSidenav) private menu: MdSidenav;
@@ -46,20 +46,70 @@ export class SiteAppComponent implements OnInit,
 
   private _subscription = null;
 
-  constructor(
-      private http: Http, private navigation: NavigationService, private media: Media,
-      private cdr: ChangeDetectorRef, private router: Router, private zone: NgZone,
-      private _components: ComponentsService) {}
+  constructor(private http: Http, private navigation: NavigationService, private media: Media,
+              private cdr: ChangeDetectorRef, private router: Router, private zone: NgZone,
+              private _components: ComponentsService) {
+  }
+
   ngAfterViewInit(): any {
     let query = Media.getQuery(SiteAppComponent.SIDE_MENU_BREAKPOINT);
     this._subscription = this.media.listen(query).onMatched.subscribe((mql: MediaQueryList) => {
       this.zone.run(() => {
         this.menu.mode = mql.matches ? 'side' : 'over';
+
         this.menu.toggle(mql.matches).catch(() => undefined);
         this.cdr.detectChanges();
       });
     });
   }
+
+  get pushed(): boolean {
+    return this.menu && this.menu.mode === 'side';
+  }
+
+  get over(): boolean {
+    return this.menu && this.menu.mode === 'over' && this.menu.opened;
+  }
+
+  // TODO(jd): these two property hacks are to work around issues with the peekaboo fixed nav
+  // overlapping the sidenav and toolbar.  They will not properly "fix" to the top if inside
+  // md-sidenav-layout, and they will overlap the sidenav and scrollbar when outside.  So just
+  // calculate left and right properties for fixed toolbars based on the media query and browser
+  // scrollbar width.  :sob: :rage:
+  @Input()
+  get sidenavWidth(): number {
+    return this.pushed ? 281 : 0;
+  }
+
+  @Input()
+  get scrollWidth(): number {
+    if (this.over) {
+      return 0;
+    }
+    var inner = document.createElement('p');
+    inner.style.width = '100%';
+    inner.style.height = '200px';
+
+    var outer = document.createElement('div');
+    outer.style.position = 'absolute';
+    outer.style.top = '0px';
+    outer.style.left = '0px';
+    outer.style.visibility = 'hidden';
+    outer.style.width = '200px';
+    outer.style.height = '150px';
+    outer.style.overflow = 'hidden';
+    outer.appendChild(inner);
+
+    document.body.appendChild(outer);
+    var w1 = inner.offsetWidth;
+    outer.style.overflow = 'scroll';
+    var w2 = inner.offsetWidth;
+    if (w1 == w2) w2 = outer.clientWidth;
+
+    document.body.removeChild(outer);
+
+    return (w1 - w2);
+  };
 
   ngOnInit() {
     this.http.get('version.json').subscribe((res: Response) => {
@@ -79,5 +129,7 @@ export class SiteAppComponent implements OnInit,
   }
 
 
-  ngOnDestroy(): any { this._subscription.unsubscribe(); }
+  ngOnDestroy(): any {
+    this._subscription.unsubscribe();
+  }
 }

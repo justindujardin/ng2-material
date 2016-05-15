@@ -28,5 +28,4 @@ export class DataTableSelectableRowsComponent {
     this.selection = names.join(', ');
     this.count = names.length;
   }
-
 }

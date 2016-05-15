@@ -9,5 +9,4 @@ import {MATERIAL_DIRECTIVES} from 'ng2-material';
   directives: [MATERIAL_DIRECTIVES]
 })
 export class CardInlineActionsComponent {
-
 }

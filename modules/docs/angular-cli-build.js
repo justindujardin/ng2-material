@@ -5,7 +5,10 @@ var Angular2App = require('angular-cli/lib/broccoli/angular2-app');
 module.exports = function(defaults) {
   return new Angular2App(defaults, {
     sassCompiler: {
-      includePaths: [ 'node_modules/ng2-material/' ]
+      includePaths: [
+        'node_modules/ng2-material/',
+        'node_modules/'
+      ]
     },
     vendorNpmFiles: [
       'systemjs/dist/system-polyfills.js',

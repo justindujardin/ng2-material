@@ -17,5 +17,4 @@ export class RadioBasicUsageComponent {
     {id: 'images/avatars/avatar2.svg', title: 'avatar 2', value: 'avatar-2'},
     {id: 'images/avatars/avatar3.svg', title: 'avatar 3', value: 'avatar-3'}
   ];
-
 }

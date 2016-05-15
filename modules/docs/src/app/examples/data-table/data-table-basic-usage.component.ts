@@ -13,5 +13,4 @@ export class DataTableBasicUsageComponent {
     {'id': 2, 'name': 'Plywood (Birch)', 'quantity': '50', 'price': '$1.25'},
     {'id': 3, 'name': 'Laminate (Gold on Blue)', 'quantity': '10', 'price': '$2.35'}
   ]
-
 }

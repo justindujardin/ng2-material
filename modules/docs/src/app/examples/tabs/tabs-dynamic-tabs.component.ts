@@ -24,7 +24,8 @@ export class TabsDynamicTabsComponent {
     },
     {
       title: 'Three',
-      content: 'If you look at the source, you\'re using tabs to look at a demo for tabs. Recursion!'
+      content:
+          'If you look at the source, you\'re using tabs to look at a demo for tabs. Recursion!'
     }
   ];
 
@@ -39,9 +40,7 @@ export class TabsDynamicTabsComponent {
     this._selectedIndex = value;
   }
 
-  get selectedIndex(): number {
-    return this._selectedIndex;
-  }
+  get selectedIndex(): number { return this._selectedIndex; }
 
   addTab(title, view) {
     view = view || title + ' Content View';
@@ -53,5 +52,4 @@ export class TabsDynamicTabsComponent {
     this.tabs.splice(index, 1);
     this.selectedIndex = Math.min(index, this.tabs.length - 1);
   }
-
 }

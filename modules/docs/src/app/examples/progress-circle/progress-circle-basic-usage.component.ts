@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MdProgressCircle} from '@angular2-material/progress-circle';
 @Component({
   moduleId: module.id,
@@ -21,5 +21,4 @@ export class ProgressCircleBasicUsageComponent implements OnInit {
       }
     }, 100, 0, true);
   }
-
 }

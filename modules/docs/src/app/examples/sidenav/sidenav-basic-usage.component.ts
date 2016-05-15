@@ -9,5 +9,4 @@ import {MD_SIDENAV_DIRECTIVES} from '@angular2-material/sidenav';
   directives: [MD_SIDENAV_DIRECTIVES]
 })
 export class SidenavBasicUsageComponent {
-
 }

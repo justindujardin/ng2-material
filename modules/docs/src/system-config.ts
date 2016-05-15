@@ -31,7 +31,8 @@ const cliSystemConfigPackages: any = {};
 barrels.forEach((barrelName: string) => { cliSystemConfigPackages[barrelName] = {main: 'index'}; });
 
 // Material2 specific barrels.
-['core', 'checkbox', 'progress-circle', 'progress-bar', 'radio', 'toolbar', 'sidenav', 'icon', 'input'
+['core', 'checkbox', 'progress-circle', 'progress-bar', 'radio', 'toolbar', 'sidenav', 'icon',
+ 'input'
 
 ].forEach((pkgName: string) => {
   cliSystemConfigPackages['@angular2-material/' + pkgName] = {

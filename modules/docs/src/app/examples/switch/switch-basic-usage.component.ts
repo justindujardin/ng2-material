@@ -12,7 +12,5 @@ export class SwitchBasicUsageComponent {
   public data: any = {cb1: true, cb4: true, cb5: false};
   public message = 'false';
 
-  public onChange(cbState) {
-    this.message = cbState;
-  };
+  public onChange(cbState) { this.message = cbState; };
 }

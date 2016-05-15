@@ -1,37 +1,29 @@
-import {
-  beforeEach,
-  beforeEachProviders,
-  describe,
-  expect,
-  it,
-  inject,
-} from '@angular/core/testing';
-import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
-import { Component } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { CardInlineActionsComponent } from './card-inline-actions.component';
+import {beforeEach, beforeEachProviders, describe, expect, it, inject,} from '@angular/core/testing';
+import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {Component} from '@angular/core';
+import {By} from '@angular/platform-browser';
+import {CardInlineActionsComponent} from './card-inline-actions.component';
 
 describe('Component: CardInlineActions', () => {
   let builder: TestComponentBuilder;
 
   beforeEachProviders(() => [CardInlineActionsComponent]);
-  beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
-    builder = tcb;
-  }));
+  beforeEach(
+      inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 
-  it('should inject the component', inject([CardInlineActionsComponent],
-      (component: CardInlineActionsComponent) => {
-    expect(component).toBeTruthy();
-  }));
+  it('should inject the component',
+     inject([CardInlineActionsComponent], (component: CardInlineActionsComponent) => {
+       expect(component).toBeTruthy();
+     }));
 
   it('should create the component', inject([], () => {
-    return builder.createAsync(CardInlineActionsComponentTestController)
-      .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(CardInlineActionsComponent));
-        expect(query).toBeTruthy();
-        expect(query.componentInstance).toBeTruthy();
-      });
-  }));
+       return builder.createAsync(CardInlineActionsComponentTestController)
+           .then((fixture: ComponentFixture<any>) => {
+             let query = fixture.debugElement.query(By.directive(CardInlineActionsComponent));
+             expect(query).toBeTruthy();
+             expect(query.componentInstance).toBeTruthy();
+           });
+     }));
 });
 
 @Component({
@@ -43,4 +35,3 @@ describe('Component: CardInlineActions', () => {
 })
 class CardInlineActionsComponentTestController {
 }
-

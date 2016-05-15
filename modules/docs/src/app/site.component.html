@@ -1,6 +1,41 @@
+<md-toolbar color="primary" class="fixed-toolbar"
+            md-peekaboo [scroller]="content.parentElement"
+            [break]="190"
+            breakAction="show"
+            [ngClass]="{hide:over}"
+            [style.left]="sidenavWidth + 'px'"
+            [style.right]="scrollWidth + 'px'">
+</md-toolbar>
+<md-toolbar color="primary" class="fixed-toolbar"
+            [ngClass]="{hide:over}"
+            [style.left]="sidenavWidth + 'px'"
+            [style.right]="scrollWidth + 'px'">
+  <button md-button
+          class="md-hamburger md-icon-button"
+          hide-gt-lg
+          (click)="menu.open($event)"
+          aria-label="Home">
+    <i md-icon class="md-dark">menu</i>
+  </button>
+  <span md-peekaboo [scroller]="content.parentElement"
+        [breakMd]="72"
+        [breakXs]="20"
+        breakAction="show">
+    <span class="verbose-title" *ngIf="navigation?.currentTitle != site">Components <small>–</small>&nbsp;</span>
+    <span>{{navigation?.currentTitle}}</span>
+  </span>
+  <span flex></span>
+  <a md-peekaboo [scroller]="content.parentElement"
+     href="https://github.com/justindujardin/ng2-material/releases/tag/v{{version}}"
+     target="_blank"
+     [breakMd]="72"
+     breakAction="show"
+     *ngIf="version" class="md-caption">v{{version}}</a>
+</md-toolbar>
+
 <md-sidenav-layout layout="row" fullscreen>
   <md-sidenav #menu class="app-menu" mode="over">
-    <md-toolbar routerLink="/index">
+    <md-toolbar routerLink="/">
       <h3>ng2-material</h3>
     </md-toolbar>
     <md-list>
@@ -11,34 +46,6 @@
       </md-list-item>
     </md-list>
   </md-sidenav>
-  <md-toolbar color="primary" class="fixed-toolbar"
-              md-peekaboo [scroller]="content.parentElement"
-              [break]="190"
-              breakAction="show">
-  </md-toolbar>
-  <md-toolbar color="primary" class="fixed-toolbar">
-    <button md-button
-            class="md-hamburger md-icon-button"
-            hide-gt-lg
-            (click)="menu.open($event)"
-            aria-label="Home">
-      <i md-icon class="md-dark">menu</i>
-    </button>
-  <span md-peekaboo [scroller]="content.parentElement"
-        [breakMd]="72"
-        [breakXs]="20"
-        breakAction="show">
-    <span class="verbose-title" *ngIf="navigation?.currentTitle != site">Components <small>–</small>&nbsp;</span>
-    <span>{{navigation?.currentTitle}}</span>
-  </span>
-    <span flex></span>
-    <a md-peekaboo [scroller]="content.parentElement"
-       href="https://github.com/justindujardin/ng2-material/releases/tag/v{{version}}"
-       target="_blank"
-       [breakMd]="72"
-       breakAction="show"
-       *ngIf="version" class="md-caption">v{{version}}</a>
-  </md-toolbar>
 
   <md-content #content>
     <md-toolbar color="primary" class="hero">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {MdIcon} from '@angular2-material/icon';
 
@@ -10,10 +10,7 @@ import {MdIcon} from '@angular2-material/icon';
   directives: [MdToolbar, MdIcon]
 })
 export class ToolbarBasicUsageComponent implements OnInit {
-
   constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
