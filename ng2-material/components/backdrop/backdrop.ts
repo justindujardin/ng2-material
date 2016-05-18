@@ -1,5 +1,5 @@
 import {Animate} from "../../core/util/animate";
-import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter} from "angular2/core";
+import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter} from "@angular/core";
 import {DOM} from "angular2/src/platform/dom/dom_adapter";
 import {ViewportHelper} from "../../core/util/viewport";
 
