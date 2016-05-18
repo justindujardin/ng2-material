@@ -90,6 +90,12 @@ export class MdDataTable implements AfterContentInit {
         .map((tr: MdDataTableSelectableRow) => {
           tr.onChange.subscribe(this.change.bind(this));
         });
+
+      this._rows.forEach((row) => {
+        if(row.isActive){
+          this.selected.push(row.selectableValue);
+        }
+      });
     }
   }
 

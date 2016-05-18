@@ -39,6 +39,7 @@ MdDataTable is an enhancment of classic data tables.
 | --- | --- | --- | --- |
 | md-data-table-selectable-row | tbody tr | boolean | Enable a checkbox for this row. |
 | selectable-value | tbody tr | string | value of the checkbox. If it's not set the checkbox's value will be the index of the row. |
+| is-active | tbody tr | boolean | initial value for  the checkbox. If true the row will be selected. |
 
 ### Events
 | Name | Description |

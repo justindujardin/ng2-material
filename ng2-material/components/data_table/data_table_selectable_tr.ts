@@ -29,9 +29,10 @@ export interface ITableSelectableRowSelectionChange {
 export abstract class AbstractMdDataTableSelectableRow implements AfterContentInit, ITableSelectableRow {
   @Input('selectable-value')
   selectableValue: string;
+  @Input('is-active')
+  isActive: boolean = false;
   @Output()
   onChange: EventEmitter<ITableSelectableRowSelectionChange> = new EventEmitter(false);
-  isActive: boolean = false;
 
   constructor(@Optional()
               @Inject(forwardRef(() => MdDataTable))
