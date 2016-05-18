@@ -38,6 +38,9 @@ export function main() {
         <tr md-data-table-selectable-row>
           <td>$1.25</td>
         </tr>
+        <tr md-data-table-selectable-row [is-active]="true">
+          <td>$4.25</td>
+        </tr>
       </tbody>
     </md-data-table>`
   })
@@ -72,7 +75,7 @@ export function main() {
     describe('md-data-table', () => {
       it('should initialize selected', injectAsync([], () => {
         return setup().then((api: IDataTableFixture) => {
-          expect(api.comp.selected.length).toEqual(0);
+          expect(api.comp.selected.length).toEqual(1);
           api.fixture.destroy();
         });
       }));
@@ -81,10 +84,10 @@ export function main() {
         return setup(true).then((api: IDataTableFixture) => {
           let row = api.debug.query(By.css('tbody tr:first-child'));
           row.nativeElement.click();
-          expect(api.comp.selected.length).toEqual(1);
-          expect(api.comp.selected[0]).toEqual('0');
+          expect(api.comp.selected.length).toEqual(2);
+          expect(api.comp.selected[1]).toEqual('0');
           row.nativeElement.click();
-          expect(api.comp.selected.length).toEqual(0);
+          expect(api.comp.selected.length).toEqual(1);
           api.fixture.destroy();
         });
       }));
@@ -93,7 +96,7 @@ export function main() {
         return setup(true).then((api: IDataTableFixture) => {
             let masterRow = api.debug.query(By.css('thead tr:first-child'));
             masterRow.nativeElement.click();
-            expect(api.comp.selected.length).toEqual(2);
+            expect(api.comp.selected.length).toEqual(3);
             expect(api.comp.selected[0]).toEqual('0');
             masterRow.nativeElement.click();
             expect(api.comp.selected.length).toEqual(0);
@@ -109,7 +112,7 @@ export function main() {
             masterRow.nativeElement.click();
             expect(masterRow.componentInstance.isActive).toBe(true);
             row.click();
-            expect(api.comp.selected.length).toEqual(1);
+            expect(api.comp.selected.length).toEqual(2);
             expect(api.comp.selected[0]).toEqual('1');
             expect(masterRow.componentInstance.isActive).toBe(false);
             api.fixture.destroy();
@@ -128,6 +131,20 @@ export function main() {
           api.fixture.destroy();
         });
       }));
+
+      it('should checked a row checkbox when a is-active property is true', injectAsync([], () => {
+        return setup(true).then((api: IDataTableFixture) => {
+          let firstRow = api.debug.query(By.css('tbody tr:first-child')),
+              lastRow = api.debug.query(By.css('tbody tr:last-child'));
+
+          expect(firstRow.componentInstance.isActive).toBe(false);
+          expect(lastRow.componentInstance.isActive).toBe(true);
+          expect(api.comp.selected.length).toEqual(1);
+          expect(api.comp.selected[0]).toEqual('2');
+          api.fixture.destroy();
+        });
+      }));
+
     });
   });
 
