@@ -68,7 +68,7 @@ export class Ink {
       .then(() => ripple.classList.add('md-ripple-scaled'))
       .then(() => ripple.classList.add('md-ripple-active'))
       .then(() => Animate.wait(450))
-      .then(() => ripple.classList.remove('md-ripple-placed'))
+      .then(() => ripple.classList.remove('md-ripple-active'))
       .then(() => Animate.wait(650))
       .then(() => container.removeChild(ripple));
   }
