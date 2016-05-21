@@ -143,7 +143,6 @@ module.exports = function (grunt) {
         commit: true,
         commitMessage: 'chore(deploy): release v%VERSION%',
         commitFiles: [
-          'tsconfig.build.json',
           'package.json',
           'CHANGELOG.md'
         ],
@@ -251,7 +250,7 @@ module.exports = function (grunt) {
 
     // Switch to "dist" path and publish the npm package from there.
     process.chdir('dist');
-    exec('npm publish' + (tag ? ' --tag ' + tag : ''), function (err) {
+    exec('npm publish' + (tag ? ' --tag=' + tag : ''), function (err) {
       process.chdir('../');
       if (err) {
         return grunt.fatal(err.message.replace(/\n$/, '.'));
