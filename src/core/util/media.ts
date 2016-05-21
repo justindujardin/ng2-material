@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {Subject} from "rxjs/Subject";
+import {Injectable, NgZone} from "@angular/core";
 import {ViewportHelper} from "./viewport";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Observable} from "rxjs/Observable";
 
 
 /**
@@ -46,14 +46,14 @@ export class MediaListener {
   /**
    * Emits when the query that this is listening for changes.
    */
-  onMatched: Subject<MediaQueryList> = new BehaviorSubject<MediaQueryList>(this._mql);
+  onMatched: Observable<MediaQueryList> = new BehaviorSubject<MediaQueryList>(this.mql);
 
   /**
    * Determine if this query is currently matched by the viewport.
    * @returns {boolean} True if the query is matched.
    */
   get matches(): boolean {
-    return !this._destroyed && this._mql.matches;
+    return !this._destroyed && this.mql.matches;
   }
 
   private _destroyed: boolean = false;
@@ -61,10 +61,14 @@ export class MediaListener {
   private _listener: MediaQueryListListener;
 
   constructor(public query: string,
-              private _mql: MediaQueryList,
-              private _media: Media) {
-    this._listener = (mql: MediaQueryList) => this.onMatched.next(mql);
-    this._mql.addListener(this._listener);
+              private zone: NgZone,
+              private mql: MediaQueryList,
+              private media: Media) {
+    const subject = this.onMatched as BehaviorSubject<MediaQueryList>;
+    this._listener = (mql: MediaQueryList) => {
+      zone.run(() => subject.next(mql));
+    };
+    this.mql.addListener(this._listener);
   }
 
   /**
@@ -72,17 +76,17 @@ export class MediaListener {
    */
   destroy() {
     if (!this._destroyed) {
-      this._mql.removeListener(this._listener);
-      this._media.unregisterListener(this);
+      this.mql.removeListener(this._listener);
+      this.media.unregisterListener(this);
       this._destroyed = true;
       this._listener = null;
-      this._mql = null;
+      this.mql = null;
     }
   }
 
 }
 
-interface IMediaQueryCache {
+export interface IMediaQueryCache {
   references: number;
   mql: MediaQueryList;
 }
@@ -92,33 +96,36 @@ interface IMediaQueryCache {
  */
 @Injectable()
 export class Media {
-  private _cache: {[query: string]: IMediaQueryCache} = {};
 
-  constructor(public viewport:ViewportHelper) {
+  cache: {[query: string]: IMediaQueryCache} = {};
+
+  constructor(public viewport: ViewportHelper, private zone: NgZone) {
 
   }
 
   listen(query: string): MediaListener {
-    let listener = this._cache[query];
+    let listener = this.cache[query];
     if (!listener) {
-      listener = this._cache[query] = {
+      listener = this.cache[query] = {
         mql: this.viewport.matchMedia(query),
         references: 0
       };
     }
     listener.references++;
-    return new MediaListener(query, listener.mql, this);
+    return new MediaListener(query, this.zone, listener.mql, this);
   }
 
   unregisterListener(listener: MediaListener): void {
-    let cached = this._cache[listener.query];
+    let cached = this.cache[listener.query];
     if (cached) {
       cached.references--;
-      delete this._cache[listener.query];
+      if (cached.references === 0) {
+        delete this.cache[listener.query];
+      }
     }
   }
 
-  hasMedia(size:string): boolean {
+  hasMedia(size: string): boolean {
     let query = Media.getQuery(size);
     if (!query) {
       return false;
