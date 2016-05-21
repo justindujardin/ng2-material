@@ -1,26 +1,28 @@
-import {ChangeDetectorRef, Component, OnInit, OnDestroy, Input, ViewChild, NgZone, AfterViewInit} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, ViewChild, AfterViewInit} from '@angular/core';
 import {IndexComponent} from './+index';
-import {Routes, ROUTER_DIRECTIVES, Router} from '@angular/router';
+import {Routes, ROUTER_DIRECTIVES} from '@angular/router';
 import {ComponentsComponent} from './+components';
 import {MATERIAL_DIRECTIVES, Media} from 'ng2-material';
 import {NavigationService} from './shared/navigation.service';
 import {MD_SIDENAV_DIRECTIVES, MdSidenav} from '@angular2-material/sidenav';
-import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 import {MdToolbar} from '@angular2-material/toolbar';
 import {ComponentsService, IComponentMeta} from './shared/components.service';
 import {Response, Http} from '@angular/http';
+import {Router} from '@angular/router';
 import {FooterComponent} from './shared/footer/footer.component';
+import {MdIcon} from 'ng2-material';
+import {ComponentsOrderByPipe} from './site.pipe';
 
 @Component({
   moduleId: module.id,
   selector: 'site-app',
   templateUrl: 'site.component.html',
   styleUrls: ['site.component.css'],
+  pipes: [ComponentsOrderByPipe],
   directives: [
     ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MD_SIDENAV_DIRECTIVES, MdIcon, MdToolbar,
     FooterComponent
-  ],
-  providers: [MdIconRegistry]
+  ]
 })
 @Routes([
   {path: '/', component: IndexComponent},
@@ -47,6 +49,7 @@ export class SiteAppComponent implements OnInit,
   private _subscription = null;
 
   constructor(private http: Http, private navigation: NavigationService, private media: Media,
+              private router: Router,
               private _components: ComponentsService) {
   }
 
@@ -54,9 +57,7 @@ export class SiteAppComponent implements OnInit,
     let query = Media.getQuery(SiteAppComponent.SIDE_MENU_BREAKPOINT);
     this._subscription = this.media.listen(query).onMatched.subscribe((mql: MediaQueryList) => {
       this.menu.mode = mql.matches ? 'side' : 'over';
-
       this.menu.toggle(mql.matches).catch(() => undefined);
-      this.cdr.detectChanges();
     });
   }
 

@@ -39,9 +39,9 @@
       <h3>ng2-material</h3>
     </md-toolbar>
     <md-list>
-      <md-list-item md-ink [routerLink]="'/components/' + value.id"
+      <md-list-item md-ink (inked)="router.navigateByUrl('/components/' + value.id)"
                     [class.md-active]="navigation?.currentTitle==value.name"
-                    *ngFor="let value of components">
+                    *ngFor="let value of components | componentOrder">
         {{value.name}}
       </md-list-item>
     </md-list>

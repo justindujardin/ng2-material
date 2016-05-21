@@ -63,13 +63,11 @@
     right: 0;
     z-index: $z-index-toolbar;
     width: auto;
-    transition: transform 0.2s ease-out, opacity 0.1s ease-in;
-    will-change: transform, opacity, left;
-    opacity:1;
+    transition: opacity 0.1s ease-in;
+    will-change: opacity;
+    opacity: 1;
     &.hide {
-      transition: transform 0.2s ease-out, opacity 0.1s ease-in;
-      transform: translateY(-100%);
-      opacity:0;
+      opacity: 0;
     }
     .md-caption {
       text-decoration: none;

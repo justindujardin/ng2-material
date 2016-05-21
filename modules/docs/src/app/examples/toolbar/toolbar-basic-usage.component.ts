@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MdToolbar} from '@angular2-material/toolbar';
-import {MdIcon} from '@angular2-material/icon';
+import {MdIcon} from 'ng2-material';
 
 @Component({
   moduleId: module.id,
@@ -9,8 +9,5 @@ import {MdIcon} from '@angular2-material/icon';
   styleUrls: ['toolbar-basic-usage.component.css'],
   directives: [MdToolbar, MdIcon]
 })
-export class ToolbarBasicUsageComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+export class ToolbarBasicUsageComponent {
 }

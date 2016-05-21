@@ -142,7 +142,7 @@ export class Animate {
           Animate.setTransitionDuration(element, saveDuration);
         }
         else {
-          delete element.style['transition-duration'];
+          element.style['transition-duration'] = null;
         }
         animResolve();
       };
@@ -168,7 +168,7 @@ export class Animate {
         Animate.setTransitionDuration(element, saveDuration);
       }
       else {
-        delete element.style['transition-duration'];
+        element.style['transition-duration'] = null;
       }
       resolve();
     });
