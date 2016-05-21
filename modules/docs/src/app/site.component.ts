@@ -47,19 +47,16 @@ export class SiteAppComponent implements OnInit,
   private _subscription = null;
 
   constructor(private http: Http, private navigation: NavigationService, private media: Media,
-              private cdr: ChangeDetectorRef, private router: Router, private zone: NgZone,
               private _components: ComponentsService) {
   }
 
   ngAfterViewInit(): any {
     let query = Media.getQuery(SiteAppComponent.SIDE_MENU_BREAKPOINT);
     this._subscription = this.media.listen(query).onMatched.subscribe((mql: MediaQueryList) => {
-      this.zone.run(() => {
-        this.menu.mode = mql.matches ? 'side' : 'over';
+      this.menu.mode = mql.matches ? 'side' : 'over';
 
-        this.menu.toggle(mql.matches).catch(() => undefined);
-        this.cdr.detectChanges();
-      });
+      this.menu.toggle(mql.matches).catch(() => undefined);
+      this.cdr.detectChanges();
     });
   }
 
