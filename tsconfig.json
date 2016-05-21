@@ -11,7 +11,6 @@
         "outDir": "dist/",
         "rootDir": "src/",
         "inlineSourceMap": true,
-        "sourceMap": true,
         "target": "es5"
     },
     "filesGlob": [
