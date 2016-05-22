@@ -39,15 +39,15 @@ If you want to unlink it later you can run the same commands, but with `unlink` 
 
 Create a new component by specifying the component type that is being demonstrated, and the 
 behavior that the example demonstrates. Specify the by giving `ng generate component` a path of the
-form `components/[component-type]/[what-it-demonstrates]`. Here are a few examples:
+form `components/[component-type]/[component-type]-[what-it-demonstrates]`. Here are a few examples:
 
- > ng generate component examples/button-basic-usage --prefix=false
- > ng generate component examples/button-floating-action-buttons --prefix=false
- > ng generate component examples/sidenav-content-push --prefix=false
- > ng generate component examples/sidenav-responsive-mode --prefix=false
- > ng generate component examples/data-table-pagination --prefix=false
+ > ng generate component examples/button/button-basic-usage --prefix=false --flat
+ > ng generate component examples/button/button-floating-action-buttons --prefix=false --flat
+ > ng generate component examples/sidenav/sidenav-content-push --prefix=false --flat
+ > ng generate component examples/sidenav/sidenav-responsive-mode --prefix=false --flat
+ > ng generate component examples/data-table/data-table-pagination --prefix=false --flat
  
 If you are creating the first most basic example for a component, specify the name `basic-usage`:
 
- > ng generate component examples/data-table-basic-usage --prefix=false
+ > ng generate component examples/data-table/data-table-basic-usage --prefix=false  --flat
  
