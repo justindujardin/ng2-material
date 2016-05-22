@@ -1,14 +1,12 @@
 @import "../../core/style/variables";
 @import "../../core/style/shadows";
 @import "../../core/style/default-theme";
+@import "../../core/style/typography";
 
+md-dialog {
+  display: none;
+}
 .md-dialog {
-  position: fixed;
-  z-index: 80;
-
-  /** Center the dialog. */
-  top: 50%;
-  left: 50%;
   min-width: 300px;
   min-height: 100px;
 
@@ -20,15 +18,11 @@
 
   opacity: 0;
   transition: $swift-ease-out;
-  transform: translate3d(-50%, -50%, 0) scale(0.2);
+  transform: scale(0.2);
 
   order: 1;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-
-  &:not([layout=row]) > * > *:first-child:not(.md-subheader) {
-    margin-top: 0;
-  }
 
   &:focus {
     outline: none;
@@ -36,46 +30,8 @@
 
   &.md-active {
     opacity: 1;
-    transition: $swift-ease-out;
-    transform: translate3d(-50%, -50%, 0) scale(1.0);
-    -webkit-filter: blur(0px);
-    -moz-filter: blur(0px);
-    -ms-filter: blur(0px);
-    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
-    filter: none;
+    transform: perspective(1px) scale(1.0);
   }
-
-  &.md-dialog-absolute {
-    position: absolute;
-  }
-
-  .md-actions, md-dialog-actions {
-    display: flex;
-    order: 2;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: flex-end;
-    padding-top: $baseline-grid * 3;
-    padding-right: $baseline-grid;
-    padding-left: $baseline-grid * 2;
-
-    // Align md-actions outside of the padding of .md-dialog
-    margin-bottom: -$baseline-grid * 3;
-    margin-left: -$baseline-grid * 3;
-    margin-right: -$baseline-grid * 3;
-
-    right: -$baseline-grid * 3;
-    min-height: $baseline-grid * 6.5;
-    overflow: hidden;
-
-    [md-button], [md-raised-button] {
-      margin-bottom: $baseline-grid;
-      margin-left: $baseline-grid;
-      margin-right: 0;
-      margin-top: $baseline-grid;
-    }
-  }
-
 }
 
 // Theme
@@ -93,4 +49,5 @@ $dialog-border-radius: 4px !default;
   }
 }
 
-
+@import "dialog-actions";
+@import "dialog-title";

@@ -1,4 +1,4 @@
 
 ```
-This example is currently broken.
+These components are a work in progress.
 ```

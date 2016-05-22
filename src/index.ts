@@ -6,7 +6,7 @@ import {
   MdDataTableHeaderSelectableRow,
   MdDataTableSelectableRow
 } from "./components/data_table/data_table";
-import {MdDialog, MdDialogTitle, MdDialogActions} from "./components/dialog/dialog";
+import {MdDialog, MdDialogTitle, MdDialogActions, MdDialogPortal} from "./components/dialog/index";
 import {MdDivider} from "./components/divider/divider";
 import {MdIcon} from "./components/icon/icon";
 import {MdInk} from "./components/ink/ink";
@@ -28,14 +28,15 @@ import {Media} from "./core/util/media";
 import {ViewportHelper, BrowserViewportHelper, NodeViewportHelper} from "./core/util/viewport";
 import {OVERLAY_CONTAINER_TOKEN, createOverlayContainer} from "@angular2-material/core/overlay/overlay";
 import {MdBackdrop} from "./components/backdrop/backdrop";
+
 export * from './components/button/button';
-export * from './components/backdrop/backdrop';
+export * from './components/backdrop/backdrop'; 
 
 export * from './components/content/content';
 
 export * from './components/data_table/data_table';
 
-export * from './components/dialog/dialog';
+export * from './components/dialog/index';
 export * from './components/divider/divider';
 
 export * from './components/icon/icon';
@@ -70,7 +71,7 @@ export const MATERIAL_DIRECTIVES: any[] = [
   MdDataTable, MdDataTableHeaderSelectableRow, MdDataTableSelectableRow,
   MdDivider,
   MdBackdrop,
-  MdDialog, MdDialogActions, MdDialogTitle,
+  MdDialog, MdDialogActions, MdDialogTitle, MdDialogPortal,
   MdIcon,
   MdInk,
   MdPatternValidator, MdMaxLengthValidator,

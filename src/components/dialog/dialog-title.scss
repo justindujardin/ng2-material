@@ -1,0 +1,8 @@
+@import "../../core/style/typography";
+
+.md-dialog {
+  md-dialog-title {
+    @extend .md-headline;
+    margin-bottom: 20px;
+  }
+}
