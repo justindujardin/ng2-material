@@ -1,3 +1,26 @@
+<a name="0.4.1"></a>
+## [0.4.1](https://github.com/justindujardin/ng2-material/compare/v0.4.0...v0.4.1) (2016-05-22)
+
+
+### Bug Fixes
+
+* **Media:** zone aware query callbacks and sane reference counting ([b7385e1](https://github.com/justindujardin/ng2-material/commit/b7385e1))
+* **npm:** rewrite package source maps to point to the correct sources ([329dac2](https://github.com/justindujardin/ng2-material/commit/329dac2))
+
+### Features
+
+* **examples:** add jetbrains sponsor to index page ([03a5ff0](https://github.com/justindujardin/ng2-material/commit/03a5ff0))
+* **examples:** highlight code examples in component readme files ([4033074](https://github.com/justindujardin/ng2-material/commit/4033074))
+* **MdDialog:** add material2 overlay based dialog ([3a02410](https://github.com/justindujardin/ng2-material/commit/3a02410))
+
+
+
+<a name="0.3.8"></a>
+## [0.3.8](https://github.com/justindujardin/ng2-material/compare/v0.3.7...v0.3.8) (2016-05-04)
+
+
+
+
 <a name="0.3.8"></a>
 ## [0.3.8](https://github.com/justindujardin/ng2-material/compare/v0.3.7...v0.3.8) (2016-05-04)
 
