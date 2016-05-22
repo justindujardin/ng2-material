@@ -1,0 +1,632 @@
+[
+  {
+    "lines": {
+      "found": 42,
+      "hit": 42,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/index.ts"
+  },
+  {
+    "lines": {
+      "found": 32,
+      "hit": 30,
+      "percent": 94
+    },
+    "functions": {
+      "hit": 10,
+      "found": 12,
+      "percent": 83
+    },
+    "branches": {
+      "hit": 10,
+      "found": 12,
+      "percent": 83
+    },
+    "file": "src/components/button/button.ts"
+  },
+  {
+    "lines": {
+      "found": 38,
+      "hit": 34,
+      "percent": 89
+    },
+    "functions": {
+      "hit": 14,
+      "found": 15,
+      "percent": 93
+    },
+    "branches": {
+      "hit": 4,
+      "found": 8,
+      "percent": 50
+    },
+    "file": "src/core/util/ink.ts"
+  },
+  {
+    "lines": {
+      "found": 106,
+      "hit": 75,
+      "percent": 71
+    },
+    "functions": {
+      "hit": 20,
+      "found": 28,
+      "percent": 71
+    },
+    "branches": {
+      "hit": 17,
+      "found": 40,
+      "percent": 43
+    },
+    "file": "src/core/util/animate.ts"
+  },
+  {
+    "lines": {
+      "found": 4,
+      "hit": 4,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 1,
+      "found": 1,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/content/content.ts"
+  },
+  {
+    "lines": {
+      "found": 40,
+      "hit": 40,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 7,
+      "found": 7,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 10,
+      "found": 12,
+      "percent": 83
+    },
+    "file": "src/components/data_table/data_table.ts"
+  },
+  {
+    "lines": {
+      "found": 54,
+      "hit": 52,
+      "percent": 96
+    },
+    "functions": {
+      "hit": 18,
+      "found": 21,
+      "percent": 86
+    },
+    "branches": {
+      "hit": 6,
+      "found": 9,
+      "percent": 67
+    },
+    "file": "src/components/data_table/data_table_selectable_tr.ts"
+  },
+  {
+    "lines": {
+      "found": 16,
+      "hit": 15,
+      "percent": 94
+    },
+    "functions": {
+      "hit": 3,
+      "found": 4,
+      "percent": 75
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/dialog/dialog.ts"
+  },
+  {
+    "lines": {
+      "found": 4,
+      "hit": 4,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 1,
+      "found": 1,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/divider/divider.ts"
+  },
+  {
+    "lines": {
+      "found": 4,
+      "hit": 4,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 1,
+      "found": 1,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/icon/icon.ts"
+  },
+  {
+    "lines": {
+      "found": 12,
+      "hit": 12,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 4,
+      "found": 4,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 4,
+      "found": 4,
+      "percent": 100
+    },
+    "file": "src/components/ink/ink.ts"
+  },
+  {
+    "lines": {
+      "found": 67,
+      "hit": 50,
+      "percent": 75
+    },
+    "functions": {
+      "hit": 14,
+      "found": 25,
+      "percent": 56
+    },
+    "branches": {
+      "hit": 8,
+      "found": 20,
+      "percent": 40
+    },
+    "file": "src/components/form/validators.ts"
+  },
+  {
+    "lines": {
+      "found": 22,
+      "hit": 7,
+      "percent": 32
+    },
+    "functions": {
+      "hit": 2,
+      "found": 7,
+      "percent": 29
+    },
+    "branches": {
+      "hit": 0,
+      "found": 10,
+      "percent": 0
+    },
+    "file": "src/core/util/util.ts"
+  },
+  {
+    "lines": {
+      "found": 61,
+      "hit": 32,
+      "percent": 52
+    },
+    "functions": {
+      "hit": 7,
+      "found": 10,
+      "percent": 70
+    },
+    "branches": {
+      "hit": 5,
+      "found": 22,
+      "percent": 23
+    },
+    "file": "src/components/form/messages.ts"
+  },
+  {
+    "lines": {
+      "found": 7,
+      "hit": 7,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 2,
+      "found": 2,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/list/list.ts"
+  },
+  {
+    "lines": {
+      "found": 98,
+      "hit": 85,
+      "percent": 87
+    },
+    "functions": {
+      "hit": 21,
+      "found": 25,
+      "percent": 84
+    },
+    "branches": {
+      "hit": 25,
+      "found": 35,
+      "percent": 71
+    },
+    "file": "src/components/peekaboo/peekaboo.ts"
+  },
+  {
+    "lines": {
+      "found": 50,
+      "hit": 46,
+      "percent": 92
+    },
+    "functions": {
+      "hit": 9,
+      "found": 11,
+      "percent": 82
+    },
+    "branches": {
+      "hit": 5,
+      "found": 12,
+      "percent": 42
+    },
+    "file": "src/core/util/media.ts"
+  },
+  {
+    "lines": {
+      "found": 27,
+      "hit": 21,
+      "percent": 78
+    },
+    "functions": {
+      "hit": 6,
+      "found": 15,
+      "percent": 40
+    },
+    "branches": {
+      "hit": 2,
+      "found": 6,
+      "percent": 33
+    },
+    "file": "src/core/util/viewport.ts"
+  },
+  {
+    "lines": {
+      "found": 31,
+      "hit": 19,
+      "percent": 61
+    },
+    "functions": {
+      "hit": 1,
+      "found": 7,
+      "percent": 14
+    },
+    "branches": {
+      "hit": 0,
+      "found": 6,
+      "percent": 0
+    },
+    "file": "src/components/switch/switch.ts"
+  },
+  {
+    "lines": {
+      "found": 5,
+      "hit": 5,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 1,
+      "found": 1,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 2,
+      "found": 2,
+      "percent": 100
+    },
+    "file": "src/core/key_codes.ts"
+  },
+  {
+    "lines": {
+      "found": 4,
+      "hit": 4,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 1,
+      "found": 1,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/subheader/subheader.ts"
+  },
+  {
+    "lines": {
+      "found": 56,
+      "hit": 56,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 15,
+      "found": 15,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 16,
+      "found": 16,
+      "percent": 100
+    },
+    "file": "src/components/tabs/tabs.ts"
+  },
+  {
+    "lines": {
+      "found": 58,
+      "hit": 55,
+      "percent": 95
+    },
+    "functions": {
+      "hit": 8,
+      "found": 9,
+      "percent": 89
+    },
+    "branches": {
+      "hit": 31,
+      "found": 33,
+      "percent": 94
+    },
+    "file": "src/components/backdrop/backdrop.ts"
+  },
+  {
+    "lines": {
+      "found": 101,
+      "hit": 99,
+      "percent": 98
+    },
+    "functions": {
+      "hit": 27,
+      "found": 29,
+      "percent": 93
+    },
+    "branches": {
+      "hit": 2,
+      "found": 2,
+      "percent": 100
+    },
+    "file": "src/components/button/button_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 27,
+      "hit": 27,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 11,
+      "found": 11,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/form/validators_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 48,
+      "hit": 46,
+      "percent": 96
+    },
+    "functions": {
+      "hit": 13,
+      "found": 14,
+      "percent": 93
+    },
+    "branches": {
+      "hit": 2,
+      "found": 2,
+      "percent": 100
+    },
+    "file": "src/components/ink/ink_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 53,
+      "hit": 53,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 27,
+      "found": 27,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 4,
+      "found": 4,
+      "percent": 100
+    },
+    "file": "src/components/peekaboo/peekaboo_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 70,
+      "hit": 68,
+      "percent": 97
+    },
+    "functions": {
+      "hit": 21,
+      "found": 22,
+      "percent": 95
+    },
+    "branches": {
+      "hit": 4,
+      "found": 4,
+      "percent": 100
+    },
+    "file": "src/components/tabs/tabs_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 128,
+      "hit": 126,
+      "percent": 98
+    },
+    "functions": {
+      "hit": 56,
+      "found": 61,
+      "percent": 92
+    },
+    "branches": {
+      "hit": 6,
+      "found": 6,
+      "percent": 100
+    },
+    "file": "src/components/backdrop/backdrop_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 65,
+      "hit": 64,
+      "percent": 98
+    },
+    "functions": {
+      "hit": 17,
+      "found": 18,
+      "percent": 94
+    },
+    "branches": {
+      "hit": 3,
+      "found": 4,
+      "percent": 75
+    },
+    "file": "src/components/data_table/data_table_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 4,
+      "hit": 4,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 1,
+      "found": 1,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/dialog/dialog_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 47,
+      "hit": 47,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 17,
+      "found": 17,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 4,
+      "found": 4,
+      "percent": 100
+    },
+    "file": "src/components/form/messages_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 3,
+      "hit": 3,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 1,
+      "found": 1,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/subheader/subheader_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 5,
+      "hit": 5,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 1,
+      "found": 1,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/list/list_spec.ts"
+  },
+  {
+    "lines": {
+      "found": 3,
+      "hit": 3,
+      "percent": 100
+    },
+    "functions": {
+      "hit": 1,
+      "found": 1,
+      "percent": 100
+    },
+    "branches": {
+      "hit": 0,
+      "found": 0,
+      "percent": 100
+    },
+    "file": "src/components/switch/switch_spec.ts"
+  }
+]

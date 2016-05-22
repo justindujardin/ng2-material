@@ -122,7 +122,7 @@ module.exports = function (grunt) {
       },
       meta: {
         files: [
-          'modules/docs/src/**/*.*',
+          'modules/site/src/**/*.*',
           'src/**/*.md',
           'package.json'
         ],
@@ -360,7 +360,7 @@ module.exports = function (grunt) {
           d.branches.percent = percent(d.branches);
           return d;
         });
-        writeJson('modules/docs/public/coverage.json', outMeta);
+        writeJson('modules/site/public/coverage.json', outMeta);
         next();
       });
     });
@@ -380,7 +380,7 @@ module.exports = function (grunt) {
     });
 
     tasks.push(function buildReadmeFiles() {
-      glob("modules/docs/src/app/examples/**/readme.md", function (err, files) {
+      glob("modules/site/src/app/examples/**/readme.md", function (err, files) {
         files.forEach(function parseDemo(readmeFile) {
           var component = readableString(path.basename(path.dirname(readmeFile)));
           meta[component] = meta[component] || {};
@@ -400,12 +400,12 @@ module.exports = function (grunt) {
       Object.keys(pkg.dependencies).forEach(function (depKey) {
         data[depKey] = pkg.dependencies[depKey];
       });
-      writeJson('modules/docs/public/version.json', data);
+      writeJson('modules/site/public/version.json', data);
       next();
     });
 
     tasks.push(function buildExamples() {
-      const pathPrefix = 'modules/docs/src/';
+      const pathPrefix = 'modules/site/src/';
       glob(pathPrefix + "app/examples/**/*.html", function (err, files) {
         files.forEach(function parseDemo(templateFile) {
           var name = path.basename(templateFile, '.html');
@@ -443,7 +443,7 @@ module.exports = function (grunt) {
             }
             meta[component].files.push(sourceFile);
           });
-          writeJson('modules/docs/public/meta.json', prepareMeta());
+          writeJson('modules/site/public/meta.json', prepareMeta());
           next();
         });
       });

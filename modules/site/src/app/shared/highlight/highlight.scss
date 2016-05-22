@@ -28,6 +28,7 @@
   white-space: pre;
   white-space: pre-wrap;
   word-wrap: break-word;
+  margin: 0;
 
   > code {
     margin: 0;
@@ -45,11 +46,8 @@
       -ms-user-select: initial;
       user-select: initial;
       background-color: transparent;
-      font-weight: 400;
-      padding: 16px;
       display: block;
       overflow-wrap: break-word;
-      margin-bottom: 15px;
     }
     &:not(.highlight) {
       margin-left: 1px;
