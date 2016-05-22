@@ -122,15 +122,16 @@ module.exports = function (grunt) {
       },
       meta: {
         files: [
-          'modules/docs/src/**/*.*'
+          'modules/docs/src/**/*.*',
+          'package.json'
         ],
-        tasks: ['site-meta', 'notify:meta']
+        tasks: ['site-meta', 'build-npm-package', 'notify:meta']
       },
       ts: {
         files: [
           '<%- sourceRoot %>/**/*.ts'
         ],
-        tasks: ['ts:source', 'notify:source']
+        tasks: ['ts:source', 'rewrite-source-maps', 'notify:source']
       }
     },
 
@@ -202,7 +203,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.registerTask('default', ['ts', 'sass', 'postcss', 'site-meta']);
+  grunt.registerTask('default', ['ts', 'sass', 'postcss', 'site-meta', 'rewrite-source-maps']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
@@ -226,8 +227,8 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('build-npm', ['build', 'build-npm-package-json']);
-  grunt.registerTask('build-npm-package-json', function () {
+  grunt.registerTask('build-npm', ['build', 'build-npm-package', 'rewrite-source-maps']);
+  grunt.registerTask('build-npm-package', function () {
     // Swap dependencies for peerDependencies in the published package.
     // http://stackoverflow.com/a/34645112
     var fs = require('fs');
@@ -242,6 +243,22 @@ module.exports = function (grunt) {
     catch (e) {
       console.error('failed: ' + e);
     }
+  });
+  grunt.registerTask('rewrite-source-maps', function () {
+    var done = this.async();
+    var glob = require('glob');
+    var fs = require('fs');
+    var path = require('path');
+    // Rewrite source maps to match NPM directory structure
+    // replace "../src/" with "src/" in glob("dist/**/*.js.map")
+    glob("dist/**/*.js.map", function (err, files) {
+      files.forEach(function rewriteSourceMap(sourceMapFileName) {
+        const data = fs.readFileSync(sourceMapFileName).toString();
+        fs.writeFileSync(sourceMapFileName,data.replace("../src/", "src/"));
+      });
+      done();
+    });
+
   });
 
   grunt.registerTask('publish', 'Publish new npm package', function (tag) {
@@ -394,7 +411,7 @@ module.exports = function (grunt) {
           }
 
           var component = readableString(path.basename(path.dirname(templateFile)));
-          var readable = readableString(name).replace('.component','');
+          var readable = readableString(name).replace('.component', '');
           result.component = selectorString(readable);
           meta[component] = meta[component] || {};
           meta[component].files = [];
