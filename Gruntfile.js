@@ -1,8 +1,8 @@
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    sourceRoot: 'ng2-material',
-    outPath: 'out',
+    sourceRoot: 'src',
+    outPath: 'dist',
     sitePath: 'site',
     clean: [
       "dist/",
@@ -12,38 +12,16 @@ module.exports = function (grunt) {
       "<%- sourceRoot %>/**/*.d.ts",
       "<%- sourceRoot %>/**/*.js.map",
       "<%- sourceRoot %>/**/*.css",
-      "<%- sourceRoot %>/**/*.css.map",
-      "examples/**/*.js",
-      "examples/**/*.d.ts",
-      "examples/**/*.js.map",
-      "examples/**/*.css",
-      "examples/**/*.css.map",
-      "test/**/*.js",
-      "test/**/*.d.ts",
-      "test/**/*.js.map"
+      "<%- sourceRoot %>/**/*.css.map"
     ],
     copy: {
-      release: {
+      npm: {
         files: [
           {src: 'package.json', dest: '<%- outPath %>/'},
           {src: 'CHANGELOG.md', dest: '<%- outPath %>/'},
           {src: 'README.md', dest: '<%- outPath %>/'},
-          // Individual style and html files
-          // NOTE: Individual js/d.ts outputs are handled by the build task for release
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.css'], dest: '<%- outPath %>/'},
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.css.map'], dest: '<%- outPath %>/'},
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.html'], dest: '<%- outPath %>/'},
-
-          // Source .ts/.scss files for people that prefer to build.
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.scss'], dest: '<%- outPath %>/source'},
-          {expand: true, cwd: 'ng2-material/', src: ['**/*.ts'], dest: '<%- outPath %>/source'},
-
-          // Bundled js and css files
-          {expand: true, cwd: 'dist/', src: ['*.*'], dest: '<%- outPath %>/dist'},
-          {expand: true, cwd: 'public/font/', src: ['*.*'], dest: '<%- outPath %>/dist'},
-
-
-          // Material Icons web font
+          {expand: true, cwd: 'src/', src: ['**/*.scss'], dest: '<%- outPath %>/'},
+          {expand: true, cwd: 'src/', src: ['**/*.ts'], dest: '<%- outPath %>/src'},
           {expand: true, cwd: 'public/', src: ['font/*.*'], dest: '<%- outPath %>/'}
         ]
       },
@@ -70,7 +48,7 @@ module.exports = function (grunt) {
           {expand: true, src: 'package.json', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'index.html', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'config.js', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'ng2-material/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
+          {expand: true, src: 'src/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'coverage/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'dist/*.*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {
@@ -81,7 +59,7 @@ module.exports = function (grunt) {
             dest: '<%- sitePath %>/<%- pkg.version %>/dist/'
           },
           {expand: true, src: 'public/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'examples/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
+          {expand: true, src: 'example/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
         ]
       }
     },
@@ -95,9 +73,6 @@ module.exports = function (grunt) {
     ts: {
       source: {
         tsconfig: true
-      },
-      release: {
-        tsconfig: 'tsconfig.build.json'
       }
     },
     sass: {
@@ -109,8 +84,6 @@ module.exports = function (grunt) {
             dest: '.',
             ext: '.css',
             src: [
-              "examples/*.scss",
-              "examples/**/*.scss",
               "public/font/*.scss",
               "<%- sourceRoot %>/all.scss"
             ]
@@ -129,14 +102,7 @@ module.exports = function (grunt) {
         ]
       },
       dist: {
-        src: [
-          "examples/*.css",
-          "examples/**/*.css",
-          "public/font/*.css",
-          "dist/ng2-material.css",
-          "<%- sourceRoot %>/all.css",
-          "<%- sourceRoot %>/components/**/*.css"
-        ]
+        src: ["dist/*.css"]
       }
     },
     connect: {
@@ -150,30 +116,23 @@ module.exports = function (grunt) {
       sass: {
         files: [
           '<%- sourceRoot %>/**/*.scss',
-          '<%- sourceRoot %>/*.scss',
-          'examples/**/*.scss',
-          'app.scss'
+          '<%- sourceRoot %>/*.scss'
         ],
         tasks: ['sass', 'postcss:dist', 'notify:styles']
       },
       meta: {
         files: [
-          'examples/**/*.html',
-          'examples/**/*.ts',
-          'examples/**/*.scss',
-          'examples/*.*'
+          'modules/site/src/**/*.*',
+          'src/**/*.md',
+          'package.json'
         ],
-        tasks: ['site-meta', 'notify:meta']
+        tasks: ['site-meta', 'build-npm-package', 'notify:meta']
       },
       ts: {
         files: [
-          '<%- sourceRoot %>/**/*.ts',
-          './*.ts',
-          'examples/*.ts',
-          'examples/**/*.ts',
-          'test/**/*.ts'
+          '<%- sourceRoot %>/**/*.ts'
         ],
-        tasks: ['ts:source', 'notify:source']
+        tasks: ['ts:source', 'rewrite-source-maps', 'notify:source']
       }
     },
 
@@ -186,7 +145,6 @@ module.exports = function (grunt) {
         commit: true,
         commitMessage: 'chore(deploy): release v%VERSION%',
         commitFiles: [
-          'tsconfig.build.json',
           'package.json',
           'CHANGELOG.md'
         ],
@@ -213,23 +171,13 @@ module.exports = function (grunt) {
         commitMessage: 'chore(attribution): update contributors'
       }
     },
-    dtsGenerator: {
-      options: {
-        name: 'ng2-material',
-        baseDir: '<%- sourceRoot %>',
-        out: 'dist/<%=pkg.name%>.d.ts'
-      },
-      default: {
-        src: ['<%- sourceRoot %>/**/*.ts']
-      }
-    },
+
     karma: {
       cover: {
         options: {
           singleRun: true
         },
-        configFile: './karma.conf.js',
-        preprocessors: {"ng2-material/**/*.js": "coverage"}
+        configFile: './karma.conf.js'
       }
     },
     remapIstanbul: {
@@ -243,9 +191,6 @@ module.exports = function (grunt) {
           }
         }
       }
-    },
-    webpack: {
-      singleJs: require('./webpack.config.js')
     }
   });
 
@@ -258,52 +203,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ts');
-  grunt.loadNpmTasks('dts-generator');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.loadNpmTasks('grunt-webpack');
-
-  grunt.registerTask('default', ['dtsGenerator', 'ts:source', 'sass', 'postcss', 'site-meta']);
+  grunt.registerTask('default', ['ts', 'sass', 'postcss', 'site-meta', 'rewrite-source-maps']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
   grunt.registerTask('site', ['build', 'cover', 'copy:site']);
-  grunt.registerTask('build', ['default', 'ts:release', 'dist-bundle', 'copy:release', 'webpack']);
-
-
-  grunt.registerTask('dist-bundle', 'Build a single-file javascript output.', function () {
-    var done = this.async();
-    var Builder = require('systemjs-builder');
-    var builder = new Builder('./', './config.bundle.js');
-
-    // Strip the extension off of the output System js import names.
-
-    //var fs = require('fs');
-    //
-    //function fixPaths(file) {
-    //  var contents = fs.readFileSync(file).toString();
-    //  contents = contents.replace(/("ng2-material\/.*?\.ts")/g, function (match) {
-    //    return match.replace('.ts', '');
-    //  });
-    //  fs.writeFileSync(file, contents, 'utf-8');
-    //}
-
-    builder
-      .bundle('ng2-material', 'dist/ng2-material.js', {
-        minify: false,
-        sourceMaps: true
-      })
-      .then(function () {
-        //fixPaths('dist/ng2-material.js');
-        return builder.bundle('ng2-material', 'dist/ng2-material.min.js', {
-          minify: true,
-          sourceMaps: true
-        });
-      })
-      .then(function () {
-        //fixPaths('dist/ng2-material.min.js');
-        done();
-      });
-  });
+  grunt.registerTask('build', ['default', 'copy:npm']);
 
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-conventional-changelog');
@@ -316,17 +222,14 @@ module.exports = function (grunt) {
       'npm-contributors',
       'bump:' + type + ':bump-only',
       'conventionalChangelog',
-      'copy:release',
+      'copy:npm',
       'bump-commit',
       'publish'
     ]);
   });
 
-
-  grunt.registerTask('publish', 'Publish new npm package', function (tag) {
-    var exec = require('child_process').exec;
-    var done = this.async();
-
+  grunt.registerTask('build-npm', ['build', 'build-npm-package', 'rewrite-source-maps']);
+  grunt.registerTask('build-npm-package', function () {
     // Swap dependencies for peerDependencies in the published package.
     // http://stackoverflow.com/a/34645112
     var fs = require('fs');
@@ -336,15 +239,36 @@ module.exports = function (grunt) {
       var rendered = JSON.parse(file);
       rendered.peerDependencies = rendered.dependencies;
       delete rendered.dependencies;
-      fs.writeFileSync('out/package.json', JSON.stringify(rendered, null, 2));
+      fs.writeFileSync('dist/package.json', JSON.stringify(rendered, null, 2));
     }
     catch (e) {
       console.error('failed: ' + e);
     }
+  });
+  grunt.registerTask('rewrite-source-maps', function () {
+    var done = this.async();
+    var glob = require('glob');
+    var fs = require('fs');
+    var path = require('path');
+    // Rewrite source maps to match NPM directory structure
+    // replace "../src/" with "src/" in glob("dist/**/*.js.map")
+    glob("dist/**/*.js.map", function (err, files) {
+      files.forEach(function rewriteSourceMap(sourceMapFileName) {
+        const data = fs.readFileSync(sourceMapFileName).toString();
+        fs.writeFileSync(sourceMapFileName,data.replace("../src/", "src/"));
+      });
+      done();
+    });
 
-    // Switch to "out" path and publish the npm package from there.
-    process.chdir('out');
-    exec('npm publish' + (tag ? ' --tag ' + tag : ''), function (err) {
+  });
+
+  grunt.registerTask('publish', 'Publish new npm package', function (tag) {
+    var exec = require('child_process').exec;
+    var done = this.async();
+
+    // Switch to "dist" path and publish the npm package from there.
+    process.chdir('dist');
+    exec('npm publish' + (tag ? ' --tag=' + tag : ''), function (err) {
       process.chdir('../');
       if (err) {
         return grunt.fatal(err.message.replace(/\n$/, '.'));
@@ -361,6 +285,7 @@ module.exports = function (grunt) {
     var path = require('path');
     var util = require('util');
     var marked = require('marked');
+    var npm = require("npm");
     var meta = {};
     var tasks = [];
 
@@ -374,6 +299,40 @@ module.exports = function (grunt) {
       smartLists: true,
       smartypants: false
     });
+
+    function ifError(err) {
+      if (err) {
+        return grunt.fatal(err.message.replace(/\n$/, '.'));
+      }
+    }
+
+    // npm.load({loaded: false}, function (err) {
+    //   ifError(err);
+    //   var file = fs.readFileSync(path.join(__dirname, 'package.json')).toString();
+    //   var rendered = JSON.parse(file);
+    //   var depNames = Object.keys(rendered.dependencies);
+    //   console.log('--> Getting version information for (' + depNames.length + ') package dependencies');
+    //   depNames.forEach(function (packageName) {
+    //     const version = rendered.dependencies[packageName];
+    //     tasks.push(function getComponentVersions() {
+    //       var save = process.stdout.write;
+    //       // NPM will write all of the stuff we query to the console
+    //       // so go ahead and suppress the duplicate output.
+    //       process.stdout.write = function (msg) {
+    //       };
+    //       // catch errors
+    //       npm.commands.info([packageName], function (err, data) {
+    //         ifError(err);
+    //         process.stdout.write = save;
+    //         console.log('    ' + packageName + ' (' + version + ') OK');
+    //         // console.log(data);
+    //         next();
+    //       });
+    //     });
+    //   });
+    //   // Once we've queried the dependent components, kick off the tasks
+    //   next();
+    // });
 
     tasks.push(function buildCoverage() {
       // Parse Lcov report and generate `coverage.json` file for site.
@@ -401,13 +360,27 @@ module.exports = function (grunt) {
           d.branches.percent = percent(d.branches);
           return d;
         });
-        writeJson('public/coverage.json', outMeta);
+        writeJson('modules/site/public/coverage.json', outMeta);
+        next();
+      });
+    });
+
+
+    // Copy Readme for official components BEFORE rendering readme markdown files.
+    tasks.push(function buildComponentDocumentation() {
+      glob("src/components/**/readme.md", function (err, files) {
+        files.forEach(function parseReadme(readmeFile) {
+          var component = readableString(path.basename(path.dirname(readmeFile)));
+          var data = fs.readFileSync(readmeFile).toString();
+          meta[component] = meta[component] || {};
+          meta[component].documentation = marked(data);
+        });
         next();
       });
     });
 
     tasks.push(function buildReadmeFiles() {
-      glob("examples/components/**/readme.md", function (err, files) {
+      glob("modules/site/src/app/examples/**/readme.md", function (err, files) {
         files.forEach(function parseDemo(readmeFile) {
           var component = readableString(path.basename(path.dirname(readmeFile)));
           meta[component] = meta[component] || {};
@@ -420,44 +393,49 @@ module.exports = function (grunt) {
     tasks.push(function buildProjectReadme() {
       var rendered = marked(fs.readFileSync(path.join(__dirname, 'README.md')).toString());
       var pkg = require('./package.json');
-      writeJson('public/version.json', {
+      var data = {
         version: pkg.version,
-        readme: rendered,
-        angular2: pkg.dependencies.angular2
+        readme: rendered
+      };
+      Object.keys(pkg.dependencies).forEach(function (depKey) {
+        data[depKey] = pkg.dependencies[depKey];
       });
+      writeJson('modules/site/public/version.json', data);
       next();
     });
 
     tasks.push(function buildExamples() {
-      glob("examples/components/**/*.html", function (err, files) {
+      const pathPrefix = 'modules/site/src/';
+      glob(pathPrefix + "app/examples/**/*.html", function (err, files) {
         files.forEach(function parseDemo(templateFile) {
           var name = path.basename(templateFile, '.html');
           var result = {
-            template: templateFile
+            template: fs.readFileSync(templateFile).toString()
           };
           var readmeFile = path.join(path.dirname(templateFile), name + '.md');
           var sourceFile = path.join(path.dirname(templateFile), name + '.ts');
           var stylesFile = path.join(path.dirname(templateFile), name + '.scss');
           if (fileExists(stylesFile)) {
-            result.styles = stylesFile;
+            result.styles = fs.readFileSync(stylesFile).toString();
           }
           if (fileExists(sourceFile)) {
-            result.source = sourceFile;
+            result.source = fs.readFileSync(sourceFile).toString();
           }
           if (fileExists(readmeFile)) {
             result.readme = marked(fs.readFileSync(readmeFile).toString());
           }
 
           var component = readableString(path.basename(path.dirname(templateFile)));
-          result.component = selectorString(component + ' ' + readableString(name));
+          var readable = readableString(name).replace('.component', '');
+          result.component = selectorString(readable);
           meta[component] = meta[component] || {};
           meta[component].files = [];
-          meta[component][readableString(name)] = result;
+          meta[component][readable] = result;
           lintDemo(result);
         });
 
 
-        glob("ng2-material/components/**/*.ts", function (err, files) {
+        glob("src/components/**/*.ts", function (err, files) {
           files.forEach(function linkComponentsToExamples(sourceFile) {
             var component = readableString(path.basename(path.dirname(sourceFile)));
             if (!meta[component]) {
@@ -465,7 +443,7 @@ module.exports = function (grunt) {
             }
             meta[component].files.push(sourceFile);
           });
-          writeJson('public/meta.json', prepareMeta());
+          writeJson('modules/site/public/meta.json', prepareMeta());
           next();
         });
       });
@@ -505,8 +483,10 @@ module.exports = function (grunt) {
         var demos = meta[key];
         var sources = demos.files.slice();
         var readme = demos.readme;
+        var componentDocs = demos.documentation;
         delete demos.files;
         delete demos.readme;
+        delete demos.documentation;
         var demoKeys = Object.keys(demos);
         var result = {
           name: key,
@@ -519,6 +499,9 @@ module.exports = function (grunt) {
         };
         if (readme) {
           result.readme = readme;
+        }
+        if (componentDocs) {
+          result.documentation = componentDocs;
         }
         return result;
       });
@@ -536,9 +519,9 @@ module.exports = function (grunt) {
         .join('-');
     }
 
-    function readableString(snakeCaseString) {
-      return snakeCaseString
-        .split('_')
+    function readableString(hyphenatedString) {
+      return hyphenatedString
+        .split('-')
         .map(function (c) {
           return c[0].toUpperCase() + c.slice(1);
         })
@@ -546,7 +529,6 @@ module.exports = function (grunt) {
     }
 
     function lintDemo(outputMeta) {
-      grunt.log.ok('checking ' + outputMeta.source + ' no lint present');
     }
 
     function fileExists(filePath) {

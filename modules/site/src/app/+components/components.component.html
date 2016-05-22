@@ -1,0 +1,11 @@
+<p class="examples-intro example-readme" *ngIf="value.readme" [innerHtml]="value.readme"></p>
+
+<h1 class="examples-title">Examples</h1>
+
+<docs-example *ngFor="let demo of value.examples" [model]="demo"></docs-example>
+
+<docs-highlight-container
+  class="examples-intro"
+  *ngIf="value.documentation"
+  selector="pre > code" [innerHtml]="value.documentation">
+</docs-highlight-container>

@@ -1,0 +1,35 @@
+<div class="doc-content">
+  <div flex layout="column" style="z-index:1">
+
+    <section class="demo-container md-whiteframe-z1" [ngClass]="{'show-source': showSource}">
+      <md-toolbar class="demo-toolbar" color="primary">
+        {{ model?.name }}
+        <span flex></span>
+        <button md-button
+                class="md-icon-button"
+                aria-label="View Source"
+                [ngClass]="{ active: showSource }"
+                (click)="toggleSource()">
+          <i md-icon>code</i>
+        </button>
+      </md-toolbar>
+
+      <!-- Source views -->
+      <md-tabs md-dynamic-height
+               *ngIf="showSource"
+               [ngClass]="{ shown: showTabs }"
+               mdNoScroll="true"
+               class="demo-source-tabs md-primary md-no-scroll">
+        <template md-tab *ngFor="let file of orderedFiles" [label]="file?.type">
+          <md-content md-scroll-y class="demo-source-container">
+            <docs-highlight [text]="file.data" [type]="file.type" class="no-header"></docs-highlight>
+          </md-content>
+        </template>
+      </md-tabs>
+
+      <!-- Live Demos -->
+      <div #example></div>
+    </section>
+
+  </div>
+</div>

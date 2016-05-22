@@ -1,0 +1,28 @@
+.md-dialog {
+  md-dialog-actions {
+    display: flex;
+    order: 2;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: $baseline-grid * 3;
+    padding-right: $baseline-grid;
+    padding-left: $baseline-grid * 2;
+
+    // Align md-actions outside of the padding of .md-dialog
+    margin-bottom: -$baseline-grid * 3;
+    margin-left: -$baseline-grid * 3;
+    margin-right: -$baseline-grid * 3;
+
+    right: -$baseline-grid * 3;
+    min-height: $baseline-grid * 6.5;
+    overflow: hidden;
+
+    [md-button], [md-raised-button] {
+      margin-bottom: $baseline-grid;
+      margin-left: $baseline-grid;
+      margin-right: 0;
+      margin-top: $baseline-grid;
+    }
+  }
+}

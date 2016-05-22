@@ -1,0 +1,44 @@
+$md-font-url: 'vendor/ng2-material/font/';
+@import "ng2-material/font/font.scss";
+@import "ng2-material/core";
+@import "ng2-material/components";
+
+$app-content-lg: 940px;
+$app-content-md: 580px;
+$app-content-sm: 360px;
+$app-sidenav-width: 280px;
+
+// Standard/Desktop Heights
+$toolbar-medium-tall-height: 88px !default;
+$toolbar-tall-height: 128px !default;
+$toolbar-hero-height: 256px !default;
+
+@mixin md-hero-toolbar() {
+  height: $toolbar-hero-height;
+  min-height: $toolbar-hero-height;
+  max-height: $toolbar-hero-height;
+}
+
+@mixin md-tall-toolbar() {
+  height: $toolbar-tall-height;
+  min-height: $toolbar-tall-height;
+  max-height: $toolbar-tall-height;
+}
+
+@mixin md-medium-tall-toolbar() {
+  height: $toolbar-medium-tall-height;
+  min-height: $toolbar-medium-tall-height;
+  max-height: $toolbar-medium-tall-height;
+}
+
+md-toolbar {
+  &.hero {
+    @include md-hero-toolbar();
+  }
+  &.tall {
+    @include md-tall-toolbar();
+  }
+  &.medium-tall {
+    @include md-tall-toolbar();
+  }
+}

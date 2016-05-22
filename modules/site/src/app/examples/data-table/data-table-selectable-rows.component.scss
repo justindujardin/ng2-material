@@ -1,0 +1,14 @@
+@import "core/style/variables";
+@import "core/style/default-theme";
+
+md-toolbar {
+  background-color: transparent;
+  border-bottom: 1px solid md-color($md-foreground, divider);
+  color: md-color($md-foreground, text);
+  .md-toolbar-tools {
+    &.selection {
+      background-color: md-color($md-accent, 50);
+      color: md-color($md-accent, 900);
+    }
+  }
+}

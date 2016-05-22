@@ -1,0 +1,53 @@
+@import "../../core/style/variables";
+@import "../../core/style/shadows";
+@import "../../core/style/default-theme";
+@import "../../core/style/typography";
+
+md-dialog {
+  display: none;
+}
+.md-dialog {
+  min-width: 300px;
+  min-height: 100px;
+
+  padding: $baseline-grid * 3;
+
+  box-shadow: $whiteframe-shadow-13dp;
+  display: flex;
+  flex-direction: column;
+
+  opacity: 0;
+  transition: $swift-ease-out;
+  transform: scale(0.2);
+
+  order: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.md-active {
+    opacity: 1;
+    transform: perspective(1px) scale(1.0);
+  }
+}
+
+// Theme
+
+$dialog-border-radius: 4px !default;
+
+.md-dialog {
+  border-radius: $dialog-border-radius;
+  background-color: md-color($md-background, lighter); //'{{background-color}}';
+
+  &.md-content-overflow {
+    .md-actions, md-dialog-actions {
+      border-top-color: md-color($md-foreground, divider); //'{{foreground-4}}';
+    }
+  }
+}
+
+@import "dialog-actions";
+@import "dialog-title";

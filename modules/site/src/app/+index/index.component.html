@@ -1,0 +1,92 @@
+<h1 class="examples-title">Introduction</h1>
+
+<section class="examples-intro">
+  <p>
+    Examples of how to use various <a href="https://www.google.com/design/spec/material-design/introduction.html"
+                                      target="_blank">material design</a>
+    inspired components with <a href="https://angular.io" target="_blank">angular2</a>.
+  </p>
+  <p>
+    There are a number of community developed components available in the <a
+    href="https://www.npmjs.com/package/ng2-material" target="_blank">ng2-material
+    package</a>.
+  </p>
+  <p>
+    There are also a number of examples demonstrating the use of the official Google developed <a
+    href="https://www.npmjs.com/~angular2-material" target="_blank">material2
+    packages</a>.
+  </p>
+</section>
+
+<nav class="heading-list-toc">
+  <h1>Components</h1>
+  <ul>
+    <li *ngFor="let value of components.components"><a [routerLink]="'/components/' + value.id">{{value.name}}</a></li>
+  </ul>
+</nav>
+
+<md-divider></md-divider>
+
+<section class="examples-intro seed-intro">
+  <h1 class="examples-title">Installing from NPM</h1>
+  <p>
+    Install the ng2-material and the material2 core libraries:
+  </p>
+
+  <docs-highlight type="bash" class="md-subhead">
+    npm install --save ng2-material @angular2-material/core
+  </docs-highlight>
+  <p>
+    Then import the material directives and providers
+  </p>
+  <docs-highlight type="typescript" class="md-subhead">
+    import {MATERIAL_DIRECTIVES, MATERIAL_PROVIDERS} from "ng2-material/all";
+  </docs-highlight>
+  <p>
+    Then reference the styles in your page
+  </p>
+  <docs-highlight type="html" class="md-subhead">
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/ng2-material/ng2-material.css&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;node_modules/ng2-material/font/font.css&quot;&gt;
+  </docs-highlight>
+</section>
+
+<section class="examples-intro">
+  <h1 class="examples-title">Using Material2 Components</h1>
+  <p>
+    To make use of the official google material2 components you will need to install them alongside ng2-material
+    as needed. ng2-material has peerDependencies on the components that it uses internally. The various examples
+    of official components describe how to install them.
+  </p>
+</section>
+
+<md-divider></md-divider>
+
+<section class="examples-intro">
+  <h1 class="examples-title seed-title">What is Material Design?</h1>
+  <p>If you're not familiar with Google's <a
+    href="https://www.google.com/design/spec/material-design/introduction.html">Material Design</a>, here are two
+    videos. The first introduces it very generally, and the second talks about the use of color.</p>
+  <div>
+    <div layout="column" layout-gt-lg="row" layout-padding layout-align="start center">
+      <iframe flex="100" flex-gt-lg="50" width="560" height="315" src="https://www.youtube.com/embed/Q8TXgCzxEnw"
+              frameborder="0" allowfullscreen></iframe>
+      <iframe flex="100" flex-gt-lg="50" width="560" height="315" src="https://www.youtube.com/embed/xYkz0Ueg0L4"
+              frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<md-divider></md-divider>
+
+<section class="examples-intro">
+  <h1 class="examples-title seed-title">Open Source</h1>
+  <p>
+    ng2-material is an open source project sponsored by JetBrains. Most of ng2-material has been built in WebStorm, an
+    excellent IDE for angular2 and Typescript development.
+  </p>
+  <section layout="row" layout-align="space-around center">
+    <a href="https://www.jetbrains.com/" target="_blank"><img src="/images/logo_jetbrains.svg" width="256"></a>
+    <a href="https://www.jetbrains.com/webstorm/" target="_blank"><img src="/images/logo_webstorm.svg" width="256"></a>
+  </section>
+</section>

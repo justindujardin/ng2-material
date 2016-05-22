@@ -1,0 +1,22 @@
+<md-toolbar *ngIf="!selection">Materials</md-toolbar>
+<md-toolbar color="accent" *ngIf="selection">
+  <span>{{count}} item{{count > 1 ? 's' : ''}} selected</span>
+  <span flex hide show-gt-md></span>
+  <span class="md-caption" hide show-gt-md>{{selection}}</span>
+</md-toolbar>
+<md-data-table layout-fill [selectable]="true" (onSelectableChange)="change($event)">
+  <thead>
+  <tr md-data-table-header-selectable-row>
+    <th class="md-text-cell">Material</th>
+    <th>Quantity</th>
+    <th>Unit price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let material of materials"  md-data-table-selectable-row [selectable-value]="material.id">
+    <td class="md-text-cell">{{ material.name }}</td>
+    <td>{{ material.quantity }}</td>
+    <td>{{ material.price }}</td>
+  </tr>
+  </tbody>
+</md-data-table>

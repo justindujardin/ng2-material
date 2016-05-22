@@ -1,0 +1,48 @@
+@import "core/style/mixins";
+@import "core/style/variables";
+@import "core/style/default-theme";
+
+:host {
+
+  .example-readme {
+    pre {
+      padding: 12px;
+      border: 1px solid lightgray;
+      background-color: white;
+    }
+  }
+  .examples-intro {
+
+    &:not(:first-child) {
+      margin-top: 2em;
+    }
+
+    h1 {
+      margin-top: 3em;
+      color: md-color($md-primary);
+    }
+    h2 {
+      margin-top: 2em;
+      margin-bottom: 1.5em;
+      > code {
+        color: md-color($md-primary);
+      }
+    }
+    table {
+      background-color: white;
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.8em;
+      th, td {
+        padding: 4px 12px;
+        border: 1px solid #ddd;
+      }
+      tr {
+        background-color: #fff;
+        border-top: 1px solid #ccc;
+      }
+    }
+
+  }
+
+}

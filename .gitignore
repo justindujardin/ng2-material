@@ -1,34 +1,30 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/tmp
+
+# dependencies
+/node_modules
+/modules/*/node_modules
+/bower_components
+
+# IDEs and editors
+/.idea
+
+# misc
+/.sass-cache
+/.coverage
+/.tscache
+/connect.lock
+/coverage/*
+/libpeerconnection.log
+npm-debug.log
+testem.log
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+#System Files
 .DS_Store
-.baseDir.*
-.idea
-node_modules/
-dist/
-out/
-site/
-/public/coverage.json
-/public/meta.json
-/public/version.json
-
-ng2-material/**/*.css
-ng2-material/**/*.css.map
-ng2-material/**/*.js
-ng2-material/**/*.js.map
-ng2-material/**/*.d.ts
-
-public/font/*.css
-public/font/*.css.map
-
-examples/**/*.css
-examples/**/*.css.map
-examples/**/*.js
-examples/**/*.js.map
-examples/**/*.d.ts
-
-test/**/*.js
-test/**/*.js.map
-test/**/*.d.ts
-.coverage
-.sass-cache
-.tscache
-coverage
-node_modules

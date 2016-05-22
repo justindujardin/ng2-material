@@ -1,0 +1,33 @@
+<md-content class="md-padding">
+  <md-tabs [selected]="selectedIndex" md-border-bottom md-autoselect>
+    <template md-tab *ngFor="let tab of tabs"
+              [disabled]="tab.disabled"
+              [label]="tab.title">
+      <div class="demo-tab tab{{index%4}}" style="padding: 25px; text-align: center;">
+        <div>{{ tab.content }}</div>
+        <br/>
+        <button md-raised-button class="md-primary" (click)="removeTab( tab )" [disabled]="tabs.length <= 1">Remove Tab
+        </button>
+      </div>
+    </template>
+  </md-tabs>
+</md-content>
+
+<form (submit)="addTab(tTitle,tContent)" layout="column" class="md-padding" style="padding-top: 0;">
+  <div layout="row" layout-sm="column">
+    <div flex style="position: relative;">
+      <h2 class="md-subhead">
+        Add a new Tab:</h2>
+    </div>
+    <md-input-container>
+      <label for="label">Label</label>
+      <input md-input type="text" id="label" [(ngModel)]="tTitle">
+    </md-input-container>
+    <md-input-container>
+      <label for="content">Content</label>
+      <input md-input type="text" id="content" [(ngModel)]="tContent">
+    </md-input-container>
+    <button md-raised-button class="add-tab md-primary" [disabled]="!tTitle || !tContent" type="submit">Add Tab
+    </button>
+  </div>
+</form>

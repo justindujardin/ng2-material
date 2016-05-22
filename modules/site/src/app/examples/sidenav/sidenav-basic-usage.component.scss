@@ -1,0 +1,7 @@
+@import '../../shared/styles.scss';
+md-sidenav[mode=side] {
+  background-color: md-color($md-accent, 500);
+}
+md-sidenav[align=end] {
+  background-color: md-color($md-warn, 500);
+}
