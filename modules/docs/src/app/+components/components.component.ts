@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
-import {ComponentsService, IComponentMeta, NavigationService, ExampleComponent} from '../shared';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
+
+import {ComponentsService, IComponentMeta, NavigationService, ExampleComponent} from '../shared';
 import {HighlightComponent} from '../shared/highlight/highlight.component';
 
 

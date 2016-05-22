@@ -1,6 +1,4 @@
 import {ButtonBasicUsageComponent} from './examples/button/button-basic-usage.component';
-import {ElevationBasicUsageComponent} from './examples/elevation/elevation-basic-usage.component';
-import {ComponentsService, NavigationService, VersionService} from './shared';
 import {CardActionButtonsComponent} from './examples/card/card-action-buttons.component';
 import {CardBasicUsageComponent} from './examples/card/card-basic-usage.component';
 import {CardInlineActionsComponent} from './examples/card/card-inline-actions.component';
@@ -8,6 +6,7 @@ import {CheckboxBasicUsageComponent} from './examples/checkbox/checkbox-basic-us
 import {DataTableBasicUsageComponent} from './examples/data-table/data-table-basic-usage.component';
 import {DataTableSelectableRowsComponent} from './examples/data-table/data-table-selectable-rows.component';
 import {DialogBasicUsageComponent} from './examples/dialog/dialog-basic-usage.component';
+import {ElevationBasicUsageComponent} from './examples/elevation/elevation-basic-usage.component';
 import {InputBasicUsageComponent} from './examples/input/input-basic-usage.component';
 import {ListBasicUsageComponent} from './examples/list/list-basic-usage.component';
 import {ProgressBarBasicUsageComponent} from './examples/progress-bar/progress-bar-basic-usage.component';
@@ -18,8 +17,11 @@ import {SwitchBasicUsageComponent} from './examples/switch/switch-basic-usage.co
 import {TabsDynamicHeightComponent} from './examples/tabs/tabs-dynamic-height.component';
 import {TabsDynamicTabsComponent} from './examples/tabs/tabs-dynamic-tabs.component';
 import {ToolbarBasicUsageComponent} from './examples/toolbar/toolbar-basic-usage.component';
+import {ComponentsService, NavigationService, VersionService} from './shared';
+
 export {environment} from './environment';
 export {SiteAppComponent} from './site.component';
+
 
 /**
  * Collection of Material Design component example directives.

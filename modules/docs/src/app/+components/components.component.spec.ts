@@ -1,7 +1,8 @@
-import {beforeEach, beforeEachProviders, describe, expect, it, inject} from '@angular/core/testing';
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
+import {beforeEach, beforeEachProviders, describe, expect, it, inject} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
+
 import {ComponentsComponent} from './components.component';
 
 describe('Component: Components', () => {

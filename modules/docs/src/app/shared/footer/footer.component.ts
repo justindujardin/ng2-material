@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ROUTER_DIRECTIVES} from '@angular/router';
-import {MATERIAL_DIRECTIVES} from 'ng2-material';
 import {MdToolbar} from '@angular2-material/toolbar';
+import {MATERIAL_DIRECTIVES} from 'ng2-material';
+
 import {NavigationService} from '../navigation.service';
 
 @Component({

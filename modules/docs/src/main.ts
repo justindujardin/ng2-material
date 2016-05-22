@@ -1,10 +1,11 @@
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {provide, enableProdMode} from '@angular/core';
-import {SiteAppComponent, environment, DEMO_PROVIDERS} from './app/index';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
-import {ROUTER_PROVIDERS} from '@angular/router';
+import {provide, enableProdMode} from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
+import {bootstrap} from '@angular/platform-browser-dynamic';
+import {ROUTER_PROVIDERS} from '@angular/router';
 import {MATERIAL_BROWSER_PROVIDERS} from 'ng2-material';
+
+import {SiteAppComponent, environment, DEMO_PROVIDERS} from './app/index';
 
 
 enableProdMode();

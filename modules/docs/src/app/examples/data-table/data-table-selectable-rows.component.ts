@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {MATERIAL_DIRECTIVES, ITableSelectionChange} from 'ng2-material';
 import {MdToolbar} from '@angular2-material/toolbar';
+import {MATERIAL_DIRECTIVES, ITableSelectionChange} from 'ng2-material';
 
 @Component({
   moduleId: module.id,

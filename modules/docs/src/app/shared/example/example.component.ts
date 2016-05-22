@@ -1,7 +1,8 @@
 import {Component, Input, DynamicComponentLoader, ComponentRef, Query, QueryList, ViewContainerRef, AfterViewInit, ViewChild} from '@angular/core';
-import {MATERIAL_DIRECTIVES, MdTabs} from 'ng2-material';
 import {Http} from '@angular/http';
 import {MdToolbar} from '@angular2-material/toolbar';
+import {MATERIAL_DIRECTIVES, MdTabs} from 'ng2-material';
+
 import {IExampleData, DEMO_DIRECTIVES} from '../../index';
 import {HighlightComponent} from '../highlight/highlight.component';
 

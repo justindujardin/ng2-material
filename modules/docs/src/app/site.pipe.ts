@@ -1,8 +1,6 @@
 import {Pipe} from '@angular/core';
 
-@Pipe({
-  name: 'componentOrder'
-})
+@Pipe({name: 'componentOrder'})
 export class ComponentsOrderByPipe {
   transform(array: Array<string>, args: string): Array<string> {
     array.sort((a: any, b: any): number => {

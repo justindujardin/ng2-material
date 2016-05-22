@@ -1,16 +1,17 @@
 import {Component, OnInit, OnDestroy, Input, ViewChild, AfterViewInit} from '@angular/core';
-import {IndexComponent} from './+index';
+import {Response, Http} from '@angular/http';
 import {Routes, ROUTER_DIRECTIVES} from '@angular/router';
-import {ComponentsComponent} from './+components';
-import {MATERIAL_DIRECTIVES, Media} from 'ng2-material';
-import {NavigationService} from './shared/navigation.service';
+import {Router} from '@angular/router';
 import {MD_SIDENAV_DIRECTIVES, MdSidenav} from '@angular2-material/sidenav';
 import {MdToolbar} from '@angular2-material/toolbar';
-import {ComponentsService, IComponentMeta} from './shared/components.service';
-import {Response, Http} from '@angular/http';
-import {Router} from '@angular/router';
-import {FooterComponent} from './shared/footer/footer.component';
+import {MATERIAL_DIRECTIVES, Media} from 'ng2-material';
 import {MdIcon} from 'ng2-material';
+
+import {ComponentsComponent} from './+components';
+import {IndexComponent} from './+index';
+import {ComponentsService, IComponentMeta} from './shared/components.service';
+import {FooterComponent} from './shared/footer/footer.component';
+import {NavigationService} from './shared/navigation.service';
 import {ComponentsOrderByPipe} from './site.pipe';
 
 @Component({
@@ -29,7 +30,7 @@ import {ComponentsOrderByPipe} from './site.pipe';
   {path: '/components/:id', component: ComponentsComponent}
 ])
 export class SiteAppComponent implements OnInit,
-  OnDestroy, AfterViewInit {
+    OnDestroy, AfterViewInit {
   static SIDE_MENU_BREAKPOINT: string = 'gt-md';
 
   @ViewChild(MdSidenav) private menu: MdSidenav;
@@ -48,10 +49,9 @@ export class SiteAppComponent implements OnInit,
 
   private _subscription = null;
 
-  constructor(private http: Http, private navigation: NavigationService, private media: Media,
-              private router: Router,
-              private _components: ComponentsService) {
-  }
+  constructor(
+      private http: Http, private navigation: NavigationService, private media: Media,
+      private router: Router, private _components: ComponentsService) {}
 
   ngAfterViewInit(): any {
     let query = Media.getQuery(SiteAppComponent.SIDE_MENU_BREAKPOINT);
@@ -61,13 +61,9 @@ export class SiteAppComponent implements OnInit,
     });
   }
 
-  get pushed(): boolean {
-    return this.menu && this.menu.mode === 'side';
-  }
+  get pushed(): boolean { return this.menu && this.menu.mode === 'side'; }
 
-  get over(): boolean {
-    return this.menu && this.menu.mode === 'over' && this.menu.opened;
-  }
+  get over(): boolean { return this.menu && this.menu.mode === 'over' && this.menu.opened; }
 
   // TODO(jd): these two property hacks are to work around issues with the peekaboo fixed nav
   // overlapping the sidenav and toolbar.  They will not properly "fix" to the top if inside
@@ -75,9 +71,7 @@ export class SiteAppComponent implements OnInit,
   // calculate left and right properties for fixed toolbars based on the media query and browser
   // scrollbar width.  :sob: :rage:
   @Input()
-  get sidenavWidth(): number {
-    return this.pushed ? 281 : 0;
-  }
+  get sidenavWidth(): number { return this.pushed ? 281 : 0; }
 
   @Input()
   get scrollWidth(): number {
@@ -124,7 +118,5 @@ export class SiteAppComponent implements OnInit,
   }
 
 
-  ngOnDestroy(): any {
-    this._subscription.unsubscribe();
-  }
+  ngOnDestroy(): any { this._subscription.unsubscribe(); }
 }
