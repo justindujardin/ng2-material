@@ -68,6 +68,7 @@
     opacity: 1;
     &.hide {
       opacity: 0;
+      pointer-events: none;
     }
     .md-caption {
       text-decoration: none;
