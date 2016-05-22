@@ -8,12 +8,9 @@ import {HighlightComponent} from './highlight.component';
   styleUrls: ['highlight-container.component.css']
 })
 export class HighlightContainerComponent implements AfterViewInit {
-
   @Input() selector: string = '';
 
-  constructor(private elementRef: ElementRef) {
-
-  }
+  constructor(private elementRef: ElementRef) {}
 
   ngAfterViewInit() {
     // Find children and highlight them in place
@@ -29,8 +26,6 @@ export class HighlightContainerComponent implements AfterViewInit {
         codeBlock.classList.add('highlight');
         codeBlock.innerHTML = code;
       }
-
     }
   }
-
 }

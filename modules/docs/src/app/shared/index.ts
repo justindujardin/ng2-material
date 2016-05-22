@@ -4,4 +4,3 @@ export * from './version.service';
 export * from './footer';
 export * from './example';
 export * from './highlight';
-

@@ -10,7 +10,10 @@ import {HighlightComponent, HighlightContainerComponent} from '../shared/highlig
   selector: 'docs-components',
   templateUrl: 'components.component.html',
   styleUrls: ['components.component.css'],
-  directives: [ExampleComponent, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, HighlightComponent, HighlightContainerComponent]
+  directives: [
+    ExampleComponent, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, HighlightComponent,
+    HighlightContainerComponent
+  ]
 })
 export class ComponentsComponent implements OnActivate {
   public id: string;
@@ -20,8 +23,7 @@ export class ComponentsComponent implements OnActivate {
   public next: IComponentMeta = null;
   public previous: IComponentMeta = null;
 
-  constructor(private _components: ComponentsService, private _navigation: NavigationService) {
-  }
+  constructor(private _components: ComponentsService, private _navigation: NavigationService) {}
 
   routerOnActivate(curr: RouteSegment): void {
     this.id = curr.getParam('id');

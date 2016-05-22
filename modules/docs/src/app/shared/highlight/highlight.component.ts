@@ -51,7 +51,7 @@ export class HighlightComponent implements AfterContentInit {
     // Make it so each line starts at 0 whitespace
     var firstLineWhitespace = lines[0].match(/^\s*/)[0];
     var startingWhitespaceRegex = new RegExp('^' + firstLineWhitespace);
-    lines = lines.map(function (line) {
+    lines = lines.map(function(line) {
       return line.replace(startingWhitespaceRegex, '').replace(/\s+$/, '');
     });
 
@@ -59,10 +59,9 @@ export class HighlightComponent implements AfterContentInit {
   }
 
   static highlight(language: string, code: string): string {
-    return hljs.highlight(language, code, true).value
-      .replace(/=<span class="hljs-value">""<\/span>/gi, '')
-      .replace('<head>', '')
-      .replace('<head/>', '');
-
+    return hljs.highlight(language, code, true)
+        .value.replace(/=<span class="hljs-value">""<\/span>/gi, '')
+        .replace('<head>', '')
+        .replace('<head/>', '');
   }
 }
