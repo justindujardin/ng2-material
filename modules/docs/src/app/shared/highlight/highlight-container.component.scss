@@ -1,0 +1,14 @@
+@import "./highlight";
+
+:host {
+  pre {
+    @extend .highlight-block;
+    @extend .higlight-pre;
+    > code.highlight {
+      margin-bottom: 0 !important;
+      font-size: 0.9em;
+      border: 1px solid lightgrey;
+    }
+  }
+}
+

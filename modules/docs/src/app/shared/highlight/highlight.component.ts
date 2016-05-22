@@ -1,4 +1,4 @@
-import {Component, Input, ViewEncapsulation, AfterContentInit, ElementRef} from '@angular/core';
+import {Component, Input, AfterContentInit, ElementRef} from '@angular/core';
 
 declare var hljs: any;
 
@@ -20,7 +20,7 @@ export class HighlightComponent implements AfterContentInit {
 
   get text(): string { return this._text; }
 
-  @Input('text')
+  @Input()
   set text(value: string) {
     this._text = value;
     this.render();
@@ -51,16 +51,18 @@ export class HighlightComponent implements AfterContentInit {
     // Make it so each line starts at 0 whitespace
     var firstLineWhitespace = lines[0].match(/^\s*/)[0];
     var startingWhitespaceRegex = new RegExp('^' + firstLineWhitespace);
-    lines = lines.map(function(line) {
+    lines = lines.map(function (line) {
       return line.replace(startingWhitespaceRegex, '').replace(/\s+$/, '');
     });
 
+    this.rendered = HighlightComponent.highlight(this._type, lines.join('\n'));
+  }
 
-    var highlightedCode = hljs.highlight(this._type, lines.join('\n'), true);
-    highlightedCode.value =
-        highlightedCode.value.replace(/=<span class="hljs-value">""<\/span>/gi, '')
-            .replace('<head>', '')
-            .replace('<head/>', '');
-    this.rendered = highlightedCode.value;
+  static highlight(language: string, code: string): string {
+    return hljs.highlight(language, code, true).value
+      .replace(/=<span class="hljs-value">""<\/span>/gi, '')
+      .replace('<head>', '')
+      .replace('<head/>', '');
+
   }
 }

@@ -5,7 +5,7 @@ import {
   MdDataTable,
   MdDataTableHeaderSelectableRow,
   MdDataTableSelectableRow
-} from "./components/data_table/data_table";
+} from "./components/data-table/index";
 import {MdDialog, MdDialogTitle, MdDialogActions, MdDialogPortal} from "./components/dialog/index";
 import {MdDivider} from "./components/divider/divider";
 import {MdIcon} from "./components/icon/icon";
@@ -30,11 +30,11 @@ import {OVERLAY_CONTAINER_TOKEN, createOverlayContainer} from "@angular2-materia
 import {MdBackdrop} from "./components/backdrop/backdrop";
 
 export * from './components/button/button';
-export * from './components/backdrop/backdrop'; 
+export * from './components/backdrop/backdrop';
 
 export * from './components/content/content';
 
-export * from './components/data_table/data_table';
+export * from './components/data-table/index';
 
 export * from './components/dialog/index';
 export * from './components/divider/divider';

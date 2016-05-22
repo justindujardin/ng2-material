@@ -4,7 +4,7 @@ import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing"
 import {Component, DebugElement} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
 import {By} from "@angular/platform-browser";
-import {MdDataTableHeaderSelectableRow, MdDataTable, MdDataTableSelectableRow} from "../../index";
+import {MdDataTableHeaderSelectableRow, MdDataTable, MdDataTableSelectableRow} from "./index";
 
 export function main() {
 

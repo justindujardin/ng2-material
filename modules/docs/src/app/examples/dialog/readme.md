@@ -1,4 +1,4 @@
 
 ```
-These components are a work in progress.
+This component is experimental.
 ```

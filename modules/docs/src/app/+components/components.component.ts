@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
 import {OnActivate, RouteSegment, ROUTER_DIRECTIVES} from '@angular/router';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
-
 import {ComponentsService, IComponentMeta, NavigationService, ExampleComponent} from '../shared';
-import {HighlightComponent} from '../shared/highlight/highlight.component';
+import {HighlightComponent, HighlightContainerComponent} from '../shared/highlight/index';
 
 
 @Component({
@@ -11,7 +10,7 @@ import {HighlightComponent} from '../shared/highlight/highlight.component';
   selector: 'docs-components',
   templateUrl: 'components.component.html',
   styleUrls: ['components.component.css'],
-  directives: [ExampleComponent, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, HighlightComponent]
+  directives: [ExampleComponent, ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, HighlightComponent, HighlightContainerComponent]
 })
 export class ComponentsComponent implements OnActivate {
   public id: string;
@@ -21,7 +20,8 @@ export class ComponentsComponent implements OnActivate {
   public next: IComponentMeta = null;
   public previous: IComponentMeta = null;
 
-  constructor(private _components: ComponentsService, private _navigation: NavigationService) {}
+  constructor(private _components: ComponentsService, private _navigation: NavigationService) {
+  }
 
   routerOnActivate(curr: RouteSegment): void {
     this.id = curr.getParam('id');

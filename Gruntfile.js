@@ -123,6 +123,7 @@ module.exports = function (grunt) {
       meta: {
         files: [
           'modules/docs/src/**/*.*',
+          'src/**/*.md',
           'package.json'
         ],
         tasks: ['site-meta', 'build-npm-package', 'notify:meta']
@@ -364,6 +365,20 @@ module.exports = function (grunt) {
       });
     });
 
+
+    // Copy Readme for official components BEFORE rendering readme markdown files.
+    tasks.push(function buildComponentDocumentation() {
+      glob("src/components/**/readme.md", function (err, files) {
+        files.forEach(function parseReadme(readmeFile) {
+          var component = readableString(path.basename(path.dirname(readmeFile)));
+          var data = fs.readFileSync(readmeFile).toString();
+          meta[component] = meta[component] || {};
+          meta[component].documentation = marked(data);
+        });
+        next();
+      });
+    });
+
     tasks.push(function buildReadmeFiles() {
       glob("modules/docs/src/app/examples/**/readme.md", function (err, files) {
         files.forEach(function parseDemo(readmeFile) {
@@ -468,8 +483,10 @@ module.exports = function (grunt) {
         var demos = meta[key];
         var sources = demos.files.slice();
         var readme = demos.readme;
+        var componentDocs = demos.documentation;
         delete demos.files;
         delete demos.readme;
+        delete demos.documentation;
         var demoKeys = Object.keys(demos);
         var result = {
           name: key,
@@ -482,6 +499,9 @@ module.exports = function (grunt) {
         };
         if (readme) {
           result.readme = readme;
+        }
+        if (componentDocs) {
+          result.documentation = componentDocs;
         }
         return result;
       });
