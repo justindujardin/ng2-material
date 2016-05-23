@@ -42,9 +42,13 @@ behavior that the example demonstrates. Specify the by giving `ng generate compo
 form `components/[component-type]/[component-type]-[what-it-demonstrates]`. Here are a few examples:
 
  > ng generate component examples/button/button-basic-usage --prefix=false --flat
+ 
  > ng generate component examples/button/button-floating-action-buttons --prefix=false --flat
+ 
  > ng generate component examples/sidenav/sidenav-content-push --prefix=false --flat
+ 
  > ng generate component examples/sidenav/sidenav-responsive-mode --prefix=false --flat
+ 
  > ng generate component examples/data-table/data-table-pagination --prefix=false --flat
  
 If you are creating the first most basic example for a component, specify the name `basic-usage`:
