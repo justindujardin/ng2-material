@@ -28,8 +28,8 @@ ng2-material is an open source project sponsored by JetBrains. Most of ng2-mater
 
 Major project contributors are eligible to be granted an all-products JetBrains license, for development of ng2-material. 
 
-<a href="https://www.jetbrains.com/" target="_blank"><img src="https://rawgit.com/justindujardin/ng2-material/master/public/images/logo_jetbrains.svg" width="256"></a>
-<a href="https://www.jetbrains.com/webstorm/" target="_blank"><img src="https://rawgit.com/justindujardin/ng2-material/master/public/images/logo_webstorm.svg" width="256"></a>
+<a href="https://www.jetbrains.com/" target="_blank"><img src="https://rawgit.com/justindujardin/ng2-material/0ccd658914fc3d0a5e04560d2d58a529e93c6649/public/images/logo_jetbrains.svg" width="256"></a>
+<a href="https://www.jetbrains.com/webstorm/" target="_blank"><img src="https://rawgit.com/justindujardin/ng2-material/0ccd658914fc3d0a5e04560d2d58a529e93c6649/public/images/logo_webstorm.svg" width="256"></a>
 
 ## License 
 
