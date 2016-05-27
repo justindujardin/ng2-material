@@ -3,6 +3,10 @@
 # compiled output
 /dist
 /tmp
+public/font/font.css
+public/font/font.css.map
+src/all.css
+src/all.css.map
 
 # dependencies
 /node_modules
