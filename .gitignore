@@ -12,6 +12,7 @@ src/all.css.map
 /node_modules
 /modules/*/node_modules
 /bower_components
+/typings
 
 # IDEs and editors
 /.idea

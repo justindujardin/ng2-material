@@ -12,7 +12,8 @@
   "readmeFilename": "README.md",
   "scripts": {
     "start": "$(npm bin)/grunt serve",
-    "test": "$(npm bin)/grunt karma"
+    "test": "$(npm bin)/grunt karma",
+    "postinstall": "$(npm bin)/typings install"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.1",
@@ -23,11 +24,6 @@
     "@angular/router": "2.0.0-rc.1",
     "@angular2-material/checkbox": "2.0.0-alpha.4",
     "@angular2-material/core": "2.0.0-alpha.4",
-    "@angular2-material/progress-bar": "2.0.0-alpha.4",
-    "@angular2-material/progress-circle": "2.0.0-alpha.4",
-    "@angular2-material/radio": "2.0.0-alpha.4",
-    "@angular2-material/sidenav": "2.0.0-alpha.4",
-    "@angular2-material/toolbar": "2.0.0-alpha.4",
     "es6-promise": ">=3.0.2",
     "es6-shim": "^0.35.0",
     "rxjs": "5.0.0-beta.6",
@@ -73,6 +69,7 @@
     "style-loader": "0.13.0",
     "systemjs": "0.19.26",
     "typescript": ">=1.8.9",
+    "typings": "^1.0.4",
     "underscore": "1.8.3"
   },
   "contributors": [

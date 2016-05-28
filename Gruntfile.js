@@ -230,15 +230,20 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build-npm', ['build', 'build-npm-package', 'rewrite-source-maps']);
   grunt.registerTask('build-npm-package', function () {
-    // Swap dependencies for peerDependencies in the published package.
-    // http://stackoverflow.com/a/34645112
     var fs = require('fs');
     var path = require('path');
     try {
       var file = fs.readFileSync(path.join(__dirname, 'package.json')).toString();
       var rendered = JSON.parse(file);
+
+      // Swap dependencies for peerDependencies in the published package.
+      // http://stackoverflow.com/a/34645112
       rendered.peerDependencies = rendered.dependencies;
       delete rendered.dependencies;
+
+      // The installed package shouldn't do any postinstall stuff
+      delete rendered.scripts;
+
       fs.writeFileSync('dist/package.json', JSON.stringify(rendered, null, 2));
     }
     catch (e) {
