@@ -20,6 +20,11 @@ import {
 } from "./components/form/validators";
 import {MdMessage, MdMessages} from "./components/form/messages";
 import {MdList, MdListItem} from "./components/list/list";
+import {MdPagination,
+  MdPaginationControls,
+  MdPaginationItemsPerPage,
+  MdPaginationRange,
+  PaginationService} from "./components/pagination/index";
 import {MdPeekaboo} from "./components/peekaboo/peekaboo";
 import {MdSwitch} from "./components/switch/switch";
 import {MdSubheader} from "./components/subheader/subheader";
@@ -47,6 +52,8 @@ export * from './components/form/validators';
 export * from './components/form/messages';
 
 export * from './components/list/list';
+
+export * from './components/pagination/index';
 
 export * from './components/peekaboo/peekaboo';
 
@@ -79,6 +86,7 @@ export const MATERIAL_DIRECTIVES: any[] = [
   MdNumberRequiredValidator,
   MdMessage, MdMessages,
   MdList, MdListItem,
+  MdPagination, MdPaginationControls, MdPaginationItemsPerPage, MdPaginationRange,
   MdPeekaboo,
   MdSubheader,
   MdSwitch,
@@ -91,6 +99,7 @@ export const MATERIAL_DIRECTIVES: any[] = [
 export const MATERIAL_NODE_PROVIDERS: any[] = [
   provide(ViewportHelper, {useClass: NodeViewportHelper}),
   Media,
+  PaginationService,
   ...INPUT_VALIDATORS
 ];
 

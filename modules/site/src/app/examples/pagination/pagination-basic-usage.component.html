@@ -1,0 +1,18 @@
+<md-pagination [model]="pagination" (on-pagination-change)="detectChange($event)" [items-per-page-options]="availableLength"></md-pagination>
+
+<md-data-table layout-fill>
+  <thead>
+  <tr>
+    <th class="md-text-cell">Material</th>
+    <th>Quantity</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let material of pagedMaterials">
+    <td class="md-text-cell">{{ material.name }}</td>
+    <td>{{ material.quantity }}</td>
+  </tr>
+  </tbody>
+</md-data-table>
+
+<md-pagination [model]="pagination" (on-pagination-change)="detectChange($event)" [items-per-page-options]="availableLength"></md-pagination>

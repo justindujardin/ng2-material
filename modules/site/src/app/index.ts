@@ -9,6 +9,8 @@ import {DialogBasicUsageComponent} from './examples/dialog/dialog-basic-usage.co
 import {ElevationBasicUsageComponent} from './examples/elevation/elevation-basic-usage.component';
 import {InputBasicUsageComponent} from './examples/input/input-basic-usage.component';
 import {ListBasicUsageComponent} from './examples/list/list-basic-usage.component';
+import {PaginationBasicUsageComponent} from './examples/pagination/pagination-basic-usage.component';
+import {PaginationSplitUsageComponent} from './examples/pagination/pagination-split-usage.component';
 import {ProgressBarBasicUsageComponent} from './examples/progress-bar/progress-bar-basic-usage.component';
 import {ProgressCircleBasicUsageComponent} from './examples/progress-circle/progress-circle-basic-usage.component';
 import {RadioBasicUsageComponent} from './examples/radio/radio-basic-usage.component';
@@ -30,8 +32,8 @@ export const DEMO_DIRECTIVES: any[] = [
   ElevationBasicUsageComponent, ButtonBasicUsageComponent, CardActionButtonsComponent,
   CardBasicUsageComponent, CardInlineActionsComponent, CheckboxBasicUsageComponent,
   DataTableBasicUsageComponent, DataTableSelectableRowsComponent, DialogBasicUsageComponent,
-  InputBasicUsageComponent, ListBasicUsageComponent, ProgressBarBasicUsageComponent,
-  ProgressCircleBasicUsageComponent, RadioBasicUsageComponent, SidenavBasicUsageComponent,
+  InputBasicUsageComponent, ListBasicUsageComponent, PaginationBasicUsageComponent, PaginationSplitUsageComponent,
+  ProgressBarBasicUsageComponent, ProgressCircleBasicUsageComponent, RadioBasicUsageComponent, SidenavBasicUsageComponent,
   SwitchBasicUsageComponent, TabsDynamicHeightComponent, TabsDynamicTabsComponent,
   ToolbarBasicUsageComponent
 ];
