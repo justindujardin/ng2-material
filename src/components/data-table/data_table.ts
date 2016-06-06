@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ContentChild, ContentChildren, QueryList, AfterContentInit} from '@angular/core';
+import {Component, Input, Output, EventEmitter, ContentChild, ContentChildren, QueryList, AfterContentInit, OnDestroy} from '@angular/core';
 import 'rxjs/add/operator/share';
 import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow, ITableSelectableRowSelectionChange} from './data_table_selectable_tr';
 
@@ -22,7 +22,7 @@ export interface ITableSelectionChange {
     '[class.md-data-table-selectable]': 'selectable',
   }
 })
-export class MdDataTable implements AfterContentInit {
+export class MdDataTable implements AfterContentInit, OnDestroy {
   @Input()
   selectable: boolean;
   @Output()
@@ -35,6 +35,8 @@ export class MdDataTable implements AfterContentInit {
 
   @ContentChildren(MdDataTableSelectableRow, true)
   _rows: QueryList<MdDataTableSelectableRow>;
+
+  _listeners: EventEmitter<any>[] = [];
 
   selected: Array<string> = [];
 
@@ -79,17 +81,38 @@ export class MdDataTable implements AfterContentInit {
       .map((tr: MdDataTableSelectableRow) => tr.selectableValue);
   }
 
+  _unsubscribeChildren() {
+    this.selected = [];
+    if (this._listeners.length) {
+      this._listeners.forEach(listener => {
+        listener.unsubscribe();
+      });
+      this._listeners = [];
+    }
+  }
+
+  _updateChildrenListener(list: QueryList<MdDataTableSelectableRow>) {
+    this._unsubscribeChildren();
+
+    list.toArray()
+      .map((tr: MdDataTableSelectableRow) => {
+        tr.onChange.subscribe(this.change.bind(this));
+      });
+  }
+
   ngAfterContentInit() {
     if (this.selectable === true) {
       if (!!this._masterRow) {
         this._masterRow.onChange.subscribe(this.change.bind(this));
       }
 
-      this._rows.toArray()
-        .map((tr: MdDataTableSelectableRow) => {
-          tr.onChange.subscribe(this.change.bind(this));
-        });
+      this._rows.changes.subscribe(this._updateChildrenListener.bind(this));
+      this._updateChildrenListener(this._rows);
     }
+  }
+
+  ngOnDestroy() {
+    this._unsubscribeChildren();
   }
 
 }
