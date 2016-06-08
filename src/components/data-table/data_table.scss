@@ -19,8 +19,19 @@ $data-table-dividers: 1px solid $data-table-divider-color !default;
 $data-table-row-height: rem(4.800) !default;
 $data-table-last-row-height: rem(5.600) !default;
 $data-table-column-padding: rem(2.400) !default;
-$data-table-column-spacing: rem(3.200) !default; 
+$data-table-column-spacing: rem(3.200) !default;
 //column spacing + column padding = the prescribed 56dp
+
+@mixin sort-icon() {
+  display: inline-block;
+  font-family: 'Material Icons';
+  font-size: $data-table-header-sort-icon-size;
+  width: $data-table-header-sort-icon-size;
+  height: $data-table-header-sort-icon-size;
+  content: " ";
+  margin-right: 5px;
+  vertical-align: sub;
+}
 
 md-data-table, .md-data-table {
   display: table;
@@ -70,31 +81,46 @@ md-data-table, .md-data-table {
 
     &.sortable {
       cursor: pointer;
-    }
-
-    /*
-     TODO (ollwenjones) sorting functionality pending, but these class names
-     were tested, and can be used outside of the library component structures.
-     */
-    &.sorted-ascending,
-    &.sorted-descending {
-      color: md-color($md-foreground, text);
       &:before {
-        font-family: 'Material Icons';
-        font-size: $data-table-header-sort-icon-size;
-        content: "\e5d8";
-        margin-right: 5px;
-        vertical-align: sub;
+        @include sort-icon();
       }
+
       &:hover {
-        cursor: pointer;
-        &:before {
+        &:before, &:after {
           color: $data-table-header-sorted-icon-hover-color;
         }
       }
-    }
-    &.sorted-descending:before {
-      content: "\e5db";
+
+      &.sorted-ascending, &.sorted-descending {
+        color: md-color($md-foreground, text);
+      }
+
+      &.sorted-ascending:before {
+        content: "\e5d8";
+      }
+
+      &.sorted-descending:before {
+        content: "\e5db";
+      }
+
+      &.md-text-cell {
+        &:before {
+          content: "";
+          display: none;
+        }
+        &:after {
+          @include sort-icon();
+          margin-right: 0;
+          margin-left: 5px;
+        }
+        &.sorted-ascending:after {
+          content: "\e5d8";
+        }
+
+        &.sorted-descending:after {
+          content: "\e5db";
+        }
+      }
     }
   }
   td {
@@ -126,7 +152,7 @@ md-data-table, .md-data-table {
 
       &:hover {
         background-color: $data-table-hover-color;
-      }      
+      }
     }
   }
 

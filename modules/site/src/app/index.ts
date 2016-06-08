@@ -7,6 +7,7 @@ import {DataTableBasicUsageComponent} from './examples/data-table/data-table-bas
 import {
   DataTableSelectableRowsComponent
 } from './examples/data-table/data-table-selectable-rows.component';
+import {DataTableSortingComponent} from './examples/data-table/data-table-sorting.component';
 import {DialogBasicUsageComponent} from './examples/dialog/dialog-basic-usage.component';
 import {ElevationBasicUsageComponent} from './examples/elevation/elevation-basic-usage.component';
 import {InputBasicUsageComponent} from './examples/input/input-basic-usage.component';
@@ -33,7 +34,7 @@ export {SiteAppComponent, AppRouterProviders} from './site.component';
 export const DEMO_DIRECTIVES: any[] = [
   ElevationBasicUsageComponent, ButtonBasicUsageComponent, CardActionButtonsComponent,
   CardBasicUsageComponent, CardInlineActionsComponent, CheckboxBasicUsageComponent,
-  DataTableBasicUsageComponent, DataTableSelectableRowsComponent, DialogBasicUsageComponent,
+  DataTableBasicUsageComponent, DataTableSelectableRowsComponent, DataTableSortingComponent, DialogBasicUsageComponent,
   InputBasicUsageComponent, ListBasicUsageComponent, PaginationBasicUsageComponent, PaginationSplitUsageComponent,
   ProgressBarBasicUsageComponent, ProgressCircleBasicUsageComponent, RadioBasicUsageComponent, SidenavBasicUsageComponent,
   SwitchBasicUsageComponent, TabsDynamicHeightComponent, TabsDynamicTabsComponent,

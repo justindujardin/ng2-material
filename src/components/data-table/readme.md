@@ -45,14 +45,36 @@ MdDataTable is an enhancment of classic data tables.
 | --- | --- |
 | onChange | Emitted when the user check or uncheck the checkbox |
 
+## Sorting by Column
+### Model Definitions
+| Name | Type | Description |
+| --- | --- | --- |
+| SortDirection | `enum` | `ASCEND` or `DESCEND`
+| ColumnSortingModel | `interface` | sorting model definition.
+ 
+### Service: `MdDataColumnSortingService`
+| Name | Type | Description |
+| --- | --- | --- |
+| `sortingColumn$` | property | Observable of current column sorting model |
+| `setSorting` | method | Assign column sorting model |
+| `changeSorting` | method | Trigger sorting change, requires column identifier and current model to compare. |
+
+### Directive: `MdDataColumnSortDirective`
+Styles its host according to sorting model in the `MdDataColumnSortingService`
+
+| Attribute Selector | Description |
+| --- | --- |
+| `md-data-column-sort` | Attribute selector and Input for column sorting identifier. |
+
+
 ## Examples
 ```
 <md-data-table [selectable]="true">
   <thead>
   <tr md-data-table-header-selectable-row>
-    <th class="md-text-cell">Material</th>
-    <th>Quantity</th>
-    <th>Unit price</th>
+    <th md-data-column-sort="1" class="md-text-cell">Material</th>
+    <th md-data-column-sort="2">Quantity</th>
+    <th md-data-column-sort="3">Unit price</th>
   </tr>
   </thead>
   <tbody>
