@@ -164,7 +164,8 @@ And that's it! Now you run the Example app via `grunt serve` command, you can se
 ### Write some Tests
 
 Don't forget to write tests about your component. Even if it's pretty awesome, it could help to avoid regression in the future.
-Follow recommandations about [writing test in angular2][writing-test].  
+Follow recommandations about [writing test in angular2][writing-test].
+There is an npm script for Test Driven Development: `npm run tdd`, which can be helpful.
 When your tests pass and only after that, you can [propose a pull request](#how-to-contribute)
 
 
