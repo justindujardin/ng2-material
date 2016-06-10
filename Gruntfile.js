@@ -133,6 +133,12 @@ module.exports = function (grunt) {
           '<%- sourceRoot %>/**/*.ts'
         ],
         tasks: ['ts:source', 'rewrite-source-maps', 'notify:source']
+      },
+      karma: {
+        files: [
+          '<%- sourceRoot %>/**/*.ts'
+        ],
+        tasks: ['karma']
       }
     },
 
@@ -194,6 +200,7 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-continue');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
@@ -210,6 +217,8 @@ module.exports = function (grunt) {
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
   grunt.registerTask('site', ['build', 'cover', 'copy:site']);
   grunt.registerTask('build', ['default', 'copy:npm']);
+  grunt.registerTask('tddTasks', ['ts', 'continue:on', 'karma']);
+  grunt.registerTask('tdd', ['tddTasks', 'watch']);
 
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-conventional-changelog');
