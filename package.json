@@ -13,6 +13,7 @@
   "scripts": {
     "start": "$(npm bin)/grunt serve",
     "test": "$(npm bin)/grunt karma",
+    "tdd": "./node_modules/.bin/grunt tdd",
     "postinstall": "$(npm bin)/typings install"
   },
   "dependencies": {
@@ -42,6 +43,7 @@
     "grunt": "0.4.5",
     "grunt-bump": "0.7.0",
     "grunt-cli": "0.1.13",
+    "grunt-continue": "^0.1.0",
     "grunt-contrib-clean": "0.7.0",
     "grunt-contrib-connect": "0.11.2",
     "grunt-contrib-copy": "0.8.2",
