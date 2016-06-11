@@ -62,6 +62,7 @@
         "src/core/key_codes.ts",
         "src/core/util/animate.ts",
         "src/core/util/ink.ts",
+        "src/core/util/ink_spec.ts",
         "src/core/util/media.ts",
         "src/core/util/media_spec.ts",
         "src/core/util/util.ts",

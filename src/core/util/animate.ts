@@ -122,38 +122,6 @@ export class Animate {
     }
   }
 
-  static animateStyles(element: HTMLElement, styles: {[style: string]: string|number}, durationMs: number): Promise<void> {
-    let saveDuration = Animate.getTransitionDuration(element);
-    Animate.setTransitionDuration(element, durationMs);
-    return new Promise<void>((animResolve, animReject) => {
-      let callTimeout = setTimeout(() => done(true), durationMs);
-      let removeListener = () => done(false);
-
-      let done = (timeout) => {
-        if (!removeListener) {
-          return;
-        }
-        if (timeout) {
-          clearTimeout(callTimeout);
-        }
-        element.removeEventListener(Animate.TRANSITION_EVENT, removeListener);
-        removeListener = null;
-        if (saveDuration !== -1) {
-          Animate.setTransitionDuration(element, saveDuration);
-        }
-        else {
-          element.style['transition-duration'] = null;
-        }
-        animResolve();
-      };
-      element.addEventListener(Animate.TRANSITION_EVENT, removeListener);
-      Object.keys(styles).forEach((key: string) => {
-        element.style[key] = `${styles[key]}`;
-      });
-
-    });
-  }
-
   /**
    * Set CSS styles immediately by turning off transition duration and restoring it afterward
    */

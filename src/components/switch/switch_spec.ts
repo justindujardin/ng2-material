@@ -29,11 +29,12 @@ export function main() {
   @Component({
     selector: 'test-app',
     directives: [MdSwitch],
-    template: `<md-switch [(checked)]="isChecked" [disabled]="isDisabled"></md-switch>`
+    template: `<md-switch [(checked)]="isChecked" [disabled]="isDisabled" [tabindex]="tabIndex"></md-switch>`
   })
   class TestComponent {
     isChecked: boolean = false;
     isDisabled: boolean = false;
+    tabIndex = "1";
   }
 
   componentSanityCheck('Switch', 'md-switch', `<md-switch checked="true"></md-switch>`);

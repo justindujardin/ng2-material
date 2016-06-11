@@ -3,7 +3,7 @@ import {Animate} from "./animate";
 /**
  * Create ink ripples on elements in the page.
  */
-export class Ink {
+export abstract class Ink {
 
   /**
    * Determine if ink can be applied to a given element.

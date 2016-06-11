@@ -1,7 +1,6 @@
-import {Directive, OnDestroy, Input, ApplicationRef, ElementRef} from "@angular/core";
-import {Media, MediaListener} from "../../core/util/media";
-import {debounce} from "../../core/util/util";
-import {ViewportHelper} from "../../core/util/viewport";
+import {Directive, OnDestroy, Input, ElementRef, NgZone} from '@angular/core';
+import {Media, MediaListener} from '../../core/util/media';
+import {ViewportHelper} from '../../core/util/viewport';
 
 export type BreakAction = 'hide' | 'show';
 
@@ -117,7 +116,7 @@ export class MdPeekaboo implements OnDestroy {
   constructor(public media: Media,
               private element: ElementRef,
               public viewport: ViewportHelper,
-              private _app: ApplicationRef) {
+              private zone: NgZone) {
     MdPeekaboo.SIZES.forEach((size: string) => {
       this._watchMediaQuery(size);
       if (this.media.hasMedia(size)) {
@@ -125,11 +124,6 @@ export class MdPeekaboo implements OnDestroy {
       }
     });
     this.evaluate();
-    this._scrollTick = debounce(() => {
-      if (!!this._app.tick) {
-        this._app.tick();
-      }
-    }, 100, this);
   }
 
   ngOnDestroy(): any {
@@ -148,7 +142,6 @@ export class MdPeekaboo implements OnDestroy {
   }
 
   private _windowScroll = this.evaluate.bind(this);
-  private _scrollTick;
 
   /**
    * Evaluate the current scroll and media breakpoint to determine what scrollTop
@@ -186,12 +179,14 @@ export class MdPeekaboo implements OnDestroy {
         }
     }
     if (top >= bp && !this._active) {
-      this._active = true;
-      this._scrollTick();
+      this.zone.run(() => {
+        this._active = true;
+      });
     }
     else if (top < bp && this._active) {
-      this._active = false;
-      this._scrollTick();
+      this.zone.run(() => {
+        this._active = false;
+      });
     }
     return bp;
   }

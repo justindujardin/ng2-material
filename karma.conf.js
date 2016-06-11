@@ -52,14 +52,12 @@ module.exports = function (config) {
     ],
 
     preprocessors: (process.env.TRAVIS || coverageDebug) ? {
-      "dist/*.js": "coverage",
-      "dist/components/**/*.js": "coverage",
-      "dist/core/**/*.js": "coverage",
-      "src/platform/**/*.js": "coverage"
+      "dist/!(*spec).js": "coverage",
+      "dist/components/**/!(*spec).js": "coverage",
+      "dist/core/**/!(*spec).js": "coverage"
     } : {},
     coverageReporter: {
       dir: '.coverage',
-
       reporters: coverageReporters
     }
   });
