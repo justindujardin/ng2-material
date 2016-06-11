@@ -11,9 +11,9 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "scripts": {
-    "start": "$(npm bin)/grunt serve",
-    "test": "$(npm bin)/grunt karma",
-    "postinstall": "$(npm bin)/typings install"
+    "start": "./node_modules/.bin/grunt serve",
+    "test": "./node_modules/.bin/grunt karma",
+    "postinstall": "./node_modules/.bin/typings install"
   },
   "dependencies": {
     "@angular/common": "2.0.0-rc.1",
