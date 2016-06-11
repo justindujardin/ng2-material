@@ -9,7 +9,7 @@ import {
   ViewEncapsulation,
   OnDestroy
 } from '@angular/core';
-import {Overlay, OverlayState, OverlayRef} from '@angular2-material/core/overlay/overlay';
+import {Overlay, OverlayState, OverlayRef, OVERLAY_PROVIDERS} from '@angular2-material/core/overlay/overlay';
 import {Animate} from '../../core/util/animate';
 import {MdDialogPortal} from './dialog-portal';
 import {MdDialogActions} from './dialog-actions';
@@ -22,7 +22,7 @@ import {KeyCodes} from '../../core/key_codes';
 @Component({
   selector: 'md-dialog',
   directives: [MdDialogTitle, MdDialogActions, MdDialogPortal],
-  providers: [Overlay],
+  providers: [Overlay, OVERLAY_PROVIDERS],
   encapsulation: ViewEncapsulation.None,
   template: `
 <template mdDialogPortal>

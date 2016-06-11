@@ -59,8 +59,6 @@
         "src/components/subheader/subheader_spec.ts",
         "src/components/switch/switch.ts",
         "src/components/switch/switch_spec.ts",
-        "src/components/tabs/tabs.ts",
-        "src/components/tabs/tabs_spec.ts",
         "src/core/key_codes.ts",
         "src/core/util/animate.ts",
         "src/core/util/ink.ts",

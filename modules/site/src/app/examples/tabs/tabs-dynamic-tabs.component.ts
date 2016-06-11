@@ -1,6 +1,7 @@
 import {Component, ViewEncapsulation, Input} from '@angular/core';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
-
+import {MD_TABS_DIRECTIVES} from '@angular2-material/tabs';
+import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
 
 export interface ITabData {
   title: string;
@@ -14,7 +15,7 @@ export interface ITabData {
   templateUrl: 'tabs-dynamic-tabs.component.html',
   styleUrls: ['tabs-dynamic-tabs.component.css'],
   encapsulation: ViewEncapsulation.None,
-  directives: [MATERIAL_DIRECTIVES]
+  directives: [MATERIAL_DIRECTIVES, MD_TABS_DIRECTIVES, MD_INPUT_DIRECTIVES]
 })
 export class TabsDynamicTabsComponent {
   public tabs: ITabData[] = [
@@ -24,8 +25,7 @@ export class TabsDynamicTabsComponent {
     },
     {
       title: 'Three',
-      content:
-          'If you look at the source, you\'re using tabs to look at a demo for tabs. Recursion!'
+      content: 'If you look at the source, you\'re using tabs to look at a demo for tabs. Recursion!'
     }
   ];
 
@@ -40,7 +40,9 @@ export class TabsDynamicTabsComponent {
     this._selectedIndex = value;
   }
 
-  get selectedIndex(): number { return this._selectedIndex; }
+  get selectedIndex(): number {
+    return this._selectedIndex;
+  }
 
   addTab(title, view) {
     view = view || title + ' Content View';

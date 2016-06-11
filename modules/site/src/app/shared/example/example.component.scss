@@ -18,8 +18,21 @@
     }
   }
 
-  .doc-content {
-    margin: 24px 0;
+  md-tab-group {
+    .md-tab-label {
+      color: md-color($md-background, 50);
+      text-transform: uppercase;
+      &.md-active {
+        font-weight: 400;
+      }
+    }
+    .md-tab-header {
+      background-color: md-color($md-primary, 500);
+      border-bottom: 0;
+      md-ink-bar {
+        background-color: md-color($md-background, lighter);
+      }
+    }
   }
 
   .demo-container {
@@ -33,28 +46,9 @@
     //background-color: md-color($md-background, 50);
   }
 
-  .demo-source-tabs {
-    z-index: 1;
-    -webkit-transition: all 0.45s cubic-bezier(0.35, 0, 0.25, 1);
-    transition: all 0.45s cubic-bezier(0.35, 0, 0.25, 1);
-    height: 448px;
-    max-height: 0;
-    background: #fff;
+  .demo-source-container {
     overflow: hidden;
-    &.shown {
-      max-height: 448px;
-    }
-  }
-
-  .demo-source-tabs.ng-hide {
-    min-height: 0;
-    height: 0;
-  }
-
-  .demo-source-tabs {
-    position: relative;
-    width: 100%;
-    z-index: 0;
+    overflow-y: auto;
   }
 
   .demo-content {
@@ -75,10 +69,6 @@
   .demo-source-container {
     display: block;
     height: 400px;
-  }
-
-  md-tabs-content-wrapper {
-    max-height: 448px;
   }
 
 }

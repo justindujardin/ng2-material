@@ -28,6 +28,7 @@
     "@angular2-material/progress-circle": "2.0.0-alpha.5-2",
     "@angular2-material/radio": "2.0.0-alpha.5-2",
     "@angular2-material/sidenav": "2.0.0-alpha.5-2",
+    "@angular2-material/tabs": "^2.0.0-alpha.5-2",
     "@angular2-material/toolbar": "2.0.0-alpha.5-2",
     "es6-shim": "^0.35.0",
     "highlightjs": "^8.7.0",
