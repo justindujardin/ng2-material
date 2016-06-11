@@ -6,8 +6,7 @@ declare var hljs: any;
   moduleId: module.id,
   selector: 'docs-highlight',
   styleUrls: ['highlight.component.css'],
-  template:
-      `<pre><code class="highlight" [innerHtml]="rendered || text"><ng-content></ng-content></code></pre>`
+  template: `<pre><code class="highlight" [innerHtml]="rendered || text"><ng-content></ng-content></code></pre>`
 })
 export class HighlightComponent implements AfterContentInit {
   get type(): string { return this._type; }
