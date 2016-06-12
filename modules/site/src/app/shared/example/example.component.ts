@@ -1,8 +1,16 @@
-import {Component, Input, DynamicComponentLoader, ComponentRef, Query, QueryList, ViewContainerRef, AfterViewInit, ViewChild} from '@angular/core';
+import {
+  Component,
+  Input,
+  ComponentRef,
+  ViewContainerRef,
+  AfterViewInit,
+  ViewChild,
+  ComponentResolver
+} from '@angular/core';
 import {Http} from '@angular/http';
 import {MdToolbar} from '@angular2-material/toolbar';
-import {MATERIAL_DIRECTIVES, MdTabs} from 'ng2-material';
-
+import {MD_TABS_DIRECTIVES} from '@angular2-material/tabs';
+import {MATERIAL_DIRECTIVES} from 'ng2-material';
 import {IExampleData, DEMO_DIRECTIVES} from '../../index';
 import {HighlightComponent} from '../highlight/highlight.component';
 
@@ -16,7 +24,7 @@ export interface ISourceFile {
   selector: 'docs-example',
   templateUrl: 'example.component.html',
   styleUrls: ['example.component.css'],
-  directives: [MATERIAL_DIRECTIVES, HighlightComponent, MdToolbar]
+  directives: [MATERIAL_DIRECTIVES, MD_TABS_DIRECTIVES, HighlightComponent, MdToolbar]
 })
 export class ExampleComponent implements AfterViewInit {
   private _model: IExampleData = null;
@@ -28,14 +36,18 @@ export class ExampleComponent implements AfterViewInit {
     this.applyModel(value);
   }
 
-  get model(): IExampleData { return this._model; }
+  get model(): IExampleData {
+    return this._model;
+  }
 
   private _loaded: boolean = false;
-  get loaded(): boolean { return this._loaded; }
+  get loaded(): boolean {
+    return this._loaded;
+  }
 
-  constructor(
-      public http: Http, @Query(MdTabs) public panes: QueryList<MdTabs>,
-      public dcl: DynamicComponentLoader) {}
+  constructor(public http: Http,
+              private _componentResolver: ComponentResolver) {
+  }
 
   private _init: boolean = false;
 
@@ -49,14 +61,12 @@ export class ExampleComponent implements AfterViewInit {
    */
   @Input() public showSource: boolean = false;
 
-  @Input() private showTabs: boolean = false;
-
   /**
    * The selected type of source to view.
    */
   @Input() public selected: string = 'html';
 
-  @ViewChild('example', {read: ViewContainerRef}) private exampleRef;
+  @ViewChild('example', {read: ViewContainerRef}) private exampleRef: ViewContainerRef;
 
   ngAfterViewInit(): any {
     this._init = true;
@@ -92,29 +102,19 @@ export class ExampleComponent implements AfterViewInit {
     })
     class CompiledComponent {
     }
-    this.dcl.loadNextToLocation(CompiledComponent, this.exampleRef)
-        .then((ref: ComponentRef<CompiledComponent>) => {
-          if (this._reference) {
-            this._reference.destroy();
-          }
-          this._loaded = true;
-          this._reference = ref;
-        });
+    return this._componentResolver.resolveComponent(CompiledComponent).then(componentFactory => {
+      let ref = this.exampleRef.createComponent(componentFactory, this.exampleRef.length, this.exampleRef.parentInjector);
+      if (this._reference) {
+        this._reference.destroy();
+      }
+      this._loaded = true;
+      this._reference = ref;
+    });
   }
 
   addFile(data: string, type: string) {
     let desc: ISourceFile = {type: type, data: data};
     // this.http.get(url).subscribe((res: Response) => { desc.data = res.text(); });
     this.orderedFiles.push(desc);
-  }
-
-  toggleSource() {
-    if (this.showSource) {
-      this.showTabs = false;
-      setTimeout(() => { this.showSource = false; }, 500);
-    } else {
-      this.showSource = true;
-      setTimeout(() => { this.showTabs = true; }, 25);
-    }
   }
 }

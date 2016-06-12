@@ -4,7 +4,9 @@ import {CardBasicUsageComponent} from './examples/card/card-basic-usage.componen
 import {CardInlineActionsComponent} from './examples/card/card-inline-actions.component';
 import {CheckboxBasicUsageComponent} from './examples/checkbox/checkbox-basic-usage.component';
 import {DataTableBasicUsageComponent} from './examples/data-table/data-table-basic-usage.component';
-import {DataTableSelectableRowsComponent} from './examples/data-table/data-table-selectable-rows.component';
+import {
+  DataTableSelectableRowsComponent
+} from './examples/data-table/data-table-selectable-rows.component';
 import {DialogBasicUsageComponent} from './examples/dialog/dialog-basic-usage.component';
 import {ElevationBasicUsageComponent} from './examples/elevation/elevation-basic-usage.component';
 import {InputBasicUsageComponent} from './examples/input/input-basic-usage.component';

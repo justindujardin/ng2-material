@@ -61,6 +61,14 @@ export function main() {
         });
       })));
 
+      it('should ink ripple without assertion mock', async(() => {
+        setup().then((fixture: ComponentFixture<TestComponent>) => {
+          let element: DebugElement = fixture.debugElement.query(By.css('[md-ink]'));
+          let event = createEvent();
+          element.triggerEventHandler('mousedown', event);
+        });
+      }));
+
       it('should not ink ripple with md-no-ink attribute', async(inject([], () => {
         let template = `<div md-ink md-no-ink></div>`;
         setup(template).then((fixture: ComponentFixture<TestComponent>) => {

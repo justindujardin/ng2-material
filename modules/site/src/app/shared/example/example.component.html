@@ -9,23 +9,22 @@
                 class="md-icon-button"
                 aria-label="View Source"
                 [ngClass]="{ active: showSource }"
-                (click)="toggleSource()">
+                (click)="showSource = !showSource">
           <i md-icon>code</i>
         </button>
       </md-toolbar>
 
       <!-- Source views -->
-      <md-tabs md-dynamic-height
-               *ngIf="showSource"
-               [ngClass]="{ shown: showTabs }"
-               mdNoScroll="true"
-               class="demo-source-tabs md-primary md-no-scroll">
-        <template md-tab *ngFor="let file of orderedFiles" [label]="file?.type">
-          <md-content md-scroll-y class="demo-source-container">
-            <docs-highlight [text]="file.data" [type]="file.type" class="no-header"></docs-highlight>
-          </md-content>
-        </template>
-      </md-tabs>
+      <md-tab-group *ngIf="showSource">
+        <md-tab *ngFor="let file of orderedFiles">
+          <template md-tab-label>{{file?.type}}</template>
+          <template md-tab-content>
+            <md-content md-scroll-y class="demo-source-container">
+              <docs-highlight [text]="file.data" [type]="file.type" class="no-header"></docs-highlight>
+            </md-content>
+          </template>
+        </md-tab>
+      </md-tab-group>
 
       <!-- Live Demos -->
       <div #example></div>

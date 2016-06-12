@@ -28,7 +28,6 @@ import {MdPagination,
 import {MdPeekaboo} from "./components/peekaboo/peekaboo";
 import {MdSwitch} from "./components/switch/switch";
 import {MdSubheader} from "./components/subheader/subheader";
-import {MdTabs, MdTab} from "./components/tabs/tabs";
 import {Media} from "./core/util/media";
 import {ViewportHelper, BrowserViewportHelper, NodeViewportHelper} from "./core/util/viewport";
 import {OVERLAY_CONTAINER_TOKEN, createOverlayContainer} from "@angular2-material/core/overlay/overlay";
@@ -61,8 +60,6 @@ export * from './components/switch/switch';
 
 export * from './components/subheader/subheader';
 
-export * from './components/tabs/tabs';
-
 export * from './core/util/media';
 export * from './core/util/ink';
 
@@ -89,8 +86,7 @@ export const MATERIAL_DIRECTIVES: any[] = [
   MdPagination, MdPaginationControls, MdPaginationItemsPerPage, MdPaginationRange,
   MdPeekaboo,
   MdSubheader,
-  MdSwitch,
-  MdTab, MdTabs
+  MdSwitch
 ];
 
 /**
