@@ -1,0 +1,69 @@
+@import "../../core/style/variables";
+@import "../../core/style/default-theme";
+
+$pagination-padding: rem(1.4) !default;
+$pagination-min-height: 28px !default;
+$pagination-font-size: rem(1.3) !default;
+
+$pagination-controls-margin: rem(.6) !default;
+
+$pagination-control-margin: rem(.600) !default;
+$pagination-control-icon-width: rem(3.600) !default;
+$pagination-control-icon-height: rem(2.800) !default;
+$pagination-control-icon-background: transparent;
+
+$pagination-range-margin: rem(2) !default;
+
+$pagination-items-per-page-options-margin: rem(.6) !default;
+$pagination-items-per-page-options-select-margin: rem(.6) !default;
+$pagination-items-per-page-options-label-margin: rem(.6) !default;
+$pagination-items-per-page-options-label-font-size: rem(1.1) !default;
+
+md-pagination, .md-pagination {
+  display: block;
+  padding: $pagination-padding 0;
+  min-height: $pagination-min-height;
+  font-size: $pagination-font-size;
+  color: md-color($md-foreground, text);
+  text-align: right;
+
+  md-pagination-controls, .md-pagination-controls {
+    margin: 0 $pagination-controls-margin;
+  }
+
+  .md-pagination-control {
+    display: inline-block;
+    margin: 0 $pagination-control-margin;
+    width: $pagination-control-icon-width;
+    height: $pagination-control-icon-height;
+    vertical-align: middle;
+
+    button {
+      display: none;
+      width: $pagination-control-icon-width;
+      height: $pagination-control-icon-height;
+      border: 0;
+      outline: 0;
+      background: $pagination-control-icon-background;
+    }
+  }
+  .md-pagination-control-active button {
+    display: block;
+  }
+
+  md-pagination-range, .md-pagination-range {
+    margin: 0 $pagination-range-margin;
+  }
+
+  md-pagination-items-per-page, .md-pagination-items-per-page {
+    margin: 0 $pagination-items-per-page-options-margin;
+  }
+
+  .md-pagination-length-select {
+    margin: 0 $pagination-items-per-page-options-select-margin;
+  }
+  .md-pagination-items-per-page-label {
+    margin: 0 $pagination-items-per-page-options-label-margin;
+    font-size: $pagination-items-per-page-options-label-font-size;
+  }
+}

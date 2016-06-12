@@ -1,0 +1,63 @@
+@import "../../../ng2-material/core/style/variables";
+@import "../../../ng2-material/core/style/default-theme";
+@import "../../../ng2-material/components/whiteframe/whiteframe";
+
+pagination-split-usage {
+  .page-container {
+    position: relative;
+    align-items: stretch;
+  }
+
+  md-card {
+    margin: 0;
+
+    md-card-content {
+      padding: 30px 30px 40px;
+    }
+  }
+
+  .controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    .md-pagination-control {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 35px;
+      height: 35px;
+      vertical-align: middle;
+    }
+
+    .md-pagination-control-previous {
+      left: 0;
+    }
+
+    .md-pagination-control-next {
+      right: 0;
+    }
+
+    .material-icons {
+      @extend .md-whiteframe-1dp;
+      width: 35px;
+      height: 35px;
+      background: #FFF;
+    }
+  }
+
+  .md-pagination-range {
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+    left: 0;
+  }
+
+  .page-number {
+    padding: 0 10px;
+    font-weight: bold;
+  }
+}
