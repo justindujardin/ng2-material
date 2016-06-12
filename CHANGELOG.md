@@ -1,3 +1,23 @@
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/justindujardin/ng2-material/compare/v0.4.1...v0.5.0) (2016-06-12)
+
+
+### Bug Fixes
+
+* import path in example page ([0cbec43](https://github.com/justindujardin/ng2-material/commit/0cbec43)), closes [#239](https://github.com/justindujardin/ng2-material/issues/239)
+* lock to material2 alpha 4 temporarily ([630b289](https://github.com/justindujardin/ng2-material/commit/630b289)), closes [#244](https://github.com/justindujardin/ng2-material/issues/244) [#240](https://github.com/justindujardin/ng2-material/issues/240)
+* **data-table:** unsubscribe from observables when destroyed ([ab3a326](https://github.com/justindujardin/ng2-material/commit/ab3a326))
+
+### Features
+
+* **build:** install typings as postinstall step ([772fab4](https://github.com/justindujardin/ng2-material/commit/772fab4))
+* Add Paging component ([a6061f6](https://github.com/justindujardin/ng2-material/commit/a6061f6))
+* **develop:** Add `npm tdd` and `grunt tdd` tasks ([1b6ba0c](https://github.com/justindujardin/ng2-material/commit/1b6ba0c))
+* **develop:** make npm scripts Windows friendly ([c5d63cd](https://github.com/justindujardin/ng2-material/commit/c5d63cd))
+* **examples:** add webpack example with ng2-material and material2 ([fe58d90](https://github.com/justindujardin/ng2-material/commit/fe58d90)), closes [#175](https://github.com/justindujardin/ng2-material/issues/175)
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/justindujardin/ng2-material/compare/v0.4.0...v0.4.1) (2016-05-22)
 
