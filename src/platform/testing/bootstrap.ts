@@ -8,7 +8,7 @@ import {
   TEST_BROWSER_STATIC_PLATFORM_PROVIDERS,
   ADDITIONAL_TEST_BROWSER_PROVIDERS
 } from "@angular/platform-browser/testing";
-import {MATERIAL_BROWSER_PROVIDERS} from "../../index";
+import {MATERIAL_BROWSER_PROVIDERS, overlayContainerToken} from "../../index";
 import {TestUrlResolver} from "./test_url_resolver";
 import {UrlResolver} from "@angular/compiler";
 import {provide, ApplicationRef} from "@angular/core";
@@ -20,6 +20,7 @@ setBaseTestProviders(
     ...BROWSER_APP_DYNAMIC_PROVIDERS,
     ...ADDITIONAL_TEST_BROWSER_PROVIDERS,
     ...MATERIAL_BROWSER_PROVIDERS,
+    overlayContainerToken(),
     provide(ApplicationRef, {useClass: MockApplicationRef}),
     provide(UrlResolver, {useValue: new TestUrlResolver()})
   ]
