@@ -1,5 +1,5 @@
 import {beforeEach, describe, expect, inject, it, async} from '@angular/core/testing';
-import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {ComponentFixture, TestComponentBuilder} from '@angular/core/testing';
 import {Component, DebugElement} from '@angular/core';
 import {Ink, MdInk} from '../../index';
 import {By} from '@angular/platform-browser';

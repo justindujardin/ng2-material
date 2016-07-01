@@ -1,5 +1,5 @@
 import {beforeEach, describe, expect, inject, it, async} from '@angular/core/testing';
-import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {ComponentFixture, TestComponentBuilder} from '@angular/core/testing';
 import {Component, ViewMetadata, DebugElement} from '@angular/core';
 import {MdButton, MdAnchor, Ink} from '../../index';
 import {By} from '@angular/platform-browser';
@@ -22,7 +22,7 @@ export function main() {
       this.clickCount++;
     }
   }
-  
+
   let createEvent = (): MouseEvent => {
     var event = document.createEvent('MouseEvent');
     event.initEvent('mouse', true, true);

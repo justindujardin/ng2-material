@@ -6,7 +6,7 @@ import {
   it,
   async
 } from "@angular/core/testing";
-import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/core/testing";
 import {Component, DebugElement} from "@angular/core";
 import {MdPeekaboo} from "../../index";
 import {By} from "@angular/platform-browser";

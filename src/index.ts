@@ -30,7 +30,8 @@ import {MdSwitch} from "./components/switch/switch";
 import {MdSubheader} from "./components/subheader/subheader";
 import {Media} from "./core/util/media";
 import {ViewportHelper, BrowserViewportHelper, NodeViewportHelper} from "./core/util/viewport";
-import {OVERLAY_CONTAINER_TOKEN, createOverlayContainer} from "@angular2-material/core/overlay/overlay";
+import {OVERLAY_CONTAINER_TOKEN} from "@angular2-material/core/overlay/overlay";
+import {createOverlayContainer} from '@angular2-material/core/overlay/overlay-container';
 import {MdBackdrop} from "./components/backdrop/backdrop";
 
 export * from './components/button/button';
