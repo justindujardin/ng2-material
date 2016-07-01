@@ -1,7 +1,7 @@
 import {describe, it, beforeEach, expect, inject, async} from '@angular/core/testing';
 import {MATERIAL_DIRECTIVES} from '../../index';
 import {Component} from '@angular/core';
-import {TestComponentBuilder, ComponentFixture} from '@angular/compiler/testing';
+import {TestComponentBuilder, ComponentFixture} from '@angular/core/testing';
 import {promiseWait} from '../../platform/testing/util';
 import {Ink} from './ink';
 import {By} from "@angular/platform-browser";

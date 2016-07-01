@@ -1,6 +1,6 @@
 import {componentSanityCheck} from "../../platform/testing/util";
 import {beforeEach, describe, expect, inject, it, async} from "@angular/core/testing";
-import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/core/testing";
 import {Component, DebugElement, EventEmitter, QueryList} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
 import {By} from "@angular/platform-browser";

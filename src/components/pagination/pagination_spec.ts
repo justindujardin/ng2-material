@@ -7,7 +7,7 @@ import {
   it,
   async
 } from '@angular/core/testing';
-import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/core/testing";
 import {Component, DebugElement} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {By} from "@angular/platform-browser";
