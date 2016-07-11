@@ -3,11 +3,10 @@ declare var Zone: any;
 
 
 import {resetBaseTestProviders, setBaseTestProviders, MockApplicationRef} from "@angular/core/testing";
-import {BROWSER_APP_DYNAMIC_PROVIDERS} from "@angular/platform-browser-dynamic";
+import {BROWSER_APP_COMPILER_PROVIDERS} from "@angular/platform-browser-dynamic";
 import {
-  TEST_BROWSER_STATIC_PLATFORM_PROVIDERS,
-  ADDITIONAL_TEST_BROWSER_PROVIDERS
-} from "@angular/platform-browser/testing";
+  TEST_BROWSER_PLATFORM_PROVIDERS
+} from "@angular/platform-browser/testing/browser";
 import {MATERIAL_BROWSER_PROVIDERS} from "../../index";
 import {TestUrlResolver} from "./test_url_resolver";
 import {UrlResolver} from "@angular/compiler";
@@ -15,10 +14,9 @@ import {provide, ApplicationRef} from "@angular/core";
 
 resetBaseTestProviders();
 setBaseTestProviders(
-  TEST_BROWSER_STATIC_PLATFORM_PROVIDERS,
+  TEST_BROWSER_PLATFORM_PROVIDERS,
   [
-    ...BROWSER_APP_DYNAMIC_PROVIDERS,
-    ...ADDITIONAL_TEST_BROWSER_PROVIDERS,
+    ...BROWSER_APP_COMPILER_PROVIDERS,
     ...MATERIAL_BROWSER_PROVIDERS,
     provide(ApplicationRef, {useClass: MockApplicationRef}),
     provide(UrlResolver, {useValue: new TestUrlResolver()})
