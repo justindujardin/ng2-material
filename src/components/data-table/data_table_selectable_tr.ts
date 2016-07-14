@@ -11,7 +11,7 @@ export interface ITableSelectableRow {
   selectableValue: string;
   onChange: EventEmitter<ITableSelectableRowSelectionChange>;
   isActive: boolean;
-  change: () => void;
+  change: (event: any) => void;
   ngAfterContentInit: () => void;
 }
 
@@ -41,16 +41,20 @@ export abstract class AbstractMdDataTableSelectableRow implements AfterContentIn
   /**
    * Change active status
    */
-  change() {
+  change(event) {
+    if (event.target.classList.contains('md-checkbox-inner-container')) {
+      event.preventDefault();
+    }
+
     this.isActive = !this.isActive;
 
-    let event: ITableSelectableRowSelectionChange = {
+    let changeEvent: ITableSelectableRowSelectionChange = {
       name: 'selectable_row_change',
       target: this,
       isActive: this.isActive,
       selectableValue: this.selectableValue
     }
-    this.onChange.emit(event);
+    this.onChange.emit(changeEvent);
   }
 
   ngAfterContentInit() {}
@@ -60,14 +64,14 @@ export abstract class AbstractMdDataTableSelectableRow implements AfterContentIn
   selector: 'tr[md-data-table-header-selectable-row]',
   template: `
         <th class="md-data-check-cell">
-            <md-checkbox #check [checked]="isActive"></md-checkbox>
+            <md-checkbox [checked]="isActive"></md-checkbox>
         </th>
         <ng-content></ng-content>
     `,
   directives: [MdCheckbox],
   host: {
     '[class.active]': 'isActive',
-    '(click)': 'change()'
+    '(click)': 'change($event)'
   }
 })
 export class MdDataTableHeaderSelectableRow extends AbstractMdDataTableSelectableRow {
@@ -94,14 +98,14 @@ export class MdDataTableHeaderSelectableRow extends AbstractMdDataTableSelectabl
   selector: 'tr[md-data-table-selectable-row]',
   template: `
         <td class="md-data-check-cell">
-          <md-checkbox #check [checked]="isActive"></md-checkbox>
+          <md-checkbox [checked]="isActive"></md-checkbox>
         </td>
         <ng-content></ng-content>
     `,
   directives: [MdCheckbox],
   host: {
     '[class.active]': 'isActive',
-    '(click)': 'change()'
+    '(click)': 'change($event)'
   }
 })
 export class MdDataTableSelectableRow extends AbstractMdDataTableSelectableRow {
