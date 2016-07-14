@@ -10,7 +10,7 @@ import {MdRadioButton, MdRadioGroup, MdRadioDispatcher} from '@angular2-material
   providers: [MdRadioDispatcher]
 })
 export class RadioBasicUsageComponent {
-  data: any = {group1: 'Banana', group2: '2', group3: 'avatar-1'};
+  data: any = {default: 'Banana', avatar: 'avatar-1'};
 
   avatarData: any[] = [
     {id: 'images/avatars/avatar1.svg', title: 'avatar 1', value: 'avatar-1'},
