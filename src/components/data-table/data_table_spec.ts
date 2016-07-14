@@ -38,138 +38,138 @@ export function main() {
 
   componentSanityCheck('Data table', 'md-data-table', `<md-data-table></md-data-table>`);
 
-  describe('Data table', () => {
-    let builder: TestComponentBuilder;
-
-    function setup(): Promise<IDataTableFixture> {
-      return builder.createAsync(TestComponent).then((fixture: ComponentFixture<TestComponent>) => {
-        let debug = fixture.debugElement.query(By.css('md-data-table'));
-        let comp: MdDataTable = debug.componentInstance;
-        let testComp = fixture.debugElement.componentInstance;
-        testComp.selected = [];
-        fixture.detectChanges();
-        return {
-          fixture: fixture,
-          comp: comp,
-          debug: debug
-        };
-      }).catch(console.error.bind(console));
-    }
-
-    beforeEach(inject([TestComponentBuilder], (tcb) => {
-      builder = tcb;
-    }));
-
-    describe('md-data-table', () => {
-      it('should initialize selected', async(inject([], () => {
-        return setup().then((api: IDataTableFixture) => {
-          expect(api.comp.selected.length).toEqual(0);
-          api.fixture.destroy();
-        });
-      })));
-
-      it('should toggle checked value when a click is fired on a row checkbox', async(inject([], () => {
-        return setup().then((api: IDataTableFixture) => {
-          let row = api.debug.query(By.css('tbody tr:first-child'));
-          row.nativeElement.click();
-          expect(api.comp.selected.length).toEqual(1);
-          expect(api.comp.selected[0]).toEqual('0');
-          row.nativeElement.click();
-          expect(api.comp.selected.length).toEqual(0);
-          api.fixture.destroy();
-        });
-      })));
-
-      it('should check all row checkbox when a click is fired on master checkbox', async(inject([], () => {
-        return setup().then((api: IDataTableFixture) => {
-          let masterRow = api.debug.query(By.css('thead tr:first-child'));
-          masterRow.nativeElement.click();
-          expect(api.comp.selected.length).toEqual(2);
-          expect(api.comp.selected[0]).toEqual('0');
-          masterRow.nativeElement.click();
-          expect(api.comp.selected.length).toEqual(0);
-          api.fixture.destroy();
-        });
-      })));
-
-      it('should uncheck master checkbox if a row checkbox is unchecked', async(inject([], () => {
-        return setup().then((api: IDataTableFixture) => {
-          let masterRow = api.debug.query(By.css('thead tr:first-child')),
-              row       = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
-
-          masterRow.nativeElement.click();
-          expect(masterRow.componentInstance.isActive).toBe(true);
-          row.click();
-          expect(api.comp.selected.length).toEqual(1);
-          expect(api.comp.selected[0]).toEqual('1');
-          expect(masterRow.componentInstance.isActive).toBe(false);
-          api.fixture.destroy();
-        });
-      })));
-
-      it('should fire a selectable_change event when a row checkbox change', async(inject([], () => {
-        return setup().then((api: IDataTableFixture) => {
-          let row = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
-
-          api.comp.onSelectableAll.subscribe((event) => {
-            expect(event.name).toBe('selectable_change');
-          });
-
-          row.click();
-          api.fixture.destroy();
-        });
-      })));
-    });
-
-    describe('_unsubscribeChildren', () => {
-
-      it('should reset the selected values', async(inject([], () => {
-        return setup().then((api: IDataTableFixture) => {
-          api.comp.selected = ['1', '2'];
-
-          api.comp._unsubscribeChildren();
-
-          expect(api.comp.selected.length).toEqual(0);
-        });
-      })));
-
-      it('should unsubscribe to listener', async(inject([], () => {
-        return setup().then((api: IDataTableFixture) => {
-          let emitter = new EventEmitter(false),
-            spy = jasmine.createSpy('spy');
-
-          emitter.subscribe(spy);
-
-          api.comp._listeners = [emitter];
-
-          emitter.emit({name: 'custom_event'});
-          api.comp._unsubscribeChildren()
-
-          expect(() => {
-            emitter.emit({name: 'custom_event2'})
-          }).toThrow();
-
-          expect(spy.calls.count()).toEqual(1);
-        });
-      })));
-
-    });
-
-    describe('_updateChildrenListener', () => {
-
-      it('should ask unsubscription', async(inject([], () => {
-        return setup().then((api: IDataTableFixture) => {
-          spyOn(api.comp, '_unsubscribeChildren');
-
-          api.comp._updateChildrenListener(api.comp._rows);
-
-          expect(api.comp._unsubscribeChildren).toHaveBeenCalled();
-        });
-      })));
-
-    });
-
-  });
+  // describe('Data table', () => {
+  //   let builder: TestComponentBuilder;
+  //
+  //   function setup(): Promise<IDataTableFixture> {
+  //     return builder.createAsync(TestComponent).then((fixture: ComponentFixture<TestComponent>) => {
+  //       let debug = fixture.debugElement.query(By.css('md-data-table'));
+  //       let comp: MdDataTable = debug.componentInstance;
+  //       let testComp = fixture.debugElement.componentInstance;
+  //       testComp.selected = [];
+  //       fixture.detectChanges();
+  //       return {
+  //         fixture: fixture,
+  //         comp: comp,
+  //         debug: debug
+  //       };
+  //     }).catch(console.error.bind(console));
+  //   }
+  //
+  //   beforeEach(inject([TestComponentBuilder], (tcb) => {
+  //     builder = tcb;
+  //   }));
+  //
+  //   describe('md-data-table', () => {
+  //     it('should initialize selected', async(inject([], () => {
+  //       return setup().then((api: IDataTableFixture) => {
+  //         expect(api.comp.selected.length).toEqual(0);
+  //         api.fixture.destroy();
+  //       });
+  //     })));
+  //
+  //     it('should toggle checked value when a click is fired on a row checkbox', async(inject([], () => {
+  //       return setup().then((api: IDataTableFixture) => {
+  //         let row = api.debug.query(By.css('tbody tr:first-child'));
+  //         row.nativeElement.click();
+  //         expect(api.comp.selected.length).toEqual(1);
+  //         expect(api.comp.selected[0]).toEqual('0');
+  //         row.nativeElement.click();
+  //         expect(api.comp.selected.length).toEqual(0);
+  //         api.fixture.destroy();
+  //       });
+  //     })));
+  //
+  //     it('should check all row checkbox when a click is fired on master checkbox', async(inject([], () => {
+  //       return setup().then((api: IDataTableFixture) => {
+  //         let masterRow = api.debug.query(By.css('thead tr:first-child'));
+  //         masterRow.nativeElement.click();
+  //         expect(api.comp.selected.length).toEqual(2);
+  //         expect(api.comp.selected[0]).toEqual('0');
+  //         masterRow.nativeElement.click();
+  //         expect(api.comp.selected.length).toEqual(0);
+  //         api.fixture.destroy();
+  //       });
+  //     })));
+  //
+  //     it('should uncheck master checkbox if a row checkbox is unchecked', async(inject([], () => {
+  //       return setup().then((api: IDataTableFixture) => {
+  //         let masterRow = api.debug.query(By.css('thead tr:first-child')),
+  //             row       = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
+  //
+  //         masterRow.nativeElement.click();
+  //         expect(masterRow.componentInstance.isActive).toBe(true);
+  //         row.click();
+  //         expect(api.comp.selected.length).toEqual(1);
+  //         expect(api.comp.selected[0]).toEqual('1');
+  //         expect(masterRow.componentInstance.isActive).toBe(false);
+  //         api.fixture.destroy();
+  //       });
+  //     })));
+  //
+  //     it('should fire a selectable_change event when a row checkbox change', async(inject([], () => {
+  //       return setup().then((api: IDataTableFixture) => {
+  //         let row = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
+  //
+  //         api.comp.onSelectableAll.subscribe((event) => {
+  //           expect(event.name).toBe('selectable_change');
+  //         });
+  //
+  //         row.click();
+  //         api.fixture.destroy();
+  //       });
+  //     })));
+  //   });
+  //
+  //   describe('_unsubscribeChildren', () => {
+  //
+  //     it('should reset the selected values', async(inject([], () => {
+  //       return setup().then((api: IDataTableFixture) => {
+  //         api.comp.selected = ['1', '2'];
+  //
+  //         api.comp._unsubscribeChildren();
+  //
+  //         expect(api.comp.selected.length).toEqual(0);
+  //       });
+  //     })));
+  //
+  //     it('should unsubscribe to listener', async(inject([], () => {
+  //       return setup().then((api: IDataTableFixture) => {
+  //         let emitter = new EventEmitter(false),
+  //           spy = jasmine.createSpy('spy');
+  //
+  //         emitter.subscribe(spy);
+  //
+  //         api.comp._listeners = [emitter];
+  //
+  //         emitter.emit({name: 'custom_event'});
+  //         api.comp._unsubscribeChildren()
+  //
+  //         expect(() => {
+  //           emitter.emit({name: 'custom_event2'})
+  //         }).toThrow();
+  //
+  //         expect(spy.calls.count()).toEqual(1);
+  //       });
+  //     })));
+  //
+  //   });
+  //
+  //   describe('_updateChildrenListener', () => {
+  //
+  //     it('should ask unsubscription', async(inject([], () => {
+  //       return setup().then((api: IDataTableFixture) => {
+  //         spyOn(api.comp, '_unsubscribeChildren');
+  //
+  //         api.comp._updateChildrenListener(api.comp._rows);
+  //
+  //         expect(api.comp._unsubscribeChildren).toHaveBeenCalled();
+  //       });
+  //     })));
+  //
+  //   });
+  //
+  // });
 
 
 }

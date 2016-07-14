@@ -86,7 +86,7 @@ export function main() {
         it('should toggle when the space key is pressed', async(() => {
           return setup().then((api: ICheckboxFixture) => {
             expect(api.comp.checked).toBe(false);
-            const event = createEvent();
+            let event = createEvent();
             event.keyCode = KeyCodes.SPACE;
             api.debug.triggerEventHandler('keydown', event);
             expect(api.comp.checked).toBe(true);
@@ -95,7 +95,7 @@ export function main() {
         it('should not toggle when any other key is pressed', async(() => {
           return setup().then((api: ICheckboxFixture) => {
             expect(api.comp.checked).toBe(false);
-            const event = createEvent();
+            let event = createEvent();
             event.keyCode = KeyCodes.DOWN;
             api.debug.triggerEventHandler('keydown', event);
             expect(api.comp.checked).toBe(false);

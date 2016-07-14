@@ -33,6 +33,10 @@ export function main() {
 
     let builder: TestComponentBuilder;
 
+    beforeEach(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+      builder = tcb;
+    }));
+
     function setup(template: string = defaultTemplate): Promise<ComponentFixture<TestComponent>> {
       return builder
         .overrideTemplate(TestComponent, template)
@@ -43,9 +47,6 @@ export function main() {
         }).catch(console.error.bind(console));
     }
 
-    beforeEach(inject([TestComponentBuilder], (tcb) => {
-      builder = tcb;
-    }));
 
     describe('button[md-button]', () => {
       it('should handle a click on the button', async(() => {
@@ -56,7 +57,7 @@ export function main() {
           buttonDebugElement.nativeElement.click();
           expect(testComponent.clickCount).toBe(1);
         });
-      }), 10000);
+      }));
 
 
       it('should ink ripple when clicked', async(() => {

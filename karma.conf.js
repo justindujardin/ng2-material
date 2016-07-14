@@ -17,20 +17,36 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
 
     files: [
-      { pattern: 'node_modules/es6-shim/es6-shim.js', included: true, watched: false },
-      { pattern: 'node_modules/zone.js/dist/zone.js', included: true, watched: false },
-      { pattern: 'node_modules/reflect-metadata/Reflect.js', included: true, watched: false },
-      { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: true, watched: false },
-      { pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: false },
-      { pattern: 'node_modules/zone.js/dist/async-test.js', included: true, watched: false },
+      // Polyfills.
+      'node_modules/core-js/client/shim.min.js',
+
+      // System.js for module loading
+      // Polyfills.
+      'node_modules/core-js/client/shim.min.js',
+
+      // System.js for module loading
+      'node_modules/systemjs/dist/system.src.js',
+
+      // Zone.js dependencies
+      'node_modules/zone.js/dist/zone.js',
+      'node_modules/zone.js/dist/jasmine-patch.js',
+      'node_modules/zone.js/dist/async-test.js',
+      'node_modules/zone.js/dist/fake-async-test.js',
+
+      // RxJs.
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
-      { pattern: 'node_modules/@angular/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
+
+      // paths loaded via module imports
+      // Angular itself
+      { pattern: 'node_modules/@angular/**/*.js', included: false, watched: true },
       { pattern: 'node_modules/@angular2-material/**/*.js', included: false, watched: false },
       'karma.ie.shims.js',
       "config.karma.js",
       { pattern: 'dist/*.*', included: false, watched: true },
       { pattern: 'dist/components/**/*.js', included: false, watched: true },
       { pattern: 'dist/core/**/*.js', included: false, watched: true },
+      { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: false, watched: false }, // PhantomJS2 (and possibly others) might require it
       { pattern: 'dist/platform/**/*.js', included: false, watched: true },
       "karma.main.js"
     ],

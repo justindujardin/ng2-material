@@ -24,8 +24,8 @@
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@angular/router": "3.0.0-alpha.8",
-    "@angular2-material/checkbox": "2.0.0-alpha.6",
-    "@angular2-material/core": "2.0.0-alpha.6",
+    "@angular2-material/checkbox": "2.0.0-alpha.6-2",
+    "@angular2-material/core": "2.0.0-alpha.6-2",
     "es6-promise": ">=3.0.2",
     "es6-shim": "^0.35.0",
     "grunt-sass": "^1.2.0",
@@ -37,6 +37,7 @@
   "devDependencies": {
     "autoprefixer": "6.2.0",
     "codelyzer": "0.0.19",
+    "core-js": "^2.4.0",
     "coveralls": "2.11.6",
     "css": "^2.2.1",
     "css-loader": "0.23.1",
@@ -72,7 +73,7 @@
     "npm": "^3.9.2",
     "remap-istanbul": "0.4.0",
     "style-loader": "0.13.0",
-    "systemjs": "0.19.26",
+    "systemjs": "0.19.27",
     "typescript": ">=1.8.9",
     "typings": "^1.0.4",
     "underscore": "1.8.3"
