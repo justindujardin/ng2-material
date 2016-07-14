@@ -1,4 +1,4 @@
-import {beforeEachProviders, inject} from '@angular/core/testing';
+import {addProviders, inject} from '@angular/core/testing';
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
@@ -7,7 +7,12 @@ import {DialogBasicUsageComponent} from './dialog-basic-usage.component';
 describe('Component: DialogBasicUsage', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [DialogBasicUsageComponent]);
+  beforeEach(() => {
+    addProviders([
+      DialogBasicUsageComponent,
+    ]);
+  });
+
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 

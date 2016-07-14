@@ -1,4 +1,4 @@
-import {beforeEachProviders, inject} from '@angular/core/testing';
+import {addProviders, inject} from '@angular/core/testing';
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
@@ -7,7 +7,12 @@ import {DataTableSelectableRowsComponent} from './data-table-selectable-rows.com
 describe('Component: DataTableSelectableRows', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [DataTableSelectableRowsComponent]);
+  beforeEach(() => {
+    addProviders([
+      DataTableSelectableRowsComponent,
+    ]);
+  });
+
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 

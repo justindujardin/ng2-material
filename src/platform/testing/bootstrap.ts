@@ -23,7 +23,7 @@ setBaseTestProviders(
 /*
     provide(ApplicationRef, {useClass: MockApplicationRef}),
 */
-    provide(UrlResolver, {useValue: new TestUrlResolver()})
+    {provide: UrlResolver, useValue: new TestUrlResolver()}
   ]
 );
 

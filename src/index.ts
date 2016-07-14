@@ -94,7 +94,7 @@ export const MATERIAL_DIRECTIVES: any[] = [
  * Material Design component providers for use in a Node.JS environment.
  */
 export const MATERIAL_NODE_PROVIDERS: any[] = [
-  provide(ViewportHelper, {useClass: NodeViewportHelper}),
+  {provide: ViewportHelper, useClass: NodeViewportHelper},
   Media,
   PaginationService,
   ...INPUT_VALIDATORS
@@ -105,9 +105,9 @@ export const MATERIAL_NODE_PROVIDERS: any[] = [
  */
 export const MATERIAL_BROWSER_PROVIDERS: any[] = [
   ...MATERIAL_NODE_PROVIDERS,
-  provide(ViewportHelper, {useClass: BrowserViewportHelper}),
+  {provide: ViewportHelper, useClass: BrowserViewportHelper},
   // TODO(jd): should this be here? Or in the example app bootstrap?
-  provide(OVERLAY_CONTAINER_TOKEN, {useValue: createOverlayContainer()}),
+  {provide: OVERLAY_CONTAINER_TOKEN, useValue: createOverlayContainer()},
 ];
 
 

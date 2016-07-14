@@ -1,4 +1,4 @@
-import {beforeEachProviders, inject} from '@angular/core/testing';
+import {addProviders, inject} from '@angular/core/testing';
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
@@ -7,7 +7,12 @@ import {DataTableBasicUsageComponent} from './data-table-basic-usage.component';
 describe('Component: DataTableBasicUsage', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [DataTableBasicUsageComponent]);
+  beforeEach(() => {
+    addProviders([
+      DataTableBasicUsageComponent,
+    ]);
+  });
+
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 

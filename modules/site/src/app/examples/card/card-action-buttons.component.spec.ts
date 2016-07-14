@@ -1,4 +1,4 @@
-import {beforeEachProviders, inject} from '@angular/core/testing';
+import {addProviders, inject} from '@angular/core/testing';
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
@@ -7,7 +7,12 @@ import {CardActionButtonsComponent} from './card-action-buttons.component';
 describe('Component: CardActionButtons', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [CardActionButtonsComponent]);
+  beforeEach(() => {
+    addProviders([
+      CardActionButtonsComponent,
+    ]);
+  });
+
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 
