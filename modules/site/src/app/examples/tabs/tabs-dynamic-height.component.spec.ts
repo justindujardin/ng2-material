@@ -1,4 +1,4 @@
-import {beforeEachProviders, inject} from '@angular/core/testing';
+import {addProviders, inject} from '@angular/core/testing';
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
@@ -7,7 +7,12 @@ import {TabsDynamicHeightComponent} from './tabs-dynamic-height.component';
 describe('Component: TabsDynamicHeight', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [TabsDynamicHeightComponent]);
+  beforeEach(() => {
+    addProviders([
+      TabsDynamicHeightComponent,
+    ]);
+  });
+
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 

@@ -12,5 +12,5 @@ if (environment.production) {
 
 bootstrap(SiteAppComponent, [
   ...AppRouterProviders, ...DEMO_PROVIDERS, ...HTTP_PROVIDERS, ...MATERIAL_BROWSER_PROVIDERS,
-  provide(LocationStrategy, {useClass: HashLocationStrategy})
+  {provide: LocationStrategy, useClass: HashLocationStrategy}
 ]);

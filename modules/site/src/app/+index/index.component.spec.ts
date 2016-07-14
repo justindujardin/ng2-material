@@ -1,6 +1,6 @@
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
-import {beforeEach, beforeEachProviders, describe, expect, it, inject} from '@angular/core/testing';
+import {addProviders, inject} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 
 import {IndexComponent} from './index.component';
@@ -8,7 +8,12 @@ import {IndexComponent} from './index.component';
 describe('Component: Index', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [IndexComponent]);
+  beforeEach(() => {
+    addProviders([
+      IndexComponent,
+    ]);
+  });
+
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 
