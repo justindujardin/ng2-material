@@ -1,4 +1,4 @@
-import {inject, async} from '@angular/core/testing';
+import {inject} from '@angular/core/testing';
 import {ComponentFixture, TestComponentBuilder} from '@angular/core/testing';
 import {Component, DebugElement} from '@angular/core';
 import {Ink, MdInk} from '../../index';
@@ -41,7 +41,7 @@ export function main() {
     }));
 
     describe('[md-ink]', () => {
-      it('should ink ripple when clicked', async(() => {
+      it('should ink ripple when clicked', () => {
         setup().then((fixture: ComponentFixture<TestComponent>) => {
           let element: DebugElement = fixture.debugElement.query(By.css('[md-ink]'));
 
@@ -59,17 +59,17 @@ export function main() {
           expect(fired).toBe(true);
           Ink.rippleEvent = save;
         });
-      }));
+      });
 
-      it('should ink ripple without assertion mock', async(() => {
+      it('should ink ripple without assertion mock', () => {
         setup().then((fixture: ComponentFixture<TestComponent>) => {
           let element: DebugElement = fixture.debugElement.query(By.css('[md-ink]'));
           let event = createEvent();
           element.triggerEventHandler('mousedown', event);
         });
-      }));
+      });
 
-      it('should not ink ripple with md-no-ink attribute', async(() => {
+      it('should not ink ripple with md-no-ink attribute', () => {
         let template = `<div md-ink md-no-ink></div>`;
         setup(template).then((fixture: ComponentFixture<TestComponent>) => {
           let element: DebugElement = fixture.debugElement.query(By.css('[md-ink]'));
@@ -86,7 +86,7 @@ export function main() {
           expect(fired).toBe(false);
           Ink.rippleEvent = save;
         });
-      }));
+      });
     });
   });
 }

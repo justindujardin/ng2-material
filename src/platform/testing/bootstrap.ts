@@ -15,10 +15,11 @@ import {UrlResolver} from "@angular/compiler";
 
 resetBaseTestProviders();
 setBaseTestProviders(
-  TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
+  TEST_BROWSER_PLATFORM_PROVIDERS,
   [
     ...BROWSER_APP_COMPILER_PROVIDERS,
     ...TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS,
+    ...TEST_BROWSER_APPLICATION_PROVIDERS,
     ...MATERIAL_BROWSER_PROVIDERS,
     {provide: UrlResolver, useValue: new TestUrlResolver()}
   ]
@@ -41,7 +42,7 @@ export function load(files: string[]): Promise<any[]> {
     }
   });
 
-
+  let index = 0;
   let runTests = (path: string) => {
     return new Promise<void>((resolve, reject) => {
       myZone.run(() => {
@@ -51,6 +52,7 @@ export function load(files: string[]): Promise<any[]> {
             try {
               module.main();
               resolve();
+              index++;
             }
             catch (e) {
               error(e);

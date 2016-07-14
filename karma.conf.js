@@ -61,7 +61,7 @@ module.exports = function (config) {
     // - Chrome, ChromeCanary, Firefox, Opera, Safari (only Mac), PhantomJS, IE (only Windows)
     browsers: process.env.TRAVIS ? ['Firefox'] : ['Chrome'],
     browserNoActivityTimeout: 15000,
-    singleRun: false,
+    singleRun: true,
     reportSlowerThan: 500,
     plugins: [
       'karma-*'

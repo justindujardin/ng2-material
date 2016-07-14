@@ -30,7 +30,6 @@ export function main() {
   };
 
   describe('MdButton', () => {
-
     let builder: TestComponentBuilder;
 
     beforeEach(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
@@ -47,9 +46,13 @@ export function main() {
         }).catch(console.error.bind(console));
     }
 
-
     describe('button[md-button]', () => {
-      it('should handle a click on the button', async(() => {
+
+      beforeEach(() => {
+        spyOn(Ink, 'rippleEvent');
+      });
+
+      it('should handle a click on the button', () => {
         return setup().then((fixture: ComponentFixture<TestComponent>) => {
           let testComponent = fixture.debugElement.componentInstance;
           let buttonDebugElement = fixture.debugElement.query(By.css('button'));
@@ -57,49 +60,31 @@ export function main() {
           buttonDebugElement.nativeElement.click();
           expect(testComponent.clickCount).toBe(1);
         });
-      }));
+      });
 
 
-      it('should ink ripple when clicked', async(() => {
+      it('should ink ripple when clicked', () => {
         return setup().then((fixture: ComponentFixture<TestComponent>) => {
           let button: DebugElement = fixture.debugElement.children[0];
-
-          let save = Ink.rippleEvent;
-          let fired = false;
-          Ink.rippleEvent = () => {
-            fired = true;
-            return Promise.resolve();
-          };
-
           let event = createEvent();
           button.triggerEventHandler('mousedown', event);
 
-
-          expect(fired).toBe(true);
-          Ink.rippleEvent = save;
+          expect(Ink.rippleEvent).toHaveBeenCalled();
         });
-      }));
+      });
 
-      it('should not ink ripple with md-no-ink attribute', async(inject([], () => {
+      it('should not ink ripple with md-no-ink attribute', () => {
         let template = `<button md-button md-no-ink></button>`;
         return setup(template).then((fixture: ComponentFixture<TestComponent>) => {
           let button: DebugElement = fixture.debugElement.children[0];
-          let save = Ink.rippleEvent;
-          let fired = false;
-          Ink.rippleEvent = () => {
-            fired = true;
-            return Promise.resolve();
-          };
-
           let event = createEvent();
           button.triggerEventHandler('mousedown', event);
 
-          expect(fired).toBe(false);
-          Ink.rippleEvent = save;
+          expect(Ink.rippleEvent).not.toHaveBeenCalled();
         });
-      })));
+      });
 
-      it('should disable the button', async(() => {
+      it('should disable the button', () => {
         return setup().then((fixture: ComponentFixture<TestComponent>) => {
           let testAppComponent = fixture.debugElement.componentInstance;
           let buttonDebugElement = fixture.debugElement.query(By.css('button'));
@@ -119,7 +104,7 @@ export function main() {
           buttonElement.click();
           expect(testAppComponent.clickCount).toBe(0);
         });
-      }), 10000);
+      });
     });
 
     describe('a[md-button]', () => {
@@ -130,7 +115,7 @@ export function main() {
           TestComponent, new ViewMetadata({template: anchorTemplate, directives: [MdAnchor]}));
       });
 
-      it('should remove disabled anchors from tab order', async(() => {
+      it('should remove disabled anchors from tab order', () => {
         return builder.createAsync(TestComponent).then((fixture: ComponentFixture<TestComponent>) => {
           let testAppComponent = fixture.debugElement.componentInstance;
           let anchorDebugElement = fixture.debugElement.query(By.css('a'));
@@ -147,9 +132,9 @@ export function main() {
           expect(anchorElement.tabIndex).toBe(-1);
 
         });
-      }), 10000);
+      });
 
-      it('should not preventDefault on enabled anchor clicks', async(inject([], () => {
+      it('should not preventDefault on enabled anchor clicks', () => {
         return builder.createAsync(TestComponent).then((fixture: ComponentFixture<TestComponent>) => {
           let anchor: DebugElement = fixture.debugElement.children[0];
           let event = createEvent();
@@ -158,8 +143,9 @@ export function main() {
           anchor.triggerEventHandler('click', event);
           expect(triggered).toBe(false);
         });
-      })));
-      it('should preventDefault for disabled anchor clicks', async(inject([], () => {
+      });
+
+      it('should preventDefault for disabled anchor clicks', () => {
         return builder.createAsync(TestComponent).then((fixture: ComponentFixture<TestComponent>) => {
           let anchor: DebugElement = fixture.debugElement.children[0];
           let anchorComp: MdAnchor = anchor.componentInstance;
@@ -171,7 +157,7 @@ export function main() {
           expect(triggered).toBe(true);
           fixture.destroy();
         });
-      })));
+      });
     });
   });
 }
