@@ -63,7 +63,7 @@ module.exports = function (config) {
 
     reporters: ['mocha', 'saucelabs', 'coverage'],
 
-    singleRun: true,
+    singleRun: false,
 
     transports:['polling'],
 

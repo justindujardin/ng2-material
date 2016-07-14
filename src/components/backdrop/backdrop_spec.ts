@@ -1,11 +1,4 @@
-import {
-  beforeEach,
-  describe,
-  expect,
-  inject,
-  it,
-  async
-} from "@angular/core/testing";
+import {inject, async} from "@angular/core/testing";
 import {ComponentFixture, TestComponentBuilder} from "@angular/core/testing";
 import {Component, DebugElement} from "@angular/core";
 import {MdBackdrop} from "../../index";

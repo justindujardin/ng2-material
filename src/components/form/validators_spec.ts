@@ -1,4 +1,3 @@
-import {describe, it, expect} from "@angular/core/testing";
 import {Control} from "@angular/common";
 import {MdPatternValidator, MdNumberRequiredValidator} from "../../index";
 

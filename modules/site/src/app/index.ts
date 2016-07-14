@@ -24,7 +24,7 @@ import {ToolbarBasicUsageComponent} from './examples/toolbar/toolbar-basic-usage
 import {ComponentsService, NavigationService, VersionService} from './shared';
 
 export {environment} from './environment';
-export {SiteAppComponent} from './site.component';
+export {SiteAppComponent, AppRouterProviders} from './site.component';
 
 
 /**

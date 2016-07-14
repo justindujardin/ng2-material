@@ -1,13 +1,12 @@
 import {Component} from '@angular/core';
-import {MdRadioButton, MdRadioGroup, MdRadioDispatcher} from '@angular2-material/radio';
+import {MdRadioButton, MdRadioGroup} from '@angular2-material/radio';
 
 @Component({
   moduleId: module.id,
   selector: 'radio-basic-usage',
   templateUrl: 'radio-basic-usage.component.html',
   styleUrls: ['radio-basic-usage.component.css'],
-  directives: [MdRadioButton, MdRadioGroup],
-  providers: [MdRadioDispatcher]
+  directives: [MdRadioButton, MdRadioGroup]
 })
 export class RadioBasicUsageComponent {
   data: any = {default: 'Banana', avatar: 'avatar-1'};

@@ -181,7 +181,7 @@ module.exports = function (grunt) {
     karma: {
       cover: {
         options: {
-          singleRun: true
+          singleRun: false
         },
         configFile: './karma.conf.js'
       }
