@@ -1,7 +1,7 @@
-<form ng-submit="submit()">
+<form (ngSubmit)="submit()">
   <p>Selected Value: <span class="radioValue">{{ data.default }}</span></p>
 
-  <md-radio-group [(ngModel)]="data.default">
+  <md-radio-group [(ngModel)]="data.default" [ngModelOptions]="{standalone: true}">
     <md-radio-button value="Apple" class="md-primary">Apple</md-radio-button>
     <md-radio-button value="Banana" checked="true"> Banana</md-radio-button>
     <md-radio-button value="Mango" class="md-warn">Mango</md-radio-button>
@@ -13,7 +13,7 @@
   </p>
   <p>Selected Avatar: <span class="radioValue">{{ data.avatar }}</span></p>
 
-  <md-radio-group #group [(ngModel)]="data.avatar">
+  <md-radio-group #group [(ngModel)]="data.avatar" [ngModelOptions]="{standalone: true}">
     <md-radio-button *ngFor="let it of avatarData"
                      [checked]="group.value==it.value"
                      [value]="it.value"
