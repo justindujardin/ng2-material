@@ -9,8 +9,10 @@ import {
   AfterContentInit
 } from '@angular/core';
 import {isPresent} from '@angular/core/src/facade/lang';
+import {DomSanitizationService, SafeHtml} from '@angular/platform-browser/src/security/dom_sanitization_service';
 import 'rxjs/add/operator/filter';
 import {PaginationService} from './pagination_service';
+
 
 export interface IPaginationModel {
   currentPage: number;
@@ -60,7 +62,7 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
 
   public value: string = '';
 
-  constructor(protected service: PaginationService) {
+  constructor(protected service: PaginationService, private sanitizationService: DomSanitizationService) {
     super(service);
   }
 
@@ -92,7 +94,9 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
       let rest = this.model.totalItems - rangeStart,
         rangeStop = rest < this.model.itemsPerPage ? this.model.totalItems : rangeStart + this.model.itemsPerPage - 1;
 
-      return this.getFormattedValue(rangeStart, rangeStop, this.model.totalItems);
+      return this.sanitizationService.bypassSecurityTrustHtml(
+        this.getFormattedValue(rangeStart, rangeStop, this.model.totalItems)
+      );
     }
 
     return;

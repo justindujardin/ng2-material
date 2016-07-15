@@ -402,7 +402,7 @@ export function main() {
           return setup(`<md-pagination-range [model]="page2"></md-pagination-range>`).then((api: IPaginationRangeFixture) => {
             spyOn(api.comp, 'getFormattedValue').and.callThrough();
             let result = api.comp.getRange();
-            expect(result).toEqual('31-60 of 65');
+            expect(result['changingThisBreaksApplicationSecurity']).toEqual('31-60 of 65');
             expect(api.comp.getFormattedValue).toHaveBeenCalledWith(31, 60, 65);
           });
         });
@@ -412,7 +412,7 @@ export function main() {
           return setup(`<md-pagination-range [model]="page3"></md-pagination-range>`).then((api: IPaginationRangeFixture) => {
             spyOn(api.comp, 'getFormattedValue').and.callThrough();
             let result = api.comp.getRange();
-            expect(result).toEqual('61-65 of 65');
+            expect(result['changingThisBreaksApplicationSecurity']).toEqual('61-65 of 65');
             expect(api.comp.getFormattedValue).toHaveBeenCalledWith(61, 65, 65);
           });
         });
