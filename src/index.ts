@@ -104,10 +104,15 @@ export const MATERIAL_NODE_PROVIDERS: any[] = [
  */
 export const MATERIAL_BROWSER_PROVIDERS: any[] = [
   ...MATERIAL_NODE_PROVIDERS,
-  provide(ViewportHelper, {useClass: BrowserViewportHelper}),
-  // TODO(jd): should this be here? Or in the example app bootstrap?
-  provide(OVERLAY_CONTAINER_TOKEN, {useValue: createOverlayContainer()}),
+  provide(ViewportHelper, {useClass: BrowserViewportHelper})
 ];
+
+/**
+ * Create OverlayContainer.
+ */
+export function overlayContainerToken(): any {
+  return provide(OVERLAY_CONTAINER_TOKEN, {useValue: createOverlayContainer()});
+}
 
 
 /**
