@@ -1,13 +1,15 @@
-declare var System: any;
-declare var Zone: any;
-
-
 import {resetBaseTestProviders, setBaseTestProviders} from "@angular/core/testing";
 import {BROWSER_APP_COMPILER_PROVIDERS} from "@angular/platform-browser-dynamic";
-import {TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS, TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS} from "@angular/platform-browser-dynamic/testing";
+import {
+  TEST_BROWSER_DYNAMIC_PLATFORM_PROVIDERS,
+  TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
+} from "@angular/platform-browser-dynamic/testing";
 import {MATERIAL_BROWSER_PROVIDERS} from "../../index";
 import {TestUrlResolver} from "./test_url_resolver";
 import {UrlResolver} from "@angular/compiler";
+declare var System: any;
+declare var Zone: any;
+
 
 resetBaseTestProviders();
 setBaseTestProviders(
