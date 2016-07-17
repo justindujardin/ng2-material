@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute, ROUTER_DIRECTIVES} from '@angular/router';
 import {MATERIAL_DIRECTIVES} from 'ng2-material';
 import {ComponentsService, IComponentMeta, NavigationService, ExampleComponent} from '../shared';
 import {HighlightComponent, HighlightContainerComponent} from '../shared/highlight/index';
+import {Subscription} from 'rxjs/Subscription';
 
 
 @Component({
@@ -15,7 +16,7 @@ import {HighlightComponent, HighlightContainerComponent} from '../shared/highlig
     HighlightContainerComponent
   ]
 })
-export class ComponentsComponent implements OnInit {
+export class ComponentsComponent implements OnInit, OnDestroy {
   public id: string;
 
   public value: IComponentMeta = <IComponentMeta>{};
@@ -23,10 +24,14 @@ export class ComponentsComponent implements OnInit {
   public next: IComponentMeta = null;
   public previous: IComponentMeta = null;
 
-  constructor(private _route: ActivatedRoute, private _components: ComponentsService, private _navigation: NavigationService) {}
+  private subscription: Subscription;
+
+  constructor(private _route: ActivatedRoute,
+              private _components: ComponentsService,
+              private _navigation: NavigationService) {}
 
   ngOnInit(): void {
-    this._route.params.subscribe(params => {
+    this.subscription = this._route.params.subscribe((params) => {
       this.id = params['id'];
       this._components.getComponent(this.id).then((c: IComponentMeta) => {
         this.value = c;
@@ -41,4 +46,9 @@ export class ComponentsComponent implements OnInit {
       });
     });
   }
+
+  ngOnDestroy(): any {
+    this.subscription.unsubscribe();
+  }
+
 }
