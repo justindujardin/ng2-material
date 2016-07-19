@@ -79,7 +79,7 @@ export class MdMessages implements OnInit, OnDestroy {
     let errors:{[errorKey:string]:string} = null;
     errors = this.control.errors;
     if (errors) {
-      this.messages.toArray().forEach((m:MdMessage) => {
+      this.messages.toArray().forEach((m: MdMessage) => {
         m.okay = !m.errorKey ? !errors : !errors.hasOwnProperty(m.errorKey);
       });
     } else {

@@ -97,9 +97,8 @@ export function main() {
         });
       });
 
-      it('should add md-valid and md-invalid class on [mdMessages] based on field validation state', () => {
+      it('should add md-invalid class on [mdMessages] based on field validation state', () => {
         return setup().then((api:IFormMessagesFixture) => {
-          expect(api.fixture.debugElement.query(By.css('[md-messages].md-valid'))).toBeNull();
           expect(api.fixture.debugElement.query(By.css('[md-messages].md-invalid'))).toBeNull();
           api.container.control.updateValue(null, {emitEvent: true});
           let input = api.fixture.debugElement.query(By.css('input'));
@@ -107,22 +106,35 @@ export function main() {
           input.nativeElement.blur();
           api.fixture.detectChanges();
           expect(api.fixture.debugElement.query(By.css('[md-messages].md-invalid'))).not.toBeNull();
-          api.container.control.updateValue('MorTon', {emitEvent: true});
+        });
+      });
+
+      it('should add md-valid class on [mdMessages] based on field validation state', () => {
+        return setup().then((api:IFormMessagesFixture) => {
+          expect(api.fixture.debugElement.query(By.css('[md-messages].md-valid'))).toBeNull();
+          api.container.control.updateValue(null, {emitEvent: true});
+          let input = api.fixture.debugElement.query(By.css('input'));
           input.nativeElement.focus();
+          api.container.control.updateValue('MorTon', {emitEvent: true});
           input.nativeElement.blur();
           api.fixture.detectChanges();
-          expect(api.fixture.debugElement.query(By.css('[md-messages].md-invalid'))).toBeNull();
           expect(api.fixture.debugElement.query(By.css('[md-messages].md-valid'))).not.toBeNull();
         });
       });
 
-      it('should re-export valid from control or form', () => {
+
+      it('should re-export invalid from control or form', () => {
         return setup().then((api:IFormMessagesFixture) => {
           api.container.control.updateValue(null, {emitEvent: true});
           api.fixture.detectChanges();
           expect(api.container.control.value).toBe(null);
           expect(api.container.valid).toBe(false);
           expect(api.container.formDirective.valid).toBe(false);
+        }).catch((e) => console.log(e));
+      });
+
+      it('should re-export valid from control or form', () => {
+        return setup().then((api:IFormMessagesFixture) => {
           api.container.control.updateValue('MorTon', {emitEvent: true});
           api.fixture.detectChanges();
           expect(api.container.control.valid).toBe(true);
@@ -131,7 +143,6 @@ export function main() {
       });
 
     });
-
 
 // TODO(jd): Behaviors to test
 // - md-messages with no md-message children act as message for all errors in a field
