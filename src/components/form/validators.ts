@@ -1,4 +1,4 @@
-import {NG_VALIDATORS, Validator, Control, AbstractControl} from "@angular/common";
+import {NG_VALIDATORS, Validator, FormControl, AbstractControl} from "@angular/forms";
 import {Input, Provider, Directive, forwardRef} from "@angular/core";
 import {isNumber} from "../../core/util/util";
 
@@ -29,7 +29,7 @@ export class MdPatternValidator implements Validator {
   @Input()
   mdPattern: string;
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdPatternValidator.inline(this.mdPattern)(control);
   }
 }
@@ -57,7 +57,7 @@ export class MdMaxLengthValidator implements Validator {
   @Input()
   mdMaxLength: string;
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdMaxLengthValidator.inline(this.mdMaxLength)(control);
   }
 }
@@ -85,7 +85,7 @@ export class MdMaxValueValidator implements Validator {
   @Input()
   mdMax: string;
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdMaxValueValidator.inline(this.mdMax)(control);
   }
 }
@@ -113,7 +113,7 @@ export class MdMinValueValidator implements Validator {
   @Input()
   mdMin: string;
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdMinValueValidator.inline(this.mdMin)(control);
   }
 }
@@ -134,7 +134,7 @@ export class MdNumberRequiredValidator implements Validator {
     }
   }
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdNumberRequiredValidator.inline()(control);
   }
 }
