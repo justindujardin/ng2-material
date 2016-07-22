@@ -48,10 +48,6 @@ export function main() {
 
     describe('button[md-button]', () => {
 
-      beforeEach(() => {
-        spyOn(Ink, 'rippleEvent');
-      });
-
       it('should handle a click on the button', () => {
         return setup().then((fixture: ComponentFixture<TestComponent>) => {
           let testComponent = fixture.debugElement.componentInstance;
@@ -66,10 +62,20 @@ export function main() {
       it('should ink ripple when clicked', () => {
         return setup().then((fixture: ComponentFixture<TestComponent>) => {
           let button: DebugElement = fixture.debugElement.children[0];
+
+          let save = Ink.rippleEvent;
+          let fired = false;
+          Ink.rippleEvent = () => {
+            fired = true;
+            return Promise.resolve();
+          };
+
           let event = createEvent();
           button.triggerEventHandler('mousedown', event);
 
-          expect(Ink.rippleEvent).toHaveBeenCalled();
+
+          expect(fired).toBe(true);
+          Ink.rippleEvent = save;
         });
       });
 
@@ -77,10 +83,18 @@ export function main() {
         let template = `<button md-button md-no-ink></button>`;
         return setup(template).then((fixture: ComponentFixture<TestComponent>) => {
           let button: DebugElement = fixture.debugElement.children[0];
+          let save = Ink.rippleEvent;
+          let fired = false;
+          Ink.rippleEvent = () => {
+            fired = true;
+            return Promise.resolve();
+          };
+
           let event = createEvent();
           button.triggerEventHandler('mousedown', event);
 
-          expect(Ink.rippleEvent).not.toHaveBeenCalled();
+          expect(fired).toBe(false);
+          Ink.rippleEvent = save;
         });
       });
 
