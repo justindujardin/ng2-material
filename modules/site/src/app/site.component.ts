@@ -1,18 +1,25 @@
-import {Component, OnInit, OnDestroy, Input, ViewChild, AfterViewInit} from '@angular/core';
-import {Response, Http} from '@angular/http';
-import {Routes, ROUTER_DIRECTIVES} from '@angular/router';
-import {Router} from '@angular/router';
-import {MD_SIDENAV_DIRECTIVES, MdSidenav} from '@angular2-material/sidenav';
-import {MdToolbar} from '@angular2-material/toolbar';
-import {MATERIAL_DIRECTIVES, Media} from 'ng2-material';
-import {MdIcon} from 'ng2-material';
+import { Component, OnInit, OnDestroy, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { Response, Http } from '@angular/http';
+import { ROUTER_DIRECTIVES, provideRouter, Router, RouterConfig } from '@angular/router';
+import { MD_SIDENAV_DIRECTIVES, MdSidenav } from '@angular2-material/sidenav';
+import { MdToolbar } from '@angular2-material/toolbar';
+import { MATERIAL_DIRECTIVES, Media, MdIcon } from 'ng2-material';
+import { ComponentsComponent } from './+components';
+import { IndexComponent } from './+index';
+import { ComponentsService, IComponentMeta } from './shared/components.service';
+import { FooterComponent } from './shared/footer/footer.component';
+import { NavigationService } from './shared/navigation.service';
+import { ComponentsOrderByPipe } from './site.pipe';
 
-import {ComponentsComponent} from './+components';
-import {IndexComponent} from './+index';
-import {ComponentsService, IComponentMeta} from './shared/components.service';
-import {FooterComponent} from './shared/footer/footer.component';
-import {NavigationService} from './shared/navigation.service';
-import {ComponentsOrderByPipe} from './site.pipe';
+export const routes: RouterConfig = [
+  {path: '', component: IndexComponent},
+  {path: 'components/:id', component: ComponentsComponent}
+];
+
+export const AppRouterProviders = [
+  provideRouter(routes)
+];
+
 
 @Component({
   moduleId: module.id,
@@ -25,10 +32,6 @@ import {ComponentsOrderByPipe} from './site.pipe';
     FooterComponent
   ]
 })
-@Routes([
-  {path: '/', component: IndexComponent},
-  {path: '/components/:id', component: ComponentsComponent}
-])
 export class SiteAppComponent implements OnInit,
     OnDestroy, AfterViewInit {
   static SIDE_MENU_BREAKPOINT: string = 'gt-md';
@@ -49,8 +52,11 @@ export class SiteAppComponent implements OnInit,
   private _subscription = null;
 
   constructor(
-      private http: Http, private navigation: NavigationService, private media: Media,
-      private router: Router, private _components: ComponentsService) {}
+      private http: Http,
+      private router: Router,
+      private navigation: NavigationService,
+      private media: Media,
+      private _components: ComponentsService) {}
 
   ngAfterViewInit(): any {
     let query = Media.getQuery(SiteAppComponent.SIDE_MENU_BREAKPOINT);

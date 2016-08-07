@@ -1,7 +1,7 @@
 language: node_js
 sudo: false
 node_js:
-- '4.2.6'
+- '5.6.0'
 before_install:
 - npm install -g karma-cli typings
 - export CHROME_BIN=chromium-browser
@@ -17,9 +17,9 @@ install:
 - ./node_modules/.bin/grunt build
 
 script:
-#- karma start karma.sauce.conf.js --browsers MICROSOFTEDGE_V20.10240
-- karma start karma.sauce.conf.js --browsers IE_V9,IE_V10,IE_V11
-- karma start karma.sauce.conf.js --browsers FIREFOX_V40,FIREFOX_V30,FIREFOX_V35
+# TODO: When it can be run reliably from travis, add MICROSOFTEDGE_V13.10586
+- karma start karma.sauce.conf.js --browsers IE_V11
+- karma start karma.sauce.conf.js --browsers FIREFOX_V40,FIREFOX_V35
 - karma start karma.sauce.conf.js --browsers CHROME_VBETA,CHROME_VDEV,CHROME_V39,CHROME_V26
 - karma start karma.sauce.conf.js --browsers ANDROID_V5.1,ANDROID_V4.4
 after_script:

@@ -1,16 +1,17 @@
 import {Component} from '@angular/core';
-import {MdRadioButton, MdRadioGroup, MdRadioDispatcher} from '@angular2-material/radio';
+import {MdUniqueSelectionDispatcher} from '@angular2-material/core';
+import {MD_RADIO_DIRECTIVES} from '@angular2-material/radio';
 
 @Component({
   moduleId: module.id,
   selector: 'radio-basic-usage',
   templateUrl: 'radio-basic-usage.component.html',
   styleUrls: ['radio-basic-usage.component.css'],
-  directives: [MdRadioButton, MdRadioGroup],
-  providers: [MdRadioDispatcher]
+  directives: [MD_RADIO_DIRECTIVES],
+  providers: [MdUniqueSelectionDispatcher]
 })
 export class RadioBasicUsageComponent {
-  data: any = {group1: 'Banana', group2: '2', group3: 'avatar-1'};
+  data: any = {default: 'Banana', avatar: 'avatar-1'};
 
   avatarData: any[] = [
     {id: 'images/avatars/avatar1.svg', title: 'avatar 1', value: 'avatar-1'},

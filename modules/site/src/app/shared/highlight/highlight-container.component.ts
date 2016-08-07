@@ -1,4 +1,4 @@
-import {ElementRef, Component, AfterViewInit, Input} from '@angular/core';
+import {ElementRef, Component, Input} from '@angular/core';
 import {HighlightComponent} from './highlight.component';
 
 @Component({
@@ -7,13 +7,26 @@ import {HighlightComponent} from './highlight.component';
   template: `<ng-content></ng-content>`,
   styleUrls: ['highlight-container.component.css']
 })
-export class HighlightContainerComponent implements AfterViewInit {
+export class HighlightContainerComponent {
   @Input() selector: string = '';
+
+  @Input()
+  set content(value: string) {
+    this._content = value;
+    this.update();
+  }
+
+  get content(): string {
+    return this._content;
+  }
+
+  private _content: string = '';
 
   constructor(private elementRef: ElementRef) {}
 
-  ngAfterViewInit() {
+  update() {
     // Find children and highlight them in place
+    this.elementRef.nativeElement.innerHTML = this._content;
     if (this.selector !== '' && this.elementRef) {
       const blocks = this.elementRef.nativeElement.querySelectorAll(this.selector);
       for (var i = 0; i < blocks.length; i++) {

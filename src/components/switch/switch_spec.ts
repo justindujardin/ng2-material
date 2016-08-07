@@ -1,13 +1,6 @@
-import {
-  beforeEach,
-  describe,
-  expect,
-  inject,
-  it,
-  async
-} from "@angular/core/testing";
+import {inject} from "@angular/core/testing";
 import {By} from "@angular/platform-browser";
-import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/core/testing";
 import {Component, DebugElement} from "@angular/core";
 import {MdSwitch} from "./switch";
 import {componentSanityCheck} from "../../platform/testing/util";
@@ -63,51 +56,56 @@ export function main() {
     }));
 
     describe('md-switch', () => {
-      it('should initialize unchecked', async(() => {
+      it('should initialize unchecked', () => {
         return setup().then((api: ICheckboxFixture) => {
           expect(api.comp.checked).toBe(false);
           api.fixture.destroy();
         });
-      }));
-      it('should set checked from binding', async(() => {
+      });
+
+      it('should set checked from binding', () => {
         return setup(true).then((api: ICheckboxFixture) => {
           expect(api.comp.checked).toBe(true);
         });
-      }));
-      it('should toggle checked value when clicked on', async(() => {
+      });
+
+      it('should toggle checked value when clicked on', () => {
         return setup(true).then((api: ICheckboxFixture) => {
           expect(api.comp.checked).toBe(true);
           api.debug.nativeElement.click();
           expect(api.comp.checked).toBe(false);
         });
-      }));
-      it('should not toggle checked value when disabled and clicked on', async(() => {
+      });
+
+      it('should not toggle checked value when disabled and clicked on', () => {
         return setup(true, true).then((api: ICheckboxFixture) => {
           expect(api.comp.checked).toBe(true);
           api.debug.nativeElement.click();
           expect(api.comp.checked).toBe(true);
           api.fixture.destroy();
         });
-      }));
+      });
+
       describe('Keyboard', () => {
-        it('should toggle when the space key is pressed', async(() => {
+        it('should toggle when the space key is pressed', () => {
           return setup().then((api: ICheckboxFixture) => {
             expect(api.comp.checked).toBe(false);
-            const event = createEvent();
+            let event = createEvent();
             event.keyCode = KeyCodes.SPACE;
             api.debug.triggerEventHandler('keydown', event);
             expect(api.comp.checked).toBe(true);
           });
-        }));
-        it('should not toggle when any other key is pressed', async(() => {
+        });
+
+        it('should not toggle when any other key is pressed', () => {
           return setup().then((api: ICheckboxFixture) => {
             expect(api.comp.checked).toBe(false);
-            const event = createEvent();
+            let event = createEvent();
             event.keyCode = KeyCodes.DOWN;
             api.debug.triggerEventHandler('keydown', event);
             expect(api.comp.checked).toBe(false);
           });
-        }));
+        });
 
       });
     });

@@ -11,7 +11,7 @@ export class PaginationService {
     this.onChange = new Subject(null);
   }
 
-  change(name: string, pagination: IPaginationModel) {
+  change(name: string = 'default', pagination: IPaginationModel) {
     let newEvent: IPaginationChange = {
       name: 'pagination_changed',
       target: name,

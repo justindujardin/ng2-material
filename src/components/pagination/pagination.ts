@@ -6,34 +6,42 @@ import {
   EventEmitter,
   ElementRef,
   AfterViewInit,
-  AfterContentInit
+  AfterContentInit,
+  OnInit
 } from '@angular/core';
 import {isPresent} from '@angular/core/src/facade/lang';
+import {DomSanitizationService, SafeHtml} from '@angular/platform-browser/src/security/dom_sanitization_service';
 import 'rxjs/add/operator/filter';
 import {PaginationService} from './pagination_service';
+
 
 export interface IPaginationModel {
   currentPage: number;
   itemsPerPage: number;
-  totalItems: number;
+  totalItems: number; 
 }
 
-export abstract class AbstractPaginationSubComponent {
+export abstract class AbstractPaginationSubComponent implements OnInit{
 
-  @Input() name: string;
+  @Input() name: string = 'default';
 
   @Input() model: IPaginationModel = { currentPage: 0,
     itemsPerPage: 0,
     totalItems: 0
   };
 
-  constructor(protected service: PaginationService) {
+  constructor(protected service: PaginationService) {}
+
+  ngOnInit() {
+    if (!this.name) {
+      this.name = 'default'; 
+    }
     this.service.onChange
-      .filter(event => isPresent(event) && isPresent(event.name))
-      .filter(event => event.target === this.name)
-      .subscribe(event => {
-        this.model = event.pagination;
-      });
+        .filter(event => isPresent(event) && isPresent(event.name))
+        .filter(event => event.target === this.name)
+        .subscribe(event => {
+          this.model = event.pagination;
+        });
   }
 
 }
@@ -60,7 +68,7 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
 
   public value: string = '';
 
-  constructor(protected service: PaginationService) {
+  constructor(protected service: PaginationService, private sanitizationService: DomSanitizationService) {
     super(service);
   }
 
@@ -92,7 +100,9 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
       let rest = this.model.totalItems - rangeStart,
         rangeStop = rest < this.model.itemsPerPage ? this.model.totalItems : rangeStart + this.model.itemsPerPage - 1;
 
-      return this.getFormattedValue(rangeStart, rangeStop, this.model.totalItems);
+      return this.sanitizationService.bypassSecurityTrustHtml(
+        this.getFormattedValue(rangeStart, rangeStop, this.model.totalItems)
+      );
     }
 
     return;
@@ -261,7 +271,9 @@ export class MdPagination implements AfterContentInit, AfterViewInit {
   constructor(private service: PaginationService, private element: ElementRef) {
     this.service.onChange
       .filter(event => isPresent(event) && isPresent(event.name))
-      .filter(event => event.target === this.name)
+      .filter(event => {
+        return event.target === this.name;
+      })
       .subscribe(event => this.onPaginationChange.emit(event));
 
   }

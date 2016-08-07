@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {beforeEach, describe, inject, it, async} from "@angular/core/testing";
-import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/core/testing";
 import {MATERIAL_DIRECTIVES} from "../../index";
 
 export function promiseWait(milliseconds: number = 10): Promise<void> {

@@ -1,4 +1,4 @@
-import {describe, it, beforeEach, expect, inject} from '@angular/core/testing';
+import {inject} from '@angular/core/testing';
 import {Media} from './media';
 
 export function main() {

@@ -1,11 +1,6 @@
-import {provide} from "@angular/core";
 import {MdAnchor, MdButton} from "./components/button/button";
 import {MdContent} from "./components/content/content";
-import {
-  MdDataTable,
-  MdDataTableHeaderSelectableRow,
-  MdDataTableSelectableRow
-} from "./components/data-table/index";
+import {MdDataTable, MdDataTableHeaderSelectableRow, MdDataTableSelectableRow} from "./components/data-table/index";
 import {MdDialog, MdDialogTitle, MdDialogActions, MdDialogPortal} from "./components/dialog/index";
 import {MdDivider} from "./components/divider/divider";
 import {MdIcon} from "./components/icon/icon";
@@ -20,17 +15,20 @@ import {
 } from "./components/form/validators";
 import {MdMessage, MdMessages} from "./components/form/messages";
 import {MdList, MdListItem} from "./components/list/list";
-import {MdPagination,
+import {
+  MdPagination,
   MdPaginationControls,
   MdPaginationItemsPerPage,
   MdPaginationRange,
-  PaginationService} from "./components/pagination/index";
+  PaginationService
+} from "./components/pagination/index";
 import {MdPeekaboo} from "./components/peekaboo/peekaboo";
 import {MdSwitch} from "./components/switch/switch";
 import {MdSubheader} from "./components/subheader/subheader";
 import {Media} from "./core/util/media";
 import {ViewportHelper, BrowserViewportHelper, NodeViewportHelper} from "./core/util/viewport";
-import {OVERLAY_CONTAINER_TOKEN, createOverlayContainer} from "@angular2-material/core/overlay/overlay";
+import {OVERLAY_CONTAINER_TOKEN} from "@angular2-material/core/overlay/overlay";
+import {createOverlayContainer} from "@angular2-material/core/overlay/overlay-container";
 import {MdBackdrop} from "./components/backdrop/backdrop";
 
 export * from './components/button/button';
@@ -93,7 +91,7 @@ export const MATERIAL_DIRECTIVES: any[] = [
  * Material Design component providers for use in a Node.JS environment.
  */
 export const MATERIAL_NODE_PROVIDERS: any[] = [
-  provide(ViewportHelper, {useClass: NodeViewportHelper}),
+  {provide: ViewportHelper, useClass: NodeViewportHelper},
   Media,
   PaginationService,
   ...INPUT_VALIDATORS
@@ -104,9 +102,9 @@ export const MATERIAL_NODE_PROVIDERS: any[] = [
  */
 export const MATERIAL_BROWSER_PROVIDERS: any[] = [
   ...MATERIAL_NODE_PROVIDERS,
-  provide(ViewportHelper, {useClass: BrowserViewportHelper}),
+  {provide: ViewportHelper, useClass: BrowserViewportHelper},
   // TODO(jd): should this be here? Or in the example app bootstrap?
-  provide(OVERLAY_CONTAINER_TOKEN, {useValue: createOverlayContainer()}),
+  {provide: OVERLAY_CONTAINER_TOKEN, useValue: createOverlayContainer()},
 ];
 
 
