@@ -14,20 +14,12 @@
 
 ### Features
 
-* **build:** update npm package for example site during build ([dbfc4e8](https://github.com/justindujardin/ng2-material/commit/dbfc4e8))
 * update to angular2 rc4 ([65aa538](https://github.com/justindujardin/ng2-material/commit/65aa538))
 
 
 ### BREAKING CHANGES
 
-* The automated builds will no longer execute tests against IE9 and IE10 browsers. IE11 and Microsoft Edge (currently 13.10586) will be tested.
-
-* chore: Edge just cannot catch a break
-
- - travis is flaky on it, even though it runs reliably from my terminal
-
-* chore(travis): remove unused firefox v30 reference
-
+* The automated builds will no longer execute tests against IE9 and IE10 browsers. IE11 will be tested.
 
 
 <a name="0.5.0"></a>
