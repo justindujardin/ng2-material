@@ -1,3 +1,13 @@
+<a name="0.6.1"></a>
+## [0.6.1](https://github.com/justindujardin/ng2-material/compare/v0.6.0...v0.6.1) (2016-08-07)
+
+
+### Bug Fixes
+
+* revert to @angular2-material alpha6 ([2a26bee](https://github.com/justindujardin/ng2-material/commit/2a26bee))
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/justindujardin/ng2-material/compare/v0.5.0...v0.6.0) (2016-08-07)
 
