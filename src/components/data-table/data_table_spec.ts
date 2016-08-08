@@ -1,6 +1,6 @@
 import {componentSanityCheck} from "../../platform/testing/util";
-import {beforeEach, describe, expect, inject, it, async} from "@angular/core/testing";
-import {ComponentFixture, TestComponentBuilder} from "@angular/compiler/testing";
+import {inject, async} from "@angular/core/testing";
+import {ComponentFixture, TestComponentBuilder} from "@angular/core/testing";
 import {Component, DebugElement, EventEmitter, QueryList} from "@angular/core";
 import {CORE_DIRECTIVES} from "@angular/common";
 import {By} from "@angular/platform-browser";
@@ -61,14 +61,14 @@ export function main() {
     }));
 
     describe('md-data-table', () => {
-      it('should initialize selected', async(inject([], () => {
+      it('should initialize selected', () => {
         return setup().then((api: IDataTableFixture) => {
           expect(api.comp.selected.length).toEqual(0);
           api.fixture.destroy();
         });
-      })));
+      });
 
-      it('should toggle checked value when a click is fired on a row checkbox', async(inject([], () => {
+      it('should toggle checked value when a click is fired on a row checkbox', () => {
         return setup().then((api: IDataTableFixture) => {
           let row = api.debug.query(By.css('tbody tr:first-child'));
           row.nativeElement.click();
@@ -78,9 +78,9 @@ export function main() {
           expect(api.comp.selected.length).toEqual(0);
           api.fixture.destroy();
         });
-      })));
+      });
 
-      it('should check all row checkbox when a click is fired on master checkbox', async(inject([], () => {
+      it('should check all row checkbox when a click is fired on master checkbox', () => {
         return setup().then((api: IDataTableFixture) => {
           let masterRow = api.debug.query(By.css('thead tr:first-child'));
           masterRow.nativeElement.click();
@@ -90,9 +90,9 @@ export function main() {
           expect(api.comp.selected.length).toEqual(0);
           api.fixture.destroy();
         });
-      })));
+      });
 
-      it('should uncheck master checkbox if a row checkbox is unchecked', async(inject([], () => {
+      it('should uncheck master checkbox if a row checkbox is unchecked', () => {
         return setup().then((api: IDataTableFixture) => {
           let masterRow = api.debug.query(By.css('thead tr:first-child')),
               row       = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
@@ -105,9 +105,9 @@ export function main() {
           expect(masterRow.componentInstance.isActive).toBe(false);
           api.fixture.destroy();
         });
-      })));
+      });
 
-      it('should fire a selectable_change event when a row checkbox change', async(inject([], () => {
+      it('should fire a selectable_change event when a row checkbox change', () => {
         return setup().then((api: IDataTableFixture) => {
           let row = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
 
@@ -118,12 +118,12 @@ export function main() {
           row.click();
           api.fixture.destroy();
         });
-      })));
+      });
     });
 
     describe('_unsubscribeChildren', () => {
 
-      it('should reset the selected values', async(inject([], () => {
+      it('should reset the selected values', () => {
         return setup().then((api: IDataTableFixture) => {
           api.comp.selected = ['1', '2'];
 
@@ -131,9 +131,9 @@ export function main() {
 
           expect(api.comp.selected.length).toEqual(0);
         });
-      })));
+      });
 
-      it('should unsubscribe to listener', async(inject([], () => {
+      it('should unsubscribe to listener', () => {
         return setup().then((api: IDataTableFixture) => {
           let emitter = new EventEmitter(false),
             spy = jasmine.createSpy('spy');
@@ -151,13 +151,13 @@ export function main() {
 
           expect(spy.calls.count()).toEqual(1);
         });
-      })));
+      });
 
     });
 
     describe('_updateChildrenListener', () => {
 
-      it('should ask unsubscription', async(inject([], () => {
+      it('should ask unsubscription', () => {
         return setup().then((api: IDataTableFixture) => {
           spyOn(api.comp, '_unsubscribeChildren');
 
@@ -165,7 +165,7 @@ export function main() {
 
           expect(api.comp._unsubscribeChildren).toHaveBeenCalled();
         });
-      })));
+      });
 
     });
 

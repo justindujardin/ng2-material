@@ -1,11 +1,4 @@
-import {
-  beforeEach,
-  beforeEachProviders,
-  describe,
-  expect,
-  it,
-  inject,
-} from '@angular/core/testing';
+import {addProviders, inject} from '@angular/core/testing';
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
@@ -14,7 +7,12 @@ import {ElevationBasicUsageComponent} from './elevation-basic-usage.component';
 describe('Component: ElevationBasicUsage', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [ElevationBasicUsageComponent]);
+  beforeEach(() => {
+    addProviders([
+      ElevationBasicUsageComponent,
+    ]);
+  });
+
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 

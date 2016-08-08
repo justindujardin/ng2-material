@@ -33,7 +33,8 @@ var packageNames = [
   '@angular/platform-browser',
   '@angular/platform-browser-dynamic',
   '@angular/router',
-  '@angular/router-deprecated',
+  '@angular/forms',
+  '@angular/router',
   '@angular/testing',
   '@angular/upgrade'
 ];

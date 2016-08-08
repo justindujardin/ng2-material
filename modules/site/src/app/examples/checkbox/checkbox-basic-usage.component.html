@@ -1,16 +1,16 @@
 <section layout-padding>
   <fieldset class="standard">
-    <legend>Using two way bindings with <code>[(checked)]</code></legend>
+    <legend>Using two way bindings with <code>[(ngModel)]</code></legend>
     <div layout="row" layout-wrap>
       <div flex-xs="100" flex="50">
-        <md-checkbox [(checked)]="cb1" aria-label="Checkbox 1">
+        <md-checkbox [(ngModel)]="cb1" aria-label="Checkbox 1">
           Checkbox 1: {{ cb1 }}
         </md-checkbox>
       </div>
       <div flex-xs="100" flex="50">
         <div layout-xs="column" flex-xs="100">
           <md-checkbox
-            [(checked)]="cb2"
+            [(ngModel)]="cb2"
             aria-label="Checkbox 2"
             ng-true-value="'yup'"
             ng-false-value="'nope'"
@@ -27,17 +27,17 @@
         </div>
       </div>
       <div flex-xs="100" flex="50">
-        <md-checkbox disabled="true" aria-label="Disabled checkbox" [(checked)]="cb3">
+        <md-checkbox disabled="true" aria-label="Disabled checkbox" [(ngModel)]="cb3">
           Checkbox: Disabled
         </md-checkbox>
       </div>
       <div flex-xs="100" flex="50">
-        <md-checkbox disabled="true" aria-label="Disabled checked checkbox" [(checked)]="cb4">
+        <md-checkbox disabled="true" aria-label="Disabled checked checkbox" [(ngModel)]="cb4">
           Checkbox: Disabled, Checked
         </md-checkbox>
       </div>
       <div flex-xs="100" flex="50">
-        <md-checkbox md-no-ink aria-label="Checkbox No Ink" [(checked)]="cb5" class="md-primary">
+        <md-checkbox md-no-ink aria-label="Checkbox No Ink" [(ngModel)]="cb5" class="md-primary">
           Checkbox (md-primary): No Ink
         </md-checkbox>
       </div>

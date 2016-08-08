@@ -1,11 +1,4 @@
-import {
-  beforeEach,
-  beforeEachProviders,
-  describe,
-  expect,
-  it,
-  inject,
-} from '@angular/core/testing';
+import {addProviders, inject} from '@angular/core/testing';
 import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
@@ -14,7 +7,12 @@ import {RadioBasicUsageComponent} from './radio-basic-usage.component';
 describe('Component: RadioBasicUsage', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [RadioBasicUsageComponent]);
+  beforeEach(() => {
+    addProviders([
+      RadioBasicUsageComponent,
+    ]);
+  });
+
   beforeEach(
       inject([TestComponentBuilder], function(tcb: TestComponentBuilder) { builder = tcb; }));
 

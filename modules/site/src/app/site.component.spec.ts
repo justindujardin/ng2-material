@@ -1,7 +1,11 @@
-import {beforeEachProviders, describe, expect, it, inject} from '@angular/core/testing';
+import {addProviders, inject} from '@angular/core/testing';
 import {SiteAppComponent} from '../app/site.component';
 
-beforeEachProviders(() => [SiteAppComponent]);
+beforeEach(() => {
+  addProviders([
+    SiteAppComponent,
+  ]);
+});
 
 describe('App: Site', () => {
   it('should create the app',

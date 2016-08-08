@@ -25,6 +25,14 @@ module.exports = function (grunt) {
           {expand: true, cwd: 'public/', src: ['font/*.*'], dest: '<%- outPath %>/'}
         ]
       },
+      site_deps_update: {
+        files: [{
+          expand: true,
+          cwd: 'dist/',
+          src: '**',
+          dest: 'modules/site/node_modules/ng2-material/'
+        }]
+      },
       // Examples site all nicely packaged up for uploading to an FTP.
       site: {
         files: [
@@ -205,7 +213,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-notify');
   grunt.loadNpmTasks('grunt-karma');
@@ -216,7 +224,7 @@ module.exports = function (grunt) {
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
   grunt.registerTask('site', ['build', 'cover', 'copy:site']);
-  grunt.registerTask('build', ['default', 'copy:npm']);
+  grunt.registerTask('build', ['default', 'copy:npm', 'copy:site_deps_update']);
   grunt.registerTask('tddTasks', ['ts', 'continue:on', 'karma']);
   grunt.registerTask('tdd', ['tddTasks', 'watch']);
 

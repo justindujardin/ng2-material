@@ -1,4 +1,5 @@
-<md-pagination [model]="pagination" (on-pagination-change)="detectChange($event)" [items-per-page-options]="availableLength"></md-pagination>
+<md-pagination [model]="pagination" name="basic" (on-pagination-change)="detectChange($event)"
+               [items-per-page-options]="availableLength"></md-pagination>
 
 <md-data-table layout-fill>
   <thead>
@@ -15,4 +16,4 @@
   </tbody>
 </md-data-table>
 
-<md-pagination [model]="pagination" (on-pagination-change)="detectChange($event)" [items-per-page-options]="availableLength"></md-pagination>
+<md-pagination [model]="pagination" name="basic" (on-pagination-change)="detectChange($event)" [items-per-page-options]="availableLength"></md-pagination>

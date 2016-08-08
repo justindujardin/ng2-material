@@ -1,5 +1,5 @@
-import {beforeEach, describe, expect, inject, it, async} from '@angular/core/testing';
-import {ComponentFixture, TestComponentBuilder} from '@angular/compiler/testing';
+import {inject, async} from '@angular/core/testing';
+import {ComponentFixture, TestComponentBuilder} from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {MdMessage, MdMessages} from '../../index';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, Control} from '@angular/common';
@@ -53,26 +53,29 @@ export function main() {
     }));
 
     describe('md-messages', () => {
-      it('should error if used outside of an NgFormControl', async(inject([], () => {
+      it('should error if used outside of an NgFormControl', () => {
         return setup(`<div md-messages></div>`).catch((err: any) => {
           expect(err).toBeDefined();
         });
-      })));
-      it('should initialize when given model and control group are present', async(inject([], () => {
+      });
+
+      it('should initialize when given model and control group are present', () => {
         return setup().then((api: IFormMessagesFixture) => {
           expect(api.container.isTouched).toBe(false);
           api.fixture.destroy();
         });
-      })));
-      it('should bind local view references #ref="ngForm"', async(inject([], () => {
+      });
+
+      it('should bind local view references #ref="ngForm"', () => {
         return setup().then((api: IFormMessagesFixture) => {
           expect(api.container.isTouched).toBe(false);
           expect(api.messages.length).toBe(1);
           expect(api.container.form).not.toBeNull();
           expect(api.fixture.componentInstance.name).toBe('MorTon');
         });
-      })));
-      it('should re-export valid from control or form', async(inject([], () => {
+      });
+
+      it('should re-export valid from control or form', async(() => {
         return setup().then((api: IFormMessagesFixture) => {
           return promiseWait().then(() => {
             let ctrl: Control = (<any>api.container.property).control;
@@ -84,7 +87,8 @@ export function main() {
             expect(api.container.valid).toBe(true);
           });
         });
-      })));
+      }));
+
     });
 
 
