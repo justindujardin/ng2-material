@@ -1,5 +1,4 @@
 import {Component, Input, ChangeDetectionStrategy} from '@angular/core';
-import {MdDialog} from './dialog';
 
 @Component({
   selector: 'md-dialog-title',

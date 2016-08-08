@@ -18,7 +18,7 @@ import {MdDialogActions} from './dialog-actions';
 import {MdDialogTitle} from './dialog-title';
 import {KeyCodes} from '../../core/key_codes';
 
-// TODO(jd): behavioral tests
+// TODO(jd): behavioral tests for custom dialog elements
 // TODO(jd): backdrop and clickToClose options
 
 @Component({
@@ -94,7 +94,7 @@ export class MdDialog implements AfterContentInit, OnDestroy {
   }
 
   /** Close the dialog */
-  close(result: any = true, cancel: boolean = false): Promise<MdDialog> {
+  close(result?: any, cancel: boolean = false): Promise<MdDialog> {
     if (!this.overlayRef) {
       return Promise.resolve<MdDialog>(this);
     }
