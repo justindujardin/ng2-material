@@ -105,7 +105,9 @@ export function main() {
           input.nativeElement.focus();
           input.nativeElement.blur();
           api.fixture.detectChanges();
-          expect(api.fixture.debugElement.query(By.css('[md-messages].md-invalid'))).not.toBeNull();
+          api.fixture.whenStable().then(() => {
+            expect(api.fixture.debugElement.query(By.css('[md-messages].md-invalid'))).not.toBeNull();
+          });
         });
       });
 
@@ -118,7 +120,9 @@ export function main() {
           api.container.control.updateValue('MorTon', {emitEvent: true});
           input.nativeElement.blur();
           api.fixture.detectChanges();
-          expect(api.fixture.debugElement.query(By.css('[md-messages].md-valid'))).not.toBeNull();
+          api.fixture.whenStable().then(() => {
+            expect(api.fixture.debugElement.query(By.css('[md-messages].md-valid'))).not.toBeNull();
+          });
         });
       });
 
