@@ -1,0 +1,16 @@
+<md-data-table layout-fill>
+  <thead>
+  <tr>
+    <th class="md-text-cell" md-data-column-sort="name">Picnic Item</th>
+    <th md-data-column-sort="quantity">Quantity</th>
+    <th md-data-column-sort="price">Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of picnicItems">
+    <td class="md-text-cell">{{ item.name }}</td>
+    <td>{{ item.quantity }}</td>
+    <td>&pound;{{ item.price }}</td>
+  </tr>
+  </tbody>
+</md-data-table>

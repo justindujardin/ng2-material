@@ -1,6 +1,12 @@
 import {MdAnchor, MdButton} from "./components/button/button";
 import {MdContent} from "./components/content/content";
-import {MdDataTable, MdDataTableHeaderSelectableRow, MdDataTableSelectableRow} from "./components/data-table/index";
+import {
+  MdDataTable,
+  MdDataTableHeaderSelectableRow,
+  MdDataTableSelectableRow,
+  MdDataColumnSortDirective,
+  MdDataColumnSortingService
+} from "./components/data-table/index";
 import {MdDialog, MdDialogTitle, MdDialogActions, MdDialogPortal} from "./components/dialog/index";
 import {MdDivider} from "./components/divider/divider";
 import {MdIcon} from "./components/icon/icon";
@@ -70,7 +76,7 @@ export * from './core/util/animate';
 export const MATERIAL_DIRECTIVES: any[] = [
   MdAnchor, MdButton,
   MdContent,
-  MdDataTable, MdDataTableHeaderSelectableRow, MdDataTableSelectableRow,
+  MdDataTable, MdDataTableHeaderSelectableRow, MdDataTableSelectableRow, MdDataColumnSortDirective,
   MdDivider,
   MdBackdrop,
   MdDialog, MdDialogActions, MdDialogTitle, MdDialogPortal,
@@ -94,6 +100,7 @@ export const MATERIAL_NODE_PROVIDERS: any[] = [
   {provide: ViewportHelper, useClass: NodeViewportHelper},
   Media,
   PaginationService,
+  MdDataColumnSortingService,
   ...INPUT_VALIDATORS
 ];
 
