@@ -74,6 +74,7 @@
     "remap-istanbul": "0.4.0",
     "style-loader": "0.13.0",
     "systemjs": "0.19.27",
+    "tslint": "^3.15.1",
     "typescript": ">=1.8.9",
     "typings": "^1.0.4",
     "underscore": "1.8.3"
