@@ -1,5 +1,5 @@
 import {Animate} from "../../core/util/animate";
-import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter} from "@angular/core";
+import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter, NgModule} from "@angular/core";
 import {ViewportHelper} from "../../core/util/viewport";
 
 /**
@@ -152,3 +152,9 @@ export class MdBackdrop {
     });
   }
 }
+
+@NgModule({
+  declarations: [MdBackdrop],
+  exports: [MdBackdrop]
+})
+export class MdBackdropModule {}

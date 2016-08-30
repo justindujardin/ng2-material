@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, NgModule} from "@angular/core";
 
 @Component({
   selector: 'md-subheader',
@@ -10,5 +10,11 @@ import {Component} from "@angular/core";
       <span class="md-subheader-content"><ng-content></ng-content></span>
     </div>`
 })
-export class MdSubheader {
+class MdSubheader {
 }
+
+@NgModule({
+  declarations: [MdSubheader],
+  exports:[MdSubheader]
+})
+export class MdSubheaderModule {}

@@ -103,6 +103,8 @@ import {Directive} from "@angular/core";
  *   </md-card-content>
  * </md-card>
  * </hljs>
+ *
+ * @deprecated
  */
 @Directive({selector: 'md-card'})
 export class MdContent {

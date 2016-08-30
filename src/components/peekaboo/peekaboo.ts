@@ -1,4 +1,4 @@
-import {Directive, OnDestroy, Input, ElementRef, NgZone} from '@angular/core';
+import {Directive, OnDestroy, Input, ElementRef, NgZone, NgModule} from '@angular/core';
 import {Media, MediaListener} from '../../core/util/media';
 import {ViewportHelper} from '../../core/util/viewport';
 
@@ -192,3 +192,9 @@ export class MdPeekaboo implements OnDestroy {
   }
 
 }
+
+@NgModule({
+  declarations: [MdPeekaboo],
+  exports: [MdPeekaboo]
+})
+export class MdPeekabooModule {}

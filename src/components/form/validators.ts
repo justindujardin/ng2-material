@@ -1,5 +1,5 @@
 import {NG_VALIDATORS, Validator, Control, AbstractControl} from "@angular/common";
-import {Input, Provider, Directive, forwardRef} from "@angular/core";
+import {Input, Provider, Directive, forwardRef, NgModule} from "@angular/core";
 import {isNumber} from "../../core/util/util";
 
 const PATTERN_VALIDATOR = new Provider(NG_VALIDATORS, {
@@ -146,3 +146,9 @@ export const INPUT_VALIDATORS = [
   MdMinValueValidator,
   MdNumberRequiredValidator
 ];
+
+@NgModule({
+  declarations: INPUT_VALIDATORS,
+  exports: INPUT_VALIDATORS
+})
+export class MdValidatorsModule {}
