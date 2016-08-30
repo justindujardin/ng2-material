@@ -8,7 +8,7 @@ export class PaginationService {
   public onChange: Subject<IPaginationChange>;
 
   constructor() {
-    this.onChange = new Subject(null);
+    this.onChange = new Subject();
   }
 
   change(name: string = 'default', pagination: IPaginationModel) {
