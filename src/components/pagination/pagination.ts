@@ -297,9 +297,6 @@ const PAGINATION_DIRECTIVES = [
 ]
 
 @NgModule({
-  providers: [
-    PaginationService // not sure about this, provider may need to be added to the components themselves and exported separately
-  ],
   declarations: PAGINATION_DIRECTIVES,
   exports: PAGINATION_DIRECTIVES,
   imports : [
