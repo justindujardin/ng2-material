@@ -68,7 +68,12 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
     totalItems: 0
   };
 
-  @Input('range-format') rangeFormat: string = '{start}-{end} of {total}';
+  @Input('range-format') rangeFormat: string;
+
+  private get computedRangeFormat():string {
+    if (this.rangeFormat) return this.rangeFormat;
+    return '{start}-{end} of {total}';
+  }
 
   public value: string = '';
 
@@ -76,13 +81,14 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
     super(service);
   }
 
+
   /**
    * tranform format into an readable string
    *
    * @returns {string}
    */
   getFormattedValue(rangeStart: number, rangeStop: number, totalItems: number) {
-    let result: string = this.rangeFormat;
+    let result: string = this.computedRangeFormat;
 
     result = result.replace(/\{start\}/gi, rangeStart.toString());
     result = result.replace(/\{end\}/gi, rangeStop.toString());
