@@ -78,6 +78,11 @@ module.exports = function (grunt) {
       styles: {options: {message: 'Styles Compiled'}},
       source: {options: {message: 'Source Compiled'}}
     },
+    exec: {
+      ts: {
+        cmd: 'tsc'
+      }
+    },
     ts: {
       source: {
         tsconfig: true
@@ -213,6 +218,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-postcss');
   grunt.loadNpmTasks('grunt-notify');
@@ -220,11 +226,15 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('remap-istanbul');
   grunt.registerTask('default', ['ts', 'sass', 'postcss', 'site-meta', 'rewrite-source-maps']);
+  // temporary kludge to get typescript 2.0 to compile, grunt-ts is not compatible with 2.0
+  grunt.registerTask('default-ts-2', ['exec:ts', 'sass', 'postcss', 'site-meta', 'rewrite-source-maps'])
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
   grunt.registerTask('site', ['build', 'cover', 'copy:site']);
   grunt.registerTask('build', ['default', 'copy:npm', 'copy:site_deps_update']);
+  // temporary kludge to get typescript 2.0 to compile, grunt-ts is not compatible with 2.0
+  grunt.registerTask('build-ts-2', ['default-ts-2', 'copy:npm', 'copy:site_deps_update'])
   grunt.registerTask('tddTasks', ['ts', 'continue:on', 'karma']);
   grunt.registerTask('tdd', ['tddTasks', 'watch']);
 
@@ -245,7 +255,9 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('build-npm', ['build', 'build-npm-package', 'rewrite-source-maps']);
+  // temporary kludge to get typescript 2.0 to compile, grunt-ts is not compatible with 2.0
+  grunt.registerTask('build-npm', ['build-ts-2', 'build-npm-package', 'rewrite-source-maps']);
+
   grunt.registerTask('build-npm-package', function () {
     var fs = require('fs');
     var path = require('path');

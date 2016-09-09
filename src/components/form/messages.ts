@@ -1,11 +1,11 @@
-import {NgFormModel, NgControlName, ControlGroup, AbstractControl} from "@angular/common";
-import {Input, Directive, Optional, SkipSelf, Host, OnDestroy, OnInit, QueryList, Query} from "@angular/core";
+import {FormGroupDirective, FormControlName, FormGroup, AbstractControl} from "@angular/forms";
+import {Input, Directive, Optional, SkipSelf, Host, OnDestroy, OnInit, QueryList, ContentChildren} from "@angular/core";
 
 
 // TODO(jd): Behaviors to test
 // - md-messages with no md-message children act as message for all errors in a field
 // - md-message="propName" binds to FormBuilder group by given name
-// - [md-message]="viewLocal" binds to given NgControlName referenced from the view
+// - [md-message]="viewLocal" binds to given FormControlName referenced from the view
 // - [md-messages] adds md-valid and md-invalid class based on field validation state
 // - throws informative errors when it fails to bind to a given form field because it cannot be found.
 
@@ -34,11 +34,11 @@ export class MdMessage {
 export class MdMessages implements OnInit, OnDestroy {
 
   @Input('md-messages')
-  property: string|NgControlName;
+  property: string|FormControlName;
 
   get valid(): boolean {
-    if (this.property instanceof NgControlName) {
-      let ctrl = <NgControlName>this.property;
+    if (this.property instanceof FormControlName) {
+      let ctrl = <FormControlName>this.property;
       return !!ctrl.valid;
     }
     let prop = <string>this.property;
@@ -48,8 +48,8 @@ export class MdMessages implements OnInit, OnDestroy {
   }
 
   get isTouched(): boolean {
-    if (this.property instanceof NgControlName) {
-      return (<NgControlName>this.property).touched;
+    if (this.property instanceof FormControlName) {
+      return (<FormControlName>this.property).touched;
     }
     let prop = <string>this.property;
     let group = this.form.control;
@@ -58,10 +58,10 @@ export class MdMessages implements OnInit, OnDestroy {
   }
 
 
-  constructor(@Query(MdMessage)
+  constructor(@ContentChildren(MdMessage)
               public messages: QueryList<MdMessage>,
               @Optional() @SkipSelf() @Host()
-              public form: NgFormModel) {
+              public form: FormGroupDirective) {
   }
 
   /**
@@ -72,23 +72,23 @@ export class MdMessages implements OnInit, OnDestroy {
   private _unsubscribe: any = null;
 
   ngOnInit() {
-    if (this.property instanceof NgControlName) {
-      let ctrl: NgControlName = <NgControlName>this.property;
+    if (this.property instanceof FormControlName) {
+      let ctrl: FormControlName = <FormControlName>this.property;
       this.form = ctrl.formDirective;
       this._unsubscribe = (<any>ctrl).update.subscribe(this._valueChanged.bind(this));
     }
     else {
       if (!this.form) {
-        throw new Error('md-messages cannot bind to text property without a parent NgFormModel');
+        throw new Error('md-messages cannot bind to text property without a parent FormGroupDirective');
       }
       let prop = <string>this.property;
-      let group: ControlGroup = this.form.control;
+      let group: FormGroup = this.form.control;
       if (!group) {
-        throw new Error('md-messages cannot bind to text property without a ControlGroup');
+        throw new Error('md-messages cannot bind to text property without a FormGroup');
       }
       let ctrl: AbstractControl = group.controls[prop];
       if (!ctrl) {
-        throw new Error(`md-messages cannot find property(${prop}) in ControlGroup!`);
+        throw new Error(`md-messages cannot find property(${prop}) in FormGroup!`);
       }
       this._unsubscribe = ctrl.statusChanges.subscribe(this._valueChanged.bind(this));
     }
@@ -100,8 +100,8 @@ export class MdMessages implements OnInit, OnDestroy {
 
   private _valueChanged() {
     let errors: {[errorKey: string]: string} = null;
-    if (this.property instanceof NgControlName) {
-      let ctrl: NgControlName = <NgControlName>this.property;
+    if (this.property instanceof FormControlName) {
+      let ctrl: FormControlName = <FormControlName>this.property;
       errors = ctrl.errors;
     }
     else {
