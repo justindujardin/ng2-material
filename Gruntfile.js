@@ -80,7 +80,7 @@ module.exports = function (grunt) {
     },
     exec: {
       ts: {
-        cmd: 'tsc'
+        cmd: '"./node_modules/.bin/tsc"'
       }
     },
     ts: {
