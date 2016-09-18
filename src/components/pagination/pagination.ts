@@ -12,11 +12,15 @@ import {
 } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {isPresent} from '@angular/core/src/facade/lang';
-import {DomSanitizationService, SafeHtml} from '@angular/platform-browser/src/security/dom_sanitization_service';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import {PaginationService} from './pagination_service';
 
+// import {isPresent} from '@angular/core/src/facade/lang';
+
+function isPresent(obj) {
+    return obj !== undefined && obj !== null;
+}
 
 export interface IPaginationModel {
   currentPage: number;
@@ -68,13 +72,19 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
     totalItems: 0
   };
 
-  @Input('range-format') rangeFormat: string = '{start}-{end} of {total}';
+  @Input('range-format') rangeFormat: string;
+
+  private get computedRangeFormat():string {
+    if (this.rangeFormat) return this.rangeFormat;
+    return '{start}-{end} of {total}';
+  }
 
   public value: string = '';
 
-  constructor(protected service: PaginationService, private sanitizationService: DomSanitizationService) {
+  constructor(protected service: PaginationService, private sanitizationService: DomSanitizer) {
     super(service);
   }
+
 
   /**
    * tranform format into an readable string
@@ -82,7 +92,7 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
    * @returns {string}
    */
   getFormattedValue(rangeStart: number, rangeStop: number, totalItems: number) {
-    let result: string = this.rangeFormat;
+    let result: string = this.computedRangeFormat;
 
     result = result.replace(/\{start\}/gi, rangeStart.toString());
     result = result.replace(/\{end\}/gi, rangeStop.toString());

@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {NgModule, ModuleWithProviders} from "@angular/core";
 import {MdContentModule} from "./components/content/content";
 import {MdDataTableModule} from "./components/data-table/index";
 // import {MdDialog, MdDialogTitle, MdDialogActions, MdDialogPortal} from "./components/dialog/index"; // Soon to be released in @angular2-material
@@ -72,18 +72,30 @@ const MATERIAL_MODULES = [
  * Material Design module for use in a Node.JS environment.
  */
 @NgModule({
-  providers: MATERIAL_NODE_PROVIDERS,
   exports: MATERIAL_MODULES,
   imports: MATERIAL_MODULES
 })
-export class Ng2MaterialNodeModule {}
+export class Ng2MaterialNodeModule {
+  static forRoot():ModuleWithProviders {
+    return {
+      ngModule: Ng2MaterialNodeModule,
+      providers: MATERIAL_NODE_PROVIDERS
+    }
+  }
+}
 
 /**
  * Material Design module for use in the browser.
  */
 @NgModule({
-  providers: MATERIAL_BROWSER_PROVIDERS,
   exports: MATERIAL_MODULES,
   imports: MATERIAL_MODULES
 })
-export class Ng2MaterialModule {}
+export class Ng2MaterialModule {
+  static forRoot():ModuleWithProviders {
+    return {
+      ngModule: Ng2MaterialModule,
+      providers: MATERIAL_BROWSER_PROVIDERS
+    }
+  }
+}

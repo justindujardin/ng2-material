@@ -23,7 +23,6 @@ import {KeyCodes} from '../../core/key_codes';
 
 @Component({
   selector: 'md-dialog',
-  directives: [MdDialogTitle, MdDialogActions, MdDialogPortal],
   providers: [Overlay, OVERLAY_PROVIDERS],
   encapsulation: ViewEncapsulation.None,
   template: `
@@ -31,7 +30,7 @@ import {KeyCodes} from '../../core/key_codes';
   <div class="md-dialog" [class.md-active]="active">
     <ng-content select="md-dialog-title"></ng-content>
     <ng-content></ng-content>
-    <ng-content select="md-dialog-actions"></ng-content>  
+    <ng-content select="md-dialog-actions"></ng-content>
   </div>
 </template>
 `,

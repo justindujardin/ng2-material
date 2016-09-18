@@ -8,45 +8,33 @@
         "moduleResolution": "node",
         "noEmitOnError": true,
         "noImplicitAny": false,
-        "outDir": "dist/",
-        "rootDir": "src/",
+        "outDir": "dist",
+        "rootDir": "src",
         "sourceMap": true,
-        "target": "es5"
+        "target": "es5",
+        "lib": [
+            "es6",
+            "es2015",
+            "dom"
+        ],
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
+        "types": [
+            "jasmine",
+            "hammerjs",
+            "node"
+        ]
     },
-    "filesGlob": [
-        "ng2-material.d.ts",
-        "src/**/*.ts",
-        "!src/**/*_spec.ts",
-        "!src/platform/testing/*.*"
+    "include": [
+        "src/**/*.ts"
     ],
-    "compileOnSave": true,
-    "files": [
-        "ng2-material.d.ts",
-        "src/components/backdrop/backdrop.ts",
-        "src/components/card/card.ts",
-        "src/components/content/content.ts",
-        "src/components/data-table/data_table.ts",
-        "src/components/data-table/data_table_selectable_tr.ts",
-        "src/components/data-table/index.ts",
-        "src/components/dialog/dialog-actions.ts",
-        "src/components/dialog/dialog-portal.ts",
-        "src/components/dialog/dialog-title.ts",
-        "src/components/dialog/dialog.ts",
-        "src/components/dialog/index.ts",
-        "src/components/divider/divider.ts",
-        "src/components/form/messages.ts",
-        "src/components/form/validators.ts",
-        "src/components/pagination/index.ts",
-        "src/components/pagination/pagination.ts",
-        "src/components/pagination/pagination_service.ts",
-        "src/components/peekaboo/peekaboo.ts",
-        "src/components/subheader/subheader.ts",
-        "src/core/key_codes.ts",
-        "src/core/util/animate.ts",
-        "src/core/util/ink.ts",
-        "src/core/util/media.ts",
-        "src/core/util/util.ts",
-        "src/core/util/viewport.ts",
-        "src/index.ts"
-    ]
+    "exclude": [
+        "node_modules",
+        "dist",
+        "modules/**",
+        "src/**/*_spec.ts",
+        "src/platform/testing/*.*"
+    ],
+    "compileOnSave": true
 }
