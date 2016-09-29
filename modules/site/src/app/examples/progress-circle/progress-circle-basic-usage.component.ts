@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdProgressCircle} from '@angular2-material/progress-circle';
+import {MdProgressCircle} from '@angular/material';
 @Component({
   moduleId: module.id,
   selector: 'progress-circle-basic-usage',

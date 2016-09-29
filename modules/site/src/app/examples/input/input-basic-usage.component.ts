@@ -1,15 +1,11 @@
-import {FORM_DIRECTIVES} from '@angular/forms';
 import {Component} from '@angular/core';
-import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
-import {MdToolbar} from '@angular2-material/toolbar';
-import {MATERIAL_DIRECTIVES} from 'ng2-material';
 
 @Component({
   moduleId: module.id,
   selector: 'input-basic-usage',
   templateUrl: 'input-basic-usage.component.html',
   styleUrls: ['input-basic-usage.component.css'],
-  directives: [MATERIAL_DIRECTIVES, MdToolbar, MD_INPUT_DIRECTIVES, FORM_DIRECTIVES]
+  // directives: [MATERIAL_DIRECTIVES, MdToolbar, MD_INPUT_DIRECTIVES, FORM_DIRECTIVES]
 })
 export class InputBasicUsageComponent {
   user = {

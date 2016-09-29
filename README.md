@@ -6,7 +6,7 @@ ng2-material
 [![Join the chat at https://gitter.im/justindujardin/ng2-material](https://badges.gitter.im/justindujardin/ng2-material.svg)](https://gitter.im/justindujardin/ng2-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/ng2material.svg)](https://saucelabs.com/u/ng2material)
 
-ng2-material is a set of components, built on top of [@angular2-material/core](https://github.com/angular/material2), and a site full of examples of how to use them. The site contains examples for community 
+ng2-material is a set of components, built on top of [@angular/material/core](https://github.com/angular/material2), and a site full of examples of how to use them. The site contains examples for community 
 developed components as well as the official material2 components.
 
 Check out the [examples site](https://justindujardin.github.io/ng2-material/) for demos and instructions on getting started.
