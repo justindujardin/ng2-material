@@ -29,9 +29,11 @@ module.exports = function (config) {
 
       // Zone.js dependencies
       'node_modules/zone.js/dist/zone.js',
-      'node_modules/zone.js/dist/jasmine-patch.js',
       'node_modules/zone.js/dist/async-test.js',
       'node_modules/zone.js/dist/fake-async-test.js',
+      'node_modules/zone.js/dist/sync-test.js',
+      'node_modules/zone.js/dist/proxy-zone.js',
+      'node_modules/zone.js/dist/jasmine-patch.js',
 
       // RxJs.
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
@@ -40,7 +42,7 @@ module.exports = function (config) {
       // paths loaded via module imports
       // Angular itself
       { pattern: 'node_modules/@angular/**/*.js', included: false, watched: true },
-      { pattern: 'node_modules/@angular2-material/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/@angular/material/**/*.js', included: false, watched: false },
       'karma.ie.shims.js',
       "config.karma.js",
       { pattern: 'dist/*.*', included: false, watched: true },

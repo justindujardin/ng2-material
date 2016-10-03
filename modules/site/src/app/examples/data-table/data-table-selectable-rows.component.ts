@@ -1,13 +1,12 @@
 import {Component} from '@angular/core';
-import {MdToolbar} from '@angular2-material/toolbar';
-import {MATERIAL_DIRECTIVES, ITableSelectionChange} from 'ng2-material';
+import {ITableSelectionChange} from 'ng2-material';
 
 @Component({
   moduleId: module.id,
   selector: 'data-table-selectable-rows',
   templateUrl: 'data-table-selectable-rows.component.html',
   styleUrls: ['data-table-selectable-rows.component.css'],
-  directives: [MATERIAL_DIRECTIVES, MdToolbar]
+  // directives: [MATERIAL_DIRECTIVES, MdToolbar]
 })
 export class DataTableSelectableRowsComponent {
   selection: string;

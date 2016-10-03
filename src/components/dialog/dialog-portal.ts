@@ -1,5 +1,5 @@
 import {Directive, ViewContainerRef, TemplateRef} from '@angular/core';
-import {TemplatePortalDirective} from '@angular2-material/core';
+import {TemplatePortalDirective} from '@angular/material/core';
 
 @Directive({selector: '[mdDialogPortal]'})
 export class MdDialogPortal extends TemplatePortalDirective {

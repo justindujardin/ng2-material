@@ -1,4 +1,4 @@
-import {Directive} from "@angular/core";
+import {Directive, NgModule} from "@angular/core";
 
 /**
  * @name mdContent
@@ -18,5 +18,11 @@ import {Directive} from "@angular/core";
  *
  */
 @Directive({selector: 'md-content'})
-export class MdContent {
+class MdContent {
 }
+
+@NgModule({
+  declarations: [MdContent],
+  exports: [MdContent]
+})
+export class MdContentModule {}

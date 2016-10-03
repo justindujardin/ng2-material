@@ -5,20 +5,19 @@ require('zone.js/dist/zone');
 import '@angular/core';
 import '@angular/common';
 
-import '@angular2-material/core';
+import '@angular/material';
 
 import {Component} from '@angular/core';
 import {bootstrap} from '@angular/platform-browser-dynamic';
 
 import {MATERIAL_BROWSER_PROVIDERS, MATERIAL_DIRECTIVES} from 'ng2-material';
-import {MdToolbar} from '@angular2-material/toolbar';
 
 import 'ng2-material/ng2-material.css';
 import 'ng2-material/font/font.css';
 
 @Component({
   selector: 'my-app',
-  directives: [MATERIAL_DIRECTIVES, MdToolbar],
+  // directives: [MATERIAL_DIRECTIVES, MdToolbar],
   template: `<md-card>
   <md-toolbar color="primary">ng2-material, material2, and webpack</md-toolbar>
 <md-content>
@@ -106,11 +105,11 @@ import 'ng2-material/font/font.css';
           margin-bottom: 16px;
         }
       }
-      
+
       md-content {
         margin-right: 7px;
       }
-      
+
       .label {
         position: absolute;
         bottom: 5px;

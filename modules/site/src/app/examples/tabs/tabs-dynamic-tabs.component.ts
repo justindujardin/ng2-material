@@ -1,7 +1,4 @@
 import {Component, ViewEncapsulation, Input} from '@angular/core';
-import {MATERIAL_DIRECTIVES} from 'ng2-material';
-import {MD_TABS_DIRECTIVES} from '@angular2-material/tabs';
-import {MD_INPUT_DIRECTIVES} from '@angular2-material/input';
 
 export interface ITabData {
   title: string;
@@ -15,7 +12,7 @@ export interface ITabData {
   templateUrl: 'tabs-dynamic-tabs.component.html',
   styleUrls: ['tabs-dynamic-tabs.component.css'],
   encapsulation: ViewEncapsulation.None,
-  directives: [MATERIAL_DIRECTIVES, MD_TABS_DIRECTIVES, MD_INPUT_DIRECTIVES]
+  // directives: [MATERIAL_DIRECTIVES, MD_TABS_DIRECTIVES, MD_INPUT_DIRECTIVES]
 })
 export class TabsDynamicTabsComponent {
   public tabs: ITabData[] = [

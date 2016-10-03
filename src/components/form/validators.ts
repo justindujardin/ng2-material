@@ -1,12 +1,12 @@
-import {NG_VALIDATORS, Validator, Control, AbstractControl} from "@angular/common";
-import {Input, Provider, Directive, forwardRef} from "@angular/core";
+import {NG_VALIDATORS, Validator, FormControl, AbstractControl} from "@angular/forms";
+import {Input, Provider, Directive, forwardRef, NgModule} from "@angular/core";
 import {isNumber} from "../../core/util/util";
 
-const PATTERN_VALIDATOR = new Provider(NG_VALIDATORS, {
+const PATTERN_VALIDATOR: Provider = {
+  provide: NG_VALIDATORS,
   useExisting: forwardRef(() => MdPatternValidator),
   multi: true
-});
-
+};
 @Directive({
   selector: '[mdPattern]',
   providers: [PATTERN_VALIDATOR]
@@ -29,15 +29,16 @@ export class MdPatternValidator implements Validator {
   @Input()
   mdPattern: string;
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdPatternValidator.inline(this.mdPattern)(control);
   }
 }
 
-const MAXLENGTH_VALIDATOR = new Provider(NG_VALIDATORS, {
+const MAXLENGTH_VALIDATOR = {
+  provide: NG_VALIDATORS,
   useExisting: forwardRef(() => MdMaxLengthValidator),
   multi: true
-});
+};
 @Directive({selector: '[mdMaxLength]', providers: [MAXLENGTH_VALIDATOR]})
 export class MdMaxLengthValidator implements Validator {
   /**
@@ -57,15 +58,16 @@ export class MdMaxLengthValidator implements Validator {
   @Input()
   mdMaxLength: string;
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdMaxLengthValidator.inline(this.mdMaxLength)(control);
   }
 }
 
-const MAXVALUE_VALIDATOR = new Provider(NG_VALIDATORS, {
+const MAXVALUE_VALIDATOR = {
+  provide: NG_VALIDATORS,
   useExisting: forwardRef(() => MdMaxValueValidator),
   multi: true
-});
+};
 @Directive({selector: '[mdMax]', providers: [MAXVALUE_VALIDATOR]})
 export class MdMaxValueValidator implements Validator {
   /**
@@ -85,15 +87,16 @@ export class MdMaxValueValidator implements Validator {
   @Input()
   mdMax: string;
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdMaxValueValidator.inline(this.mdMax)(control);
   }
 }
 
-const MINVALUE_VALIDATOR = new Provider(NG_VALIDATORS, {
+const MINVALUE_VALIDATOR = {
+  provide: NG_VALIDATORS,
   useExisting: forwardRef(() => MdMinValueValidator),
   multi: true
-});
+};
 @Directive({selector: '[mdMin]', providers: [MINVALUE_VALIDATOR]})
 export class MdMinValueValidator implements Validator {
   /**
@@ -113,15 +116,16 @@ export class MdMinValueValidator implements Validator {
   @Input()
   mdMin: string;
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdMinValueValidator.inline(this.mdMin)(control);
   }
 }
 
-const NUMBER_REQUIRED_VALIDATOR = new Provider(NG_VALIDATORS, {
+const NUMBER_REQUIRED_VALIDATOR = {
+  provide:NG_VALIDATORS,
   useExisting: forwardRef(() => MdNumberRequiredValidator),
   multi: true
-});
+};
 @Directive({selector: '[mdNumberRequired]', providers: [NUMBER_REQUIRED_VALIDATOR]})
 export class MdNumberRequiredValidator implements Validator {
   /**
@@ -134,7 +138,7 @@ export class MdNumberRequiredValidator implements Validator {
     }
   }
 
-  validate(control: Control): {[key: string]: any} {
+  validate(control: FormControl): {[key: string]: any} {
     return MdNumberRequiredValidator.inline()(control);
   }
 }
@@ -146,3 +150,9 @@ export const INPUT_VALIDATORS = [
   MdMinValueValidator,
   MdNumberRequiredValidator
 ];
+
+@NgModule({
+  declarations: INPUT_VALIDATORS,
+  exports: INPUT_VALIDATORS
+})
+export class MdValidatorsModule {}
