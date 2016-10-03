@@ -10,7 +10,7 @@ import {
   OnDestroy,
   NgModule
 } from '@angular/core';
-import {MdCheckboxModule} from "@angular2-material/checkbox";
+import {MdCheckboxModule} from "@angular/material";
 
 import 'rxjs/add/operator/share';
 import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow, ITableSelectableRowSelectionChange} from './data_table_selectable_tr';

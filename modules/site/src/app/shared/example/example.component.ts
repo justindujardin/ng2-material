@@ -8,9 +8,6 @@ import {
   ComponentResolver
 } from '@angular/core';
 import {Http} from '@angular/http';
-import {MdToolbar} from '@angular2-material/toolbar';
-import {MD_TABS_DIRECTIVES} from '@angular2-material/tabs';
-import {MATERIAL_DIRECTIVES} from 'ng2-material';
 import {IExampleData, DEMO_DIRECTIVES} from '../../index';
 import {HighlightComponent} from '../highlight/highlight.component';
 
@@ -24,7 +21,7 @@ export interface ISourceFile {
   selector: 'docs-example',
   templateUrl: 'example.component.html',
   styleUrls: ['example.component.css'],
-  directives: [MATERIAL_DIRECTIVES, MD_TABS_DIRECTIVES, HighlightComponent, MdToolbar]
+  // directives: [HighlightComponent]
 })
 export class ExampleComponent implements AfterViewInit {
   private _model: IExampleData = null;
@@ -98,7 +95,7 @@ export class ExampleComponent implements AfterViewInit {
     @Component({
       selector: `md-example-${model.component}`,
       template: template,
-      directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES, HighlightComponent]
+      // directives: [MATERIAL_DIRECTIVES, DEMO_DIRECTIVES, HighlightComponent]
     })
     class CompiledComponent {
     }

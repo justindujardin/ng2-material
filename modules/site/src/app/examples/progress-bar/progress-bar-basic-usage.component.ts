@@ -1,12 +1,11 @@
 import {Component} from '@angular/core';
-import {MdProgressBar} from '@angular2-material/progress-bar';
 
 @Component({
   moduleId: module.id,
   selector: 'progress-bar-basic-usage',
   templateUrl: 'progress-bar-basic-usage.component.html',
   styleUrls: ['progress-bar-basic-usage.component.css'],
-  directives: [MdProgressBar]
+//  directives: [MdProgressBar]
 })
 export class ProgressBarBasicUsageComponent {
   public determinateValue: number = 30;

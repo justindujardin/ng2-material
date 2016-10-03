@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { Response, Http } from '@angular/http';
-import { ROUTER_DIRECTIVES, provideRouter, Router, RouterConfig } from '@angular/router';
-import { MD_SIDENAV_DIRECTIVES, MdSidenav } from '@angular2-material/sidenav';
-import { MdToolbar } from '@angular2-material/toolbar';
-import { MATERIAL_DIRECTIVES, Media, MdIcon } from 'ng2-material';
+import { provideRouter, Router, RouterConfig } from '@angular/router';
+import { MdSidenav } from '@angular/material';
+import {  Media } from 'ng2-material';
 import { ComponentsComponent } from './+components';
 import { IndexComponent } from './+index';
 import { ComponentsService, IComponentMeta } from './shared/components.service';
@@ -27,10 +26,10 @@ export const AppRouterProviders = [
   templateUrl: 'site.component.html',
   styleUrls: ['site.component.css'],
   pipes: [ComponentsOrderByPipe],
-  directives: [
-    ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MD_SIDENAV_DIRECTIVES, MdIcon, MdToolbar,
-    FooterComponent
-  ]
+  // directives: [
+  //   ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MD_SIDENAV_DIRECTIVES, MdIcon, MdToolbar,
+  //   FooterComponent
+  // ]
 })
 export class SiteAppComponent implements OnInit,
     OnDestroy, AfterViewInit {

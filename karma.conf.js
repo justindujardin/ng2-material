@@ -42,7 +42,7 @@ module.exports = function (config) {
       // paths loaded via module imports
       // Angular itself
       { pattern: 'node_modules/@angular/**/*.js', included: false, watched: true },
-      { pattern: 'node_modules/@angular2-material/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/@angular/material/**/*.js', included: false, watched: false },
       'karma.ie.shims.js',
       "config.karma.js",
       { pattern: 'dist/*.*', included: false, watched: true },

@@ -7,11 +7,12 @@ import {
   EventEmitter,
   ViewChild,
   ViewEncapsulation,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
-import {Overlay, OVERLAY_PROVIDERS} from '@angular2-material/core/overlay/overlay';
-import {OverlayState} from '@angular2-material/core/overlay/overlay-state';
-import {OverlayRef} from '@angular2-material/core/overlay/overlay-ref';
+import {  ComponentPortal,
+Overlay, OVERLAY_PROVIDERS} from '@angular/material';
+import {OverlayState} from '@angular/material';
+import {OverlayRef} from '@angular/material';
 import {Animate} from '../../core/util/animate';
 import {MdDialogPortal} from './dialog-portal';
 import {MdDialogActions} from './dialog-actions';
