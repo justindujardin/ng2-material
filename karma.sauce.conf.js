@@ -12,12 +12,7 @@ module.exports = function (config) {
     ['firefox', '35'],
 
     ['chrome', 'beta', 'Windows 8'],
-    ['chrome', 'dev', 'Windows 8'],
     ['chrome', '39'],
-    ['chrome', '26'],
-
-    ['microsoftedge', '13.10586', 'Windows 10'],
-    ['internet explorer', '11', 'Windows 10'],
 
     ['android', '5.1'],
     ['android', '4.4']
