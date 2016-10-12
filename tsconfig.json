@@ -23,16 +23,16 @@
         "types": [
             "jasmine",
             "hammerjs",
-            "node"
+            "node",
+            "core-js"
         ]
     },
-    "include": [
-        "src/**/*.ts"
-    ],
     "exclude": [
         "node_modules",
         "dist",
-        "modules/**",
+        "ng2-material.d.ts",
+        "modules",
+        "typings",
         "src/**/*_spec.ts",
         "src/platform/testing/*.*"
     ],

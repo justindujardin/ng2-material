@@ -1,7 +1,6 @@
-import {Component} from "@angular/core";
-import {beforeEach, describe, inject, it, async} from "@angular/core/testing";
-import {ComponentFixture, TestComponentBuilder} from "@angular/core/testing";
-import {MATERIAL_DIRECTIVES} from "../../index";
+import {Component} from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Ng2MaterialModule} from '../../index';
 
 export function promiseWait(milliseconds: number = 10): Promise<void> {
   return new Promise<void>((resolve)=> {
@@ -19,38 +18,49 @@ export function promiseWait(milliseconds: number = 10): Promise<void> {
 export function componentSanityCheck(name: string, selector: string, template: string) {
   @Component({
     selector: 'test-app',
-    directives: [MATERIAL_DIRECTIVES],
     template: template
   })
   class TestComponent {
   }
 
   describe(name, () => {
-    let builder: TestComponentBuilder;
 
-    function setup(): Promise<any> {
-      return builder.createAsync(TestComponent)
-        .then((fixture: ComponentFixture<TestComponent>) => {
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        declarations: [
+          TestComponent
+        ],
+        imports: [Ng2MaterialModule],
+        providers: []
+      });
+    });
+
+    function setup(template: string = null): Promise<ComponentFixture<TestComponent>> {
+      if (template) {
+        TestBed.overrideComponent(TestComponent, {
+          set: {
+            template: template
+          }
+        });
+      }
+      return TestBed.compileComponents()
+        .then(() => {
+          const fixture = TestBed.createComponent(TestComponent);
           fixture.detectChanges();
           return fixture;
         })
-        .catch(console.error.bind(console));
+        .catch(error => console.error.bind(console));
     }
 
-    beforeEach(inject([TestComponentBuilder], (tcb) => {
-      builder = tcb;
-    }));
-
     describe(selector, () => {
-      it('should instantiate component without fail', async(inject([], () => {
-        setup()
-          .then(() => promiseWait());
-      })));
-      it('should destroy component without fail', async(inject([], () => {
+      it('should instantiate component without fail', async(() => {
+        setup().then(() => promiseWait());
+      }));
+      it('should destroy component without fail', async(() => {
         setup()
           .then((api: ComponentFixture<TestComponent>) => api.destroy())
           .then(() => promiseWait());
-      })));
+      }));
     });
   });
 

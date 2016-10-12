@@ -1,42 +1,55 @@
-import {inject, async} from '@angular/core/testing';
-import {ComponentFixture, TestComponentBuilder} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {MdMessage, MdMessages} from '../../index';
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, Control} from '@angular/common';
 import {By} from '@angular/platform-browser';
 import {promiseWait} from '../../platform/testing/util';
+import {CommonModule} from '@angular/common';
+import {FormsModule, FormControl} from '@angular/forms';
 
 
-export function main() {
-
-  interface IFormMessagesFixture {
-    fixture: ComponentFixture<TestComponent>;
-    container: MdMessages;
-    messages: MdMessage[];
-  }
-  @Component({
-    selector: 'test-app',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, MdMessage, MdMessages],
-    template: `
+interface IFormMessagesFixture {
+  fixture: ComponentFixture<TestComponent>;
+  container: MdMessages;
+  messages: MdMessage[];
+}
+@Component({
+  selector: 'test-app',
+  template: `
     <form>
       <input ngControl="name" required #name="ngForm"/>
       <section [md-messages]="name">
         <div md-message="required">required</div>
       </section>
     </form>`
-  })
-  class TestComponent {
-    name: string = 'MorTon';
-  }
+})
+class TestComponent {
+  name: string = 'MorTon';
+}
 
-  describe('Form Messages', () => {
-    let builder: TestComponentBuilder;
+fdescribe('Form Messages', () => {
 
-    function setup(template: string = null): Promise<IFormMessagesFixture> {
-      let prep = template === null ?
-        builder.createAsync(TestComponent) :
-        builder.overrideTemplate(TestComponent, template).createAsync(TestComponent);
-      return prep.then((fixture: ComponentFixture<TestComponent>) => {
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        MdMessage, MdMessages, TestComponent
+      ],
+      imports: [CommonModule, FormsModule],
+      providers: []
+    });
+  });
+
+  function setup(template: string = null): Promise<IFormMessagesFixture> {
+    if (template) {
+      TestBed.overrideComponent(TestComponent, {
+        set: {
+          template: template
+        }
+      });
+    }
+    return TestBed.compileComponents()
+      .then(() => {
+        const fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
         let container = fixture.debugElement.query(By.directive(MdMessages)).injector.get(MdMessages) as MdMessages;
         let messages = fixture.debugElement.queryAll(By.directive(MdMessage)).map(b => b.injector.get(MdMessage)) as MdMessage[];
@@ -45,51 +58,48 @@ export function main() {
           container: container,
           messages: messages
         };
-      });
-    }
+      })
+      .catch(error => console.error.bind(console));
+  }
 
-    beforeEach(inject([TestComponentBuilder], (tcb) => {
-      builder = tcb;
+  describe('md-messages', () => {
+    it('should error if used outside of an NgFormControl', () => {
+      return setup(`<div md-messages></div>`).catch((err: any) => {
+        expect(err).toBeDefined();
+      });
+    });
+
+    it('should initialize when given model and control group are present', () => {
+      return setup().then((api: IFormMessagesFixture) => {
+        expect(api.container.isTouched).toBe(false);
+        api.fixture.destroy();
+      });
+    });
+
+    it('should bind local view references #ref="ngForm"', () => {
+      return setup().then((api: IFormMessagesFixture) => {
+        expect(api.container.isTouched).toBe(false);
+        expect(api.messages.length).toBe(1);
+        expect(api.container.form).not.toBeNull();
+        expect(api.fixture.componentInstance.name).toBe('MorTon');
+      });
+    });
+
+    it('should re-export valid from control or form', async(() => {
+      return setup().then((api: IFormMessagesFixture) => {
+        return promiseWait().then(() => {
+          let ctrl: FormControl = (<any>api.container.property).control;
+          expect(ctrl.value).toBe(null);
+          expect(api.container.valid).toBe(false);
+          expect(api.container.valid).toBe(ctrl.valid);
+          ctrl.setValue('MorTon', {emitEvent: true});
+          api.fixture.detectChanges();
+          expect(api.container.valid).toBe(true);
+        });
+      });
     }));
 
-    describe('md-messages', () => {
-      it('should error if used outside of an NgFormControl', () => {
-        return setup(`<div md-messages></div>`).catch((err: any) => {
-          expect(err).toBeDefined();
-        });
-      });
-
-      it('should initialize when given model and control group are present', () => {
-        return setup().then((api: IFormMessagesFixture) => {
-          expect(api.container.isTouched).toBe(false);
-          api.fixture.destroy();
-        });
-      });
-
-      it('should bind local view references #ref="ngForm"', () => {
-        return setup().then((api: IFormMessagesFixture) => {
-          expect(api.container.isTouched).toBe(false);
-          expect(api.messages.length).toBe(1);
-          expect(api.container.form).not.toBeNull();
-          expect(api.fixture.componentInstance.name).toBe('MorTon');
-        });
-      });
-
-      it('should re-export valid from control or form', async(() => {
-        return setup().then((api: IFormMessagesFixture) => {
-          return promiseWait().then(() => {
-            let ctrl: Control = (<any>api.container.property).control;
-            expect(ctrl.value).toBe(null);
-            expect(api.container.valid).toBe(false);
-            expect(api.container.valid).toBe(ctrl.valid);
-            ctrl.updateValue('MorTon', {emitEvent: true});
-            api.fixture.detectChanges();
-            expect(api.container.valid).toBe(true);
-          });
-        });
-      }));
-
-    });
+  });
 
 
 // TODO(jd): Behaviors to test
@@ -99,8 +109,6 @@ export function main() {
 // - [md-messages] adds md-valid and md-invalid class based on field validation state
 // - throws informative errors when it fails to bind to a given form field because it cannot be found.
 
-  });
+});
 
-
-}
 

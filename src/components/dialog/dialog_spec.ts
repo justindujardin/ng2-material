@@ -1,11 +1,8 @@
-import {componentSanityCheck} from "../../platform/testing/util";
+import {componentSanityCheck} from '../../platform/testing/util';
 
-export function main() {
-  let template = `
+const template = `
   <md-dialog>
     <md-dialog-title>Title</md-dialog-title>
     Content!
   </md-dialog>`;
-  componentSanityCheck('Dialog', 'md-dialog', template);
-}
-
+componentSanityCheck('Dialog', 'md-dialog', template);

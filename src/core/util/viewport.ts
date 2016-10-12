@@ -1,3 +1,4 @@
+import {Injectable} from '@angular/core';
 /**
  * Media Query Listener implementation
  */
@@ -13,6 +14,7 @@ export interface ViewportMediaMatch {
  *
  * Rather than interacting with the window, inject this service and use it.
  */
+@Injectable()
 export abstract class ViewportHelper {
 
   abstract matchMedia(query: string): ViewportMediaMatch;

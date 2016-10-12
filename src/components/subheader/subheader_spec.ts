@@ -1,6 +1,4 @@
-import {componentSanityCheck} from "../../platform/testing/util";
+import {componentSanityCheck} from '../../platform/testing/util';
 
-export function main() {
-  componentSanityCheck('Subheader', 'md-subheader', '<md-subheader></md-subheader>');
-}
+componentSanityCheck('Subheader', 'md-subheader', '<md-subheader></md-subheader>');
 
