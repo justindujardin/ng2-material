@@ -21,9 +21,6 @@ export * from './components/data-table/index';
 export * from './components/dialog/index';
 export * from './components/divider/divider';
 
-export * from './components/form/validators';
-export * from './components/form/messages';
-
 export * from './components/pagination/index';
 
 export * from './components/peekaboo/peekaboo';
