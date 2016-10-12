@@ -3,6 +3,7 @@ import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {promiseWait} from '../../platform/testing/util';
 import {MdBackdrop} from './backdrop';
+import {MdServicesModule} from '../../core/util/util.module';
 
 interface IBackdropFixture {
   fixture: ComponentFixture<MdBackdrop>;
@@ -15,7 +16,7 @@ describe('Backdrop', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [MdBackdrop],
-      imports: [],
+      imports: [MdServicesModule],
       providers: []
     });
   });
@@ -25,8 +26,8 @@ describe('Backdrop', () => {
     return TestBed.compileComponents()
       .then(() => {
         const fixture = TestBed.createComponent(MdBackdrop);
-        let debug: DebugElement = fixture.debugElement.query(By.css('md-backdrop'));
-        let backdrop = <MdBackdrop>debug.componentInstance;
+        const debug: DebugElement = fixture.debugElement;
+        const backdrop = fixture.componentInstance as MdBackdrop;
         backdrop.transitionAddClass = transitionAddClass;
         fixture.detectChanges();
         result = {

@@ -47,9 +47,11 @@ export function componentSanityCheck(name: string, selector: string, template: s
         .then(() => {
           const fixture = TestBed.createComponent(TestComponent);
           fixture.detectChanges();
-          return fixture;
+          return fixture.whenStable().then(() => fixture);
         })
-        .catch(error => console.error.bind(console));
+        .catch(error => {
+          return console.error(error);
+        });
     }
 
     describe(selector, () => {
@@ -58,7 +60,9 @@ export function componentSanityCheck(name: string, selector: string, template: s
       }));
       it('should destroy component without fail', async(() => {
         setup()
-          .then((api: ComponentFixture<TestComponent>) => api.destroy())
+          .then((api: ComponentFixture<TestComponent>) => {
+            return api.destroy();
+          })
           .then(() => promiseWait());
       }));
     });

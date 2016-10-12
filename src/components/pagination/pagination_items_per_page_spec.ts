@@ -1,18 +1,17 @@
 import {componentSanityCheck} from '../../platform/testing/util';
-import {inject, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, async} from '@angular/core/testing';
 import {Component, DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {MdPaginationItemsPerPage, IPaginationModel, PaginationService} from './index';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {MdServicesModule} from '../../core/util/util.module';
 
 describe('Pagination', () => {
 
   componentSanityCheck('MdPaginationItemsPerPage', 'md-pagination-items-per-page', `<md-pagination-items-per-page></md-pagination-items-per-page>`);
 
   describe('MdPaginationItemsPerPage', () => {
-    let service: PaginationService;
-
     interface IPaginationItemsPerPageFixture {
       fixture: ComponentFixture<TestComponent>;
       comp: MdPaginationItemsPerPage;
@@ -43,7 +42,7 @@ describe('Pagination', () => {
           MdPaginationItemsPerPage,
           TestComponent
         ],
-        imports: [CommonModule, FormsModule],
+        imports: [CommonModule, FormsModule, MdServicesModule],
         providers: [PaginationService]
       });
     });
@@ -57,9 +56,6 @@ describe('Pagination', () => {
         });
       }
       return TestBed.compileComponents()
-        .then(inject([PaginationService], (serv) => {
-          service = serv;
-        }))
         .then(() => {
           const fixture = TestBed.createComponent(TestComponent);
           let debug = fixture.debugElement.query(By.css('md-pagination-items-per-page'));
@@ -76,99 +72,96 @@ describe('Pagination', () => {
 
     describe('default values', () => {
 
-      it('should have a default model', () => {
+      it('should have a default model', async(() => {
         return setup().then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.model.currentPage).toEqual(0);
           expect(api.comp.model.itemsPerPage).toEqual(0);
           expect(api.comp.model.totalItems).toEqual(0);
         });
-      });
+      }));
 
-      it('should accept custom model', () => {
+      it('should accept custom model', async(() => {
         return setup(`<md-pagination-items-per-page [model]="page2"></md-pagination-items-per-page>`).then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.model.currentPage).toEqual(2);
           expect(api.comp.model.itemsPerPage).toEqual(30);
           expect(api.comp.model.totalItems).toEqual(65);
         });
-      });
+      }));
 
-      it('should have a default name', () => {
+      it('should have a default name', async(() => {
         return setup().then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.name).toEqual('default');
         });
-      });
+      }));
 
-      it('should accept a custom name', () => {
+      it('should accept a custom name', async(() => {
         return setup(`<md-pagination-items-per-page name="book"></md-pagination-items-per-page>`).then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.name).toEqual('book');
         });
-      });
+      }));
 
-      it('should have a default prepended string', () => {
+      it('should have a default prepended string', async(() => {
         return setup().then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.itemsPerPageBefore).toEqual('Rows per page:');
         });
-      });
+      }));
 
-      it('should accept a custom prepended string', () => {
+      it('should accept a custom prepended string', async(() => {
         return setup(`<md-pagination-items-per-page items-per-page-before="Items per page:"></md-pagination-items-per-page>`).then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.itemsPerPageBefore).toEqual('Items per page:');
         });
-      });
+      }));
 
-      it('should not have a default appended string', () => {
+      it('should not have a default appended string', async(() => {
         return setup().then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.itemsPerPageAfter).toBeUndefined();
         });
-      });
+      }));
 
-      it('should accept a custom appended string', () => {
+      it('should accept a custom appended string', async(() => {
         return setup(`<md-pagination-items-per-page items-per-page-after=" - "></md-pagination-items-per-page>`).then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.itemsPerPageAfter).toEqual(' - ');
         });
-      });
+      }));
 
-      it('should have a empty list of options for items per page', () => {
+      it('should have a empty list of options for items per page', async(() => {
         return setup().then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.itemsPerPageOptions).toEqual([]);
         });
-      });
+      }));
 
-      it('should accept a custom list of options for items per page', () => {
+      it('should accept a custom list of options for items per page', async(() => {
         return setup(`<md-pagination-items-per-page [items-per-page-options]="defaultItemsPerPageOptions"></md-pagination-items-per-page>`).then((api: IPaginationItemsPerPageFixture) => {
           expect(api.comp.itemsPerPageOptions).not.toContain(5);
           expect(api.comp.itemsPerPageOptions).toContain(10);
           expect(api.comp.itemsPerPageOptions).toContain(50);
           expect(api.comp.itemsPerPageOptions).toContain(100);
         });
-      });
+      }));
 
     });
 
     describe('construct', () => {
-      let service: PaginationService,
-        updatedPagination: IPaginationModel = {
-          currentPage: 1,
-          itemsPerPage: 30,
-          totalItems: 65
-        };
+      const updatedPagination: IPaginationModel = {
+        currentPage: 1,
+        itemsPerPage: 30,
+        totalItems: 65
+      };
 
-      beforeEach(inject([PaginationService], (serv) => {
-        service = serv;
-      }));
-
-      it('should listen PaginationService', () => {
+      it('should listen PaginationService', async(() => {
         return setup().then((api: IPaginationItemsPerPageFixture) => {
+          const service = TestBed.get(PaginationService);
           service.onChange.subscribe((event) => {
             expect(api.comp.model).toEqual(updatedPagination);
           });
 
           service.change('default', updatedPagination);
         });
-      });
+      }));
 
-      it('should listen PaginationService only for his reference name', () => {
+      it('should listen PaginationService only for his reference name', async(() => {
         return setup(`<md-pagination-items-per-page name="book"></md-pagination-items-per-page>`).then((api: IPaginationItemsPerPageFixture) => {
+          const service = TestBed.get(PaginationService);
           service.onChange.subscribe(() => {
             expect(api.comp.model.currentPage).toEqual(0);
             expect(api.comp.model.itemsPerPage).toEqual(0);
@@ -177,17 +170,15 @@ describe('Pagination', () => {
 
           service.change('default', updatedPagination);
         });
-      });
+      }));
     });
 
     describe('changePaginationLength', () => {
 
-      beforeEach(() => {
-        spyOn(service, 'change');
-      });
-
-      it('should dispatch page change to the service and reset to first page', () => {
+      it('should dispatch page change to the service and reset to first page', async(() => {
         return setup(`<md-pagination-items-per-page [model]="page2"></md-pagination-items-per-page>`).then((api: IPaginationItemsPerPageFixture) => {
+          const service = TestBed.get(PaginationService);
+          spyOn(service, 'change');
           api.comp.changePaginationLength(50);
           expect(service.change).toHaveBeenCalledWith('default', {
             currentPage: 1,
@@ -195,7 +186,7 @@ describe('Pagination', () => {
             totalItems: 65
           });
         });
-      });
+      }));
 
     });
 

@@ -12,14 +12,14 @@ import {
 } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {DomSanitizer} from '@angular/platform-browser';
 import 'rxjs/add/operator/filter';
 import {PaginationService} from './pagination_service';
 
 // import {isPresent} from '@angular/core/src/facade/lang';
 
 function isPresent(obj) {
-    return obj !== undefined && obj !== null;
+  return obj !== undefined && obj !== null;
 }
 
 export interface IPaginationModel {
@@ -38,7 +38,8 @@ export abstract class AbstractPaginationSubComponent implements OnInit {
     totalItems: 0
   };
 
-  constructor(protected service: PaginationService) { }
+  constructor(protected service: PaginationService) {
+  }
 
   ngOnInit() {
     if (!this.name) {
@@ -62,7 +63,9 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
 
   @HostBinding('class.md-pagination-range') mdPaginationRange: boolean = true;
 
-  @HostBinding('innerHTML') get html() { return this.getRange() };
+  @HostBinding('innerHTML') get html() {
+    return this.getRange()
+  };
 
   @Input() name: string = 'default';
 
@@ -74,7 +77,7 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
 
   @Input('range-format') rangeFormat: string;
 
-  private get computedRangeFormat():string {
+  get computedRangeFormat(): string {
     if (this.rangeFormat) return this.rangeFormat;
     return '{start}-{end} of {total}';
   }
@@ -107,7 +110,7 @@ export class MdPaginationRange extends AbstractPaginationSubComponent {
    * @param {IPaginationModel} model
    * @private
    */
-  getRange() {
+  getRange(): any {
     if (isPresent(this.model)) {
       let rangeStart = (this.model.currentPage - 1) * this.model.itemsPerPage + 1;
 
@@ -193,7 +196,9 @@ export class MdPaginationItemsPerPage extends AbstractPaginationSubComponent {
 
   @HostBinding('class.md-pagination-items-per-page') mdPaginationItemsPerPage: boolean = true;
 
-  @HostBinding() get hidden() { return !this.itemsPerPageOptions || !this.itemsPerPageOptions.length };
+  @HostBinding() get hidden() {
+    return !this.itemsPerPageOptions || !this.itemsPerPageOptions.length
+  };
 
   @Input() name: string = 'default';
 
@@ -300,18 +305,20 @@ export class MdPagination implements AfterContentInit, AfterViewInit {
 }
 
 const PAGINATION_DIRECTIVES = [
-    MdPagination,
-    MdPaginationControls,
-    MdPaginationItemsPerPage,
-    MdPaginationRange
-]
+  MdPagination,
+  MdPaginationControls,
+  MdPaginationItemsPerPage,
+  MdPaginationRange
+];
 
 @NgModule({
   declarations: PAGINATION_DIRECTIVES,
   exports: PAGINATION_DIRECTIVES,
-  imports : [
+  imports: [
     CommonModule,
     FormsModule
-  ]
+  ],
+  providers: [PaginationService]
 })
-export class MdPaginationModule { }
+export class MdPaginationModule {
+}

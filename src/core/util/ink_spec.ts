@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, async} from '@angular/core/testing';
 import {Component} from '@angular/core';
 import {Ink} from './ink';
 import {By} from '@angular/platform-browser';
@@ -42,33 +42,21 @@ describe('Ink', () => {
   }
 
   describe('canApply', () => {
-    it('should return true if element does not have md-no-ink attribute', () => {
+    it('should return true if element does not have md-no-ink attribute', async(() => {
       setup(`<div></div>`)
         .then((api: ComponentFixture<TestComponent>) => {
           const el = api.debugElement.query(By.css('div'));
           expect(Ink.canApply(el.nativeElement)).toBe(true);
         });
-    });
+    }));
 
-    it('should return true if element does not have md-no-ink attribute', () => {
+    it('should return false if element does have md-no-ink attribute', async(() => {
       setup(`<div md-no-ink></div>`)
         .then((api: ComponentFixture<TestComponent>) => {
           const el = api.debugElement.query(By.css('div'));
           expect(Ink.canApply(el.nativeElement)).toBe(false);
         });
-    });
+    }));
   });
 
-  describe('ripple', () => {
-    it('should ripple and resolve when the ink animation is done', () => {
-      setup(`<div></div>`)
-        .then((api: ComponentFixture<TestComponent>) => {
-          const el = api.debugElement.query(By.css('div'));
-          Ink.ripple(el.nativeElement, 0, 0).then(() => {
-            // Second time for conditional that already has an ink ripple container
-            Ink.ripple(el.nativeElement, 0, 0);
-          });
-        });
-    });
-  });
 });

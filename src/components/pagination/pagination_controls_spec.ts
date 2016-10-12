@@ -1,16 +1,16 @@
 import {componentSanityCheck} from '../../platform/testing/util';
-import {inject, ComponentFixture, TestBed} from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {Component, DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {MdPaginationControls, IPaginationModel, PaginationService} from './index';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {MdServicesModule} from '../../core/util/util.module';
 
 describe('Pagination', () => {
   componentSanityCheck('MdPaginationControls', 'md-pagination-controls', `<md-pagination-controls></md-pagination-controls>`);
 
   describe('MdPaginationControls', () => {
-    let service: PaginationService;
 
     interface IPaginationControlsFixture {
       fixture: ComponentFixture<TestComponent>;
@@ -45,7 +45,7 @@ describe('Pagination', () => {
           MdPaginationControls,
           TestComponent
         ],
-        imports: [CommonModule, FormsModule],
+        imports: [CommonModule, FormsModule, MdServicesModule],
         providers: [PaginationService]
       });
     });
@@ -59,9 +59,6 @@ describe('Pagination', () => {
         });
       }
       return TestBed.compileComponents()
-        .then(inject([PaginationService], (serv) => {
-          service = serv;
-        }))
         .then(() => {
           const fixture = TestBed.createComponent(TestComponent);
           let debug = fixture.debugElement.query(By.css('md-pagination-controls'));
@@ -78,33 +75,33 @@ describe('Pagination', () => {
 
     describe('default values', () => {
 
-      it('should have a default model', () => {
+      it('should have a default model', async(() => {
         return setup().then((api: IPaginationControlsFixture) => {
           expect(api.comp.model.currentPage).toEqual(0);
           expect(api.comp.model.itemsPerPage).toEqual(0);
           expect(api.comp.model.totalItems).toEqual(0);
         });
-      });
+      }));
 
-      it('should accept custom model', () => {
+      it('should accept custom model', async(() => {
         return setup(`<md-pagination-controls [model]="page2"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
           expect(api.comp.model.currentPage).toEqual(2);
           expect(api.comp.model.itemsPerPage).toEqual(30);
           expect(api.comp.model.totalItems).toEqual(65);
         });
-      });
+      }));
 
-      it('should have a default name', () => {
+      it('should have a default name', async(() => {
         return setup().then((api: IPaginationControlsFixture) => {
           expect(api.comp.name).toEqual('default');
         });
-      });
+      }));
 
-      it('should accept a custom name', () => {
+      it('should accept a custom name', async(() => {
         return setup(`<md-pagination-controls name="book"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
           expect(api.comp.name).toEqual('book');
         });
-      });
+      }));
 
     });
 
@@ -116,18 +113,22 @@ describe('Pagination', () => {
       };
 
 
-      it('should listen PaginationService', () => {
+      it('should listen PaginationService', async(() => {
         return setup().then((api: IPaginationControlsFixture) => {
+          const service = TestBed.get(PaginationService);
+
           service.onChange.subscribe((event) => {
             expect(api.comp.model).toEqual(updatedPagination);
           });
 
           service.change('default', updatedPagination);
         });
-      });
+      }));
 
-      it('should listen PaginationService only for his reference name', () => {
+      it('should listen PaginationService only for his reference name', async(() => {
         return setup(`<md-pagination-controls name="book"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
+          const service = TestBed.get(PaginationService);
+
           service.onChange.subscribe(() => {
             expect(api.comp.model).toEqual({
               currentPage: 0,
@@ -138,74 +139,70 @@ describe('Pagination', () => {
 
           service.change('default', updatedPagination);
         });
-      });
+      }));
     });
 
     describe('isFirstPage', () => {
 
-      it('should accept first page as first page', () => {
+      it('should accept first page as first page', async(() => {
         return setup(`<md-pagination-controls [model]="page1"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
           expect(api.comp.isFirstPage()).toBeTruthy();
         });
-      });
+      }));
 
-      it('should not accept second page as first page', () => {
+      it('should not accept second page as first page', async(() => {
         return setup(`<md-pagination-controls [model]="page2"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
           expect(api.comp.isFirstPage()).toBeFalsy();
         });
-      });
+      }));
 
     });
 
     describe('isLastPage', () => {
 
-      it('should accept third page as last page', () => {
+      it('should accept third page as last page', async(() => {
         return setup(`<md-pagination-controls [model]="page3"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
           expect(api.comp.isLastPage()).toBeTruthy();
         });
-      });
+      }));
 
-      it('should not accept second page as last page', () => {
+      it('should not accept second page as last page', async(() => {
         return setup(`<md-pagination-controls [model]="page2"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
           expect(api.comp.isLastPage()).toBeFalsy();
         });
-      });
+      }));
 
     });
 
     describe('previousPage', () => {
 
-      it('should call change of page to previous one', () => {
+      it('should call change of page to previous one', async(() => {
         return setup(`<md-pagination-controls [model]="page2"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
           spyOn(api.comp, 'changePage');
           api.comp.previousPage();
           expect(api.comp.changePage).toHaveBeenCalledWith(1);
         });
-      });
+      }));
 
     });
 
     describe('nextPage', () => {
 
-      it('should call change of page to previous one', () => {
+      it('should call change of page to previous one', async(() => {
         return setup(`<md-pagination-controls [model]="page2"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
           spyOn(api.comp, 'changePage');
           api.comp.nextPage();
           expect(api.comp.changePage).toHaveBeenCalledWith(3);
         });
-      });
+      }));
 
     });
 
     describe('changePage', () => {
-      let service: PaginationService;
-
-      beforeEach(() => {
-        spyOn(service, 'change');
-      });
-
-      it('should dispatch the new current page to the service', () => {
+      it('should dispatch the new current page to the service', async(() => {
         return setup(`<md-pagination-controls [model]="page2"></md-pagination-controls>`).then((api: IPaginationControlsFixture) => {
+          const service = TestBed.get(PaginationService);
+          spyOn(service, 'change');
           api.comp.changePage(1);
           expect(service.change).toHaveBeenCalledWith('default', {
             currentPage: 1,
@@ -213,7 +210,7 @@ describe('Pagination', () => {
             totalItems: 65
           });
         });
-      });
+      }));
 
     });
 

@@ -4,6 +4,7 @@ import {Component, DebugElement, EventEmitter} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {MdDataTableHeaderSelectableRow, MdDataTable, MdDataTableSelectableRow} from './index';
 import {CommonModule} from '@angular/common';
+import {MdCheckboxModule} from '@angular/material';
 
 interface IDataTableFixture {
   fixture: ComponentFixture<TestComponent>;
@@ -45,7 +46,7 @@ describe('Data table', () => {
         MdDataTableHeaderSelectableRow,
         TestComponent
       ],
-      imports: [CommonModule],
+      imports: [CommonModule, MdCheckboxModule],
       providers: []
     });
   });
@@ -60,26 +61,29 @@ describe('Data table', () => {
         const testComp = fixture.debugElement.componentInstance;
         testComp.selected = [];
         fixture.detectChanges();
-        return {
+        result = {
           fixture: fixture,
           comp: comp,
           debug: debug
         };
+        return fixture.whenStable();
       })
       .then(() => result)
-      .catch(error => console.error.bind(console));
+      .catch(error => {
+        console.error(error);
+      });
   }
 
   describe('md-data-table', () => {
     it('should initialize selected', async(() => {
-      return setup().then((api: IDataTableFixture) => {
+      setup().then((api: IDataTableFixture) => {
         expect(api.comp.selected.length).toEqual(0);
         api.fixture.destroy();
       });
     }));
 
-    it('should toggle checked value when a click is fired on a row checkbox', () => {
-      return setup().then((api: IDataTableFixture) => {
+    it('should toggle checked value when a click is fired on a row checkbox', async(() => {
+      setup().then((api: IDataTableFixture) => {
         let row = api.debug.query(By.css('tbody tr:first-child'));
         row.nativeElement.click();
         expect(api.comp.selected.length).toEqual(1);
@@ -88,10 +92,10 @@ describe('Data table', () => {
         expect(api.comp.selected.length).toEqual(0);
         api.fixture.destroy();
       });
-    });
+    }));
 
-    it('should check all row checkbox when a click is fired on master checkbox', () => {
-      return setup().then((api: IDataTableFixture) => {
+    it('should check all row checkbox when a click is fired on master checkbox', async(() => {
+      setup().then((api: IDataTableFixture) => {
         let masterRow = api.debug.query(By.css('thead tr:first-child'));
         masterRow.nativeElement.click();
         expect(api.comp.selected.length).toEqual(2);
@@ -100,10 +104,10 @@ describe('Data table', () => {
         expect(api.comp.selected.length).toEqual(0);
         api.fixture.destroy();
       });
-    });
+    }));
 
-    it('should uncheck master checkbox if a row checkbox is unchecked', () => {
-      return setup().then((api: IDataTableFixture) => {
+    it('should uncheck master checkbox if a row checkbox is unchecked', async(() => {
+      setup().then((api: IDataTableFixture) => {
         const masterRow = api.debug.query(By.css('thead tr:first-child'));
         const row = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
 
@@ -115,10 +119,10 @@ describe('Data table', () => {
         expect(masterRow.componentInstance.isActive).toBe(false);
         api.fixture.destroy();
       });
-    });
+    }));
 
-    it('should fire a selectable_change event when a row checkbox change', () => {
-      return setup().then((api: IDataTableFixture) => {
+    it('should fire a selectable_change event when a row checkbox change', async(() => {
+      setup().then((api: IDataTableFixture) => {
         const row = api.debug.query(By.css('tbody tr:first-child')).nativeElement;
 
         api.comp.onSelectableAll.subscribe((event) => {
@@ -128,23 +132,23 @@ describe('Data table', () => {
         row.click();
         api.fixture.destroy();
       });
-    });
+    }));
   });
 
   describe('_unsubscribeChildren', () => {
 
-    it('should reset the selected values', () => {
-      return setup().then((api: IDataTableFixture) => {
+    it('should reset the selected values', async(() => {
+      setup().then((api: IDataTableFixture) => {
         api.comp.selected = ['1', '2'];
 
         api.comp._unsubscribeChildren();
 
         expect(api.comp.selected.length).toEqual(0);
       });
-    });
+    }));
 
-    it('should unsubscribe to listener', () => {
-      return setup().then((api: IDataTableFixture) => {
+    it('should unsubscribe to listener', async(() => {
+      setup().then((api: IDataTableFixture) => {
         const emitter = new EventEmitter(false);
         const spy = jasmine.createSpy('spy');
 
@@ -161,21 +165,21 @@ describe('Data table', () => {
 
         expect(spy.calls.count()).toEqual(1);
       });
-    });
+    }));
 
   });
 
   describe('_updateChildrenListener', () => {
 
-    it('should ask unsubscription', () => {
-      return setup().then((api: IDataTableFixture) => {
+    it('should ask unsubscription', async(() => {
+      setup().then((api: IDataTableFixture) => {
         spyOn(api.comp, '_unsubscribeChildren');
 
         api.comp._updateChildrenListener(api.comp._rows);
 
         expect(api.comp._unsubscribeChildren).toHaveBeenCalled();
       });
-    });
+    }));
 
   });
 
