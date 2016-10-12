@@ -7,15 +7,13 @@ module.exports = function (config) {
 
 // Browsers to run on Sauce Labs platforms
   var sauceBrowsers = _.reduce([
-    ['firefox', '41'],
     ['firefox', '40'],
     ['firefox', '35'],
 
-    ['chrome', 'beta', 'Windows 8'],
-    ['chrome', '39'],
+    ['chrome', 'beta', 'Windows 10'],
+    ['chrome', '50', 'Windows 10'],
 
-    ['android', '5.1'],
-    ['android', '4.4']
+    ['android', '5.1']
 
   ], function (memo, platform) {
     // internet explorer -> ie

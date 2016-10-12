@@ -44,7 +44,6 @@ module.exports = function (config) {
 
       {pattern: 'systemjs.config.js', included: false, watched: false},
       {pattern: 'systemjs.config.extras.js', included: false, watched: false},
-      'karma.ie.shims.js',
 
       { pattern: 'dist/*.*', included: false, watched: true },
       { pattern: 'dist/components/**/*.js', included: false, watched: true },

@@ -17,10 +17,9 @@ install:
 - ./node_modules/.bin/grunt build
 
 script:
-# TODO: When it can be run reliably from travis, add MICROSOFTEDGE_V13.10586
 - karma start karma.sauce.conf.js --browsers FIREFOX_V40,FIREFOX_V35
-- karma start karma.sauce.conf.js --browsers CHROME_VBETA,CHROME_V39
-- karma start karma.sauce.conf.js --browsers ANDROID_V5.1,ANDROID_V4.4
+- karma start karma.sauce.conf.js --browsers CHROME_VBETA,CHROME_V50
+- karma start karma.sauce.conf.js --browsers ANDROID_V5.1
 after_script:
 - ./node_modules/.bin/grunt remapIstanbul
 - ./node_modules/.bin/coveralls < .coverage/lcov.info
