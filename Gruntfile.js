@@ -79,6 +79,9 @@ module.exports = function (grunt) {
       source: {options: {message: 'Source Compiled'}}
     },
     ts: {
+      options: {
+        compiler: './node_modules/.bin/tsc'
+      },
       source: {
         tsconfig: true
       }
@@ -246,6 +249,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('build-npm', ['build', 'build-npm-package', 'rewrite-source-maps']);
+
   grunt.registerTask('build-npm-package', function () {
     var fs = require('fs');
     var path = require('path');

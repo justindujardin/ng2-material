@@ -1,6 +1,8 @@
-import {Animate} from "../../core/util/animate";
-import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter} from "@angular/core";
-import {ViewportHelper} from "../../core/util/viewport";
+import {Animate} from '../../core/util/animate';
+import {ElementRef, ViewEncapsulation, Component, Input, Output, EventEmitter, NgModule} from '@angular/core';
+import {ViewportHelper} from '../../core/util/viewport';
+import {MATERIAL_BROWSER_PROVIDERS} from '../../index';
+import {MdServicesModule} from '../../core/util/util.module';
 
 /**
  * An overlay for content on the page.
@@ -151,4 +153,12 @@ export class MdBackdrop {
       endEvent.emit(this);
     });
   }
+}
+
+@NgModule({
+  declarations: [MdBackdrop],
+  exports: [MdBackdrop],
+  imports: [MdServicesModule]
+})
+export class MdBackdropModule {
 }

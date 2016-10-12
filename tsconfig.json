@@ -8,68 +8,33 @@
         "moduleResolution": "node",
         "noEmitOnError": true,
         "noImplicitAny": false,
-        "outDir": "dist/",
-        "rootDir": "src/",
+        "outDir": "dist",
+        "rootDir": "src",
         "sourceMap": true,
-        "target": "es5"
+        "target": "es5",
+        "lib": [
+            "es6",
+            "es2015",
+            "dom"
+        ],
+        "typeRoots": [
+            "./node_modules/@types"
+        ],
+        "types": [
+            "jasmine",
+            "hammerjs",
+            "node",
+            "core-js"
+        ]
     },
-    "filesGlob": [
+    "exclude": [
+        "node_modules",
+        "dist",
         "ng2-material.d.ts",
-        "src/**/*.ts"
+        "modules",
+        "typings",
+        "src/**/*_spec.ts",
+        "src/platform/testing/*.*"
     ],
-    "compileOnSave": true,
-    "files": [
-        "ng2-material.d.ts",
-        "src/components/backdrop/backdrop.ts",
-        "src/components/backdrop/backdrop_spec.ts",
-        "src/components/button/button.ts",
-        "src/components/button/button_spec.ts",
-        "src/components/card/card.ts",
-        "src/components/card/card_spec.ts",
-        "src/components/content/content.ts",
-        "src/components/content/content_spec.ts",
-        "src/components/data-table/data_table.ts",
-        "src/components/data-table/data_table_selectable_tr.ts",
-        "src/components/data-table/data_table_spec.ts",
-        "src/components/data-table/index.ts",
-        "src/components/dialog/dialog-actions.ts",
-        "src/components/dialog/dialog-portal.ts",
-        "src/components/dialog/dialog-title.ts",
-        "src/components/dialog/dialog.ts",
-        "src/components/dialog/dialog_spec.ts",
-        "src/components/dialog/index.ts",
-        "src/components/divider/divider.ts",
-        "src/components/divider/divider_spec.ts",
-        "src/components/form/messages.ts",
-        "src/components/form/messages_spec.ts",
-        "src/components/form/validators.ts",
-        "src/components/form/validators_spec.ts",
-        "src/components/icon/icon.ts",
-        "src/components/ink/ink.ts",
-        "src/components/ink/ink_spec.ts",
-        "src/components/list/list.ts",
-        "src/components/list/list_spec.ts",
-        "src/components/pagination/index.ts",
-        "src/components/pagination/pagination.ts",
-        "src/components/pagination/pagination_service.ts",
-        "src/components/pagination/pagination_spec.ts",
-        "src/components/peekaboo/peekaboo.ts",
-        "src/components/peekaboo/peekaboo_spec.ts",
-        "src/components/subheader/subheader.ts",
-        "src/components/subheader/subheader_spec.ts",
-        "src/components/switch/switch.ts",
-        "src/components/switch/switch_spec.ts",
-        "src/core/key_codes.ts",
-        "src/core/util/animate.ts",
-        "src/core/util/ink.ts",
-        "src/core/util/ink_spec.ts",
-        "src/core/util/media.ts",
-        "src/core/util/media_spec.ts",
-        "src/core/util/util.ts",
-        "src/core/util/viewport.ts",
-        "src/index.ts",
-        "src/platform/testing/bootstrap.ts",
-        "src/platform/testing/test_url_resolver.ts",
-        "src/platform/testing/util.ts"
-    ]
+    "compileOnSave": true
 }

@@ -1,4 +1,17 @@
-import {Component, Input, Output, EventEmitter, ContentChild, ContentChildren, QueryList, AfterContentInit, OnDestroy} from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ContentChild,
+  ContentChildren,
+  QueryList,
+  AfterContentInit,
+  OnDestroy,
+  NgModule
+} from '@angular/core';
+import {MdCheckboxModule} from "@angular/material";
+
 import 'rxjs/add/operator/share';
 import {MdDataTableHeaderSelectableRow, MdDataTableSelectableRow, ITableSelectableRowSelectionChange} from './data_table_selectable_tr';
 
@@ -16,7 +29,6 @@ export interface ITableSelectionChange {
 @Component({
   selector: 'md-data-table',
   template: `<ng-content></ng-content>`,
-  directives: [MdDataTableHeaderSelectableRow, MdDataTableSelectableRow],
   host: {
     '[class.md-data-table]': 'true',
     '[class.md-data-table-selectable]': 'selectable',
@@ -116,3 +128,17 @@ export class MdDataTable implements AfterContentInit, OnDestroy {
   }
 
 }
+
+const DATA_TABLE_DIRECTIVES = [
+   MdDataTable,
+   MdDataTableHeaderSelectableRow,
+   MdDataTableSelectableRow
+]
+@NgModule({
+ declarations: DATA_TABLE_DIRECTIVES,
+ exports: DATA_TABLE_DIRECTIVES,
+ imports: [
+   MdCheckboxModule
+ ]
+})
+export class MdDataTableModule {}

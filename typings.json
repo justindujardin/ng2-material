@@ -1,8 +1,5 @@
 {
   "globalDependencies": {
-    "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
-    "jasmine": "registry:dt/jasmine#2.2.0+20160412134438",
-    "hammerjs": "registry:dt/hammerjs#2.0.4+20160417130828",
-    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#48c1e3c1d6baefa4f1a126f188c27c4fefd36bff"
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654"
   }
 }

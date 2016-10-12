@@ -1,21 +1,22 @@
 ng2-material
 ---
 [![Build Status](https://travis-ci.org/justindujardin/ng2-material.svg?branch=master)](https://travis-ci.org/justindujardin/ng2-material)
-[![Coverage Status](https://coveralls.io/repos/justindujardin/ng2-material/badge.svg?branch=master&service=github)](https://coveralls.io/github/justindujardin/ng2-material?branch=master) 
 [![npm version](https://badge.fury.io/js/ng2-material.svg)](http://badge.fury.io/js/ng2-material) 
-[![Join the chat at https://gitter.im/justindujardin/ng2-material](https://badges.gitter.im/justindujardin/ng2-material.svg)](https://gitter.im/justindujardin/ng2-material?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/ng2material.svg)](https://saucelabs.com/u/ng2material)
 
-ng2-material is a set of components, built on top of [@angular2-material/core](https://github.com/angular/material2), and a site full of examples of how to use them. The site contains examples for community 
-developed components as well as the official material2 components.
+ng2-material is a set of components built on top of [@angular/material](https://github.com/angular/material2).
 
 Check out the [examples site](https://justindujardin.github.io/ng2-material/) for demos and instructions on getting started.
 
-## Getting Help
+**IMPORTANT**: This project is provided as-is, and no commercial level of support is given to it. If you find an issue and would like to submit a fix, please open a Pull Request with your suggested changes.
 
-**IMPORTANT**: This project is provided as-is, and no commercial level of support is given to it. If you need perfect compatbility with IE or great getting started materials for your specific use-case, you may be better off waiting for an official release of material2.
+**ALSO IMPORTANT** If you are new to Angular2 and in search of a set of material components, please visit [@angular/material](https://github.com/angular/material2) and come back here when you need a component not offered by the official package.
 
-That being said, if something is wrong with your installation or with the existing examples or materials, please try to provide a Plunkr example reproducing your problem, and file an issue.
+## Testing
+
+ng2-material components are checked against 
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/ng2material.svg)](https://saucelabs.com/u/ng2material)
+
+The tests exercise roughly [![Coverage Status](https://coveralls.io/repos/justindujardin/ng2-material/badge.svg?branch=master&service=github)](https://coveralls.io/github/justindujardin/ng2-material?branch=master) of the code on each browser 
 
 ## Credits 
 

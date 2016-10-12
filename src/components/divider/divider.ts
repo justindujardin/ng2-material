@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from "@angular/core";
+import {NgModule, Component, ViewEncapsulation} from "@angular/core";
 
 /**
  * @name mdDivider
@@ -20,5 +20,11 @@ import {Component, ViewEncapsulation} from "@angular/core";
   template: '',
   encapsulation: ViewEncapsulation.None
 })
-export class MdDivider {
+class MdDivider {
 }
+
+@NgModule({
+  declarations: [MdDivider],
+  exports: [MdDivider]
+})
+export class MdDividerModule {}

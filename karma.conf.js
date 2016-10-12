@@ -17,38 +17,39 @@ module.exports = function (config) {
     frameworks: ['jasmine'],
 
     files: [
-      // Polyfills.
-      'node_modules/core-js/client/shim.min.js',
-
-      // System.js for module loading
-      // Polyfills.
-      'node_modules/core-js/client/shim.min.js',
-
       // System.js for module loading
       'node_modules/systemjs/dist/system.src.js',
 
-      // Zone.js dependencies
+      // Polyfills
+      'node_modules/core-js/client/shim.js',
+      'node_modules/reflect-metadata/Reflect.js',
+
+      // zone.js
       'node_modules/zone.js/dist/zone.js',
+      'node_modules/zone.js/dist/long-stack-trace-zone.js',
+      'node_modules/zone.js/dist/proxy.js',
+      'node_modules/zone.js/dist/sync-test.js',
       'node_modules/zone.js/dist/jasmine-patch.js',
       'node_modules/zone.js/dist/async-test.js',
       'node_modules/zone.js/dist/fake-async-test.js',
 
-      // RxJs.
+      // RxJs
       { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
       { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
 
-      // paths loaded via module imports
+      // Paths loaded via module imports:
       // Angular itself
-      { pattern: 'node_modules/@angular/**/*.js', included: false, watched: true },
-      { pattern: 'node_modules/@angular2-material/**/*.js', included: false, watched: false },
-      'karma.ie.shims.js',
-      "config.karma.js",
+      {pattern: 'node_modules/@angular/**/*.js', included: false, watched: false},
+      {pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false},
+
+      {pattern: 'systemjs.config.js', included: false, watched: false},
+      {pattern: 'systemjs.config.extras.js', included: false, watched: false},
+
       { pattern: 'dist/*.*', included: false, watched: true },
       { pattern: 'dist/components/**/*.js', included: false, watched: true },
       { pattern: 'dist/core/**/*.js', included: false, watched: true },
-      { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: false, watched: false }, // PhantomJS2 (and possibly others) might require it
       { pattern: 'dist/platform/**/*.js', included: false, watched: true },
-      "karma.main.js"
+      "karma-test-shim.js"
     ],
     exclude: [
       // Vendor packages might include spec files. We don't want to use those.
