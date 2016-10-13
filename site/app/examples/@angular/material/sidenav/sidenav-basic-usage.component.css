@@ -1,0 +1,8 @@
+
+md-sidenav[mode=side] {
+  background-color: rgba(10, 200, 10, 0.8);
+}
+
+md-sidenav[align=end] {
+  background-color: rgba(200, 10, 10, 0.8);
+}

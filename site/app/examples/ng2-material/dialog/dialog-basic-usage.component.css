@@ -1,0 +1,12 @@
+#popupContainer {
+  position: relative; }
+
+.footer {
+  width: 100%;
+  text-align: center; }
+
+.footer, .footer > code {
+  font-size: 0.8em;
+  margin-top: 50px; }
+
+/*# sourceMappingURL=dialog-basic-usage.component.css.map */

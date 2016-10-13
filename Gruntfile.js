@@ -1,9 +1,13 @@
+var _ = require('underscore');
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     sourceRoot: 'src',
+    // The root path for the example site source
+    siteRoot: 'site',
     outPath: 'dist',
-    sitePath: 'site',
+    // The path to build a static output site into
+    sitePath: '.build/site/',
     clean: [
       "dist/",
       "<%- outPath %>/",
@@ -25,14 +29,6 @@ module.exports = function (grunt) {
           {expand: true, cwd: 'public/', src: ['font/*.*'], dest: '<%- outPath %>/'}
         ]
       },
-      site_deps_update: {
-        files: [{
-          expand: true,
-          cwd: 'dist/',
-          src: '**',
-          dest: 'modules/site/node_modules/ng2-material/'
-        }]
-      },
       // Examples site all nicely packaged up for uploading to an FTP.
       site: {
         files: [
@@ -47,8 +43,7 @@ module.exports = function (grunt) {
               './node_modules/highlightjs/highlight.pack.js',
               './node_modules/es6-shim/es6-*.js',
               './node_modules/highlightjs/styles/*.css',
-              './node_modules/rxjs/bundles/Rx.js',
-              './node_modules/angular2/typings/**/*'
+              './node_modules/rxjs/bundles/Rx.js'
             ],
             dest: '<%- sitePath %>/<%- pkg.version %>/'
           },
@@ -69,13 +64,52 @@ module.exports = function (grunt) {
           {expand: true, src: 'public/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
           {expand: true, src: 'example/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
         ]
+      },
+      siteResources: {
+        files: [
+          {
+            expand: true,
+            src: [
+              "./site/**/*.css",
+              "./site/**/*.html"
+            ],
+            dest: 'public/'
+          }
+        ]
+      },
+
+      // node_modules to public path
+      vendor: {
+        files: [
+          {
+            expand: true,
+            src: [
+              "./node_modules/core-js/client/shim.min.js",
+              "./node_modules/zone.js/dist/zone.js",
+              "./node_modules/reflect-metadata/Reflect.js",
+              "./node_modules/systemjs/dist/system.src.js",
+              './node_modules/@angular/**/bundles/*',
+              './node_modules/highlightjs/highlight.pack.js',
+              './node_modules/highlightjs/styles/*.css',
+              './node_modules/rxjs/**/*.js'
+            ],
+            dest: 'public/vendor/'
+          },
+          {
+            expand: true,
+            cwd: '<%- outPath %>/',
+            src: ['**/*'],
+            dest: 'public/vendor/node_modules/ng2-material/'
+          }
+        ]
       }
     },
     notify: {
-      options: {title: 'Material for Angular2'},
+      options: {title: 'ng2-material'},
       bundle: {options: {message: 'Output Bundle Built'}},
       meta: {options: {message: 'Site Index Compiled'}},
       styles: {options: {message: 'Styles Compiled'}},
+      site: {options: {message: 'Site Compiled'}},
       source: {options: {message: 'Source Compiled'}}
     },
     ts: {
@@ -84,21 +118,14 @@ module.exports = function (grunt) {
       },
       source: {
         tsconfig: true
+      },
+      site: {
+        tsconfig: './tsconfig.site.json'
       }
     },
     sass: {
       dist: {
         files: [
-          {
-            expand: true,
-            cwd: './',
-            dest: '.',
-            ext: '.css',
-            src: [
-              "public/font/*.scss",
-              "<%- sourceRoot %>/all.scss"
-            ]
-          },
           {
             'dist/ng2-material.css': ['<%- sourceRoot %>/all.scss']
           }
@@ -119,7 +146,8 @@ module.exports = function (grunt) {
     connect: {
       main: {
         options: {
-          port: 9001
+          port: 9001,
+          base: 'public'
         }
       }
     },
@@ -129,12 +157,11 @@ module.exports = function (grunt) {
           '<%- sourceRoot %>/**/*.scss',
           '<%- sourceRoot %>/*.scss'
         ],
-        tasks: ['sass', 'postcss:dist', 'notify:styles']
+        tasks: ['sass:dist', 'postcss:dist', 'notify:styles']
       },
       meta: {
         files: [
-          'modules/site/src/**/*.*',
-          'src/**/*.md',
+          '/site/app/**/*.*',
           'package.json'
         ],
         tasks: ['site-meta', 'build-npm-package', 'notify:meta']
@@ -144,6 +171,19 @@ module.exports = function (grunt) {
           '<%- sourceRoot %>/**/*.ts'
         ],
         tasks: ['ts:source', 'rewrite-source-maps', 'notify:source']
+      },
+      tsSite: {
+        files: [
+          '<%- siteRoot %>/**/*.ts'
+        ],
+        tasks: ['ts:site', 'rewrite-source-maps', 'notify:site']
+      },
+      siteResources: {
+        files: [
+          '<%- siteRoot %>/**/*.html',
+          '<%- siteRoot %>/**/*.css'
+        ],
+        tasks: ['copy:siteResources', 'notify:site']
       },
       karma: {
         files: [
@@ -222,12 +262,11 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ts');
   grunt.loadNpmTasks('remap-istanbul');
-  grunt.registerTask('default', ['ts', 'sass', 'postcss', 'site-meta', 'rewrite-source-maps']);
+  grunt.registerTask('default', ['ts', 'sass', 'postcss', 'site-meta', 'rewrite-source-maps', 'copy']);
   grunt.registerTask('develop', ['default', 'watch']);
   grunt.registerTask('serve', ['default', 'connect', 'watch']);
   grunt.registerTask('cover', ['karma:cover', 'remapIstanbul', 'site-meta']);
-  grunt.registerTask('site', ['build', 'cover', 'copy:site']);
-  grunt.registerTask('build', ['default', 'copy:npm', 'copy:site_deps_update']);
+
   grunt.registerTask('tddTasks', ['ts', 'continue:on', 'karma']);
   grunt.registerTask('tdd', ['tddTasks', 'watch']);
 
@@ -238,7 +277,7 @@ module.exports = function (grunt) {
     type = type || 'patch';
     grunt.task.run([
       'clean',
-      'build',
+      'default',
       'npm-contributors',
       'bump:' + type + ':bump-only',
       'conventionalChangelog',
@@ -248,7 +287,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('build-npm', ['build', 'build-npm-package', 'rewrite-source-maps']);
+  grunt.registerTask('build-npm', ['build-npm-package', 'rewrite-source-maps']);
 
   grunt.registerTask('build-npm-package', function () {
     var fs = require('fs');
@@ -281,7 +320,7 @@ module.exports = function (grunt) {
     glob("dist/**/*.js.map", function (err, files) {
       files.forEach(function rewriteSourceMap(sourceMapFileName) {
         const data = fs.readFileSync(sourceMapFileName).toString();
-        fs.writeFileSync(sourceMapFileName,data.replace("../src/", "src/"));
+        fs.writeFileSync(sourceMapFileName, data.replace("../src/", "src/"));
       });
       done();
     });
@@ -326,71 +365,14 @@ module.exports = function (grunt) {
       smartypants: false
     });
 
-    function ifError(err) {
-      if (err) {
-        return grunt.fatal(err.message.replace(/\n$/, '.'));
-      }
+    // Replace relative import statements with "ng2-material" based paths
+    function patchImports(textContent) {
+      // Any relative match to src/[child]/
+      const regex = /(\.\.\/)+src\/[a-z\-]+\//g;
+      // ../../src/components/data-table -> ng2-material/components/data-table
+      // ../../../src/core/util/ink -> ng2-material/core/util/ink
+      return textContent.replace(regex, 'ng2-material/');
     }
-
-    // npm.load({loaded: false}, function (err) {
-    //   ifError(err);
-    //   var file = fs.readFileSync(path.join(__dirname, 'package.json')).toString();
-    //   var rendered = JSON.parse(file);
-    //   var depNames = Object.keys(rendered.dependencies);
-    //   console.log('--> Getting version information for (' + depNames.length + ') package dependencies');
-    //   depNames.forEach(function (packageName) {
-    //     const version = rendered.dependencies[packageName];
-    //     tasks.push(function getComponentVersions() {
-    //       var save = process.stdout.write;
-    //       // NPM will write all of the stuff we query to the console
-    //       // so go ahead and suppress the duplicate output.
-    //       process.stdout.write = function (msg) {
-    //       };
-    //       // catch errors
-    //       npm.commands.info([packageName], function (err, data) {
-    //         ifError(err);
-    //         process.stdout.write = save;
-    //         console.log('    ' + packageName + ' (' + version + ') OK');
-    //         // console.log(data);
-    //         next();
-    //       });
-    //     });
-    //   });
-    //   // Once we've queried the dependent components, kick off the tasks
-    //   next();
-    // });
-
-    tasks.push(function buildCoverage() {
-      // Parse Lcov report and generate `coverage.json` file for site.
-      var parse = require('lcov-parse');
-      parse('.coverage/lcov.info', function (err, data) {
-        if (err) {
-          grunt.log.ok('skipping code coverage because lcov.info is missing');
-          return next();
-        }
-        // Obj has "found" and "hit"
-        function percent(obj) {
-          if (obj.found === 0) {
-            return 100;
-          }
-          return parseFloat((obj.hit / obj.found * 100.0).toPrecision(2), 10);
-        }
-
-        var outMeta = data.map(function (d) {
-          delete d.lines.details;
-          delete d.functions.details;
-          delete d.branches.details;
-          delete d.title;
-          d.lines.percent = percent(d.lines);
-          d.functions.percent = percent(d.functions);
-          d.branches.percent = percent(d.branches);
-          return d;
-        });
-        writeJson('modules/site/public/coverage.json', outMeta);
-        next();
-      });
-    });
-
 
     // Copy Readme for official components BEFORE rendering readme markdown files.
     tasks.push(function buildComponentDocumentation() {
@@ -406,7 +388,7 @@ module.exports = function (grunt) {
     });
 
     tasks.push(function buildReadmeFiles() {
-      glob("modules/site/src/app/examples/**/readme.md", function (err, files) {
+      glob("site/app/examples/**/readme.md", function (err, files) {
         files.forEach(function parseDemo(readmeFile) {
           var component = readableString(path.basename(path.dirname(readmeFile)));
           meta[component] = meta[component] || {};
@@ -426,12 +408,12 @@ module.exports = function (grunt) {
       Object.keys(pkg.dependencies).forEach(function (depKey) {
         data[depKey] = pkg.dependencies[depKey];
       });
-      writeJson('modules/site/public/version.json', data);
+      writeJson('public/version.json', data);
       next();
     });
 
     tasks.push(function buildExamples() {
-      const pathPrefix = 'modules/site/src/';
+      const pathPrefix = 'site/';
       glob(pathPrefix + "app/examples/**/*.html", function (err, files) {
         files.forEach(function parseDemo(templateFile) {
           var name = path.basename(templateFile, '.html');
@@ -440,12 +422,12 @@ module.exports = function (grunt) {
           };
           var readmeFile = path.join(path.dirname(templateFile), name + '.md');
           var sourceFile = path.join(path.dirname(templateFile), name + '.ts');
-          var stylesFile = path.join(path.dirname(templateFile), name + '.scss');
+          var stylesFile = path.join(path.dirname(templateFile), name + '.css');
           if (fileExists(stylesFile)) {
-            result.styles = fs.readFileSync(stylesFile).toString();
+            result.styles = patchImports(fs.readFileSync(stylesFile).toString());
           }
           if (fileExists(sourceFile)) {
-            result.source = fs.readFileSync(sourceFile).toString();
+            result.source = patchImports(fs.readFileSync(sourceFile).toString());
           }
           if (fileExists(readmeFile)) {
             result.readme = marked(fs.readFileSync(readmeFile).toString());
@@ -469,7 +451,7 @@ module.exports = function (grunt) {
             }
             meta[component].files.push(sourceFile);
           });
-          writeJson('modules/site/public/meta.json', prepareMeta());
+          writeJson('public/meta.json', prepareMeta());
           next();
         });
       });
@@ -494,7 +476,7 @@ module.exports = function (grunt) {
         fs.writeFileSync(to, JSON.stringify(data, null, 2));
       }
       catch (e) {
-        grunt.log.fatal('failed to write (' + to + ') with error: ' + e);
+        grunt.log.error('failed to write (' + to + ') with error: ' + e);
 
       }
     }

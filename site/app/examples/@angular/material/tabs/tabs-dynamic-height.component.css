@@ -1,0 +1,12 @@
+tabs-dynamic-height {
+  background-color: transparent !important; }
+  tabs-dynamic-height md-tabs {
+    background: #f6f6f6;
+    border: 1px solid #e1e1e1; }
+    tabs-dynamic-height md-tabs md-tabs-wrapper {
+      background: white; }
+    tabs-dynamic-height md-tabs md-content {
+      background-color: transparent; }
+  tabs-dynamic-height h1:first-child {
+    margin-top: 0; }
+

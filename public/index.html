@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ng2-material</title>
+  <base href="./">
+  <link rel="icon" type="image/x-icon" href="site/favicon.icon.ico">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="vendor/node_modules/ng2-material/ng2-material.css">
+  <link rel="stylesheet" type="text/css" href="vendor/node_modules/ng2-material/font/font.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style type="text/css">
+    html, body {
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-touch-callout: none;
+      min-height: 100%;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+    }
+
+    app {
+      box-sizing: border-box;
+      display: block;
+      padding: 115px 16px 0;
+      background-color: #009688;
+      height: 256px;
+      min-height: 256px;
+      max-height: 256px;
+    }
+
+    app > .hero > h1 {
+      margin: 0 auto;
+      width: 80%;
+      color: white;
+      font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+      font-size: 24px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+    @media (min-width: 600px) {
+      app > .hero > h1 {
+        font-size: 56px;
+      }
+    }
+  </style>
+
+  <!-- Service worker support is disabled by default.
+       Install the worker script and uncomment to enable.
+       Only enable service workers in production.
+  <script type="text/javascript">
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/worker.js').catch(function(err) {
+        console.log('Error installing service worker: ', err);
+      });
+    }
+  </script>
+  -->
+</head>
+<body>
+<app>
+  <div class="hero"><h1>ng2-material…</h1></div>
+</app>
+
+
+
+<!-- Polyfill(s) for older browsers -->
+<script src="vendor/node_modules/core-js/client/shim.min.js"></script>
+
+<script src="vendor/node_modules/zone.js/dist/zone.js"></script>
+<script src="vendor/node_modules/reflect-metadata/Reflect.js"></script>
+<script src="vendor/node_modules/systemjs/dist/system.src.js"></script>
+
+<script src="system-config.js"></script>
+<script src="vendor/node_modules/highlightjs/highlight.pack.js"></script>
+<script>
+  System.import('site/main.browser.js').catch(function(err){ console.error(err); });
+</script>
+</body>
+</html>

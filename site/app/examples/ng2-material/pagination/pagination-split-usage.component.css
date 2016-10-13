@@ -1,0 +1,56 @@
+pagination-split-usage .page-container {
+  position: relative;
+  align-items: stretch;
+}
+
+pagination-split-usage md-card {
+  margin: 0;
+}
+
+pagination-split-usage md-card md-card-content {
+  padding: 30px 30px 40px;
+}
+
+pagination-split-usage .controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+pagination-split-usage .controls .md-pagination-control {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 35px;
+  height: 35px;
+  vertical-align: middle;
+}
+
+pagination-split-usage .controls .md-pagination-control-previous {
+  left: 0;
+}
+
+pagination-split-usage .controls .md-pagination-control-next {
+  right: 0;
+}
+
+pagination-split-usage .controls .material-icons {
+  width: 35px;
+  height: 35px;
+  background: #FFF;
+}
+
+pagination-split-usage .md-pagination-range {
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  left: 0;
+}
+
+pagination-split-usage .page-number {
+  padding: 0 10px;
+  font-weight: bold;
+}

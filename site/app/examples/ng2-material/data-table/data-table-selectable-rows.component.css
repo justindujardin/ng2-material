@@ -1,0 +1,10 @@
+md-toolbar {
+  background-color: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.87);
+}
+
+md-toolbar .md-toolbar-tools.selection {
+  background-color: #f3e5f5;
+  color: #4a148c;
+}

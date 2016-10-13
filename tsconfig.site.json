@@ -8,8 +8,7 @@
         "moduleResolution": "node",
         "noEmitOnError": true,
         "noImplicitAny": false,
-        "outDir": "dist",
-        "rootDir": "src",
+        "outDir": "public",
         "sourceMap": true,
         "target": "es5",
         "lib": [
@@ -29,14 +28,12 @@
     },
     "exclude": [
         "node_modules",
-        "dist",
-        "ng2-material.d.ts",
-        "modules",
-        "site",
-        "public",
         ".build",
-        "src/**/*_spec.ts",
-        "src/platform/testing/*.*"
+        "dist",
+        "public",
+        "site/.baseDir.ts",
+        "ng2-material.d.ts",
+        "src"
     ],
     "compileOnSave": true
 }
