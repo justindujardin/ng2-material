@@ -1,0 +1,73 @@
+@import '~@angular/material/core/style/variables';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/all-theme';
+@import '../theme';
+
+docs-example {
+  display: block;
+
+  md-toolbar.demo-toolbar {
+    border-radius: 3px 3px 0 0;
+    box-shadow: 0 1px rgba(255, 255, 255, 0.1);
+    .md-icon-button {
+      margin-right: 0;
+    }
+    .material-icons {
+      color: white;
+    }
+  }
+
+  md-tab-group {
+    .md-tab-label {
+      color: md-color($md-light-theme-foreground, text);
+      text-transform: uppercase;
+      &.md-active {
+        font-weight: 400;
+      }
+    }
+    .md-tab-header {
+      background-color: md-color($primary, 500);
+      border-bottom: 0;
+      md-ink-bar {
+        background-color: md-color($md-light-theme-background, app-bar);
+      }
+    }
+  }
+
+  .demo-container {
+    border-radius: 4px;
+    margin-bottom: 16px;
+    -webkit-transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
+    transition: 0.02s padding cubic-bezier(0.35, 0, 0.25, 1);
+    position: relative;
+    padding-bottom: 0;
+    background-color: white;
+    //background-color: md-color($md-background, 50);
+  }
+
+  .demo-source-container {
+    overflow: hidden;
+    overflow-y: auto;
+  }
+
+  .demo-content {
+    position: relative;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .demo-content > div[layout-fill] {
+    min-height: 448px;
+  }
+
+  .demo-source-container {
+    display: block;
+    height: 400px;
+  }
+
+}

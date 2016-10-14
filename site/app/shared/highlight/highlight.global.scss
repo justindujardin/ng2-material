@@ -1,0 +1,9 @@
+@import "highlight";
+
+docs-highlight {
+  @extend .highlight-block;
+  pre {
+    @extend .higlight-pre;
+  }
+}
+

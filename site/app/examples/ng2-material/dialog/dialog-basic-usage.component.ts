@@ -1,5 +1,7 @@
-import {Component} from '@angular/core';
-import {OVERLAY_PROVIDERS} from '@angular/material';
+import {Component, NgModule} from '@angular/core';
+import {OVERLAY_PROVIDERS, MaterialModule} from '@angular/material';
+import {CommonModule} from '@angular/common';
+import {Ng2MaterialModule} from '../../../../../src/index';
 
 @Component({
   moduleId: module.id,
@@ -26,4 +28,16 @@ export class DialogBasicUsageComponent {
       this.status = 'Look for something else.';
     }
   }
+}
+
+@NgModule({
+  declarations: [DialogBasicUsageComponent],
+  exports: [DialogBasicUsageComponent],
+  imports: [
+    CommonModule,
+    Ng2MaterialModule,
+    MaterialModule
+  ]
+})
+export class DialogBasicUsageModule {
 }

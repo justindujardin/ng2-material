@@ -6,6 +6,7 @@
   <base href="./">
   <link rel="icon" type="image/x-icon" href="site/favicon.icon.ico">
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="site/styles.css">
   <link rel="stylesheet" type="text/css" href="vendor/node_modules/ng2-material/ng2-material.css">
   <link rel="stylesheet" type="text/css" href="vendor/node_modules/ng2-material/font/font.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,11 +22,11 @@
       margin: 0;
     }
 
-    app {
+    app.loading {
       box-sizing: border-box;
       display: block;
       padding: 115px 16px 0;
-      background-color: #009688;
+      background-color: #3f51b5;
       height: 256px;
       min-height: 256px;
       max-height: 256px;
@@ -60,7 +61,7 @@
   -->
 </head>
 <body>
-<app>
+<app class="loading">
   <div class="hero"><h1>ng2-material…</h1></div>
 </app>
 

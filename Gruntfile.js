@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var path = require('path');
 module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -78,6 +78,16 @@ module.exports = function (grunt) {
         ]
       },
 
+      // Copy dist/ folder into public node_modules path
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%- outPath %>/',
+          src: ['**/*'],
+          dest: 'public/vendor/node_modules/ng2-material/'
+        }]
+      },
+
       // node_modules to public path
       vendor: {
         files: [
@@ -89,17 +99,12 @@ module.exports = function (grunt) {
               "./node_modules/reflect-metadata/Reflect.js",
               "./node_modules/systemjs/dist/system.src.js",
               './node_modules/@angular/**/bundles/*',
+              './node_modules/@angular/**/*.umd.js',
               './node_modules/highlightjs/highlight.pack.js',
               './node_modules/highlightjs/styles/*.css',
               './node_modules/rxjs/**/*.js'
             ],
             dest: 'public/vendor/'
-          },
-          {
-            expand: true,
-            cwd: '<%- outPath %>/',
-            src: ['**/*'],
-            dest: 'public/vendor/node_modules/ng2-material/'
           }
         ]
       }
@@ -124,10 +129,32 @@ module.exports = function (grunt) {
       }
     },
     sass: {
+      options: {
+        // This importer does two things:
+        //
+        // 1. Replace "~" with "node_modules" to support "@import '~ng2-material/all';" style imports
+        // 2. Add scss extension to files that have no extension. This works around: https://github.com/sass/node-sass/issues/1222
+        importer: function importer(url, prev, done) {
+          if (url[0] === '~') {
+            url = path.resolve('node_modules', url.substr(1));
+          }
+          if (path.extname(url) === '') {
+            url = url + '.scss';
+          }
+          return {file: url};
+        }
+      },
       dist: {
         files: [
           {
-            'dist/ng2-material.css': ['<%- sourceRoot %>/all.scss']
+            'dist/ng2-material.css': '<%- sourceRoot %>/all.scss'
+          }
+        ]
+      },
+      siteGlobal: {
+        files: [
+          {
+            'public/site/styles.css': '<%- siteRoot %>/app/app.global.scss'
           }
         ]
       }
@@ -141,6 +168,9 @@ module.exports = function (grunt) {
       },
       dist: {
         src: ["dist/*.css"]
+      },
+      siteGlobal: {
+        src: ["public/site/app/app.global.css"]
       }
     },
     connect: {
@@ -159,6 +189,12 @@ module.exports = function (grunt) {
         ],
         tasks: ['sass:dist', 'postcss:dist', 'notify:styles']
       },
+      siteGlobal: {
+        files: [
+          '<%- siteRoot %>/**/*.global.scss'
+        ],
+        tasks: ['sass:siteGlobal', 'postcss:siteGlobal', 'notify:styles']
+      },
       meta: {
         files: [
           '/site/app/**/*.*',
@@ -170,7 +206,7 @@ module.exports = function (grunt) {
         files: [
           '<%- sourceRoot %>/**/*.ts'
         ],
-        tasks: ['ts:source', 'rewrite-source-maps', 'notify:source']
+        tasks: ['ts:source', 'rewrite-source-maps', 'copy:dist', 'notify:source']
       },
       tsSite: {
         files: [

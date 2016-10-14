@@ -9,7 +9,7 @@
         "noEmitOnError": true,
         "noImplicitAny": false,
         "outDir": "public",
-        "sourceMap": true,
+        "sourceMap": false,
         "target": "es5",
         "lib": [
             "es6",

@@ -1,0 +1,20 @@
+<div class="inset">
+  <md-slide-toggle [(ngModel)]="data.cb1" aria-label="Switch 1">
+    Switch 1: {{ data.cb1 }}
+  </md-slide-toggle>
+  <md-slide-toggle [(checked)]="data.cb2" aria-label="Switch 2" ng-true-value="'yup'" ng-false-value="'nope'" class="md-warn">
+    Switch 2 (md-warn): {{ data.cb2 }}
+  </md-slide-toggle>
+  <md-slide-toggle disabled="true" aria-label="Disabled switch" [(checked)]="disabledModel">
+    Switch (Disabled)
+  </md-slide-toggle>
+  <md-slide-toggle disabled="true" aria-label="Disabled active switch" [(checked)]="data.cb4">
+    Switch (Disabled, Active)
+  </md-slide-toggle>
+  <md-slide-toggle class="md-primary" md-no-ink aria-label="Switch No Ink" [(checked)]="data.cb5">
+    Switch (md-primary): No Ink
+  </md-slide-toggle>
+  <md-slide-toggle [checked]="data.cb6" aria-label="Switch 6" (change)="onChange($event)">
+    Switch 6 message: {{ message }}
+  </md-slide-toggle>
+</div>

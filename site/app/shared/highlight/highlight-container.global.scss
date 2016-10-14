@@ -1,0 +1,26 @@
+@import "highlight";
+@import '../theme';
+
+docs-highlight-container {
+  pre {
+    @extend .highlight-block;
+    min-height: 0;
+    @extend .higlight-pre;
+    > code.highlight {
+      margin-bottom: 0 !important;
+      font-size: 0.9em;
+      border: 1px solid lightgrey;
+    }
+
+  }
+
+  h3 {
+    color: md-color($md-light-theme-foreground, text);
+  }
+  h4 {
+    color: md-color($md-light-theme-foreground, secondary-text);
+    margin-bottom: 0.5em;
+  }
+
+}
+

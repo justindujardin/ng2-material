@@ -1,0 +1,204 @@
+@import "shared/styles";
+
+@import './shared/example/example.global';
+@import './shared/footer/footer.global';
+@import './shared/highlight/highlight-container.global';
+@import './shared/highlight/highlight.global';
+
+app {
+  display: block;
+
+  > md-sidenav-layout {
+    md-sidenav {
+      width: $app-sidenav-width;
+    }
+    .md-sidenav-content {
+      width: 100%;
+      md-content {
+        overflow-y: hidden;
+      }
+    }
+  }
+
+  main {
+    background-color: whitesmoke;
+    md-content {
+      margin-left: auto;
+      margin-right: auto;
+      overflow: hidden;
+    }
+  }
+  .app-menu {
+    border-right: 1px solid md-color($md-light-theme-foreground, divider);
+    md-list-item {
+      font-size: $subheader-font-size;
+      font-weight: $subheader-font-weight;
+      cursor: pointer;
+      will-change: color;
+      transition: color $swift-ease-in-duration $swift-ease-in-timing-function;
+      &.md-active {
+        color: md-color($primary, 500);
+      }
+    }
+    md-toolbar {
+      color: md-color($md-light-theme-foreground, secondary-text);
+      border-bottom: 1px solid md-color($md-light-theme-foreground, divider);
+      h3 {
+        font-weight: 500;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .examples {
+    background-color: transparent;
+    width: 800px;
+    @media screen and (min-width: $layout-breakpoint-lg - 1) {
+      width: $app-content-lg;
+    }
+    @media screen and (max-width: $layout-breakpoint-md) {
+      width: $app-content-md;
+    }
+    @media screen and (max-width: $layout-breakpoint-sm) {
+      width: $app-content-sm;
+    }
+  }
+
+  .fixed-toolbar, .shadow-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-index-drawer;
+    width: auto;
+    transition: opacity 0.1s ease-in;
+    will-change: opacity;
+    opacity: 1;
+    &.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .md-caption {
+      text-decoration: none;
+      color: md-color($primary, 50);
+    }
+    .verbose-title {
+      @media screen and (max-width: $layout-breakpoint-sm) {
+        display: none;
+      }
+    }
+  }
+
+  md-toolbar.hero {
+    @include md-hero-toolbar();
+    padding: 115px 16px 0;
+    h1 {
+      color: #fff;
+      font-size: 56px;
+      font-weight: 400;
+      line-height: 1.5;
+      margin: 0 auto;
+      overflow: visible;
+      width: 1160px;
+      white-space: nowrap;
+
+    }
+    @media screen and (min-width: $layout-breakpoint-md + 1) {
+      h1 {
+        width: $app-content-lg - 32px;
+      }
+    }
+    @media screen and (max-width: $layout-breakpoint-md) {
+      h1 {
+        width: $app-content-md - 32px;
+      }
+    }
+    @media screen and (max-width: $layout-breakpoint-sm) {
+      height: 128px;
+      padding-top: 72px;
+      @include md-tall-toolbar();
+      h1 {
+        font-size: $title-font-size-base;
+        width: $app-content-sm - 80px;
+        margin-left: 0;
+      }
+    }
+  }
+
+  md-content {
+    > h1 {
+      margin-top: rem(6);
+      margin-bottom: rem(6);
+      font-weight: 300;
+      color: md-color($primary, 900);
+    }
+    > md-divider {
+      margin-top: rem(6);
+    }
+  }
+
+  .seed-title {
+    padding-top: 80px;
+  }
+  .seed-intro {
+    highlight {
+      border-radius: 2px;
+      margin: $baseline-grid * 4 0;
+    }
+  }
+
+  .examples {
+    padding: 80px $baseline-grid;
+    min-height: 640px;
+
+    .examples-title {
+      color: md-color($primary);
+      font-size: rem(3.4);
+      font-weight: 400;
+      line-height: rem(4);
+      margin-bottom: rem(4);
+    }
+
+    .examples-intro {
+      font-size: rem(2);
+      line-height: rem(3.2);
+      margin-bottom: 0;
+      padding: 0 0 40px 0;
+      a {
+        text-decoration: none;
+        color: md-color($primary);
+      }
+    }
+    .heading-list-toc {
+      border-left: 5px solid md-color($primary);
+      padding-left: 20px;
+      h1 {
+        margin: 0;
+        font-size: rem(1.5);
+        line-height: rem(1.6);
+        padding-bottom: 12px;
+        font-weight: 400;
+        color: #757575
+      }
+
+      ul {
+        list-style: none;
+        margin-top: 0;
+        padding-left: 0
+      }
+
+      li {
+        font-size: 20px;
+        line-height: 40px;
+        a {
+          text-decoration: none;
+          color: md-color($primary);
+        }
+        &:last-child {
+          line-height: 20px;
+          padding-top: 10px
+        }
+      }
+    }
+  }
+}
