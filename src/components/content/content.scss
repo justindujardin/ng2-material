@@ -1,7 +1,6 @@
-@import "../../core/style/variables";
-@import "../../core/style/shadows";
-@import "../../core/style/default-theme";
-
+@import '~@angular/material/core/style/variables';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
 md-content {
 
   display: block;
@@ -32,8 +31,8 @@ md-content {
 // Theme
 
 md-content {
-  color: md-color($md-foreground, text);
-  background-color: md-color($md-background, A100);
+  color: md-color($md-light-theme-foreground, text);
+  background-color: md-color($md-light-theme-background, background);
 }
 
 

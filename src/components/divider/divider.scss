@@ -1,6 +1,7 @@
-@import "../../core/style/variables";
-@import "../../core/style/shadows";
-@import "../../core/style/default-theme";
+@import '~@angular/material/core/style/variables';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
+@import '../../core/style/layout';
 
 md-divider {
   display: block;
@@ -25,11 +26,11 @@ md-divider {
 // Theme
 
 md-divider {
-  border-top-color: md-color($md-foreground, divider);
+  border-top-color: md-color($md-light-theme-foreground, divider);
 }
 
 .layout-row {
   & > md-divider {
-    border-right-color: md-color($md-foreground, divider);
+    border-right-color: md-color($md-light-theme-foreground, divider);
   }
 }

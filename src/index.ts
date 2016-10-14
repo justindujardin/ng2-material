@@ -95,3 +95,6 @@ export class Ng2MaterialModule {
     }
   }
 }
+
+
+export default Ng2MaterialModule;

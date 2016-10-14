@@ -1,5 +1,6 @@
-@import "../../core/style/variables";
-@import "../../core/style/default-theme";
+@import '~@angular/material/core/style/variables';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
 
 $pagination-padding: rem(1.4) !default;
 $pagination-min-height: 28px !default;
@@ -24,7 +25,7 @@ md-pagination, .md-pagination {
   padding: $pagination-padding 0;
   min-height: $pagination-min-height;
   font-size: $pagination-font-size;
-  color: md-color($md-foreground, text);
+  color: md-color($md-light-theme-foreground, text);
   text-align: right;
 
   md-pagination-controls, .md-pagination-controls {

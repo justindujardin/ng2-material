@@ -14,6 +14,7 @@ export type BreakAction = 'hide' | 'show';
  */
 @Directive({
   selector: '[md-peekaboo]',
+  exportAs: 'mdPeekaboo',
   host: {
     '[class.md-peekaboo-active]': 'active',
     '[attr.breakAction]': 'breakAction',
@@ -110,6 +111,10 @@ export class MdPeekaboo implements OnDestroy {
     return this._scroller;
   }
 
+  get top():number {
+    return this._scroller ? this._scroller.scrollTop : this.viewport.scrollTop();
+  }
+
   private _mediaListeners: MediaListener[] = [];
 
 
@@ -149,7 +154,7 @@ export class MdPeekaboo implements OnDestroy {
    * @returns number The scrollTop breakpoint that was evaluated against.
    */
   evaluate(): number {
-    let top = this._scroller ? this._scroller.scrollTop : this.viewport.scrollTop();
+    const top = this.top;
     let bp: number = this.break;
     switch (this._breakpoint) {
       case 'xl':

@@ -1,5 +1,6 @@
-@import "../../core/style/variables";
-@import "../../core/style/default-theme";
+@import '~@angular/material/core/style/variables';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
 
 .md-backdrop {
   position: fixed;
@@ -11,7 +12,7 @@
   height: 100%;
   transition: opacity 450ms;
   opacity: 0;
-  z-index: $z-index-backdrop;
+  z-index: $md-z-index-overlay-backdrop;
   pointer-events: none;
 
   &.md-backdrop-absolute {
@@ -21,20 +22,6 @@
   &.md-active {
     opacity: 1;
     pointer-events: all;
-  }
-
-  &.md-select-backdrop {
-    z-index: $z-index-dialog + 1;
-    transition-duration: 0;
-  }
-  &.md-dialog-backdrop {
-    z-index: $z-index-dialog - 1;
-  }
-  &.md-bottom-sheet-backdrop {
-    z-index: $z-index-bottom-sheet - 1;
-  }
-  &.md-sidenav-backdrop {
-    z-index: $z-index-sidenav - 1;
   }
 
   &.md-opaque {
@@ -47,9 +34,9 @@
 // Theme
 
 .md-backdrop {
-  background-color: md-color($md-background, 900, 0);
+  background-color: md-color($md-grey, 900, 0);
   &.md-opaque {
-    background-color: md-color($md-background, 900, 1);
+    background-color: md-color($md-grey, 900, 1);
     &.md-active {
       opacity: .48;
     }

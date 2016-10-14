@@ -1,4 +1,6 @@
-@import "../../core/style/typography";
+@import '../../core/style/typography';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
 
 .md-dialog {
   md-dialog-title {

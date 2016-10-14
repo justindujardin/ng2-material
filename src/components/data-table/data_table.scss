@@ -1,5 +1,6 @@
-@import "../../core/style/variables";
-@import "../../core/style/default-theme";
+@import '~@angular/material/core/style/variables';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
 
 $data-table-font-size: rem(1.3) !default;
 $data-table-header-font-size: rem(1.2) !default;
@@ -19,7 +20,7 @@ $data-table-dividers: 1px solid $data-table-divider-color !default;
 $data-table-row-height: rem(4.800) !default;
 $data-table-last-row-height: rem(5.600) !default;
 $data-table-column-padding: rem(2.400) !default;
-$data-table-column-spacing: rem(3.200) !default; 
+$data-table-column-spacing: rem(3.200) !default;
 //column spacing + column padding = the prescribed 56dp
 
 md-data-table, .md-data-table {
@@ -64,7 +65,7 @@ md-data-table, .md-data-table {
   th {
     font-size: $data-table-header-font-size;
     font-weight: 600;
-    color: md-color($md-foreground, secondary-text);
+    color: md-color($md-light-theme-foreground, secondary-text);
     text-overflow: ellipsis;
     box-sizing: border-box;
 
@@ -78,7 +79,7 @@ md-data-table, .md-data-table {
      */
     &.sorted-ascending,
     &.sorted-descending {
-      color: md-color($md-foreground, text);
+      color: md-color($md-light-theme-foreground, text);
       &:before {
         font-family: 'Material Icons';
         font-size: $data-table-header-sort-icon-size;
@@ -104,7 +105,7 @@ md-data-table, .md-data-table {
     border-top: $data-table-dividers;
     border-bottom: $data-table-dividers;
     box-sizing: border-box;
-    color: md-color($md-foreground, text);
+    color: md-color($md-light-theme-foreground, text);
   }
   th:first-child, td:first-child {
     padding-left: 24px;
@@ -126,7 +127,7 @@ md-data-table, .md-data-table {
 
       &:hover {
         background-color: $data-table-hover-color;
-      }      
+      }
     }
   }
 

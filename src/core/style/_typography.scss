@@ -5,6 +5,49 @@
 // [4] Fonts on OSX will look more consistent with other systems that do not
 // render text using sub-pixel anti-aliasing.
 
+@import '~@angular/material/core/style/variables';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/theming';
+
+$display-4-font-size-base: rem(11.20) !default;
+$display-3-font-size-base: rem(5.600) !default;
+$display-2-font-size-base: rem(4.500) !default;
+$display-1-font-size-base: rem(3.400) !default;
+$headline-font-size-base: rem(2.400) !default;
+$title-font-size-base: rem(2.000) !default;
+$subhead-font-size-base: rem(1.600) !default;
+$caption-font-size-base: rem(1.200) !default;
+
+// Typography mixins
+
+@mixin md-title() {
+  font-size: $title-font-size-base;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
+@mixin md-body-1() {
+  font-size: $md-body-font-size-base;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: rem(2);
+}
+
+@mixin md-body-2() {
+  font-size: $md-body-font-size-base;
+  font-weight: 500;
+  letter-spacing: 0.010em;
+  line-height: rem(2.4);
+}
+
+@mixin md-subhead() {
+  font-size: $subhead-font-size-base;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: rem(2.4);
+}
+
+
 html, body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-touch-callout: none;
@@ -16,11 +59,6 @@ html, body {
 
   -webkit-font-smoothing: antialiased; // [4]
   -moz-osx-font-smoothing: grayscale; // [4]
-}
-
-md-select, md-card, md-list, md-toolbar,
-ul, ol, p, h1, h2, h3, h4, h5, h6 {
-  //text-rendering: optimizeLegibility;
 }
 
 /************
@@ -95,7 +133,7 @@ select,
 html,
 textarea,
 input {
-  font-family: $font-family;
+  font-family: $md-font-family;
 }
 
 select,

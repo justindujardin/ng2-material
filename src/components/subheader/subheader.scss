@@ -1,6 +1,7 @@
-@import "../../core/style/variables";
-@import "../../core/style/mixins";
-@import "../../core/style/default-theme";
+@import '~@angular/material/core/style/variables';
+@import '~@angular/material/core/theming/palette';
+@import '~@angular/material/core/theming/all-theme';
+@import '../../core/style/layout';
 
 $subheader-line-height: 1em !default;
 $subheader-font-size: rem(1.4) !default;
@@ -32,16 +33,16 @@ $subheader-sticky-shadow: 0px 2px 4px 0 rgba(0, 0, 0, 0.16) !default;
 // Theme
 
 .md-subheader {
-  color: md-color($md-foreground, secondary-text, 0.23); //'{{ foreground-2-0.23 }}';
-  background-color: md-color($md-background, A100); //'{{background-color}}';
+  color: md-color($md-light-theme-foreground, secondary-text, 0.23); //'{{ foreground-2-0.23 }}';
+  background-color: md-color($md-light-theme-background, background); //'{{background-color}}';
 
-  &.md-primary {
-    color: md-color($md-primary); //'{{primary-color}}'
-  }
-  &.md-accent {
-    color: md-color($md-accent); //'{{accent-color}}'
-  }
-  &.md-warn {
-    color: md-color($md-warn); //'{{warn-color}}'
-  }
+  //&.md-primary {
+  //  color: md-color($primary); //'{{primary-color}}'
+  //}
+  //&.md-accent {
+  //  color: md-color($accent); //'{{accent-color}}'
+  //}
+  //&.md-warn {
+  //  color: md-color($warn); //'{{warn-color}}'
+  //}
 }
