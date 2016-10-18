@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
   templateUrl: 'checkbox-basic-usage.component.html',
   styleUrls: ['checkbox-basic-usage.component.css']
 })
-export class CheckboxBasicUsageComponent {
+export default class CheckboxBasicUsageComponent {
   public cb1 = true;
   public cb2 = false;
   public cb3 = false;

@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
   templateUrl: 'button-basic-usage.component.html',
   styleUrls: ['button-basic-usage.component.css']
 })
-export class ButtonBasicUsageComponent {
+export default class ButtonBasicUsageComponent {
   googleUrl: string = 'https://www.google.com';
   title1: string = 'Button';
   title4: string = 'Warn';

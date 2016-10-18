@@ -7,7 +7,7 @@ import {ITableSelectionChange} from '../../../../../src/components/data-table/da
   templateUrl: 'data-table-selectable-rows.component.html',
   styleUrls: ['data-table-selectable-rows.component.css']
 })
-export class DataTableSelectableRowsComponent {
+export default class DataTableSelectableRowsComponent {
   selection: string;
   count: number;
   materials: Array<any> = [

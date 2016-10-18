@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: 'progress-circle-basic-usage.component.html',
   styleUrls: ['progress-circle-basic-usage.component.css']
 })
-export class ProgressCircleBasicUsageComponent implements OnInit {
+export default class ProgressCircleBasicUsageComponent implements OnInit {
   public determinateValue: number = 30;
   public mode: string;
 

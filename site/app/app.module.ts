@@ -8,27 +8,26 @@ import {App} from './app.component';
 import {Home} from './home/index';
 import {NoContent} from './no-content/index';
 import {XLarge} from './home/x-large/index';
-import {DataTableBasicUsageComponent} from './examples/ng2-material/data-table/data-table-basic-usage.component';
-import {DataTableSelectableRowsComponent} from './examples/ng2-material/data-table/data-table-selectable-rows.component';
-import {DialogBasicUsageComponent} from './examples/ng2-material/dialog/dialog-basic-usage.component';
-import {PaginationBasicUsageComponent} from './examples/ng2-material/pagination/pagination-basic-usage.component';
-import {PaginationSplitUsageComponent} from './examples/ng2-material/pagination/pagination-split-usage.component';
-
-import {ButtonBasicUsageComponent} from './examples/@angular/material/button/button-basic-usage.component';
-import {CardActionButtonsComponent} from './examples/@angular/material/card/card-action-buttons.component';
-import {CardBasicUsageComponent} from './examples/@angular/material/card/card-basic-usage.component';
-import {CardInlineActionsComponent} from './examples/@angular/material/card/card-inline-actions.component';
-import {CheckboxBasicUsageComponent} from './examples/@angular/material/checkbox/checkbox-basic-usage.component';
-import {InputBasicUsageComponent} from './examples/@angular/material/input/input-basic-usage.component';
-import {ListBasicUsageComponent} from './examples/@angular/material/list/list-basic-usage.component';
-import {ProgressBarBasicUsageComponent} from './examples/@angular/material/progress-bar/progress-bar-basic-usage.component';
-import {ProgressCircleBasicUsageComponent} from './examples/@angular/material/progress-circle/progress-circle-basic-usage.component';
-import {RadioBasicUsageComponent} from './examples/@angular/material/radio/radio-basic-usage.component';
-import {SidenavBasicUsageComponent} from './examples/@angular/material/sidenav/sidenav-basic-usage.component';
-import {SlideToggleBasicUsageComponent} from './examples/@angular/material/slide-toggle/slide-toggle-basic-usage.component';
-import {TabsDynamicHeightComponent} from './examples/@angular/material/tabs/tabs-dynamic-height.component';
-import {TabsDynamicTabsComponent} from './examples/@angular/material/tabs/tabs-dynamic-tabs.component';
-import {ToolbarBasicUsageComponent} from './examples/@angular/material/toolbar/toolbar-basic-usage.component';
+import DataTableBasicUsageComponent from './examples/ng2-material/data-table/data-table-basic-usage.component';
+import DataTableSelectableRowsComponent from './examples/ng2-material/data-table/data-table-selectable-rows.component';
+import DialogBasicUsageComponent from './examples/ng2-material/dialog/dialog-basic-usage.component';
+import PaginationBasicUsageComponent from './examples/ng2-material/pagination/pagination-basic-usage.component';
+import PaginationSplitUsageComponent from './examples/ng2-material/pagination/pagination-split-usage.component';
+import ButtonBasicUsageComponent from './examples/@angular/material/button/button-basic-usage.component';
+import CardActionButtonsComponent from './examples/@angular/material/card/card-action-buttons.component';
+import CardBasicUsageComponent from './examples/@angular/material/card/card-basic-usage.component';
+import CardInlineActionsComponent from './examples/@angular/material/card/card-inline-actions.component';
+import CheckboxBasicUsageComponent from './examples/@angular/material/checkbox/checkbox-basic-usage.component';
+import InputBasicUsageComponent from './examples/@angular/material/input/input-basic-usage.component';
+import ListBasicUsageComponent from './examples/@angular/material/list/list-basic-usage.component';
+import ProgressBarBasicUsageComponent from './examples/@angular/material/progress-bar/progress-bar-basic-usage.component';
+import ProgressCircleBasicUsageComponent from './examples/@angular/material/progress-circle/progress-circle-basic-usage.component';
+import RadioBasicUsageComponent from './examples/@angular/material/radio/radio-basic-usage.component';
+import SidenavBasicUsageComponent from './examples/@angular/material/sidenav/sidenav-basic-usage.component';
+import SlideToggleBasicUsageComponent from './examples/@angular/material/slide-toggle/slide-toggle-basic-usage.component';
+import TabsDynamicHeightComponent from './examples/@angular/material/tabs/tabs-dynamic-height.component';
+import TabsDynamicTabsComponent from './examples/@angular/material/tabs/tabs-dynamic-tabs.component';
+import ToolbarBasicUsageComponent from './examples/@angular/material/toolbar/toolbar-basic-usage.component';
 import {ComponentsService, NavigationService, VersionService} from './shared/index';
 import {MaterialModule} from '@angular/material';
 import {Ng2MaterialModule} from '../../src/index';
@@ -69,6 +68,8 @@ export interface IExampleData {
   template: string;
   source: string;
   styles: string;
+  // path to a module that can be imported using systemjs
+  module: string;
   component: string;
   name: string;
 }
@@ -111,6 +112,7 @@ export const DEMO_SHARED: any[] = [
     Ng2MaterialModule.forRoot(),
     RouterModule.forRoot(ROUTES, {useHash: true})
   ],
+  entryComponents:[...DEMO_DIRECTIVES],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ...APP_PROVIDERS,
     ...DEMO_PROVIDERS

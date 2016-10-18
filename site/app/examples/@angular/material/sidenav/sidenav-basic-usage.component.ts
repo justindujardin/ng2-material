@@ -6,5 +6,5 @@ import {Component} from '@angular/core';
   templateUrl: 'sidenav-basic-usage.component.html',
   styleUrls: ['sidenav-basic-usage.component.css']
 })
-export class SidenavBasicUsageComponent {
+export default class SidenavBasicUsageComponent {
 }

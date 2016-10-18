@@ -18,6 +18,9 @@ app {
         overflow-y: hidden;
       }
     }
+    md-list-item {
+
+    }
   }
 
   main {
@@ -74,10 +77,6 @@ app {
     transition: opacity 0.1s ease-in;
     will-change: opacity;
     opacity: 1;
-    &.hide {
-      opacity: 0;
-      pointer-events: none;
-    }
     .md-caption {
       text-decoration: none;
       color: md-color($primary, 50);

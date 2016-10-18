@@ -6,6 +6,6 @@ import {Component} from '@angular/core';
   templateUrl: 'card-basic-usage.component.html',
   styleUrls: ['card-basic-usage.component.css']
 })
-export class CardBasicUsageComponent {
+export default class CardBasicUsageComponent {
   public imagePath: string = 'images/washedout.png';
 }

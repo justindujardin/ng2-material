@@ -6,5 +6,5 @@ import {Component} from '@angular/core';
   templateUrl: 'toolbar-basic-usage.component.html',
   styleUrls: ['toolbar-basic-usage.component.css']
 })
-export class ToolbarBasicUsageComponent {
+export default class ToolbarBasicUsageComponent {
 }

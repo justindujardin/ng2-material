@@ -7,7 +7,7 @@ import {tableDatas} from './pagination-datas';
   selector: 'pagination-basic-usage',
   templateUrl: 'pagination-basic-usage.component.html'
 })
-export class PaginationBasicUsageComponent {
+export default class PaginationBasicUsageComponent {
   materials: Array<any> = tableDatas;
 
   pagination = {

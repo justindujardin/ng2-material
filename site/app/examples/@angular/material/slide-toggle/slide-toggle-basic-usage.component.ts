@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
   templateUrl: 'slide-toggle-basic-usage.component.html',
   styleUrls: ['slide-toggle-basic-usage.component.css']
 })
-export class SlideToggleBasicUsageComponent {
+export default class SlideToggleBasicUsageComponent {
   public data: any = {cb1: true, cb4: true, cb5: false};
   public message = 'false';
 

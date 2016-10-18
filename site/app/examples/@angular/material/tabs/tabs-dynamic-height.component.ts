@@ -7,5 +7,5 @@ import {Component, ViewEncapsulation} from '@angular/core';
   styleUrls: ['tabs-dynamic-height.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class TabsDynamicHeightComponent {
+export default class TabsDynamicHeightComponent {
 }

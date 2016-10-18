@@ -6,7 +6,9 @@
     <md-list>
       <md-list-item [class.md-active]="navigation?.currentTitle==value.name"
                     *ngFor="let value of components | componentOrder">
-        <a [routerLink]=" ['./components', value.id] ">{{ value.name }}</a>
+        <button md-ripple md-button [routerLink]=" ['./components', value.id]">
+          {{ value.name }}
+        </button>
       </md-list-item>
     </md-list>
   </md-sidenav>
@@ -16,10 +18,9 @@
                 md-peekaboo [scroller]="content.parentElement"
                 #peekaboo="mdPeekaboo"
                 [break]="190"
-                breakAction="show"
-                [ngClass]="{hide:over}">
+                breakAction="show">
     </md-toolbar>
-    <md-toolbar color="primary" class="fixed-toolbar" [ngClass]="{hide:over}" [style.top]="getScrollTop(peekaboo)">
+    <md-toolbar color="primary" class="fixed-toolbar" [style.top]="getScrollTop(peekaboo)">
       <button md-button
               class="md-hamburger md-icon-button"
               hide-gt-lg

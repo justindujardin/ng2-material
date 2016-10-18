@@ -7,6 +7,7 @@ public/font/font.css
 public/font/font.css.map
 public/src/
 public/vendor/
+public/*.json
 
 # dependencies
 /node_modules

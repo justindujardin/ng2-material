@@ -13,7 +13,7 @@ export interface ITabData {
   styleUrls: ['tabs-dynamic-tabs.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class TabsDynamicTabsComponent {
+export default class TabsDynamicTabsComponent {
   public tabs: ITabData[] = [
     {title: 'One', content: 'You can add tabs dynamically by filling in the form below this.'}, {
       title: 'Two',

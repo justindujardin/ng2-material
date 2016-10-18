@@ -6,5 +6,5 @@ import {Component} from '@angular/core';
   templateUrl: 'card-action-buttons.component.html',
   styleUrls: ['card-action-buttons.component.css']
 })
-export class CardActionButtonsComponent {
+export default class CardActionButtonsComponent {
 }

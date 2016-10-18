@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
   templateUrl: 'progress-bar-basic-usage.component.html',
   styleUrls: ['progress-bar-basic-usage.component.css']
 })
-export class ProgressBarBasicUsageComponent {
+export default class ProgressBarBasicUsageComponent {
   public determinateValue: number = 30;
   public determinateValue2: number = 30;
 

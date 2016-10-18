@@ -5,7 +5,7 @@ import {Component} from '@angular/core';
   selector: 'data-table-basic-usage',
   templateUrl: 'data-table-basic-usage.component.html'
 })
-export class DataTableBasicUsageComponent {
+export default class DataTableBasicUsageComponent {
   materials: Array<any> = [
     {'id': 1, 'name': 'Acrylic (Transparent)', 'quantity': '25', 'price': '$2.90'},
     {'id': 2, 'name': 'Plywood (Birch)', 'quantity': '50', 'price': '$1.25'},

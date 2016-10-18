@@ -8,7 +8,7 @@ import {MdUniqueSelectionDispatcher} from '@angular/material';
   styleUrls: ['radio-basic-usage.component.css'],
   providers: [MdUniqueSelectionDispatcher]
 })
-export class RadioBasicUsageComponent {
+export default class RadioBasicUsageComponent {
   data: any = {default: 'Banana', avatar: 'avatar-1'};
 
   avatarData: any[] = [

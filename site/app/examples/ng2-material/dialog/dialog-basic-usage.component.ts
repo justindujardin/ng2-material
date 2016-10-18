@@ -10,7 +10,7 @@ import {Ng2MaterialModule} from '../../../../../src/index';
   styleUrls: ['dialog-basic-usage.component.css'],
   providers: [OVERLAY_PROVIDERS]
 })
-export class DialogBasicUsageComponent {
+export default class DialogBasicUsageComponent {
   status: string = '';
 
   confirmClose(forgiveDebt: boolean) {

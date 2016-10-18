@@ -6,7 +6,7 @@ import {Component} from '@angular/core';
   templateUrl: 'input-basic-usage.component.html',
   styleUrls: ['input-basic-usage.component.css']
 })
-export class InputBasicUsageComponent {
+export default class InputBasicUsageComponent {
   user = {
     title: 'Developer',
     email: 'ipsum@lorem.com',

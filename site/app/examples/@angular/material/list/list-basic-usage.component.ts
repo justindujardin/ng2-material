@@ -8,7 +8,7 @@ let imagePath = 'images/avatars/avatar11.svg';
   templateUrl: 'list-basic-usage.component.html',
   styleUrls: ['list-basic-usage.component.css']
 })
-export class ListBasicUsageComponent {
+export default class ListBasicUsageComponent {
   phones = [
     {type: 'Home', number: '(555) 251-1234'}, {type: 'Cell', number: '(555) 786-9841'},
     {type: 'Office', number: '(555) 314-1592'}

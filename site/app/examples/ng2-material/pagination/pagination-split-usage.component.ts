@@ -10,7 +10,7 @@ import {MediaListener, Media} from '../../../../../src/core/util/media';
   styleUrls: ['pagination-split-usage.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PaginationSplitUsageComponent implements OnInit, OnDestroy {
+export default class PaginationSplitUsageComponent implements OnInit, OnDestroy {
   pages: Array<string> = bookDatas;
 
   pagination: any = {

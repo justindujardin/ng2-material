@@ -12,6 +12,9 @@ module.exports = function (grunt) {
       "dist/",
       "<%- outPath %>/",
       "<%- sitePath %>/",
+      "public/site",
+      "public/src",
+      "public/vendor",
       "<%- sourceRoot %>/**/*.js",
       "<%- sourceRoot %>/**/*.d.ts",
       "<%- sourceRoot %>/**/*.js.map",
@@ -25,44 +28,7 @@ module.exports = function (grunt) {
           {src: 'CHANGELOG.md', dest: '<%- outPath %>/'},
           {src: 'README.md', dest: '<%- outPath %>/'},
           {expand: true, cwd: 'src/', src: ['**/*.scss'], dest: '<%- outPath %>/'},
-          {expand: true, cwd: 'src/', src: ['**/*.ts'], dest: '<%- outPath %>/src'},
-          {expand: true, cwd: 'public/', src: ['font/*.*'], dest: '<%- outPath %>/'}
-        ]
-      },
-      // Examples site all nicely packaged up for uploading to an FTP.
-      site: {
-        files: [
-          {
-            expand: true,
-            src: [
-              './node_modules/systemjs/dist/*.js',
-              './node_modules/angular2/bundles/angular2-polyfills.js',
-              './node_modules/angular2/bundles/angular2.dev.js',
-              './node_modules/angular2/bundles/http.dev.js',
-              './node_modules/angular2/bundles/router.dev.js',
-              './node_modules/highlightjs/highlight.pack.js',
-              './node_modules/es6-shim/es6-*.js',
-              './node_modules/highlightjs/styles/*.css',
-              './node_modules/rxjs/bundles/Rx.js'
-            ],
-            dest: '<%- sitePath %>/<%- pkg.version %>/'
-          },
-
-          {expand: true, src: 'package.json', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'index.html', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'config.js', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'src/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'coverage/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'dist/*.*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {
-            expand: true,
-            cwd: 'public/font/',
-            flatten: true,
-            src: ['*.*'],
-            dest: '<%- sitePath %>/<%- pkg.version %>/dist/'
-          },
-          {expand: true, src: 'public/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'},
-          {expand: true, src: 'example/**/*', dest: '<%- sitePath %>/<%- pkg.version %>/'}
+          {expand: true, cwd: 'src/', src: ['**/*.ts'], dest: '<%- outPath %>/src'}
         ]
       },
       siteResources: {
@@ -468,6 +434,10 @@ module.exports = function (grunt) {
           if (fileExists(readmeFile)) {
             result.readme = marked(fs.readFileSync(readmeFile).toString());
           }
+
+          // Output module will be in the same path, but with a JS extension.
+          result.module = sourceFile.replace('.ts', '.js');
+
 
           var component = readableString(path.basename(path.dirname(templateFile)));
           var readable = readableString(name).replace('.component', '');
