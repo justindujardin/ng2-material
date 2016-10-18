@@ -1,3 +1,59 @@
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/justindujardin/ng2-material/compare/v0.6.1...v0.7.0) (2016-10-18)
+
+
+### Bug Fixes
+
+* **theme:** allow overriding theme colors when using scss ([fed603c](https://github.com/justindujardin/ng2-material/commit/fed603c))
+* **typings:** remove in favor of npm [@types](https://github.com/types) ([#312](https://github.com/justindujardin/ng2-material/issues/312)) ([6e819db](https://github.com/justindujardin/ng2-material/commit/6e819db))
+
+
+### Features
+
+* **angular2:** update to 2.0.x and latest [@angular](https://github.com/angular)/material ([6b5fc52](https://github.com/justindujardin/ng2-material/commit/6b5fc52))
+* **router:** upgrade to 3.0.0-beta.2 ([81116f4](https://github.com/justindujardin/ng2-material/commit/81116f4))
+* **yarn:** build in travis using yarn ([#313](https://github.com/justindujardin/ng2-material/issues/313)) ([a15a334](https://github.com/justindujardin/ng2-material/commit/a15a334))
+
+
+### BREAKING CHANGES
+
+* angular2: remove md-card component
+
+The card component conflicts with the official @angular/material/card implementation. Please use the official component. For more information see: https://github.com/angular/material2/tree/master/src/lib/card
+
+* chore: remove form md-messages
+
+ - the forms module has changed quite a bit and look competent enough to exist without these components.
+* angular2: removed md-messages components and prefer to use standard FormsModule
+
+* chore: fix up test suite
+
+ - use async() to wrap any it() or beforeEach() calls that do promise based async stuff.
+ - use `TestBed.get(ServiceTypeName)` instead of `inject()` when a service instance is needed in a test.
+
+* chore: reduce sauce test matrix
+* angular2: Remove support for automated testing of IE and unreliable builds of Chrome beta.
+
+* chore: reduce sauce test matrix
+* angular2: Remove support for automated testing of Chrome 39 and Android 4.4
+
+* test: add spec to dialog component
+
+* chore: fix bad package name
+
+* feat(readme): update readme to direct new users to @angular/material
+
+ - move some testing stuff out of the first line
+ - update language to downplay any suggestion that users should create issues.  Instead suggest they provide a fix for the community.
+ - remove gitter link (I never monitor it despite good intentions.)
+
+* chore: drop android from sauce and add dev/beta for chrome/firefox
+
+ - Android is failing to start sometimes. I have no patience for sauce flakiness.
+ - Make all browsers run on Windows 10 in an attempt to reduce test start times
+
+
+
 <a name="0.6.1"></a>
 ## [0.6.1](https://github.com/justindujardin/ng2-material/compare/v0.6.0...v0.6.1) (2016-08-07)
 
