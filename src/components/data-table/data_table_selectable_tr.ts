@@ -41,7 +41,7 @@ export abstract class AbstractMdDataTableSelectableRow implements AfterContentIn
    * Change active status
    */
   change(event) {
-    if (event.target.classList.contains('md-checkbox-inner-container')) {
+    if (event.target.classList.contains('md-checkbox-inner-container') || event.target.classList.contains('md-checkbox-layout')) {
       event.preventDefault();
     }
 
