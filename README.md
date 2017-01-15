@@ -1,15 +1,9 @@
-ng2-material
+ng2-material (DEPRECATED)
 ---
 [![Build Status](https://travis-ci.org/justindujardin/ng2-material.svg?branch=master)](https://travis-ci.org/justindujardin/ng2-material)
 [![npm version](https://badge.fury.io/js/ng2-material.svg)](http://badge.fury.io/js/ng2-material) 
 
-ng2-material is a set of components built on top of [@angular/material](https://github.com/angular/material2).
-
-Check out the [examples site](https://justindujardin.github.io/ng2-material/) for demos and instructions on getting started.
-
-**IMPORTANT**: This project is provided as-is, and no commercial level of support is given to it. If you find an issue and would like to submit a fix, please open a Pull Request with your suggested changes.
-
-**ALSO IMPORTANT** If you are new to Angular2 and in search of a set of material components, please visit [@angular/material](https://github.com/angular/material2) and come back here when you need a component not offered by the official package.
+**IMPORTANT** This project is deprecated, please visit the official [@angular/material](https://github.com/angular/material2) site.
 
 ## Testing
 
