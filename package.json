@@ -73,7 +73,7 @@
     "karma-mocha-reporter": "2.2.0",
     "karma-sauce-launcher": "1.0.0",
     "lcov-parse": "0.0.10",
-    "marked": "0.3.6",
+    "marked": "~0.3.9",
     "npm": "^3.10.7",
     "remap-istanbul": "0.6.4",
     "style-loader": "0.13.1",
